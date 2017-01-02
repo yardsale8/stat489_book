@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.1. What is Python? &mdash; Runestone Interactive Overview</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/activecode.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/clickable.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pytutor.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/modal-basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/datafile.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/dragndrop.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fitb.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/livecode.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/parsons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/lib/prettify.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/poll.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/tabbedstuff.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/video.css" type="text/css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootswatch/2.3.1/""/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jquery-ui-1.10.3.custom.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/user-highlights.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/runestone-custom-sphinx-bootstrap.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/runestonebase.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jquery.highlight.js"></script>
+    <script type="text/javascript" src="../_static/bookfuncs.js"></script>
+    <script type="text/javascript" src="../_static/codemirror.js"></script>
+    <script type="text/javascript" src="../_static/xml.js"></script>
+    <script type="text/javascript" src="../_static/css.js"></script>
+    <script type="text/javascript" src="../_static/htmlmixed.js"></script>
+    <script type="text/javascript" src="../_static/python.js"></script>
+    <script type="text/javascript" src="../_static/javascript.js"></script>
+    <script type="text/javascript" src="../_static/activecode.js"></script>
+    <script type="text/javascript" src="../_static/skulpt.min.js"></script>
+    <script type="text/javascript" src="../_static/skulpt-stdlib.js"></script>
+    <script type="text/javascript" src="../_static/clike.js"></script>
+    <script type="text/javascript" src="../_static/timed_activecode.js"></script>
+    <script type="text/javascript" src="../_static/animationbase.js"></script>
+    <script type="text/javascript" src="../_static/mchoice.js"></script>
+    <script type="text/javascript" src="../_static/timedmc.js"></script>
+    <script type="text/javascript" src="../_static/timed.js"></script>
+    <script type="text/javascript" src="../_static/clickable.js"></script>
+    <script type="text/javascript" src="../_static/timedclickable.js"></script>
+    <script type="text/javascript" src="../_static/d3.v2.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery.ba-bbq.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery.jsPlumb-1.3.10-all-min.js"></script>
+    <script type="text/javascript" src="../_static/pytutor.js"></script>
+    <script type="text/javascript" src="../_static/codelens.js"></script>
+    <script type="text/javascript" src="../_static/skulpt.min.js"></script>
+    <script type="text/javascript" src="../_static/skulpt-stdlib.js"></script>
+    <script type="text/javascript" src="../_static/datafile.js"></script>
+    <script type="text/javascript" src="../_static/dragndrop.js"></script>
+    <script type="text/javascript" src="../_static/timeddnd.js"></script>
+    <script type="text/javascript" src="../_static/fitb.js"></script>
+    <script type="text/javascript" src="../_static/timedfitb.js"></script>
+    <script type="text/javascript" src="../_static/livecode.js"></script>
+    <script type="text/javascript" src="../_static/clike.js"></script>
+    <script type="text/javascript" src="../_static/lib/prettify.js"></script>
+    <script type="text/javascript" src="../_static/lib/hammer.min.js"></script>
+    <script type="text/javascript" src="../_static/parsons.js"></script>
+    <script type="text/javascript" src="../_static/timedparsons.js"></script>
+    <script type="text/javascript" src="../_static/poll.js"></script>
+    <script type="text/javascript" src="../_static/reveal.js"></script>
+    <script type="text/javascript" src="../_static/shortanswer.js"></script>
+    <script type="text/javascript" src="../_static/timed_shortanswer.js"></script>
+    <script type="text/javascript" src="../_static/tabbedstuff.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/waypoints.min.js"></script>
+    <script type="text/javascript" src="../_static/rangy-core.js"></script>
+    <script type="text/javascript" src="../_static/rangy-textrange.js"></script>
+    <script type="text/javascript" src="../_static/rangy-cssclassapplier.js"></script>
+    <script type="text/javascript" src="../_static/user-highlights.js"></script>
+    <script type="text/javascript" src="../_static/jquery.idle-timer.js"></script>
+    <script type="text/javascript" src="../_static/processing-1.4.1.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
+    <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
+    <link rel="up" title="1. Introduction to Python" href="toctree.html" />
+    <link rel="next" title="1.2. Data, Types, and Variables" href="DataTypesAndVariables.html" />
+    <link rel="prev" title="1. Introduction to Python" href="toctree.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<link rel="shortcut icon" href="/runestone/static/favicon.ico" type="image/ico" />
+
+<script type="text/javascript">
+  eBookConfig = {};
+  eBookConfig.host = 'http://127.0.0.1:8000' ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:8000';
+  eBookConfig.app = eBookConfig.host+'/runestone';
+  eBookConfig.ajaxURL = eBookConfig.app+'/ajax/';
+  eBookConfig.course = 'STAT489';
+  eBookConfig.logLevel = 0;
+  eBookConfig.loginRequired = false;
+  eBookConfig.build_info = "unknown";
+  eBookConfig.isLoggedIn = false;
+  eBookConfig.useRunestoneServices = false;
+  eBookConfig.python3 = true;
+  eBookConfig.basecourse = 'STAT489';
+</script>
+
+<div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&status=0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+  </head>
+  <body role="document">
+
+
+<!-- Begin navbar -->
+<div id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+  <div class="container">
+
+    <div class="navbar-header">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button type='button' class='navbar-toggle' data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <div>
+        <a class="brand-logo" style='background: transparent url("../_static/img/logo_small.png") no-repeat 0px 0px;' href="/runestone/default/user/login">&nbsp; </a>
+        <a class="navbar-brand" href="../index.html">STAT489</a>
+      </div>
+    </div>
+
+    <div class="navbar-collapse collapse navbar-ex1-collapse">
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="divider-vertical"></li>
+
+        <!-- social media dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-share-alt" style="opacity: 0.9"></i>
+          </a>
+          <ul class="dropdown-menu social-menu">
+              <li>
+                <div>
+                  <b>Runestone in social media:</b>
+                </div>
+                <a href="https://twitter.com/iRunestone" class="twitter-follow-button" data-show-count="true">Follow @iRunestone</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                <div class="fb-like" data-href="https://www.facebook.com/RunestoneInteractive" data-send="false" data-layout="button_count" data-width="300" data-show-faces="false" data-font="arial"></div>
+              </li>
+
+              <li class="divider"></li>
+              <li>
+                <div>
+                  <b>Help support us:</b>
+                </div>
+                <div>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_s-xclick">
+                  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+                  ">
+                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                  </form>
+
+                </div>
+              </li>
+          </ul>
+        </li>
+        <!-- end social media dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        <!-- search dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-search" style='opacity:0.9;'></i>
+          </a>
+          <ul class='dropdown-menu'>
+            
+                <li><a href='../index.html'>Table of Contents</a></li>
+            
+            <li><a href='/runestone/static/STAT489/genindex.html'>Book Index</a></li>
+            <li class="divider"></li>
+            <li id="scratch_ac_link"><a href="javascript:ACFactory.toggleScratchActivecode()">Scratch ActiveCode</a></li>
+            <li class="divider"></li>
+            <li style="width: 240px;">
+              <form class="navbar-search" style="margin:10px;" action="../search.html" method="get">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="q" placeholder="Search this book" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" style="margin:0;" type="submit">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                  </span>
+                </div><!-- /input-group -->
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+            </li>
+          </ul>
+        </li>
+        <!-- end search dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        
+        <li class="divider-vertical"></li>
+
+        <!-- help menu dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-question-sign" style="opacity:0.9;"></i>
+          </a>
+          <ul class="dropdown-menu user-menu">
+            <li><a href='/runestone/static/STAT489/navhelp.html'>Navigation Help</a></li>
+            <li><a href='/runestone/static/overview/instructor.html'>Help for Instructors</a></li>
+            <li class="divider"></li>
+            <li><a href='http://runestoneinteractive.org'>About Runestone</a></li>
+            <li><a href='/runestone/default/reportabug?course=STAT489&page=WhatIsPython'>Report A Problem</a></li>
+          </ul>
+        </li>
+        <!-- end help menu dropdown -->
+
+        <li class="divider-vertical"></li>
+
+      </ul>
+
+      <ul class="nav navbar-nav">
+        <li class="divider-vertical"></li>
+        <!--
+          <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><ul>
+<li><a class="reference internal" href="#">1.1. What is Python?</a><ul>
+<li><a class="reference internal" href="#the-python-programming-language">1.1.1. The Python Programming Language</a></li>
+<li><a class="reference internal" href="#a-typical-first-program">1.1.2. A Typical First Program</a></li>
+<li><a class="reference internal" href="#comments">1.1.3. Comments</a></li>
+<li><a class="reference internal" href="#the-jupyter-ipython-notebook">1.1.4. The Jupyter/IPython Notebook</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+          <li class="divider-vertical"></li>
+        
+        
+          
+  <li id="relations-prev" title="Previous Chapter - 1. Introduction to Python" data-toggle="tooltip">
+    <a href="toctree.html" >
+      <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
+    </a>
+  </li>
+  
+  <li id="relations-next" title='Next Chapter - 1.2. Data, Types, and Variables' data-toggle="tooltip" >
+    <a href="DataTypesAndVariables.html" >
+      <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
+    </a>
+  </li>
+  <li class="divider-vertical"></li>
+
+<script type="text/javascript">
+  opts = {'placement':'bottom',
+          'selector': '',
+          'delay': { show: 100, hide: 50}
+         };
+
+  $('#relations-prev').tooltip(opts);
+  $('#relations-next').tooltip(opts);
+</script>
+        -->
+        
+          <li></li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container" id="continue-reading"></div>
+
+<div class="container" id="main-content">
+  
+  <div class="section" id="what-is-python">
+<h1>1.1. What is Python?<a class="headerlink" href="#what-is-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-python-programming-language">
+<h2>1.1.1. The Python Programming Language<a class="headerlink" href="#the-python-programming-language" title="Permalink to this headline">¶</a></h2>
+<p>The programming language you will be learning is Python. Python is an example
+of a <strong>high-level language</strong>; other high-level languages you might have heard
+of are C++, PHP, and Java.</p>
+<p>It
+is much easier to program in a
+high-level language. Programs written in a high-level language take less time
+to write, they are shorter and easier to read, and they are more likely to be
+correct. Second, high-level languages are <strong>portable</strong>, meaning that they can
+run on different kinds of computers with few or no modifications. Low-level
+programs can run on only one kind of computer and have to be rewritten to run
+on another.</p>
+<p>Due to these advantages, almost all programs are written in high-level
+languages. Low-level languages are used only for a few specialized
+applications.</p>
+<p>Two kinds of programs process high-level languages into low-level languages:
+<strong>interpreters</strong> and <strong>compilers</strong>. An interpreter reads a high-level program
+and executes it, meaning that it does what the program says. It processes the
+program a little at a time, alternately reading lines and performing
+computations.</p>
+<img alt="Interpret illustration" src="../_images/interpret.png" />
+<p>A compiler reads the program and translates it completely before the program
+starts running. In this case, the high-level program is called the <strong>source
+code</strong>, and the translated program is called the <strong>object code</strong> or the
+<strong>executable</strong>. Once a program is compiled, you can execute it repeatedly
+without further translation.</p>
+<img alt="Compile illustration" src="../_images/compile.png" />
+<p>Many modern languages use both processes. They are first compiled into a lower
+level language, called <strong>byte code</strong>, and then interpreted by a program called
+a <strong>virtual machine</strong>. Python uses both processes, but because of the way
+programmers interact with it, it is usually considered an interpreted language.</p>
+<p>There are three ways to use the Python interpreter: <em>shell mode</em> <em>program
+mode</em>.  We will also explore a hybrid of the shell mode by using the <em>Jupyter
+notebook.</em> In shell mode, you type Python expressions into the <strong>Python shell</strong>,
+and the interpreter immediately shows the result.  The example below shows the Python shell at work.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python3
+Python 3.2 (r32:88445, Mar 25 2011, 19:28:28)
+[GCC 4.5.2] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; 2 + 3
+5
+&gt;&gt;&gt;
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> is called the <strong>Python prompt</strong>. The interpreter uses the prompt to
+indicate that it is ready for instructions. We typed <code class="docutils literal"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code>.  The interpreter
+evaluated our expression and replied <code class="docutils literal"><span class="pre">5</span></code>. On the next line it gave a new
+prompt indicating that it is ready for more input.</p>
+<p>Working directly in the interpreter is convenient for testing short bits of
+code because you get immediate feedback. Think of it as scratch paper used to
+help you work out problems.</p>
+<p>Alternatively, you can write an entire program by placing lines of Python
+instructions in a file and then use the interpreter to execute the contents of
+the file as a whole. Such a file is often referred to as <strong>source code</strong>.  For
+example, we used a text editor to create a source code file named
+<code class="docutils literal"><span class="pre">firstprogram.py</span></code> with the following contents:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;My first program adds two numbers, 2 and 3:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By convention, files that contain Python programs have names that end with
+<code class="docutils literal"><span class="pre">.py</span></code> .  Following this convention will help your operating system and other
+programs identify a file as containing python code.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python firstprogram.py
+My first program adds two numbers, 2 and 3:
+5
+</pre></div>
+</div>
+<p>These examples show Python being run from a Unix command line. In other
+development environments, the details of executing programs may differ. Also,
+most programs are more interesting than this one.</p>
+<p>When working with data, it is natural to interact with the data <em>interactively</em>.
+We will be using python packages <cite>Jupyter</cite> and <cite>Ipython</cite> for this purpose.
+Below you see the output of evaluating this program in the interactive
+interpreter.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="s2">&quot;My first program adds two numbers, 2 and 3:&quot;</span>
+<span class="gh">Out[1]: </span><span class="go">&#39;My first program adds two numbers, 2 and 3:&#39;</span>
+
+<span class="gp">In [2]: </span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="go">                                                      Out[2]: 5</span>
+</pre></div>
+</div>
+<p>Note that we don&#8217;t need the print statements when working
+interactively, and in fact, print statements can be a common source of errors
+for programmers that are new to python.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">You should try to limit the use of print statements in your code.  In the
+interactive code blocks in the book, we are forced to use <cite>print</cite> statements,
+but you should should try to limit your use of the <cite>print</cite> function.</p>
+</div>
+<div class="admonition-when-to-use-print admonition">
+<p class="first admonition-title">When to use <cite>print</cite></p>
+<p>Use <cite>print</cite> ...</p>
+<ol class="last arabic simple">
+<li>as a temparary debugging toy.  In this case, the print calls should be removed after the bugs are fixed.</li>
+<li>when writing python shell scripts that interact with other programs (We will show examples of this later in the book.</li>
+<li>To log information to a file.  This is a useful development tool, but <strong>will not</strong> play a role in this book.</li>
+</ol>
+</div>
+<div class="admonition-want-to-learn-more-about-python admonition">
+<p class="first admonition-title">Want to learn more about Python?</p>
+<p class="last">If you would like to learn more about installing and using Python, here are some video links.
+<a class="reference external" href="http://youtu.be/9EfGpN1Pnsg">Installing Python for Windows</a> shows you how to install the Python environment under
+Windows Vista,
+<a class="reference external" href="http://youtu.be/MEmEJCLLI2k">Installing Python for Mac</a> shows you how to install under Mac OS/X, and
+<a class="reference external" href="http://youtu.be/RLPYBxfAud4">Installing Python for Linux</a> shows you how to install from the Linux
+command line.
+<a class="reference external" href="http://youtu.be/kXbpB5_ywDw">Using Python</a> shows you some details about the Python shell and source code.</p>
+</div>
+</div>
+<div class="section" id="a-typical-first-program">
+<h2>1.1.2. A Typical First Program<a class="headerlink" href="#a-typical-first-program" title="Permalink to this headline">¶</a></h2>
+<p>Traditionally, the first program written in a new language is called <em>Hello,
+World!</em> because all it does is display the words, Hello, World!  In Python, the source code
+looks like this.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is an example of using the <strong>print function</strong>, which doesn&#8217;t actually
+print anything on paper. It displays a value on the screen. In this case, the result is the phrase:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Hello, World!
+</pre></div>
+</div>
+<p>Here is the example in activecode.  Give it a try!</p>
+
+<textarea data-component="activecode" id=ch01_2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
+print("Hello, World!")
+</textarea>
+<p>The quotation marks in the program mark the beginning and end of the value.
+They don&#8217;t appear in the result.</p>
+<p>Some people judge the quality of a programming language by the simplicity of
+the Hello, World! program. By this standard, Python does about as well as
+possible.</p>
+<p>In the earlier section, we gave a warning about using the print statement.  The
+reason for this warning with the nature of <cite>print</cite>, which outputs text to
+the computer display.  This output is then outside the scope of our program and
+<em>cannot</em> be used later in the program.  A common &#8220;rookee mistake&#8221; is to mistake
+the output of print with a python value that can be used later in our program.
+To illustrate, consider the following <cite>IPython</cite> output.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="go">Hello, World!</span>
+
+<span class="gp">In [4]: </span><span class="mi">2</span><span class="o">+</span><span class="mi">3</span>
+<span class="go">              Out[4]: 5</span>
+</pre></div>
+</div>
+<p>Notice the lack of <cite>Out[3]</cite> on the evaluation of the <cite>print</cite> call.  This is an
+indication that this function is not returning a value that we can later use in
+our program.  This is an example of a <em>side-effect</em>, which will be defined and
+discussed at length in a later chapter.</p>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="question1_11_1">
+            intro-12-1: The print function:
+            <li data-component="answer"  id="question1_11_1_opt_a">(A) sends information to the printer to be printed on paper.</li><li data-component="feedback" id="question1_11_1_opt_a">Within the Python programming language, the print function has nothing to do with the printer.</li>
+            
+            <li data-component="answer" data-correct id="question1_11_1_opt_b">(B) displays a value on the screen.</li><li data-component="feedback" id="question1_11_1_opt_b">Yes, the print function is used to display the value of the thing being printed.</li>
+            
+            <li data-component="answer"  id="question1_11_1_opt_c">(C) tells the computer to put the information in print, rather than cursive, format.</li><li data-component="feedback" id="question1_11_1_opt_c">The format of the information is called its font and has nothing to do with the print function.</li>
+            
+            <li data-component="answer"  id="question1_11_1_opt_d">(D) tells the computer to speak the information.</li><li data-component="feedback" id="question1_11_1_opt_d">That would be a different function.</li>
+            
+
+            </ul>
+            </div>
+<div class="section" id="comments">
+<h2>1.1.3. Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<p>As programs get bigger and more complicated, they get more difficult to read.
+Formal languages are dense, and it is often difficult to look at a piece of
+code and figure out what it is doing, or why.
+For this reason, it is a good idea to add notes to your programs to explain in
+natural language what the program is doing.  These notes are called comments.</p>
+<p>A <strong>comment</strong> in a computer program is text that is intended only for the human
+reader - it is completely ignored by the interpreter.
+In Python, the <cite>#</cite> token starts a comment.  The rest of the line is ignored.
+Here is a new version of <em>Hello, World!</em>.</p>
+
+<textarea data-component="activecode" id=ch01_3 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
+#---------------------------------------------------
+# This demo program shows off how elegant Python is!
+# Written by Joe Soap, December 2010.
+# Anyone may freely copy or modify this program.
+#---------------------------------------------------
+
+print("Hello, World!")     # Isn't this easy!
+</textarea>
+<p>Notice that when you run this program, it still only prints the phrase Hello, World!  None of the comments appear.
+You&#8217;ll also notice that we&#8217;ve left a blank line in the program.  Blank lines
+are also ignored by the interpreter, but comments and blank lines can make your
+programs much easier for humans to parse.  Use them liberally!</p>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="question1_12_1">
+            intro-12-2: What are comments for?
+            <li data-component="answer"  id="question1_12_1_opt_a">(A) To tell the computer what you mean in your program.</li><li data-component="feedback" id="question1_12_1_opt_a">Comments are ignored by the computer.</li>
+            
+            <li data-component="answer" data-correct id="question1_12_1_opt_b">(B) For the people who are reading your code to know, in natural language, what the program is doing.</li><li data-component="feedback" id="question1_12_1_opt_b">The computer ignores comments.  It's for the humans that will "consume" your program.</li>
+            
+            <li data-component="answer"  id="question1_12_1_opt_c">(C) Nothing, they are extraneous information that is not needed.</li><li data-component="feedback" id="question1_12_1_opt_c">Comments can provide much needed information for anyone reading the program.</li>
+            
+            <li data-component="answer"  id="question1_12_1_opt_d">(D) Nothing in a short program.  They are only needed for really large programs.</li><li data-component="feedback" id="question1_12_1_opt_d">Even small programs benefit from comments.</li>
+            
+
+            </ul>
+            <div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
+
+<textarea data-component="activecode" id=scratch_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
+
+
+</textarea>
+</div>
+</div>
+<div class="section" id="the-jupyter-ipython-notebook">
+<h2>1.1.4. The Jupyter/IPython Notebook<a class="headerlink" href="#the-jupyter-ipython-notebook" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
+</div>
+</div>
+
+
+  
+      
+  <li id="relations-prev" class="navLink" title='Previous Section - 1. Introduction to Python' data-toggle="tooltip">
+    <a href="toctree.html" >
+      <i class='prevNav glyphicon glyphicon-chevron-left'></i>
+    </a>
+  </li>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="toctree.html" ></a>
+  
+  <li id="relations-next" class="navLink" title='Next Section - 1.2. Data, Types, and Variables' data-toggle="tooltip" >
+    <a href="DataTypesAndVariables.html" >
+      <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
+    </a>
+  </li>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="DataTypesAndVariables.html" >Next Section - 1.2. Data, Types, and Variables</a>
+
+<script type="text/javascript">
+
+  $('#relations-prev').tooltip({'placement':'right', 'selector': '', 'delay': { show: 100, hide: 50}});
+  $('#relations-next').tooltip({'placement':'left', 'selector': '', 'delay': { show: 100, hide: 50}});
+  
+</script>
+  
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      
+      | <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015 bn8210wy.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+    </p>
+  </div>
+</footer>
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-32029811-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>
