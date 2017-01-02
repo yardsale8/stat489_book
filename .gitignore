@@ -1,0 +1,8 @@
+*.pyc
+**/*.pyc
+.DS_Store
+**/.DS_Store
+/build/
+build_info
+notes.md
+scratch

@@ -1,0 +1,12 @@
+language: python
+python:
+    - "2.7"
+    - "3.4"
+    - "3.5"
+install: "pip install runestone"
+
+script: bash ./deploy.sh
+env:
+  global:
+      - ENCRYPTION_LABEL: "de098bddbbd8"
+      - COMMIT_AUTHOR_EMAIL: "tiverson@smumn.edu"
