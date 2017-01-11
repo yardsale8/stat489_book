@@ -15,3 +15,4 @@ Sequential Data Structures in Python
     TransformingSequencesWithComprehensions.rst
     ComputationalComplexityAndBigONotation.rst
     OtherPythonSequenceTypes.rst
+    Exercises.rst

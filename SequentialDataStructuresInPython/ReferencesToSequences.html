@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.6. Referenes to Sequences &mdash; Runestone Interactive Overview</title>
+    <title>3.6. Referenes to Sequences &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="2. Sequential Data Structures in Python" href="toctree.html" />
-    <link rel="next" title="2.7. Sequence Methods and Working with Strings and Lists" href="SequenceMethodsandWorkingwithStringsAndLists.html" />
-    <link rel="prev" title="2.5. Mutable and Immutable Sequences" href="MutableAndImmutableSequences.html" />
+    <link rel="up" title="3. Sequential Data Structures in Python" href="toctree.html" />
+    <link rel="next" title="3.7. Sequence Methods and Working with Strings and Lists" href="SequenceMethodsandWorkingwithStringsAndLists.html" />
+    <link rel="prev" title="3.5. Mutable and Immutable Sequences" href="MutableAndImmutableSequences.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,11 +263,11 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">2.6. Referenes to Sequences</a><ul>
-<li><a class="reference internal" href="#objects-and-references">2.6.1. Objects and References</a></li>
-<li><a class="reference internal" href="#aliasing">2.6.2. Aliasing</a></li>
-<li><a class="reference internal" href="#cloning-lists">2.6.3. Cloning Lists</a></li>
-<li><a class="reference internal" href="#repetition-and-references">2.6.4. Repetition and References</a></li>
+<li><a class="reference internal" href="#">3.6. Referenes to Sequences</a><ul>
+<li><a class="reference internal" href="#objects-and-references">3.6.1. Objects and References</a></li>
+<li><a class="reference internal" href="#aliasing">3.6.2. Aliasing</a></li>
+<li><a class="reference internal" href="#cloning-lists">3.6.3. Cloning Lists</a></li>
+<li><a class="reference internal" href="#repetition-and-references">3.6.4. Repetition and References</a></li>
 </ul>
 </li>
 </ul>
@@ -277,13 +277,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 2.5. Mutable and Immutable Sequences" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 3.5. Mutable and Immutable Sequences" data-toggle="tooltip">
     <a href="MutableAndImmutableSequences.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 2.7. Sequence Methods and Working with Strings and Lists' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 3.7. Sequence Methods and Working with Strings and Lists' data-toggle="tooltip" >
     <a href="SequenceMethodsandWorkingwithStringsAndLists.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -315,9 +315,12 @@
 <div class="container" id="main-content">
   
   <div class="section" id="referenes-to-sequences">
-<h1>2.6. Referenes to Sequences<a class="headerlink" href="#referenes-to-sequences" title="Permalink to this headline">¶</a></h1>
+<h1>3.6. Referenes to Sequences<a class="headerlink" href="#referenes-to-sequences" title="Permalink to this headline">¶</a></h1>
+<p>In the next section, we will explore Python&#8217;s implementation of lists.  In the
+process the idea of an alias is defined and illustrated, which will help explain
+some of the more confusing behaviors related to mutable objects such as lists.</p>
 <div class="section" id="objects-and-references">
-<h2>2.6.1. Objects and References<a class="headerlink" href="#objects-and-references" title="Permalink to this headline">¶</a></h2>
+<h2>3.6.1. Objects and References<a class="headerlink" href="#objects-and-references" title="Permalink to this headline">¶</a></h2>
 <p>If we execute these assignment statements,</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;banana&quot;</span>
 <span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;banana&quot;</span>
@@ -325,40 +328,56 @@
 </div>
 <p>we know that <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> will refer to a string with the letters
 <code class="docutils literal"><span class="pre">&quot;banana&quot;</span></code>. But we don&#8217;t know yet whether they point to the <em>same</em> string.</p>
-<p>There are two possible ways the Python interpreter could arrange its internal states:</p>
+<p>There are two possible ways the Python interpreter could arrange its internal
+states:</p>
 <img alt="List illustration" src="../_images/refdiag1.png" />
 <p>or</p>
 <img alt="List illustration" src="../_images/refdiag2.png" />
-<p>In one case, <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> refer to two different string objects that have the same
-value. In the second case, they refer to the same object. Remember that an object is something a variable can
-refer to.</p>
-<p>We already know that objects can be identified using their unique identifier.  We can also test whether two names refer to the same object using the <em>is</em>
-operator.  The <em>is</em> operator will return true if the two references are to the same object.  In other words, the references are the same.  Try our example from above.</p>
+<p>In one case, <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> refer to two different string objects that have the
+same value. In the second case, they refer to the same object. Remember that an
+object is something a variable can refer to.</p>
+<p>We already know that objects can be identified using their unique identifier.
+We can also test whether two names refer to the same object using the <em>is</em>
+operator.  The <em>is</em> operator will return true if the two references are to the
+same object.  In other words, the references are the same.  Try our example from
+above.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;banana&quot;</span>
 
-<textarea data-component="activecode" id=chp09_is1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-a = "banana"
-b = "banana"
+<span class="gp">In [2]: </span><span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;banana&quot;</span>
 
-print(a is b)
-</textarea>
-<p>The answer is <code class="docutils literal"><span class="pre">True</span></code>.  This tells us that both <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> refer to the same object, and that it
-is the second of the two reference diagrams that describes the relationship.
-Since strings are <em>immutable</em>, Python optimizes resources by making two names
-that refer to the same string value refer to the same object.</p>
-<p>This is not the case with lists.  Consider the following example.  Here, <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> refer to two different lists, each of which happens to have the same element values.</p>
+<span class="gp">In [3]: </span><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+<span class="gh">Out[3]: </span><span class="go">True</span>
+</pre></div>
+</div>
+<p>The answer is <code class="docutils literal"><span class="pre">True</span></code>.  This tells us that both <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> refer to the
+same object, and that it is the second of the two reference diagrams that
+describes the relationship.  Since strings are <em>immutable</em>, Python optimizes
+resources by making two names that refer to the same string value refer to the
+same object.</p>
+<p>This is not the case with lists.  Consider the following example.  Here, <code class="docutils literal"><span class="pre">a</span></code>
+and <code class="docutils literal"><span class="pre">b</span></code> refer to two different lists, each of which happens to have the same
+element values.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">81</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">83</span><span class="p">]</span>
 
-<textarea data-component="activecode" id=chp09_is2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-a = [81, 82, 83]
-b = [81, 82, 83]
+<span class="gp">In [5]: </span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">81</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">83</span><span class="p">]</span>
 
-print(a is b)
+<span class="gp">In [6]: </span><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+<span class="gh">Out[6]: </span><span class="go">False</span>
 
-print(a == b)
-</textarea>
+<span class="gp">In [7]: </span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+<span class="go">              Out[7]: True</span>
+</pre></div>
+</div>
 <p>The reference diagram for this example looks like this:</p>
 <img alt="Reference diagram for equal different lists" src="../_images/refdiag3.png" />
 <p><code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> have the same value but do not refer to the same object.</p>
-<p>There is one other important thing to notice about this reference diagram.  The variable <code class="docutils literal"><span class="pre">a</span></code> is a reference to a <strong>collection of references</strong>.  Those references actually refer to the integer values in the list.  In other words, a list is a collection of references to objects.  Interestingly, even though <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> are two different lists (two different collections of references), the integer object <code class="docutils literal"><span class="pre">81</span></code> is shared by both.  Like strings, integers are also immutable so Python optimizes and lets everyone share the same object.</p>
+<p>There is one other important thing to notice about this reference diagram.  The
+variable <code class="docutils literal"><span class="pre">a</span></code> is a reference to a <strong>collection of references</strong>.  Those
+references actually refer to the integer values in the list.  In other words, a
+list is a collection of references to objects.  Interestingly, even though <code class="docutils literal"><span class="pre">a</span></code>
+and <code class="docutils literal"><span class="pre">b</span></code> are two different lists (two different collections of references), the
+integer object <code class="docutils literal"><span class="pre">81</span></code> is shared by both.  Like strings, integers are also
+immutable so Python optimizes and lets everyone share the same object.</p>
 <p>Here is the example in codelens.  Pay particular attention to the <cite>id</cite> values.</p>
 
 <div class="alert alert-warning cd_section">
@@ -366,7 +385,7 @@ print(a == b)
 <p class="cl_caption"><span class="cl_caption_text"> (chp09_istrace)</span> </p>
 </div>
 <script type="text/javascript">
-var chp09_istrace_trace = {"code": "a = [81, 82, 83]\nb = [81, 82, 83]\n\nprint(a is b)\nprint(a == b)", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 2, "stdout": "", "ordered_globals": ["a"], "heap": {"1": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 4, "stdout": "", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "False\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "False\nTrue\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "return"}]};
+var chp09_istrace_trace = {"trace": [{"heap": {}, "event": "step_line", "line": 1, "ordered_globals": [], "func_name": "<module>", "stdout": "", "globals": {}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 2, "ordered_globals": ["a"], "func_name": "<module>", "stdout": "", "globals": {"a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 4, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 5, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "False\n", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "event": "return", "line": 5, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "False\nTrue\n", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}], "code": "a = [81, 82, 83]\nb = [81, 82, 83]\n\nprint(a is b)\nprint(a == b)"};
 var chp09_istrace_vis;
 
 $(document).ready(function() {
@@ -407,27 +426,30 @@ $(window).resize(function() {
 </script>
 </div>
 <div class="section" id="aliasing">
-<span id="index-0"></span><h2>2.6.2. Aliasing<a class="headerlink" href="#aliasing" title="Permalink to this headline">¶</a></h2>
+<h2>3.6.2. Aliasing<a class="headerlink" href="#aliasing" title="Permalink to this headline">¶</a></h2>
 <p>Since variables refer to objects, if we assign one variable to another, both
 variables refer to the same object:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">81</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">83</span><span class="p">]</span>
 
-<textarea data-component="activecode" id=listalias1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-a = [81, 82, 83]
-b = a
-print(a is b)
-</textarea>
+<span class="gp">In [9]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+
+<span class="gp">In [10]: </span><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+<span class="gh">Out[10]: </span><span class="go">True</span>
+</pre></div>
+</div>
 <p>In this case, the reference diagram looks like this:</p>
 <img alt="State snapshot for multiple references (aliases) to a list" src="../_images/refdiag4.png" />
 <p>Because the same list has two different names, <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code>, we say that it
-is <strong>aliased</strong>. Changes made with one alias affect the other.  In the codelens example below, you can see that <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> refer
-to the same list after executing the assignment statement <code class="docutils literal"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span></code>.</p>
+is <strong>aliased</strong>. Changes made with one alias affect the other.  In the codelens
+example below, you can see that <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> refer to the same list after
+executing the assignment statement <code class="docutils literal"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span></code>.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="chp09_is3"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (chp09_is3)</span> </p>
 </div>
 <script type="text/javascript">
-var chp09_is3_trace = {"code": "a = [81, 82, 83]\nb = [81, 82, 83]\n\nprint(a == b)\nprint(a is b)\n\nb = a\nprint(a == b)\nprint(a is b)\n\nb[0] = 5\nprint(a)", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 2, "stdout": "", "ordered_globals": ["a"], "heap": {"1": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 4, "stdout": "", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "True\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 7, "stdout": "True\nFalse\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 8, "stdout": "True\nFalse\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 9, "stdout": "True\nFalse\nTrue\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 11, "stdout": "True\nFalse\nTrue\nTrue\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 12, "stdout": "True\nFalse\nTrue\nTrue\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 5, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 12, "stdout": "True\nFalse\nTrue\nTrue\n[5, 82, 83]\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 5, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 1]}, "event": "return"}]};
+var chp09_is3_trace = {"trace": [{"heap": {}, "event": "step_line", "line": 1, "ordered_globals": [], "func_name": "<module>", "stdout": "", "globals": {}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 2, "ordered_globals": ["a"], "func_name": "<module>", "stdout": "", "globals": {"a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 4, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 5, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\n", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 7, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\nFalse\n", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 8, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\nFalse\n", "globals": {"b": ["REF", 1], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 9, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\nFalse\nTrue\n", "globals": {"b": ["REF", 1], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 11, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\nFalse\nTrue\nTrue\n", "globals": {"b": ["REF", 1], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 5, 82, 83]}, "event": "step_line", "line": 12, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\nFalse\nTrue\nTrue\n", "globals": {"b": ["REF", 1], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 5, 82, 83]}, "event": "return", "line": 12, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\nFalse\nTrue\nTrue\n[5, 82, 83]\n", "globals": {"b": ["REF", 1], "a": ["REF", 1]}, "stack_to_render": []}], "code": "a = [81, 82, 83]\nb = [81, 82, 83]\n\nprint(a == b)\nprint(a is b)\n\nb = a\nprint(a == b)\nprint(a is b)\n\nb[0] = 5\nprint(a)"};
 var chp09_is3_vis;
 
 $(document).ready(function() {
@@ -466,15 +488,15 @@ $(window).resize(function() {
     }
 });
 </script>
-<p>Although this behavior can be useful, it is sometimes unexpected or
-undesirable. In general, it is safer to avoid aliasing when you are working
-with mutable objects. Of course, for immutable objects, there&#8217;s no problem.
-That&#8217;s why Python is free to alias strings and integers when it sees an opportunity to
+<p>Although this behavior can be useful, it is sometimes unexpected or undesirable.
+In general, it is safer to avoid aliasing when you are working with mutable
+objects. Of course, for immutable objects, there&#8217;s no problem.  That&#8217;s why
+Python is free to alias strings and integers when it sees an opportunity to
 economize.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_10_1">
-            <p>rec-5-31: What is printed by the following statements?</p>
+            <p>intro-12-413: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">blist</span> <span class="o">=</span> <span class="n">alist</span>
 <span class="n">blist</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span>
@@ -490,7 +512,7 @@ economize.</p>
             </ul>
             </div>
 <div class="section" id="cloning-lists">
-<span id="index-1"></span><h2>2.6.3. Cloning Lists<a class="headerlink" href="#cloning-lists" title="Permalink to this headline">¶</a></h2>
+<h2>3.6.3. Cloning Lists<a class="headerlink" href="#cloning-lists" title="Permalink to this headline">¶</a></h2>
 <p>If we want to modify a list and also keep a copy of the original, we need to be
 able to make a copy of the list itself, not just the reference. This process is
 sometimes called <strong>cloning</strong>, to avoid the ambiguity of the word copy.</p>
@@ -503,7 +525,7 @@ consist of the whole list.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (chp09_is4)</span> </p>
 </div>
 <script type="text/javascript">
-var chp09_is4_trace = {"code": "a = [81, 82, 83]\n\nb = a[:]       # make a clone using slice\nprint(a == b)\nprint(a is b)\n\nb[0] = 5\n\nprint(a)\nprint(b)", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["a"], "heap": {"1": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 4, "stdout": "", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "True\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 7, "stdout": "True\nFalse\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 9, "stdout": "True\nFalse\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 5, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 10, "stdout": "True\nFalse\n[81, 82, 83]\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 5, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 10, "stdout": "True\nFalse\n[81, 82, 83]\n[5, 82, 83]\n", "ordered_globals": ["a", "b"], "heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 5, 82, 83]}, "globals": {"a": ["REF", 1], "b": ["REF", 2]}, "event": "return"}]};
+var chp09_is4_trace = {"trace": [{"heap": {}, "event": "step_line", "line": 1, "ordered_globals": [], "func_name": "<module>", "stdout": "", "globals": {}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 3, "ordered_globals": ["a"], "func_name": "<module>", "stdout": "", "globals": {"a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 4, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 5, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\n", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 81, 82, 83]}, "event": "step_line", "line": 7, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\nFalse\n", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 5, 82, 83]}, "event": "step_line", "line": 9, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\nFalse\n", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 5, 82, 83]}, "event": "step_line", "line": 10, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\nFalse\n[81, 82, 83]\n", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 81, 82, 83], "2": ["LIST", 5, 82, 83]}, "event": "return", "line": 10, "ordered_globals": ["a", "b"], "func_name": "<module>", "stdout": "True\nFalse\n[81, 82, 83]\n[5, 82, 83]\n", "globals": {"b": ["REF", 2], "a": ["REF", 1]}, "stack_to_render": []}], "code": "a = [81, 82, 83]\n\nb = a[:]       # make a clone using slice\nprint(a == b)\nprint(a is b)\n\nb[0] = 5\n\nprint(a)\nprint(b)"};
 var chp09_is4_vis;
 
 $(document).ready(function() {
@@ -542,52 +564,66 @@ $(window).resize(function() {
     }
 });
 </script>
-<p>Now we are free to make changes to <code class="docutils literal"><span class="pre">b</span></code> without worrying about <code class="docutils literal"><span class="pre">a</span></code>.  Again, we can clearly see in codelens that <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> are entirely different list objects.</p>
+<p>Now we are free to make changes to <code class="docutils literal"><span class="pre">b</span></code> without worrying about <code class="docutils literal"><span class="pre">a</span></code>.  Again,
+we can clearly see in codelens that <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> are entirely different list
+objects.</p>
 </div>
 <div class="section" id="repetition-and-references">
-<h2>2.6.4. Repetition and References<a class="headerlink" href="#repetition-and-references" title="Permalink to this headline">¶</a></h2>
-<p>We have already seen the repetition operator working on strings as well as lists.  For example,</p>
+<h2>3.6.4. Repetition and References<a class="headerlink" href="#repetition-and-references" title="Permalink to this headline">¶</a></h2>
+<p>We have already seen the repetition operator working on strings as well as
+lists.  For example,</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">origlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">55</span><span class="p">]</span>
 
-<textarea data-component="activecode" id=repref1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-origlist = [45, 76, 34, 55]
-print(origlist * 3)
-</textarea>
-<p>With a list, the repetition operator creates copies of the references.  Although this may seem simple enough, when we allow a list to refer to another list, a subtle problem can arise.</p>
+<span class="gp">In [12]: </span><span class="n">origlist</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="gh">Out[12]: </span><span class="go">[45, 76, 34, 55, 45, 76, 34, 55, 45, 76, 34, 55]</span>
+</pre></div>
+</div>
+<p>With a list, the repetition operator creates copies of the references.  Although
+this may seem simple enough, when we allow a list to refer to another list, a
+subtle problem can arise.</p>
 <p>Consider the following extension on the previous example.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">origlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">55</span><span class="p">]</span>
 
-<textarea data-component="activecode" id=repref2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-origlist = [45, 76, 34, 55]
-print(origlist * 3)
+<span class="gp">In [14]: </span><span class="n">origlist</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="gh">Out[14]: </span><span class="go">[45, 76, 34, 55, 45, 76, 34, 55, 45, 76, 34, 55]</span>
 
-newlist = [origlist] * 3
+<span class="gp">In [15]: </span><span class="n">newlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">origlist</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
 
-print(newlist)
-</textarea>
-<p><code class="docutils literal"><span class="pre">newlist</span></code> is a list of three references to <code class="docutils literal"><span class="pre">origlist</span></code> that were created by the repetition operator.  The reference diagram is shown below.</p>
+<span class="gp">In [16]: </span><span class="n">newlist</span>
+<span class="gh">Out[16]: </span><span class="go">[[45, 76, 34, 55], [45, 76, 34, 55], [45, 76, 34, 55]]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">newlist</span></code> is a list of three references to <code class="docutils literal"><span class="pre">origlist</span></code> that were created by
+the repetition operator.  The reference diagram is shown below.</p>
 <img alt="Repetition of a nested list" src="../_images/refrep1.png" />
 <p>Now, what happens if we modify a value in <code class="docutils literal"><span class="pre">origlist</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">origlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">55</span><span class="p">]</span>
 
-<textarea data-component="activecode" id=repref3 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-origlist = [45, 76, 34, 55]
+<span class="gp">In [18]: </span><span class="n">newlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">origlist</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
 
-newlist = [origlist] * 3
+<span class="gp">In [19]: </span><span class="n">newlist</span>
+<span class="gh">Out[19]: </span><span class="go">[[45, 76, 34, 55], [45, 76, 34, 55], [45, 76, 34, 55]]</span>
 
-print(newlist)
+<span class="gp">In [20]: </span><span class="n">origlist</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span>
 
-origlist[1] = 99
-
-print(newlist)
-</textarea>
-<p><code class="docutils literal"><span class="pre">newlist</span></code> shows the change in three places.  This can easily be seen by noting that in the reference diagram, there is only one <code class="docutils literal"><span class="pre">origlist</span></code>, so any changes to it appear in all three references from <code class="docutils literal"><span class="pre">newlist</span></code>.</p>
+<span class="gp">In [21]: </span><span class="n">newlist</span>
+<span class="gh">Out[21]: </span><span class="go">[[45, 99, 34, 55], [45, 99, 34, 55], [45, 99, 34, 55]]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">newlist</span></code> shows the change in three places.  This can easily be seen by noting
+that in the reference diagram, there is only one <code class="docutils literal"><span class="pre">origlist</span></code>, so any changes to
+it appear in all three references from <code class="docutils literal"><span class="pre">newlist</span></code>.</p>
 <img alt="Same reference" src="../_images/refrep2.png" />
-<p>Here is the same example in codelens.  Step through the code paying particular attention to the result of executing the assignment statement <code class="docutils literal"><span class="pre">origlist[1]</span> <span class="pre">=</span> <span class="pre">99</span></code>.</p>
+<p>Here is the same example in codelens.  Step through the code paying particular
+attention to the result of executing the assignment statement <code class="docutils literal"><span class="pre">origlist[1]</span> <span class="pre">=</span>
+<span class="pre">99</span></code>.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="reprefstep"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (reprefstep)</span> </p>
 </div>
 <script type="text/javascript">
-var reprefstep_trace = {"code": "origlist = [45, 76, 34, 55]\n\nnewlist = [origlist] * 3\n\nprint(newlist)\n\noriglist[1] = 99\n\nprint(newlist)", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["origlist"], "heap": {"1": ["LIST", 45, 76, 34, 55]}, "globals": {"origlist": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "", "ordered_globals": ["origlist", "newlist"], "heap": {"1": ["LIST", 45, 76, 34, 55], "2": ["LIST", ["REF", 1], ["REF", 1], ["REF", 1]]}, "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 7, "stdout": "[[45, 76, 34, 55], [45, 76, 34, 55], [45, 76, 34, 55]]\n", "ordered_globals": ["origlist", "newlist"], "heap": {"1": ["LIST", 45, 76, 34, 55], "2": ["LIST", ["REF", 1], ["REF", 1], ["REF", 1]]}, "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 9, "stdout": "[[45, 76, 34, 55], [45, 76, 34, 55], [45, 76, 34, 55]]\n", "ordered_globals": ["origlist", "newlist"], "heap": {"1": ["LIST", 45, 99, 34, 55], "2": ["LIST", ["REF", 1], ["REF", 1], ["REF", 1]]}, "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 9, "stdout": "[[45, 76, 34, 55], [45, 76, 34, 55], [45, 76, 34, 55]]\n[[45, 99, 34, 55], [45, 99, 34, 55], [45, 99, 34, 55]]\n", "ordered_globals": ["origlist", "newlist"], "heap": {"1": ["LIST", 45, 99, 34, 55], "2": ["LIST", ["REF", 1], ["REF", 1], ["REF", 1]]}, "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "event": "return"}]};
+var reprefstep_trace = {"trace": [{"heap": {}, "event": "step_line", "line": 1, "ordered_globals": [], "func_name": "<module>", "stdout": "", "globals": {}, "stack_to_render": []}, {"heap": {"1": ["LIST", 45, 76, 34, 55]}, "event": "step_line", "line": 3, "ordered_globals": ["origlist"], "func_name": "<module>", "stdout": "", "globals": {"origlist": ["REF", 1]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 45, 76, 34, 55], "2": ["LIST", ["REF", 1], ["REF", 1], ["REF", 1]]}, "event": "step_line", "line": 5, "ordered_globals": ["origlist", "newlist"], "func_name": "<module>", "stdout": "", "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 45, 76, 34, 55], "2": ["LIST", ["REF", 1], ["REF", 1], ["REF", 1]]}, "event": "step_line", "line": 7, "ordered_globals": ["origlist", "newlist"], "func_name": "<module>", "stdout": "[[45, 76, 34, 55], [45, 76, 34, 55], [45, 76, 34, 55]]\n", "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 45, 99, 34, 55], "2": ["LIST", ["REF", 1], ["REF", 1], ["REF", 1]]}, "event": "step_line", "line": 9, "ordered_globals": ["origlist", "newlist"], "func_name": "<module>", "stdout": "[[45, 76, 34, 55], [45, 76, 34, 55], [45, 76, 34, 55]]\n", "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "stack_to_render": []}, {"heap": {"1": ["LIST", 45, 99, 34, 55], "2": ["LIST", ["REF", 1], ["REF", 1], ["REF", 1]]}, "event": "return", "line": 9, "ordered_globals": ["origlist", "newlist"], "func_name": "<module>", "stdout": "[[45, 76, 34, 55], [45, 76, 34, 55], [45, 76, 34, 55]]\n[[45, 99, 34, 55], [45, 99, 34, 55], [45, 99, 34, 55]]\n", "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "stack_to_render": []}], "code": "origlist = [45, 76, 34, 55]\n\nnewlist = [origlist] * 3\n\nprint(newlist)\n\noriglist[1] = 99\n\nprint(newlist)"};
 var reprefstep_vis;
 
 $(document).ready(function() {
@@ -629,7 +665,7 @@ $(window).resize(function() {
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_12_1">
-            <p>rec-5-32: What is printed by the following statements?</p>
+            <p>intro-12-414: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">blist</span> <span class="o">=</span> <span class="n">alist</span> <span class="o">*</span> <span class="mi">2</span>
 <span class="n">blist</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span>
@@ -647,7 +683,7 @@ $(window).resize(function() {
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_12_2">
-            <p>rec-5-33: What is printed by the following statements?</p>
+            <p>intro-12-415: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">blist</span> <span class="o">=</span> <span class="p">[</span><span class="n">alist</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
 <span class="n">alist</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span>
@@ -665,25 +701,35 @@ $(window).resize(function() {
             
 
             </ul>
-            <span class="target" id="index-2"></span></div>
+            <div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This workspace is provided for your convenience.  You can use this
+activecode window to try out anything you like.</p>
+
+<textarea data-component="activecode" id=scratch_08_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
+
+
+</textarea>
+</div>
+</div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 2.5. Mutable and Immutable Sequences' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 3.5. Mutable and Immutable Sequences' data-toggle="tooltip">
     <a href="MutableAndImmutableSequences.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="MutableAndImmutableSequences.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 2.7. Sequence Methods and Working with Strings and Lists' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 3.7. Sequence Methods and Working with Strings and Lists' data-toggle="tooltip" >
     <a href="SequenceMethodsandWorkingwithStringsAndLists.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="SequenceMethodsandWorkingwithStringsAndLists.html" >Next Section - 2.7. Sequence Methods and Working with Strings and Lists</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="SequenceMethodsandWorkingwithStringsAndLists.html" >Next Section - 3.7. Sequence Methods and Working with Strings and Lists</a>
 
 <script type="text/javascript">
 

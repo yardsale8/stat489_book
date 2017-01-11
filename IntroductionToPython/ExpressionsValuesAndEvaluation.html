@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.5. Expressions, Values and Evaluation &mdash; Runestone Interactive Overview</title>
+    <title>2.3. Expressions, Values and Evaluation &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="1. Introduction to Python" href="toctree.html" />
-    <link rel="next" title="1.6. Statements: When Expressions Are Not Enough" href="StatementsWhenExpressionsAreNotEnough.html" />
-    <link rel="prev" title="1.4. Saving Expressions for Later Execution - The lambda Expression" href="SavingExpressionsForLaterExecution.html" />
+    <link rel="up" title="2. Expressions and Evalation" href="toctree2.html" />
+    <link rel="next" title="2.4. Statements: When Expressions Are Not Enough" href="StatementsWhenExpressionsAreNotEnough.html" />
+    <link rel="prev" title="2.2. Saving Expressions for Later Execution - The lambda Expression" href="SavingExpressionsForLaterExecution.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,12 +263,12 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">1.5. Expressions, Values and Evaluation</a><ul>
-<li><a class="reference internal" href="#what-is-evaluation">1.5.1. What is Evaluation?</a></li>
-<li><a class="reference internal" href="#evaluation-of-variables-with-substitution">1.5.2. Evaluation of Variables with Substitution</a></li>
-<li><a class="reference internal" href="#evaluating-conditional-expressions">1.5.3. Evaluating Conditional Expressions</a></li>
-<li><a class="reference internal" href="#evaluating-lambda-function-application">1.5.4. Evaluating <cite>lambda</cite> Function Application</a></li>
-<li><a class="reference internal" href="#evaluating-the-application-of-lambda-function-composition">1.5.5. Evaluating the Application of <cite>lambda</cite> Function Composition</a></li>
+<li><a class="reference internal" href="#">2.3. Expressions, Values and Evaluation</a><ul>
+<li><a class="reference internal" href="#what-is-evaluation">2.3.1. What is Evaluation?</a></li>
+<li><a class="reference internal" href="#evaluation-of-variables-with-substitution">2.3.2. Evaluation of Variables with Substitution</a></li>
+<li><a class="reference internal" href="#evaluating-conditional-expressions">2.3.3. Evaluating Conditional Expressions</a></li>
+<li><a class="reference internal" href="#evaluating-lambda-function-application">2.3.4. Evaluating <cite>lambda</cite> Function Application</a></li>
+<li><a class="reference internal" href="#evaluating-the-application-of-lambda-function-composition">2.3.5. Evaluating the Application of <cite>lambda</cite> Function Composition</a></li>
 </ul>
 </li>
 </ul>
@@ -278,13 +278,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 1.4. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 2.2. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression" data-toggle="tooltip">
     <a href="SavingExpressionsForLaterExecution.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 1.6. Statements: When Expressions Are Not Enough' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 2.4. Statements: When Expressions Are Not Enough' data-toggle="tooltip" >
     <a href="StatementsWhenExpressionsAreNotEnough.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -316,40 +316,40 @@
 <div class="container" id="main-content">
   
   <div class="section" id="expressions-values-and-evaluation">
-<h1>1.5. Expressions, Values and Evaluation<a class="headerlink" href="#expressions-values-and-evaluation" title="Permalink to this headline">¶</a></h1>
+<h1>2.3. Expressions, Values and Evaluation<a class="headerlink" href="#expressions-values-and-evaluation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="what-is-evaluation">
-<h2>1.5.1. What is Evaluation?<a class="headerlink" href="#what-is-evaluation" title="Permalink to this headline">¶</a></h2>
+<h2>2.3.1. What is Evaluation?<a class="headerlink" href="#what-is-evaluation" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="evaluation-of-variables-with-substitution">
-<h2>1.5.2. Evaluation of Variables with Substitution<a class="headerlink" href="#evaluation-of-variables-with-substitution" title="Permalink to this headline">¶</a></h2>
+<h2>2.3.2. Evaluation of Variables with Substitution<a class="headerlink" href="#evaluation-of-variables-with-substitution" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="evaluating-conditional-expressions">
-<h2>1.5.3. Evaluating Conditional Expressions<a class="headerlink" href="#evaluating-conditional-expressions" title="Permalink to this headline">¶</a></h2>
+<h2>2.3.3. Evaluating Conditional Expressions<a class="headerlink" href="#evaluating-conditional-expressions" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="evaluating-lambda-function-application">
-<h2>1.5.4. Evaluating <cite>lambda</cite> Function Application<a class="headerlink" href="#evaluating-lambda-function-application" title="Permalink to this headline">¶</a></h2>
+<h2>2.3.4. Evaluating <cite>lambda</cite> Function Application<a class="headerlink" href="#evaluating-lambda-function-application" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="evaluating-the-application-of-lambda-function-composition">
-<h2>1.5.5. Evaluating the Application of <cite>lambda</cite> Function Composition<a class="headerlink" href="#evaluating-the-application-of-lambda-function-composition" title="Permalink to this headline">¶</a></h2>
+<h2>2.3.5. Evaluating the Application of <cite>lambda</cite> Function Composition<a class="headerlink" href="#evaluating-the-application-of-lambda-function-composition" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 1.4. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 2.2. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression' data-toggle="tooltip">
     <a href="SavingExpressionsForLaterExecution.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="SavingExpressionsForLaterExecution.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 1.6. Statements: When Expressions Are Not Enough' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 2.4. Statements: When Expressions Are Not Enough' data-toggle="tooltip" >
     <a href="StatementsWhenExpressionsAreNotEnough.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="StatementsWhenExpressionsAreNotEnough.html" >Next Section - 1.6. Statements: When Expressions Are Not Enough</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="StatementsWhenExpressionsAreNotEnough.html" >Next Section - 2.4. Statements: When Expressions Are Not Enough</a>
 
 <script type="text/javascript">
 

@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.8. Sharing and Reusing Code with Modules &mdash; Runestone Interactive Overview</title>
+    <title>1.4. Sharing and Reusing Code with Modules &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="1. Introduction to Python" href="toctree.html" />
-    <link rel="next" title="2. Sequential Data Structures in Python" href="../SequentialDataStructuresInPython/toctree.html" />
-    <link rel="prev" title="1.7. Python as an Object Oriented Language" href="PythonAsAnObjectOrientedLanguage.html" />
+    <link rel="next" title="1.5. Python as an Object Oriented Language" href="PythonAsAnObjectOrientedLanguage.html" />
+    <link rel="prev" title="1.3. Data, Types, and Variables" href="DataTypesAndVariables.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,11 +263,12 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">1.8. Sharing and Reusing Code with Modules</a><ul>
-<li><a class="reference internal" href="#modules-and-getting-help">1.8.1. Modules and Getting Help</a></li>
-<li><a class="reference internal" href="#the-math-module">1.8.2. The <cite>math</cite> module</a></li>
-<li><a class="reference internal" href="#the-random-module">1.8.3. The <cite>random</cite> module</a></li>
-<li><a class="reference internal" href="#making-your-own-modules">1.8.4. Making your own modules</a></li>
+<li><a class="reference internal" href="#">1.4. Sharing and Reusing Code with Modules</a><ul>
+<li><a class="reference internal" href="#modules-and-getting-help">1.4.1. Modules and Getting Help</a></li>
+<li><a class="reference internal" href="#the-math-module">1.4.2. The <cite>math</cite> module</a></li>
+<li><a class="reference internal" href="#the-import-statement">1.4.3. The <code class="docutils literal"><span class="pre">import</span></code> statement</a></li>
+<li><a class="reference internal" href="#the-random-module">1.4.4. The <cite>random</cite> module</a></li>
+<li><a class="reference internal" href="#making-your-own-modules">1.4.5. Making your own modules</a></li>
 </ul>
 </li>
 </ul>
@@ -277,14 +278,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 1.7. Python as an Object Oriented Language" data-toggle="tooltip">
-    <a href="PythonAsAnObjectOrientedLanguage.html" >
+  <li id="relations-prev" title="Previous Chapter - 1.3. Data, Types, and Variables" data-toggle="tooltip">
+    <a href="DataTypesAndVariables.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 2. Sequential Data Structures in Python' data-toggle="tooltip" >
-    <a href="../SequentialDataStructuresInPython/toctree.html" >
+  <li id="relations-next" title='Next Chapter - 1.5. Python as an Object Oriented Language' data-toggle="tooltip" >
+    <a href="PythonAsAnObjectOrientedLanguage.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -315,84 +316,41 @@
 <div class="container" id="main-content">
   
   <div class="section" id="sharing-and-reusing-code-with-modules">
-<h1>1.8. Sharing and Reusing Code with Modules<a class="headerlink" href="#sharing-and-reusing-code-with-modules" title="Permalink to this headline">¶</a></h1>
+<h1>1.4. Sharing and Reusing Code with Modules<a class="headerlink" href="#sharing-and-reusing-code-with-modules" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="modules-and-getting-help">
-<h2>1.8.1. Modules and Getting Help<a class="headerlink" href="#modules-and-getting-help" title="Permalink to this headline">¶</a></h2>
-<div id="inputvid" class="video_popup" >
-<video controls preload="none"  poster="../_static/modules.png">
-    <source src="http://media.interactivepython.org/thinkcsVideos/modules.mov" type="video/mp4"></source>
-    <source src="http://media.interactivepython.org/thinkcsVideos/modules.webm" type="video/webm"></source>
-    No supported video types
-</video>
-</div>
-<script>
-   jQuery(function($) {
-      var rb = new RunestoneBase();
-      $('#inputvid_thumb').click(function(e) {
-         $('#inputvid').show();
-         $('#inputvid_thumb').hide();
-         rb.logBookEvent({'event':'video','act':'play','div_id': 'inputvid'});
-         // Log the run event
-      });
-      $('#inputvid video').one("click", function(){
-        this.play();
-      });
-      $('#inputvid video').one("play", function(){
-        rb.logBookEvent({'event':'video','act':'play','div_id': 'inputvid'});
-      });
-   });
-</script>
-<p>A <strong>module</strong> is a file containing Python definitions and statements intended
-for use in other Python programs. There are many Python modules that come with
-Python as part of the <strong>standard library</strong>. We have already used one of these quite extensively,
-the <code class="docutils literal"><span class="pre">turtle</span></code> module.  Recall that once we import the module, we can use things
-that are defined inside.</p>
-
-<textarea data-component="activecode" id=chmod_01 data-lang="python"    data-timelimit=25000   data-audio=''     >
-import turtle            # allows us to use the turtles library
-
-wn = turtle.Screen()     # creates a graphics window
-alex = turtle.Turtle()   # create a turtle named alex
-
-alex.forward(150)        # tell alex to move forward by 150 units
-alex.left(90)            # turn by 90 degrees
-alex.forward(75)         # complete the second side of a rectangle
-wn.exitonclick()
-</textarea>
-<p>Here we are using <code class="docutils literal"><span class="pre">Screen</span></code> and <code class="docutils literal"><span class="pre">Turtle</span></code>, both of which are defined inside the turtle module.</p>
-<p>But what if no one had told us about turtle?  How would we know
-that it exists. How would we know what it can do for us? The answer is to ask for help and the best place to get
-help about the Python programming environment is to consult with the Python Documentation.</p>
-<p>The  <a class="reference external" href="http://docs.python.org/py3k/">Python Documentation</a> site for Python version 3 (the home page is shown below) is an extremely useful reference
-for all aspects of Python.
-The site contains
-a listing of all the standard modules that are available with Python
-(see <a class="reference external" href="http://docs.python.org/py3k/py-modindex.html">Global Module Index</a>).
-You will also see that there is a <a class="reference external" href="http://docs.python.org/py3k/reference/index.html">Language Reference</a>
+<h2>1.4.1. Modules and Getting Help<a class="headerlink" href="#modules-and-getting-help" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>module</strong> is a file containing Python definitions and statements intended for
+use in other Python programs. There are many Python modules that come with
+Python as part of the <strong>standard library</strong>.</p>
+<p>The  <a class="reference external" href="http://docs.python.org/py3k/">Python Documentation</a> site for Python
+version 3 (the home page is shown below) is an extremely useful reference for
+all aspects of Python.  The site contains a listing of all the standard modules
+that are available with Python (see <a class="reference external" href="http://docs.python.org/py3k/py-modindex.html">Global Module Index</a>).  You will also see that there
+is a <a class="reference external" href="http://docs.python.org/py3k/reference/index.html">Language Reference</a>
 and a <a class="reference external" href="http://docs.python.org/py3k/tutorial/index.html">Tutorial</a>, as well as
-installation instructions, how-tos, and frequently asked questions.  We encourage you to become familiar with this site
-and to use it often.</p>
+installation instructions, how-tos, and frequently asked questions.  We
+encourage you to become familiar with this site and to use it often.</p>
 <img alt="../_images/pythondocmedium.png" src="../_images/pythondocmedium.png" />
-<p>If you have not done so already, take a look at the Global Module Index.  Here you will see an alphabetical listing of all
-the modules that are available as part of the standard library.  Find the turtle module.</p>
-<img alt="../_images/moduleindexmedium.png" src="../_images/moduleindexmedium.png" />
-<img alt="../_images/turtlemodmedium.png" src="../_images/turtlemodmedium.png" />
-<p>You can see that all the turtle functionality that we have talked about is there.  However, there is so much more.  Take some time to read through and familiarize yourself with some of the other things that turtles can do.</p>
+<p>If you have not done so already, take a look at the Global Module Index.  Here
+you will see an alphabetical listing of all the modules that are available as
+part of the standard library.</p>
 <div class="admonition-note-python-modules-and-limitations-with-activecode admonition">
 <p class="first admonition-title">Note: Python modules and limitations with activecode</p>
-<p>Throughout the chapters of this book, activecode windows allow you to practice the Python that you are learning.
-We mentioned in the first chapter that programming is normally done using some type of development
-environment and that the
-activecode used here was strictly to help us learn.  It is not the way we write production programs.</p>
-<p class="last">To that end, it is necessary to mention that many of the  modules available in standard Python
-will <strong>not</strong> work in the activecode environment.  In fact, only turtle, math, and random have been
-ported at this point.  If you wish to explore any
-additional modules, you will need to also explore using a more robust development environment.</p>
+<p>Throughout the chapters of this book, activecode windows allow you to
+practice the Python that you are learning.  We mentioned in the first
+chapter that programming is normally done using some type of development
+environment and that the activecode used here was strictly to help us learn.
+It is not the way we write production programs.</p>
+<p class="last">To that end, it is necessary to mention that many of the  modules available
+in standard Python will <strong>not</strong> work in the activecode environment.  In
+fact, only turtle, math, and random have been ported at this point.  If you
+wish to explore any additional modules, you will need to also explore using
+a more robust development environment.</p>
 </div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="question4_1_1">
-            select-3-4: In Python a module is:
+            intro-12-261: In Python a module is:
             <li data-component="answer" data-correct id="question4_1_1_opt_a">(A) A file containing Python definitions and statements intended for use in other Python programs.</li><li data-component="feedback" id="question4_1_1_opt_a">A module can be reused in different programs.</li>
             
             <li data-component="answer"  id="question4_1_1_opt_b">(B) A separate block of code within a program.</li><li data-component="feedback" id="question4_1_1_opt_b">While a module is separate block of code, it is separate from a program.</li>
@@ -405,7 +363,7 @@ additional modules, you will need to also explore using a more robust developmen
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="question4_1_2">
-            select-3-5: To find out information on the standard modules available with Python you should:
+            intro-12-262: To find out information on the standard modules available with Python you should:
             <li data-component="answer" data-correct id="question4_1_2_opt_a">(A) Go to the Python Documentation site.</li><li data-component="feedback" id="question4_1_2_opt_a">The site contains a listing of all the standard modules that are available with Python.</li>
             
             <li data-component="answer"  id="question4_1_2_opt_b">(B) Look at the import statements of the program you are working with or writing.</li><li data-component="feedback" id="question4_1_2_opt_b">The import statements only tell you what modules are currently being used in the program, not how to use them or what they contain.</li>
@@ -418,7 +376,7 @@ additional modules, you will need to also explore using a more robust developmen
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="question4_1_3">
-            select-3-6: True / False:  All standard Python modules will work in activecode.
+            intro-12-263: True / False:  All standard Python modules will work in activecode.
             <li data-component="answer"  id="question4_1_3_opt_a">(A) True</li><li data-component="feedback" id="question4_1_3_opt_a">Only turtle, math, and random have been ported to work in activecode at this time.</li>
             
             <li data-component="answer" data-correct id="question4_1_3_opt_b">(B) False</li><li data-component="feedback" id="question4_1_3_opt_b">Only turtle, math, and random have been ported to work in activecode at this time.</li>
@@ -427,14 +385,15 @@ additional modules, you will need to also explore using a more robust developmen
             </ul>
             </div>
 <div class="section" id="the-math-module">
-<h2>1.8.2. The <cite>math</cite> module<a class="headerlink" href="#the-math-module" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">math</span></code> module contains the kinds of mathematical functions you would typically find on your
-calculator and some mathematical constants
-like <cite>pi</cite> and <cite>e</cite>.
-As we noted above, when we <code class="docutils literal"><span class="pre">import</span> <span class="pre">math</span></code>, we create a reference to a module object that contains these elements.</p>
+<h2>1.4.2. The <cite>math</cite> module<a class="headerlink" href="#the-math-module" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">math</span></code> module contains the kinds of mathematical functions you would
+typically find on your calculator and some mathematical constants like <cite>pi</cite> and
+<cite>e</cite>.  As we noted above, when we <code class="docutils literal"><span class="pre">import</span> <span class="pre">math</span></code>, we create a reference to a
+module object that contains these elements.</p>
 <img alt="../_images/mathmod.png" src="../_images/mathmod.png" />
-<p>Here are some items from the math module in action.  If you want more information, you can check out the
-<a class="reference external" href="http://docs.python.org/py3k/library/math.html#module-math">Math Module</a> Python Documentation.</p>
+<p>Here are some items from the math module in action.  If you want more
+information, you can check out the <a class="reference external" href="http://docs.python.org/py3k/library/math.html#module-math">Math Module</a> Python
+Documentation.</p>
 
 <textarea data-component="activecode" id=chmodule_02 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
 import math
@@ -446,22 +405,19 @@ print(math.sqrt(2.0))
 
 print(math.sin(math.radians(90)))   # sin of 90 degrees
 </textarea>
-<p>Notice another difference between this module and our use of <code class="docutils literal"><span class="pre">turtle</span></code>.
-In  <code class="docutils literal"><span class="pre">turtle</span></code> we create objects (either <code class="docutils literal"><span class="pre">Turtle</span></code> or <code class="docutils literal"><span class="pre">Screen</span></code>) and call methods on those objects.  Remember that
-a turtle is a data object (recall <code class="docutils literal"><span class="pre">alex</span></code> and <code class="docutils literal"><span class="pre">tess</span></code>).  We need to create one in order to use it.  When we say
-<code class="docutils literal"><span class="pre">alex</span> <span class="pre">=</span> <span class="pre">turtle.Turtle()</span></code>, we are calling the constructor for the Turtle class which returns a single turtle object.</p>
-<p>Mathematical functions do not need to be constructed.  They simply
-perform a task.
-They are all housed together in a module called <cite>math</cite>.  Once we have imported the math module, anything defined there
-can be used in our program.  Notice that we always use the name of the module followed by a <cite>dot</cite> followed by the
-specific item from the module (<code class="docutils literal"><span class="pre">math.sqrt</span></code>).  You can think of this as lastname.firstname where the lastname is the module
-family and the firstname is the individual entry in the module.</p>
-<p>If you have not done so already, take a look at the documentation
-for the math module.</p>
+<p>Mathematical functions do not need to be constructed.  They simply perform a
+task.  They are all housed together in a module called <cite>math</cite>.  Once we have
+imported the math module, anything defined there can be used in our program.
+Notice that we always use the name of the module followed by a <cite>dot</cite> followed by
+the specific item from the module (<code class="docutils literal"><span class="pre">math.sqrt</span></code>).  You can think of this as
+lastname.firstname where the lastname is the module family and the firstname is
+the individual entry in the module.</p>
+<p>If you have not done so already, take a look at the documentation for the math
+module.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="question4_2_1">
-            select-3-7: Which statement allows you to use the math module in your program?
+            intro-12-264: Which statement allows you to use the math module in your program?
             <li data-component="answer" data-correct id="question4_2_1_opt_a">(A) import math</li><li data-component="feedback" id="question4_2_1_opt_a">The module must be imported before you can use anything declared inside the module.</li>
             
             <li data-component="answer"  id="question4_2_1_opt_b">(B) include math</li><li data-component="feedback" id="question4_2_1_opt_b">The correct term is not include, but you are close.</li>
@@ -473,11 +429,93 @@ for the math module.</p>
 
             </ul>
             </div>
+<div class="section" id="the-import-statement">
+<h2>1.4.3. The <code class="docutils literal"><span class="pre">import</span></code> statement<a class="headerlink" href="#the-import-statement" title="Permalink to this headline">¶</a></h2>
+<p>There are three ways to import a module.  The first is the basic <code class="docutils literal"><span class="pre">import</span></code>
+statement, as shown below.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">math</span>
+</pre></div>
+</div>
+<p>When using this import statement, all the objects from the math module live in
+the <code class="docutils literal"><span class="pre">math</span></code> namespace and are accessed using the <code class="docutils literal"><span class="pre">.</span></code> notation.  For example,
+to see an approximation of <span class="math">\(\pi\)</span>, we would use <code class="docutils literal"><span class="pre">math.pi</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+<span class="gh">Out[2]: </span><span class="go">3.141592653589793</span>
+</pre></div>
+</div>
+<p>It can be inconvenient to type the module name before each object and there are
+two ways to avoid this annoyance.  First, we could assign a short alias for the
+module using the <code class="docutils literal"><span class="pre">import-as</span></code> statement.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="kn">import</span> <span class="nn">math</span> <span class="kn">as</span> <span class="nn">m</span>
+
+<span class="gp">In [4]: </span><span class="n">m</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[4]: </span><span class="go">6.123233995736766e-17</span>
+</pre></div>
+</div>
+<p>The other alternative is to import elements into the <strong>main namespace</strong> using
+the <code class="docutils literal"><span class="pre">from-import</span></code> statement, as shown below. In this case, we no longer need
+to use the module name and dot notation to access the objects.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span>
+
+<span class="gp">In [6]: </span><span class="n">cos</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[6]: </span><span class="go">6.123233995736766e-17</span>
+</pre></div>
+</div>
+<p>You may be wondering why anyone might use the <code class="docutils literal"><span class="pre">import</span></code> or <code class="docutils literal"><span class="pre">import-as</span></code>
+statements and subject themselves to the inconvenience of prepending all module
+objects with the dot notation.  The primary advantage to using these forms of
+the import statement is that they avoid naming conflicts.  For example, both the
+<code class="docutils literal"><span class="pre">math</span></code> standard library and the <code class="docutils literal"><span class="pre">numpy</span></code> numerical library have a cosine
+function.  In the example shown below, the second import statement <strong>shadows</strong>
+the first <code class="docutils literal"><span class="pre">cos</span></code> function from the math module, which usually leads to a bug.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span>
+
+<span class="gp">In [8]: </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">cos</span>
+
+<span class="gp">In [9]: </span><span class="n">cos</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[9]: </span><span class="go">6.123233995736766e-17</span>
+</pre></div>
+</div>
+<p>In this case, we were lucky that both <code class="docutils literal"><span class="pre">cos</span></code> functions worked the same way.
+The <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">cos</span></code> function has the added functionality of working on lists.
+Let&#8217;s change the example to introduce a bug.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">cos</span>
+
+<span class="gp">In [11]: </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span>
+
+<span class="gp">In [12]: </span><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [13]: </span><span class="n">cos</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-13-ed215e133adf&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">cos</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: a float is required
+</pre></div>
+</div>
+<p>In this last example, the <code class="docutils literal"><span class="pre">math</span> <span class="pre">cos</span></code> function &#8220;overwrites&#8221; the <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">cos</span></code> because
+math is imported second. When trying to apply the <code class="docutils literal"><span class="pre">cos</span></code> to a list, we
+get an error as the <code class="docutils literal"><span class="pre">math</span> <span class="pre">cos</span></code> doesn&#8217;t work on a list, only numbers. We can
+avoid this shadowing using an alias for the modules.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="gp">In [15]: </span><span class="kn">import</span> <span class="nn">math</span> <span class="kn">as</span> <span class="nn">m</span>
+
+<span class="gp">In [16]: </span><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [17]: </span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<span class="gh">Out[17]: </span><span class="go">array([ 0.54030231, -0.41614684, -0.9899925 ])</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="the-random-module">
-<h2>1.8.3. The <cite>random</cite> module<a class="headerlink" href="#the-random-module" title="Permalink to this headline">¶</a></h2>
-<p>We often want to use <strong>random numbers</strong> in programs.  Here are a few typical uses:</p>
+<h2>1.4.4. The <cite>random</cite> module<a class="headerlink" href="#the-random-module" title="Permalink to this headline">¶</a></h2>
+<p>We often want to use <strong>random numbers</strong> in programs.  Here are a few typical
+uses:</p>
 <ul class="simple">
-<li>To play a game of chance where the computer needs to throw some dice, pick a number, or flip a coin,</li>
+<li>To play a game of chance where the computer needs to throw some dice, pick a
+number, or flip a coin,</li>
 <li>To shuffle a deck of playing cards randomly,</li>
 <li>To randomly allow a new enemy spaceship to appear and shoot at you,</li>
 <li>To simulate possible rainfall when we make a computerized model for
@@ -485,7 +523,8 @@ estimating the environmental impact of building a dam,</li>
 <li>For encrypting your banking session on the Internet.</li>
 </ul>
 <p>Python provides a module <code class="docutils literal"><span class="pre">random</span></code> that helps with tasks like this.  You can
-take a look at it in the documentation.  Here are the key things we can do with it.</p>
+take a look at it in the documentation.  Here are the key things we can do with
+it.</p>
 
 <textarea data-component="activecode" id=chmodule_rand data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
 import random
@@ -496,21 +535,23 @@ print(prob)
 diceThrow = random.randrange(1, 7)       # return an int, one of 1,2,3,4,5,6
 print(diceThrow)
 </textarea>
-<p>Press the run button a number of times.  Note that the values change each time.  These are random numbers.</p>
+<p>Press the run button a number of times.  Note that the values change each time.
+These are random numbers.</p>
 <p>The <code class="docutils literal"><span class="pre">randrange</span></code> function generates an integer between its lower and upper
-argument, using the same semantics as <code class="docutils literal"><span class="pre">range</span></code> &#8212; so the lower bound is included, but
-the upper bound is excluded.   All the values have an equal probability of occurring
-(i.e. the results are <em>uniformly</em> distributed).</p>
-<p>The <code class="docutils literal"><span class="pre">random()</span></code> function returns a floating point number in the range [0.0, 1.0) &#8212; the
-square bracket means &#8220;closed interval on the left&#8221; and the round parenthesis means
-&#8220;open interval on the right&#8221;.  In other words, 0.0 is possible, but all returned
-numbers will be strictly less than 1.0.  It is usual to <em>scale</em> the results after
-calling this method, to get them into a range suitable for your application.</p>
-<p>In the
-case shown here, we&#8217;ve converted the result of the method call to a number in
-the range [0.0, 5.0).  Once more, these are uniformly distributed numbers &#8212; numbers
-close to 0 are just as likely to occur as numbers close to 0.5, or numbers close to 1.0.
-If you continue to press the run button you will see random values between 0.0 and up to but not including 5.0.</p>
+argument, using the same semantics as <code class="docutils literal"><span class="pre">range</span></code> &#8212; so the lower bound is
+included, but the upper bound is excluded.   All the values have an equal
+probability of occurring (i.e. the results are <em>uniformly</em> distributed).</p>
+<p>The <code class="docutils literal"><span class="pre">random()</span></code> function returns a floating point number in the range [0.0,
+1.0) &#8212; the square bracket means &#8220;closed interval on the left&#8221; and the round
+parenthesis means &#8220;open interval on the right&#8221;.  In other words, 0.0 is
+possible, but all returned numbers will be strictly less than 1.0.  It is usual
+to <em>scale</em> the results after calling this method, to get them into a range
+suitable for your application.</p>
+<p>In the case shown here, we&#8217;ve converted the result of the method call to a
+number in the range [0.0, 5.0).  Once more, these are uniformly distributed
+numbers &#8212; numbers close to 0 are just as likely to occur as numbers close to
+0.5, or numbers close to 1.0.  If you continue to press the run button you will
+see random values between 0.0 and up to but not including 5.0.</p>
 
 <textarea data-component="activecode" id=chmodule_rand2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
 import random
@@ -519,14 +560,15 @@ prob = random.random()
 result = prob * 5
 print(result)
 </textarea>
-<p id="index-0">It is important to note that
-random number generators are based on a <strong>deterministic</strong> algorithm &#8212; repeatable and predictable.
-So they&#8217;re called <strong>pseudo-random</strong> generators &#8212; they are not genuinely random.
-They start with a <em>seed</em> value. Each time you ask for another random number, you&#8217;ll get
-one based on the current seed attribute, and the state of the seed (which is one
-of the attributes of the generator) will be updated.  The good news is that each time you run your program, the seed value
-is likely to be different meaning that even though the random numbers are being created algorithmically, you will likely
-get random behavior each time you execute.</p>
+<p id="index-0">It is important to note that random number generators are based on a
+<strong>deterministic</strong> algorithm &#8212; repeatable and predictable.  So they&#8217;re called
+<strong>pseudo-random</strong> generators &#8212; they are not genuinely random.  They start with
+a <em>seed</em> value. Each time you ask for another random number, you&#8217;ll get one
+based on the current seed attribute, and the state of the seed (which is one of
+the attributes of the generator) will be updated.  The good news is that each
+time you run your program, the seed value is likely to be different meaning that
+even though the random numbers are being created algorithmically, you will
+likely get random behavior each time you execute.</p>
 <div class="admonition-lab admonition">
 <p class="first admonition-title">Lab</p>
 <ul class="last simple">
@@ -536,7 +578,7 @@ get random behavior each time you execute.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="question4_4_1">
-            select-3-8: Which of the following is the correct way to reference the value pi within the math module.   Assume you have already imported the math module.
+            intro-12-265: Which of the following is the correct way to reference the value pi within the math module.   Assume you have already imported the math module.
             <li data-component="answer" data-correct id="question4_4_1_opt_a">(A) math.pi</li><li data-component="feedback" id="question4_4_1_opt_a">To invoke or reference something contained in a module you use the dot (.) notation.</li>
             
             <li data-component="answer"  id="question4_4_1_opt_b">(B) math(pi)</li><li data-component="feedback" id="question4_4_1_opt_b">This is the syntax for calling a function, not referencing an item in a module.</li>
@@ -549,7 +591,7 @@ get random behavior each time you execute.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="question4_4_2">
-            select-3-9: Which module would you most likely use if you were writing a function to simulate rolling dice?
+            intro-12-266: Which module would you most likely use if you were writing a function to simulate rolling dice?
             <li data-component="answer"  id="question4_4_2_opt_a">(A) the math module</li><li data-component="feedback" id="question4_4_2_opt_a">While you might want to use the math module for other numerical computations in your program, it does not contain functions that are likely to help you simulate a dice roll.</li>
             
             <li data-component="answer" data-correct id="question4_4_2_opt_b">(B) the random module</li><li data-component="feedback" id="question4_4_2_opt_b">You would likely call the function random.randrange.</li>
@@ -562,7 +604,7 @@ get random behavior each time you execute.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="question4_4_3">
-            select-3-10: The correct code to generate a random number between 1 and 100 (inclusive) is:
+            intro-12-267: The correct code to generate a random number between 1 and 100 (inclusive) is:
             <li data-component="answer" data-correct id="question4_4_3_opt_a">(A) prob = random.randrange(1, 101)</li><li data-component="feedback" id="question4_4_3_opt_a">This will generate a number between 1 and 101, but does not include 101.</li>
             
             <li data-component="answer"  id="question4_4_3_opt_b">(B) prob = random.randrange(1, 100)</li><li data-component="feedback" id="question4_4_3_opt_b">This will generate a number between 1 and 100, but does not include 100.  The highest value generated will be 99.</li>
@@ -575,7 +617,7 @@ get random behavior each time you execute.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="question4_4_4">
-            select-3-11: One reason that lotteries don&#8217;t use computers to generate random numbers is:
+            intro-12-268: One reason that lotteries don&#8217;t use computers to generate random numbers is:
             <li data-component="answer"  id="question4_4_4_opt_a">(A) There is no computer on the stage for the drawing.</li><li data-component="feedback" id="question4_4_4_opt_a">They could easily put one there.</li>
             
             <li data-component="answer" data-correct id="question4_4_4_opt_b">(B) Because computers don't really generate random numbers, they generate pseudo-random numbers.</li><li data-component="feedback" id="question4_4_4_opt_b">Computers generate random numbers using a deterministic algorithm.  This means that if anyone ever found out the algorithm they could accurately predict the next value to be generated and would always win the lottery.</li>
@@ -597,26 +639,45 @@ get random behavior each time you execute.</p>
 </div>
 </div>
 <div class="section" id="making-your-own-modules">
-<h2>1.8.4. Making your own modules<a class="headerlink" href="#making-your-own-modules" title="Permalink to this headline">¶</a></h2>
+<h2>1.4.5. Making your own modules<a class="headerlink" href="#making-your-own-modules" title="Permalink to this headline">¶</a></h2>
+<p>Making your own modules is as easy as saving the functions and values in a file
+with the <code class="docutils literal"><span class="pre">.py</span></code> extension.  Provided that Python can find your file, you will
+now be able to <code class="docutils literal"><span class="pre">import</span></code> and use your code in other programs.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The easiest way to make sure that Python can locate your module is keeping
+in in the <strong>current working directory</strong>.  In IPython, you can see the
+location of the current working directory using the <code class="docutils literal"><span class="pre">pwd</span></code> magic alias.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">pwd</span>
+<span class="gh">Out[18]: </span><span class="go">&#39;/Users/tiverson/Dropbox/Current_Classes/STAT489/book&#39;</span>
+</pre></div>
+</div>
+<p class="last">Other methods for providing access to your module includes adding the
+modules address to the <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> or using the <code class="docutils literal"><span class="pre">distutils</span></code> standard
+module to provide an installation of your module.  The best way to share a
+module in Python is using the Python Package Index, which allows users to
+install your program using <code class="docutils literal"><span class="pre">pip</span></code>.  For more information, take a look at
+this <a class="reference external" href="https://wiki.python.org/moin/CheeseShopTutorial">tutorial</a>.</p>
+</div>
 </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 1.7. Python as an Object Oriented Language' data-toggle="tooltip">
-    <a href="PythonAsAnObjectOrientedLanguage.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 1.3. Data, Types, and Variables' data-toggle="tooltip">
+    <a href="DataTypesAndVariables.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="PythonAsAnObjectOrientedLanguage.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="DataTypesAndVariables.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 2. Sequential Data Structures in Python' data-toggle="tooltip" >
-    <a href="../SequentialDataStructuresInPython/toctree.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 1.5. Python as an Object Oriented Language' data-toggle="tooltip" >
+    <a href="PythonAsAnObjectOrientedLanguage.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="../SequentialDataStructuresInPython/toctree.html" >Next Section - 2. Sequential Data Structures in Python</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="PythonAsAnObjectOrientedLanguage.html" >Next Section - 1.5. Python as an Object Oriented Language</a>
 
 <script type="text/javascript">
 

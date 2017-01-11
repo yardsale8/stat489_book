@@ -1,6 +1,9 @@
 Referenes to Sequences
 ======================
 
+In the next section, we will explore Python's implementation of lists.  In the
+process the idea of an alias is defined and illustrated, which will help explain
+some of the more confusing behaviors related to mutable objects such as lists.
 
 Objects and References
 ----------------------
@@ -15,7 +18,8 @@ If we execute these assignment statements,
 we know that ``a`` and ``b`` will refer to a string with the letters
 ``"banana"``. But we don't know yet whether they point to the *same* string.
 
-There are two possible ways the Python interpreter could arrange its internal states:
+There are two possible ways the Python interpreter could arrange its internal
+states:
 
 .. image:: Figures/refdiag1.png
    :alt: List illustration 
@@ -26,35 +30,39 @@ or
 .. image:: Figures/refdiag2.png
    :alt: List illustration
 
-In one case, ``a`` and ``b`` refer to two different string objects that have the same
-value. In the second case, they refer to the same object. Remember that an object is something a variable can
-refer to.
+In one case, ``a`` and ``b`` refer to two different string objects that have the
+same value. In the second case, they refer to the same object. Remember that an
+object is something a variable can refer to.
 
-We already know that objects can be identified using their unique identifier.  We can also test whether two names refer to the same object using the *is*
-operator.  The *is* operator will return true if the two references are to the same object.  In other words, the references are the same.  Try our example from above.
+We already know that objects can be identified using their unique identifier.
+We can also test whether two names refer to the same object using the *is*
+operator.  The *is* operator will return true if the two references are to the
+same object.  In other words, the references are the same.  Try our example from
+above.
 
-.. activecode:: chp09_is1
+.. ipython:: python
 
     a = "banana"
     b = "banana"
 
-    print(a is b)
+    a is b
 
-The answer is ``True``.  This tells us that both ``a`` and ``b`` refer to the same object, and that it
-is the second of the two reference diagrams that describes the relationship. 
-Since strings are *immutable*, Python optimizes resources by making two names
-that refer to the same string value refer to the same object.
+The answer is ``True``.  This tells us that both ``a`` and ``b`` refer to the
+same object, and that it is the second of the two reference diagrams that
+describes the relationship.  Since strings are *immutable*, Python optimizes
+resources by making two names that refer to the same string value refer to the
+same object.
 
-This is not the case with lists.  Consider the following example.  Here, ``a`` and ``b`` refer to two different lists, each of which happens to have the same element values.
+This is not the case with lists.  Consider the following example.  Here, ``a``
+and ``b`` refer to two different lists, each of which happens to have the same
+element values.
 
-.. activecode:: chp09_is2
+.. ipython:: python
     
     a = [81, 82, 83]
     b = [81, 82, 83]
-
-    print(a is b)
-
-    print(a == b)  
+    a is b
+    a == b  
 
 The reference diagram for this example looks like this:
 
@@ -63,7 +71,13 @@ The reference diagram for this example looks like this:
 
 ``a`` and ``b`` have the same value but do not refer to the same object.
 
-There is one other important thing to notice about this reference diagram.  The variable ``a`` is a reference to a **collection of references**.  Those references actually refer to the integer values in the list.  In other words, a list is a collection of references to objects.  Interestingly, even though ``a`` and ``b`` are two different lists (two different collections of references), the integer object ``81`` is shared by both.  Like strings, integers are also immutable so Python optimizes and lets everyone share the same object.
+There is one other important thing to notice about this reference diagram.  The
+variable ``a`` is a reference to a **collection of references**.  Those
+references actually refer to the integer values in the list.  In other words, a
+list is a collection of references to objects.  Interestingly, even though ``a``
+and ``b`` are two different lists (two different collections of references), the
+integer object ``81`` is shared by both.  Like strings, integers are also
+immutable so Python optimizes and lets everyone share the same object.
 
 Here is the example in codelens.  Pay particular attention to the `id` values.
 
@@ -76,10 +90,6 @@ Here is the example in codelens.  Pay particular attention to the `id` values.
     print(a is b)
     print(a == b)
 
-.. index:: aliases
-
-
-
 
 Aliasing
 --------
@@ -87,11 +97,11 @@ Aliasing
 Since variables refer to objects, if we assign one variable to another, both
 variables refer to the same object:
 
-.. activecode:: listalias1
+.. ipython:: python
     
     a = [81, 82, 83]
     b = a
-    print(a is b)
+    a is b
     
 In this case, the reference diagram looks like this:
 
@@ -99,8 +109,9 @@ In this case, the reference diagram looks like this:
    :alt: State snapshot for multiple references (aliases) to a list 
 
 Because the same list has two different names, ``a`` and ``b``, we say that it
-is **aliased**. Changes made with one alias affect the other.  In the codelens example below, you can see that ``a`` and ``b`` refer
-to the same list after executing the assignment statement ``b = a``.
+is **aliased**. Changes made with one alias affect the other.  In the codelens
+example below, you can see that ``a`` and ``b`` refer to the same list after
+executing the assignment statement ``b = a``.
 
 
 .. codelens:: chp09_is3
@@ -121,10 +132,10 @@ to the same list after executing the assignment statement ``b = a``.
     
 
 
-Although this behavior can be useful, it is sometimes unexpected or
-undesirable. In general, it is safer to avoid aliasing when you are working
-with mutable objects. Of course, for immutable objects, there's no problem.
-That's why Python is free to alias strings and integers when it sees an opportunity to
+Although this behavior can be useful, it is sometimes unexpected or undesirable.
+In general, it is safer to avoid aliasing when you are working with mutable
+objects. Of course, for immutable objects, there's no problem.  That's why
+Python is free to alias strings and integers when it sees an opportunity to
 economize.
 
 **Check your understanding**
@@ -144,11 +155,6 @@ economize.
      blist = alist
      blist[3] = 999
      print(alist)
-
-
-.. index:: clone
-
-
 
 
 Cloning Lists
@@ -177,36 +183,38 @@ consist of the whole list.
     print(a)
     print(b)
 
-Now we are free to make changes to ``b`` without worrying about ``a``.  Again, we can clearly see in codelens that ``a`` and ``b`` are entirely different list objects.
-
-
-
-
+Now we are free to make changes to ``b`` without worrying about ``a``.  Again,
+we can clearly see in codelens that ``a`` and ``b`` are entirely different list
+objects.
 
 Repetition and References
 -------------------------
 
-We have already seen the repetition operator working on strings as well as lists.  For example, 
+We have already seen the repetition operator working on strings as well as
+lists.  For example, 
 
-.. activecode:: repref1
+.. ipython:: python
 
     origlist = [45, 76, 34, 55]
-    print(origlist * 3)
+    origlist * 3
 
-With a list, the repetition operator creates copies of the references.  Although this may seem simple enough, when we allow a list to refer to another list, a subtle problem can arise.
+With a list, the repetition operator creates copies of the references.  Although
+this may seem simple enough, when we allow a list to refer to another list, a
+subtle problem can arise.
 
 Consider the following extension on the previous example.
 
-.. activecode:: repref2
+.. ipython:: python
 
     origlist = [45, 76, 34, 55]
-    print(origlist * 3)
+    origlist * 3
 
     newlist = [origlist] * 3
 
-    print(newlist)
+    newlist
 
-``newlist`` is a list of three references to ``origlist`` that were created by the repetition operator.  The reference diagram is shown below.
+``newlist`` is a list of three references to ``origlist`` that were created by
+the repetition operator.  The reference diagram is shown below.
 
 
 
@@ -218,25 +226,28 @@ Consider the following extension on the previous example.
 
 Now, what happens if we modify a value in ``origlist``.
 
-
-.. activecode:: repref3
+.. ipython:: python
 
     origlist = [45, 76, 34, 55]
 
     newlist = [origlist] * 3
 
-    print(newlist)
+    newlist
 
     origlist[1] = 99
 
-    print(newlist)
+    newlist
 
-``newlist`` shows the change in three places.  This can easily be seen by noting that in the reference diagram, there is only one ``origlist``, so any changes to it appear in all three references from ``newlist``.
+``newlist`` shows the change in three places.  This can easily be seen by noting
+that in the reference diagram, there is only one ``origlist``, so any changes to
+it appear in all three references from ``newlist``.
 
 .. image:: Figures/refrep2.png
    :alt: Same reference
 
-Here is the same example in codelens.  Step through the code paying particular attention to the result of executing the assignment statement ``origlist[1] = 99``.
+Here is the same example in codelens.  Step through the code paying particular
+attention to the result of executing the assignment statement ``origlist[1] =
+99``.
 
 .. codelens:: reprefstep
     :showoutput:
@@ -293,8 +304,9 @@ Here is the same example in codelens.  Step through the code paying particular a
      print(blist)
 
 
+.. note::
 
+    This workspace is provided for your convenience.  You can use this
+    activecode window to try out anything you like.
 
-
-.. index:: list; append
-
+    .. activecode:: scratch_08_01

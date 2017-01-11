@@ -1,34 +1,39 @@
 Sequence Methods and Working with Strings and Lists
 ===================================================
 
+As discussed in the last chapter, all values in Python are objects that comes
+bundled with any number of associated methods.  In this section, we will point
+out some useful methods for working with sequences.
 
 
 String Methods
 --------------
 
-We previously saw that each turtle instance has its own attributes and 
-a number of methods that can be applied to the instance.  For example,
-we wrote ``tess.right(90)`` when we wanted the turtle object ``tess`` to perform the ``right`` method to turn
-to the right 90 degrees.  The "dot notation" is the way we connect the name of an object to the name of a method
-it can perform.  
+We previously saw that each turtle instance has its own attributes and a number
+of methods that can be applied to the instance.  For example, we wrote
+``tess.right(90)`` when we wanted the turtle object ``tess`` to perform the
+``right`` method to turn to the right 90 degrees.  The "dot notation" is the way
+we connect the name of an object to the name of a method it can perform.  
 
-Strings are also objects.  Each string instance has its own attributes and methods.  The most important attribute of the string is the collection of characters.  There are a wide variety of methods.  Try the following program.
+Strings are also objects.  Each string instance has its own attributes and
+methods.  The most important attribute of the string is the collection of
+characters.  There are a wide variety of methods.  Consider the following program.
 
-.. activecode:: chp08_upper
+.. ipython:: python
 
     ss = "Hello, World"
-    print(ss.upper())
-
-    tt = ss.lower()
-    print(tt)
+    ss.upper()
+    ss.lower()
 
 
-In this example, ``upper`` is a method that can be invoked on any string object 
-to create a new string in which all the 
-characters are in uppercase.  ``lower`` works in a similar fashion changing all characters in the string
-to lowercase.  (The original string ``ss`` remains unchanged.  A new string ``tt`` is created.)
+In this example, ``upper`` is a method that can be invoked on any string object
+to create a new string in which all the characters are in uppercase.  ``lower``
+works in a similar fashion changing all characters in the string to lowercase.
+(The original string ``ss`` remains unchanged.  A new string ``tt`` is created.)
 
-In addition to ``upper`` and ``lower``, the following table provides a summary of some other useful string methods.  There are a few activecode examples that follow so that you can try them out.
+In addition to ``upper`` and ``lower``, the following table provides a summary
+of some other useful string methods.  There are a few examples that
+follow so that you can try them out.
 
 ==========  ==============      ==================================================================
 Method      Parameters          Description
@@ -53,44 +58,61 @@ index       item                Like find except causes a runtime error if item 
 rindex      item                Like rfind except causes a runtime error if item is not found
 ==========  ==============      ==================================================================
 
-You should experiment with these
-methods so that you understand what they do.  Note once again that the methods that return strings do not
-change the original.  You can also consult the `Python documentation for strings <http://docs.python.org/py3k/library/stdtypes.html#index-21>`_.
+You should experiment with these methods so that you understand what they do.
+Note once again that the methods that return strings do not change the original.
+You can also consult the `Python documentation for strings
+<http://docs.python.org/py3k/library/stdtypes.html#index-21>`_. Also recall that
+you can explore all of the methods for an object such as a strong using the
+``dir`` and ``help`` functions (any string will do!).
 
-.. activecode:: ch08_methods1
+.. ipython:: python
+
+    dir("a")
+
+
+Here are some additional examples of useful methods associated with strings.
+First we can use the various forms of ``strip`` to remove whitespace from a
+string.  ``rstrip`` and ``lstrip`` stand for *right strip* and *left strip*
+respectively.  ``replace`` is used to replace one sequence of characters with
+another.
+
+.. ipython:: python
 
     ss = "    Hello, World    "
 
-    els = ss.count("l")
-    print(els)
 
-    print("***" + ss.strip() + "***")
-    print("***" + ss.lstrip() + "***")
-    print("***" + ss.rstrip() + "***")
+    "***" + ss.strip()  + "***"
+    "***" + ss.lstrip() + "***"
+    "***" + ss.rstrip() + "***"
 
-    news = ss.replace("o", "***")
-    print(news)
+    ss.replace("o", "***")
 
+Here are some other methods for transforming a string,
 
-.. activecode:: ch08_methods2
-
+.. ipython:: python
 
     food = "banana bread"
-    print(food.capitalize())
+    food.capitalize()
 
-    print("*" + food.center(25) + "*")
-    print("*" + food.ljust(25) + "*")     # stars added to show bounds
-    print("*" + food.rjust(25) + "*")
+    "*" + food.center(25) + "*"
+    "*" + food.ljust(25)  + "*"     # stars added to show bounds
+    "*" + food.rjust(25)  + "*"
 
-    print(food.find("e"))
-    print(food.find("na"))
-    print(food.find("b"))
+and finally some methods for finding and counting sub-sequences.
 
-    print(food.rfind("e"))
-    print(food.rfind("na"))
-    print(food.rfind("b"))
+.. ipython:: python
 
-    print(food.index("e"))
+    food.count("a")
+
+    food.find("e")
+    food.find("na")
+    food.find("b")
+
+    food.rfind("e")
+    food.rfind("na")
+    food.rfind("b")
+
+    food.index("e")
 
 
 **Check your understanding**
@@ -134,128 +156,78 @@ change the original.  You can also consult the `Python documentation for strings
       s = "python rocks"
       print(s[1] * s.index("n"))
 
-
-.. index::
-    single: len function
-    single: function; len
-    single: runtime error
-    single: negative index
-    single: index; negative
-
-
-
-
-A ``find`` function
--------------------
-
-Here is an implementation for the ``find`` method.
-
-.. activecode:: ch08_run3
-    
-    def find(astring, achar):
-        """
-        Find and return the index of achar in astring.  
-        Return -1 if achar does not occur in astring.
-        """
-        ix = 0
-        found = False
-        while ix < len(astring) and not found:
-            if astring[ix] == achar:
-                found = True
-            else:
-                ix = ix + 1
-        if found:
-            return ix
-        else:
-            return -1
-        
-    print(find("Compsci", "p"))
-    print(find("Compsci", "C"))
-    print(find("Compsci", "i"))
-    print(find("Compsci", "x"))
-    
-
-In a sense, ``find`` is the opposite of the indexing operator. Instead of taking
-an index and extracting the corresponding character, it takes a character and
-finds the index where that character appears for the first time. If the character is not found,
-the function returns ``-1``.
-
-The ``while`` loop in this example uses a slightly more complex condition than we have seen
-in previous programs.  Here there are two parts to the condition.  We want to keep going if there
-are more characters to look through and we want to keep going if we have not found what we are 
-looking for.  The variable ``found`` is a boolean variable that keeps track of whether we have found
-the character we are searching for.  It is initialized to *False*.  If we find the character, we
-reassign ``found`` to *True*.
-
-The other part of the condition is the same as we used previously to traverse the characters of the
-string.  Since we have now combined these two parts with a logical ``and``, it is necessary for them
-both to be *True* to continue iterating.  If one part fails, the condition fails and the iteration stops.
-
-When the iteration stops, we simply ask a question to find out why and then return the proper value.
-
 .. note::
 
-	This pattern of computation is sometimes called a eureka traversal because as
-	soon as we find what we are looking for, we can cry Eureka!  and stop looking.  The way
-	we stop looking is by setting ``found`` to True which causes the condition to fail.
+    This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
 
-
-
-.. index:: optional parameter, default value, parameter; optional
-
-.. _optional_parameters:
-
-
-
+    .. activecode:: scratch_08_01
 
 List Methods
 ------------
 
-The dot operator can also be used to access built-in methods of list objects.  
+The dot operator can also be used to access built-in methods of list objects.
 ``append`` is a list method which adds the argument passed to it to the end of
-the list. Continuing with this example, we show several other list methods.  Many of them are
-easy to understand.  
+the list. Continuing with this example, we show several other list methods.
+Many of them are easy to understand.  
 
-.. activecode:: chp09_meth1
+.. ipython:: python
 
     mylist = []
     mylist.append(5)
     mylist.append(27)
     mylist.append(3)
     mylist.append(12)
-    print(mylist)
+    mylist
 
     mylist.insert(1, 12)
-    print(mylist)
-    print(mylist.count(12))
+    mylist
+    mylist.count(12)
 
-    print(mylist.index(3))
-    print(mylist.count(5))
+    mylist.index(3)
+    mylist.count(5)
 
     mylist.reverse()
-    print(mylist)
+    mylist
 
     mylist.sort()
-    print(mylist)
+    mylist
 
     mylist.remove(5)
-    print(mylist)
+    mylist
+
+.. note::
+
+    It should be noted that many of these methods *mutate* the list in place.
+    mutating data in place in memory can be efficient, but is also confusing.  to
+    understand code that mutates a list (or even a variable) we are forced to track
+    the **state** of each object throughout the program.  programs that focus on
+    mutation are not only harder to understand, but harder to distribute over many
+    machines.  it is for this second reason that distributed systems such as hadoop,
+    mapreduce, and spark use **stateless**, immutable constructions.
+
+Next, we look at one last list method, namely ``pop``.
+
+.. ipython:: python
 
     lastitem = mylist.pop()
-    print(lastitem)
-    print(mylist)
+    lastitem
+    mylist
 
-There are two ways to use the ``pop`` method.  The first, with no parameter, will remove and return the
-last item of the list.  If you provide a parameter for the position, ``pop`` will remove and return the
-item at that position.  Either way the list is changed.
+There are two ways to use the ``pop`` method.  The first, with no parameter,
+will remove and return the last item of the list.  If you provide a parameter
+for the position, ``pop`` will remove and return the item at that position.
+Either way the list is changed.
 
-The following table provides a summary of the list methods shown above.  The column labeled
-`result` gives an explanation as to what the return value is as it relates to the new value of the list.  The word
-**mutator** means that the list is changed by the method but nothing is returned (actually ``None`` is returned).  A **hybrid** method is one that not only changes the list but also returns a value as its result.  Finally, if the result is simply a return, then the list
-is unchanged by the method.
+The following table provides a summary of the list methods shown above.  The
+column labeled `result` gives an explanation as to what the return value is as
+it relates to the new value of the list.  The word **mutator** means that the
+list is changed by the method but nothing is returned (actually ``None`` is
+returned).  A **hybrid** method is one that not only changes the list but also
+returns a value as its result.  Finally, if the result is simply a return, then
+the list is unchanged by the method.
 
-Be sure
-to experiment with these methods to gain a better understanding of what they do.
+Be sure to experiment with these methods to gain a better understanding of what
+they do.
 
 
 
@@ -275,23 +247,26 @@ remove      item            mutator       Removes the first occurrence of item
 ==========  ==============  ============  ================================================
 
 
-Details for these and others
-can be found in the `Python Documentation <http://docs.python.org/py3k/library/stdtypes.html#sequence-types-str-bytes-bytearray-list-tuple-range>`_.
+Details for these and others can be found in the `Python Documentation
+<http://docs.python.org/py3k/library/stdtypes.html#sequence-types-str-bytes-bytearray-list-tuple-range>`_.
 
-It is important to remember that methods like ``append``, ``sort``, 
-and ``reverse`` all return ``None``.  This means that re-assigning ``mylist`` to the result of sorting ``mylist`` will result in losing the entire list.  Calls like these will likely never appear as part of an assignment statement (see line 8 below).
+It is important to remember that methods like ``append``, ``sort``, and
+``reverse`` all return ``None``.  This means that re-assigning ``mylist`` to the
+result of sorting ``mylist`` will result in losing the entire list.  Calls like
+these will likely never appear as part of an assignment statement (see line 8
+below).
 
-.. activecode:: chp09_meth2
+.. ipython:: python
 
     mylist = []
     mylist.append(5)
     mylist.append(27)
     mylist.append(3)
     mylist.append(12)
-    print(mylist)
+    mylist
 
     mylist = mylist.sort()   #probably an error
-    print(mylist)
+    mylist
 
 **Check your understanding**
 
@@ -373,64 +348,54 @@ and ``reverse`` all return ``None``.  This means that re-assigning ``mylist`` to
      alist = alist.pop(0)
      print(alist)
 
-
-
 .. note::
 
-   This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
+    This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
 
-   .. activecode:: scratch_09_03
-
-
-
-
-
-
+    .. activecode:: scratch_08_01
 
 Strings and Lists
 -----------------
 
-Two of the most useful methods on strings involve lists of
-strings. The ``split`` method
-breaks a string into a list of words.  By
-default, any number of whitespace characters is considered a word boundary.
+Two of the most useful methods on strings involve lists of strings. The
+``split`` method breaks a string into a list of words.  By default, any number
+of whitespace characters is considered a word boundary.
 
-.. activecode:: ch09_split1
+.. ipython:: python
     
     song = "The rain in Spain..."
     wds = song.split()
-    print(wds)
+    wds
 
 An optional argument called a **delimiter** can be used to specify which
 characters to use as word boundaries. The following example uses the string
 ``ai`` as the delimiter:
 
-.. activecode:: ch09_split2
+.. ipython:: python
     
-    song = "The rain in Spain..."
     wds = song.split('ai')
-    print(wds)
+    wds
 
 Notice that the delimiter doesn't appear in the result.
 
-The inverse of the ``split`` method is ``join``.  You choose a
-desired **separator** string, (often called the *glue*) 
-and join the list with the glue between each of the elements.
+The inverse of the ``split`` method is ``join``.  You choose a desired
+**separator** string, (often called the *glue*) and join the list with the glue
+between each of the elements.
 
-.. activecode:: ch09_join
+.. ipython:: python
 
     wds = ["red", "blue", "green"]
     glue = ';'
     s = glue.join(wds)
-    print(s)
-    print(wds)
+    s
+    wds
 
-    print("***".join(wds))
-    print("".join(wds))
+    "***".join(wds)
+    "".join(wds)
 
 
-The list that you glue together (``wds`` in this example) is not modified.  Also, 
-you can use empty glue or multi-character strings as glue.
+The list that you glue together (``wds`` in this example) is not modified.
+Also, you can use empty glue or multi-character strings as glue.
 
 
 
@@ -457,26 +422,50 @@ you can use empty glue or multi-character strings as glue.
      for aname in namelist:
          init = init + aname[0]
      print(init)
-
-
     
 
+.. note::
 
+    This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
+
+    .. activecode:: scratch_08_01
 
 ``list`` Type Conversion Function
 ---------------------------------
     
-Python has a built-in type conversion function called 
-``list`` that tries to turn whatever you give it
-into a list.  For example, try the following:
+Python has a built-in type conversion function called ``list`` that tries to
+turn whatever you give it into a list.  For example, try the following:
 
-.. activecode:: ch09_list1
+.. ipython:: python
     
     xs = list("Crunchy Frog")
-    print(xs)
+    xs
 
 
-The string "Crunchy Frog" is turned into a list by taking each character in the string and placing it in a list.  In general, any sequence can be turned into a list using this function.  The result will be a list containing the elements in the original sequence.  It is not legal to use the ``list`` conversion function on any argument that is not a sequence.
+The string ``"Crunchy Frog"`` is turned into a list by taking each character in
+the string and placing it in a list.  In general, any sequence can be turned
+into a list using this function.  The result will be a list containing the
+elements in the original sequence.  It is not legal to use the ``list``
+conversion function on any argument that is not a sequence.
 
-It is also important to point out that the ``list`` conversion function will place each element of the original sequence in the new list.  When working with strings, this is very different than the result of the ``split`` method.  Whereas ``split`` will break a string into a list of "words", ``list`` will always break it into a list of characters.
+.. note:: 
+
+    Readers familiar with object oriented programming should note that these
+    *type conversion* functions are actually constructors for the associated
+    classes.  The ``type`` function that we introduced earlier is actually the
+    constructor for a meta-class, which is a class that constructs other
+    classes.
+
+It is also important to point out that the ``list`` conversion function will
+place each element of the original sequence in the new list.  When working with
+strings, this is very different than the result of the ``split`` method.
+Whereas ``split`` will break a string into a list of "words", ``list`` will
+always break it into a list of characters.
     
+
+.. note::
+
+    This workspace is provided for your convenience.  You can use this
+    activecode window to try out anything you like.
+
+    .. activecode:: scratch_08_01

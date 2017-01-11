@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.9. Computational Complexity and Big O Notation. &mdash; Runestone Interactive Overview</title>
+    <title>3.9. Computational Complexity and Big O Notation. &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="2. Sequential Data Structures in Python" href="toctree.html" />
-    <link rel="next" title="2.10. Other Python Sequence Types" href="OtherPythonSequenceTypes.html" />
-    <link rel="prev" title="2.8. Transforming Sequences with Comprehensions" href="TransformingSequencesWithComprehensions.html" />
+    <link rel="up" title="3. Sequential Data Structures in Python" href="toctree.html" />
+    <link rel="next" title="3.10. Other Python Sequence Types" href="OtherPythonSequenceTypes.html" />
+    <link rel="prev" title="3.8. Transforming Sequences with Comprehensions" href="TransformingSequencesWithComprehensions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,11 +263,16 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">2.9. Computational Complexity and Big O Notation.</a><ul>
-<li><a class="reference internal" href="#the-computational-complexity-of-the-find-method">2.9.1. The computational complexity of the <cite>find</cite> method</a></li>
-<li><a class="reference internal" href="#the-computational-complexity-of-item-lookup">2.9.2. The computational complexity of item lookup</a></li>
-<li><a class="reference internal" href="#append-versus-concatenate">2.9.3. Append versus Concatenate</a></li>
-<li><a class="reference internal" href="#summary-of-computational-complexity-for-lists-and-strings">2.9.4. Summary of Computational Complexity for Lists and Strings</a></li>
+<li><a class="reference internal" href="#">3.9. Computational Complexity and Big O Notation.</a><ul>
+<li><a class="reference internal" href="#formal-definition">3.9.1. Formal definition</a></li>
+<li><a class="reference internal" href="#example">3.9.2. Example</a></li>
+<li><a class="reference internal" href="#infinite-asymptotics">3.9.3. Infinite asymptotics</a></li>
+<li><a class="reference internal" href="#properties">3.9.4. Properties</a></li>
+<li><a class="reference internal" href="#the-computational-complexity-of-the-find-method">3.9.5. The computational complexity of the <cite>find</cite> method</a></li>
+<li><a class="reference internal" href="#the-computational-complexity-of-item-lookup">3.9.6. The computational complexity of item lookup</a></li>
+<li><a class="reference internal" href="#the-complexity-of-the-slice-operator">3.9.7. The complexity of the slice operator</a></li>
+<li><a class="reference internal" href="#append-versus-concatenate">3.9.8. Append versus Concatenate</a></li>
+<li><a class="reference internal" href="#summary-of-computational-complexity-for-lists-and-strings">3.9.9. Summary of Computational Complexity for Lists and Strings</a></li>
 </ul>
 </li>
 </ul>
@@ -277,13 +282,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 2.8. Transforming Sequences with Comprehensions" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 3.8. Transforming Sequences with Comprehensions" data-toggle="tooltip">
     <a href="TransformingSequencesWithComprehensions.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 2.10. Other Python Sequence Types' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 3.10. Other Python Sequence Types' data-toggle="tooltip" >
     <a href="OtherPythonSequenceTypes.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -315,27 +320,287 @@
 <div class="container" id="main-content">
   
   <div class="section" id="computational-complexity-and-big-o-notation">
-<h1>2.9. Computational Complexity and Big O Notation.<a class="headerlink" href="#computational-complexity-and-big-o-notation" title="Permalink to this headline">¶</a></h1>
-<p>TODO</p>
+<h1>3.9. Computational Complexity and Big O Notation.<a class="headerlink" href="#computational-complexity-and-big-o-notation" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This section is a modified copy of the <a class="reference external" href="https://en.wikipedia.org/wiki/Big_O_notation">Wikipedia page</a> on the big O notation,
+which is covered by the <a class="reference external" href="https://en.wikipedia.org/wiki/Wikipedia:GFDL">GNU Free Documentation license</a>.</p>
+</div>
+<p><strong>Big O notation</strong> is a mathematical notation that describes the limiting
+behavior of a function when the argument tends towards a particular value or
+infinity.  It is a member of a family of notations invented by Paul Bachmann,
+Edmund Landau and others, collectively called <strong>Bachmann–Landau notation</strong> or
+<strong>asymptotic notation</strong>.  In computer science , big O notation is used to
+classify algorithms by how they respond to changes in input size, such as how
+the processing time of an algorithm changes as the problem size becomes
+extremely large.</p>
+<p>Big O notation characterizes functions according to their growth rates:
+different functions with the same growth rate may be represented using the same
+O notation.</p>
+<p>The letter O is used because the growth rate of a function is also referred to
+as <strong>order of the function</strong>.  A description of a function in terms of big O
+notation usually only provides an upper bound on the growth rate of the
+function. Associated with big O notation are several related notations, using
+the symbols <span class="math">\(o\)</span>, to describe other kinds of bounds on
+asymptotic growth rates.</p>
+<p>Big O notation is also used in many other fields to provide similar estimates.</p>
+<div class="section" id="formal-definition">
+<h2>3.9.1. Formal definition<a class="headerlink" href="#formal-definition" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math">\(f\)</span> and <span class="math">\(g\)</span> be two functions defined on some subset of the
+real numbers. One writes</p>
+<div class="math">
+\[f(x)=O(g(x))\text{ as }x\to\infty\,\]</div>
+<p>if and only if there is a positive constant <span class="math">\(M\)</span> such that for all
+sufficiently large values of <span class="math">\(x\)</span>, the absolute value of <span class="math">\(f(x)\)</span> is at
+most <span class="math">\(M\)</span>  multiplied by the absolute value of <span class="math">\(g(x)\)</span>. That is,
+<span class="math">\(f(x)=O(g(x))\)</span> if and only if there exists a positive real number
+<span class="math">\(M\)</span> and a real number <span class="math">\(x_0\)</span> such that</p>
+<div class="math">
+\[|f(x)| \le \; M |g(x)|\text{ for all }x \ge x_0.\]</div>
+<p>In many contexts, the assumption that we are interested in the growth rate as
+the variable <span class="math">\(x\)</span> goes to infinity is left unstated, and one writes more
+simply that</p>
+<div class="math">
+\[f(x) = O(g(x)).\]</div>
+<div class="figure">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Big-O-notation.png/510px-Big-O-notation.png"><img alt="Big O formal definition illustrated." src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Big-O-notation.png/510px-Big-O-notation.png" /></a>
+<div class="legend">
+This image illustrates the formal definition of the Big O notation.  The function <span class="math">\(cg\)</span> is an upper bound for <span class="math">\(f\)</span> for all values larger than <span class="math">\(x_0\)</span>, so we say <span class="math">\(f(x)=O(g(x))\)</span>.  <a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/8/89/Big-O-notation.png">Image Source</a></div>
+</div>
+</div>
+<div class="section" id="example">
+<h2>3.9.2. Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>In typical usage, the formal definition of <span class="math">\(O\)</span> notation is not used
+directly; rather, the <span class="math">\(O\)</span> notation for a function <span class="math">\(f\)</span> is derived by
+the following simplification rules:</p>
+<ul class="simple">
+<li>If <span class="math">\(f(x)\)</span> is a sum of several terms, if there is one with largest growth
+rate, it can be kept, and all others omitted.</li>
+<li>If <span class="math">\(f(x)\)</span> is a product of several factors, any constants (terms in the
+product that do not depend on <span class="math">\(x\)</span>) can be omitted.</li>
+</ul>
+<p>For example,
+let <span class="math">\(f(x) = 6x^4 − 2x^3 + 5\)</span>, and suppose we wish to simplify this
+function, using <span class="math">\(O\)</span> notation, to describe its growth rate as <span class="math">\(x\)</span>
+approaches infinity. This function is the sum of three terms: <span class="math">\(6x^4\)</span>,
+<span class="math">\(2x^3\)</span>, and 5. Of these three terms, the one with the highest growth rate is the
+one with the largest exponent as a function of <span class="math">\(x\)</span>, namely <span class="math">\(6x^4\)</span>.
+Now one may apply the second rule: <span class="math">\(6x^4\)</span> is a product of 6 and
+<span class="math">\(x^4\)</span> in which the first factor does not depend on <span class="math">\(x\)</span>. Omitting
+this factor results in the simplified form <span class="math">\(x^4\)</span>. Thus, we say that
+<span class="math">\(f(x)\)</span> is a &#8220;big-oh&#8221; of <span class="math">\((x^4)\)</span>. Mathematically, we can write
+<span class="math">\(f(x)=O(x^4)\)</span>.  One may confirm this calculation using the formal
+definition: let <span class="math">\(f(x)=6x^4 − 2x^3 + 5\)</span> and <span class="math">\(g(x)=x^4\)</span>. Applying the
+formal definition from above, the statement that <span class="math">\(f(x)=O(x^4)\)</span> is
+equivalent to its expansion, <span class="math">\(|f(x)| \le \; M |x^4|\)</span> for some suitable
+choice of <span class="math">\(x_0\)</span> and <span class="math">\(M\)</span> and for all <span class="math">\(x &gt; x_0\)</span>. To prove this,
+let <span class="math">\(x_0=1\)</span> and <span class="math">\(M=13\)</span>. Then, for all <span class="math">\(x &gt; x_0\)</span></p>
+<div class="math">
+\[\begin{split}\begin{align}|6x^4 - 2x^3 + 5| &amp;\le 6x^4 + |2x^3| + 5\\ &amp;\le 6x^4 + 2x^4 + 5x^4\\ &amp;= 13x^4\end{align}\end{split}\]</div>
+<p>so</p>
+<div class="math">
+\[|6x^4 - 2x^3 + 5| \le 13 \,x^4 .\]</div>
+</div>
+<div class="section" id="infinite-asymptotics">
+<h2>3.9.3. Infinite asymptotics<a class="headerlink" href="#infinite-asymptotics" title="Permalink to this headline">¶</a></h2>
+<p>Big O notation is useful when analyzing algorithms for efficiency.  For
+example, the time (or the number of steps) it takes to complete a problem of
+size <span class="math">\(n\)</span> might be found to be <span class="math">\(T(n) = 4n^2 − 2n + 2\)</span>.  As <span class="math">\(n\)</span>
+grows large, the <span class="math">\(n^2\)</span> term will come to dominate, so that all other
+terms can be neglected—for instance when <span class="math">\(n = 500\)</span>, the term <span class="math">\(4n^2\)</span>
+is 1000 times as large as the <span class="math">\(2n\)</span> term. Ignoring the latter would have
+negligible effect on the expression&#8217;s value for most purposes.
+Further, the coefficients become irrelevant if we compare to any other order
+of expression, such as an expression containing a term <span class="math">\(n^3\)</span> or
+<span class="math">\(n^4\)</span>.  Even if <span class="math">\(T(n) = 1,000,000n^2\)</span>, if <span class="math">\(U(n) = n^3\)</span>, the
+latter will always exceed the former once <span class="math">\(n\)</span> grows larger than 1,000,000
+(<span class="math">\(T(1,000,000) = 1,000,000^3= U(1,000,000)\)</span>).
+Additionally, the number of steps depends on the details of the machine model
+on which the algorithm runs, but different types of machines typically vary by
+only a constant factor in the number of steps needed to execute an algorithm.
+So the big O notation captures what remains: we write either</p>
+<div class="math">
+\[\ T(n)= O(n^2) \,\]</div>
+<p>or</p>
+<div class="math">
+\[T(n)\in O(n^2) \,\]</div>
+<p>and say that the algorithm has <span class="math">\(order of n^2\)</span> time complexity.  Note that
+&#8220;=&#8221; is not meant to express &#8220;is equal to&#8221; in its normal mathematical sense, but
+rather a more colloquial &#8220;is&#8221;, so the second expression is sometimes considered
+more accurate (see the &#8221; Equals sign &#8221; discussion below) while the first is
+considered by some as an Abuse of notation.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/7/7e/Comparison_computational_complexity.svg"><img alt="Graphs of number of operations, N vs input size, n for common complexities, assuming a coefficient of 1" src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Comparison_computational_complexity.svg" /></a>
+<div class="legend">
+This image compares the rate of growth for functions from various Big O classes.  Eventually functions from the same class tend to grow at similar rates and all members of one class tend to dominate functions from a lower-order group.  <a class="reference external" href="https://commons.wikimedia.org/wiki/File:Comparison_computational_complexity.svg">Image Source</a></div>
+</div>
+</div>
+<div class="section" id="properties">
+<h2>3.9.4. Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<p>If the function <span class="math">\(f\)</span> can be written as a finite sum of other functions,
+then the fastest growing one determines the order of <span class="math">\(f(n)\)</span>. For example</p>
+<div class="math">
+\[f(n) = 9 \log n + 5 (\log n)^3 + 3n^2 + 2n^3 = O(n^3) \,, \qquad\text{as } n\to\infty  \,\!.\]</div>
+<p>In particular, if a function may be bounded by a polynomial in <span class="math">\(n\)</span>, then
+as <span class="math">\(n\)</span> tends to <span class="math">\(\infty\)</span>, one may disregard <em>lower-order</em> terms of
+the polynomial.  Another thing to notice is the sets <span class="math">\(O(n^c)\)</span> and
+<span class="math">\(O(c^n)\)</span> are very different. If <span class="math">\(c\)</span> is greater than one, then the
+latter grows much faster. A function that grows faster than <span class="math">\(n^c\)</span> for any
+<span class="math">\(c\)</span>  is called <em>superpolynomial</em>.  One that grows more slowly than any
+exponential function of the form <span class="math">\(c^n\)</span> is called <em>subexponential</em>. An
+algorithm can require time that is both superpolynomial and subexponential;
+examples of this include the fastest known algorithms for integer factorization
+and the function <span class="math">\(n^log n\)</span>.</p>
+<p>We may ignore any powers of <span class="math">\(n\)</span> inside of the logarithms. The set
+<span class="math">\(O(\log n)\)</span> is exactly the same as <span class="math">\(O(\log(n^c))\)</span>. The logarithms
+differ only by a constant factor (since <span class="math">\(\log(n^c) = c (\log n)\)</span>) and thus
+the big O notation ignores that. Similarly, logs with different constant bases
+are equivalent. On the other hand, exponentials with different bases are not of
+the same order. For example, <span class="math">\(2^n\)</span> and <span class="math">\(3^n\)</span> are not of the same
+order.</p>
+<p>Changing units may or may not affect the order of the resulting algorithm.
+Changing units is equivalent to multiplying the appropriate variable by a
+constant wherever it appears. For example, if an algorithm runs in the order of
+<span class="math">\(n^2\)</span>, replacing <span class="math">\(n\)</span> by <span class="math">\(cn\)</span> means the algorithm runs in the
+order of <span class="math">\(c^2n^2\)</span>, and the big O notation ignores the constant
+<span class="math">\(c^2\)</span>. This can be written as <span class="math">\(c^2n^2 = O(n^2)\)</span>. If, however, an
+algorithm runs in the order of <span class="math">\(2^n\)</span>, replacing <span class="math">\(n\)</span> with <span class="math">\(cn\)</span>
+gives <span class="math">\(2^{cn} = (2^c)^n\)</span>. This is not equivalent to <span class="math">\(2^n\)</span> in general.
+Changing variables may also affect the order of the resulting algorithm. For
+example, if an algorithm&#8217;s run time is <span class="math">\(O(n)\)</span> when measured in terms of
+the number <span class="math">\(n\)</span> of <em>digits</em> of an input number <span class="math">\(x\)</span>, then its run
+time is <span class="math">\(O(\log x)\)</span> when measured as a function of the input number
+<span class="math">\(x\)</span> itself, because <span class="math">\(n=O(\log x)\)</span>.</p>
+<p><strong>Product</strong></p>
+<div class="math">
+\[f_1 = O(g_1) \text{ and } f_2 = O(g_2)\, \Rightarrow f_1  f_2 = O(g_1  g_2)\,\]</div>
+<div class="math">
+\[f\cdot O(g) = O(f g)\]</div>
+<p><strong>Sum</strong></p>
+<div class="math">
+\[f_1 = O(g_1) \text{ and } f_2= O(g_2)\, \Rightarrow f_1 + f_2 = O(|g_1| + |g_2|)\,\]</div>
+<p>This implies</p>
+<div class="math">
+\[f_1 = O(g) \text{ and } f_2 = O(g) \Rightarrow f_1+f_2 \in O(g)\]</div>
+<p>and if <span class="math">\(f\)</span> and <span class="math">\(g\)</span> are positive functions, <span class="math">\(f + O(g) = O(f +
+g).\)</span></p>
+<p><strong>Multiplication by a constant</strong></p>
+<p>Let <span class="math">\(k\)</span> be a constant. Then <span class="math">\(O(k g) = O(g)\)</span> if <span class="math">\(k\)</span> is nonzero.</p>
+<div class="math">
+\[f= O(g) \Rightarrow kf = O(g).\]</div>
+<p>In the next section, we will consider the computational complexity of various
+operations on Python lists.</p>
+</div>
 <div class="section" id="the-computational-complexity-of-the-find-method">
-<h2>2.9.1. The computational complexity of the <cite>find</cite> method<a class="headerlink" href="#the-computational-complexity-of-the-find-method" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<h2>3.9.5. The computational complexity of the <cite>find</cite> method<a class="headerlink" href="#the-computational-complexity-of-the-find-method" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we will look at the run-time complexity of the <code class="docutils literal"><span class="pre">find</span></code> method
+of a list or a string.   For a list, we are interested in the order of growth
+of the <code class="docutils literal"><span class="pre">find</span></code> method as the length of the sequence <span class="math">\(n\)</span> grows without
+bound and we will classify this rate using Big O notation.  When looking at
+<em>orders of growth</em> for an algorithm as the it is common to consider the
+<strong>worst-case</strong> and the <strong>average case</strong>.</p>
+<p><strong>Worst Case</strong></p>
+<p>In the worst case, the item that we are searching for is at the end of the
+sequence, and it will take <span class="math">\(n\)</span> steps to find the value.  Thus the
+worst-case order of the <cite>find</cite> method is <span class="math">\(O(n)\)</span>.</p>
+<p><strong>Average Case</strong></p>
+<p>When thinking of the &#8220;average-case&#8221;, we imagine applying the <code class="docutils literal"><span class="pre">find</span></code> method to
+randomly shuffled lists.  In the average case, the item that we are searching
+for be in the middle of the sequence, and it will take (about)
+<span class="math">\(\frac{n+1}{2}\)</span> steps to find the value.  Thus the average-case order of
+the <code class="docutils literal"><span class="pre">find</span></code> method is <span class="math">\(O\left(\frac{n}{2}+\frac{1}{2}\right)= O(n)\)</span>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Additional thoughts:</p>
+<ul class="last simple">
+<li>It is not always the case that the average and worst cases have the same order
+of growth.  For example, the <a class="reference external" href="https://en.wikipedia.org/wiki/Quicksort">quicksort</a> algorithm is <span class="math">\(O(n\log n)\)</span> in
+the average case, but <span class="math">\(O(n^2)\)</span> in the worst case.</li>
+<li>While constant multiples don&#8217;t matter in the long run, the do have an impact
+on small problems.  When comparing methods of the same order, it is important
+to test the performance on smaller problems.</li>
+<li>In this chapter, we are being pretty sloppy in our mathematical
+assumptions.  A more formal discussion of this topic can be found on <a class="reference external" href="https://en.wikipedia.org/wiki/Analysis_of_algorithms">Wikipedia</a>.</li>
+</ul>
+</div>
 </div>
 <div class="section" id="the-computational-complexity-of-item-lookup">
-<h2>2.9.2. The computational complexity of item lookup<a class="headerlink" href="#the-computational-complexity-of-item-lookup" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<h2>3.9.6. The computational complexity of item lookup<a class="headerlink" href="#the-computational-complexity-of-item-lookup" title="Permalink to this headline">¶</a></h2>
+<p>Now consider the order of growth of the indexing operator.  Recall that Python
+lists are really a list of references to other objects in memory.  This means
+that a list really holds a list of memory addresses, e.g. which will be either
+32 or 64 bits of data (depending on machine architecture and machine language.)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="n">ADDRESS_0</span><span class="p">,</span> <span class="n">ADDRESS_1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">ADDRESS_</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>These addresses will all be the same size, getting the address for the value
+are index <code class="docutils literal"><span class="pre">k</span></code> consists of adding some multiple of <code class="docutils literal"><span class="pre">k</span></code> to the first address.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">returns</span> <span class="n">ADDRESS_k</span> <span class="o">=</span> <span class="n">ADDRESS_0</span> <span class="o">+</span> <span class="n">M</span><span class="o">*</span><span class="n">k</span>
+</pre></div>
+</div>
+<p>This means that, regardless of the length of the list <code class="docutils literal"><span class="pre">L</span></code>, we can return the
+value at any index with one arithmetic computation.  In other words, indexing
+on lists and strings is <span class="math">\(O(1)\)</span>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Notice that the computation shown above also works for the first item in
+the list (index 0), as</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">returns</span> <span class="n">ADDRESS_0</span> <span class="o">=</span> <span class="n">ADDRESS_1</span> <span class="o">+</span> <span class="n">M</span><span class="o">*</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p class="last">Thinking of lists as a collection of memory addresses explains one of the
+primary reasons that lists are indexed starting at 0.  In general, Python hides
+these details from the programmer, but other languages like C and C++ are <em>closer
+to the metal</em>, a phrase that means they expose more memory details to the user.
+This is one of the reasons that any aspiring programmer should probably gain
+some experience in one of these languages.</p>
+</div>
+</div>
+<div class="section" id="the-complexity-of-the-slice-operator">
+<h2>3.9.7. The complexity of the slice operator<a class="headerlink" href="#the-complexity-of-the-slice-operator" title="Permalink to this headline">¶</a></h2>
+<p>The complexity of the slice operator is a little more complicated and depends
+on the rate at which the range of values in the slice grow.  Recall that the
+slice returns a <strong>new list</strong>, which means that we will need to construct a new
+list of references to these values.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="n">returns</span> <span class="p">[</span><span class="n">ADDRESS_i</span><span class="p">,</span> <span class="n">ADDRESS_</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="o">...</span><span class="p">,</span> <span class="n">ADDRESS_k</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We will consider a number of examples, but the questions of the complexity of
+the slice operator needs to be considers on a case-by-case basis.</p>
+<p><strong>Slice of a constant length</strong></p>
+<p>Suppose that our slice is of the form <code class="docutils literal"><span class="pre">L[i:i+c]</span></code> for some constant <code class="docutils literal"><span class="pre">c</span></code>.  To
+construct a slice of constant length, we need to</p>
+<ol class="arabic simple">
+<li>allocate memory for the new list (<span class="math">\(O(1)\)</span>)</li>
+<li>copy or compute the <code class="docutils literal"><span class="pre">c</span></code> memory addresses. (<span class="math">\(O(c) = O(1)\)</span>)</li>
+</ol>
+<p>Thus, the complexity of the slice of constant length is <span class="math">\(O(1) + O(1) = O(1)\)</span>.</p>
+<p><strong>Slice all but the first item c items</strong></p>
+<p>Suppose that our slice is of the form <code class="docutils literal"><span class="pre">L[c:]</span></code> for some constant <code class="docutils literal"><span class="pre">c</span></code> and
+assume that <code class="docutils literal"><span class="pre">len(L)</span> <span class="pre">=</span> <span class="pre">n</span></code>.  In this case, the size of the slice grows at the
+same rate as the original list.  To construct this type of slice, we need to</p>
+<ol class="arabic simple">
+<li>allocate memory for the new list (<span class="math">\(O(1)\)</span>)</li>
+<li>copy or compute the <code class="docutils literal"><span class="pre">n</span> <span class="pre">-</span> <span class="pre">c</span></code> memory addresses. (<span class="math">\(O(n - c) = O(n)\)</span>)</li>
+</ol>
+<p>Thus, the complexity of the slice of this type is <span class="math">\(O(n) + O(1) = O(n)\)</span>.
+Finally, we note that this case includes <code class="docutils literal"><span class="pre">L[:]</span></code>, i.e. using the slice
+operator to copy the entire list.</p>
 </div>
 <div class="section" id="append-versus-concatenate">
-<h2>2.9.3. Append versus Concatenate<a class="headerlink" href="#append-versus-concatenate" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">append</span></code> method adds a new item to the end of a list.  It is also possible to add a new item to the end of a list by using the concatenation operator.  However, you need to be careful.</p>
-<p>Consider the following example.  The original list has 3 integers.  We want to add the word &#8220;cat&#8221; to the end of the list.</p>
+<h2>3.9.8. Append versus Concatenate<a class="headerlink" href="#append-versus-concatenate" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">append</span></code> method adds a new item to the end of a list.  It is also
+possible to add a new item to the end of a list by using the concatenation
+operator.  However, you need to be careful.</p>
+<p>Consider the following example.  The original list has 3 integers.  We want to
+add the word &#8220;cat&#8221; to the end of the list.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="appcon1"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (appcon1)</span> </p>
 </div>
 <script type="text/javascript">
-var appcon1_trace = {"code": "origlist = [45, 32, 88]\n\noriglist.append(\"cat\")", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["origlist"], "heap": {"1": ["LIST", 45, 32, 88]}, "globals": {"origlist": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["origlist"], "heap": {"1": ["LIST", 45, 32, 88, "cat"]}, "globals": {"origlist": ["REF", 1]}, "event": "return"}]};
+var appcon1_trace = {"trace": [{"stack_to_render": [], "func_name": "<module>", "stdout": "", "globals": {}, "heap": {}, "line": 1, "event": "step_line", "ordered_globals": []}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "globals": {"origlist": ["REF", 1]}, "heap": {"1": ["LIST", 45, 32, 88]}, "line": 3, "event": "step_line", "ordered_globals": ["origlist"]}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "globals": {"origlist": ["REF", 1]}, "heap": {"1": ["LIST", 45, 32, 88, "cat"]}, "line": 3, "event": "return", "ordered_globals": ["origlist"]}], "code": "origlist = [45, 32, 88]\n\noriglist.append(\"cat\")"};
 var appcon1_vis;
 
 $(document).ready(function() {
@@ -374,18 +639,21 @@ $(window).resize(function() {
     }
 });
 </script>
-<p>Here we have used <code class="docutils literal"><span class="pre">append</span></code> which simply modifies the list.  In order to use concatenation, we need to write an assignment statement that uses the accumulator pattern:</p>
+<p>Here we have used <code class="docutils literal"><span class="pre">append</span></code> which simply modifies the list.  In order to use
+concatenation, we need to write an assignment statement that uses the
+accumulator pattern:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">origlist</span> <span class="o">=</span> <span class="n">origlist</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Note that the word &#8220;cat&#8221; needs to be placed in a list since the concatenation operator needs two lists to do its work.</p>
+<p>Note that the word &#8220;cat&#8221; needs to be placed in a list since the concatenation
+operator needs two lists to do its work.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="appcon2"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (appcon2)</span> </p>
 </div>
 <script type="text/javascript">
-var appcon2_trace = {"code": "origlist = [45, 32, 88]\n\noriglist = origlist + [\"cat\"]", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["origlist"], "heap": {"1": ["LIST", 45, 32, 88]}, "globals": {"origlist": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["origlist"], "heap": {"2": ["LIST", 45, 32, 88, "cat"]}, "globals": {"origlist": ["REF", 2]}, "event": "return"}]};
+var appcon2_trace = {"trace": [{"stack_to_render": [], "func_name": "<module>", "stdout": "", "globals": {}, "heap": {}, "line": 1, "event": "step_line", "ordered_globals": []}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "globals": {"origlist": ["REF", 1]}, "heap": {"1": ["LIST", 45, 32, 88]}, "line": 3, "event": "step_line", "ordered_globals": ["origlist"]}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "globals": {"origlist": ["REF", 2]}, "heap": {"2": ["LIST", 45, 32, 88, "cat"]}, "line": 3, "event": "return", "ordered_globals": ["origlist"]}], "code": "origlist = [45, 32, 88]\n\noriglist = origlist + [\"cat\"]"};
 var appcon2_vis;
 
 $(document).ready(function() {
@@ -424,17 +692,19 @@ $(window).resize(function() {
     }
 });
 </script>
-<p>It is also important to realize that with append, the original list is simply modified.
-On the other hand, with concatenation, an entirely new list is created.  This can be seen in the following codelens example where
-<code class="docutils literal"><span class="pre">newlist</span></code> refers to a list which is a copy of the original list, <code class="docutils literal"><span class="pre">origlist</span></code>, with the new item &#8220;cat&#8221; added to the end.  <code class="docutils literal"><span class="pre">origlist</span></code> still contains the three values it did before the concatenation.  This is why the assignment operation is necessary as part of the
-accumulator pattern.</p>
+<p>It is also important to realize that with append, the original list is simply
+modified.  On the other hand, with concatenation, an entirely new list is
+created.  This can be seen in the following codelens example where <code class="docutils literal"><span class="pre">newlist</span></code>
+refers to a list which is a copy of the original list, <code class="docutils literal"><span class="pre">origlist</span></code>, with the
+new item &#8220;cat&#8221; added to the end.  <code class="docutils literal"><span class="pre">origlist</span></code> still contains the three values
+it did before the concatenation.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="appcon3"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (appcon3)</span> </p>
 </div>
 <script type="text/javascript">
-var appcon3_trace = {"code": "origlist = [45, 32, 88]\n\nnewlist = origlist + [\"cat\"]", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["origlist"], "heap": {"1": ["LIST", 45, 32, 88]}, "globals": {"origlist": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["origlist", "newlist"], "heap": {"1": ["LIST", 45, 32, 88], "2": ["LIST", 45, 32, 88, "cat"]}, "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "event": "return"}]};
+var appcon3_trace = {"trace": [{"stack_to_render": [], "func_name": "<module>", "stdout": "", "globals": {}, "heap": {}, "line": 1, "event": "step_line", "ordered_globals": []}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "globals": {"origlist": ["REF", 1]}, "heap": {"1": ["LIST", 45, 32, 88]}, "line": 3, "event": "step_line", "ordered_globals": ["origlist"]}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "globals": {"newlist": ["REF", 2], "origlist": ["REF", 1]}, "heap": {"1": ["LIST", 45, 32, 88], "2": ["LIST", 45, 32, 88, "cat"]}, "line": 3, "event": "return", "ordered_globals": ["origlist", "newlist"]}], "code": "origlist = [45, 32, 88]\n\nnewlist = origlist + [\"cat\"]"};
 var appcon3_vis;
 
 $(document).ready(function() {
@@ -473,10 +743,23 @@ $(window).resize(function() {
     }
 });
 </script>
+<p>This distinction has an impact on the complexity of these two operations.  For
+a list of length <code class="docutils literal"><span class="pre">n</span></code>, the concatenation operation will be <span class="math">\(O(n)\)</span> (This
+is equivalent to <code class="docutils literal"><span class="pre">origlist[:]</span> <span class="pre">+</span> <span class="pre">[&quot;cat&quot;]</span></code> which is <span class="math">\(O(n) + O(1) =
+O(n)\)</span>.)</p>
+<p>When Python constructs a new list, it actually allocates extra memory in
+anticipation of future calls to <code class="docutils literal"><span class="pre">append</span></code>.  So the complexity of an append
+statement, depends on whether or not this extra memory is still available.  In
+the case that we have exosted the memory, we will need to allocate more memory
+and copy the list (<span class="math">\(O(n)\)</span>), but it the memory is available, we just need
+to copy the memory address of the new element into the next memory slot
+(<span class="math">\(O(1)\)</span>).  Luckily, Python allocates memory is such a way that the need
+to add memory and copy the list happens to infrequently, we can consider
+<code class="docutils literal"><span class="pre">append</span></code> to have an <a class="reference external" href="https://en.wikipedia.org/wiki/Amortized_analysis">amortized worst case</a> of <span class="math">\(O(1)\)</span></p>
 <p><strong>Check you understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_15_1">
-            <p>rec-5-20: What is printed by the following statements?</p>
+            <p>intro-12-496: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">alist</span> <span class="o">=</span> <span class="n">alist</span> <span class="o">+</span> <span class="mi">999</span>
 <span class="k">print</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span>
@@ -491,27 +774,40 @@ $(window).resize(function() {
             </ul>
             <span class="target" id="index-0"></span></div>
 <div class="section" id="summary-of-computational-complexity-for-lists-and-strings">
-<span id="index-1"></span><h2>2.9.4. Summary of Computational Complexity for Lists and Strings<a class="headerlink" href="#summary-of-computational-complexity-for-lists-and-strings" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<span id="index-1"></span><h2>3.9.9. Summary of Computational Complexity for Lists and Strings<a class="headerlink" href="#summary-of-computational-complexity-for-lists-and-strings" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we looked at the complexity of various operations on lists and
+strings.  When selecting a data structure for your program, it is important to
+consider the operations that you will perform and select the best data
+structure for that job.  We have seen that Python lists and strings excel at
+indexing, but are not necessarily great at looking up values.  In a future
+chapter, we will introduce two Python data structures that are much more
+efficient when it comes to look-up operations.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<blockquote>
+<div>A good reference for the complexity of various operations on Python data
+structures is</div></blockquote>
+<p class="last"><a class="reference external" href="https://wiki.python.org/moin/TimeComplexity">TimeComplexity</a></p>
+</div>
 </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 2.8. Transforming Sequences with Comprehensions' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 3.8. Transforming Sequences with Comprehensions' data-toggle="tooltip">
     <a href="TransformingSequencesWithComprehensions.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="TransformingSequencesWithComprehensions.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 2.10. Other Python Sequence Types' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 3.10. Other Python Sequence Types' data-toggle="tooltip" >
     <a href="OtherPythonSequenceTypes.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="OtherPythonSequenceTypes.html" >Next Section - 2.10. Other Python Sequence Types</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="OtherPythonSequenceTypes.html" >Next Section - 3.10. Other Python Sequence Types</a>
 
 <script type="text/javascript">
 

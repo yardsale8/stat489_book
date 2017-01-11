@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.4. Saving Expressions for Later Execution - The lambda Expression &mdash; Runestone Interactive Overview</title>
+    <title>2.2. Saving Expressions for Later Execution - The lambda Expression &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="1. Introduction to Python" href="toctree.html" />
-    <link rel="next" title="1.5. Expressions, Values and Evaluation" href="ExpressionsValuesAndEvaluation.html" />
-    <link rel="prev" title="1.3. Transforming Simple Data with Expressions" href="TransformingSimpleDataWithExpressions.html" />
+    <link rel="up" title="2. Expressions and Evaluation" href="toctree2.html" />
+    <link rel="next" title="2.3. Expressions, Values and Evaluation" href="ExpressionsValuesAndEvaluation.html" />
+    <link rel="prev" title="2.1. Transforming Simple Data with Expressions" href="TransformingSimpleDataWithExpressions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,11 +263,12 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">1.4. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression</a><ul>
-<li><a class="reference internal" href="#the-generalization-and-the-dry-principle">1.4.1. The Generalization and the DRY Principle</a></li>
-<li><a class="reference internal" href="#the-lambda-expression">1.4.2. The <cite>lambda</cite> Expression</a></li>
-<li><a class="reference internal" href="#boolean-functions">1.4.3. Boolean Functions</a></li>
-<li><a class="reference internal" href="#aside-lambda-calculus-and-the-power-of-the-lambda-expression">1.4.4. Aside: Lambda Calculus and the Power of the Lambda Expression</a></li>
+<li><a class="reference internal" href="#">2.2. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression</a><ul>
+<li><a class="reference internal" href="#abstraction-with-variables-and-expressions">2.2.1. Abstraction with Variables and Expressions</a></li>
+<li><a class="reference internal" href="#the-generalization-and-the-dry-principle">2.2.2. The Generalization and the DRY Principle</a></li>
+<li><a class="reference internal" href="#the-lambda-expression">2.2.3. The <cite>lambda</cite> Expression</a></li>
+<li><a class="reference internal" href="#boolean-functions">2.2.4. Boolean Functions</a></li>
+<li><a class="reference internal" href="#aside-lambda-calculus-and-the-power-of-the-lambda-expression">2.2.5. Aside: Lambda Calculus and the Power of the Lambda Expression</a></li>
 </ul>
 </li>
 </ul>
@@ -277,13 +278,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 1.3. Transforming Simple Data with Expressions" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 2.1. Transforming Simple Data with Expressions" data-toggle="tooltip">
     <a href="TransformingSimpleDataWithExpressions.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 1.5. Expressions, Values and Evaluation' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 2.3. Expressions, Values and Evaluation' data-toggle="tooltip" >
     <a href="ExpressionsValuesAndEvaluation.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -315,77 +316,354 @@
 <div class="container" id="main-content">
   
   <div class="section" id="saving-expressions-for-later-execution-the-lambda-expression">
-<h1>1.4. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression<a class="headerlink" href="#saving-expressions-for-later-execution-the-lambda-expression" title="Permalink to this headline">¶</a></h1>
+<h1>2.2. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression<a class="headerlink" href="#saving-expressions-for-later-execution-the-lambda-expression" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="abstraction-with-variables-and-expressions">
+<h2>2.2.1. Abstraction with Variables and Expressions<a class="headerlink" href="#abstraction-with-variables-and-expressions" title="Permalink to this headline">¶</a></h2>
+<p>The most important concept in programming is <strong>abstraction.</strong>  Creating an
+abstraction involves replacing code with a name, which replaces the <em>complexity
+of the solution</em> with the <em>meaning of the code.</em>  In this way, a programmer can
+deal with a complex problem by combining many small and easy to understand
+abstractions.  This process is added by picking names that keep the meaning of
+the code intact while hiding the implementation details (complexity), which is
+why we will be so particular about the names that we use.</p>
+<p>We have seen our first form of abstraction in the form of a variable.  Using
+variables allows us to replace values with a name that expresses the meaning of
+these values in the context of the problem.  Consider the following calculation.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="mf">1.55</span><span class="o">*</span><span class="mf">1.065</span><span class="o">*</span><span class="mi">3</span><span class="p">))</span><span class="o">/</span><span class="mi">100</span>
+<span class="gh">Out[1]: </span><span class="go">4.95</span>
+</pre></div>
+</div>
+<p>While this expression is easy to understand <em>arithmetically</em>, it lacks any
+real-world meaning.  Compare this to the following code, which has applied the
+variable abstraction to give the code meaning.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">iced_tea_price</span> <span class="o">=</span> <span class="mf">1.55</span>
+
+<span class="gp">In [3]: </span><span class="n">tax_rate</span> <span class="o">=</span> <span class="mf">1.065</span>
+
+<span class="gp">In [4]: </span><span class="n">number_of_glasses</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="gp">In [5]: </span><span class="n">total_cost</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">iced_tea_price</span><span class="o">*</span><span class="n">tax_rate</span><span class="o">*</span><span class="n">number_of_glasses</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [6]: </span><span class="n">total_cost</span>
+<span class="gh">Out[6]: </span><span class="go">4.95</span>
+</pre></div>
+</div>
+<p>Now we see the meaning behind each of the numbers.  Here we have combined the
+variable abstraction (represented by the variables <code class="docutils literal"><span class="pre">iced_tea_price</span></code>,
+<code class="docutils literal"><span class="pre">tax_rate</span></code>, <code class="docutils literal"><span class="pre">number_of_glasses</span></code> and <code class="docutils literal"><span class="pre">total_cost</span></code>) with the <code class="docutils literal"><span class="pre">round</span></code>
+function, which is another form of abstraction.  In particular, the <code class="docutils literal"><span class="pre">round</span></code>
+function makes the meaning of the <code class="docutils literal"><span class="pre">int(100*(...))/100</span></code> portion of the
+expression much easier to understand by hiding this complexity behind a
+meaningful name.</p>
+</div>
 <div class="section" id="the-generalization-and-the-dry-principle">
-<h2>1.4.1. The Generalization and the DRY Principle<a class="headerlink" href="#the-generalization-and-the-dry-principle" title="Permalink to this headline">¶</a></h2>
+<h2>2.2.2. The Generalization and the DRY Principle<a class="headerlink" href="#the-generalization-and-the-dry-principle" title="Permalink to this headline">¶</a></h2>
+<p>Abstractions allow us to introduce two other programming important concepts:
+<strong>generalization</strong> and <strong>the &#8220;Don&#8217;t Repeat Yourself&#8221; (DRY) principle.</strong>  Code
+that has been generalized using abstractions can be used to solve not just one
+problem but <strong>many</strong> problems.  An example of the application of generalization
+is the use the <code class="docutils literal"><span class="pre">round</span></code> function from the last section.  Not only can we use
+this function to round to two decimal places when working with dollars and
+cents, it generalizes the process of rounding to any number of decimal places.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+
+<span class="gp">In [8]: </span><span class="nb">round</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="gh">Out[8]: </span><span class="go">3</span>
+
+<span class="gp">In [9]: </span><span class="nb">round</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">          Out[9]: 3.142</span>
+
+<span class="gp">In [10]: </span><span class="nb">round</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="go">                        Out[10]: 3.1415927</span>
+</pre></div>
+</div>
+<p>Adhering to the DRY principle is a standard approach to writing code that is
+correct (e.g. computes the correct values), clean (easy to read) and
+maintainable (can be changed or extended).  We will strive to <strong>eliminate all
+repeated code</strong> in our programs.  One advantage to this approach is
+increased productivity, since we won&#8217;t waste time retyping the same code over and over.
+Another, perhaps more important, advantage is that any mistakes that we make
+will be isolated to one place in the code.  Functions will be our primary tool
+for abstraction, generalization, and the elimination of replicated code.  In
+this next section, we will introduce the <code class="docutils literal"><span class="pre">lambda</span></code> expression, which will allow
+us to save expressions for later execution, as well as generalize the solution
+to a problem.</p>
 </div>
 <div class="section" id="the-lambda-expression">
-<h2>1.4.2. The <cite>lambda</cite> Expression<a class="headerlink" href="#the-lambda-expression" title="Permalink to this headline">¶</a></h2>
+<h2>2.2.3. The <cite>lambda</cite> Expression<a class="headerlink" href="#the-lambda-expression" title="Permalink to this headline">¶</a></h2>
+<p>While the iced tea example from above illustrated the power of abstraction to
+compartmentalize complexity, it was not a general solution to the problem.
+Suppose that we want to compute the cost (with tax) of purchasing 2 and 5
+glasses of tea.  Currently, we would accomplish this as follows.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">number_of_glasses</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="gp">In [12]: </span><span class="n">total_cost</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">iced_tea_price</span><span class="o">*</span><span class="n">tax_rate</span><span class="o">*</span><span class="n">number_of_glasses</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [13]: </span><span class="n">total_cost</span>
+<span class="gh">Out[13]: </span><span class="go">3.3</span>
+
+<span class="gp">In [14]: </span><span class="n">number_of_glasses</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="gp">In [15]: </span><span class="n">total_cost</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">iced_tea_price</span><span class="o">*</span><span class="n">tax_rate</span><span class="o">*</span><span class="n">number_of_glasses</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [16]: </span><span class="n">total_cost</span>
+<span class="gh">Out[16]: </span><span class="go">8.25</span>
+</pre></div>
+</div>
+<p>We have violated the DRY principle by using the
+<code class="docutils literal"><span class="pre">round(iced_tea_price*tax_rate*number_of_glasses,</span> <span class="pre">2)</span></code> expression twice!  We
+can make a more general solution using the <code class="docutils literal"><span class="pre">lambda</span></code> expression, which allows
+us to turn simple expressions into functions.  The syntax for the one variable
+<code class="docutils literal"><span class="pre">lambda</span></code> expression is as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">PARAMETER</span><span class="p">:</span> <span class="n">BODY_EXPRESSION</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We have specialized language when talking about lambda expressions (and
+other functions.)  The variable that the we are generalizing is called the
+<strong>formal parameter</strong> and the expression that we mean to evaluate is referred
+to as the <strong>body</strong> of the lambda expression.</p>
+</div>
+<p>Generalizing the application of the tax rate to the cost of an item would be a
+useful abstraction, as this function could be applied in many situations.  The
+general expression of applying tax is <code class="docutils literal"><span class="pre">tax_rate*cost</span></code>.  We want to be able to
+change the value of <code class="docutils literal"><span class="pre">cost</span></code> in our generalization, which is accomplished using a
+lambda expression as shown below</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cost</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">tax_rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [18]: </span><span class="n">apply_tax</span>
+<span class="gh">Out[18]: </span><span class="go">&lt;function __main__.&lt;lambda&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Notice that we can save lambda expressions to variables in the same way that we
+save any other value.  Simply evaluating the lambda expression does not execute
+the encapsulated code, to do this we need to use a new form of syntax.</p>
+<p>Once a lambda expression is constructed, it can be <strong>applied</strong> later to a given
+value of the variable using the following syntax.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">LAMBDA_EXPRESSION</span><span class="p">(</span><span class="n">ARGUMENT</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>LAMBDA_EXPRESSION can be the literal expression or a variable to which the
+expression was saved.  For simple lambda expressions, all instances of PARAMETER
+will be replaced with the value of the ARGUMENT, and then evaluate the
+BODY_EXPRESSION*.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">*Since lambda expressions are themselves expressions, we can embed lambda
+expressions inside lambda expressions.  This will cause problems with the
+simple substitution rule that we gave above.  More on this complexity later.</p>
+</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cost</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">tax_rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [20]: </span><span class="n">total_cost</span> <span class="o">=</span> <span class="n">apply_tax</span><span class="p">(</span><span class="n">iced_tea_price</span><span class="o">*</span><span class="n">number_of_glasses</span><span class="p">)</span>
+
+<span class="gp">In [21]: </span><span class="n">total_cost</span>
+<span class="gh">Out[21]: </span><span class="go">8.25</span>
+</pre></div>
+</div>
+<p>Hard-coding the tax rate inside <code class="docutils literal"><span class="pre">apply_tax</span></code> makes this a less general solution
+to the problem.  We can fix this by adding another parameter to the lambda
+expression. To do this, we will need to allow two variables in the body to
+change from problem to problem, which can also be accomplished with the lambda
+expression by adding additional parameters. The syntax for the more general
+lambda expression, with many parameters, is as follows.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">PARAMETER_1</span><span class="p">,</span> <span class="o">...</span> <span class="p">,</span> <span class="n">PARAMETER_K</span><span class="p">:</span> <span class="n">BODY_EXPRESSION</span>
+</pre></div>
+</div>
+<p>We can apply this more general expression using a similar application syntax.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">LAMBDA_EXPRESSION</span><span class="p">(</span><span class="n">ARGUMENT_1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">ARGUMENT_K</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the number of arguments needs to match the number of arguments</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="nb">pow</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span>
+
+<span class="gp">In [23]: </span><span class="nb">pow</span>
+<span class="gh">Out[23]: </span><span class="go">&lt;function __main__.&lt;lambda&gt;&gt;</span>
+
+<span class="gp">In [24]: </span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">                                      Out[24]: 8</span>
+
+<span class="gp">In [25]: </span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">                                                 ---------------------------------------------------------------------------</span>
+<span class="go">TypeError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-25-f547158b80b1&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 pow(2)</span>
+
+<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;y&#39;</span>
+
+<span class="gp">In [26]: </span><span class="nb">pow</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ---------------------------------------------------------------------------</span>
+<span class="go">TypeError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-26-919f0291c481&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 pow(1,2,3)</span>
+
+<span class="go">TypeError: &lt;lambda&gt;() takes 2 positional arguments but 3 were given</span>
+</pre></div>
+</div>
+<p>Returning to the iced tea example, we now make a more general version of
+<code class="docutils literal"><span class="pre">apply_tax</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cost</span><span class="p">,</span> <span class="n">tax</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">tax</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [28]: </span><span class="n">pre_tax_cost</span> <span class="o">=</span> <span class="n">iced_tea_price</span><span class="o">*</span><span class="n">number_of_glasses</span>
+
+<span class="gp">In [29]: </span><span class="n">total_cost</span> <span class="o">=</span> <span class="n">apply_tax</span><span class="p">(</span><span class="n">pre_tax_cost</span><span class="p">,</span> <span class="n">tax_rate</span><span class="p">)</span>
+
+<span class="gp">In [30]: </span><span class="n">total_cost</span>
+<span class="gh">Out[30]: </span><span class="go">8.25</span>
+</pre></div>
+</div>
+<p>To continue the generalization process, we construct a lambda expression for
+computing the (pre_tax) cost of any number of glasses of tea and use it to
+compute the cost for 3, 2, and 5 glasses of tea.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">pre_tax_cost</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">num_glasses</span><span class="p">:</span> <span class="n">iced_tea_price</span><span class="o">*</span><span class="n">num_glasses</span>
+
+<span class="gp">In [32]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="n">pre_tax_cost</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">tax_rate</span><span class="p">)</span>
+<span class="gh">Out[32]: </span><span class="go">4.95</span>
+
+<span class="gp">In [33]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="n">pre_tax_cost</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">tax_rate</span><span class="p">)</span>
+<span class="go">              Out[33]: 3.3</span>
+
+<span class="gp">In [34]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="n">pre_tax_cost</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">tax_rate</span><span class="p">)</span>
+<span class="go">                           Out[34]: 8.25</span>
+</pre></div>
+</div>
+<div class="admonition-question admonition">
+<p class="first admonition-title">Question</p>
+<p class="last">Do you see where we have violated the DRY principle?  How might we fix this
+problem?</p>
+</div>
+<p>Finally, we will eliminated the repeated code and hide the complexity of the
+computation of the total cost in another lambda expression.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">total_cost</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">num_glasses</span><span class="p">:</span> <span class="n">apply_tax</span><span class="p">(</span><span class="n">pre_tax_cost</span><span class="p">(</span><span class="n">num_glasses</span><span class="p">),</span> <span class="n">tax_rate</span><span class="p">)</span>
+
+<span class="gp">In [36]: </span><span class="n">total_cost</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gh">Out[36]: </span><span class="go">4.95</span>
+
+<span class="gp">In [37]: </span><span class="n">total_cost</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">              Out[37]: 3.3</span>
+
+<span class="gp">In [38]: </span><span class="n">total_cost</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">                           Out[38]: 8.25</span>
+</pre></div>
+</div>
+<p>To better understand the evaluation of this code, use codelens to step through
+the evaluation step-by-step.</p>
+
+<div class="alert alert-warning cd_section">
+<div id="ch06_lambdacodelens"></div>
+<p class="cl_caption"><span class="cl_caption_text"> (ch06_lambdacodelens)</span> </p>
+</div>
+<script type="text/javascript">
+var ch06_lambdacodelens_trace = {"trace": [{"line": 1, "heap": {}, "func_name": "<module>", "ordered_globals": [], "stack_to_render": [], "event": "step_line", "globals": {}, "stdout": ""}, {"line": 2, "heap": {}, "func_name": "<module>", "ordered_globals": ["iced_tea_price"], "stack_to_render": [], "event": "step_line", "globals": {"iced_tea_price": 1.55}, "stdout": ""}, {"line": 3, "heap": {}, "func_name": "<module>", "ordered_globals": ["iced_tea_price", "tax_rate"], "stack_to_render": [], "event": "step_line", "globals": {"tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 4, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null]}, "func_name": "<module>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax"], "stack_to_render": [], "event": "step_line", "globals": {"apply_tax": ["REF", 1], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 5, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null]}, "func_name": "<module>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost"], "stack_to_render": [], "event": "step_line", "globals": {"apply_tax": ["REF", 1], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 6, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<module>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [], "event": "step_line", "globals": {"apply_tax": ["REF", 1], "total_cost": ["REF", 3], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 5, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<lambda>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 5>", "is_highlighted": true, "ordered_varnames": ["num_glasses"], "is_parent": false, "unique_hash": "<lambda> <line 5>_f1", "encoded_locals": {"num_glasses": 3}, "parent_frame_id_list": [], "frame_id": 1}], "event": "call", "globals": {"apply_tax": ["REF", 1], "total_cost": ["REF", 3], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 5, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<lambda>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 5>", "is_highlighted": true, "ordered_varnames": ["num_glasses"], "is_parent": false, "unique_hash": "<lambda> <line 5>_f1", "encoded_locals": {"num_glasses": 3}, "parent_frame_id_list": [], "frame_id": 1}], "event": "step_line", "globals": {"apply_tax": ["REF", 1], "total_cost": ["REF", 3], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 4, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<lambda>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 5>", "is_highlighted": false, "ordered_varnames": ["num_glasses"], "is_parent": false, "unique_hash": "<lambda> <line 5>_f1", "encoded_locals": {"num_glasses": 3}, "parent_frame_id_list": [], "frame_id": 1}, {"is_zombie": false, "func_name": "<lambda> <line 4>", "is_highlighted": true, "ordered_varnames": ["num_glasses"], "is_parent": false, "unique_hash": "<lambda> <line 4>_f2", "encoded_locals": {"num_glasses": 3}, "parent_frame_id_list": [], "frame_id": 2}], "event": "call", "globals": {"apply_tax": ["REF", 1], "total_cost": ["REF", 3], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 4, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<lambda>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 5>", "is_highlighted": false, "ordered_varnames": ["num_glasses"], "is_parent": false, "unique_hash": "<lambda> <line 5>_f1", "encoded_locals": {"num_glasses": 3}, "parent_frame_id_list": [], "frame_id": 1}, {"is_zombie": false, "func_name": "<lambda> <line 4>", "is_highlighted": true, "ordered_varnames": ["num_glasses"], "is_parent": false, "unique_hash": "<lambda> <line 4>_f2", "encoded_locals": {"num_glasses": 3}, "parent_frame_id_list": [], "frame_id": 2}], "event": "step_line", "globals": {"apply_tax": ["REF", 1], "total_cost": ["REF", 3], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 4, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<lambda>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 5>", "is_highlighted": false, "ordered_varnames": ["num_glasses"], "is_parent": false, "unique_hash": "<lambda> <line 5>_f1", "encoded_locals": {"num_glasses": 3}, "parent_frame_id_list": [], "frame_id": 1}, {"is_zombie": false, "func_name": "<lambda> <line 4>", "is_highlighted": true, "ordered_varnames": ["num_glasses", "__return__"], "is_parent": false, "unique_hash": "<lambda> <line 4>_f2", "encoded_locals": {"num_glasses": 3, "__return__": 4.65}, "parent_frame_id_list": [], "frame_id": 2}], "event": "return", "globals": {"apply_tax": ["REF", 1], "total_cost": ["REF", 3], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 3, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<lambda>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 5>", "is_highlighted": false, "ordered_varnames": ["num_glasses"], "is_parent": false, "unique_hash": "<lambda> <line 5>_f1", "encoded_locals": {"num_glasses": 3}, "parent_frame_id_list": [], "frame_id": 1}, {"is_zombie": false, "func_name": "<lambda> <line 3>", "is_highlighted": true, "ordered_varnames": ["cost", "tax"], "is_parent": false, "unique_hash": "<lambda> <line 3>_f3", "encoded_locals": {"cost": 4.65, "tax": 1.065}, "parent_frame_id_list": [], "frame_id": 3}], "event": "call", "globals": {"apply_tax": ["REF", 1], "total_cost": ["REF", 3], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 3, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<lambda>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 5>", "is_highlighted": false, "ordered_varnames": ["num_glasses"], "is_parent": false, "unique_hash": "<lambda> <line 5>_f1", "encoded_locals": {"num_glasses": 3}, "parent_frame_id_list": [], "frame_id": 1}, {"is_zombie": false, "func_name": "<lambda> <line 3>", "is_highlighted": true, "ordered_varnames": ["cost", "tax"], "is_parent": false, "unique_hash": "<lambda> <line 3>_f3", "encoded_locals": {"cost": 4.65, "tax": 1.065}, "parent_frame_id_list": [], "frame_id": 3}], "event": "step_line", "globals": {"apply_tax": ["REF", 1], "total_cost": ["REF", 3], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 3, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<lambda>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 5>", "is_highlighted": false, "ordered_varnames": ["num_glasses"], "is_parent": false, "unique_hash": "<lambda> <line 5>_f1", "encoded_locals": {"num_glasses": 3}, "parent_frame_id_list": [], "frame_id": 1}, {"is_zombie": false, "func_name": "<lambda> <line 3>", "is_highlighted": true, "ordered_varnames": ["cost", "tax", "__return__"], "is_parent": false, "unique_hash": "<lambda> <line 3>_f3", "encoded_locals": {"cost": 4.65, "__return__": 4.95, "tax": 1.065}, "parent_frame_id_list": [], "frame_id": 3}], "event": "return", "globals": {"apply_tax": ["REF", 1], "total_cost": ["REF", 3], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 5, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<lambda>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 5>", "is_highlighted": true, "ordered_varnames": ["num_glasses", "__return__"], "is_parent": false, "unique_hash": "<lambda> <line 5>_f1", "encoded_locals": {"num_glasses": 3, "__return__": 4.95}, "parent_frame_id_list": [], "frame_id": 1}], "event": "return", "globals": {"apply_tax": ["REF", 1], "total_cost": ["REF", 3], "pre_tax_cost": ["REF", 2], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}, {"line": 6, "heap": {"1": ["FUNCTION", "<lambda>(cost, tax) <line 3>", null], "2": ["FUNCTION", "<lambda>(num_glasses) <line 4>", null], "3": ["FUNCTION", "<lambda>(num_glasses) <line 5>", null]}, "func_name": "<module>", "ordered_globals": ["iced_tea_price", "tax_rate", "apply_tax", "pre_tax_cost", "total_cost"], "stack_to_render": [], "event": "return", "globals": {"pre_tax_cost": ["REF", 2], "total_cost": ["REF", 3], "apply_tax": ["REF", 1], "tax_rate": 1.065, "iced_tea_price": 1.55}, "stdout": ""}], "code": "iced_tea_price = 1.55\ntax_rate = 1.065\napply_tax = lambda cost, tax: round(tax*cost, 2)\npre_tax_cost = lambda num_glasses: iced_tea_price*num_glasses\ntotal_cost = lambda num_glasses: apply_tax(pre_tax_cost(num_glasses), tax_rate)\ntotal_cost(3)"};
+var ch06_lambdacodelens_vis;
+
+$(document).ready(function() {
+    try {
+        ch06_lambdacodelens_vis = new ExecutionVisualizer('ch06_lambdacodelens',ch06_lambdacodelens_trace,
+                                    {embeddedMode: false,
+                                    verticalStack: false,
+                                    heightChangeCallback: redrawAllVisualizerArrows,
+                                    codeDivWidth: 500,
+                                    lang : 'py3'
+                                    });
+        attachLoggers(ch06_lambdacodelens_vis,'ch06_lambdacodelens');
+        styleButtons('ch06_lambdacodelens');
+        allVisualizers.push(ch06_lambdacodelens_vis);
+    } catch (e) {
+        console.log("Failed to Initialize CodeLens component ch06_lambdacodelens_vis" );
+        console.log(e.toString());
+    }
+
+});
+
+$(document).ready(function() {
+    $("#ch06_lambdacodelens_tracecheck").click(function() {
+        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'ch06_lambdacodelens'});
+    });
+});
+
+if (allVisualizers === undefined) {
+   var allVisualizers = [];
+}
+
+
+$(window).resize(function() {
+    if (ch06_lambdacodelens_vis) {
+        ch06_lambdacodelens_vis.redrawConnectors();
+    }
+});
+</script>
+<p>This example includes many of the ideas that we will explore in a later chapter
+on functional programming, including</p>
+<ol class="arabic simple">
+<li><strong>Abstracting constants with global variables.</strong>  In this case, the values of
+<code class="docutils literal"><span class="pre">iced_tea_price</span></code> and <code class="docutils literal"><span class="pre">tax_rate</span></code> have been assigned to variables that are
+used by other functions and expressions.  Doing this at the top of our code
+allows us to easily change these constants at a later date.</li>
+<li><strong>Abstracting expressions using functions by pulling out variables as formal
+parameters.</strong>  We can think of these parameters as &#8220;holes&#8221; in our program that
+can be filled in later.</li>
+<li><strong>Composing small functions to solve more complicated problems.</strong>  Notice that
+<code class="docutils literal"><span class="pre">total_cost</span></code> is an example of function composition, as <code class="docutils literal"><span class="pre">apply_tax</span></code> is
+applied to the result of <code class="docutils literal"><span class="pre">pre_tax_cost</span></code>.</li>
+</ol>
 </div>
 <div class="section" id="boolean-functions">
-<h2>1.4.3. Boolean Functions<a class="headerlink" href="#boolean-functions" title="Permalink to this headline">¶</a></h2>
-<p>We have already seen that boolean values result from the evaluation of boolean expressions.  Since the result of any
-expression evaluation can be returned by a function (using the <code class="docutils literal"><span class="pre">return</span></code> statement),
-functions can return boolean values.  This turns out to be a very convenient way to hide the details of complicated tests. For example:</p>
+<h2>2.2.4. Boolean Functions<a class="headerlink" href="#boolean-functions" title="Permalink to this headline">¶</a></h2>
+<p>We have already seen that boolean values result from the evaluation of boolean
+expressions.  Since the result of any expression evaluation can be returned by a
+lambda expression, lambda expressions can return boolean values.  This turns out
+to be a very convenient way to hide the details of complicated tests. For
+example:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">isDivisible</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">True</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">False</span>
 
-<textarea data-component="activecode" id=ch06_boolfun1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-def isDivisible(x, y):
-    if x % y == 0:
-        result = True
-    else:
-        result = False
-
-    return result
-
-print(isDivisible(10, 5))
-</textarea>
+<span class="gp">In [40]: </span><span class="n">isDivisible</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gh">Out[40]: </span><span class="go">True</span>
+</pre></div>
+</div>
 <p>The name of this function is <code class="docutils literal"><span class="pre">isDivisible</span></code>. It is common to give <strong>boolean
 functions</strong> names that sound like yes/no questions.  <code class="docutils literal"><span class="pre">isDivisible</span></code> returns
 either <code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code> to indicate whether the <code class="docutils literal"><span class="pre">x</span></code> is or is not
 divisible by <code class="docutils literal"><span class="pre">y</span></code>.</p>
-<p>We can make the function more concise by taking advantage of the fact that the
-condition of the <code class="docutils literal"><span class="pre">if</span></code> statement is itself a boolean expression. We can return
-it directly, avoiding the <code class="docutils literal"><span class="pre">if</span></code> statement altogether:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">isDivisible</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
+<p>We can make the lambda expression more concise by taking advantage of the fact
+that the condition of the <code class="docutils literal"><span class="pre">if</span></code> expression is itself a boolean expression. We
+can return it directly, avoiding the <code class="docutils literal"><span class="pre">if</span></code> statement altogether:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">isDivisible</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="gp">In [42]: </span><span class="n">isDivisible</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gh">Out[42]: </span><span class="go">True</span>
 </pre></div>
 </div>
 <p>Boolean functions are often used in conditional statements:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">isDivisible</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="o">...</span> <span class="c1"># do something ...</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="o">...</span> <span class="c1"># do something else ...</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">EXPR_1</span> <span class="k">if</span> <span class="n">isDivisible</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">else</span> <span class="n">EXPR_2</span>
 </pre></div>
 </div>
-<p>It might be tempting to write something like
-<code class="docutils literal"><span class="pre">if</span> <span class="pre">isDivisible(x,</span> <span class="pre">y)</span> <span class="pre">==</span> <span class="pre">True:</span></code>
-but the extra comparison is  not necessary.  The following example shows the <code class="docutils literal"><span class="pre">isDivisible</span></code> function at work.  Notice how
-descriptive the code is when we move the testing details into a boolean function.  Try it
-with a few other actual parameters to see what is printed.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It might be tempting to write something like <code class="docutils literal"><span class="pre">isDivisible(x,</span> <span class="pre">y)</span> <span class="pre">==</span> <span class="pre">True</span></code> as
+the condition of the if expression, but the extra comparison is not necessary.</p>
+</div>
+<p>The following example shows the <code class="docutils literal"><span class="pre">isDivisible</span></code> function at work.  Notice how
+descriptive the code is when we move the testing details into a boolean
+function, which is a direct result of using an abstraction.  Try it with a few
+other actual parameters to see what is printed.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [43]: </span><span class="n">isDivisible</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
 
-<textarea data-component="activecode" id=ch06_boolfun2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-def isDivisible(x, y):
-    if x % y == 0:
-        result = True
-    else:
-        result = False
-
-    return result
-
-if isDivisible(10, 5):
-    print("That works")
-else:
-    print("Those values are no good")
-</textarea>
-<p>Here is the same program in codelens.  When we evaluate the <code class="docutils literal"><span class="pre">if</span></code> statement in the main part of the program, the evaluation of
-the boolean expression causes a call to the <code class="docutils literal"><span class="pre">isDivisible</span></code> function.  This is very easy to see in codelens.</p>
+<span class="gp">In [44]: </span><span class="s2">&quot;That works&quot;</span> <span class="k">if</span> <span class="n">isDivisible</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;Those values are no good&quot;</span>
+<span class="gh">Out[44]: </span><span class="go">&#39;That works&#39;</span>
+</pre></div>
+</div>
+<p>Here is the same program in codelens.  When we evaluate the <code class="docutils literal"><span class="pre">if</span></code> statement in
+the main part of the program, the evaluation of the boolean expression causes a
+call to the <code class="docutils literal"><span class="pre">isDivisible</span></code> function.  This is very easy to see in codelens.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="ch06_boolcodelens"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (ch06_boolcodelens)</span> </p>
 </div>
 <script type="text/javascript">
-var ch06_boolcodelens_trace = {"code": "def isDivisible(x, y):\n    if x % y == 0:\n        result = True\n    else:\n        result = False\n\n    return result\n\nif isDivisible(10, 5):\n    print(\"That works\")\nelse:\n    print(\"Those values are no good\")", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 9, "stdout": "", "ordered_globals": ["isDivisible"], "heap": {"1": ["FUNCTION", "isDivisible(x, y)", null]}, "globals": {"isDivisible": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [{"func_name": "isDivisible", "ordered_varnames": ["x", "y"], "unique_hash": "isDivisible_f1", "is_highlighted": true, "is_zombie": false, "parent_frame_id_list": [], "frame_id": 1, "is_parent": false, "encoded_locals": {"y": 5, "x": 10}}], "func_name": "isDivisible", "line": 1, "stdout": "", "ordered_globals": ["isDivisible"], "heap": {"1": ["FUNCTION", "isDivisible(x, y)", null]}, "globals": {"isDivisible": ["REF", 1]}, "event": "call"}, {"stack_to_render": [{"func_name": "isDivisible", "ordered_varnames": ["x", "y"], "unique_hash": "isDivisible_f1", "is_highlighted": true, "is_zombie": false, "parent_frame_id_list": [], "frame_id": 1, "is_parent": false, "encoded_locals": {"y": 5, "x": 10}}], "func_name": "isDivisible", "line": 2, "stdout": "", "ordered_globals": ["isDivisible"], "heap": {"1": ["FUNCTION", "isDivisible(x, y)", null]}, "globals": {"isDivisible": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [{"func_name": "isDivisible", "ordered_varnames": ["x", "y"], "unique_hash": "isDivisible_f1", "is_highlighted": true, "is_zombie": false, "parent_frame_id_list": [], "frame_id": 1, "is_parent": false, "encoded_locals": {"y": 5, "x": 10}}], "func_name": "isDivisible", "line": 3, "stdout": "", "ordered_globals": ["isDivisible"], "heap": {"1": ["FUNCTION", "isDivisible(x, y)", null]}, "globals": {"isDivisible": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [{"func_name": "isDivisible", "ordered_varnames": ["x", "y", "result"], "unique_hash": "isDivisible_f1", "is_highlighted": true, "is_zombie": false, "parent_frame_id_list": [], "frame_id": 1, "is_parent": false, "encoded_locals": {"y": 5, "x": 10, "result": true}}], "func_name": "isDivisible", "line": 7, "stdout": "", "ordered_globals": ["isDivisible"], "heap": {"1": ["FUNCTION", "isDivisible(x, y)", null]}, "globals": {"isDivisible": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [{"func_name": "isDivisible", "ordered_varnames": ["x", "y", "result", "__return__"], "unique_hash": "isDivisible_f1", "is_highlighted": true, "is_zombie": false, "parent_frame_id_list": [], "frame_id": 1, "is_parent": false, "encoded_locals": {"y": 5, "x": 10, "__return__": true, "result": true}}], "func_name": "isDivisible", "line": 7, "stdout": "", "ordered_globals": ["isDivisible"], "heap": {"1": ["FUNCTION", "isDivisible(x, y)", null]}, "globals": {"isDivisible": ["REF", 1]}, "event": "return"}, {"stack_to_render": [], "func_name": "<module>", "line": 10, "stdout": "", "ordered_globals": ["isDivisible"], "heap": {"1": ["FUNCTION", "isDivisible(x, y)", null]}, "globals": {"isDivisible": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 10, "stdout": "That works\n", "ordered_globals": ["isDivisible"], "heap": {"1": ["FUNCTION", "isDivisible(x, y)", null]}, "globals": {"isDivisible": ["REF", 1]}, "event": "return"}]};
+var ch06_boolcodelens_trace = {"trace": [{"line": 1, "heap": {}, "func_name": "<module>", "ordered_globals": [], "stack_to_render": [], "event": "step_line", "globals": {}, "stdout": ""}, {"line": 3, "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<module>", "ordered_globals": ["isDivisible"], "stack_to_render": [], "event": "step_line", "globals": {"isDivisible": ["REF", 1]}, "stdout": ""}, {"line": 1, "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<lambda>", "ordered_globals": ["isDivisible"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 1>", "is_highlighted": true, "ordered_varnames": ["x", "y"], "is_parent": false, "unique_hash": "<lambda> <line 1>_f1", "encoded_locals": {"x": 10, "y": 5}, "parent_frame_id_list": [], "frame_id": 1}], "event": "call", "globals": {"isDivisible": ["REF", 1]}, "stdout": ""}, {"line": 1, "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<lambda>", "ordered_globals": ["isDivisible"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 1>", "is_highlighted": true, "ordered_varnames": ["x", "y"], "is_parent": false, "unique_hash": "<lambda> <line 1>_f1", "encoded_locals": {"x": 10, "y": 5}, "parent_frame_id_list": [], "frame_id": 1}], "event": "step_line", "globals": {"isDivisible": ["REF", 1]}, "stdout": ""}, {"line": 1, "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<lambda>", "ordered_globals": ["isDivisible"], "stack_to_render": [{"is_zombie": false, "func_name": "<lambda> <line 1>", "is_highlighted": true, "ordered_varnames": ["x", "y", "__return__"], "is_parent": false, "unique_hash": "<lambda> <line 1>_f1", "encoded_locals": {"x": 10, "__return__": true, "y": 5}, "parent_frame_id_list": [], "frame_id": 1}], "event": "return", "globals": {"isDivisible": ["REF", 1]}, "stdout": ""}, {"line": 4, "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<module>", "ordered_globals": ["isDivisible", "outcome"], "stack_to_render": [], "event": "step_line", "globals": {"outcome": "That works", "isDivisible": ["REF", 1]}, "stdout": ""}, {"line": 4, "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<module>", "ordered_globals": ["isDivisible", "outcome"], "stack_to_render": [], "event": "return", "globals": {"outcome": "That works", "isDivisible": ["REF", 1]}, "stdout": ""}], "code": "isDivisible = lambda x, y: True if x % y == 0 else False\n\noutcome = \"That works\" if isDivisible(10, 5) else \"Those values are no good\"\noutcome"};
 var ch06_boolcodelens_vis;
 
 $(document).ready(function() {
@@ -427,7 +705,7 @@ $(window).resize(function() {
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_8_1">
-            select-3-2: What is a Boolean function?
+            intro-12-259: What is a Boolean function?
             <li data-component="answer" data-correct id="test_question6_8_1_opt_a">(A) A function that returns True or False</li><li data-component="feedback" id="test_question6_8_1_opt_a">A Boolean function is just like any other function, but it always returns True or False.</li>
             
             <li data-component="answer"  id="test_question6_8_1_opt_b">(B) A function that takes True or False as an argument</li><li data-component="feedback" id="test_question6_8_1_opt_b">A Boolean function may take any number of arguments (including 0, though that is rare), of any type.</li>
@@ -438,7 +716,7 @@ $(window).resize(function() {
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_8_2">
-            <p>select-3-3: Is the following statement legal in Python (assuming x, y and z are defined to be numbers)?</p>
+            <p>intro-12-260: Is the following statement legal in Python (assuming x, y and z are defined to be numbers)?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">z</span>
 </pre></div>
 </div>
@@ -460,26 +738,43 @@ $(window).resize(function() {
 </div>
 </div>
 <div class="section" id="aside-lambda-calculus-and-the-power-of-the-lambda-expression">
-<h2>1.4.4. Aside: Lambda Calculus and the Power of the Lambda Expression<a class="headerlink" href="#aside-lambda-calculus-and-the-power-of-the-lambda-expression" title="Permalink to this headline">¶</a></h2>
+<h2>2.2.5. Aside: Lambda Calculus and the Power of the Lambda Expression<a class="headerlink" href="#aside-lambda-calculus-and-the-power-of-the-lambda-expression" title="Permalink to this headline">¶</a></h2>
+<p>While the expressions that we have introduced so far may seem like a very small
+subset of a programming language like Python, it turns out that they are very
+powerful. <a class="reference external" href="https://en.wikipedia.org/wiki/Alonzo_Church">Alonzo Church</a>
+developed the lambda calculus in 1930 as a general method of describing
+computation.  The lambda calculus consists of three basic building blocks.</p>
+<ol class="arabic simple">
+<li><strong>variables</strong></li>
+<li><strong>lambda expressions/abstractions</strong></li>
+<li><strong>an application rule for lambda expressions</strong></li>
+</ol>
+<p>It has been shown that this system is <strong>Turing complete</strong>, meaning that it can
+be used to describe <strong>every</strong> possible computation that can be performed on a
+computer.  Thus we <em>could</em> simply write all of our programs with the tools
+presented so far ... but we won&#8217;t! Programs written in this style are
+unnecessarily complicated without introducing many of the abstractions that are
+already provided by Python.  For more information about the lambda calculus,
+visit <a class="reference external" href="https://en.wikipedia.org/wiki/Lambda_calculus#History">the Wikipedia page</a>.</p>
 </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 1.3. Transforming Simple Data with Expressions' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 2.1. Transforming Simple Data with Expressions' data-toggle="tooltip">
     <a href="TransformingSimpleDataWithExpressions.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="TransformingSimpleDataWithExpressions.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 1.5. Expressions, Values and Evaluation' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 2.3. Expressions, Values and Evaluation' data-toggle="tooltip" >
     <a href="ExpressionsValuesAndEvaluation.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="ExpressionsValuesAndEvaluation.html" >Next Section - 1.5. Expressions, Values and Evaluation</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="ExpressionsValuesAndEvaluation.html" >Next Section - 2.3. Expressions, Values and Evaluation</a>
 
 <script type="text/javascript">
 

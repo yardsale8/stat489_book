@@ -5,11 +5,9 @@ Introduction to Python
     :caption: Introduction to Python
     :maxdepth: 1
 
+    intro.rst
     WhatIsPython.rst
     DataTypesAndVariables.rst
-    TransformingSimpleDataWithExpressions.rst
-    SavingExpressionsForLaterExecution.rst
-    ExpressionsValuesAndEvaluation.rst
-    StatementsWhenExpressionsAreNotEnough.rst
-    PythonAsAnObjectOrientedLanguage.rst
     SharingAndReusingCodeWithModules.rst
+    PythonAsAnObjectOrientedLanguage.rst
+    Exercises.rst

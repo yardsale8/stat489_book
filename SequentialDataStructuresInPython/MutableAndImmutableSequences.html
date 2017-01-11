@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.5. Mutable and Immutable Sequences &mdash; Runestone Interactive Overview</title>
+    <title>3.5. Mutable and Immutable Sequences &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="2. Sequential Data Structures in Python" href="toctree.html" />
-    <link rel="next" title="2.6. Referenes to Sequences" href="ReferencesToSequences.html" />
-    <link rel="prev" title="2.4. Asking Boolean Questions about Sequences" href="AskingBooleanQuestionsAboutSequences.html" />
+    <link rel="up" title="3. Sequential Data Structures in Python" href="toctree.html" />
+    <link rel="next" title="3.6. Referenes to Sequences" href="ReferencesToSequences.html" />
+    <link rel="prev" title="3.4. Asking Boolean Questions about Sequences" href="AskingBooleanQuestionsAboutSequences.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,12 +263,10 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">2.5. Mutable and Immutable Sequences</a><ul>
-<li><a class="reference internal" href="#strings-are-immutable">2.5.1. Strings are Immutable</a></li>
-<li><a class="reference internal" href="#lists-are-mutable">2.5.2. Lists are Mutable</a></li>
-<li><a class="reference internal" href="#list-deletion">2.5.3. List Deletion</a></li>
-<li><a class="reference internal" href="#tuples-and-mutability">2.5.4. Tuples and Mutability</a></li>
-<li><a class="reference internal" href="#immutable-data-structures-with-pyrsistent">2.5.5. Immutable Data Structures with <cite>pyrsistent</cite></a></li>
+<li><a class="reference internal" href="#">3.5. Mutable and Immutable Sequences</a><ul>
+<li><a class="reference internal" href="#strings-and-tuples-are-immutable">3.5.1. Strings and Tuples are Immutable</a></li>
+<li><a class="reference internal" href="#lists-are-mutable">3.5.2. Lists are Mutable</a></li>
+<li><a class="reference internal" href="#immutable-and-persistent-data-structures-with-pyrsistent">3.5.3. Immutable and Persistent Data Structures with <code class="docutils literal"><span class="pre">pyrsistent</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -278,13 +276,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 2.4. Asking Boolean Questions about Sequences" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 3.4. Asking Boolean Questions about Sequences" data-toggle="tooltip">
     <a href="AskingBooleanQuestionsAboutSequences.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 2.6. Referenes to Sequences' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 3.6. Referenes to Sequences' data-toggle="tooltip" >
     <a href="ReferencesToSequences.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -316,35 +314,94 @@
 <div class="container" id="main-content">
   
   <div class="section" id="mutable-and-immutable-sequences">
-<h1>2.5. Mutable and Immutable Sequences<a class="headerlink" href="#mutable-and-immutable-sequences" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="strings-are-immutable">
-<h2>2.5.1. Strings are Immutable<a class="headerlink" href="#strings-are-immutable" title="Permalink to this headline">¶</a></h2>
-<p>One final thing that makes strings different from some other Python collection types is that
-you are not allowed to modify the individual characters in the collection.  It is tempting to use the <code class="docutils literal"><span class="pre">[]</span></code> operator on the left side of an assignment,
-with the intention of changing a character in a string.  For example, in the following code, we would like to change the first letter of <code class="docutils literal"><span class="pre">greeting</span></code>.</p>
+<h1>3.5. Mutable and Immutable Sequences<a class="headerlink" href="#mutable-and-immutable-sequences" title="Permalink to this headline">¶</a></h1>
+<p>We have seen that in many ways lists and strings are similar, but there is a
+major distinction between these containers.  In this section, we introduce the
+idea for <em>mutable</em> and <em>immutable</em> sequences and reconsider lists, strings and
+tuples in this light.</p>
+<div class="section" id="strings-and-tuples-are-immutable">
+<h2>3.5.1. Strings and Tuples are Immutable<a class="headerlink" href="#strings-and-tuples-are-immutable" title="Permalink to this headline">¶</a></h2>
+<p>One final thing that makes strings different from lists is that you are not
+allowed to modify the individual characters in the collection.  It is tempting
+to use the <code class="docutils literal"><span class="pre">[]</span></code> operator on the left side of an assignment, with the intention
+of changing a character in a string.  For example, in the following code, we
+would like to change the first letter of <code class="docutils literal"><span class="pre">greeting</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">greeting</span> <span class="o">=</span> <span class="s2">&quot;Hello, world!&quot;</span>
 
-<textarea data-component="activecode" id=cg08_imm1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-greeting = "Hello, world!"
-greeting[0] = 'J'            # ERROR!
-print(greeting)
-</textarea>
+<span class="gp">In [2]: </span><span class="n">greeting</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;J&#39;</span>            <span class="c1"># ERROR!</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-2-fe47087f0508&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">greeting</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;J&#39;</span>            <span class="c1"># ERROR!</span>
+
+<span class="ne">TypeError</span>: &#39;str&#39; object does not support item assignment
+
+<span class="gp">In [3]: </span><span class="n">greeting</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Out[3]: &#39;Hello, world!&#39;</span>
+</pre></div>
+</div>
 <p>Instead of producing the output <code class="docutils literal"><span class="pre">Jello,</span> <span class="pre">world!</span></code>, this code produces the
 runtime error <code class="docutils literal"><span class="pre">TypeError:</span> <span class="pre">'str'</span> <span class="pre">object</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">support</span> <span class="pre">item</span> <span class="pre">assignment</span></code>.</p>
 <p>Strings are <strong>immutable</strong>, which means you cannot change an existing string. The
 best you can do is create a new string that is a variation on the original.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">greeting</span> <span class="o">=</span> <span class="s2">&quot;Hello, world!&quot;</span>
 
-<textarea data-component="activecode" id=ch08_imm2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-greeting = "Hello, world!"
-newGreeting = 'J' + greeting[1:]
-print(newGreeting)
-print(greeting)            # same as it was
-</textarea>
+<span class="gp">In [5]: </span><span class="n">newGreeting</span> <span class="o">=</span> <span class="s1">&#39;J&#39;</span> <span class="o">+</span> <span class="n">greeting</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+<span class="gp">In [6]: </span><span class="n">newGreeting</span>
+<span class="gh">Out[6]: </span><span class="go">&#39;Jello, world!&#39;</span>
+
+<span class="gp">In [7]: </span><span class="n">greeting</span>            <span class="c1"># same as it was</span>
+<span class="go">                        Out[7]: &#39;Hello, world!&#39;</span>
+</pre></div>
+</div>
 <p>The solution here is to concatenate a new first letter onto a slice of
 <code class="docutils literal"><span class="pre">greeting</span></code>. This operation has no effect on the original string.</p>
+<p>Unlike lists, however, tuples are immutable.  As with strings, if we try to use
+item assignment to modify one of the elements of the tuple, we get an error.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">julia</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-8-4a62bf349745&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">julia</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
+
+<span class="ne">NameError</span>: name &#39;julia&#39; is not defined
+</pre></div>
+</div>
+<p>Of course, even if we can&#8217;t modify the elements of a tuple, we can make a
+variable reference a new tuple holding different information.  To construct the
+new tuple, it is convenient that we can slice parts of the old tuple and join up
+the bits to make the new tuple.  So <code class="docutils literal"><span class="pre">julia</span></code> has a new recent film, and we
+might want to change her tuple.  We can easily slice off the parts we want and
+concatenate them with the new tuple.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">julia</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Julia&quot;</span><span class="p">,</span> <span class="s2">&quot;Roberts&quot;</span><span class="p">,</span> <span class="mi">1967</span><span class="p">,</span> <span class="s2">&quot;Duplicity&quot;</span><span class="p">,</span> <span class="mi">2009</span><span class="p">,</span> <span class="s2">&quot;Actress&quot;</span><span class="p">,</span> <span class="s2">&quot;Atlanta, Georgia&quot;</span><span class="p">)</span>
+
+<span class="gp">In [10]: </span><span class="n">julia</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gh">Out[10]: </span><span class="go">1967</span>
+
+<span class="gp">In [11]: </span><span class="n">julia</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="go">              Out[11]: (1967, &#39;Duplicity&#39;, 2009, &#39;Actress&#39;)</span>
+
+<span class="gp">In [12]: </span><span class="nb">len</span><span class="p">(</span><span class="n">julia</span><span class="p">)</span>
+<span class="go">                                                            Out[12]: 7</span>
+
+<span class="gp">In [13]: </span><span class="n">julia</span> <span class="o">=</span> <span class="n">julia</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;Eat Pray Love&quot;</span><span class="p">,</span> <span class="mi">2010</span><span class="p">)</span> <span class="o">+</span> <span class="n">julia</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span>
+
+<span class="gp">In [14]: </span><span class="n">julia</span>
+<span class="gh">Out[14]: </span><span class="go"></span>
+<span class="go">(&#39;Julia&#39;,</span>
+<span class="go"> &#39;Roberts&#39;,</span>
+<span class="go"> 1967,</span>
+<span class="go"> &#39;Eat Pray Love&#39;,</span>
+<span class="go"> 2010,</span>
+<span class="go"> &#39;Actress&#39;,</span>
+<span class="go"> &#39;Atlanta, Georgia&#39;)</span>
+</pre></div>
+</div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_7_1">
-            <p>rec-5-21: What is printed by the following statements:</p>
+            <p>intro-12-408: What is printed by the following statements:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;Ball&quot;</span>
 <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -359,32 +416,37 @@ print(greeting)            # same as it was
             
 
             </ul>
-            <span class="target" id="index-0"></span></div>
+            </div>
 <div class="section" id="lists-are-mutable">
-<span id="index-1"></span><h2>2.5.2. Lists are Mutable<a class="headerlink" href="#lists-are-mutable" title="Permalink to this headline">¶</a></h2>
-<p>Unlike strings, lists are <strong>mutable</strong>.  This means we can change an item in a list by accessing
-it directly as part of the assignment statement. Using the indexing operator (square brackets) on the left side of an assignment, we can
-update one of the list items.</p>
+<h2>3.5.2. Lists are Mutable<a class="headerlink" href="#lists-are-mutable" title="Permalink to this headline">¶</a></h2>
+<p>Unlike strings and tuples, lists are <strong>mutable</strong>.  This means we can change an
+item in a list by accessing it directly as part of the assignment statement.
+Using the indexing operator (square brackets) on the left side of an assignment,
+we can update one of the list items.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">fruit</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
 
-<textarea data-component="activecode" id=ch09_7 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-fruit = ["banana", "apple", "cherry"]
-print(fruit)
+<span class="gp">In [16]: </span><span class="n">fruit</span>
+<span class="gh">Out[16]: </span><span class="go">[&#39;banana&#39;, &#39;apple&#39;, &#39;cherry&#39;]</span>
 
-fruit[0] = "pear"
-fruit[-1] = "orange"
-print(fruit)
-</textarea>
-<p>An
-assignment to an element of a list is called <strong>item assignment</strong>. Item
-assignment does not work for strings.  Recall that strings are immutable.</p>
-<p>Here is the same example in codelens so that you can step through the statements and see the changes to the list elements.</p>
+<span class="gp">In [17]: </span><span class="n">fruit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pear&quot;</span>
+
+<span class="gp">In [18]: </span><span class="n">fruit</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span>
+
+<span class="gp">In [19]: </span><span class="n">fruit</span>
+<span class="gh">Out[19]: </span><span class="go">[&#39;pear&#39;, &#39;apple&#39;, &#39;orange&#39;]</span>
+</pre></div>
+</div>
+<p>An assignment to an element of a list is called <strong>item assignment</strong>. Item
+assignment does not work for strings or tuples, as they are both immutable.</p>
+<p>Here is the same example in codelens so that you can step through the statements
+and see the changes to the list elements.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="item_assign"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (item_assign)</span> </p>
 </div>
 <script type="text/javascript">
-var item_assign_trace = {"code": "fruit = [\"banana\", \"apple\", \"cherry\"]\n\nfruit[0] = \"pear\"\nfruit[-1] = \"orange\"", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["fruit"], "heap": {"1": ["LIST", "banana", "apple", "cherry"]}, "globals": {"fruit": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 4, "stdout": "", "ordered_globals": ["fruit"], "heap": {"1": ["LIST", "pear", "apple", "cherry"]}, "globals": {"fruit": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 4, "stdout": "", "ordered_globals": ["fruit"], "heap": {"1": ["LIST", "pear", "apple", "orange"]}, "globals": {"fruit": ["REF", 1]}, "event": "return"}]};
+var item_assign_trace = {"code": "fruit = [\"banana\", \"apple\", \"cherry\"]\n\nfruit[0] = \"pear\"\nfruit[-1] = \"orange\"", "trace": [{"heap": {}, "ordered_globals": [], "func_name": "<module>", "globals": {}, "event": "step_line", "stack_to_render": [], "line": 1, "stdout": ""}, {"heap": {"1": ["LIST", "banana", "apple", "cherry"]}, "ordered_globals": ["fruit"], "func_name": "<module>", "globals": {"fruit": ["REF", 1]}, "event": "step_line", "stack_to_render": [], "line": 3, "stdout": ""}, {"heap": {"1": ["LIST", "pear", "apple", "cherry"]}, "ordered_globals": ["fruit"], "func_name": "<module>", "globals": {"fruit": ["REF", 1]}, "event": "step_line", "stack_to_render": [], "line": 4, "stdout": ""}, {"heap": {"1": ["LIST", "pear", "apple", "orange"]}, "ordered_globals": ["fruit"], "func_name": "<module>", "globals": {"fruit": ["REF", 1]}, "event": "return", "stack_to_render": [], "line": 4, "stdout": ""}]};
 var item_assign_vis;
 
 $(document).ready(function() {
@@ -424,33 +486,42 @@ $(window).resize(function() {
 });
 </script>
 <p>By combining assignment with the slice operator we can update several elements at once.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">]</span>
 
-<textarea data-component="activecode" id=ch09_8 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-alist = ['a', 'b', 'c', 'd', 'e', 'f']
-alist[1:3] = ['x', 'y']
-print(alist)
-</textarea>
+<span class="gp">In [21]: </span><span class="n">alist</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span>
+
+<span class="gp">In [22]: </span><span class="n">alist</span>
+<span class="gh">Out[22]: </span><span class="go">[&#39;a&#39;, &#39;x&#39;, &#39;y&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]</span>
+</pre></div>
+</div>
 <p>We can also remove elements from a list by assigning the empty list to them.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">]</span>
 
-<textarea data-component="activecode" id=ch09_9 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-alist = ['a', 'b', 'c', 'd', 'e', 'f']
-alist[1:3] = []
-print(alist)
-</textarea>
-<p>We can even insert elements into a list by squeezing them into an empty slice at the
-desired location.</p>
+<span class="gp">In [24]: </span><span class="n">alist</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
-<textarea data-component="activecode" id=ch09_10 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-alist = ['a', 'd', 'f']
-alist[1:1] = ['b', 'c']
-print(alist)
-alist[4:4] = ['e']
-print(alist)
-</textarea>
+<span class="gp">In [25]: </span><span class="n">alist</span>
+<span class="gh">Out[25]: </span><span class="go">[&#39;a&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]</span>
+</pre></div>
+</div>
+<p>We can even insert elements into a list by squeezing them into an empty slice at
+the desired location.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">]</span>
+
+<span class="gp">In [27]: </span><span class="n">alist</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span>
+
+<span class="gp">In [28]: </span><span class="n">alist</span>
+<span class="gh">Out[28]: </span><span class="go">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;f&#39;]</span>
+
+<span class="gp">In [29]: </span><span class="n">alist</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;e&#39;</span><span class="p">]</span>
+
+<span class="gp">In [30]: </span><span class="n">alist</span>
+<span class="gh">Out[30]: </span><span class="go">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]</span>
+</pre></div>
+</div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_7_1">
-            <p>rec-5-22: What is printed by the following statements?</p>
+            <p>intro-12-409: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">alist</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="k">print</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span>
@@ -466,29 +537,94 @@ print(alist)
 
             </ul>
             </div>
-<div class="section" id="list-deletion">
-<span id="index-2"></span><h2>2.5.3. List Deletion<a class="headerlink" href="#list-deletion" title="Permalink to this headline">¶</a></h2>
-<p>Using slices to delete list elements can be awkward and therefore error-prone.
-Python provides an alternative that is more readable.
-The <code class="docutils literal"><span class="pre">del</span></code> statement removes an element from a list by using its position.</p>
-
-<textarea data-component="activecode" id=ch09_11 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-a = ['one', 'two', 'three']
-del a[1]
-print(a)
-
-alist = ['a', 'b', 'c', 'd', 'e', 'f']
-del alist[1:5]
-print(alist)
-</textarea>
-<p>As you might expect, <code class="docutils literal"><span class="pre">del</span></code> handles negative indices and causes a runtime
-error if the index is out of range.
-In addition, you can use a slice as an index for <code class="docutils literal"><span class="pre">del</span></code>.
-As usual, slices select all the elements up to, but not including, the second
-index.</p>
+<div class="section" id="immutable-and-persistent-data-structures-with-pyrsistent">
+<h2>3.5.3. Immutable and Persistent Data Structures with <code class="docutils literal"><span class="pre">pyrsistent</span></code><a class="headerlink" href="#immutable-and-persistent-data-structures-with-pyrsistent" title="Permalink to this headline">¶</a></h2>
+<p>The act of <em>mutating</em> a data structure is common in both imperative and object
+oriented programming and can be lead to very efficient algorithms in terms of
+memory usage.</p>
+<p>As noted before, this textbook focuses on functional programming, which tends to
+avoid mutation as much as possible.  Instead, in functional programs data
+structures passing through functions are transformed into <strong>new data
+structures</strong> in the same way that the slice operator returns a new list or
+string.</p>
+<p>Unfortunately, this can be inefficient unless we use specialized data structures
+that have been designed with this in mind.  Consequently, many modern functional
+programming languages such as Clojure use data structures that are immutable and
+persistent.  A <strong>persistent</strong> data structure is designed in such a way that it
+can be transformed efficiently through operations such as assignment with
+indexing and slicing.</p>
+<p>In Python, the <code class="docutils literal"><span class="pre">pyrsistent</span></code> module provides a number of efficient persistent
+data structures that work well when using the functional programming paradigm.</p>
+<p>You can install this module from inside IPython using the following <code class="docutils literal"><span class="pre">!pip</span></code>
+command.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="o">!</span>pip install pyrsistent
+<span class="go">Collecting pyrsistent</span>
+<span class="go">  Downloading pyrsistent-0.12.0.tar.gz (91kB)</span>
+<span class="go">    100% |████████████████████████████████| 92kB 570kB/s</span>
+<span class="go">Requirement already satisfied (use --upgrade to upgrade): six in /Users/tiverson/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages (from pyrsistent)</span>
+<span class="go">Installing collected packages: pyrsistent</span>
+<span class="go">  Running setup.py install for pyrsistent ... done</span>
+<span class="go">Successfully installed pyrsistent-0.12.0</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
+<p class="last">You only need to install a module once in a given python enviroment.  After
+the initial installation, the module will continue to remain avaiable.</p>
+</div>
+<p>The <code class="docutils literal"><span class="pre">pvector</span></code> function from the <code class="docutils literal"><span class="pre">pyrsistent</span></code> module is an immutable
+persistent version of a list.  First, we illustrate the immutability of the
+<code class="docutils literal"><span class="pre">pvector</span></code> by trying to assign a new value at index 0.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="kn">from</span> <span class="nn">pyrsistent</span> <span class="kn">import</span> <span class="n">pvector</span>
+
+<span class="gp">In [32]: </span><span class="n">fruit</span> <span class="o">=</span> <span class="n">pvector</span><span class="p">([</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">])</span>
+
+<span class="gp">In [33]: </span><span class="n">fruit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pear&quot;</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-33-13775da5cf96&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fruit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pear&quot;</span>
+
+<span class="ne">TypeError</span>: &#39;pvectorc.PVector&#39; object does not support item assignment
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">pvector</span></code> class provides a method called <code class="docutils literal"><span class="pre">set</span></code> that allows us to
+(efficiently) construct a new <code class="docutils literal"><span class="pre">pvector</span></code> with a new value assigned to a
+specific instance.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">new_fruit</span> <span class="o">=</span> <span class="n">fruit</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;pear&quot;</span><span class="p">)</span>
+
+<span class="gp">In [35]: </span><span class="n">new_fruit</span>
+<span class="gh">Out[35]: </span><span class="go">pvector([&#39;pear&#39;, &#39;apple&#39;, &#39;cherry&#39;])</span>
+</pre></div>
+</div>
+<p>Recall that the <code class="docutils literal"><span class="pre">id</span></code> function gives a unique id number to each value in
+memory.  We can use <code class="docutils literal"><span class="pre">id</span></code> to verify that <code class="docutils literal"><span class="pre">new_fruit</span></code> is indeed a new
+<code class="docutils literal"><span class="pre">pvector</span></code>, different than the original <code class="docutils literal"><span class="pre">fruit</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="nb">id</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">new_fruit</span><span class="p">)</span>
+<span class="gh">Out[36]: </span><span class="go">False</span>
+</pre></div>
+</div>
+<p>Other efficient features of the <code class="docutils literal"><span class="pre">pvector</span></code> include using <code class="docutils literal"><span class="pre">append</span></code> to add to
+the end of the vector, as well as slicing the vector.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">fruit2</span> <span class="o">=</span> <span class="n">fruit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;watermelon&quot;</span><span class="p">)</span>
+
+<span class="gp">In [38]: </span><span class="n">fruit</span>  <span class="c1"># The original fruit</span>
+<span class="gh">Out[38]: </span><span class="go">pvector([&#39;banana&#39;, &#39;apple&#39;, &#39;cherry&#39;])</span>
+
+<span class="gp">In [39]: </span><span class="n">fruit2</span>
+<span class="go">                                                Out[39]: pvector([&#39;banana&#39;, &#39;apple&#39;, &#39;cherry&#39;, &#39;watermelon&#39;])</span>
+
+<span class="gp">In [40]: </span><span class="nb">id</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span>  <span class="c1"># Not the same vector</span>
+<span class="go">                                                                                                              Out[40]: True</span>
+</pre></div>
+</div>
+<p>When writing programs in the functional style, consider using persistent and
+immutable data structures.  We will explore other data structures from this
+module in later sections on associative data structures and recursion.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This workspace is provided for your convenience.  You can use this
+activecode window to try out anything you like.</p>
 
 <textarea data-component="activecode" id=scratch_09_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
 
@@ -496,84 +632,24 @@ index.</p>
 </textarea>
 </div>
 </div>
-<div class="section" id="tuples-and-mutability">
-<span id="index-3"></span><h2>2.5.4. Tuples and Mutability<a class="headerlink" href="#tuples-and-mutability" title="Permalink to this headline">¶</a></h2>
-<p>So far you have seen two types of sequential collections: strings, which are made up of
-characters; and lists, which are made up of elements of any type.  One of the
-differences we noted is that the elements of a list can be modified, but the
-characters in a string cannot. In other words, strings are <strong>immutable</strong> and
-lists are <strong>mutable</strong>.</p>
-<p>A <strong>tuple</strong>, like a list, is a sequence of items of any type. Unlike lists,
-however, tuples are immutable. Syntactically, a tuple is a comma-separated
-sequence of values.  Although it is not necessary, it is conventional to
-enclose tuples in parentheses:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">julia</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Julia&quot;</span><span class="p">,</span> <span class="s2">&quot;Roberts&quot;</span><span class="p">,</span> <span class="mi">1967</span><span class="p">,</span> <span class="s2">&quot;Duplicity&quot;</span><span class="p">,</span> <span class="mi">2009</span><span class="p">,</span> <span class="s2">&quot;Actress&quot;</span><span class="p">,</span> <span class="s2">&quot;Atlanta, Georgia&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Tuples are useful for representing what other languages often call <em>records</em> &#8212;
-some related information that belongs together, like your student record.  There is
-no description of what each of these <em>fields</em> means, but we can guess.  A tuple
-lets us &#8220;chunk&#8221; together related information and use it as a single thing.</p>
-<p>Tuples support the same sequence operations as strings and
-lists.
-For example, the index operator selects an element from a tuple.</p>
-<p>As with strings, if we try to use item assignment to modify one of the elements of the
-tuple, we get an error.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
-<span class="ne">TypeError</span><span class="p">:</span> <span class="s1">&#39;tuple&#39;</span> <span class="nb">object</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">support</span> <span class="n">item</span> <span class="n">assignment</span>
-</pre></div>
-</div>
-<p>Of course, even if we can&#8217;t modify the elements of a tuple, we can make a variable
-reference a new tuple holding different information.  To construct the new tuple,
-it is convenient that we can slice parts of the old tuple and join up the
-bits to make the new tuple.  So <code class="docutils literal"><span class="pre">julia</span></code> has a new recent film, and we might want
-to change her tuple.  We can easily slice off the parts we want and concatenate them with
-the new tuple.</p>
-
-<textarea data-component="activecode" id=ch09_tuple1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-julia = ("Julia", "Roberts", 1967, "Duplicity", 2009, "Actress", "Atlanta, Georgia")
-print(julia[2])
-print(julia[2:6])
-
-print(len(julia))
-
-julia = julia[:3] + ("Eat Pray Love", 2010) + julia[5:]
-print(julia)
-</textarea>
-<p>To create a tuple with a single element (but you&#8217;re probably not likely
-to do that too often), we have to include the final comma, because without
-the final comma, Python treats the <code class="docutils literal"><span class="pre">(5)</span></code> below as an integer in parentheses:</p>
-
-<textarea data-component="activecode" id=chp09_tuple2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-tup = (5,)
-print(type(tup))
-
-x = (5)
-print(type(x))
-</textarea>
-</div>
-<div class="section" id="immutable-data-structures-with-pyrsistent">
-<span id="index-4"></span><h2>2.5.5. Immutable Data Structures with <cite>pyrsistent</cite><a class="headerlink" href="#immutable-data-structures-with-pyrsistent" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
-</div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 2.4. Asking Boolean Questions about Sequences' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 3.4. Asking Boolean Questions about Sequences' data-toggle="tooltip">
     <a href="AskingBooleanQuestionsAboutSequences.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="AskingBooleanQuestionsAboutSequences.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 2.6. Referenes to Sequences' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 3.6. Referenes to Sequences' data-toggle="tooltip" >
     <a href="ReferencesToSequences.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="ReferencesToSequences.html" >Next Section - 2.6. Referenes to Sequences</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="ReferencesToSequences.html" >Next Section - 3.6. Referenes to Sequences</a>
 
 <script type="text/javascript">
 

@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.3. Accessing Sequence Data &mdash; Runestone Interactive Overview</title>
+    <title>3.3. Accessing Sequence Data &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="2. Sequential Data Structures in Python" href="toctree.html" />
-    <link rel="next" title="2.4. Asking Boolean Questions about Sequences" href="AskingBooleanQuestionsAboutSequences.html" />
-    <link rel="prev" title="2.2. Operations On Sequences" href="OperationsOnSequences.html" />
+    <link rel="up" title="3. Sequential Data Structures in Python" href="toctree.html" />
+    <link rel="next" title="3.4. Asking Boolean Questions about Sequences" href="AskingBooleanQuestionsAboutSequences.html" />
+    <link rel="prev" title="3.2. Operations On Sequences" href="OperationsOnSequences.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,12 +263,10 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">2.3. Accessing Sequence Data</a><ul>
-<li><a class="reference internal" href="#index-operator-working-with-the-characters-of-a-string">2.3.1. Index Operator: Working with the Characters of a String</a></li>
-<li><a class="reference internal" href="#accessing-elements">2.3.2. Accessing Elements</a></li>
-<li><a class="reference internal" href="#the-slice-operator">2.3.3. The Slice Operator</a></li>
-<li><a class="reference internal" href="#list-slices">2.3.4. List Slices</a></li>
-<li><a class="reference internal" href="#nested-lists">2.3.5. Nested Lists</a></li>
+<li><a class="reference internal" href="#">3.3. Accessing Sequence Data</a><ul>
+<li><a class="reference internal" href="#index-operator">3.3.1. Index Operator</a></li>
+<li><a class="reference internal" href="#the-slice-operator">3.3.2. The Slice Operator</a></li>
+<li><a class="reference internal" href="#nested-lists">3.3.3. Nested Lists</a></li>
 </ul>
 </li>
 </ul>
@@ -278,13 +276,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 2.2. Operations On Sequences" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 3.2. Operations On Sequences" data-toggle="tooltip">
     <a href="OperationsOnSequences.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 2.4. Asking Boolean Questions about Sequences' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 3.4. Asking Boolean Questions about Sequences' data-toggle="tooltip" >
     <a href="AskingBooleanQuestionsAboutSequences.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -316,42 +314,92 @@
 <div class="container" id="main-content">
   
   <div class="section" id="accessing-sequence-data">
-<h1>2.3. Accessing Sequence Data<a class="headerlink" href="#accessing-sequence-data" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="index-operator-working-with-the-characters-of-a-string">
-<h2>2.3.1. Index Operator: Working with the Characters of a String<a class="headerlink" href="#index-operator-working-with-the-characters-of-a-string" title="Permalink to this headline">¶</a></h2>
+<h1>3.3. Accessing Sequence Data<a class="headerlink" href="#accessing-sequence-data" title="Permalink to this headline">¶</a></h1>
+<p>As lists and strings are <em>collections</em> of items, it would be useful to have a
+method for accessing the individual elements of the sequence.  In this section
+we introduce both methods of accessing data from Python sequences: <em>indexing</em> for
+a single element and <em>slicing</em> for a sub-sequence.</p>
+<div class="section" id="index-operator">
+<h2>3.3.1. Index Operator<a class="headerlink" href="#index-operator" title="Permalink to this headline">¶</a></h2>
 <p>The <strong>indexing operator</strong> (Python uses square brackets to enclose the index)
-selects a single character from a string.  The characters are accessed by their position or
-index value.  For example, in the string shown below, the 14 characters are indexed left to right from postion 0 to position 13.</p>
+selects a single character from a string.  The characters are accessed by their
+position or index value.  For example, in the string shown below, the 14
+characters are indexed left to right from position 0 to position 13.</p>
 <img alt="index values" src="../_images/indexvalues.png" />
-<p>It is also the case that the positions are named from right to left using negative numbers where -1 is the rightmost
-index and so on.
-Note that the character at index 6 (or -8) is the blank character.</p>
+<p>It is also the case that the positions are named from right to left using
+negative numbers where -1 is the rightmost index and so on.  Note that the
+character at index 6 (or -8) is the blank character.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">school</span> <span class="o">=</span> <span class="s2">&quot;Luther College&quot;</span>
 
-<textarea data-component="activecode" id=chp08_index1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-school = "Luther College"
-m = school[2]
-print(m)
+<span class="gp">In [2]: </span><span class="n">school</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gh">Out[2]: </span><span class="go">&#39;t&#39;</span>
 
-lastchar = school[-1]
-print(lastchar)
-</textarea>
-<p>The expression <code class="docutils literal"><span class="pre">school[2]</span></code> selects the character at index 2 from <code class="docutils literal"><span class="pre">school</span></code>, and creates a new
-string containing just this one character. The variable <code class="docutils literal"><span class="pre">m</span></code> refers to the result.</p>
-<p>Remember that computer scientists often start counting
-from zero. The letter at index zero of <code class="docutils literal"><span class="pre">&quot;Luther</span> <span class="pre">College&quot;</span></code> is <code class="docutils literal"><span class="pre">L</span></code>.  So at
-position <code class="docutils literal"><span class="pre">[2]</span></code> we have the letter <code class="docutils literal"><span class="pre">t</span></code>.</p>
-<p>If you want the zero-eth letter of a string, you just put 0, or any expression
-with the value 0, in the brackets.  Give it a try.</p>
+<span class="gp">In [3]: </span><span class="n">school</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">            Out[3]: &#39;e&#39;</span>
+</pre></div>
+</div>
+<p>The expression <code class="docutils literal"><span class="pre">school[2]</span></code> selects the character at index 2 from <code class="docutils literal"><span class="pre">school</span></code>,
+and creates a new string containing just this one character. The variable <code class="docutils literal"><span class="pre">m</span></code>
+refers to the result.</p>
 <p>The expression in brackets is called an <strong>index</strong>. An index specifies a member
-of an ordered collection.  In this case the collection of characters in the string. The index
-<em>indicates</em> which character you want. It can be any integer
+of an ordered collection.  In this case the collection of characters in the
+string. The index <em>indicates</em> which character you want. It can be any integer
 expression so long as it evaluates to a valid index value.</p>
-<p>Note that indexing returns a <em>string</em> &#8212; Python has no special type for a single character.
-It is just a string of length 1.</p>
+<p>Note that indexing returns a <em>string</em> &#8212; Python has no special type for a
+single character.  It is just a string of length 1.</p>
+<p>As shown above, the syntax for the indexing operator in Python uses brackets to
+surround the desired index.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">SEQUENCE</span><span class="p">[</span> <span class="n">INDEX</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>Python uses the following rules to evaluate an indexing expression.</p>
+<ol class="arabic simple">
+<li>Evaluate SEQUENCE</li>
+<li>Evaluate INDEX</li>
+<li>Get and return the index element.</li>
+</ol>
+<p>In the process, the interpreter will make sure that SEQUENCE evaluates to a
+list and the INDEX is in the proper range of values.</p>
+<p>Note that SEQUENCE can be any python expression that evaluates to a sequence, be that
+a variable that refers to a sequence, the literal expression of a sequence, or a
+function that returns a sequence.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [5]: </span><span class="n">my_list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># Sequence stored in a variable</span>
+<span class="gh">Out[5]: </span><span class="go">3</span>
+
+<span class="gp">In [6]: </span><span class="s2">&quot;aeiou&quot;</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Indexing with the literal string expression</span>
+<span class="go">          Out[6]: &#39;e&#39;</span>
+
+<span class="gp">In [7]: </span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;***&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;***&quot;</span>
+
+<span class="gp">In [8]: </span><span class="n">f</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="gh">Out[8]: </span><span class="go">&#39;***12***&#39;</span>
+
+<span class="gp">In [9]: </span><span class="n">f</span><span class="p">(</span><span class="mi">12</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>  <span class="c1"># indexing a string returns by a function</span>
+<span class="go">                   Out[9]: &#39;2&#39;</span>
+</pre></div>
+</div>
+<p>Similarly, the INDEX can be any expression that evaluates to an integer,
+provided the result in the right range for the sequence in questions.  Remember
+that computer scientists often start counting from zero. The letter at index
+zero of <code class="docutils literal"><span class="pre">&quot;Luther</span> <span class="pre">College&quot;</span></code> is <code class="docutils literal"><span class="pre">L</span></code>.  So at position <code class="docutils literal"><span class="pre">2</span></code> we have the letter
+<code class="docutils literal"><span class="pre">t</span></code>.</p>
+<p>For example, if you want the zero-eth letter of a string, you just put 0, or any
+expression with the value 0, in the brackets.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">school</span> <span class="o">=</span> <span class="s2">&quot;Luther College&quot;</span>
+
+<span class="gp">In [11]: </span><span class="n">school</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gh">Out[11]: </span><span class="go">&#39;L&#39;</span>
+
+<span class="gp">In [12]: </span><span class="n">school</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+<span class="go">             Out[12]: &#39;L&#39;</span>
+</pre></div>
+</div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_2_1">
-            <p>rec-5-5: What is printed by the following statements?</p>
+            <p>intro-12-350: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python rocks&quot;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
@@ -369,7 +417,7 @@ It is just a string of length 1.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_2_2">
-            <p>rec-5-6: What is printed by the following statements?</p>
+            <p>intro-12-351: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python rocks&quot;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
@@ -385,27 +433,9 @@ It is just a string of length 1.</p>
             
 
             </ul>
-            </div>
-<div class="section" id="accessing-elements">
-<h2>2.3.2. Accessing Elements<a class="headerlink" href="#accessing-elements" title="Permalink to this headline">¶</a></h2>
-<p>The syntax for accessing the elements of a list is the same as the syntax for
-accessing the characters of a string.  We use the index operator ( <code class="docutils literal"><span class="pre">[]</span></code> &#8211; not to
-be confused with an empty list). The expression inside the brackets specifies
-the index. Remember that the indices start at 0.  Any integer expression can be used
-as an index and as with strings, negative index values will locate items from the right instead
-of from the left.</p>
-
-<textarea data-component="activecode" id=chp09_02 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-numbers = [17, 123, 87, 34, 66, 8398, 44]
-print(numbers[2])
-print(numbers[9 - 8])
-print(numbers[-2])
-print(numbers[len(numbers) - 1])
-</textarea>
-<p><strong>Check your understanding</strong></p>
-
+            
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_3_1">
-            <p>rec-5-7: What is printed by the following statements?</p>
+            <p>intro-12-352: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="p">[</span> <span class="p">],</span> <span class="mf">3.14</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">alist</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
@@ -421,7 +451,7 @@ print(numbers[len(numbers) - 1])
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_3_2">
-            <p>rec-5-8: What is printed by the following statements?</p>
+            <p>intro-12-353: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="p">[</span> <span class="p">],</span> <span class="mf">3.14</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">alist</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
 </pre></div>
@@ -437,7 +467,7 @@ print(numbers[len(numbers) - 1])
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_3_3">
-            <p>rec-5-9: What is printed by the following statements?</p>
+            <p>intro-12-354: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="p">[</span> <span class="p">],</span> <span class="mf">3.14</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">alist</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
@@ -455,36 +485,82 @@ print(numbers[len(numbers) - 1])
             </ul>
             </div>
 <div class="section" id="the-slice-operator">
-<h2>2.3.3. The Slice Operator<a class="headerlink" href="#the-slice-operator" title="Permalink to this headline">¶</a></h2>
+<h2>3.3.2. The Slice Operator<a class="headerlink" href="#the-slice-operator" title="Permalink to this headline">¶</a></h2>
 <p>A substring of a string is called a <strong>slice</strong>. Selecting a slice is similar to
 selecting a character:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">singers</span> <span class="o">=</span> <span class="s2">&quot;Peter, Paul, and Mary&quot;</span>
 
-<textarea data-component="activecode" id=chp08_slice1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-singers = "Peter, Paul, and Mary"
-print(singers[0:5])
-print(singers[7:11])
-print(singers[17:21])
-</textarea>
-<p>The <cite>slice</cite> operator <code class="docutils literal"><span class="pre">[n:m]</span></code> returns the part of the string from the n&#8217;th character
-to the m&#8217;th character, including the first but excluding the last. In other words,  start with the character at index n and
-go up to but do not include the character at index m.
-This
-behavior may seem counter-intuitive but if you recall the <code class="docutils literal"><span class="pre">range</span></code> function, it did not include its end
-point either.</p>
+<span class="gp">In [14]: </span><span class="n">singers</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[14]: </span><span class="go">&#39;Peter&#39;</span>
+
+<span class="gp">In [15]: </span><span class="n">singers</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>
+<span class="go">                 Out[15]: &#39;Paul&#39;</span>
+
+<span class="gp">In [16]: </span><span class="n">singers</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">21</span><span class="p">]</span>
+<span class="go">                                 Out[16]: &#39;Mary&#39;</span>
+</pre></div>
+</div>
+<p>The <cite>slice</cite> operator <code class="docutils literal"><span class="pre">sequence[n:m]</span></code> returns the part of the string from the
+n&#8217;th character to the m&#8217;th character, including the first but excluding the
+last. In other words,  start with the character at index <code class="docutils literal"><span class="pre">n</span></code> and go up to but
+do not include the character at index <code class="docutils literal"><span class="pre">m</span></code>.</p>
 <p>If you omit the first index (before the colon), the slice starts at the
 beginning of the string. If you omit the second index, the slice goes to the
 end of the string.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">fruit</span> <span class="o">=</span> <span class="s2">&quot;banana&quot;</span>
 
-<textarea data-component="activecode" id=chp08_slice2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-fruit = "banana"
-print(fruit[:3])
-print(fruit[3:])
-</textarea>
+<span class="gp">In [18]: </span><span class="n">fruit</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="gh">Out[18]: </span><span class="go">&#39;ban&#39;</span>
+
+<span class="gp">In [19]: </span><span class="n">fruit</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+<span class="go">               Out[19]: &#39;ana&#39;</span>
+</pre></div>
+</div>
 <p>What do you think <code class="docutils literal"><span class="pre">fruit[:]</span></code> means?</p>
+<p>The slice operation also work on lists.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">]</span>
+
+<span class="gp">In [21]: </span><span class="n">a_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="gh">Out[21]: </span><span class="go">[&#39;b&#39;, &#39;c&#39;]</span>
+
+<span class="gp">In [22]: </span><span class="n">a_list</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+<span class="go">                    Out[22]: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span>
+
+<span class="gp">In [23]: </span><span class="n">a_list</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+<span class="go">                                                  Out[23]: [&#39;d&#39;, &#39;e&#39;, &#39;f&#39;]</span>
+
+<span class="gp">In [24]: </span><span class="n">a_list</span><span class="p">[:]</span>
+<span class="go">                                                                           Out[24]: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]</span>
+</pre></div>
+</div>
+<p>The syntax for the <cite>slice</cite> operator is similar to that of the indexing operator
+and uses brackets to surround the desired indexes, but a slice needs to specify
+a starting and ending index</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">SEQUENCE</span><span class="p">[</span><span class="n">STARTING_INDEX</span><span class="p">:</span><span class="n">STOP_BEFORE_INDEX</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Python uses the following rules to evaluate an slicing expression.</p>
+<ol class="arabic simple">
+<li>Evaluate SEQUENCE</li>
+<li>Evaluate STARTING_INDEX, using 0 as the index if omitted.</li>
+<li>Evaluate STOP_BEFORE_INDEX, using len(SEQUENCE) as the index if omitted.</li>
+<li>Get and return the requested sub-sequence of the same type as SEQUENCE</li>
+</ol>
+<p>In the process, the interpreter will make sure that SEQUENCE evaluates to a
+sequence and the indexes are in the proper range of values.  Note integers that
+are larger than the length of the sequence are valid!</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">short_word</span> <span class="o">=</span> <span class="s2">&quot;the&quot;</span>
+
+<span class="gp">In [26]: </span><span class="n">short_word</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="gh">Out[26]: </span><span class="go">&#39;he&#39;</span>
+</pre></div>
+</div>
+<p>Again, the SEQUENCE can be any python expression that evaluates to a sequence
+and the indexes can be any expression that evaluated to an appropriate integer.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_5_1">
-            <p>rec-5-10: What is printed by the following statements?</p>
+            <p>intro-12-355: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python rocks&quot;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
 </pre></div>
@@ -502,7 +578,7 @@ print(fruit[3:])
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_5_2">
-            <p>rec-5-11: What is printed by the following statements?</p>
+            <p>intro-12-356: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python rocks&quot;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
@@ -518,34 +594,9 @@ print(fruit[3:])
             
 
             </ul>
-            <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
-
-<textarea data-component="activecode" id=scratch_08_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-
-
-</textarea>
-</div>
-</div>
-<div class="section" id="list-slices">
-<span id="index-0"></span><h2>2.3.4. List Slices<a class="headerlink" href="#list-slices" title="Permalink to this headline">¶</a></h2>
-<p>The slice operation we saw with strings also work on lists.  Remember that the first index is the starting point for the slice and the second number is one index past the end of the slice (up to but not including that element).  Recall also
-that if you omit the first index (before the colon), the slice starts at the
-beginning of the sequence. If you omit the second index, the slice goes to the
-end of the sequence.</p>
-
-<textarea data-component="activecode" id=chp09_6 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-a_list = ['a', 'b', 'c', 'd', 'e', 'f']
-print(a_list[1:3])
-print(a_list[:4])
-print(a_list[3:])
-print(a_list[:])
-</textarea>
-<p><strong>Check your understanding</strong></p>
-
+            
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_6_1">
-            <p>rec-5-12: What is printed by the following statements?</p>
+            <p>intro-12-357: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="p">[</span> <span class="p">],</span> <span class="mf">3.14</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">alist</span><span class="p">[</span><span class="mi">4</span><span class="p">:])</span>
 </pre></div>
@@ -561,27 +612,33 @@ print(a_list[:])
             </ul>
             </div>
 <div class="section" id="nested-lists">
-<span id="index-1"></span><h2>2.3.5. Nested Lists<a class="headerlink" href="#nested-lists" title="Permalink to this headline">¶</a></h2>
+<h2>3.3.3. Nested Lists<a class="headerlink" href="#nested-lists" title="Permalink to this headline">¶</a></h2>
 <p>A nested list is a list that appears as an element in another list. In this
-list, the element with index 3 is a nested list.
-If we print(<code class="docutils literal"><span class="pre">nested[3]</span></code>), we get <code class="docutils literal"><span class="pre">[10,</span> <span class="pre">20]</span></code>. To extract an element from the
-nested list, we can proceed in two steps.  First, extract the nested list, then extract the item
-of interest.  It is also possible to combine those steps using bracket operators that evaluate from
-left to right.</p>
+list, the element with index 3 is a nested list.  If we <code class="docutils literal"><span class="pre">print(nested[3])</span></code>, we
+get <code class="docutils literal"><span class="pre">[10,</span> <span class="pre">20]</span></code>. To extract an element from the nested list, we can proceed in
+two steps.  First, extract the nested list, then extract the item of interest.
+It is also possible to combine those steps using bracket operators that evaluate
+from left to right.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">nested</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]]</span>
 
-<textarea data-component="activecode" id=chp09_nest data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-nested = ["hello", 2.0, 5, [10, 20]]
-innerlist = nested[3]
-print(innerlist)
-item = innerlist[1]
-print(item)
+<span class="gp">In [28]: </span><span class="n">innerlist</span> <span class="o">=</span> <span class="n">nested</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
-print(nested[3][1])
-</textarea>
-<p id="index-2"><strong>Check your understanding</strong></p>
+<span class="gp">In [29]: </span><span class="n">innerlist</span>
+<span class="gh">Out[29]: </span><span class="go">[10, 20]</span>
+
+<span class="gp">In [30]: </span><span class="n">item</span> <span class="o">=</span> <span class="n">innerlist</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">In [31]: </span><span class="n">item</span>
+<span class="gh">Out[31]: </span><span class="go">20</span>
+
+<span class="gp">In [32]: </span><span class="n">nested</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">            Out[32]: 20</span>
+</pre></div>
+</div>
+<p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_21_1">
-            <p>rec-5-13: What is printed by the following statements?</p>
+            <p>intro-12-358: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">888</span><span class="p">,</span> <span class="mi">999</span><span class="p">]</span> <span class="p">]</span>
 <span class="k">if</span> <span class="n">alist</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
    <span class="k">print</span><span class="p">(</span><span class="n">alist</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
@@ -600,25 +657,34 @@ print(nested[3][1])
             
 
             </ul>
-            <span class="target" id="index-3"></span></div>
+            <div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
+
+<textarea data-component="activecode" id=scratch_08_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
+
+
+</textarea>
+</div>
+</div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 2.2. Operations On Sequences' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 3.2. Operations On Sequences' data-toggle="tooltip">
     <a href="OperationsOnSequences.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="OperationsOnSequences.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 2.4. Asking Boolean Questions about Sequences' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 3.4. Asking Boolean Questions about Sequences' data-toggle="tooltip" >
     <a href="AskingBooleanQuestionsAboutSequences.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="AskingBooleanQuestionsAboutSequences.html" >Next Section - 2.4. Asking Boolean Questions about Sequences</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="AskingBooleanQuestionsAboutSequences.html" >Next Section - 3.4. Asking Boolean Questions about Sequences</a>
 
 <script type="text/javascript">
 

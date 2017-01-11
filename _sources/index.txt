@@ -32,8 +32,8 @@
    primary author (Todd Iverson).
 
 
-   About this Project
-   ------------------
+   About the ThinkCPY Project
+   --------------------------
 
    This interactive book is a product of the `Runestone Interactive <http://runestoneinteractive.org>`_ Project at Luther College, led by `Brad Miller <http://reputablejournal.com>`_ and David Ranum.  There have been many contributors to the project.  Our thanks especially to the following:
 
@@ -63,6 +63,7 @@ Table of Contents
     :maxdepth: 2
 
     IntroductionToPython/toctree.rst
+    IntroductionToPython/toctree2.rst
     SequentialDataStructuresInPython/toctree.rst
     ReadingDataFromFiles/toctree.rst
     AssociativeDataStructures_DictionariesAndSets/toctree.rst
@@ -97,13 +98,13 @@ open-source book from which a portion of this textbook was constructed.
     :caption: Acknowledgements
     :maxdepth: 1
 
-    FrontBackMatter/copyright.rst
-    FrontBackMatter/prefaceinteractive.rst
-    FrontBackMatter/foreword.rst
-    FrontBackMatter/preface.rst
-    FrontBackMatter/preface2e.rst
-    FrontBackMatter/contrib.rst
-    FrontBackMatter/fdl-1.3.rst
+    FrontMatter/copyright.rst
+    FrontMatter/prefaceinteractive.rst
+    FrontMatter/foreword.rst
+    FrontMatter/preface.rst
+    FrontMatter/preface2e.rst
+    FrontMatter/contrib.rst
+    FrontMatter/fdl-1.3.rst
 
 Indices and tables
 ::::::::::::::::::

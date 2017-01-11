@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.2. Operations On Sequences &mdash; Runestone Interactive Overview</title>
+    <title>3.2. Operations On Sequences &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="2. Sequential Data Structures in Python" href="toctree.html" />
-    <link rel="next" title="2.3. Accessing Sequence Data" href="AccessingSequenceData.html" />
-    <link rel="prev" title="2.1. Collection Types - Strings, Lists and Tuples" href="CollectionTypes_StringsListsTuples.html" />
+    <link rel="up" title="3. Sequential Data Structures in Python" href="toctree.html" />
+    <link rel="next" title="3.3. Accessing Sequence Data" href="AccessingSequenceData.html" />
+    <link rel="prev" title="3.1. Collection Types - Strings, Lists and Tuples" href="CollectionTypes_StringsListsTuples.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,11 +263,10 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">2.2. Operations On Sequences</a><ul>
-<li><a class="reference internal" href="#concatenation-and-repetition">2.2.1. Concatenation and Repetition</a></li>
-<li><a class="reference internal" href="#operations-on-strings">2.2.2. Operations on Strings</a></li>
-<li><a class="reference internal" href="#list-length">2.2.3. List Length</a></li>
-<li><a class="reference internal" href="#length">2.2.4. Length</a></li>
+<li><a class="reference internal" href="#">3.2. Operations On Sequences</a><ul>
+<li><a class="reference internal" href="#concatenation-and-repetition">3.2.1. Concatenation and Repetition</a></li>
+<li><a class="reference internal" href="#operations-on-strings">3.2.2. Operations on Strings</a></li>
+<li><a class="reference internal" href="#length">3.2.3. Length</a></li>
 </ul>
 </li>
 </ul>
@@ -277,13 +276,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 2.1. Collection Types - Strings, Lists and Tuples" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 3.1. Collection Types - Strings, Lists and Tuples" data-toggle="tooltip">
     <a href="CollectionTypes_StringsListsTuples.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 2.3. Accessing Sequence Data' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 3.3. Accessing Sequence Data' data-toggle="tooltip" >
     <a href="AccessingSequenceData.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -315,29 +314,50 @@
 <div class="container" id="main-content">
   
   <div class="section" id="operations-on-sequences">
-<h1>2.2. Operations On Sequences<a class="headerlink" href="#operations-on-sequences" title="Permalink to this headline">¶</a></h1>
+<h1>3.2. Operations On Sequences<a class="headerlink" href="#operations-on-sequences" title="Permalink to this headline">¶</a></h1>
+<p>Next, we will look at how to interpret expressions involving sequences and
+various operators.</p>
 <div class="section" id="concatenation-and-repetition">
-<h2>2.2.1. Concatenation and Repetition<a class="headerlink" href="#concatenation-and-repetition" title="Permalink to this headline">¶</a></h2>
-<p>Again, as with strings, the <code class="docutils literal"><span class="pre">+</span></code> operator concatenates lists.
-Similarly, the <code class="docutils literal"><span class="pre">*</span></code> operator repeats the items in a list a given number of times.</p>
+<h2>3.2.1. Concatenation and Repetition<a class="headerlink" href="#concatenation-and-repetition" title="Permalink to this headline">¶</a></h2>
+<p>In general, you cannot perform mathematical operations on lists.  Interestingly,
+the <code class="docutils literal"><span class="pre">+</span></code> and <code class="docutils literal"><span class="pre">*</span></code> operator does work with lists, but for lists, the <code class="docutils literal"><span class="pre">+</span></code>
+operator <strong>concatenates</strong> lists and the <code class="docutils literal"><span class="pre">*</span></code> operator <strong>repeats</strong> the items in
+a list a given number of times.  <strong>Concatenation</strong> means joining the two
+operands by linking them end-to-end. For example:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">fruit</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
 
-<textarea data-component="activecode" id=chp09_5 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-fruit = ["apple", "orange", "banana", "cherry"]
-print([1, 2] + [3, 4])
-print(fruit + [6, 7, 8, 9])
+<span class="gp">In [2]: </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="gh">Out[2]: </span><span class="go">[1, 2, 3, 4]</span>
 
-print([0] * 4)
-print([1, 2, ["hello", "goodbye"]] * 2)
-</textarea>
-<p>It is important to see that these operators create new lists from the elements of the operand lists.  If you concatenate a list with 2 items and a list with 4 items, you will get a new list with 6 items (not a list with two sublists).  Similarly, repetition of a list of 2 items 4 times will give a list with 8 items.</p>
-<p>One way for us to make this more clear is to run a part of this example in codelens.  As you step through the code, you will see the variables being created and the lists that they refer to.  Pay particular attention to the fact that when <code class="docutils literal"><span class="pre">newlist</span></code> is created by the statement <code class="docutils literal"><span class="pre">newlist</span> <span class="pre">=</span> <span class="pre">fruit</span> <span class="pre">+</span> <span class="pre">numlist</span></code>, it refers to a completely new list formed by making copies of the items from <code class="docutils literal"><span class="pre">fruit</span></code> and <code class="docutils literal"><span class="pre">numlist</span></code>.  You can see this very clearly in the codelens object diagram.  The objects are different.</p>
+<span class="gp">In [3]: </span><span class="n">fruit</span> <span class="o">+</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="go">                     Out[3]: [&#39;apple&#39;, &#39;orange&#39;, &#39;banana&#39;, &#39;cherry&#39;, 6, 7, 8, 9]</span>
+
+<span class="gp">In [4]: </span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="go">                                                                                 Out[4]: [0, 0, 0, 0]</span>
+
+<span class="gp">In [5]: </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;goodbye&quot;</span><span class="p">]]</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="go">                                                                                                      Out[5]: [1, 2, [&#39;hello&#39;, &#39;goodbye&#39;], 1, 2, [&#39;hello&#39;, &#39;goodbye&#39;]]</span>
+</pre></div>
+</div>
+<p>It is important to see that these operators create new lists from the elements
+of the operand lists.  If you concatenate a list with 2 items and a list with 4
+items, you will get a <strong>new list</strong> with 6 items (not a list with two sublists).
+Similarly, repetition of a list of 2 items 4 times will give a list with 8
+items.</p>
+<p>One way for us to make this more clear is to run a part of this example in
+codelens.  As you step through the code, you will see the variables being
+created and the lists that they refer to.  Pay particular attention to the fact
+that when <code class="docutils literal"><span class="pre">newlist</span></code> is created by the statement <code class="docutils literal"><span class="pre">newlist</span> <span class="pre">=</span> <span class="pre">fruit</span> <span class="pre">+</span> <span class="pre">numlist</span></code>,
+it refers to a completely new list formed by making copies of the items from
+<code class="docutils literal"><span class="pre">fruit</span></code> and <code class="docutils literal"><span class="pre">numlist</span></code>.  You can see this very clearly in the codelens object
+diagram.  The objects are different.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="chp09_concatid"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (chp09_concatid)</span> </p>
 </div>
 <script type="text/javascript">
-var chp09_concatid_trace = {"code": "fruit = [\"apple\", \"orange\", \"banana\", \"cherry\"]\nnumlist = [6, 7]\n\nnewlist = fruit + numlist\n\nzeros = [0] * 4", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 2, "stdout": "", "ordered_globals": ["fruit"], "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"]}, "globals": {"fruit": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 4, "stdout": "", "ordered_globals": ["fruit", "numlist"], "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7]}, "globals": {"numlist": ["REF", 2], "fruit": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 6, "stdout": "", "ordered_globals": ["fruit", "numlist", "newlist"], "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7], "3": ["LIST", "apple", "orange", "banana", "cherry", 6, 7]}, "globals": {"newlist": ["REF", 3], "numlist": ["REF", 2], "fruit": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 6, "stdout": "", "ordered_globals": ["fruit", "numlist", "newlist", "zeros"], "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7], "3": ["LIST", "apple", "orange", "banana", "cherry", 6, 7], "4": ["LIST", 0, 0, 0, 0]}, "globals": {"newlist": ["REF", 3], "zeros": ["REF", 4], "numlist": ["REF", 2], "fruit": ["REF", 1]}, "event": "return"}]};
+var chp09_concatid_trace = {"code": "fruit = [\"apple\", \"orange\", \"banana\", \"cherry\"]\nnumlist = [6, 7]\n\nnewlist = fruit + numlist\n\nzeros = [0] * 4", "trace": [{"line": 1, "func_name": "<module>", "heap": {}, "globals": {}, "stack_to_render": [], "ordered_globals": [], "event": "step_line", "stdout": ""}, {"line": 2, "func_name": "<module>", "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"]}, "globals": {"fruit": ["REF", 1]}, "stack_to_render": [], "ordered_globals": ["fruit"], "event": "step_line", "stdout": ""}, {"line": 4, "func_name": "<module>", "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7]}, "globals": {"fruit": ["REF", 1], "numlist": ["REF", 2]}, "stack_to_render": [], "ordered_globals": ["fruit", "numlist"], "event": "step_line", "stdout": ""}, {"line": 6, "func_name": "<module>", "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7], "3": ["LIST", "apple", "orange", "banana", "cherry", 6, 7]}, "globals": {"newlist": ["REF", 3], "fruit": ["REF", 1], "numlist": ["REF", 2]}, "stack_to_render": [], "ordered_globals": ["fruit", "numlist", "newlist"], "event": "step_line", "stdout": ""}, {"line": 6, "func_name": "<module>", "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7], "3": ["LIST", "apple", "orange", "banana", "cherry", 6, 7], "4": ["LIST", 0, 0, 0, 0]}, "globals": {"newlist": ["REF", 3], "zeros": ["REF", 4], "fruit": ["REF", 1], "numlist": ["REF", 2]}, "stack_to_render": [], "ordered_globals": ["fruit", "numlist", "newlist", "zeros"], "event": "return", "stdout": ""}]};
 var chp09_concatid_vis;
 
 $(document).ready(function() {
@@ -376,17 +396,22 @@ $(window).resize(function() {
     }
 });
 </script>
-<p>In Python, every object has a unique identification tag.  Likewise, there is a built-in function that can be called on any object to return its unique id.  The function is appropriately called <code class="docutils literal"><span class="pre">id</span></code> and takes a single parameter, the object that you are interested in knowing about.  You can see in the example below that a real id is usually a very large integer value (corresponding to an address in memory).</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span>
-<span class="go">4300840544</span>
-<span class="go">&gt;&gt;&gt;</span>
+<p>In Python, every object has a unique identification tag.  Likewise, there is a
+built-in function that can be called on any object to return its unique id.  The
+function is appropriately called <code class="docutils literal"><span class="pre">id</span></code> and takes a single parameter, the object
+that you are interested in knowing about.  You can see in the example below that
+a real id is usually a very large integer value (corresponding to an address in
+memory).</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="gp">In [7]: </span><span class="nb">id</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span>
+<span class="gh">Out[7]: </span><span class="go">4451453768</span>
 </pre></div>
 </div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_5_1">
-            <p>rec-5-23: What is printed by the following statements?</p>
+            <p>intro-12-316: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">blist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">alist</span> <span class="o">+</span> <span class="n">blist</span><span class="p">)</span>
@@ -405,7 +430,7 @@ $(window).resize(function() {
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_5_2">
-            <p>rec-5-24: What is printed by the following statements?</p>
+            <p>intro-12-317: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">alist</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
@@ -423,19 +448,48 @@ $(window).resize(function() {
             </ul>
             </div>
 <div class="section" id="operations-on-strings">
-<h2>2.2.2. Operations on Strings<a class="headerlink" href="#operations-on-strings" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.2. Operations on Strings<a class="headerlink" href="#operations-on-strings" title="Permalink to this headline">¶</a></h2>
 <p>In general, you cannot perform mathematical operations on strings, even if the
 strings look like numbers. The following are illegal (assuming that <code class="docutils literal"><span class="pre">message</span></code>
 has type string):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="s2">&quot;Hello&quot;</span> <span class="o">/</span> <span class="mi">123</span>
-<span class="n">message</span> <span class="o">*</span> <span class="s2">&quot;Hello&quot;</span>
-<span class="s2">&quot;15&quot;</span> <span class="o">+</span> <span class="mi">2</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Hi!&quot;</span>
+
+<span class="gp">In [9]: </span><span class="n">message</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-9-61ad35376c4a&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">message</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="ne">TypeError</span>: unsupported operand type(s) for -: &#39;str&#39; and &#39;int&#39;
+
+<span class="gp">In [10]: </span><span class="s2">&quot;Hello&quot;</span> <span class="o">/</span> <span class="mi">123</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ---------------------------------------------------------------------------</span>
+<span class="go">TypeError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-10-f9d3d3f84fca&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 &quot;Hello&quot; / 123</span>
+
+<span class="go">TypeError: unsupported operand type(s) for /: &#39;str&#39; and &#39;int&#39;</span>
+
+<span class="gp">In [11]: </span><span class="n">message</span> <span class="o">*</span> <span class="s2">&quot;Hello&quot;</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ---------------------------------------------------------------------------</span>
+<span class="go">TypeError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-11-e2613568ab04&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 message * &quot;Hello&quot;</span>
+
+<span class="go">TypeError: can&#39;t multiply sequence by non-int of type &#39;str&#39;</span>
+
+<span class="gp">In [12]: </span><span class="s2">&quot;15&quot;</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ---------------------------------------------------------------------------</span>
+<span class="go">TypeError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-12-01703460fe91&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 &quot;15&quot; + 2</span>
+
+<span class="go">TypeError: Can&#39;t convert &#39;int&#39; object to str implicitly</span>
 </pre></div>
 </div>
-<p>Interestingly, the <code class="docutils literal"><span class="pre">+</span></code> operator does work with strings, but for strings, the
-<code class="docutils literal"><span class="pre">+</span></code> operator represents <strong>concatenation</strong>, not addition.  Concatenation means
-joining the two operands by linking them end-to-end. For example:</p>
+<p>Like with lists, the <code class="docutils literal"><span class="pre">+</span></code> operator <strong>concatenates</strong> strings and the <code class="docutils literal"><span class="pre">*</span></code>
+operator <strong>repeats</strong> the items in a string a given number of times.
+For example:</p>
 
 <textarea data-component="activecode" id=ch08_add data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
 fruit = "banana"
@@ -445,30 +499,34 @@ print(fruit + bakedGood)
 <p>The output of this program is <code class="docutils literal"><span class="pre">banana</span> <span class="pre">nut</span> <span class="pre">bread</span></code>. The space before the word
 <code class="docutils literal"><span class="pre">nut</span></code> is part of the string and is necessary to produce the space between
 the concatenated strings.  Take out the space and run it again.</p>
-<p>The <code class="docutils literal"><span class="pre">*</span></code> operator also works on strings.  It performs repetition. For example,
-<code class="docutils literal"><span class="pre">'Fun'*3</span></code> is <code class="docutils literal"><span class="pre">'FunFunFun'</span></code>. One of the operands has to be a string and the
-other has to be an integer.</p>
+<p>As with lists, the <code class="docutils literal"><span class="pre">*</span></code> operator also works on strings, performing repetition.
+For example, <code class="docutils literal"><span class="pre">'Fun'*3</span></code> is <code class="docutils literal"><span class="pre">'FunFunFun'</span></code>. One of the operands has to be a
+string and the other has to be an integer.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="s2">&quot;Go&quot;</span> <span class="o">*</span> <span class="mi">6</span>
+<span class="gh">Out[13]: </span><span class="go">&#39;GoGoGoGoGoGo&#39;</span>
 
-<textarea data-component="activecode" id=ch08_mult data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print("Go" * 6)
+<span class="gp">In [14]: </span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Packers&quot;</span>
 
-name = "Packers"
-print(name * 3)
+<span class="gp">In [15]: </span><span class="n">name</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="gh">Out[15]: </span><span class="go">&#39;PackersPackersPackers&#39;</span>
 
-print(name + "Go" * 3)
+<span class="gp">In [16]: </span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;Go&quot;</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="go">                                 Out[16]: &#39;PackersGoGoGo&#39;</span>
 
-print((name + "Go") * 3)
-</textarea>
-<p>This interpretation of <code class="docutils literal"><span class="pre">+</span></code> and <code class="docutils literal"><span class="pre">*</span></code> makes sense by analogy with
-addition and multiplication. Just as <code class="docutils literal"><span class="pre">4*3</span></code> is equivalent to <code class="docutils literal"><span class="pre">4+4+4</span></code>, we
-expect <code class="docutils literal"><span class="pre">&quot;Go&quot;*3</span></code> to be the same as <code class="docutils literal"><span class="pre">&quot;Go&quot;+&quot;Go&quot;+&quot;Go&quot;</span></code>, and it is.  Note also in the last
-example that the order of operations for <code class="docutils literal"><span class="pre">*</span></code> and <code class="docutils literal"><span class="pre">+</span></code> is the same as it was for arithmetic.
-The repetition is done before the concatenation.  If you want to cause the concatenation to be
-done first, you will need to use parenthesis.</p>
+<span class="gp">In [17]: </span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;Go&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="go">                                                          Out[17]: &#39;PackersGoPackersGoPackersGo&#39;</span>
+</pre></div>
+</div>
+<p>This interpretation of <code class="docutils literal"><span class="pre">+</span></code> and <code class="docutils literal"><span class="pre">*</span></code> makes sense by analogy with addition and
+multiplication. Just as <code class="docutils literal"><span class="pre">4*3</span></code> is equivalent to <code class="docutils literal"><span class="pre">4+4+4</span></code>, we expect <code class="docutils literal"><span class="pre">&quot;Go&quot;*3</span></code>
+to be the same as <code class="docutils literal"><span class="pre">&quot;Go&quot;+&quot;Go&quot;+&quot;Go&quot;</span></code>, and it is.  Note also in the last example
+that the order of operations for <code class="docutils literal"><span class="pre">*</span></code> and <code class="docutils literal"><span class="pre">+</span></code> is the same as it was for
+arithmetic.  The repetition is done before the concatenation.  If you want to
+cause the concatenation to be done first, you will need to use parenthesis.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_1_1">
-            <p>rec-5-25: What is printed by the following statements?</p>
+            <p>intro-12-318: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span>
 <span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;rocks&quot;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">t</span><span class="p">)</span>
@@ -487,7 +545,7 @@ done first, you will need to use parenthesis.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_1_2">
-            <p>rec-5-26: What is printed by the following statements?</p>
+            <p>intro-12-319: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span>
 <span class="n">excl</span> <span class="o">=</span> <span class="s2">&quot;!&quot;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">excl</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
@@ -505,22 +563,47 @@ done first, you will need to use parenthesis.</p>
 
             </ul>
             </div>
-<div class="section" id="list-length">
-<h2>2.2.3. List Length<a class="headerlink" href="#list-length" title="Permalink to this headline">¶</a></h2>
-<p>As with strings, the function <code class="docutils literal"><span class="pre">len</span></code> returns the length of a list (the number
-of items in the list).  However, since lists can have items which are themselves lists, it important to note
-that <code class="docutils literal"><span class="pre">len</span></code> only returns the top-most length.  In other words, sublists are considered to be a single
-item when counting the length of the list.</p>
+<div class="section" id="length">
+<h2>3.2.3. Length<a class="headerlink" href="#length" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">len</span></code> function, when applied to a string, returns the number of characters in a string.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">fruit</span> <span class="o">=</span> <span class="s2">&quot;Banana&quot;</span>
 
-<textarea data-component="activecode" id=chp09_01a data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-alist =  ["hello", 2.0, 5, [10, 20]]
-print(len(alist))
-print(len(['spam!', 1, ['Brie', 'Roquefort', 'Pol le Veq'], [1, 2, 3]]))
-</textarea>
+<span class="gp">In [19]: </span><span class="nb">len</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span>
+<span class="gh">Out[19]: </span><span class="go">6</span>
+</pre></div>
+</div>
+<p>As with strings, the function <code class="docutils literal"><span class="pre">len</span></code> returns the length of a list (the number
+of items in the list).  However, since lists can have items which are themselves
+lists, it important to note that <code class="docutils literal"><span class="pre">len</span></code> only returns the top-most length.  In
+other words, sublists are considered to be a single item when counting the
+length of the list.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">alist</span> <span class="o">=</span>  <span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]]</span>
+
+<span class="gp">In [21]: </span><span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span>
+<span class="gh">Out[21]: </span><span class="go">4</span>
+
+<span class="gp">In [22]: </span><span class="nb">len</span><span class="p">([</span><span class="s1">&#39;spam!&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Brie&#39;</span><span class="p">,</span> <span class="s1">&#39;Roquefort&#39;</span><span class="p">,</span> <span class="s1">&#39;Pol le Veq&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="go">           Out[22]: 4</span>
+</pre></div>
+</div>
 <p><strong>Check your understanding</strong></p>
 
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_4_1">
+            <p>intro-12-320: What is printed by the following statements?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python rocks&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="test_question8_4_1_opt_a">(A) 11</li><li data-component="feedback" id="test_question8_4_1_opt_a">The blank counts as a character.</li>
+            
+            <li data-component="answer" data-correct id="test_question8_4_1_opt_b">(B) 12</li><li data-component="feedback" id="test_question8_4_1_opt_b">Yes, there are 12 characters in the string.</li>
+            
+
+            </ul>
+            
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_2_1">
-            <p>rec-5-27: What is printed by the following statements?</p>
+            <p>intro-12-321: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">))</span>
 </pre></div>
@@ -534,7 +617,7 @@ print(len(['spam!', 1, ['Brie', 'Roquefort', 'Pol le Veq'], [1, 2, 3]]))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_2_2">
-            <p>rec-5-28: What is printed by the following statements?</p>
+            <p>intro-12-322: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="p">[</span> <span class="p">],</span> <span class="mf">3.14</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">))</span>
 </pre></div>
@@ -547,93 +630,24 @@ print(len(['spam!', 1, ['Brie', 'Roquefort', 'Pol le Veq'], [1, 2, 3]]))
 
             </ul>
             </div>
-<div class="section" id="length">
-<h2>2.2.4. Length<a class="headerlink" href="#length" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">len</span></code> function, when applied to a string, returns the number of characters in a string.</p>
-
-<textarea data-component="activecode" id=chp08_len1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-fruit = "Banana"
-print(len(fruit))
-</textarea>
-<p>To get the last letter of a string, you might be tempted to try something like
-this:</p>
-
-<textarea data-component="activecode" id=chp08_len2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-fruit = "Banana"
-sz = len(fruit)
-last = fruit[sz]       # ERROR!
-print(last)
-</textarea>
-<p>That won&#8217;t work. It causes the runtime error
-<code class="docutils literal"><span class="pre">IndexError:</span> <span class="pre">string</span> <span class="pre">index</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">range</span></code>. The reason is that there is no
-letter at index position 6 in <code class="docutils literal"><span class="pre">&quot;Banana&quot;</span></code>.
-Since we started counting at zero, the six indexes are
-numbered 0 to 5. To get the last character, we have to subtract 1 from
-<code class="docutils literal"><span class="pre">length</span></code>.  Give it a try in the example above.</p>
-
-<textarea data-component="activecode" id=ch08_len3 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-fruit = "Banana"
-sz = len(fruit)
-lastch = fruit[sz-1]
-print(lastch)
-</textarea>
-<p>Typically, a Python programmer will access the last character by combining the
-two lines of code from above.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">lastch</span> <span class="o">=</span> <span class="n">fruit</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-<p><strong>Check your understanding</strong></p>
-
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_4_1">
-            <p>rec-5-29: What is printed by the following statements?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python rocks&quot;</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question8_4_1_opt_a">(A) 11</li><li data-component="feedback" id="test_question8_4_1_opt_a">The blank counts as a character.</li>
-            
-            <li data-component="answer" data-correct id="test_question8_4_1_opt_b">(B) 12</li><li data-component="feedback" id="test_question8_4_1_opt_b">Yes, there are 12 characters in the string.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_4_2">
-            <p>rec-5-30: What is printed by the following statements?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python rocks&quot;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">5</span><span class="p">])</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question8_4_2_opt_a">(A) o</li><li data-component="feedback" id="test_question8_4_2_opt_a">Take a look at the index calculation again, len(s)-5.</li>
-            
-            <li data-component="answer" data-correct id="test_question8_4_2_opt_b">(B) r</li><li data-component="feedback" id="test_question8_4_2_opt_b">Yes, len(s) is 12 and 12-5 is 7.  Use 7 as index and remember to start counting with 0.</li>
-            
-            <li data-component="answer"  id="test_question8_4_2_opt_c">(C) s</li><li data-component="feedback" id="test_question8_4_2_opt_c">s is at index 11</li>
-            
-            <li data-component="answer"  id="test_question8_4_2_opt_d">(D) Error, len(s) is 12 and there is no index 12.</li><li data-component="feedback" id="test_question8_4_2_opt_d">You subtract 5 before using the index operator so it will work.</li>
-            
-
-            </ul>
-            </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 2.1. Collection Types - Strings, Lists and Tuples' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 3.1. Collection Types - Strings, Lists and Tuples' data-toggle="tooltip">
     <a href="CollectionTypes_StringsListsTuples.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="CollectionTypes_StringsListsTuples.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 2.3. Accessing Sequence Data' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 3.3. Accessing Sequence Data' data-toggle="tooltip" >
     <a href="AccessingSequenceData.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="AccessingSequenceData.html" >Next Section - 2.3. Accessing Sequence Data</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="AccessingSequenceData.html" >Next Section - 3.3. Accessing Sequence Data</a>
 
 <script type="text/javascript">
 

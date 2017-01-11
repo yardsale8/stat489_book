@@ -8,9 +8,6 @@
     the license is included in the section entitled "GNU Free Documentation
     License".
 
-.. qnum::
-   :prefix: data-6-
-   :start: 1
 
 Transforming Simple Data with Expressions
 =========================================
@@ -18,27 +15,18 @@ Transforming Simple Data with Expressions
 Statements and Expressions
 --------------------------
 
-.. video:: expression_vid
-    :controls:
-    :thumb: ../_static/expressions.png
-
-    http://media.interactivepython.org/thinkcsVideos/Expressions.mov
-    http://media.interactivepython.org/thinkcsVideos/Expressions.webm
-
 A **statement** is an instruction that the Python interpreter can execute. We
 have only seen the assignment statement so far.  Some other kinds of statements
 that we'll see shortly are ``while`` statements, ``for`` statements, ``if``
 statements,  and ``import`` statements.  (There are other kinds too!)
 
 
-.. index:: expression
+An **expression** is a combination of values, variables, operators, and calls to
+functions. Expressions need to be evaluated.  If you ask Python to ``print`` an
+expression, the interpreter **evaluates** the expression and displays the
+result.
 
-An **expression** is a combination of values, variables, operators, and calls
-to functions. Expressions need to be evaluated.  If you ask Python to ``print`` an expression, the interpreter
-**evaluates** the expression and displays the result.
-
-.. activecode:: ch02_13
-    :nocanvas:
+.. ipython:: python
 
     print(1 + 1)
     print(len("hello"))
@@ -52,32 +40,35 @@ The *evaluation of an expression* produces a value, which is why expressions
 can appear on the right hand side of assignment statements. A value all by
 itself is a simple expression, and so is a variable.  Evaluating a variable gives the value that the variable refers to.
 
-.. activecode:: ch02_14
-    :nocanvas:
+.. ipython:: python
 
     y = 3.14
     x = len("hello")
-    print(x)
-    print(y)
+    x
+    y
 
-If we take a look at this same example in the Python shell, we will see one of the distinct differences between statements and expressions.
+.. If we take a look at this same example in the Python shell, we will see one of the distinct differences between statements and expressions.
+.. 
+.. .. sourcecode:: python
+.. 
+.. 	>>> y = 3.14
+.. 	>>> x = len("hello")
+.. 	>>> print(x)
+.. 	5
+.. 	>>> print(y)
+.. 	3.14
+.. 	>>> y
+.. 	3.14
+.. 	>>>
 
-.. sourcecode:: python
+Note that when we enter the assignment statement, ``y = 3.14``, only the prompt
+is returned.  There is no value.  This is due to the fact that statements, such
+as the assignment statement, do not return a value.  They are simply executed.
 
-	>>> y = 3.14
-	>>> x = len("hello")
-	>>> print(x)
-	5
-	>>> print(y)
-	3.14
-	>>> y
-	3.14
-	>>>
-
-Note that when we enter the assignment statement, ``y = 3.14``, only the prompt is returned.  There is no value.  This
-is due to the fact that statements, such as the assignment statement, do not return a value.  They are simply executed.
-
-On the other hand, the result of executing the assignment statement is the creation of a reference from a variable, ``y``, to a value, ``3.14``.  When we execute the print function working on ``y``, we see the value that y is referring to.  In fact, evaluating ``y`` by itself results in the same response.
+On the other hand, the result of executing the assignment statement is the
+creation of a reference from a variable, ``y``, to a value, ``3.14``.  When we
+execute the print function working on ``y``, we see the value that y is
+referring to.  In fact, evaluating ``y`` by itself results in the same response.
 
 
 .. index:: operator, operand, expression, integer division
@@ -106,14 +97,13 @@ token for multiplication, and ``**`` is the token for exponentiation.
 Addition, subtraction, multiplication, and exponentiation all do what you
 expect.
 
-.. activecode:: ch02_15
-    :nocanvas:
+.. ipython:: python
 
-    print(2 + 3)
-    print(2 - 3)
-    print(2 * 3)
-    print(2 ** 3)
-    print(3 ** 2)
+    2 + 3
+    2 - 3
+    2 * 3
+    2 ** 3
+    3 ** 2
 
 When a variable name appears in the place of an operand, it is replaced with
 the value that it refers to before the operation is performed.
@@ -121,12 +111,11 @@ For example, what if we wanted to convert 645 minutes into hours.
 In Python 3, division is denoted by the operator token ``/`` which always evaluates to a floating point
 result.
 
-.. activecode:: ch02_16
-    :nocanvas:
+.. ipython:: python
 
     minutes = 645
     hours = minutes / 60
-    print(hours)
+    hours
 
 What if, on the other hand, we had wanted to know how many *whole* hours there
 are and how many minutes remain.  To help answer this question, Python gives us a second flavor of
@@ -134,50 +123,52 @@ the division operator.  This version, called **integer division**, uses the toke
 ``//``.  It always *truncates* its result down to the next smallest integer (to
 the left on the number line).
 
-.. activecode:: ch02_17
-    :nocanvas:
+.. ipython:: python
 
-    print(7 / 4)
-    print(7 // 4)
+    7 / 4
+    7 // 4
     minutes = 645
     hours = minutes // 60
-    print(hours)
+    hours
 
-Pay particular attention to the first two examples above.  Notice that the result of floating point division
-is ``1.75`` but the result of the integer division is simply ``1``.
-Take care that you choose the correct flavor of the division operator.  If
-you're working with expressions where you need floating point values, use the
-division operator ``/``.  If you want an integer result, use ``//``.
+Pay particular attention to the first two examples above.  Notice that the
+result of floating point division is ``1.75`` but the result of the integer
+division is simply ``1``.  Take care that you choose the correct flavor of the
+division operator.  If you're working with expressions where you need floating
+point values, use the division operator ``/``.  If you want an integer result,
+use ``//``.
 
 .. index:: modulus
 
-The **modulus operator**, sometimes also called the **remainder operator** or **integer remainder operator** works on integers (and integer expressions) and yields
-the remainder when the first operand is divided by the second. In Python, the
-modulus operator is a percent sign (``%``). The syntax is the same as for other
-operators.
+The **modulus operator**, sometimes also called the **remainder operator** or
+**integer remainder operator** works on integers (and integer expressions) and
+yields the remainder when the first operand is divided by the second. In Python,
+the modulus operator is a percent sign (``%``). The syntax is the same as for
+other operators.
 
-.. activecode:: ch02_18
-    :nocanvas:
+.. ipython:: python
 
     quotient = 7 // 3     # This is the integer division operator
-    print(quotient)
+    quotient
     remainder = 7 % 3
-    print(remainder)
+    remainder
 
 
-In the above example, 7 divided by 3 is 2 when we use integer division and there is a remainder of 1.
+In the above example, 7 divided by 3 is 2 when we use integer division and there
+is a remainder of 1.
 
 The modulus operator turns out to be surprisingly useful. For example, you can
 check whether one number is divisible by another---if ``x % y`` is zero, then
-``x`` is divisible by ``y``.
-Also, you can extract the right-most digit or digits from a number.  For
-example, ``x % 10`` yields the right-most digit of ``x`` (in base 10).
-Similarly ``x % 100`` yields the last two digits.
+``x`` is divisible by ``y``.  Also, you can extract the right-most digit or
+digits from a number.  For example, ``x % 10`` yields the right-most digit of
+``x`` (in base 10).  Similarly ``x % 100`` yields the last two digits.
 
-Finally, returning to our time example, the remainder operator is extremely useful for doing conversions, say from seconds,
-to hours, minutes and seconds.
-If we start with a number of seconds, say 7684, the following program uses integer division and remainder to convert to an easier form.  Step through it to be sure you understand how the division and remainder operators are being used to
-compute the correct values.
+Finally, returning to our time example, the remainder operator is extremely
+useful for doing conversions, say from seconds, to hours, minutes and seconds.
+If we start with a number of seconds, say 7684, the following program uses
+integer division and remainder to convert to an easier form.  Step through it to
+be sure you understand how the division and remainder operators are being used
+to compute the correct values.
 
 .. codelens:: ch02_19_codelens
 
@@ -251,23 +242,6 @@ compute the correct values.
 Order of Operations
 -------------------
 
-.. video:: precedencevid
-    :controls:
-    :thumb: ../_static/precedencethumb.png
-
-    http://media.interactivepython.org/thinkcsVideos/precedence.mov
-    http://media.interactivepython.org/thinkcsVideos/precedence.webm
-
-
-.. video:: associativityvid
-    :controls:
-    :thumb: ../_static/associativitythumb.png
-
-    http://media.interactivepython.org/thinkcsVideos/associativity.mov
-    http://media.interactivepython.org/thinkcsVideos/associativity.webm
-
-
-
 When more than one operator appears in an expression, the order of evaluation
 depends on the **rules of precedence**. Python follows the same precedence
 rules for its mathematical operators that mathematics does.
@@ -308,11 +282,10 @@ rules for its mathematical operators that mathematics does.
     is to always use parentheses to force exactly the order you want when
     exponentiation is involved:
 
-    .. activecode:: ch02_23
-        :nocanvas:
+.. ipython:: python
 
-        print(2 ** 3 ** 2)     # the right-most ** operator gets done first!
-        print((2 ** 3) ** 2)   # use parentheses to force the order you want!
+        2 ** 3 ** 2     # the right-most ** operator gets done first!
+        (2 ** 3) ** 2   # use parentheses to force the order you want!
 
 .. The immediate mode command prompt of Python is great for exploring and
 .. experimenting with expressions like this.
@@ -360,13 +333,6 @@ rules for its mathematical operators that mathematics does.
 Boolean Values and Boolean Expressions
 --------------------------------------
 
-.. video:: booleanexpressions
-   :controls:
-   :thumb: ../_static/booleanexpressions.png
-
-   http://media.interactivepython.org/thinkcsVideos/booleanexpressions.mov
-   http://media.interactivepython.org/thinkcsVideos/booleanexpressions.webm
-
 The Python type for storing true and false values is called ``bool``, named
 after the British mathematician, George Boole. George Boole created *Boolean
 Algebra*, which is the basis of all modern computer arithmetic.
@@ -375,11 +341,11 @@ There are only two **boolean values**.  They are ``True`` and ``False``.  Capita
 is important, since ``true`` and ``false`` are not boolean values (remember Python is case
 sensitive).
 
-.. activecode:: ch05_1
+.. ipython:: python
 
-    print(True)
-    print(type(True))
-    print(type(False))
+    True
+    type(True)
+    type(False)
 
 .. note:: Boolean values are not strings!
 
@@ -388,19 +354,19 @@ sensitive).
     types shown below.
 
 
-.. activecode:: ch05_1a
+.. ipython:: python
 
-    print(type(True))
-    print(type("True"))
+    type(True)
+    type("True")
 
 A **boolean expression** is an expression that evaluates to a boolean value.
 The equality operator, ``==``, compares two values and produces a boolean value related to whether the
 two values are equal to one another.
 
-.. activecode:: ch05_2
+.. ipython:: python
 
-    print(5 == 5)
-    print(5 == 6)
+    5 == 5
+    5 == 6
 
 In the first statement, the two operands are equal, so the expression evaluates
 to ``True``.  In the second statement, 5 is not equal to 6, so we get ``False``.
@@ -472,18 +438,25 @@ Finally, the ``not`` operator negates a boolean expression, so ``not  x > y``
 is true if ``x > y`` is false, that is, if ``x`` is less than or equal to
 ``y``.
 
-.. activecode:: chp05_3
+.. ipython:: python
 
     x = 5
-    print(x > 0 and x < 10)
+    x > 0 and x < 10
 
     n = 25
-    print(n % 2 == 0 or n % 3 == 0)
+    n % 2 == 0 or n % 3 == 0
 
 
 .. admonition:: Common Mistake!
 
-	There is a very common mistake that occurs when programmers try to write boolean expressions.  For example, what if we have a variable ``number`` and we want to check to see if its value is 5,6, or 7.  In words we might say: "number equal to 5 or 6 or 7".  However, if we translate this into Python, ``number == 5 or 6 or 7``, it will not be correct.  The ``or`` operator must join the results of three equality checks.  The correct way to write this is ``number == 5 or number == 6 or number == 7``.  This may seem like a lot of typing but it is absolutely necessary.  You cannot take a shortcut.
+    There is a very common mistake that occurs when programmers try to write
+    boolean expressions.  For example, what if we have a variable ``number`` and
+    we want to check to see if its value is 5,6, or 7.  In words we might say:
+    "number equal to 5 or 6 or 7".  However, if we translate this into Python,
+    ``number == 5 or 6 or 7``, it will not be correct.  The ``or`` operator must
+    join the results of three equality checks.  The correct way to write this is
+    ``number == 5 or number == 6 or number == 7``.  This may seem like a lot of
+    typing but it is absolutely necessary.  You cannot take a shortcut.
 
 
 **Check your understanding**
@@ -506,9 +479,21 @@ is true if ``x > y`` is false, that is, if ``x`` is less than or equal to
 Precedence of Operators
 -----------------------
 
-We have now added a number of additional operators to those we learned in the previous chapters.  It is important to understand how these operators relate to the others with respect to operator precedence.  Python will always evaluate the arithmetic operators first (** is highest, then multiplication/division, then addition/subtraction).  Next comes the relational operators.  Finally, the logical operators are done last.  This means that the expression ``x*5 >= 10 and y-6 <= 20`` will be evaluated so as to first perform the arithmetic and then check the relationships.  The ``and`` will be done last.  Although many programmers might place parenthesis around the two relational expressions, it is not necessary.
+We have now added a number of additional operators to those we learned in the
+previous chapters.  It is important to understand how these operators relate to
+the others with respect to operator precedence.  Python will always evaluate the
+arithmetic operators first (** is highest, then multiplication/division, then
+addition/subtraction).  Next comes the relational operators.  Finally, the
+logical operators are done last.  This means that the expression ``x*5 >= 10 and
+y-6 <= 20`` will be evaluated so as to first perform the arithmetic and then
+check the relationships.  The ``and`` will be done last.  Although many
+programmers might place parenthesis around the two relational expressions, it is
+not necessary.
 
-The following table summarizes the operator precedence from highest to lowest.  A complete table for the entire language can be found in the `Python Documentation <http://docs.python.org/py3k/reference/expressions.html#expression-lists>`_.
+The following table summarizes the operator precedence from highest to lowest.
+A complete table for the entire language can be found in the `Python
+Documentation
+<http://docs.python.org/py3k/reference/expressions.html#expression-lists>`_.
 
 =======   ==============  ===============
 Level     Category        Operators
@@ -526,7 +511,8 @@ Level     Category        Operators
 
 .. note::
 
-  This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
+  This workspace is provided for your convenience.  You can use this activecode
+  window to try out anything you like.
 
   .. activecode:: scratch_06_01
 
@@ -560,70 +546,82 @@ Level     Category        Operators
 Conditional Execution: Binary Selection
 ---------------------------------------
 
-.. video:: binaryselection
-   :controls:
-   :thumb: ../_static/binaryselection.png
-
-   http://media.interactivepython.org/thinkcsVideos/binaryselection.mov
-   http://media.interactivepython.org/thinkcsVideos/binaryselection.webm
-
-
 In order to write useful programs, we almost always need the ability to check
-conditions and change the behavior of the program accordingly. **Selection statements**, sometimes
-also referred to as **conditional statements**, give us this ability. The simplest form of selection is the **if statement**.  
-This is sometimes referred to as **binary selection** since there are two possible paths of execution.
+conditions and change the behavior of the program accordingly. The simplest form
+of selection is the **if expression**.  This is sometimes referred to as
+**binary selection** since there are two possible paths of execution.
 
-.. activecode:: ch05_4
+.. ipython:: python
 
     x = 15
 
-    if x % 2 == 0:
-        print(x, "is even")
-    else:
-        print(x, "is odd")
+    "even" if x % 2 == 0 else "odd"
 
 
-The syntax for an ``if`` statement looks like this:
+The syntax for an ``if`` expression looks like this:
 
 .. sourcecode:: python
 
-    if BOOLEAN EXPRESSION:
-        STATEMENTS_1        # executed if condition evaluates to True
-    else:
-        STATEMENTS_2        # executed if condition evaluates to False
+    EXPRESSION_1 if BOOLEAN EXPRESSION else EXPRESSION_2
 
 The boolean expression after the ``if`` statement is called the **condition**.
-If it is true, then the indented statements get executed. If not, then the statements
-indented under the `else` clause get executed.
+If it is true, then the first expression is evaluated. If not, then the
+expression after the `else` clause gets evaluated.
+
+An important property of the conditional expression is that **exactly one** of
+the expressions is evaluated and **not the other**.  This allows us to avoid
+errors that would otherwise be impossible to avoid, as illustrate by the
+following silly example.
+
+.. ipython:: python
+
+    x = 15
+
+    "No Error" if x == 15 else x / 0
+
+If the conditional expression evaluated both expressions, then we would have
+encountered the following exception.
+
+.. ipython:: python
+
+    15 / 0
 
 .. sidebar::  Flowchart of a **if** statement with an **else**
 
    .. image:: Figures/flowchart_if_else.png
 
+There is a limitation to the conditional expression.  Since this is an
+expression, it can only contain values or other expressions.  This means that we
+cannot include statements, such as the assignment statement in this expression.
+In a later section, we will introduce the **if-elif-else** statement to deal
+with this limitation.
 
+.. ipython:: python
 
-As with the function definition from the last chapter and other compound
-statements like ``for``, the ``if`` statement consists of a header line and a body. The header
-line begins with the keyword ``if`` followed by a *boolean expression* and ends with
-a colon (:).
+    3 if 5 == 4 else (x = 1)
 
-The indented statements that follow are called a **block**. The first
-unindented statement marks the end of the block.
-
-Each of the statements inside the first block of statements is executed in order if the boolean
-expression evaluates to ``True``. The entire first block of statements
-is skipped if the boolean expression evaluates to ``False``, and instead
-all the statements under the ``else`` clause are executed.
-
-There is no limit on the number of statements that can appear under the two clauses of an
-``if`` statement, but there has to be at least one statement in each block.
-
-
-.. admonition:: Lab
-
-    * `Approximating Pi with Simulation <../Labs/montepi.html>`_ In this guided lab exercise we will work
-      through a problem solving exercise related to approximating the value of pi using random numbers.
-
+.. As with the function definition from the last chapter and other compound
+.. statements like ``for``, the ``if`` statement consists of a header line and a
+.. body. The header line begins with the keyword ``if`` followed by a *boolean
+.. expression* and ends with a colon (:).
+.. 
+.. The indented statements that follow are called a **block**. The first
+.. unindented statement marks the end of the block.
+.. 
+.. Each of the statements inside the first block of statements is executed in order
+.. if the boolean expression evaluates to ``True``. The entire first block of
+.. statements is skipped if the boolean expression evaluates to ``False``, and
+.. instead all the statements under the ``else`` clause are executed.
+.. 
+.. There is no limit on the number of statements that can appear under the two clauses of an
+.. ``if`` statement, but there has to be at least one statement in each block.
+.. 
+.. 
+.. .. admonition:: Lab
+.. 
+..     * `Approximating Pi with Simulation <../Labs/montepi.html>`_ In this guided lab exercise we will work
+..       through a problem solving exercise related to approximating the value of pi using random numbers.
+.. 
 
 
 **Check your understanding**
@@ -632,78 +630,31 @@ There is no limit on the number of statements that can appear under the two clau
    :answer_a: Just one.
    :answer_b: Zero or more.
    :answer_c: One or more.
-   :answer_d: One or more, and each must contain the same number.
-   :correct: c
-   :feedback_a: Each block may also contain more than one.
-   :feedback_b: Each block must contain at least one statement.
-   :feedback_c: Yes, a block must contain at least one statement and can have many statements.
-   :feedback_d: The blocks may contain different numbers of statements.
+   :answer_d: None.
+   :correct: d
+   :feedback_a: The conditional expression may only consist of other expressions.
+   :feedback_b: The conditional expression may only consist of other expressions.
+   :feedback_c: The conditional expression may only consist of other expressions.
+   :feedback_d: The conditional expression may only consist of other expressions.
 
-   How many statements can appear in each block (the if and the else) in a conditional statement?
+   How many statements can appear in each expression (the if and the else) in a conditional expression?
 
 .. mchoice:: test_question6_4_2
-   :answer_a: TRUE
-   :answer_b: FALSE
-   :answer_c: TRUE on one line and FALSE on the next
-   :answer_d: Nothing will be printed
+   :answer_a: True
+   :answer_b: False
+   :answer_c: True on one line and False on the next
+   :answer_d: Nothing 
    :correct: b
-   :feedback_a: TRUE is printed by the if-block, which only executes if the conditional (in this case, 4+5 == 10) is true.  In this case 5+4 is not equal to 10.
-   :feedback_b: Since 4+5==10 evaluates to False, Python will skip over the if block and execute the statement in the else block.
-   :feedback_c: Python would never print both TRUE and FALSE because it will only execute one of the if-block or the else-block, but not both.
-   :feedback_d: Python will always execute either the if-block (if the condition is true) or the else-block (if the condition is false).  It would never skip over both blocks.
+   :feedback_a: True is only evaluated if the conditional (in this case, 4+5 == 10) is true.  In this case 5+4 is not equal to 10.
+   :feedback_b: Since 4+5==10 evaluates to False, Python will skip over the if expression and execute the expression after the else.
+   :feedback_c: Python would never evaluate both True and False because it will only evalutate one expression, but not both.
+   :feedback_d: Python will always evaluate either the if-expression or the else-expression. It would never skip over both expressions.
 
-   What does the following code print (choose from output a, b, c or nothing).
-
-   .. code-block:: python
-
-     if 4 + 5 == 10:
-         print("TRUE")
-     else:
-         print("FALSE")
-
-
-.. mchoice:: test_question6_4_3
-   :answer_a: Output a
-   :answer_b: Output b
-   :answer_c: Output c
-   :answer_d: Output d
-   :correct: c
-   :feedback_a: Although TRUE is printed after the if-else statement completes, both blocks within the if-else statement print something too.  In this case, Python would have had to have skipped both blocks in the if-else statement, which it never would do.
-   :feedback_b: Because there is a TRUE printed after the if-else statement ends, Python will always print TRUE as the last statement.
-   :feedback_c: Python will print FALSE from within the else-block (because 5+4 does not equal 10), and then print TRUE after the if-else statement completes.
-   :feedback_d: To print these three lines, Python would have to execute both blocks in the if-else statement, which it can never do.
-
-   What does the following code print?
+   What is the value of the following expression?
 
    .. code-block:: python
 
-     if 4 + 5 == 10:
-         print("TRUE")
-     else:
-         print("FALSE")
-     print("TRUE")
-
-   ::
-
-      a. TRUE
-
-      b.
-         TRUE
-         FALSE
-
-      c.
-         FALSE
-         TRUE
-      d.
-         TRUE
-         FALSE
-         TRUE
-
-
+      True if 4 + 5 == 10 else False
 
 .. index:: alternative execution, branch, wrapping code in a function
 
-Abstraction with Variables and Expressions
-------------------------------------------
-
-TODO
