@@ -298,17 +298,6 @@
 <p>The programming language you will be learning is Python. Python is an example
 of a <strong>high-level language</strong>; other high-level languages you might have heard
 of are C++, PHP, and Java.</p>
-<p>It
-is much easier to program in a
-high-level language. Programs written in a high-level language take less time
-to write, they are shorter and easier to read, and they are more likely to be
-correct. Second, high-level languages are <strong>portable</strong>, meaning that they can
-run on different kinds of computers with few or no modifications. Low-level
-programs can run on only one kind of computer and have to be rewritten to run
-on another.</p>
-<p>Due to these advantages, almost all programs are written in high-level
-languages. Low-level languages are used only for a few specialized
-applications.</p>
 <p>Two kinds of programs process high-level languages into low-level languages:
 <strong>interpreters</strong> and <strong>compilers</strong>. An interpreter reads a high-level program
 and executes it, meaning that it does what the program says. It processes the
@@ -325,19 +314,22 @@ without further translation.</p>
 level language, called <strong>byte code</strong>, and then interpreted by a program called
 a <strong>virtual machine</strong>. Python uses both processes, but because of the way
 programmers interact with it, it is usually considered an interpreted language.</p>
-<p>There are three ways to use the Python interpreter: <em>shell mode</em> <em>program
-mode</em>.  We will also explore a hybrid of the shell mode by using the <em>Jupyter
-notebook.</em> In shell mode, you type Python expressions into the <strong>Python shell</strong>,
-and the interpreter immediately shows the result.  The example below shows the Python shell at work.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python3
+<p>There are three ways to use the Python interpreter: <em>shell mode,</em> <em>program mode</em>
+and the <em>IPython/Jupyter notebook.</em> In shell mode, you type Python expressions
+into the <strong>Python shell</strong> or <strong>IPython shell</strong>, and the interpreter immediately
+shows the result.  The shell has many the advantages, including direct and immediate
+interaction with our data.   Furthermore, we can work with a shell in our
+programming enviroment, often called an Integrated Development Enviroment (IDE),
+or on a remote session with a server.</p>
+<p>The example below shows the Python shell at work.</p>
+<blockquote>
+<div>$ python3
 Python 3.2 (r32:88445, Mar 25 2011, 19:28:28)
 [GCC 4.5.2] on linux2
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+Type &#8220;help&#8221;, &#8220;copyright&#8221;, &#8220;credits&#8221; or &#8220;license&#8221; for more information.
 &gt;&gt;&gt; 2 + 3
 5
-&gt;&gt;&gt;
-</pre></div>
-</div>
+&gt;&gt;&gt;</div></blockquote>
 <p>The <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> is called the <strong>Python prompt</strong>. The interpreter uses the prompt to
 indicate that it is ready for instructions. We typed <code class="docutils literal"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code>.  The interpreter
 evaluated our expression and replied <code class="docutils literal"><span class="pre">5</span></code>. On the next line it gave a new
@@ -345,22 +337,51 @@ prompt indicating that it is ready for more input.</p>
 <p>Working directly in the interpreter is convenient for testing short bits of
 code because you get immediate feedback. Think of it as scratch paper used to
 help you work out problems.</p>
-<p>Alternatively, you can write an entire program by placing lines of Python
-instructions in a file and then use the interpreter to execute the contents of
-the file as a whole. Such a file is often referred to as <strong>source code</strong>.  For
-example, we used a text editor to create a source code file named
-<code class="docutils literal"><span class="pre">firstprogram.py</span></code> with the following contents:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;My first program adds two numbers, 2 and 3:&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+<p>An alterative to the regular python shell is the <em>IPython/Jupyter</em> shell, which
+makes many &#8220;quality-of-life&#8221; improvements, making it the prefered choice for
+interactive sessions in python (if avaiable).  The following example illustrates
+code evaluated in the IPython shell.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="gh">Out[1]: </span><span class="go">5</span>
 </pre></div>
 </div>
-<p>By convention, files that contain Python programs have names that end with
+<p>The <code class="docutils literal"><span class="pre">In</span> <span class="pre">[1]:</span></code> is called the <strong>IPython prompt</strong>.  We typed <code class="docutils literal"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code>.  The
+interpreter evaluated our expression and replied <code class="docutils literal"><span class="pre">Out[1]:</span> <span class="pre">5</span></code>. The numbering of
+lines as well as distinguishing between input and uptput are two small
+advantages to this shell.  Other advantages include code completion, simplified
+help commands, and the ability to call other languages such as bash and R using
+magic commands.</p>
+<p>Alternatively, you can write an entire program by placing lines of Python
+instructions in a file and then use the interpreter to execute the contents of
+the file as a whole. Such a file is often referred to as <strong>source code</strong>.
+.. For example, we used a text editor to create a source code file named
+.. <code class="docutils literal"><span class="pre">firstprogram.py</span></code> with the following contents:
+..
+.. .. sourcecode:: python
+..
+..     print(&#8220;My first program adds two numbers, 2 and 3:&#8221;)
+..     print(2 + 3)
+Not only can a python file be executed as a program, it can also be used to
+share code with other programs, and this case we refer to the file as a
+<em>module</em>.</p>
+<p>By convention, files that contain Python code have names that end with
 <code class="docutils literal"><span class="pre">.py</span></code> .  Following this convention will help your operating system and other
 programs identify a file as containing python code.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python firstprogram.py
-My first program adds two numbers, 2 and 3:
-5
-</pre></div>
+<p>We will illustrate constructing python and modules in a later chapters.</p>
+<p>Finally, we will also explore a hybrid of the shell mode called the <em>Jupyter
+notebook,</em> which will allow use to execute code in a web browser, as well
+allowing us to combine our code with supporting documentation.</p>
+<div class="admonition-ipython-and-jupyter admonition">
+<p class="first admonition-title">IPython and Jupyter</p>
+<p class="last">The name(s) for the IPython tools are currently in transition.  Ipython was
+originally written with Python as the sole focus, but it was quickly
+recognized that this framework works well with many language.  Recently,
+IPython was split into two parts, Jupyter and Ipython proper.  Project
+Jupyter includes all of the machinery that is used to make shells and
+notebooks, allowing easy creation of tools in other language.  Ipython
+contains the Python-specific interface with Jupyter.  Because this name
+change is relatively new, there can be some confusion on naming, so be aware
+the &#8220;Ipython&#8221; might refer to wither or both of Jupyter and Ipython.</p>
 </div>
 <p>These examples show Python being run from a Unix command line. In other
 development environments, the details of executing programs may differ. Also,

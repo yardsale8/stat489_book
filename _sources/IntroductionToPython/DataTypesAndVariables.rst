@@ -34,40 +34,39 @@ because they are enclosed in quotation marks.
 If you are not sure what class a value falls into, Python has a function called
 **type** which can tell you.
 
-.. activecode:: ch02_1
-    :nocanvas:
+.. ipython:: python
 
-    print(type("Hello, World!"))
-    print(type(17))
-    print("Hello, World")
+    type("Hello, World!")
+    type(17)
+    "Hello, World"
 
 Not surprisingly, strings belong to the class **str** and integers belong to the
 class **int**.
 
-.. note::
-
-	When we show the value of a string using the ``print`` function, such as in the third example above, the quotes are no longer present.  The
-	value of the string is the sequence of characters inside the quotes.  The quotes are only necessary to help Python know what the value is.
-
-
-In the Python shell, it is not necessary to use the ``print`` function to see the values shown above.  The shell evaluates the Python function and automatically prints the result.  For example, consider the shell session shown below.  When
-we ask the shell to evaluate ``type("Hello, World!")``, it responds with the appropriate answer and then goes on to
-display the prompt for the next use.
-
-::
-
-	Python 3.1.2 (r312:79360M, Mar 24 2010, 01:33:18)
-	[GCC 4.0.1 (Apple Inc. build 5493)] on darwin
-	Type "help", "copyright", "credits" or "license" for more information.
-	>>> type("Hello, World!")
-	<class 'str'>
-	>>> type(17)
-	<class 'int'>
-	>>> "Hello, World"
-	'Hello, World'
-	>>>
-
-Note that in the last example, we simply ask the shell to evaluate the string "Hello, World".  The result is as you might expect, the string itself.
+.. .. note::
+.. 
+.. 	When we show the value of a string using the ``print`` function, such as in the third example above, the quotes are no longer present.  The
+.. 	value of the string is the sequence of characters inside the quotes.  The quotes are only necessary to help Python know what the value is.
+.. 
+.. 
+.. In the Python shell, it is not necessary to use the ``print`` function to see the values shown above.  The shell evaluates the Python function and automatically prints the result.  For example, consider the shell session shown below.  When
+.. we ask the shell to evaluate ``type("Hello, World!")``, it responds with the appropriate answer and then goes on to
+.. display the prompt for the next use.
+.. 
+.. ::
+.. 
+.. 	Python 3.1.2 (r312:79360M, Mar 24 2010, 01:33:18)
+.. 	[GCC 4.0.1 (Apple Inc. build 5493)] on darwin
+.. 	Type "help", "copyright", "credits" or "license" for more information.
+.. 	>>> type("Hello, World!")
+.. 	<class 'str'>
+.. 	>>> type(17)
+.. 	<class 'int'>
+.. 	>>> "Hello, World"
+.. 	'Hello, World'
+.. 	>>>
+.. 
+.. Note that in the last example, we simply ask the shell to evaluate the string "Hello, World".  The result is as you might expect, the string itself.
 
 Continuing with our discussion of data types, numbers with a decimal point belong to a class
 called **float**, because these numbers are represented in a format called
@@ -75,33 +74,30 @@ called **float**, because these numbers are represented in a format called
 interchangeably.  We'll come back to a deeper understanding of what a class
 is in later chapters.
 
-.. activecode:: ch02_2
-    :nocanvas:
+.. ipython:: python
 
-    print(type(3.2))
+    type(3.2)
 
 
 What about values like ``"17"`` and ``"3.2"``? They look like numbers, but they
 are in quotation marks like strings.
 
-.. activecode:: ch02_3
-    :nocanvas:
+.. ipython:: python
 
-    print(type("17"))
-    print(type("3.2"))
+    type("17")
+    type("3.2")
 
 They're strings!
 
 Strings in Python can be enclosed in either single quotes (``'``) or double
 quotes (``"``), or three of each (``'''`` or ``"""``)
 
-.. activecode:: ch02_4
-    :nocanvas:
+.. ipython:: python
 
-    print(type('This is a string.') )
-    print(type("And so is this.") )
-    print(type("""and this.""") )
-    print(type('''and even this...''') )
+    type('This is a string.')
+    type("And so is this.")
+    type("""and this.""")
+    type('''and even this...''')
 
 
 Double quoted strings can contain single quotes inside them, as in ``"Bruce's
@@ -110,67 +106,73 @@ beard"``, and single quoted strings can have double quotes inside them, as in
 Strings enclosed with three occurrences of either quote symbol are called
 triple quoted strings.  They can contain either single or double quotes:
 
-.. activecode:: ch02_5
-    :nocanvas:
+.. ipython:: python
 
-    print('''"Oh no", she exclaimed, "Ben's bike is broken!"''')
+    '''"Oh no", she exclaimed, "Ben's bike is broken!"'''
 
 
 
 Triple quoted strings can even span multiple lines:
 
-.. activecode:: ch02_6
-    :nocanvas:
+
+.. ipython:: python
 
     message = """This message will
     span several
     lines."""
+    message
     print(message)
 
-    print("""This message will span
+    """This message will span
     several lines
-    of the text.""")
+    of the text."""
 
 Python doesn't care whether you use single or double quotes or the
 three-of-a-kind quotes to surround your strings.  Once it has parsed the text of
 your program or command, the way it stores the value is identical in all cases,
-and the surrounding quotes are not part of the value.
+and the surrounding quotes are not part of the value.  
 
-.. activecode:: ch02_7
-    :nocanvas:
+.. note:: 
 
-    print('This is a string.')
-    print("""And so is this.""")
+    Notice that when we evaluate a multiline string, the newlines are
+    represented by the special character ``"\n"``. On the otherhand, when a
+    multiline string is printed with the ``print`` function, the new lines are
+    rendered as new lines.
+
+
+.. ipython:: python
+
+    'This is a string.'
+    """And so is this."""
 
 So the Python language designers usually chose to surround their strings by
 single quotes.  What do you think would happen if the string already contained
 single quotes?
 
-When you type a large integer, you might be tempted to use commas between
-groups of three digits, as in ``42,000``. This is not a legal integer in
-Python, but it does mean something else, which is legal:
-
-.. activecode:: ch02_8
-    :nocanvas:
-
-    print(42000)
-    print(42,000)
-
-
-Well, that's not what we expected at all! Because of the comma, Python chose to
-treat this as a *pair* of values.     In fact, the print function can print any number of values as long
-as you separate them by commas.  Notice that the values are separated by spaces when they are displayed.
-
-.. activecode:: ch02_8a
-    :nocanvas:
-
-    print(42, 17, 56, 34, 11, 4.35, 32)
-    print(3.4, "hello", 45)
-
-Remember not to put commas or spaces in your integers, no
-matter how big they are. Also revisit what we said in the previous chapter:
-formal languages are strict, the notation is concise, and even the smallest
-change might mean something quite different from what you intended.
+.. When you type a large integer, you might be tempted to use commas between
+.. groups of three digits, as in ``42,000``. This is not a legal integer in
+.. Python, but it does mean something else, which is legal:
+.. 
+.. .. ipython:: python
+.. 
+..     42000
+..     42,000
+.. 
+.. 
+.. Well, that's not what we expected at all! Because of the comma, Python chose to
+.. treat this as a *pair* of values.     In fact, the print function can print any number of values as long
+.. as you separate them by commas.  Notice that the values are separated by spaces when they are displayed.
+.. 
+.. .. activecode:: ch02_8a
+..     :nocanvas:
+.. 
+..     42, 17, 56, 34, 11, 4.35, 32
+..     3.4, "hello", 45
+.. 
+.. Remember not to put commas or spaces in your integers, no
+.. matter how big they are. Also revisit what we said in the previous chapter:
+.. formal languages are strict, the notation is concise, and even the smallest
+.. change might mean something quite different from what you intended.
 
 **Check your understanding**
 
@@ -217,17 +219,22 @@ into an int. For floating point numbers, it *discards* the decimal portion of
 the number - a process we call *truncation towards zero* on the number line.
 Let us see this in action:
 
-.. activecode:: ch02_20
-    :nocanvas:
+.. ipython:: python
 
-    print(3.14, int(3.14))
-    print(3.9999, int(3.9999))       # This doesn't round to the closest int!
-    print(3.0, int(3.0))
-    print(-3.999, int(-3.999))        # Note that the result is closer to zero
+    3.14 
+    int(3.14)
+    3.9999
+    int(3.9999)       # This doesn't round to the closest int
+    3.0
+    int(3.0)
+    -3.999
+    int(-3.999)        # Note that the result is closer to zero
 
-    print("2345", int("2345"))        # parse a string to produce an int
-    print(17, int(17))                # int even works on integers
-    print(int("23bottles"))
+    "2345"
+    int("2345")        # parse a string to produce an int
+    17
+    int(17)                # int even works on integer
+    int("23bottles")
 
 
 The last case shows that a string has to be a syntactically legal number,
@@ -237,22 +244,20 @@ otherwise you'll get one of those pesky runtime errors.  Modify the example by d
 The type converter ``float`` can turn an integer, a float, or a syntactically
 legal string into a float.
 
-.. activecode:: ch02_21
-    :nocanvas:
+.. ipython:: python
 
-    print(float("123.45"))
-    print(type(float("123.45")))
+    float("123.45")
+    type(float("123.45"))
 
 
 The type converter ``str`` turns its argument into a string.  Remember that when we print a string, the
 quotes are removed.  However, if we print the type, we can see that it is definitely `str`.
 
-.. activecode:: ch02_22
-    :nocanvas:
+.. ipython:: python
 
-    print(str(17))
-    print(str(123.45))
-    print(type(str(123.45)))
+    str(17)
+    str(123.45)
+    type(str(123.45))
 
 **Check your understanding**
 
@@ -280,19 +285,12 @@ quotes are removed.  However, if we print the type, we can see that it is defini
 Variables
 ---------
 
-.. video:: assignvid
-    :controls:
-    :thumb: ../_static/assignment.png
-
-    http://media.interactivepython.org/thinkcsVideos/Variables.mov
-    http://media.interactivepython.org/thinkcsVideos/Variables.webm
-
 One of the most powerful features of a programming language is the ability to
 manipulate **variables**. A variable is a name that refers to a value.
 
 **Assignment statements** create new variables and also give them values to refer to.
 
-.. sourcecode:: python
+.. ipython:: python
 
     message = "What's up, Doc?"
     n = 17
@@ -308,7 +306,7 @@ The **assignment token**, ``=``, should not be confused with *equality* (we will
 side of the operator, with a *value*, on the right hand side.  This is why you
 will get an error if you enter:
 
-.. sourcecode:: python
+.. ipython:: python
 
     17 = n
 
@@ -330,16 +328,15 @@ If you ask Python to evaluate a variable, it will produce the value
 that is currently linked to the variable.  In other words, evaluating a variable will give you the value that is referred to
 by the variable.
 
-.. activecode:: ch02_9
-    :nocanvas:
+.. ipython:: python
 
     message = "What's up, Doc?"
     n = 17
     pi = 3.14159
 
-    print(message)
-    print(n)
-    print(pi)
+    message
+    n
+    pi
 
 In each case the result is the value of the variable.
 To see this in even more detail, we can run the program using codelens.
@@ -365,16 +362,15 @@ created.
 Variables also have
 types; again, we can ask the interpreter what they are.
 
-.. activecode:: ch02_10
-    :nocanvas:
+.. ipython:: python
 
     message = "What's up, Doc?"
     n = 17
     pi = 3.14159
 
-    print(type(message))
-    print(type(n))
-    print(type(pi))
+    type(message)
+    type(n)
+    type(pi)
 
 
 The type of a variable is the type of the object it currently refers to.

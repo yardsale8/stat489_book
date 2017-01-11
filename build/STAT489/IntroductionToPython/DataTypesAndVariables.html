@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.2. Data, Types, and Variables &mdash; Runestone Interactive Overview</title>
+    <title>1.3. Data, Types, and Variables &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="1. Introduction to Python" href="toctree.html" />
-    <link rel="next" title="1.3. Transforming Simple Data with Expressions" href="TransformingSimpleDataWithExpressions.html" />
-    <link rel="prev" title="1.1. What is Python?" href="WhatIsPython.html" />
+    <link rel="next" title="1.4. Python as an Object Oriented Language" href="PythonAsAnObjectOrientedLanguage.html" />
+    <link rel="prev" title="1.2. What is Python?" href="WhatIsPython.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,11 +263,11 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">1.2. Data, Types, and Variables</a><ul>
-<li><a class="reference internal" href="#values-and-data-types">1.2.1. Values and Data Types</a></li>
-<li><a class="reference internal" href="#type-conversion-functions">1.2.2. Type conversion functions</a></li>
-<li><a class="reference internal" href="#variables">1.2.3. Variables</a></li>
-<li><a class="reference internal" href="#variable-names-and-keywords">1.2.4. Variable Names and Keywords</a></li>
+<li><a class="reference internal" href="#">1.3. Data, Types, and Variables</a><ul>
+<li><a class="reference internal" href="#values-and-data-types">1.3.1. Values and Data Types</a></li>
+<li><a class="reference internal" href="#type-conversion-functions">1.3.2. Type conversion functions</a></li>
+<li><a class="reference internal" href="#variables">1.3.3. Variables</a></li>
+<li><a class="reference internal" href="#variable-names-and-keywords">1.3.4. Variable Names and Keywords</a></li>
 </ul>
 </li>
 </ul>
@@ -277,14 +277,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 1.1. What is Python?" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 1.2. What is Python?" data-toggle="tooltip">
     <a href="WhatIsPython.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 1.3. Transforming Simple Data with Expressions' data-toggle="tooltip" >
-    <a href="TransformingSimpleDataWithExpressions.html" >
+  <li id="relations-next" title='Next Chapter - 1.4. Python as an Object Oriented Language' data-toggle="tooltip" >
+    <a href="PythonAsAnObjectOrientedLanguage.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -315,9 +315,9 @@
 <div class="container" id="main-content">
   
   <div class="section" id="data-types-and-variables">
-<h1>1.2. Data, Types, and Variables<a class="headerlink" href="#data-types-and-variables" title="Permalink to this headline">¶</a></h1>
+<h1>1.3. Data, Types, and Variables<a class="headerlink" href="#data-types-and-variables" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="values-and-data-types">
-<h2>1.2.1. Values and Data Types<a class="headerlink" href="#values-and-data-types" title="Permalink to this headline">¶</a></h2>
+<h2>1.3.1. Values and Data Types<a class="headerlink" href="#values-and-data-types" title="Permalink to this headline">¶</a></h2>
 <p>A <strong>value</strong> is one of the fundamental things &#8212; like a word or a number &#8212;
 that a program manipulates. The values we have seen so far are <code class="docutils literal"><span class="pre">5</span></code> (the
 result when we added <code class="docutils literal"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code>), and <code class="docutils literal"><span class="pre">&quot;Hello,</span> <span class="pre">World!&quot;</span></code>.  We often refer to these values as <strong>objects</strong> and we will use the words value and object interchangeably.</p>
@@ -331,114 +331,103 @@ contains a string or sequence of letters. You (and the interpreter) can identify
 because they are enclosed in quotation marks.</p>
 <p>If you are not sure what class a value falls into, Python has a function called
 <strong>type</strong> which can tell you.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="gh">Out[1]: </span><span class="go">str</span>
 
-<textarea data-component="activecode" id=ch02_1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(type("Hello, World!"))
-print(type(17))
-print("Hello, World")
-</textarea>
-<p>Not surprisingly, strings belong to the class <strong>str</strong> and integers belong to the
-class <strong>int</strong>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">When we show the value of a string using the <code class="docutils literal"><span class="pre">print</span></code> function, such as in the third example above, the quotes are no longer present.  The
-value of the string is the sequence of characters inside the quotes.  The quotes are only necessary to help Python know what the value is.</p>
-</div>
-<p>In the Python shell, it is not necessary to use the <code class="docutils literal"><span class="pre">print</span></code> function to see the values shown above.  The shell evaluates the Python function and automatically prints the result.  For example, consider the shell session shown below.  When
-we ask the shell to evaluate <code class="docutils literal"><span class="pre">type(&quot;Hello,</span> <span class="pre">World!&quot;)</span></code>, it responds with the appropriate answer and then goes on to
-display the prompt for the next use.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>Python 3.1.2 (r312:79360M, Mar 24 2010, 01:33:18)
-[GCC 4.0.1 (Apple Inc. build 5493)] on darwin
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt; type(&quot;Hello, World!&quot;)
-&lt;class &#39;str&#39;&gt;
-&gt;&gt;&gt; type(17)
-&lt;class &#39;int&#39;&gt;
-&gt;&gt;&gt; &quot;Hello, World&quot;
-&#39;Hello, World&#39;
-&gt;&gt;&gt;
+<span class="gp">In [2]: </span><span class="nb">type</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="go">            Out[2]: int</span>
+
+<span class="gp">In [3]: </span><span class="s2">&quot;Hello, World&quot;</span>
+<span class="go">                        Out[3]: &#39;Hello, World&#39;</span>
 </pre></div>
 </div>
-<p>Note that in the last example, we simply ask the shell to evaluate the string &#8220;Hello, World&#8221;.  The result is as you might expect, the string itself.</p>
+<p>Not surprisingly, strings belong to the class <strong>str</strong> and integers belong to the
+class <strong>int</strong>.</p>
 <p>Continuing with our discussion of data types, numbers with a decimal point belong to a class
 called <strong>float</strong>, because these numbers are represented in a format called
 <em>floating-point</em>.  At this stage, you can treat the words <em>class</em> and <em>type</em>
 interchangeably.  We&#8217;ll come back to a deeper understanding of what a class
 is in later chapters.</p>
-
-<textarea data-component="activecode" id=ch02_2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(type(3.2))
-</textarea>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="nb">type</span><span class="p">(</span><span class="mf">3.2</span><span class="p">)</span>
+<span class="gh">Out[4]: </span><span class="go">float</span>
+</pre></div>
+</div>
 <p>What about values like <code class="docutils literal"><span class="pre">&quot;17&quot;</span></code> and <code class="docutils literal"><span class="pre">&quot;3.2&quot;</span></code>? They look like numbers, but they
 are in quotation marks like strings.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;17&quot;</span><span class="p">)</span>
+<span class="gh">Out[5]: </span><span class="go">str</span>
 
-<textarea data-component="activecode" id=ch02_3 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(type("17"))
-print(type("3.2"))
-</textarea>
+<span class="gp">In [6]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;3.2&quot;</span><span class="p">)</span>
+<span class="go">            Out[6]: str</span>
+</pre></div>
+</div>
 <p>They&#8217;re strings!</p>
 <p>Strings in Python can be enclosed in either single quotes (<code class="docutils literal"><span class="pre">'</span></code>) or double
 quotes (<code class="docutils literal"><span class="pre">&quot;</span></code>), or three of each (<code class="docutils literal"><span class="pre">'''</span></code> or <code class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></code>)</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;This is a string.&#39;</span><span class="p">)</span>
+<span class="gh">Out[7]: </span><span class="go">str</span>
 
-<textarea data-component="activecode" id=ch02_4 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(type('This is a string.') )
-print(type("And so is this.") )
-print(type("""and this.""") )
-print(type('''and even this...''') )
-</textarea>
+<span class="gp">In [8]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;And so is this.&quot;</span><span class="p">)</span>
+<span class="go">            Out[8]: str</span>
+
+<span class="gp">In [9]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;and this.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="go">                        Out[9]: str</span>
+
+<span class="gp">In [10]: </span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;and even this...&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="go">                                    Out[10]: str</span>
+</pre></div>
+</div>
 <p>Double quoted strings can contain single quotes inside them, as in <code class="docutils literal"><span class="pre">&quot;Bruce's</span>
 <span class="pre">beard&quot;</span></code>, and single quoted strings can have double quotes inside them, as in
 <code class="docutils literal"><span class="pre">'The</span> <span class="pre">knights</span> <span class="pre">who</span> <span class="pre">say</span> <span class="pre">&quot;Ni!&quot;'</span></code>.
 Strings enclosed with three occurrences of either quote symbol are called
 triple quoted strings.  They can contain either single or double quotes:</p>
-
-<textarea data-component="activecode" id=ch02_5 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print('''"Oh no", she exclaimed, "Ben's bike is broken!"''')
-</textarea>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="sd">&#39;&#39;&#39;&quot;Oh no&quot;, she exclaimed, &quot;Ben&#39;s bike is broken!&quot;&#39;&#39;&#39;</span>
+<span class="gh">Out[11]: </span><span class="go">&#39;&quot;Oh no&quot;, she exclaimed, &quot;Ben\&#39;s bike is broken!&quot;&#39;</span>
+</pre></div>
+</div>
 <p>Triple quoted strings can even span multiple lines:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;This message will</span>
+<span class="gp">   ....: </span><span class="s2">span several</span>
+<span class="gp">   ....: </span><span class="s2">lines.&quot;&quot;&quot;</span>
+<span class="gp">   ....: </span>
 
-<textarea data-component="activecode" id=ch02_6 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-message = """This message will
-span several
-lines."""
-print(message)
+<span class="gp">In [13]: </span><span class="n">message</span>
+<span class="gh">Out[13]: </span><span class="go">&#39;This message will\nspan several\nlines.&#39;</span>
 
-print("""This message will span
-several lines
-of the text.""")
-</textarea>
+<span class="gp">In [14]: </span><span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="go">                                                   This message will</span>
+<span class="go">span several</span>
+<span class="go">lines.</span>
+
+<span class="gp">In [15]: </span><span class="sd">&quot;&quot;&quot;This message will span</span>
+<span class="gp">   ....: </span><span class="sd">several lines</span>
+<span class="gp">   ....: </span><span class="sd">of the text.&quot;&quot;&quot;</span>
+<span class="gp">   ....: </span>
+<span class="go">                                                                                         Out[15]: &#39;This message will span\nseveral lines\nof the text.&#39;</span>
+</pre></div>
+</div>
 <p>Python doesn&#8217;t care whether you use single or double quotes or the
 three-of-a-kind quotes to surround your strings.  Once it has parsed the text of
 your program or command, the way it stores the value is identical in all cases,
 and the surrounding quotes are not part of the value.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice that when we evaluate a multiline string, the newlines are
+represented by the special character <code class="docutils literal"><span class="pre">&quot;\n&quot;</span></code>. On the otherhand, when a
+multiline string is printed with the <code class="docutils literal"><span class="pre">print</span></code> function, the new lines are
+rendered as new lines.</p>
+</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="s1">&#39;This is a string.&#39;</span>
+<span class="gh">Out[16]: </span><span class="go">&#39;This is a string.&#39;</span>
 
-<textarea data-component="activecode" id=ch02_7 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print('This is a string.')
-print("""And so is this.""")
-</textarea>
+<span class="gp">In [17]: </span><span class="sd">&quot;&quot;&quot;And so is this.&quot;&quot;&quot;</span>
+<span class="go">                             Out[17]: &#39;And so is this.&#39;</span>
+</pre></div>
+</div>
 <p>So the Python language designers usually chose to surround their strings by
 single quotes.  What do you think would happen if the string already contained
 single quotes?</p>
-<p>When you type a large integer, you might be tempted to use commas between
-groups of three digits, as in <code class="docutils literal"><span class="pre">42,000</span></code>. This is not a legal integer in
-Python, but it does mean something else, which is legal:</p>
-
-<textarea data-component="activecode" id=ch02_8 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(42000)
-print(42,000)
-</textarea>
-<p>Well, that&#8217;s not what we expected at all! Because of the comma, Python chose to
-treat this as a <em>pair</em> of values.     In fact, the print function can print any number of values as long
-as you separate them by commas.  Notice that the values are separated by spaces when they are displayed.</p>
-
-<textarea data-component="activecode" id=ch02_8a data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(42, 17, 56, 34, 11, 4.35, 32)
-print(3.4, "hello", 45)
-</textarea>
-<p>Remember not to put commas or spaces in your integers, no
-matter how big they are. Also revisit what we said in the previous chapter:
-formal languages are strict, the notation is concise, and even the smallest
-change might mean something quite different from what you intended.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_1_1">
@@ -468,7 +457,7 @@ change might mean something quite different from what you intended.</p>
             </ul>
             </div>
 <div class="section" id="type-conversion-functions">
-<span id="index-0"></span><h2>1.2.2. Type conversion functions<a class="headerlink" href="#type-conversion-functions" title="Permalink to this headline">¶</a></h2>
+<span id="index-0"></span><h2>1.3.2. Type conversion functions<a class="headerlink" href="#type-conversion-functions" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes it is necessary to convert values from one type to another.  Python provides
 a few simple functions that will allow us to do that.  The functions <code class="docutils literal"><span class="pre">int</span></code>, <code class="docutils literal"><span class="pre">float</span></code> and <code class="docutils literal"><span class="pre">str</span></code>
 will (attempt to) convert their arguments into types <cite>int</cite>, <cite>float</cite> and <cite>str</cite>
@@ -477,35 +466,75 @@ respectively.  We call these <strong>type conversion</strong> functions.</p>
 into an int. For floating point numbers, it <em>discards</em> the decimal portion of
 the number - a process we call <em>truncation towards zero</em> on the number line.
 Let us see this in action:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="mf">3.14</span>
+<span class="gh">Out[18]: </span><span class="go">3.14</span>
 
-<textarea data-component="activecode" id=ch02_20 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(3.14, int(3.14))
-print(3.9999, int(3.9999))       # This doesn't round to the closest int!
-print(3.0, int(3.0))
-print(-3.999, int(-3.999))        # Note that the result is closer to zero
+<span class="gp">In [19]: </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="go">              Out[19]: 3</span>
 
-print("2345", int("2345"))        # parse a string to produce an int
-print(17, int(17))                # int even works on integers
-print(int("23bottles"))
-</textarea>
+<span class="gp">In [20]: </span><span class="mf">3.9999</span>
+<span class="go">                         Out[20]: 3.9999</span>
+
+<span class="gp">In [21]: </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.9999</span><span class="p">)</span>       <span class="c1"># This doesn&#39;t round to the closest int</span>
+<span class="go">                                         Out[21]: 3</span>
+
+<span class="gp">In [22]: </span><span class="mf">3.0</span>
+<span class="go">                                                    Out[22]: 3.0</span>
+
+<span class="gp">In [23]: </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="go">                                                                 Out[23]: 3</span>
+
+<span class="gp">In [24]: </span><span class="o">-</span><span class="mf">3.999</span>
+<span class="go">                                                                            Out[24]: -3.999</span>
+
+<span class="gp">In [25]: </span><span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mf">3.999</span><span class="p">)</span>        <span class="c1"># Note that the result is closer to zero</span>
+<span class="go">                                                                                            Out[25]: -3</span>
+
+<span class="gp">In [26]: </span><span class="s2">&quot;2345&quot;</span>
+<span class="go">                                                                                                        Out[26]: &#39;2345&#39;</span>
+
+<span class="gp">In [27]: </span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;2345&quot;</span><span class="p">)</span>        <span class="c1"># parse a string to produce an int</span>
+<span class="go">                                                                                                                        Out[27]: 2345</span>
+
+<span class="gp">In [28]: </span><span class="mi">17</span>
+<span class="go">                                                                                                                                      Out[28]: 17</span>
+
+<span class="gp">In [29]: </span><span class="nb">int</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>                <span class="c1"># int even works on integer</span>
+<span class="go">                                                                                                                                                  Out[29]: 17</span>
+
+<span class="gp">In [30]: </span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;23bottles&quot;</span><span class="p">)</span>
+<span class="go">                                                                                                                                                              ---------------------------------------------------------------------------</span>
+<span class="go">ValueError                                Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-30-f9490e7a2c12&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 int(&quot;23bottles&quot;)</span>
+
+<span class="go">ValueError: invalid literal for int() with base 10: &#39;23bottles&#39;</span>
+</pre></div>
+</div>
 <p>The last case shows that a string has to be a syntactically legal number,
 otherwise you&#8217;ll get one of those pesky runtime errors.  Modify the example by deleting the
 <code class="docutils literal"><span class="pre">bottles</span></code> and rerun the program.  You should see the integer <code class="docutils literal"><span class="pre">23</span></code>.</p>
 <p>The type converter <code class="docutils literal"><span class="pre">float</span></code> can turn an integer, a float, or a syntactically
 legal string into a float.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">)</span>
+<span class="gh">Out[31]: </span><span class="go">123.45</span>
 
-<textarea data-component="activecode" id=ch02_21 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(float("123.45"))
-print(type(float("123.45")))
-</textarea>
+<span class="gp">In [32]: </span><span class="nb">type</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">))</span>
+<span class="go">                Out[32]: float</span>
+</pre></div>
+</div>
 <p>The type converter <code class="docutils literal"><span class="pre">str</span></code> turns its argument into a string.  Remember that when we print a string, the
 quotes are removed.  However, if we print the type, we can see that it is definitely <cite>str</cite>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="nb">str</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="gh">Out[33]: </span><span class="go">&#39;17&#39;</span>
 
-<textarea data-component="activecode" id=ch02_22 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(str(17))
-print(str(123.45))
-print(type(str(123.45)))
-</textarea>
+<span class="gp">In [34]: </span><span class="nb">str</span><span class="p">(</span><span class="mf">123.45</span><span class="p">)</span>
+<span class="go">              Out[34]: &#39;123.45&#39;</span>
+
+<span class="gp">In [35]: </span><span class="nb">type</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mf">123.45</span><span class="p">))</span>
+<span class="go">                                Out[35]: str</span>
+</pre></div>
+</div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_2_1">
@@ -526,37 +555,15 @@ print(type(str(123.45)))
             </ul>
             </div>
 <div class="section" id="variables">
-<span id="index-1"></span><h2>1.2.3. Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
-<div id="assignvid" class="video_popup" >
-<video controls preload="none"  poster="../_static/assignment.png">
-    <source src="http://media.interactivepython.org/thinkcsVideos/Variables.mov" type="video/mp4"></source>
-    <source src="http://media.interactivepython.org/thinkcsVideos/Variables.webm" type="video/webm"></source>
-    No supported video types
-</video>
-</div>
-<script>
-   jQuery(function($) {
-      var rb = new RunestoneBase();
-      $('#assignvid_thumb').click(function(e) {
-         $('#assignvid').show();
-         $('#assignvid_thumb').hide();
-         rb.logBookEvent({'event':'video','act':'play','div_id': 'assignvid'});
-         // Log the run event
-      });
-      $('#assignvid video').one("click", function(){
-        this.play();
-      });
-      $('#assignvid video').one("play", function(){
-        rb.logBookEvent({'event':'video','act':'play','div_id': 'assignvid'});
-      });
-   });
-</script>
+<span id="index-1"></span><h2>1.3.3. Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
 <p>One of the most powerful features of a programming language is the ability to
 manipulate <strong>variables</strong>. A variable is a name that refers to a value.</p>
 <p><strong>Assignment statements</strong> create new variables and also give them values to refer to.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s up, Doc?&quot;</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
-<span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s up, Doc?&quot;</span>
+
+<span class="gp">In [37]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
+
+<span class="gp">In [38]: </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
 </pre></div>
 </div>
 <p>This example makes three assignments. The first assigns the string value
@@ -567,7 +574,11 @@ integer <code class="docutils literal"><span class="pre">17</span></code> to <co
 <code class="docutils literal"><span class="pre">==</span></code> token).  The assignment statement links a <em>name</em>, on the left hand
 side of the operator, with a <em>value</em>, on the right hand side.  This is why you
 will get an error if you enter:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">17</span> <span class="o">=</span> <span class="n">n</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="mi">17</span> <span class="o">=</span> <span class="n">n</span>
+<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-39-e0d672332486&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
+<span class="g g-Whitespace">    </span><span class="mi">17</span> <span class="o">=</span> <span class="n">n</span>
+          <span class="o">^</span>
+<span class="ne">SyntaxError</span>: can&#39;t assign to literal
 </pre></div>
 </div>
 <div class="admonition tip">
@@ -584,16 +595,22 @@ This diagram shows the result of executing the assignment statements shown above
 <p>If you ask Python to evaluate a variable, it will produce the value
 that is currently linked to the variable.  In other words, evaluating a variable will give you the value that is referred to
 by the variable.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s up, Doc?&quot;</span>
 
-<textarea data-component="activecode" id=ch02_9 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-message = "What's up, Doc?"
-n = 17
-pi = 3.14159
+<span class="gp">In [41]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
 
-print(message)
-print(n)
-print(pi)
-</textarea>
+<span class="gp">In [42]: </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+
+<span class="gp">In [43]: </span><span class="n">message</span>
+<span class="gh">Out[43]: </span><span class="go">&quot;What&#39;s up, Doc?&quot;</span>
+
+<span class="gp">In [44]: </span><span class="n">n</span>
+<span class="go">                           Out[44]: 17</span>
+
+<span class="gp">In [45]: </span><span class="n">pi</span>
+<span class="go">                                       Out[45]: 3.14159</span>
+</pre></div>
+</div>
 <p>In each case the result is the value of the variable.
 To see this in even more detail, we can run the program using codelens.</p>
 
@@ -602,7 +619,7 @@ To see this in even more detail, we can run the program using codelens.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch02_9_codelens)</span> </p>
 </div>
 <script type="text/javascript">
-var ch02_9_codelens_trace = {"code": "message = \"What's up, Doc?\"\nn = 17\npi = 3.14159\n\nprint(message)\nprint(n)\nprint(pi)", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 2, "stdout": "", "ordered_globals": ["message"], "heap": {}, "globals": {"message": "What's up, Doc?"}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["message", "n"], "heap": {}, "globals": {"n": 17, "message": "What's up, Doc?"}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "", "ordered_globals": ["message", "n", "pi"], "heap": {}, "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 6, "stdout": "What's up, Doc?\n", "ordered_globals": ["message", "n", "pi"], "heap": {}, "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 7, "stdout": "What's up, Doc?\n17\n", "ordered_globals": ["message", "n", "pi"], "heap": {}, "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 7, "stdout": "What's up, Doc?\n17\n3.14159\n", "ordered_globals": ["message", "n", "pi"], "heap": {}, "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "return"}]};
+var ch02_9_codelens_trace = {"code": "message = \"What's up, Doc?\"\nn = 17\npi = 3.14159\n\nprint(message)\nprint(n)\nprint(pi)", "trace": [{"stdout": "", "func_name": "<module>", "globals": {}, "event": "step_line", "stack_to_render": [], "line": 1, "heap": {}, "ordered_globals": []}, {"stdout": "", "func_name": "<module>", "globals": {"message": "What's up, Doc?"}, "event": "step_line", "stack_to_render": [], "line": 2, "heap": {}, "ordered_globals": ["message"]}, {"stdout": "", "func_name": "<module>", "globals": {"n": 17, "message": "What's up, Doc?"}, "event": "step_line", "stack_to_render": [], "line": 3, "heap": {}, "ordered_globals": ["message", "n"]}, {"stdout": "", "func_name": "<module>", "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "step_line", "stack_to_render": [], "line": 5, "heap": {}, "ordered_globals": ["message", "n", "pi"]}, {"stdout": "What's up, Doc?\n", "func_name": "<module>", "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "step_line", "stack_to_render": [], "line": 6, "heap": {}, "ordered_globals": ["message", "n", "pi"]}, {"stdout": "What's up, Doc?\n17\n", "func_name": "<module>", "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "step_line", "stack_to_render": [], "line": 7, "heap": {}, "ordered_globals": ["message", "n", "pi"]}, {"stdout": "What's up, Doc?\n17\n3.14159\n", "func_name": "<module>", "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "return", "stack_to_render": [], "line": 7, "heap": {}, "ordered_globals": ["message", "n", "pi"]}]};
 var ch02_9_codelens_vis;
 
 $(document).ready(function() {
@@ -646,16 +663,22 @@ the variables and the values they reference as those references are
 created.</p>
 <p>Variables also have
 types; again, we can ask the interpreter what they are.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s up, Doc?&quot;</span>
 
-<textarea data-component="activecode" id=ch02_10 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-message = "What's up, Doc?"
-n = 17
-pi = 3.14159
+<span class="gp">In [47]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
 
-print(type(message))
-print(type(n))
-print(type(pi))
-</textarea>
+<span class="gp">In [48]: </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+
+<span class="gp">In [49]: </span><span class="nb">type</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="gh">Out[49]: </span><span class="go">str</span>
+
+<span class="gp">In [50]: </span><span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">             Out[50]: int</span>
+
+<span class="gp">In [51]: </span><span class="nb">type</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="go">                          Out[51]: float</span>
+</pre></div>
+</div>
 <p>The type of a variable is the type of the object it currently refers to.</p>
 <p>We use variables in a program to &#8220;remember&#8221; things, like the current score at
 the football game.  But variables are <em>variable</em>. This means they can change
@@ -676,7 +699,7 @@ assignment we even give it a value that is of a different type.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch02_11)</span> </p>
 </div>
 <script type="text/javascript">
-var ch02_11_trace = {"code": "day = \"Thursday\"\nprint(day)\nday = \"Friday\"\nprint(day)\nday = 21\nprint(day)", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 2, "stdout": "", "ordered_globals": ["day"], "heap": {}, "globals": {"day": "Thursday"}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "Thursday\n", "ordered_globals": ["day"], "heap": {}, "globals": {"day": "Thursday"}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 4, "stdout": "Thursday\n", "ordered_globals": ["day"], "heap": {}, "globals": {"day": "Friday"}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "Thursday\nFriday\n", "ordered_globals": ["day"], "heap": {}, "globals": {"day": "Friday"}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 6, "stdout": "Thursday\nFriday\n", "ordered_globals": ["day"], "heap": {}, "globals": {"day": 21}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 6, "stdout": "Thursday\nFriday\n21\n", "ordered_globals": ["day"], "heap": {}, "globals": {"day": 21}, "event": "return"}]};
+var ch02_11_trace = {"code": "day = \"Thursday\"\nprint(day)\nday = \"Friday\"\nprint(day)\nday = 21\nprint(day)", "trace": [{"stdout": "", "func_name": "<module>", "globals": {}, "event": "step_line", "stack_to_render": [], "line": 1, "heap": {}, "ordered_globals": []}, {"stdout": "", "func_name": "<module>", "globals": {"day": "Thursday"}, "event": "step_line", "stack_to_render": [], "line": 2, "heap": {}, "ordered_globals": ["day"]}, {"stdout": "Thursday\n", "func_name": "<module>", "globals": {"day": "Thursday"}, "event": "step_line", "stack_to_render": [], "line": 3, "heap": {}, "ordered_globals": ["day"]}, {"stdout": "Thursday\n", "func_name": "<module>", "globals": {"day": "Friday"}, "event": "step_line", "stack_to_render": [], "line": 4, "heap": {}, "ordered_globals": ["day"]}, {"stdout": "Thursday\nFriday\n", "func_name": "<module>", "globals": {"day": "Friday"}, "event": "step_line", "stack_to_render": [], "line": 5, "heap": {}, "ordered_globals": ["day"]}, {"stdout": "Thursday\nFriday\n", "func_name": "<module>", "globals": {"day": 21}, "event": "step_line", "stack_to_render": [], "line": 6, "heap": {}, "ordered_globals": ["day"]}, {"stdout": "Thursday\nFriday\n21\n", "func_name": "<module>", "globals": {"day": 21}, "event": "return", "stack_to_render": [], "line": 6, "heap": {}, "ordered_globals": ["day"]}]};
 var ch02_11_vis;
 
 $(document).ready(function() {
@@ -741,7 +764,7 @@ or change the variable so that it will always reflect the correct value.</p>
             </ul>
             </div>
 <div class="section" id="variable-names-and-keywords">
-<span id="index-2"></span><h2>1.2.4. Variable Names and Keywords<a class="headerlink" href="#variable-names-and-keywords" title="Permalink to this headline">¶</a></h2>
+<span id="index-2"></span><h2>1.3.4. Variable Names and Keywords<a class="headerlink" href="#variable-names-and-keywords" title="Permalink to this headline">¶</a></h2>
 <p><strong>Variable names</strong> can be arbitrarily long. They can contain both letters and
 digits, but they have to begin with a letter or an underscore. Although it is
 legal to use uppercase letters, by convention we don&#8217;t. If you do, remember
@@ -860,19 +883,19 @@ want it to have.</p>
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 1.1. What is Python?' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 1.2. What is Python?' data-toggle="tooltip">
     <a href="WhatIsPython.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="WhatIsPython.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 1.3. Transforming Simple Data with Expressions' data-toggle="tooltip" >
-    <a href="TransformingSimpleDataWithExpressions.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 1.4. Python as an Object Oriented Language' data-toggle="tooltip" >
+    <a href="PythonAsAnObjectOrientedLanguage.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="TransformingSimpleDataWithExpressions.html" >Next Section - 1.3. Transforming Simple Data with Expressions</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="PythonAsAnObjectOrientedLanguage.html" >Next Section - 1.4. Python as an Object Oriented Language</a>
 
 <script type="text/javascript">
 

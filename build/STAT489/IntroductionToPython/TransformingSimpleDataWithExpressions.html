@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.3. Transforming Simple Data with Expressions &mdash; Runestone Interactive Overview</title>
+    <title>2.1. Transforming Simple Data with Expressions &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="1. Introduction to Python" href="toctree.html" />
-    <link rel="next" title="1.4. Saving Expressions for Later Execution - The lambda Expression" href="SavingExpressionsForLaterExecution.html" />
-    <link rel="prev" title="1.2. Data, Types, and Variables" href="DataTypesAndVariables.html" />
+    <link rel="up" title="2. Expressions and Evaluation" href="toctree2.html" />
+    <link rel="next" title="2.2. Saving Expressions for Later Execution - The lambda Expression" href="SavingExpressionsForLaterExecution.html" />
+    <link rel="prev" title="2. Expressions and Evaluation" href="toctree2.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,15 +263,14 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">1.3. Transforming Simple Data with Expressions</a><ul>
-<li><a class="reference internal" href="#statements-and-expressions">1.3.1. Statements and Expressions</a></li>
-<li><a class="reference internal" href="#operators-and-operands">1.3.2. Operators and Operands</a></li>
-<li><a class="reference internal" href="#order-of-operations">1.3.3. Order of Operations</a></li>
-<li><a class="reference internal" href="#boolean-values-and-boolean-expressions">1.3.4. Boolean Values and Boolean Expressions</a></li>
-<li><a class="reference internal" href="#logical-operators">1.3.5. Logical operators</a></li>
-<li><a class="reference internal" href="#precedence-of-operators">1.3.6. Precedence of Operators</a></li>
-<li><a class="reference internal" href="#conditional-execution-binary-selection">1.3.7. Conditional Execution: Binary Selection</a></li>
-<li><a class="reference internal" href="#abstraction-with-variables-and-expressions">1.3.8. Abstraction with Variables and Expressions</a></li>
+<li><a class="reference internal" href="#">2.1. Transforming Simple Data with Expressions</a><ul>
+<li><a class="reference internal" href="#statements-and-expressions">2.1.1. Statements and Expressions</a></li>
+<li><a class="reference internal" href="#operators-and-operands">2.1.2. Operators and Operands</a></li>
+<li><a class="reference internal" href="#order-of-operations">2.1.3. Order of Operations</a></li>
+<li><a class="reference internal" href="#boolean-values-and-boolean-expressions">2.1.4. Boolean Values and Boolean Expressions</a></li>
+<li><a class="reference internal" href="#logical-operators">2.1.5. Logical operators</a></li>
+<li><a class="reference internal" href="#precedence-of-operators">2.1.6. Precedence of Operators</a></li>
+<li><a class="reference internal" href="#conditional-execution-binary-selection">2.1.7. Conditional Execution: Binary Selection</a></li>
 </ul>
 </li>
 </ul>
@@ -281,13 +280,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 1.2. Data, Types, and Variables" data-toggle="tooltip">
-    <a href="DataTypesAndVariables.html" >
+  <li id="relations-prev" title="Previous Chapter - 2. Expressions and Evaluation" data-toggle="tooltip">
+    <a href="toctree2.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 1.4. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 2.2. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression' data-toggle="tooltip" >
     <a href="SavingExpressionsForLaterExecution.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -319,76 +318,51 @@
 <div class="container" id="main-content">
   
   <div class="section" id="transforming-simple-data-with-expressions">
-<h1>1.3. Transforming Simple Data with Expressions<a class="headerlink" href="#transforming-simple-data-with-expressions" title="Permalink to this headline">¶</a></h1>
+<h1>2.1. Transforming Simple Data with Expressions<a class="headerlink" href="#transforming-simple-data-with-expressions" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="statements-and-expressions">
-<h2>1.3.1. Statements and Expressions<a class="headerlink" href="#statements-and-expressions" title="Permalink to this headline">¶</a></h2>
-<div id="expression_vid" class="video_popup" >
-<video controls preload="none"  poster="../_static/expressions.png">
-    <source src="http://media.interactivepython.org/thinkcsVideos/Expressions.mov" type="video/mp4"></source>
-    <source src="http://media.interactivepython.org/thinkcsVideos/Expressions.webm" type="video/webm"></source>
-    No supported video types
-</video>
-</div>
-<script>
-   jQuery(function($) {
-      var rb = new RunestoneBase();
-      $('#expression_vid_thumb').click(function(e) {
-         $('#expression_vid').show();
-         $('#expression_vid_thumb').hide();
-         rb.logBookEvent({'event':'video','act':'play','div_id': 'expression_vid'});
-         // Log the run event
-      });
-      $('#expression_vid video').one("click", function(){
-        this.play();
-      });
-      $('#expression_vid video').one("play", function(){
-        rb.logBookEvent({'event':'video','act':'play','div_id': 'expression_vid'});
-      });
-   });
-</script>
+<h2>2.1.1. Statements and Expressions<a class="headerlink" href="#statements-and-expressions" title="Permalink to this headline">¶</a></h2>
 <p>A <strong>statement</strong> is an instruction that the Python interpreter can execute. We
 have only seen the assignment statement so far.  Some other kinds of statements
 that we&#8217;ll see shortly are <code class="docutils literal"><span class="pre">while</span></code> statements, <code class="docutils literal"><span class="pre">for</span></code> statements, <code class="docutils literal"><span class="pre">if</span></code>
 statements,  and <code class="docutils literal"><span class="pre">import</span></code> statements.  (There are other kinds too!)</p>
-<p id="index-0">An <strong>expression</strong> is a combination of values, variables, operators, and calls
-to functions. Expressions need to be evaluated.  If you ask Python to <code class="docutils literal"><span class="pre">print</span></code> an expression, the interpreter
-<strong>evaluates</strong> the expression and displays the result.</p>
+<p>An <strong>expression</strong> is a combination of values, variables, operators, and calls to
+functions. Expressions need to be evaluated.  If you ask Python to <code class="docutils literal"><span class="pre">print</span></code> an
+expression, the interpreter <strong>evaluates</strong> the expression and displays the
+result.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">2</span>
 
-<textarea data-component="activecode" id=ch02_13 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(1 + 1)
-print(len("hello"))
-</textarea>
+<span class="gp">In [2]: </span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">))</span>
+<span class="go">  5</span>
+</pre></div>
+</div>
 <p>In this example <code class="docutils literal"><span class="pre">len</span></code> is a built-in Python function that returns the number
 of characters in a string.  We&#8217;ve previously seen the <code class="docutils literal"><span class="pre">print</span></code> and the
 <code class="docutils literal"><span class="pre">type</span></code> functions, so this is our third example of a function!</p>
 <p>The <em>evaluation of an expression</em> produces a value, which is why expressions
 can appear on the right hand side of assignment statements. A value all by
 itself is a simple expression, and so is a variable.  Evaluating a variable gives the value that the variable refers to.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">y</span> <span class="o">=</span> <span class="mf">3.14</span>
 
-<textarea data-component="activecode" id=ch02_14 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-y = 3.14
-x = len("hello")
-print(x)
-print(y)
-</textarea>
-<p>If we take a look at this same example in the Python shell, we will see one of the distinct differences between statements and expressions.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="mf">3.14</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="go">5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="go">3.14</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
-<span class="go">3.14</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">In [4]: </span><span class="n">x</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+
+<span class="gp">In [5]: </span><span class="n">x</span>
+<span class="gh">Out[5]: </span><span class="go">5</span>
+
+<span class="gp">In [6]: </span><span class="n">y</span>
+<span class="go">          Out[6]: 3.14</span>
 </pre></div>
 </div>
-<p>Note that when we enter the assignment statement, <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">3.14</span></code>, only the prompt is returned.  There is no value.  This
-is due to the fact that statements, such as the assignment statement, do not return a value.  They are simply executed.</p>
-<p>On the other hand, the result of executing the assignment statement is the creation of a reference from a variable, <code class="docutils literal"><span class="pre">y</span></code>, to a value, <code class="docutils literal"><span class="pre">3.14</span></code>.  When we execute the print function working on <code class="docutils literal"><span class="pre">y</span></code>, we see the value that y is referring to.  In fact, evaluating <code class="docutils literal"><span class="pre">y</span></code> by itself results in the same response.</p>
+<p>Note that when we enter the assignment statement, <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">3.14</span></code>, only the prompt
+is returned.  There is no value.  This is due to the fact that statements, such
+as the assignment statement, do not return a value.  They are simply executed.</p>
+<p>On the other hand, the result of executing the assignment statement is the
+creation of a reference from a variable, <code class="docutils literal"><span class="pre">y</span></code>, to a value, <code class="docutils literal"><span class="pre">3.14</span></code>.  When we
+execute the print function working on <code class="docutils literal"><span class="pre">y</span></code>, we see the value that y is
+referring to.  In fact, evaluating <code class="docutils literal"><span class="pre">y</span></code> by itself results in the same response.</p>
 </div>
 <div class="section" id="operators-and-operands">
-<span id="index-1"></span><h2>1.3.2. Operators and Operands<a class="headerlink" href="#operators-and-operands" title="Permalink to this headline">¶</a></h2>
+<span id="index-0"></span><h2>2.1.2. Operators and Operands<a class="headerlink" href="#operators-and-operands" title="Permalink to this headline">¶</a></h2>
 <p><strong>Operators</strong> are special tokens that represent computations like addition,
 multiplication and division. The values the operator works on are called
 <strong>operands</strong>.</p>
@@ -407,72 +381,96 @@ mean in Python what they mean in mathematics. The asterisk (<code class="docutil
 token for multiplication, and <code class="docutils literal"><span class="pre">**</span></code> is the token for exponentiation.
 Addition, subtraction, multiplication, and exponentiation all do what you
 expect.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="gh">Out[7]: </span><span class="go">5</span>
 
-<textarea data-component="activecode" id=ch02_15 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(2 + 3)
-print(2 - 3)
-print(2 * 3)
-print(2 ** 3)
-print(3 ** 2)
-</textarea>
+<span class="gp">In [8]: </span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span>
+<span class="go">          Out[8]: -1</span>
+
+<span class="gp">In [9]: </span><span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="go">                     Out[9]: 6</span>
+
+<span class="gp">In [10]: </span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="go">                               Out[10]: 8</span>
+
+<span class="gp">In [11]: </span><span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="go">                                          Out[11]: 9</span>
+</pre></div>
+</div>
 <p>When a variable name appears in the place of an operand, it is replaced with
 the value that it refers to before the operation is performed.
 For example, what if we wanted to convert 645 minutes into hours.
 In Python 3, division is denoted by the operator token <code class="docutils literal"><span class="pre">/</span></code> which always evaluates to a floating point
 result.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">minutes</span> <span class="o">=</span> <span class="mi">645</span>
 
-<textarea data-component="activecode" id=ch02_16 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-minutes = 645
-hours = minutes / 60
-print(hours)
-</textarea>
+<span class="gp">In [13]: </span><span class="n">hours</span> <span class="o">=</span> <span class="n">minutes</span> <span class="o">/</span> <span class="mi">60</span>
+
+<span class="gp">In [14]: </span><span class="n">hours</span>
+<span class="gh">Out[14]: </span><span class="go">10.75</span>
+</pre></div>
+</div>
 <p>What if, on the other hand, we had wanted to know how many <em>whole</em> hours there
 are and how many minutes remain.  To help answer this question, Python gives us a second flavor of
 the division operator.  This version, called <strong>integer division</strong>, uses the token
 <code class="docutils literal"><span class="pre">//</span></code>.  It always <em>truncates</em> its result down to the next smallest integer (to
 the left on the number line).</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="mi">7</span> <span class="o">/</span> <span class="mi">4</span>
+<span class="gh">Out[15]: </span><span class="go">1.75</span>
 
-<textarea data-component="activecode" id=ch02_17 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(7 / 4)
-print(7 // 4)
-minutes = 645
-hours = minutes // 60
-print(hours)
-</textarea>
-<p>Pay particular attention to the first two examples above.  Notice that the result of floating point division
-is <code class="docutils literal"><span class="pre">1.75</span></code> but the result of the integer division is simply <code class="docutils literal"><span class="pre">1</span></code>.
-Take care that you choose the correct flavor of the division operator.  If
-you&#8217;re working with expressions where you need floating point values, use the
-division operator <code class="docutils literal"><span class="pre">/</span></code>.  If you want an integer result, use <code class="docutils literal"><span class="pre">//</span></code>.</p>
-<p id="index-2">The <strong>modulus operator</strong>, sometimes also called the <strong>remainder operator</strong> or <strong>integer remainder operator</strong> works on integers (and integer expressions) and yields
-the remainder when the first operand is divided by the second. In Python, the
-modulus operator is a percent sign (<code class="docutils literal"><span class="pre">%</span></code>). The syntax is the same as for other
-operators.</p>
+<span class="gp">In [16]: </span><span class="mi">7</span> <span class="o">//</span> <span class="mi">4</span>
+<span class="go">              Out[16]: 1</span>
 
-<textarea data-component="activecode" id=ch02_18 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-quotient = 7 // 3     # This is the integer division operator
-print(quotient)
-remainder = 7 % 3
-print(remainder)
-</textarea>
-<p>In the above example, 7 divided by 3 is 2 when we use integer division and there is a remainder of 1.</p>
+<span class="gp">In [17]: </span><span class="n">minutes</span> <span class="o">=</span> <span class="mi">645</span>
+
+<span class="gp">In [18]: </span><span class="n">hours</span> <span class="o">=</span> <span class="n">minutes</span> <span class="o">//</span> <span class="mi">60</span>
+
+<span class="gp">In [19]: </span><span class="n">hours</span>
+<span class="gh">Out[19]: </span><span class="go">10</span>
+</pre></div>
+</div>
+<p>Pay particular attention to the first two examples above.  Notice that the
+result of floating point division is <code class="docutils literal"><span class="pre">1.75</span></code> but the result of the integer
+division is simply <code class="docutils literal"><span class="pre">1</span></code>.  Take care that you choose the correct flavor of the
+division operator.  If you&#8217;re working with expressions where you need floating
+point values, use the division operator <code class="docutils literal"><span class="pre">/</span></code>.  If you want an integer result,
+use <code class="docutils literal"><span class="pre">//</span></code>.</p>
+<p id="index-1">The <strong>modulus operator</strong>, sometimes also called the <strong>remainder operator</strong> or
+<strong>integer remainder operator</strong> works on integers (and integer expressions) and
+yields the remainder when the first operand is divided by the second. In Python,
+the modulus operator is a percent sign (<code class="docutils literal"><span class="pre">%</span></code>). The syntax is the same as for
+other operators.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">quotient</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">//</span> <span class="mi">3</span>     <span class="c1"># This is the integer division operator</span>
+
+<span class="gp">In [21]: </span><span class="n">quotient</span>
+<span class="gh">Out[21]: </span><span class="go">2</span>
+
+<span class="gp">In [22]: </span><span class="n">remainder</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">%</span> <span class="mi">3</span>
+
+<span class="gp">In [23]: </span><span class="n">remainder</span>
+<span class="gh">Out[23]: </span><span class="go">1</span>
+</pre></div>
+</div>
+<p>In the above example, 7 divided by 3 is 2 when we use integer division and there
+is a remainder of 1.</p>
 <p>The modulus operator turns out to be surprisingly useful. For example, you can
 check whether one number is divisible by another&#8212;if <code class="docutils literal"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">y</span></code> is zero, then
-<code class="docutils literal"><span class="pre">x</span></code> is divisible by <code class="docutils literal"><span class="pre">y</span></code>.
-Also, you can extract the right-most digit or digits from a number.  For
-example, <code class="docutils literal"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">10</span></code> yields the right-most digit of <code class="docutils literal"><span class="pre">x</span></code> (in base 10).
-Similarly <code class="docutils literal"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">100</span></code> yields the last two digits.</p>
-<p>Finally, returning to our time example, the remainder operator is extremely useful for doing conversions, say from seconds,
-to hours, minutes and seconds.
-If we start with a number of seconds, say 7684, the following program uses integer division and remainder to convert to an easier form.  Step through it to be sure you understand how the division and remainder operators are being used to
-compute the correct values.</p>
+<code class="docutils literal"><span class="pre">x</span></code> is divisible by <code class="docutils literal"><span class="pre">y</span></code>.  Also, you can extract the right-most digit or
+digits from a number.  For example, <code class="docutils literal"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">10</span></code> yields the right-most digit of
+<code class="docutils literal"><span class="pre">x</span></code> (in base 10).  Similarly <code class="docutils literal"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">100</span></code> yields the last two digits.</p>
+<p>Finally, returning to our time example, the remainder operator is extremely
+useful for doing conversions, say from seconds, to hours, minutes and seconds.
+If we start with a number of seconds, say 7684, the following program uses
+integer division and remainder to convert to an easier form.  Step through it to
+be sure you understand how the division and remainder operators are being used
+to compute the correct values.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="ch02_19_codelens"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (ch02_19_codelens)</span> </p>
 </div>
 <script type="text/javascript">
-var ch02_19_codelens_trace = {"code": "total_secs = 7684\nhours = total_secs // 3600\nsecs_still_remaining = total_secs % 3600\nminutes =  secs_still_remaining // 60\nsecs_finally_remaining = secs_still_remaining  % 60", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 2, "stdout": "", "ordered_globals": ["total_secs"], "heap": {}, "globals": {"total_secs": 7684}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["total_secs", "hours"], "heap": {}, "globals": {"hours": 2, "total_secs": 7684}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 4, "stdout": "", "ordered_globals": ["total_secs", "hours", "secs_still_remaining"], "heap": {}, "globals": {"hours": 2, "total_secs": 7684, "secs_still_remaining": 484}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "", "ordered_globals": ["total_secs", "hours", "secs_still_remaining", "minutes"], "heap": {}, "globals": {"hours": 2, "minutes": 8, "secs_still_remaining": 484, "total_secs": 7684}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "", "ordered_globals": ["total_secs", "hours", "secs_still_remaining", "minutes", "secs_finally_remaining"], "heap": {}, "globals": {"hours": 2, "total_secs": 7684, "secs_still_remaining": 484, "minutes": 8, "secs_finally_remaining": 4}, "event": "return"}]};
+var ch02_19_codelens_trace = {"trace": [{"heap": {}, "globals": {}, "func_name": "<module>", "stdout": "", "line": 1, "event": "step_line", "stack_to_render": [], "ordered_globals": []}, {"heap": {}, "globals": {"total_secs": 7684}, "func_name": "<module>", "stdout": "", "line": 2, "event": "step_line", "stack_to_render": [], "ordered_globals": ["total_secs"]}, {"heap": {}, "globals": {"hours": 2, "total_secs": 7684}, "func_name": "<module>", "stdout": "", "line": 3, "event": "step_line", "stack_to_render": [], "ordered_globals": ["total_secs", "hours"]}, {"heap": {}, "globals": {"hours": 2, "secs_still_remaining": 484, "total_secs": 7684}, "func_name": "<module>", "stdout": "", "line": 4, "event": "step_line", "stack_to_render": [], "ordered_globals": ["total_secs", "hours", "secs_still_remaining"]}, {"heap": {}, "globals": {"minutes": 8, "hours": 2, "secs_still_remaining": 484, "total_secs": 7684}, "func_name": "<module>", "stdout": "", "line": 5, "event": "step_line", "stack_to_render": [], "ordered_globals": ["total_secs", "hours", "secs_still_remaining", "minutes"]}, {"heap": {}, "globals": {"minutes": 8, "hours": 2, "secs_finally_remaining": 4, "total_secs": 7684, "secs_still_remaining": 484}, "func_name": "<module>", "stdout": "", "line": 5, "event": "return", "stack_to_render": [], "ordered_globals": ["total_secs", "hours", "secs_still_remaining", "minutes", "secs_finally_remaining"]}], "code": "total_secs = 7684\nhours = total_secs // 3600\nsecs_still_remaining = total_secs % 3600\nminutes =  secs_still_remaining // 60\nsecs_finally_remaining = secs_still_remaining  % 60"};
 var ch02_19_codelens_vis;
 
 $(document).ready(function() {
@@ -514,7 +512,7 @@ $(window).resize(function() {
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_6_1">
-            <p>data-6-1: What value is printed when the following statement executes?</p>
+            <p>intro-12-232: What value is printed when the following statement executes?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="mi">18</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -531,7 +529,7 @@ $(window).resize(function() {
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_6_2">
-            <p>data-6-2: What value is printed when the following statement executes?</p>
+            <p>intro-12-233: What value is printed when the following statement executes?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="mi">18</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -548,7 +546,7 @@ $(window).resize(function() {
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_6_3">
-            <p>data-6-3: What value is printed when the following statement executes?</p>
+            <p>intro-12-234: What value is printed when the following statement executes?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="mi">18</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -565,55 +563,7 @@ $(window).resize(function() {
             </ul>
             </div>
 <div class="section" id="order-of-operations">
-<span id="index-3"></span><h2>1.3.3. Order of Operations<a class="headerlink" href="#order-of-operations" title="Permalink to this headline">¶</a></h2>
-<div id="precedencevid" class="video_popup" >
-<video controls preload="none"  poster="../_static/precedencethumb.png">
-    <source src="http://media.interactivepython.org/thinkcsVideos/precedence.mov" type="video/mp4"></source>
-    <source src="http://media.interactivepython.org/thinkcsVideos/precedence.webm" type="video/webm"></source>
-    No supported video types
-</video>
-</div>
-<script>
-   jQuery(function($) {
-      var rb = new RunestoneBase();
-      $('#precedencevid_thumb').click(function(e) {
-         $('#precedencevid').show();
-         $('#precedencevid_thumb').hide();
-         rb.logBookEvent({'event':'video','act':'play','div_id': 'precedencevid'});
-         // Log the run event
-      });
-      $('#precedencevid video').one("click", function(){
-        this.play();
-      });
-      $('#precedencevid video').one("play", function(){
-        rb.logBookEvent({'event':'video','act':'play','div_id': 'precedencevid'});
-      });
-   });
-</script>
-<div id="associativityvid" class="video_popup" >
-<video controls preload="none"  poster="../_static/associativitythumb.png">
-    <source src="http://media.interactivepython.org/thinkcsVideos/associativity.mov" type="video/mp4"></source>
-    <source src="http://media.interactivepython.org/thinkcsVideos/associativity.webm" type="video/webm"></source>
-    No supported video types
-</video>
-</div>
-<script>
-   jQuery(function($) {
-      var rb = new RunestoneBase();
-      $('#associativityvid_thumb').click(function(e) {
-         $('#associativityvid').show();
-         $('#associativityvid_thumb').hide();
-         rb.logBookEvent({'event':'video','act':'play','div_id': 'associativityvid'});
-         // Log the run event
-      });
-      $('#associativityvid video').one("click", function(){
-        this.play();
-      });
-      $('#associativityvid video').one("play", function(){
-        rb.logBookEvent({'event':'video','act':'play','div_id': 'associativityvid'});
-      });
-   });
-</script>
+<span id="index-2"></span><h2>2.1.3. Order of Operations<a class="headerlink" href="#order-of-operations" title="Permalink to this headline">¶</a></h2>
 <p>When more than one operator appears in an expression, the order of evaluation
 depends on the <strong>rules of precedence</strong>. Python follows the same precedence
 rules for its mathematical operators that mathematics does.</p>
@@ -637,20 +587,22 @@ right to left, the result would have been <code class="docutils literal"><span c
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>Due to some historical quirk, an exception to the left-to-right
+<p class="last">Due to some historical quirk, an exception to the left-to-right
 left-associative rule is the exponentiation operator <cite>**</cite>. A useful hint
 is to always use parentheses to force exactly the order you want when
 exponentiation is involved:</p>
+</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span>     <span class="c1"># the right-most ** operator gets done first!</span>
+<span class="gh">Out[24]: </span><span class="go">512</span>
 
-<textarea data-component="activecode" id=ch02_23 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(2 ** 3 ** 2)     # the right-most ** operator gets done first!
-print((2 ** 3) ** 2)   # use parentheses to force the order you want!
-</textarea>
+<span class="gp">In [25]: </span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>   <span class="c1"># use parentheses to force the order you want!</span>
+<span class="go">             Out[25]: 64</span>
+</pre></div>
 </div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_8_1">
-            <p>data-6-4: What is the value of the following expression:</p>
+            <p>intro-12-235: What is the value of the following expression:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">16</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">//</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -667,7 +619,7 @@ print((2 ** 3) ** 2)   # use parentheses to force the order you want!
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_8_2">
-            <p>data-6-5: What is the value of the following expression:</p>
+            <p>intro-12-236: What is the value of the following expression:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span>
 </pre></div>
 </div>
@@ -684,43 +636,23 @@ print((2 ** 3) ** 2)   # use parentheses to force the order you want!
             </ul>
             </div>
 <div class="section" id="boolean-values-and-boolean-expressions">
-<h2>1.3.4. Boolean Values and Boolean Expressions<a class="headerlink" href="#boolean-values-and-boolean-expressions" title="Permalink to this headline">¶</a></h2>
-<div id="booleanexpressions" class="video_popup" >
-<video controls preload="none"  poster="../_static/booleanexpressions.png">
-    <source src="http://media.interactivepython.org/thinkcsVideos/booleanexpressions.mov" type="video/mp4"></source>
-    <source src="http://media.interactivepython.org/thinkcsVideos/booleanexpressions.webm" type="video/webm"></source>
-    No supported video types
-</video>
-</div>
-<script>
-   jQuery(function($) {
-      var rb = new RunestoneBase();
-      $('#booleanexpressions_thumb').click(function(e) {
-         $('#booleanexpressions').show();
-         $('#booleanexpressions_thumb').hide();
-         rb.logBookEvent({'event':'video','act':'play','div_id': 'booleanexpressions'});
-         // Log the run event
-      });
-      $('#booleanexpressions video').one("click", function(){
-        this.play();
-      });
-      $('#booleanexpressions video').one("play", function(){
-        rb.logBookEvent({'event':'video','act':'play','div_id': 'booleanexpressions'});
-      });
-   });
-</script>
+<h2>2.1.4. Boolean Values and Boolean Expressions<a class="headerlink" href="#boolean-values-and-boolean-expressions" title="Permalink to this headline">¶</a></h2>
 <p>The Python type for storing true and false values is called <code class="docutils literal"><span class="pre">bool</span></code>, named
 after the British mathematician, George Boole. George Boole created <em>Boolean
 Algebra</em>, which is the basis of all modern computer arithmetic.</p>
 <p>There are only two <strong>boolean values</strong>.  They are <code class="docutils literal"><span class="pre">True</span></code> and <code class="docutils literal"><span class="pre">False</span></code>.  Capitalization
 is important, since <code class="docutils literal"><span class="pre">true</span></code> and <code class="docutils literal"><span class="pre">false</span></code> are not boolean values (remember Python is case
 sensitive).</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="bp">True</span>
+<span class="gh">Out[26]: </span><span class="go">True</span>
 
-<textarea data-component="activecode" id=ch05_1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(True)
-print(type(True))
-print(type(False))
-</textarea>
+<span class="gp">In [27]: </span><span class="nb">type</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">              Out[27]: bool</span>
+
+<span class="gp">In [28]: </span><span class="nb">type</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="go">                            Out[28]: bool</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>Boolean values are not strings!</p>
@@ -728,19 +660,23 @@ print(type(False))
 surrounded by quotes.  They are the only two values in the data type <code class="docutils literal"><span class="pre">bool</span></code>.  Take a close look at the
 types shown below.</p>
 </div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="nb">type</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="gh">Out[29]: </span><span class="go">bool</span>
 
-<textarea data-component="activecode" id=ch05_1a data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(type(True))
-print(type("True"))
-</textarea>
+<span class="gp">In [30]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+<span class="go">              Out[30]: str</span>
+</pre></div>
+</div>
 <p>A <strong>boolean expression</strong> is an expression that evaluates to a boolean value.
 The equality operator, <code class="docutils literal"><span class="pre">==</span></code>, compares two values and produces a boolean value related to whether the
 two values are equal to one another.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="mi">5</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="gh">Out[31]: </span><span class="go">True</span>
 
-<textarea data-component="activecode" id=ch05_2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(5 == 5)
-print(5 == 6)
-</textarea>
+<span class="gp">In [32]: </span><span class="mi">5</span> <span class="o">==</span> <span class="mi">6</span>
+<span class="go">              Out[32]: False</span>
+</pre></div>
+</div>
 <p>In the first statement, the two operands are equal, so the expression evaluates
 to <code class="docutils literal"><span class="pre">True</span></code>.  In the second statement, 5 is not equal to 6, so we get <code class="docutils literal"><span class="pre">False</span></code>.</p>
 <p>The <code class="docutils literal"><span class="pre">==</span></code> operator is one of six common <strong>comparison operators</strong>; the others are:</p>
@@ -762,7 +698,7 @@ is legal and <code class="docutils literal"><span class="pre">7</span> <span cla
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="true"  id="test_question6_1_1">
-            data-6-6: Which of the following is a Boolean expression?  Select all that apply.
+            intro-12-237: Which of the following is a Boolean expression?  Select all that apply.
             <li data-component="answer" data-correct id="test_question6_1_1_opt_a">(A) True</li><li data-component="feedback" id="test_question6_1_1_opt_a">True and False are both Boolean literals.</li>
             
             <li data-component="answer" data-correct id="test_question6_1_1_opt_b">(B) 3 == 4</li><li data-component="feedback" id="test_question6_1_1_opt_b">The comparison between two numbers via == results in either True or False (in this case False),  both Boolean values.</li>
@@ -777,7 +713,7 @@ is legal and <code class="docutils literal"><span class="pre">7</span> <span cla
             </ul>
             </div>
 <div class="section" id="logical-operators">
-<span id="index-4"></span><h2>1.3.5. Logical operators<a class="headerlink" href="#logical-operators" title="Permalink to this headline">¶</a></h2>
+<span id="index-3"></span><h2>2.1.5. Logical operators<a class="headerlink" href="#logical-operators" title="Permalink to this headline">¶</a></h2>
 <p>There are three <strong>logical operators</strong>: <code class="docutils literal"><span class="pre">and</span></code>, <code class="docutils literal"><span class="pre">or</span></code>, and <code class="docutils literal"><span class="pre">not</span></code>. The
 semantics (meaning) of these operators is similar to their meaning in English.
 For example, <code class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">0</span> <span class="pre">and</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">10</span></code> is true only if <code class="docutils literal"><span class="pre">x</span></code> is greater than 0 <em>and</em>
@@ -789,22 +725,32 @@ both of the parts has to be true for the result to be true.</p>
 <p>Finally, the <code class="docutils literal"><span class="pre">not</span></code> operator negates a boolean expression, so <code class="docutils literal"><span class="pre">not</span>&nbsp; <span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">y</span></code>
 is true if <code class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">y</span></code> is false, that is, if <code class="docutils literal"><span class="pre">x</span></code> is less than or equal to
 <code class="docutils literal"><span class="pre">y</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 
-<textarea data-component="activecode" id=chp05_3 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-x = 5
-print(x > 0 and x < 10)
+<span class="gp">In [34]: </span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span>
+<span class="gh">Out[34]: </span><span class="go">True</span>
 
-n = 25
-print(n % 2 == 0 or n % 3 == 0)
-</textarea>
+<span class="gp">In [35]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="gp">In [36]: </span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="gh">Out[36]: </span><span class="go">False</span>
+</pre></div>
+</div>
 <div class="admonition-common-mistake admonition">
 <p class="first admonition-title">Common Mistake!</p>
-<p class="last">There is a very common mistake that occurs when programmers try to write boolean expressions.  For example, what if we have a variable <code class="docutils literal"><span class="pre">number</span></code> and we want to check to see if its value is 5,6, or 7.  In words we might say: &#8220;number equal to 5 or 6 or 7&#8221;.  However, if we translate this into Python, <code class="docutils literal"><span class="pre">number</span> <span class="pre">==</span> <span class="pre">5</span> <span class="pre">or</span> <span class="pre">6</span> <span class="pre">or</span> <span class="pre">7</span></code>, it will not be correct.  The <code class="docutils literal"><span class="pre">or</span></code> operator must join the results of three equality checks.  The correct way to write this is <code class="docutils literal"><span class="pre">number</span> <span class="pre">==</span> <span class="pre">5</span> <span class="pre">or</span> <span class="pre">number</span> <span class="pre">==</span> <span class="pre">6</span> <span class="pre">or</span> <span class="pre">number</span> <span class="pre">==</span> <span class="pre">7</span></code>.  This may seem like a lot of typing but it is absolutely necessary.  You cannot take a shortcut.</p>
+<p class="last">There is a very common mistake that occurs when programmers try to write
+boolean expressions.  For example, what if we have a variable <code class="docutils literal"><span class="pre">number</span></code> and
+we want to check to see if its value is 5,6, or 7.  In words we might say:
+&#8220;number equal to 5 or 6 or 7&#8221;.  However, if we translate this into Python,
+<code class="docutils literal"><span class="pre">number</span> <span class="pre">==</span> <span class="pre">5</span> <span class="pre">or</span> <span class="pre">6</span> <span class="pre">or</span> <span class="pre">7</span></code>, it will not be correct.  The <code class="docutils literal"><span class="pre">or</span></code> operator must
+join the results of three equality checks.  The correct way to write this is
+<code class="docutils literal"><span class="pre">number</span> <span class="pre">==</span> <span class="pre">5</span> <span class="pre">or</span> <span class="pre">number</span> <span class="pre">==</span> <span class="pre">6</span> <span class="pre">or</span> <span class="pre">number</span> <span class="pre">==</span> <span class="pre">7</span></code>.  This may seem like a lot of
+typing but it is absolutely necessary.  You cannot take a shortcut.</p>
 </div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_2_1">
-            data-6-7: What is the correct Python expression for checking to see if a number stored in a variable x is between 0 and 5.
+            intro-12-238: What is the correct Python expression for checking to see if a number stored in a variable x is between 0 and 5.
             <li data-component="answer"  id="test_question6_2_1_opt_a">(A) x &gt; 0 and &lt; 5</li><li data-component="feedback" id="test_question6_2_1_opt_a">Each comparison must be between exactly two values.  In this case the right-hand expression &lt; 5 lacks a value on its left.</li>
             
             <li data-component="answer"  id="test_question6_2_1_opt_b">(B) 0 &lt; x &lt; 5</li><li data-component="feedback" id="test_question6_2_1_opt_b">This is tricky.  Although most other programming languages do not allow this syntax, in Python, this syntax is allowed.  However, you should not use it.  Instead, make multiple comparisons by using and or or.</li>
@@ -817,9 +763,20 @@ print(n % 2 == 0 or n % 3 == 0)
             </ul>
             </div>
 <div class="section" id="precedence-of-operators">
-<h2>1.3.6. Precedence of Operators<a class="headerlink" href="#precedence-of-operators" title="Permalink to this headline">¶</a></h2>
-<p>We have now added a number of additional operators to those we learned in the previous chapters.  It is important to understand how these operators relate to the others with respect to operator precedence.  Python will always evaluate the arithmetic operators first (** is highest, then multiplication/division, then addition/subtraction).  Next comes the relational operators.  Finally, the logical operators are done last.  This means that the expression <code class="docutils literal"><span class="pre">x*5</span> <span class="pre">&gt;=</span> <span class="pre">10</span> <span class="pre">and</span> <span class="pre">y-6</span> <span class="pre">&lt;=</span> <span class="pre">20</span></code> will be evaluated so as to first perform the arithmetic and then check the relationships.  The <code class="docutils literal"><span class="pre">and</span></code> will be done last.  Although many programmers might place parenthesis around the two relational expressions, it is not necessary.</p>
-<p>The following table summarizes the operator precedence from highest to lowest.  A complete table for the entire language can be found in the <a class="reference external" href="http://docs.python.org/py3k/reference/expressions.html#expression-lists">Python Documentation</a>.</p>
+<h2>2.1.6. Precedence of Operators<a class="headerlink" href="#precedence-of-operators" title="Permalink to this headline">¶</a></h2>
+<p>We have now added a number of additional operators to those we learned in the
+previous chapters.  It is important to understand how these operators relate to
+the others with respect to operator precedence.  Python will always evaluate the
+arithmetic operators first (** is highest, then multiplication/division, then
+addition/subtraction).  Next comes the relational operators.  Finally, the
+logical operators are done last.  This means that the expression <code class="docutils literal"><span class="pre">x*5</span> <span class="pre">&gt;=</span> <span class="pre">10</span> <span class="pre">and</span>
+<span class="pre">y-6</span> <span class="pre">&lt;=</span> <span class="pre">20</span></code> will be evaluated so as to first perform the arithmetic and then
+check the relationships.  The <code class="docutils literal"><span class="pre">and</span></code> will be done last.  Although many
+programmers might place parenthesis around the two relational expressions, it is
+not necessary.</p>
+<p>The following table summarizes the operator precedence from highest to lowest.
+A complete table for the entire language can be found in the <a class="reference external" href="http://docs.python.org/py3k/reference/expressions.html#expression-lists">Python
+Documentation</a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="19%" />
@@ -865,7 +822,8 @@ print(n % 2 == 0 or n % 3 == 0)
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
+<p>This workspace is provided for your convenience.  You can use this activecode
+window to try out anything you like.</p>
 
 <textarea data-component="activecode" id=scratch_06_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
 
@@ -875,7 +833,7 @@ print(n % 2 == 0 or n % 3 == 0)
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_3_1">
-            data-6-8: Which of the following properly expresses the precedence of operators (using parentheses) in the following expression: 5*3 &gt; 10 and 4+6==11
+            intro-12-239: Which of the following properly expresses the precedence of operators (using parentheses) in the following expression: 5*3 &gt; 10 and 4+6==11
             <li data-component="answer" data-correct id="test_question6_3_1_opt_a">(A) ((5*3) &gt; 10) and ((4+6) == 11)</li><li data-component="feedback" id="test_question6_3_1_opt_a">Yes, * and + have higher precedence, followed by &gt; and ==, and then the keyword &quot;and&quot;</li>
             
             <li data-component="answer"  id="test_question6_3_1_opt_b">(B) (5*(3 &gt; 10)) and (4 + (6 == 11))</li><li data-component="feedback" id="test_question6_3_1_opt_b">Arithmetic operators (*, +) have higher precedence than comparison operators (&gt;, ==)</li>
@@ -886,172 +844,113 @@ print(n % 2 == 0 or n % 3 == 0)
             
 
             </ul>
-            <span class="target" id="index-5"></span></div>
+            <span class="target" id="index-4"></span></div>
 <div class="section" id="conditional-execution-binary-selection">
-<span id="index-6"></span><h2>1.3.7. Conditional Execution: Binary Selection<a class="headerlink" href="#conditional-execution-binary-selection" title="Permalink to this headline">¶</a></h2>
-<div id="binaryselection" class="video_popup" >
-<video controls preload="none"  poster="../_static/binaryselection.png">
-    <source src="http://media.interactivepython.org/thinkcsVideos/binaryselection.mov" type="video/mp4"></source>
-    <source src="http://media.interactivepython.org/thinkcsVideos/binaryselection.webm" type="video/webm"></source>
-    No supported video types
-</video>
-</div>
-<script>
-   jQuery(function($) {
-      var rb = new RunestoneBase();
-      $('#binaryselection_thumb').click(function(e) {
-         $('#binaryselection').show();
-         $('#binaryselection_thumb').hide();
-         rb.logBookEvent({'event':'video','act':'play','div_id': 'binaryselection'});
-         // Log the run event
-      });
-      $('#binaryselection video').one("click", function(){
-        this.play();
-      });
-      $('#binaryselection video').one("play", function(){
-        rb.logBookEvent({'event':'video','act':'play','div_id': 'binaryselection'});
-      });
-   });
-</script>
+<span id="index-5"></span><h2>2.1.7. Conditional Execution: Binary Selection<a class="headerlink" href="#conditional-execution-binary-selection" title="Permalink to this headline">¶</a></h2>
 <p>In order to write useful programs, we almost always need the ability to check
-conditions and change the behavior of the program accordingly. <strong>Selection statements</strong>, sometimes
-also referred to as <strong>conditional statements</strong>, give us this ability. The simplest form of selection is the <strong>if statement</strong>.
-This is sometimes referred to as <strong>binary selection</strong> since there are two possible paths of execution.</p>
+conditions and change the behavior of the program accordingly. The simplest form
+of selection is the <strong>if expression</strong>.  This is sometimes referred to as
+<strong>binary selection</strong> since there are two possible paths of execution.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">x</span> <span class="o">=</span> <span class="mi">15</span>
 
-<textarea data-component="activecode" id=ch05_4 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-x = 15
-
-if x % 2 == 0:
-    print(x, "is even")
-else:
-    print(x, "is odd")
-</textarea>
-<p>The syntax for an <code class="docutils literal"><span class="pre">if</span></code> statement looks like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">BOOLEAN</span> <span class="n">EXPRESSION</span><span class="p">:</span>
-    <span class="n">STATEMENTS_1</span>        <span class="c1"># executed if condition evaluates to True</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">STATEMENTS_2</span>        <span class="c1"># executed if condition evaluates to False</span>
+<span class="gp">In [38]: </span><span class="s2">&quot;even&quot;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;odd&quot;</span>
+<span class="gh">Out[38]: </span><span class="go">&#39;odd&#39;</span>
+</pre></div>
+</div>
+<p>The syntax for an <code class="docutils literal"><span class="pre">if</span></code> expression looks like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">EXPRESSION_1</span> <span class="k">if</span> <span class="n">BOOLEAN</span> <span class="n">EXPRESSION</span> <span class="k">else</span> <span class="n">EXPRESSION_2</span>
 </pre></div>
 </div>
 <p>The boolean expression after the <code class="docutils literal"><span class="pre">if</span></code> statement is called the <strong>condition</strong>.
-If it is true, then the indented statements get executed. If not, then the statements
-indented under the <cite>else</cite> clause get executed.</p>
+If it is true, then the first expression is evaluated. If not, then the
+expression after the <cite>else</cite> clause gets evaluated.</p>
+<p>An important property of the conditional expression is that <strong>exactly one</strong> of
+the expressions is evaluated and <strong>not the other</strong>.  This allows us to avoid
+errors that would otherwise be impossible to avoid, as illustrate by the
+following silly example.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">x</span> <span class="o">=</span> <span class="mi">15</span>
+
+<span class="gp">In [40]: </span><span class="s2">&quot;No Error&quot;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">15</span> <span class="k">else</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="gh">Out[40]: </span><span class="go">&#39;No Error&#39;</span>
+</pre></div>
+</div>
+<p>If the conditional expression evaluated both expressions, then we would have
+encountered the following exception.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="mi">15</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-41-15a12a5503ee&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="mi">15</span> <span class="o">/</span> <span class="mi">0</span>
+
+<span class="ne">ZeroDivisionError</span>: division by zero
+</pre></div>
+</div>
 <div class="sidebar">
 <p class="first sidebar-title">Flowchart of a <strong>if</strong> statement with an <strong>else</strong></p>
 <img alt="../_images/flowchart_if_else.png" class="last" src="../_images/flowchart_if_else.png" />
 </div>
-<p>As with the function definition from the last chapter and other compound
-statements like <code class="docutils literal"><span class="pre">for</span></code>, the <code class="docutils literal"><span class="pre">if</span></code> statement consists of a header line and a body. The header
-line begins with the keyword <code class="docutils literal"><span class="pre">if</span></code> followed by a <em>boolean expression</em> and ends with
-a colon (:).</p>
-<p>The indented statements that follow are called a <strong>block</strong>. The first
-unindented statement marks the end of the block.</p>
-<p>Each of the statements inside the first block of statements is executed in order if the boolean
-expression evaluates to <code class="docutils literal"><span class="pre">True</span></code>. The entire first block of statements
-is skipped if the boolean expression evaluates to <code class="docutils literal"><span class="pre">False</span></code>, and instead
-all the statements under the <code class="docutils literal"><span class="pre">else</span></code> clause are executed.</p>
-<p>There is no limit on the number of statements that can appear under the two clauses of an
-<code class="docutils literal"><span class="pre">if</span></code> statement, but there has to be at least one statement in each block.</p>
-<div class="admonition-lab admonition">
-<p class="first admonition-title">Lab</p>
-<ul class="last simple">
-<li><a class="reference external" href="../Labs/montepi.html">Approximating Pi with Simulation</a> In this guided lab exercise we will work
-through a problem solving exercise related to approximating the value of pi using random numbers.</li>
-</ul>
+<p>There is a limitation to the conditional expression.  Since this is an
+expression, it can only contain values or other expressions.  This means that we
+cannot include statements, such as the assignment statement in this expression.
+In a later section, we will introduce the <strong>if-elif-else</strong> statement to deal
+with this limitation.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="mi">3</span> <span class="k">if</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">4</span> <span class="k">else</span> <span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-42-057151647ca0&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
+<span class="g g-Whitespace">    </span><span class="mi">3</span> <span class="k">if</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">4</span> <span class="k">else</span> <span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
 </div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_4_1">
-            data-6-9: How many statements can appear in each block (the if and the else) in a conditional statement?
-            <li data-component="answer"  id="test_question6_4_1_opt_a">(A) Just one.</li><li data-component="feedback" id="test_question6_4_1_opt_a">Each block may also contain more than one.</li>
+            intro-12-240: How many statements can appear in each expression (the if and the else) in a conditional expression?
+            <li data-component="answer"  id="test_question6_4_1_opt_a">(A) Just one.</li><li data-component="feedback" id="test_question6_4_1_opt_a">The conditional expression may only consist of other expressions.</li>
             
-            <li data-component="answer"  id="test_question6_4_1_opt_b">(B) Zero or more.</li><li data-component="feedback" id="test_question6_4_1_opt_b">Each block must contain at least one statement.</li>
+            <li data-component="answer"  id="test_question6_4_1_opt_b">(B) Zero or more.</li><li data-component="feedback" id="test_question6_4_1_opt_b">The conditional expression may only consist of other expressions.</li>
             
-            <li data-component="answer" data-correct id="test_question6_4_1_opt_c">(C) One or more.</li><li data-component="feedback" id="test_question6_4_1_opt_c">Yes, a block must contain at least one statement and can have many statements.</li>
+            <li data-component="answer"  id="test_question6_4_1_opt_c">(C) One or more.</li><li data-component="feedback" id="test_question6_4_1_opt_c">The conditional expression may only consist of other expressions.</li>
             
-            <li data-component="answer"  id="test_question6_4_1_opt_d">(D) One or more, and each must contain the same number.</li><li data-component="feedback" id="test_question6_4_1_opt_d">The blocks may contain different numbers of statements.</li>
+            <li data-component="answer" data-correct id="test_question6_4_1_opt_d">(D) None.</li><li data-component="feedback" id="test_question6_4_1_opt_d">The conditional expression may only consist of other expressions.</li>
             
 
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_4_2">
-            <p>data-6-10: What does the following code print (choose from output a, b, c or nothing).</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;TRUE&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;FALSE&quot;</span><span class="p">)</span>
+            <p>intro-12-241: What is the value of the following expression?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">True</span> <span class="k">if</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">10</span> <span class="k">else</span> <span class="bp">False</span>
 </pre></div>
 </div>
 
-            <li data-component="answer"  id="test_question6_4_2_opt_a">(A) TRUE</li><li data-component="feedback" id="test_question6_4_2_opt_a">TRUE is printed by the if-block, which only executes if the conditional (in this case, 4+5 == 10) is true.  In this case 5+4 is not equal to 10.</li>
+            <li data-component="answer"  id="test_question6_4_2_opt_a">(A) True</li><li data-component="feedback" id="test_question6_4_2_opt_a">True is only evaluated if the conditional (in this case, 4+5 == 10) is true.  In this case 5+4 is not equal to 10.</li>
             
-            <li data-component="answer" data-correct id="test_question6_4_2_opt_b">(B) FALSE</li><li data-component="feedback" id="test_question6_4_2_opt_b">Since 4+5==10 evaluates to False, Python will skip over the if block and execute the statement in the else block.</li>
+            <li data-component="answer" data-correct id="test_question6_4_2_opt_b">(B) False</li><li data-component="feedback" id="test_question6_4_2_opt_b">Since 4+5==10 evaluates to False, Python will skip over the if expression and execute the expression after the else.</li>
             
-            <li data-component="answer"  id="test_question6_4_2_opt_c">(C) TRUE on one line and FALSE on the next</li><li data-component="feedback" id="test_question6_4_2_opt_c">Python would never print both TRUE and FALSE because it will only execute one of the if-block or the else-block, but not both.</li>
+            <li data-component="answer"  id="test_question6_4_2_opt_c">(C) True on one line and False on the next</li><li data-component="feedback" id="test_question6_4_2_opt_c">Python would never evaluate both True and False because it will only evalutate one expression, but not both.</li>
             
-            <li data-component="answer"  id="test_question6_4_2_opt_d">(D) Nothing will be printed</li><li data-component="feedback" id="test_question6_4_2_opt_d">Python will always execute either the if-block (if the condition is true) or the else-block (if the condition is false).  It would never skip over both blocks.</li>
+            <li data-component="answer"  id="test_question6_4_2_opt_d">(D) Nothing</li><li data-component="feedback" id="test_question6_4_2_opt_d">Python will always evaluate either the if-expression or the else-expression. It would never skip over both expressions.</li>
             
 
             </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_4_3">
-            <p>data-6-11: What does the following code print?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;TRUE&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;FALSE&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;TRUE&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span> <span class="n">TRUE</span>
-
-<span class="n">b</span><span class="o">.</span>
-   <span class="n">TRUE</span>
-   <span class="n">FALSE</span>
-
-<span class="n">c</span><span class="o">.</span>
-   <span class="n">FALSE</span>
-   <span class="n">TRUE</span>
-<span class="n">d</span><span class="o">.</span>
-   <span class="n">TRUE</span>
-   <span class="n">FALSE</span>
-   <span class="n">TRUE</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question6_4_3_opt_a">(A) Output a</li><li data-component="feedback" id="test_question6_4_3_opt_a">Although TRUE is printed after the if-else statement completes, both blocks within the if-else statement print something too.  In this case, Python would have had to have skipped both blocks in the if-else statement, which it never would do.</li>
-            
-            <li data-component="answer"  id="test_question6_4_3_opt_b">(B) Output b</li><li data-component="feedback" id="test_question6_4_3_opt_b">Because there is a TRUE printed after the if-else statement ends, Python will always print TRUE as the last statement.</li>
-            
-            <li data-component="answer" data-correct id="test_question6_4_3_opt_c">(C) Output c</li><li data-component="feedback" id="test_question6_4_3_opt_c">Python will print FALSE from within the else-block (because 5+4 does not equal 10), and then print TRUE after the if-else statement completes.</li>
-            
-            <li data-component="answer"  id="test_question6_4_3_opt_d">(D) Output d</li><li data-component="feedback" id="test_question6_4_3_opt_d">To print these three lines, Python would have to execute both blocks in the if-else statement, which it can never do.</li>
-            
-
-            </ul>
-            </div>
-<div class="section" id="abstraction-with-variables-and-expressions">
-<span id="index-7"></span><h2>1.3.8. Abstraction with Variables and Expressions<a class="headerlink" href="#abstraction-with-variables-and-expressions" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
-</div>
+            <span class="target" id="index-6"></span></div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 1.2. Data, Types, and Variables' data-toggle="tooltip">
-    <a href="DataTypesAndVariables.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 2. Expressions and Evaluation' data-toggle="tooltip">
+    <a href="toctree2.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="DataTypesAndVariables.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="toctree2.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 1.4. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 2.2. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression' data-toggle="tooltip" >
     <a href="SavingExpressionsForLaterExecution.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="SavingExpressionsForLaterExecution.html" >Next Section - 1.4. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="SavingExpressionsForLaterExecution.html" >Next Section - 2.2. Saving Expressions for Later Execution - The <cite>lambda</cite> Expression</a>
 
 <script type="text/javascript">
 

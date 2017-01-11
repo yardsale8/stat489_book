@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.4. Asking Boolean Questions about Sequences &mdash; Runestone Interactive Overview</title>
+    <title>3.4. Asking Boolean Questions about Sequences &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="2. Sequential Data Structures in Python" href="toctree.html" />
-    <link rel="next" title="2.5. Mutable and Immutable Sequences" href="MutableAndImmutableSequences.html" />
-    <link rel="prev" title="2.3. Accessing Sequence Data" href="AccessingSequenceData.html" />
+    <link rel="up" title="3. Sequential Data Structures in Python" href="toctree.html" />
+    <link rel="next" title="3.5. Mutable and Immutable Sequences" href="MutableAndImmutableSequences.html" />
+    <link rel="prev" title="3.3. Accessing Sequence Data" href="AccessingSequenceData.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,10 +263,10 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">2.4. Asking Boolean Questions about Sequences</a><ul>
-<li><a class="reference internal" href="#string-comparison">2.4.1. String Comparison</a></li>
-<li><a class="reference internal" href="#the-in-and-not-in-operators">2.4.2. The <code class="docutils literal"><span class="pre">in</span></code> and <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> operators</a></li>
-<li><a class="reference internal" href="#list-membership">2.4.3. List Membership</a></li>
+<li><a class="reference internal" href="#">3.4. Asking Boolean Questions about Sequences</a><ul>
+<li><a class="reference internal" href="#comparing-equality">3.4.1. Comparing Equality</a></li>
+<li><a class="reference internal" href="#the-in-and-not-in-operators">3.4.2. The <code class="docutils literal"><span class="pre">in</span></code> and <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> operators</a></li>
+<li><a class="reference internal" href="#other-string-comparisons">3.4.3. Other String Comparisons</a></li>
 </ul>
 </li>
 </ul>
@@ -276,13 +276,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 2.3. Accessing Sequence Data" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 3.3. Accessing Sequence Data" data-toggle="tooltip">
     <a href="AccessingSequenceData.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 2.5. Mutable and Immutable Sequences' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 3.5. Mutable and Immutable Sequences' data-toggle="tooltip" >
     <a href="MutableAndImmutableSequences.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -314,76 +314,210 @@
 <div class="container" id="main-content">
   
   <div class="section" id="asking-boolean-questions-about-sequences">
-<h1>2.4. Asking Boolean Questions about Sequences<a class="headerlink" href="#asking-boolean-questions-about-sequences" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="string-comparison">
-<h2>2.4.1. String Comparison<a class="headerlink" href="#string-comparison" title="Permalink to this headline">¶</a></h2>
-<p>The comparison operators also work on strings. To see if two strings are equal you simply write a boolean
-expression using the equality operator.</p>
+<h1>3.4. Asking Boolean Questions about Sequences<a class="headerlink" href="#asking-boolean-questions-about-sequences" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal"><span class="pre">+</span></code> and <code class="docutils literal"><span class="pre">*</span></code> operators are not the only operators that work with Python
+sequence types, and in this section we will look at using Boolean operators to
+ask questions about a sequence.</p>
+<div class="section" id="comparing-equality">
+<h2>3.4.1. Comparing Equality<a class="headerlink" href="#comparing-equality" title="Permalink to this headline">¶</a></h2>
+<p>The comparison operators also work on strings. To see if two strings are equal
+you simply write a boolean expression using the equality operator.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;banana&quot;</span>
 
-<textarea data-component="activecode" id=ch08_comp1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-word = "banana"
-if word == "banana":
-    print("Yes, we have bananas!")
-else:
-    print("Yes, we have NO bananas!")
-</textarea>
+<span class="gp">In [2]: </span><span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">word</span> <span class="o">==</span> <span class="s2">&quot;banana&quot;</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span>
+<span class="gh">Out[2]: </span><span class="go">&#39;Yes&#39;</span>
+</pre></div>
+</div>
+<p>We can perform tests of equality on a simple tuples as well.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">)</span>
+
+<span class="gp">In [4]: </span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [5]: </span><span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [6]: </span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+<span class="gh">Out[6]: </span><span class="go">False</span>
+
+<span class="gp">In [7]: </span><span class="n">b</span> <span class="o">==</span> <span class="n">c</span>
+<span class="go">              Out[7]: True</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p>Tests for equality on list don&#8217;t work in the same way, which we will explain
+in a later section when discussing mutable and immutable sequences.</p>
+<div class="last highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [9]: </span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [10]: </span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+<span class="gh">Out[10]: </span><span class="go">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-in-and-not-in-operators">
+<h2>3.4.2. The <code class="docutils literal"><span class="pre">in</span></code> and <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> operators<a class="headerlink" href="#the-in-and-not-in-operators" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">in</span></code> operator tests if one string is a substring of another:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="s1">&#39;p&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="gh">Out[11]: </span><span class="go">True</span>
+
+<span class="gp">In [12]: </span><span class="s1">&#39;i&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="go">              Out[12]: False</span>
+
+<span class="gp">In [13]: </span><span class="s1">&#39;ap&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="go">                             Out[13]: True</span>
+
+<span class="gp">In [14]: </span><span class="s1">&#39;pa&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="go">                                           Out[14]: False</span>
+</pre></div>
+</div>
+<p>Note that a string is a substring of itself, and the empty string is a substring
+of any other string. (Also note that computer scientists like to think about
+these edge cases quite carefully!)</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="s1">&#39;a&#39;</span> <span class="ow">in</span> <span class="s1">&#39;a&#39;</span>
+<span class="gh">Out[15]: </span><span class="go">True</span>
+
+<span class="gp">In [16]: </span><span class="s1">&#39;apple&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="go">              Out[16]: True</span>
+
+<span class="gp">In [17]: </span><span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="s1">&#39;a&#39;</span>
+<span class="go">                            Out[17]: True</span>
+
+<span class="gp">In [18]: </span><span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="go">                                          Out[18]: True</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> operator returns the logical opposite result of <code class="docutils literal"><span class="pre">in</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="s1">&#39;x&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="gh">Out[19]: </span><span class="go">True</span>
+</pre></div>
+</div>
+<p>We can also use <code class="docutils literal"><span class="pre">in</span></code> and <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> to test membership for lists.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">fruit</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
+
+<span class="gp">In [21]: </span><span class="s2">&quot;apple&quot;</span> <span class="ow">in</span> <span class="n">fruit</span>
+<span class="gh">Out[21]: </span><span class="go">True</span>
+
+<span class="gp">In [22]: </span><span class="s2">&quot;pear&quot;</span> <span class="ow">in</span> <span class="n">fruit</span>
+<span class="go">              Out[22]: False</span>
+</pre></div>
+</div>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_4_1">
+            <p>intro-12-389: What is printed by the following statements?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="p">[</span> <span class="p">],</span> <span class="mf">3.14</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="mf">3.14</span> <span class="ow">in</span> <span class="n">alist</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer" data-correct id="test_question9_4_1_opt_a">(A) True</li><li data-component="feedback" id="test_question9_4_1_opt_a">Yes, 3.14 is an item in the list alist.</li>
+            
+            <li data-component="answer"  id="test_question9_4_1_opt_b">(B) False</li><li data-component="feedback" id="test_question9_4_1_opt_b">There are 7 items in the list, 3.14 is one of them.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_4_2">
+            <p>intro-12-390: What is printed by the following statements?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="p">[</span> <span class="p">],</span> <span class="mf">3.14</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">57</span> <span class="ow">in</span> <span class="n">alist</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="test_question9_4_2_opt_a">(A) True</li><li data-component="feedback" id="test_question9_4_2_opt_a">in returns True for top level items only.  57 is in a sublist.</li>
+            
+            <li data-component="answer" data-correct id="test_question9_4_2_opt_b">(B) False</li><li data-component="feedback" id="test_question9_4_2_opt_b">Yes, 57 is not a top level item in alist.  It is in a sublist.</li>
+            
+
+            </ul>
+            </div>
+<div class="section" id="other-string-comparisons">
+<h2>3.4.3. Other String Comparisons<a class="headerlink" href="#other-string-comparisons" title="Permalink to this headline">¶</a></h2>
 <p>Other comparison operations are useful for putting words in
 <a class="reference external" href="http://en.wikipedia.org/wiki/Lexicographic_order">lexicographical order</a>.
 This is similar to the alphabetical order you would use with a dictionary,
 except that all the uppercase letters come before all the lowercase letters.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;zebra&quot;</span>
 
-<textarea data-component="activecode" id=ch08_comp2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-word = "zebra"
+<span class="gp">In [24]: </span><span class="n">word</span> <span class="o">&lt;</span> <span class="s2">&quot;banana&quot;</span>
+<span class="gh">Out[24]: </span><span class="go">False</span>
 
-if word < "banana":
-    print("Your word, " + word + ", comes before banana.")
-elif word > "banana":
-    print("Your word, " + word + ", comes after banana.")
-else:
-    print("Yes, we have no bananas!")
-</textarea>
-<p>It is probably clear to you that the word <cite>apple</cite> would be less than (come before) the word <code class="docutils literal"><span class="pre">banana</span></code>.
-After all, <cite>a</cite> is before <cite>b</cite> in the alphabet.  But what if we consider the words <code class="docutils literal"><span class="pre">apple</span></code> and <code class="docutils literal"><span class="pre">Apple</span></code>?
-Are they the same?</p>
+<span class="gp">In [25]: </span><span class="n">word</span> <span class="o">&gt;</span> <span class="s2">&quot;banana&quot;</span>
+<span class="go">               Out[25]: True</span>
+</pre></div>
+</div>
+<p>It is probably clear to you that the word <cite>apple</cite> would be less than (come
+before) the word <code class="docutils literal"><span class="pre">banana</span></code>.  After all, <cite>a</cite> is before <cite>b</cite> in the alphabet.  But
+what if we consider the words <code class="docutils literal"><span class="pre">apple</span></code> and <code class="docutils literal"><span class="pre">Apple</span></code>?  Are they the same?</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;banana&quot;</span>
+<span class="gh">Out[26]: </span><span class="go">True</span>
 
-<textarea data-component="activecode" id=chp08_ord1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print("apple" < "banana")
+<span class="gp">In [27]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">==</span> <span class="s2">&quot;Apple&quot;</span>
+<span class="go">              Out[27]: False</span>
 
-print("apple" == "Apple")
-print("apple" < "Apple")
-</textarea>
-<p>It turns out, as you recall from our discussion of variable names, that uppercase and lowercase letters are considered to be different from one another.  The way the computer knows they are different is that
-each character is assigned a unique integer value.  &#8220;A&#8221; is 65, &#8220;B&#8221; is 66, and &#8220;5&#8221; is 53.  The way you can
-find out the so-called <strong>ordinal value</strong> for a given character is to use a character function called <code class="docutils literal"><span class="pre">ord</span></code>.</p>
+<span class="gp">In [28]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;Apple&quot;</span>
+<span class="go">                             Out[28]: False</span>
+</pre></div>
+</div>
+<p>It turns out, as you recall from our discussion of variable names, that
+uppercase and lowercase letters are considered to be different from one another.
+The way the computer knows they are different is that each character is assigned
+a unique integer value.  &#8220;A&#8221; is 65, &#8220;B&#8221; is 66, and &#8220;5&#8221; is 53.  The way you can
+find out the so-called <strong>ordinal value</strong> for a given character is to use a
+character function called <code class="docutils literal"><span class="pre">ord</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="gh">Out[29]: </span><span class="go">65</span>
 
-<textarea data-component="activecode" id=ch08_ord2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(ord("A"))
-print(ord("B"))
-print(ord("5"))
+<span class="gp">In [30]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="go">            Out[30]: 66</span>
 
-print(ord("a"))
-print("apple" > "Apple")
-</textarea>
-<p>When you compare characters or strings to one another, Python converts the characters into their equivalent ordinal values and compares the integers from left to right.  As you can see from the example above, &#8220;a&#8221; is greater than &#8220;A&#8221; so &#8220;apple&#8221; is greater than &#8220;Apple&#8221;.</p>
-<p>Humans commonly ignore capitalization when comparing two words.  However, computers do not.  A common way to address this issue is to convert strings to a standard
-format, such as all lowercase, before performing the comparison.</p>
-<p>There is also a similar function called <code class="docutils literal"><span class="pre">chr</span></code> that converts integers into their character equivalent.</p>
+<span class="gp">In [31]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+<span class="go">                        Out[31]: 53</span>
 
-<textarea data-component="activecode" id=ch08_ord3 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(chr(65))
-print(chr(66))
+<span class="gp">In [32]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="go">                                    Out[32]: 97</span>
 
-print(chr(49))
-print(chr(53))
+<span class="gp">In [33]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">&gt;</span> <span class="s2">&quot;Apple&quot;</span>
+<span class="go">                                                Out[33]: True</span>
+</pre></div>
+</div>
+<p>When you compare characters or strings to one another, Python converts the
+characters into their equivalent ordinal values and compares the integers from
+left to right.  As you can see from the example above, &#8220;a&#8221; is greater than &#8220;A&#8221;
+so &#8220;apple&#8221; is greater than &#8220;Apple&#8221;.</p>
+<p>Humans commonly ignore capitalization when comparing two words.  However,
+computers do not.  A common way to address this issue is to convert strings to a
+standard format, such as all lowercase, before performing the comparison.</p>
+<p>There is also a similar function called <code class="docutils literal"><span class="pre">chr</span></code> that converts integers into
+their character equivalent.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span>
+<span class="gh">Out[34]: </span><span class="go">&#39;A&#39;</span>
 
-print("The character for 32 is", chr(32), "!!!")
-print(ord(" "))
-</textarea>
-<p>One thing to note in the last two examples is the fact that the space character has an ordinal value (32).  Even though you don&#8217;t see it, it is an actual character.  We sometimes call it a <em>nonprinting</em> character.</p>
+<span class="gp">In [35]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">66</span><span class="p">)</span>
+<span class="go">             Out[35]: &#39;B&#39;</span>
+
+<span class="gp">In [36]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
+<span class="go">                          Out[36]: &#39;1&#39;</span>
+
+<span class="gp">In [37]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">53</span><span class="p">)</span>
+<span class="go">                                       Out[37]: &#39;5&#39;</span>
+
+<span class="gp">In [38]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="go">                                                    Out[38]: 32</span>
+
+<span class="gp">In [39]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;The character for 32 is&quot;</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="s2">&quot;!!!&quot;</span><span class="p">)</span>
+<span class="go">                                                                The character for 32 is   !!!</span>
+</pre></div>
+</div>
+<p>One thing to note in the last two examples is the fact that the space character
+has an ordinal value (32).  Even though you don&#8217;t see it, it is an actual
+character.  We sometimes call it a <em>nonprinting</em> character.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_6_1">
-            <p>rec-5-14: Evaluate the following comparison:</p>
+            <p>intro-12-391: Evaluate the following comparison:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="s2">&quot;Dog&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;Doghouse&quot;</span>
 </pre></div>
 </div>
@@ -396,7 +530,7 @@ print(ord(" "))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_6_2">
-            <p>rec-5-15: Evaluate the following comparison:</p>
+            <p>intro-12-392: Evaluate the following comparison:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="s2">&quot;dog&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;Dog&quot;</span>
 </pre></div>
 </div>
@@ -411,7 +545,7 @@ print(ord(" "))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_6_3">
-            <p>rec-5-16: Evaluate the following comparison:</p>
+            <p>intro-12-393: Evaluate the following comparison:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="s2">&quot;dog&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;Doghouse&quot;</span>
 </pre></div>
 </div>
@@ -422,92 +556,34 @@ print(ord(" "))
             
 
             </ul>
-            </div>
-<div class="section" id="the-in-and-not-in-operators">
-<span id="index-0"></span><h2>2.4.2. The <code class="docutils literal"><span class="pre">in</span></code> and <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> operators<a class="headerlink" href="#the-in-and-not-in-operators" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">in</span></code> operator tests if one string is a substring of another:</p>
+            <div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
 
-<textarea data-component="activecode" id=chp8_in1 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print('p' in 'apple')
-print('i' in 'apple')
-print('ap' in 'apple')
-print('pa' in 'apple')
-</textarea>
-<p>Note that a string is a substring of itself, and the empty string is a
-substring of any other string. (Also note that computer scientists
-like to think about these edge cases quite carefully!)</p>
+<textarea data-component="activecode" id=scratch_08_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
 
-<textarea data-component="activecode" id=chp8_in2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print('a' in 'a')
-print('apple' in 'apple')
-print('' in 'a')
-print('' in 'apple')
-</textarea>
-<p>The <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> operator returns the logical opposite result of <code class="docutils literal"><span class="pre">in</span></code>.</p>
 
-<textarea data-component="activecode" id=chp8_in3 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print('x' not in 'apple')
 </textarea>
 </div>
-<div class="section" id="list-membership">
-<h2>2.4.3. List Membership<a class="headerlink" href="#list-membership" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">in</span></code> and <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> are boolean operators that test membership in a sequence. We
-used them previously with strings and they also work here.</p>
-
-<textarea data-component="activecode" id=chp09_4 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-fruit = ["apple", "orange", "banana", "cherry"]
-
-print("apple" in fruit)
-print("pear" in fruit)
-</textarea>
-<p><strong>Check your understanding</strong></p>
-
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_4_1">
-            <p>rec-5-17: What is printed by the following statements?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="p">[</span> <span class="p">],</span> <span class="mf">3.14</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="mf">3.14</span> <span class="ow">in</span> <span class="n">alist</span><span class="p">)</span>
-</pre></div>
 </div>
-
-            <li data-component="answer" data-correct id="test_question9_4_1_opt_a">(A) True</li><li data-component="feedback" id="test_question9_4_1_opt_a">Yes, 3.14 is an item in the list alist.</li>
-            
-            <li data-component="answer"  id="test_question9_4_1_opt_b">(B) False</li><li data-component="feedback" id="test_question9_4_1_opt_b">There are 7 items in the list, 3.14 is one of them.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_4_2">
-            <p>rec-5-18: What is printed by the following statements?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="p">[</span> <span class="p">],</span> <span class="mf">3.14</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="mi">57</span> <span class="ow">in</span> <span class="n">alist</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question9_4_2_opt_a">(A) True</li><li data-component="feedback" id="test_question9_4_2_opt_a">in returns True for top level items only.  57 is in a sublist.</li>
-            
-            <li data-component="answer" data-correct id="test_question9_4_2_opt_b">(B) False</li><li data-component="feedback" id="test_question9_4_2_opt_b">Yes, 57 is not a top level item in alist.  It is in a sublist.</li>
-            
-
-            </ul>
-            </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 2.3. Accessing Sequence Data' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 3.3. Accessing Sequence Data' data-toggle="tooltip">
     <a href="AccessingSequenceData.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="AccessingSequenceData.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 2.5. Mutable and Immutable Sequences' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 3.5. Mutable and Immutable Sequences' data-toggle="tooltip" >
     <a href="MutableAndImmutableSequences.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="MutableAndImmutableSequences.html" >Next Section - 2.5. Mutable and Immutable Sequences</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="MutableAndImmutableSequences.html" >Next Section - 3.5. Mutable and Immutable Sequences</a>
 
 <script type="text/javascript">
 

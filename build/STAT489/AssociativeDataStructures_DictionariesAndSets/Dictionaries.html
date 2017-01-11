@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.1. Mapping One Value to Another with Dictionaries &mdash; Runestone Interactive Overview</title>
+    <title>5.1. Mapping One Value to Another with Dictionaries &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="4. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
-    <link rel="next" title="4.2. Checking and Comparing Membership with Sets" href="Sets.html" />
-    <link rel="prev" title="4. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
+    <link rel="up" title="5. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
+    <link rel="next" title="5.2. Checking and Comparing Membership with Sets" href="Sets.html" />
+    <link rel="prev" title="5. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,10 +263,10 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">4.1. Mapping One Value to Another with Dictionaries</a><ul>
-<li><a class="reference internal" href="#dictionary-operations">4.1.1. Dictionary Operations</a></li>
-<li><a class="reference internal" href="#dictionary-methods">4.1.2. Dictionary Methods</a></li>
-<li><a class="reference internal" href="#aliasing-and-copying">4.1.3. Aliasing and Copying</a></li>
+<li><a class="reference internal" href="#">5.1. Mapping One Value to Another with Dictionaries</a><ul>
+<li><a class="reference internal" href="#dictionary-operations">5.1.1. Dictionary Operations</a></li>
+<li><a class="reference internal" href="#dictionary-methods">5.1.2. Dictionary Methods</a></li>
+<li><a class="reference internal" href="#aliasing-and-copying">5.1.3. Aliasing and Copying</a></li>
 </ul>
 </li>
 </ul>
@@ -276,13 +276,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 4. Associative Data Structures - Dictionaries and Sets" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 5. Associative Data Structures - Dictionaries and Sets" data-toggle="tooltip">
     <a href="toctree.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 4.2. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 5.2. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
     <a href="Sets.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -314,9 +314,9 @@
 <div class="container" id="main-content">
   
   <div class="section" id="mapping-one-value-to-another-with-dictionaries">
-<h1>4.1. Mapping One Value to Another with Dictionaries<a class="headerlink" href="#mapping-one-value-to-another-with-dictionaries" title="Permalink to this headline">¶</a></h1>
+<h1>5.1. Mapping One Value to Another with Dictionaries<a class="headerlink" href="#mapping-one-value-to-another-with-dictionaries" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="dictionary-operations">
-<h2>4.1.1. Dictionary Operations<a class="headerlink" href="#dictionary-operations" title="Permalink to this headline">¶</a></h2>
+<h2>5.1.1. Dictionary Operations<a class="headerlink" href="#dictionary-operations" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">del</span></code> statement removes a key-value pair from a dictionary. For example,
 the following dictionary contains the names of various fruits and the number of
 each fruit in stock.  If someone buys all of the pears, we can remove the entry from the dictionary.</p>
@@ -326,7 +326,7 @@ each fruit in stock.  If someone buys all of the pears, we can remove the entry 
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict4)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict4_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ndel inventory['pears']", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["apples", 430], ["pears", 217], ["oranges", 525], ["bananas", 312]]}, "globals": {"inventory": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312]]}, "globals": {"inventory": ["REF", 1]}, "event": "return"}]};
+var ch12_dict4_trace = {"trace": [{"heap": {}, "event": "step_line", "ordered_globals": [], "func_name": "<module>", "line": 1, "stack_to_render": [], "stdout": "", "globals": {}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312], ["pears", 217]]}, "event": "step_line", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 3, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312]]}, "event": "return", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 3, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ndel inventory['pears']"};
 var ch12_dict4_vis;
 
 $(document).ready(function() {
@@ -374,7 +374,7 @@ example, instead of deleting the entry for <code class="docutils literal"><span 
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict4a)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict4a_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ninventory['pears'] = 0", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["apples", 430], ["pears", 217], ["oranges", 525], ["bananas", 312]]}, "globals": {"inventory": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 3, "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["apples", 430], ["pears", 0], ["oranges", 525], ["bananas", 312]]}, "globals": {"inventory": ["REF", 1]}, "event": "return"}]};
+var ch12_dict4a_trace = {"trace": [{"heap": {}, "event": "step_line", "ordered_globals": [], "func_name": "<module>", "line": 1, "stack_to_render": [], "stdout": "", "globals": {}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312], ["pears", 217]]}, "event": "step_line", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 3, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312], ["pears", 0]]}, "event": "return", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 3, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ninventory['pears'] = 0"};
 var ch12_dict4a_vis;
 
 $(document).ready(function() {
@@ -421,7 +421,7 @@ a new shipment of 200 bananas arriving could be handled like this.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict5)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict5_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\ninventory['bananas'] = inventory['bananas'] + 200\n\n\nnumItems = len(inventory)", "trace": [{"stack_to_render": [], "func_name": "<module>", "line": 1, "stdout": "", "ordered_globals": [], "heap": {}, "globals": {}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 2, "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["apples", 430], ["pears", 217], ["oranges", 525], ["bananas", 312]]}, "globals": {"inventory": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["apples", 430], ["pears", 217], ["oranges", 525], ["bananas", 512]]}, "globals": {"inventory": ["REF", 1]}, "event": "step_line"}, {"stack_to_render": [], "func_name": "<module>", "line": 5, "stdout": "", "ordered_globals": ["inventory", "numItems"], "heap": {"1": ["DICT", ["apples", 430], ["pears", 217], ["oranges", 525], ["bananas", 512]]}, "globals": {"inventory": ["REF", 1], "numItems": 4}, "event": "return"}]};
+var ch12_dict5_trace = {"trace": [{"heap": {}, "event": "step_line", "ordered_globals": [], "func_name": "<module>", "line": 1, "stack_to_render": [], "stdout": "", "globals": {}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312], ["pears", 217]]}, "event": "step_line", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 2, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 512], ["pears", 217]]}, "event": "step_line", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 5, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 512], ["pears", 217]]}, "event": "return", "ordered_globals": ["inventory", "numItems"], "func_name": "<module>", "line": 5, "stack_to_render": [], "stdout": "", "globals": {"numItems": 4, "inventory": ["REF", 1]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\ninventory['bananas'] = inventory['bananas'] + 200\n\n\nnumItems = len(inventory)"};
 var ch12_dict5_vis;
 
 $(document).ready(function() {
@@ -465,7 +465,7 @@ of key-value pairs:</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_2_1">
-            <p>Q-1: What is printed by the following statements?</p>
+            <p>data-2-6: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">}</span>
 <span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;mouse&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;dog&quot;</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;mouse&quot;</span><span class="p">])</span>
@@ -484,7 +484,7 @@ of key-value pairs:</p>
             </ul>
             </div>
 <div class="section" id="dictionary-methods">
-<h2>4.1.2. Dictionary Methods<a class="headerlink" href="#dictionary-methods" title="Permalink to this headline">¶</a></h2>
+<h2>5.1.2. Dictionary Methods<a class="headerlink" href="#dictionary-methods" title="Permalink to this headline">¶</a></h2>
 <p>Dictionaries have a number of useful built-in methods.
 The following table provides a summary and more details can be found in the
 <a class="reference external" href="http://docs.python.org/py3k/library/stdtypes.html#mapping-types-dict">Python Documentation</a>.</p>
@@ -606,7 +606,7 @@ print(inventory.get("cherries", 0))
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_1">
-            <p>Q-2: What is printed by the following statements?</p>
+            <p>data-2-7: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">keylist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mydict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="n">keylist</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -626,7 +626,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_2">
-            <p>Q-3: What is printed by the following statements?</p>
+            <p>data-2-8: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">answer</span> <span class="o">=</span> <span class="n">mydict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span> <span class="o">//</span> <span class="n">mydict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
@@ -645,7 +645,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_3">
-            <p>Q-4: What is printed by the following statements?</p>
+            <p>data-2-9: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">)</span>
 </pre></div>
@@ -659,7 +659,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_4">
-            <p>Q-5: What is printed by the following statements?</p>
+            <p>data-2-10: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="mi">23</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">)</span>
 </pre></div>
@@ -673,7 +673,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_5">
-            <p>Q-6: What is printed by the following statements?</p>
+            <p>data-2-11: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">:</span>
@@ -695,7 +695,7 @@ print(inventory.get("cherries", 0))
             </ul>
             </div>
 <div class="section" id="aliasing-and-copying">
-<span id="index-0"></span><h2>4.1.3. Aliasing and Copying<a class="headerlink" href="#aliasing-and-copying" title="Permalink to this headline">¶</a></h2>
+<span id="index-0"></span><h2>5.1.3. Aliasing and Copying<a class="headerlink" href="#aliasing-and-copying" title="Permalink to this headline">¶</a></h2>
 <p>Because dictionaries are mutable, you need to be aware of aliasing (as we saw with lists).  Whenever
 two variables refer to the same dictionary object, changes to one affect the other.
 For example, <code class="docutils literal"><span class="pre">opposites</span></code> is a dictionary that contains pairs
@@ -720,7 +720,7 @@ print(opposites['right'])
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_4_1">
-            <p>Q-7: What is printed by the following statements?</p>
+            <p>data-2-12: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">yourdict</span> <span class="o">=</span> <span class="n">mydict</span>
 <span class="n">yourdict</span><span class="p">[</span><span class="s2">&quot;elephant&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span>
@@ -744,19 +744,19 @@ print(opposites['right'])
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 4. Associative Data Structures - Dictionaries and Sets' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 5. Associative Data Structures - Dictionaries and Sets' data-toggle="tooltip">
     <a href="toctree.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="toctree.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 4.2. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 5.2. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
     <a href="Sets.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="Sets.html" >Next Section - 4.2. Checking and Comparing Membership with Sets</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="Sets.html" >Next Section - 5.2. Checking and Comparing Membership with Sets</a>
 
 <script type="text/javascript">
 

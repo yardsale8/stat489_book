@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.1. What is Python? &mdash; Runestone Interactive Overview</title>
+    <title>1.2. What is Python? &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="1. Introduction to Python" href="toctree.html" />
-    <link rel="next" title="1.2. Data, Types, and Variables" href="DataTypesAndVariables.html" />
-    <link rel="prev" title="1. Introduction to Python" href="toctree.html" />
+    <link rel="next" title="1.3. Data, Types, and Variables" href="DataTypesAndVariables.html" />
+    <link rel="prev" title="1.1. Why Python?" href="intro.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,11 +263,9 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">1.1. What is Python?</a><ul>
-<li><a class="reference internal" href="#the-python-programming-language">1.1.1. The Python Programming Language</a></li>
-<li><a class="reference internal" href="#a-typical-first-program">1.1.2. A Typical First Program</a></li>
-<li><a class="reference internal" href="#comments">1.1.3. Comments</a></li>
-<li><a class="reference internal" href="#the-jupyter-ipython-notebook">1.1.4. The Jupyter/IPython Notebook</a></li>
+<li><a class="reference internal" href="#">1.2. What is Python?</a><ul>
+<li><a class="reference internal" href="#a-typical-first-program">1.2.1. A Typical First Program</a></li>
+<li><a class="reference internal" href="#comments">1.2.2. Comments</a></li>
 </ul>
 </li>
 </ul>
@@ -277,13 +275,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 1. Introduction to Python" data-toggle="tooltip">
-    <a href="toctree.html" >
+  <li id="relations-prev" title="Previous Chapter - 1.1. Why Python?" data-toggle="tooltip">
+    <a href="intro.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 1.2. Data, Types, and Variables' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 1.3. Data, Types, and Variables' data-toggle="tooltip" >
     <a href="DataTypesAndVariables.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -315,23 +313,10 @@
 <div class="container" id="main-content">
   
   <div class="section" id="what-is-python">
-<h1>1.1. What is Python?<a class="headerlink" href="#what-is-python" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="the-python-programming-language">
-<h2>1.1.1. The Python Programming Language<a class="headerlink" href="#the-python-programming-language" title="Permalink to this headline">¶</a></h2>
+<h1>1.2. What is Python?<a class="headerlink" href="#what-is-python" title="Permalink to this headline">¶</a></h1>
 <p>The programming language you will be learning is Python. Python is an example
 of a <strong>high-level language</strong>; other high-level languages you might have heard
 of are C++, PHP, and Java.</p>
-<p>It
-is much easier to program in a
-high-level language. Programs written in a high-level language take less time
-to write, they are shorter and easier to read, and they are more likely to be
-correct. Second, high-level languages are <strong>portable</strong>, meaning that they can
-run on different kinds of computers with few or no modifications. Low-level
-programs can run on only one kind of computer and have to be rewritten to run
-on another.</p>
-<p>Due to these advantages, almost all programs are written in high-level
-languages. Low-level languages are used only for a few specialized
-applications.</p>
 <p>Two kinds of programs process high-level languages into low-level languages:
 <strong>interpreters</strong> and <strong>compilers</strong>. An interpreter reads a high-level program
 and executes it, meaning that it does what the program says. It processes the
@@ -348,88 +333,27 @@ without further translation.</p>
 level language, called <strong>byte code</strong>, and then interpreted by a program called
 a <strong>virtual machine</strong>. Python uses both processes, but because of the way
 programmers interact with it, it is usually considered an interpreted language.</p>
-<p>There are three ways to use the Python interpreter: <em>shell mode</em> <em>program
-mode</em>.  We will also explore a hybrid of the shell mode by using the <em>Jupyter
-notebook.</em> In shell mode, you type Python expressions into the <strong>Python shell</strong>,
-and the interpreter immediately shows the result.  The example below shows the Python shell at work.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python3
-Python 3.2 (r32:88445, Mar 25 2011, 19:28:28)
-[GCC 4.5.2] on linux2
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt; 2 + 3
-5
-&gt;&gt;&gt;
-</pre></div>
-</div>
-<p>The <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> is called the <strong>Python prompt</strong>. The interpreter uses the prompt to
-indicate that it is ready for instructions. We typed <code class="docutils literal"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code>.  The interpreter
-evaluated our expression and replied <code class="docutils literal"><span class="pre">5</span></code>. On the next line it gave a new
-prompt indicating that it is ready for more input.</p>
-<p>Working directly in the interpreter is convenient for testing short bits of
-code because you get immediate feedback. Think of it as scratch paper used to
-help you work out problems.</p>
-<p>Alternatively, you can write an entire program by placing lines of Python
-instructions in a file and then use the interpreter to execute the contents of
-the file as a whole. Such a file is often referred to as <strong>source code</strong>.  For
-example, we used a text editor to create a source code file named
-<code class="docutils literal"><span class="pre">firstprogram.py</span></code> with the following contents:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;My first program adds two numbers, 2 and 3:&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>By convention, files that contain Python programs have names that end with
-<code class="docutils literal"><span class="pre">.py</span></code> .  Following this convention will help your operating system and other
-programs identify a file as containing python code.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python firstprogram.py
-My first program adds two numbers, 2 and 3:
-5
-</pre></div>
-</div>
-<p>These examples show Python being run from a Unix command line. In other
-development environments, the details of executing programs may differ. Also,
-most programs are more interesting than this one.</p>
-<p>When working with data, it is natural to interact with the data <em>interactively</em>.
-We will be using python packages <cite>Jupyter</cite> and <cite>Ipython</cite> for this purpose.
-Below you see the output of evaluating this program in the interactive
-interpreter.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="s2">&quot;My first program adds two numbers, 2 and 3:&quot;</span>
-<span class="gh">Out[1]: </span><span class="go">&#39;My first program adds two numbers, 2 and 3:&#39;</span>
-
-<span class="gp">In [2]: </span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span>
-<span class="go">                                                      Out[2]: 5</span>
-</pre></div>
-</div>
-<p>Note that we don&#8217;t need the print statements when working
-interactively, and in fact, print statements can be a common source of errors
-for programmers that are new to python.</p>
-<div class="admonition caution">
-<p class="first admonition-title">Caution</p>
-<p class="last">You should try to limit the use of print statements in your code.  In the
-interactive code blocks in the book, we are forced to use <cite>print</cite> statements,
-but you should should try to limit your use of the <cite>print</cite> function.</p>
-</div>
-<div class="admonition-when-to-use-print admonition">
-<p class="first admonition-title">When to use <cite>print</cite></p>
-<p>Use <cite>print</cite> ...</p>
-<ol class="last arabic simple">
-<li>as a temparary debugging toy.  In this case, the print calls should be removed after the bugs are fixed.</li>
-<li>when writing python shell scripts that interact with other programs (We will show examples of this later in the book.</li>
-<li>To log information to a file.  This is a useful development tool, but <strong>will not</strong> play a role in this book.</li>
-</ol>
-</div>
-<div class="admonition-want-to-learn-more-about-python admonition">
-<p class="first admonition-title">Want to learn more about Python?</p>
-<p class="last">If you would like to learn more about installing and using Python, here are some video links.
-<a class="reference external" href="http://youtu.be/9EfGpN1Pnsg">Installing Python for Windows</a> shows you how to install the Python environment under
-Windows Vista,
-<a class="reference external" href="http://youtu.be/MEmEJCLLI2k">Installing Python for Mac</a> shows you how to install under Mac OS/X, and
-<a class="reference external" href="http://youtu.be/RLPYBxfAud4">Installing Python for Linux</a> shows you how to install from the Linux
-command line.
-<a class="reference external" href="http://youtu.be/kXbpB5_ywDw">Using Python</a> shows you some details about the Python shell and source code.</p>
-</div>
+<p>There are three ways to use the Python interpreter: <em>shell mode,</em> <em>program mode</em>
+and the <em>IPython/Jupyter notebook.</em> In shell mode, you type Python expressions
+into the <strong>Python shell</strong> or <strong>IPython shell</strong>, and the interpreter immediately
+shows the result.  The shell has many the advantages, including direct and
+immediate interaction with our data.   Furthermore, we can work with a shell in
+our programming environment, often called an Integrated Development Environment
+(IDE), or on a remote session with a server.</p>
+<div class="admonition-ipython-and-jupyter admonition">
+<p class="first admonition-title">IPython and Jupyter</p>
+<p class="last">The name(s) for the IPython tools are currently in transition.  Ipython was
+originally written with Python as the sole focus, but it was quickly
+recognized that this framework works well with many language.  Recently,
+IPython was split into two parts, Jupyter and Ipython proper.  Project
+Jupyter includes all of the machinery that is used to make shells and
+notebooks, allowing easy creation of tools in other language.  Ipython
+contains the Python-specific interface with Jupyter.  Because this name
+change is relatively new, there can be some confusion on naming, so be aware
+the &#8220;Ipython&#8221; might refer to wither or both of Jupyter and Ipython.</p>
 </div>
 <div class="section" id="a-typical-first-program">
-<h2>1.1.2. A Typical First Program<a class="headerlink" href="#a-typical-first-program" title="Permalink to this headline">¶</a></h2>
+<h2>1.2.1. A Typical First Program<a class="headerlink" href="#a-typical-first-program" title="Permalink to this headline">¶</a></h2>
 <p>Traditionally, the first program written in a new language is called <em>Hello,
 World!</em> because all it does is display the words, Hello, World!  In Python, the source code
 looks like this.</p>
@@ -446,28 +370,49 @@ print anything on paper. It displays a value on the screen. In this case, the re
 <textarea data-component="activecode" id=ch01_2 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
 print("Hello, World!")
 </textarea>
-<p>The quotation marks in the program mark the beginning and end of the value.
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The quotation marks in the program mark the beginning and end of the value.
 They don&#8217;t appear in the result.</p>
+</div>
 <p>Some people judge the quality of a programming language by the simplicity of
 the Hello, World! program. By this standard, Python does about as well as
 possible.</p>
-<p>In the earlier section, we gave a warning about using the print statement.  The
-reason for this warning with the nature of <cite>print</cite>, which outputs text to
-the computer display.  This output is then outside the scope of our program and
-<em>cannot</em> be used later in the program.  A common &#8220;rookee mistake&#8221; is to mistake
-the output of print with a python value that can be used later in our program.
-To illustrate, consider the following <cite>IPython</cite> output.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
-<span class="go">Hello, World!</span>
+<p>When working with data, it is natural to work <em>interactively</em>, e.g. execute a
+command or two and then observe the outcome.  To aid in exploring data
+interactively, we will be using python packages <cite>Jupyter</cite> and <cite>Ipython</cite> for this
+purpose.  Below you see the output of evaluating and printing <code class="docutils literal"><span class="pre">&quot;Hello,</span>
+<span class="pre">World!&quot;</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="s2">&quot;Hello, World!&quot;</span>
+<span class="gh">Out[1]: </span><span class="go">&#39;Hello, World!&#39;</span>
 
-<span class="gp">In [4]: </span><span class="mi">2</span><span class="o">+</span><span class="mi">3</span>
-<span class="go">              Out[4]: 5</span>
+<span class="gp">In [2]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="go">                        Hello, World!</span>
 </pre></div>
 </div>
-<p>Notice the lack of <cite>Out[3]</cite> on the evaluation of the <cite>print</cite> call.  This is an
-indication that this function is not returning a value that we can later use in
-our program.  This is an example of a <em>side-effect</em>, which will be defined and
-discussed at length in a later chapter.</p>
+<p>Notice that when we type a value such as <code class="docutils literal"><span class="pre">&quot;Hello,</span> <span class="pre">World!&quot;</span></code> and press enter,
+python returns the value, which we could save for later.  On the other hand, the
+print function has no output.  This is due to the fact that <code class="docutils literal"><span class="pre">print</span></code> sends its
+output to the operating system (and not Python).</p>
+<p>Consequently, we don&#8217;t need the print statements when working interactively, and
+in fact, print statements can be a common source of errors for programmers that
+are new to python.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">You should try to limit the use of print statements in your code.  In the
+interactive code blocks in the book, we are forced to use <code class="docutils literal"><span class="pre">print</span></code> to see
+the output of our code, but you should should try to limit your use of the
+<code class="docutils literal"><span class="pre">print</span></code> function.</p>
+</div>
+<div class="admonition-when-to-use-print admonition">
+<p class="first admonition-title">When to use <cite>print</cite></p>
+<p>Use <cite>print</cite> ...</p>
+<ol class="last arabic simple">
+<li>as a temparary debugging toy.  In this case, the print calls should be removed after the bugs are fixed.</li>
+<li>when writing python shell scripts that interact with other programs (We will show examples of this techniques later in the book.)</li>
+<li>To log information to a file.  This is a useful development tool, but <strong>will not</strong> play a role in this book.</li>
+</ol>
+</div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="question1_11_1">
@@ -484,7 +429,7 @@ discussed at length in a later chapter.</p>
             </ul>
             </div>
 <div class="section" id="comments">
-<h2>1.1.3. Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<h2>1.2.2. Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
 <p>As programs get bigger and more complicated, they get more difficult to read.
 Formal languages are dense, and it is often difficult to look at a piece of
 code and figure out what it is doing, or why.
@@ -532,28 +477,24 @@ programs much easier for humans to parse.  Use them liberally!</p>
 </textarea>
 </div>
 </div>
-<div class="section" id="the-jupyter-ipython-notebook">
-<h2>1.1.4. The Jupyter/IPython Notebook<a class="headerlink" href="#the-jupyter-ipython-notebook" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
-</div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 1. Introduction to Python' data-toggle="tooltip">
-    <a href="toctree.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 1.1. Why Python?' data-toggle="tooltip">
+    <a href="intro.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="toctree.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="intro.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 1.2. Data, Types, and Variables' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 1.3. Data, Types, and Variables' data-toggle="tooltip" >
     <a href="DataTypesAndVariables.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="DataTypesAndVariables.html" >Next Section - 1.2. Data, Types, and Variables</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="DataTypesAndVariables.html" >Next Section - 1.3. Data, Types, and Variables</a>
 
 <script type="text/javascript">
 

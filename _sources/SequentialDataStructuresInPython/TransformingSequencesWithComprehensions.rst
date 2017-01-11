@@ -1,48 +1,171 @@
 Transforming Sequences with Comprehensions
 ==========================================
 
+Python has a very convenient method for describing one list in terms for another
+call a *list comprehension*.  Comprehensions are very "functional" in their
+nature and we will make heavy use of these comprehensions moving forward.
 
 
 List Comprehensions
 -------------------
 
-The previous example creates a list from a sequence of values based on some selection criteria.  An easy way to do this type of processing in Python is to use a **list comprehension**.  List comprehensions are concise ways to create lists.  The general syntax is::
+Suppose that we wish to create a list from a sequence of values based on some
+selection criteria.  An easy way to do this type of processing in Python is to
+use a **list comprehension**.  List comprehensions are concise ways to create
+lists.  The general syntax is::
 
    [<expression> for <item> in <sequence> if  <condition>]
 
 where the if clause is optional.  For example,
 
-.. activecode:: listcomp1
+.. ipython:: python
 
     mylist = [1,2,3,4,5]
-
     yourlist = [item ** 2 for item in mylist]
+    yourlist
 
-    print(yourlist)
+The expression describes each element of the list that is being built.  The
+``for`` clause iterates through each item in a sequence.  The items are filtered
+by the ``if`` clause if there is one.  In the example above, the ``for``
+statement lets ``item`` take on all the values in the list ``mylist`` one after
+the other. Each item is then squared before it is added to the list that is
+being built.  The result is a list of squares of the values in ``mylist``.
+
+The built-in ``range`` Python function is a useful tool for generating a
+sequence of numbers.  The sequence provided by ``range`` always starts with 0.
+If you ask for ``range(4)``, then you will get 4 values starting with 0.  In
+other words, 0, 1, 2, and finally 3.  Notice that 4 is not included since we
+started with 0.  Likewise, ``range(10)`` provides 10 values, 0 through 9.
+
+.. ipython:: python
+
+      [ i for i in range(4)]
+      [x for x in range(10)]
+
+.. note::
+
+    Computer scientists like to count from 0! We will explain the reason why in
+    the next chapter.
 
 
-
-The expression describes each element of the list that is being built.  The ``for`` clause iterates through each item in a sequence.  The items are filtered by the ``if`` clause if there is one.  In the example above, the ``for`` statement lets ``item`` take on all the values in the list ``mylist``.  Each item is then squared before it is added to the list that is being built.  The result is a list of squares of the values in ``mylist``.
-
-To write the ``primes_upto`` function we will use the ``is_prime`` function to filter the sequence of integers coming from the ``range`` function.  In other words, for every integer from 2 up to but not including ``n``, if the integer is prime, keep it in the list.
-
-.. sourcecode:: python
-
-	def primes_upto(n):
-	    """ Return a list of all prime numbers less than n using a list comprehension. """
-
-	    result = [num for num in range(2,n) if is_prime(num)]
-	    return result
-
+The `range <http://docs.python.org/py3k/library/functions
+.html?highlight=range#range>`_ function is actually a very powerful function
+when it comes to creating sequences of integers.  It can take one, two, or three
+parameters.  We have seen the simplest case of one parameter such as
+``range(4)`` which creates ``[0, 1, 2, 3]``.  But what if we really want to have
+the sequence ``[1, 2, 3, 4]``?  We can do this by using a two parameter version
+of ``range`` where the first parameter is the starting point and the second
+parameter is the ending point.  The evaluation of ``range(1,5)`` produces the
+desired sequence.  What happened to the 5?  In this case we interpret the
+parameters of the ``range`` function to mean ``range(start,stop+1)``.
 
 
 .. note::
 
-    This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
+    Why in the world would range not just work like range(start, stop)?  Think
+    about it like this.  Because computer scientists like to start counting at 0
+    instead of 1, ``range(N)`` produces a sequence of things that is N long, but
+    the consequence of this is that the final number of the sequence is N-1.  In
+    the case of start, stop it helps to simply think that the sequence begins
+    with start and continues as long as the number is less than stop.
 
-    .. activecode:: scratch_09_06
-    
-    
+Here are a three examples for you to considered.  
+
+.. ipython:: python
+
+    [i for i in range(4)]
+    [x for x in range(1, 10)]
+    [item for item in range(1,10,2)]
+
+Notice that the last call to ``range`` added the third parameter, which
+represents the **step size**.  In this case, every item is 2 more than the last
+item.   Making a list that counts down from some starting number can be
+accomplished using a negative step size.
+
+.. ipython:: python
+
+    [ i for i in range(10, 0, -1)]
+
+
+**Check your understanding**
+
+.. mchoice:: test_question3_5_1
+  :answer_a: Range should generate a list that stops at 9 (including 9).
+  :answer_b: Range should generate a list that starts at 10 (including 10).
+  :answer_c: Range should generate a list starting at 3 that stops at 10 (including 10).
+  :answer_d: Range should generate a list using every 10th number between the start and the stopping number.
+  :correct: a
+  :feedback_a: Range will generate the list [3, 5, 7, 9].
+  :feedback_b: The first argument (3) tells range what number to start at.
+  :feedback_c: Range will always stop at the number before (not including) the specified ending point for the list.
+  :feedback_d: The third argument (2) tells range how many numbers to skip between each element in the list.
+
+  In the command range(3, 10, 2), what does the second argument (10) specify?
+
+.. mchoice:: test_question3_5_2
+  :answer_a: range(2, 5, 8)
+  :answer_b: range(2, 8, 3)
+  :answer_c: range(2, 10, 3)
+  :answer_d: range(8, 1, -3)
+  :correct: c
+  :feedback_a: This command generates the list [2] because the first number (2) tells range where to start, the second number tells range where to end (5, not inclusive) and the third number tells range how many numbers to skip between elements (8).  Since 10>= 8, there is only one number in this list.
+  :feedback_b: This command generates the list [2, 5] because 8 is not less than 8 (the specified ending number).
+  :feedback_c: The first number is the starting point, the second is the maximum allowed, and the third is the amount to increment by.
+  :feedback_d: This command generates the list [8, 5, 3] because it starts at 8, ends at (or above 1), and skips every third number going down.
+
+  What command correctly generates the list [2, 5, 8]?
+
+.. mchoice:: test_question3_5_3
+  :answer_a: It will generate a list starting at 0, with every number included up to but not including the argument it was passed.
+  :answer_b: It will generate a list starting at 1, with every number up to but not including the argument it was passed.
+  :answer_c: It will generate a list starting at 1, with every number including the argument it was passed.
+  :answer_d: It will cause an error: range always takes exactly 3 arguments.
+  :correct: a
+  :feedback_a: Yes, if you only give one number to range it starts with 0 and ends before the number specified incrementing by 1.
+  :feedback_b: Range starts at 0 unless otherwise specified.
+  :feedback_c: Range starts at 0 unless otherwise specified, and never includes its ending element (which is the argument it was passed).
+  :feedback_d: If range is passed only one argument, it interprets that argument as the end of the list (not inclusive).
+
+  What happens if you give range only one argument?  For example: range(4)
+
+
+One final note about the ``range`` function in python: it is lazy!  Notice that
+trying to evaluate this function by itself doesn't return the list.  Instead, it
+returns a **generator** object that will wait as long as possible to generate
+this list.  
+
+.. ipython:: python
+
+    range(5)
+
+We have a number of methods for forcing ``range`` to complete the process
+including comprehensions and the ``list`` conversion function.
+
+.. ipython:: python
+
+    list(range(5))
+
+.. note::
+
+    There are a number of lazy constructions in Python 3. We will look at these
+    features in a later chapter.
+
+
+An alternative method for generating odd values involves using a Boolean
+function to filter items out of our list using the optional if clause.  For
+example, let's compute the cube root for all odd values less than 10. 
+
+.. ipython:: python
+
+    is_odd = lambda x: x % 2 == 1
+    cube_root = lambda x: x**(1/3)
+    [cube_root(x) for x in range(10) if is_odd(x)]
+
+Why might we want to use this version of the comprehension?  Here we are using
+two explicit abstractions to describe the *intent* of our code.  This should
+make it easier for someone that later reads through the code to understand the
+meaning of this construction.
+
 
 **Check your understanding**
 
@@ -66,10 +189,12 @@ To write the ``primes_upto`` function we will use the ``is_prime`` function to f
      print(blist)
 
 
-.. index:: nested list, list; nested
-       
+.. note::
 
+    This workspace is provided for your convenience.  You can use this
+    activecode window to try out anything you like.
 
+    .. activecode:: scratch_08_01
 
 Character classification
 ------------------------
@@ -77,25 +202,64 @@ Character classification
 It is often helpful to examine a character and test whether it is upper- or
 lowercase, or whether it is a character or a digit. The ``string`` module
 provides several constants that are useful for these purposes. One of these,
-``string.digits`` is equivalent to "0123456789".  It can be used to check if a character
-is a digit using the ``in`` operator.
+``string.digits`` is equivalent to "0123456789".  It can be used to check if a
+character is a digit using the ``in`` operator.
 
-The string ``string.ascii_lowercase`` contains all of the ascii letters that the system
-considers to be lowercase. Similarly, ``string.ascii_uppercase`` contains all of the
-uppercase letters. ``string.punctuation`` comprises all the characters considered
-to be punctuation. Try the following and see what you get.
+The string ``string.ascii_lowercase`` contains all of the ascii letters that the
+system considers to be lowercase. Similarly, ``string.ascii_uppercase`` contains
+all of the uppercase letters. ``string.punctuation`` comprises all the
+characters considered to be punctuation. Try the following and see what you get.
 
-.. sourcecode:: python
-    
-    print(string.ascii_lowercase)
-    print(string.ascii_uppercase)
-    print(string.digits)
-    print(string.punctuation)
+.. ipython:: python
+   
+    import string
+    string.ascii_lowercase
+    string.ascii_uppercase
+    string.digits
+    string.punctuation
 
-    
+For more information consult the ``string`` module documentation (see `Global
+Module Index <http://docs.python.org/py3k/py-modindex.html>`_).
 
-For more information consult the ``string`` module documentaiton (see `Global Module Index <http://docs.python.org/py3k/py-modindex.html>`_).
+We can use list comprehensions to describe a new string, but we need to convert
+the result back to a string using the ``str`` conversion function.  For example,
+let's remove all of the punctuation from a string.
 
+.. ipython:: python
+
+    zen_of_python = '''The Zen of Python, by Tim Peters
+    Beautiful is better than ugly.
+    Explicit is better than implicit.
+    Simple is better than complex.
+    Complex is better than complicated.
+    Flat is better than nested.
+    Sparse is better than dense.
+    Readability counts.
+    Special cases aren't special enough to break the rules.
+    Although practicality beats purity.
+    Errors should never pass silently.
+    Unless explicitly silenced.
+    In the face of ambiguity, refuse the temptation to guess.
+    There should be one-- and preferably only one --obvious way to do it.
+    Although that way may not be obvious at first unless you're Dutch.
+    Now is better than never.
+    Although never is often better than *right* now.
+    If the implementation is hard to explain, it's a bad idea.
+    If the implementation is easy to explain, it may be a good idea.
+    Namespaces are one honking great idea -- let's do more of those!'''
+
+    zen_list_no_punc = [ch for ch in zen_of_python if ch not in string.punctuation]
+    print(zen_list_no_punc)
+    zen_string_no_punc = ''.join(zen_list_no_punc)
+    print(zen_string_no_punc)
+
+.. note::
+
+    You can contemplate the zen of Python anytime by executing ``import this``.
+
+    .. ipython:: python
+
+        import this
 
 .. note::
 
@@ -104,3 +268,17 @@ For more information consult the ``string`` module documentaiton (see `Global Mo
    .. activecode:: scratch_08_04
 
 
+Common Comprehension Patterns
+=============================
+
+TODO
+
+Use built-in helper functions
+-----------------------------
+
+TODO
+
+1. iterators: zip, enumerate, reversed
+2. reductions: max, min, sum, length, all, any
+3. working with tuples
+4. comprehensions for tables and matrices

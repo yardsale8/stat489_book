@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.7. Python as an Object Oriented Language &mdash; Runestone Interactive Overview</title>
+    <title>1.5. Python as an Object Oriented Language &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="1. Introduction to Python" href="toctree.html" />
-    <link rel="next" title="1.8. Sharing and Reusing Code with Modules" href="SharingAndReusingCodeWithModules.html" />
-    <link rel="prev" title="1.6. Statements: When Expressions Are Not Enough" href="StatementsWhenExpressionsAreNotEnough.html" />
+    <link rel="next" title="1.6. Transforming Simple Data with Expressions" href="TransformingSimpleDataWithExpressions.html" />
+    <link rel="prev" title="1.4. Sharing and Reusing Code with Modules" href="SharingAndReusingCodeWithModules.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,9 +263,13 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">1.7. Python as an Object Oriented Language</a><ul>
-<li><a class="reference internal" href="#a-overview-of-objects-and-methods">1.7.1. A overview of objects and methods</a></li>
-<li><a class="reference internal" href="#learning-python-interactively-with-dir-and-help">1.7.2. Learning Python interactively with <cite>dir</cite> and <cite>help</cite></a></li>
+<li><a class="reference internal" href="#">1.5. Python as an Object Oriented Language</a><ul>
+<li><a class="reference internal" href="#hello-little-turtles">1.5.1. Hello Little Turtles!</a></li>
+<li><a class="reference internal" href="#our-first-turtle-program">1.5.2. Our First Turtle Program</a></li>
+<li><a class="reference internal" href="#the-dir-and-help-functions">1.5.3. The <code class="docutils literal"><span class="pre">dir</span></code> and <code class="docutils literal"><span class="pre">help</span></code> functions</a></li>
+<li><a class="reference internal" href="#instances-a-herd-of-turtles">1.5.4. Instances &#8212; A Herd of Turtles</a></li>
+<li><a class="reference internal" href="#object-oriented-programming">1.5.5. Object-oriented programming</a></li>
+<li><a class="reference internal" href="#a-change-of-perspective">1.5.6. A change of perspective</a></li>
 </ul>
 </li>
 </ul>
@@ -275,14 +279,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 1.6. Statements: When Expressions Are Not Enough" data-toggle="tooltip">
-    <a href="StatementsWhenExpressionsAreNotEnough.html" >
+  <li id="relations-prev" title="Previous Chapter - 1.4. Sharing and Reusing Code with Modules" data-toggle="tooltip">
+    <a href="SharingAndReusingCodeWithModules.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 1.8. Sharing and Reusing Code with Modules' data-toggle="tooltip" >
-    <a href="SharingAndReusingCodeWithModules.html" >
+  <li id="relations-next" title='Next Chapter - 1.6. Transforming Simple Data with Expressions' data-toggle="tooltip" >
+    <a href="TransformingSimpleDataWithExpressions.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -313,31 +317,563 @@
 <div class="container" id="main-content">
   
   <div class="section" id="python-as-an-object-oriented-language">
-<h1>1.7. Python as an Object Oriented Language<a class="headerlink" href="#python-as-an-object-oriented-language" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="a-overview-of-objects-and-methods">
-<h2>1.7.1. A overview of objects and methods<a class="headerlink" href="#a-overview-of-objects-and-methods" title="Permalink to this headline">¶</a></h2>
+<h1>1.5. Python as an Object Oriented Language<a class="headerlink" href="#python-as-an-object-oriented-language" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we will explore an import detail of Python: all values in
+Python are objects.  Although Python allows programs to be written in many
+programming paradigms (e.g. imperative, functional), Python is <em>built</em> using the
+<strong>object-oriented</strong> paradigm.  Thus, regardless of the types of programs that
+you write, it is important to understand the basics of working with objects and
+methods.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This textbook does not focus on object-oriented programming, but there are
+sections in the appendix that provide details about writing your own
+classes/objects in Python.</p>
 </div>
-<div class="section" id="learning-python-interactively-with-dir-and-help">
-<h2>1.7.2. Learning Python interactively with <cite>dir</cite> and <cite>help</cite><a class="headerlink" href="#learning-python-interactively-with-dir-and-help" title="Permalink to this headline">¶</a></h2>
+<p>Next, we will use the Python <code class="docutils literal"><span class="pre">turtle</span></code> module to gain familiarity in working
+with object.</p>
+<div class="section" id="hello-little-turtles">
+<h2>1.5.1. Hello Little Turtles!<a class="headerlink" href="#hello-little-turtles" title="Permalink to this headline">¶</a></h2>
+<p>There are many <em>modules</em> in Python that provide very powerful features that we
+can use in our own programs.  Some of these can send email or fetch web pages.
+Others allow us to perform complex mathematical calculations.  In this chapter
+we will introduce a module that allows us to create a data object called a
+<strong>turtle</strong> that can be used to draw pictures.</p>
+<p>Turtle graphics, as it is known, is based on a very simple metaphor. Imagine
+that you have a turtle that understands English.  You can tell your turtle to do
+simple commands such as go forward and turn right.  As the turtle moves around,
+if its tail is down touching the ground, it will draw a line (leave a trail
+behind) as it moves.  If you tell your turtle to lift up its tail it can still
+move around but will not leave a trail.  As you will see, you can make some
+pretty amazing drawings with this simple capability.</p>
+</div>
+<div class="section" id="our-first-turtle-program">
+<h2>1.5.2. Our First Turtle Program<a class="headerlink" href="#our-first-turtle-program" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s try a couple of lines of Python code to create a new turtle and start
+drawing a simple figure like a rectangle.  We will refer to our first turtle
+using the variable name <code class="docutils literal"><span class="pre">alex</span></code>, but remember that you can choose any name you
+wish as long as you follow the naming rules from the previous chapter.</p>
+<p>The program as shown will only draw the first two sides of the rectangle.
+After line 4 you will have a straight line going from the center of the
+drawing canvas towards the right.  After line 6, you will have a canvas with a
+turtle and a half drawn rectangle.  Press the run button to try it and see.</p>
+
+<textarea data-component="activecode" id=ch03_1 data-lang="python"    data-timelimit=25000   data-audio='*doubleq*Overall Tour*doubleq*; 1-6: Example01_Tour01_Line01; 3: Example01_Tour01_Line02; 4: Example01_Tour01_Line03; 5: Example01_Tour01_Line04; 6: Example01_Tour01_Line05;*atype**doubleq*Line by Line Tour*doubleq*; 1: Example01_Tour02_Line01; 2: Example01_Tour02_Line02; 3: Example01_Tour02_Line03; 4: Example01_Tour02_Line04; 5: Example01_Tour02_Line05; 6: Example01_Tour02_Line06;*atype*'     >
+import turtle               # allows us to use the turtles library
+wn = turtle.Screen()        # creates a graphics window
+alex = turtle.Turtle()      # create a turtle named alex
+alex.forward(150)           # tell alex to move forward by 150 units
+alex.left(90)               # turn by 90 degrees
+alex.forward(75)            # complete the second side of a rectangle
+</textarea>
+<p>Here are a couple of things you&#8217;ll need to understand about this program.</p>
+<p>The first line tells Python to load a <strong>module</strong> named <code class="docutils literal"><span class="pre">turtle</span></code>.  That module
+brings us two new types that we can use: the <code class="docutils literal"><span class="pre">Turtle</span></code> type, and the <code class="docutils literal"><span class="pre">Screen</span></code>
+type.  The dot notation <code class="docutils literal"><span class="pre">turtle.Turtle</span></code> means <em>&#8220;The Turtle type that is
+defined within the turtle module&#8221;</em>.   (Remember that Python is case sensitive,
+so the module name, <code class="docutils literal"><span class="pre">turtle</span></code>, with a lowercase <cite>t</cite>, is different from the type
+<code class="docutils literal"><span class="pre">Turtle</span></code> because of the uppercase <cite>T</cite>.)</p>
+<p>We then create and open what the turtle module calls a screen (we would prefer
+to call it a window, or in the case of this web version of Python simply a
+canvas), which we assign to variable <cite>wn</cite>. Every window contains a <strong>canvas</strong>,
+which is the area inside the window on which we can draw.</p>
+<p>In line 3 we create a turtle. The variable <cite>alex</cite> is made to refer to this
+turtle.   These first three lines set us up so that we are ready to do some
+drawing.</p>
+<p>In lines 4-6, we instruct the <strong>object</strong> alex to move and to turn. We do this
+by <strong>invoking</strong> or activating alex&#8217;s <strong>methods</strong> &#8212; these are the
+instructions that all turtles know how to respond to.</p>
+<div class="admonition-complete-the-rectangle admonition">
+<p class="first admonition-title">Complete the rectangle ...</p>
+<p class="last">Modify the program by adding the commands necessary to have <em>alex</em> complete
+the rectangle.</p>
+</div>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_1_0">
+            intro-12-168: Which direction does the Turtle face when it is created?
+            <li data-component="answer"  id="test_question3_1_0_opt_a">(A) North</li><li data-component="feedback" id="test_question3_1_0_opt_a">Some turtle systems start with the turtle facing north, but not this one.</li>
+            
+            <li data-component="answer"  id="test_question3_1_0_opt_b">(B) South</li><li data-component="feedback" id="test_question3_1_0_opt_b">No, look at the first example with a turtle.  Which direction does the turtle move?</li>
+            
+            <li data-component="answer" data-correct id="test_question3_1_0_opt_c">(C) East</li><li data-component="feedback" id="test_question3_1_0_opt_c">Yes, the turtle starts out facing east.</li>
+            
+            <li data-component="answer"  id="test_question3_1_0_opt_d">(D) West</li><li data-component="feedback" id="test_question3_1_0_opt_d">No, look at the first example with a turtle.  Which direction does the turtle move?</li>
+            
+
+            </ul>
+            <p>An object can have various methods &#8212; things it can do &#8212; and it can also
+have <strong>attributes</strong> &#8212; (sometimes called <em>properties</em>).  For example, each
+turtle has a <em>color</em> attribute.  The method invocation  <cite>alex.color(&#8220;red&#8221;)</cite>
+will make alex red and the line that it draws will be red too.</p>
+<p>The color of the turtle, the width of its pen(tail), the position of the turtle
+within the window, which way it is facing, and so on are all part of its current
+<strong>state</strong>.   Similarly, the window object has a background color which is part
+of its state. Quite a number of methods exist that allow us to modify the turtle and window
+objects.</p>
+<p>In the example below, we show just show a couple and have only
+commented those lines that are different from the previous example.  Note also
+that we have decided to call our turtle object <em>tess</em>.</p>
+
+<textarea data-component="activecode" id=ch03_2 data-lang="python"    data-timelimit=25000   data-audio='*doubleq*Overall Tour*doubleq*; 1-10: Example02_Tour01_Line01; 4: Example02_Tour01_Line02; 6: Example02_Tour01_Line03; 7: Example02_Tour01_Line04; 8: Example02_Tour01_Line05; 10: Example02_Tour01_Line06; 11: Example02_Tour01_Line07; 12: Example02_Tour01_Line08; 14: Example02_Tour01_Line09;*atype**doubleq*Line by Line Tour*doubleq*; 1: Example01_Tour02_Line01; 3: Example01_Tour02_Line02; 4: Example02_Tour02_Line03; 6: Example02_Tour02_Line04; 7: Example02_Tour02_Line05; 8: Example02_Tour02_Line06; 10: Example02_Tour02_Line07; 11: Example02_Tour02_Line08; 12: Example02_Tour02_Line09; 14: Example02_Tour02_Line10;*atype*'     >
+import turtle
+
+wn = turtle.Screen()
+wn.bgcolor("lightgreen")        # set the window background color
+
+tess = turtle.Turtle()
+tess.color("blue")              # make tess blue
+tess.pensize(3)                 # set the width of her pen
+
+tess.forward(50)
+tess.left(120)
+tess.forward(50)
+
+wn.exitonclick()                # wait for a user click on the canvas
+</textarea>
+<p>The last line plays a very important role. The wn variable refers to the window shown
+above. When we invoke its <code class="docutils literal"><span class="pre">exitonclick</span></code> method, the program pauses execution and waits for the user to click the mouse somewhere in the window.
+When this click event occurs, the response is to close the turtle window and
+exit (stop execution of) the Python program.</p>
+<p>Each time we run this program, a new drawing window pops up, and will remain on the
+screen until we click on it.</p>
+<div class="admonition-extend-this-program admonition">
+<p class="first admonition-title">Extend this program ...</p>
+<ol class="last arabic simple">
+<li>Modify this program so that before it creates the window, it prompts
+the user to enter the desired background color. It should store the
+user&#8217;s responses in a variable, and modify the color of the window
+according to the user&#8217;s wishes.
+(Hint: you can find a list of permitted color names at
+<a class="reference external" href="http://www.w3schools.com/html/html_colornames.asp">http://www.w3schools.com/html/html_colornames.asp</a>.  It includes some quite
+unusual ones, like &#8220;PeachPuff&#8221;  and &#8220;HotPink&#8221;.)</li>
+<li>Do similar changes to allow the user, at runtime, to set tess&#8217; color.</li>
+<li>Do the same for the width of tess&#8217; pen.  <em>Hint:</em> your dialog with the
+user will return a string, but tess&#8217; <code class="docutils literal"><span class="pre">pensize</span></code> method
+expects its argument to be an <code class="docutils literal"><span class="pre">int</span></code>.  That means you need to convert
+the string to an int before you pass it to <code class="docutils literal"><span class="pre">pensize</span></code>.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="the-dir-and-help-functions">
+<h2>1.5.3. The <code class="docutils literal"><span class="pre">dir</span></code> and <code class="docutils literal"><span class="pre">help</span></code> functions<a class="headerlink" href="#the-dir-and-help-functions" title="Permalink to this headline">¶</a></h2>
+<p>You can explore the available methods using the <code class="docutils literal"><span class="pre">dir</span></code> and <code class="docutils literal"><span class="pre">help</span></code>
+functions.  First, perform <code class="docutils literal"><span class="pre">dir</span></code> on an object to see all of the available
+methods.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">turtle</span>
+
+<span class="gp">In [2]: </span><span class="n">tess</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>
+
+<span class="gp">In [3]: </span><span class="nb">dir</span><span class="p">(</span><span class="n">tess</span><span class="p">)</span>
+<span class="gh">Out[3]: </span><span class="go"></span>
+<span class="go">[&#39;DEFAULT_ANGLEOFFSET&#39;,</span>
+<span class="go"> &#39;DEFAULT_ANGLEORIENT&#39;,</span>
+<span class="go"> &#39;DEFAULT_MODE&#39;,</span>
+<span class="go"> &#39;START_ORIENTATION&#39;,</span>
+<span class="go"> &#39;__class__&#39;,</span>
+<span class="go"> &#39;__delattr__&#39;,</span>
+<span class="go"> &#39;__dict__&#39;,</span>
+<span class="go"> &#39;__dir__&#39;,</span>
+<span class="go"> &#39;__doc__&#39;,</span>
+<span class="go"> &#39;__eq__&#39;,</span>
+<span class="go"> &#39;__format__&#39;,</span>
+<span class="go"> &#39;__ge__&#39;,</span>
+<span class="go"> &#39;__getattribute__&#39;,</span>
+<span class="go"> &#39;__gt__&#39;,</span>
+<span class="go"> &#39;__hash__&#39;,</span>
+<span class="go"> &#39;__init__&#39;,</span>
+<span class="go"> &#39;__le__&#39;,</span>
+<span class="go"> &#39;__lt__&#39;,</span>
+<span class="go"> &#39;__module__&#39;,</span>
+<span class="go"> &#39;__ne__&#39;,</span>
+<span class="go"> &#39;__new__&#39;,</span>
+<span class="go"> &#39;__reduce__&#39;,</span>
+<span class="go"> &#39;__reduce_ex__&#39;,</span>
+<span class="go"> &#39;__repr__&#39;,</span>
+<span class="go"> &#39;__setattr__&#39;,</span>
+<span class="go"> &#39;__sizeof__&#39;,</span>
+<span class="go"> &#39;__str__&#39;,</span>
+<span class="go"> &#39;__subclasshook__&#39;,</span>
+<span class="go"> &#39;__weakref__&#39;,</span>
+<span class="go"> &#39;_angleOffset&#39;,</span>
+<span class="go"> &#39;_angleOrient&#39;,</span>
+<span class="go"> &#39;_cc&#39;,</span>
+<span class="go"> &#39;_clear&#39;,</span>
+<span class="go"> &#39;_clearstamp&#39;,</span>
+<span class="go"> &#39;_color&#39;,</span>
+<span class="go"> &#39;_colorstr&#39;,</span>
+<span class="go"> &#39;_creatingPoly&#39;,</span>
+<span class="go"> &#39;_degreesPerAU&#39;,</span>
+<span class="go"> &#39;_delay&#39;,</span>
+<span class="go"> &#39;_drawing&#39;,</span>
+<span class="go"> &#39;_drawturtle&#39;,</span>
+<span class="go"> &#39;_fillcolor&#39;,</span>
+<span class="go"> &#39;_fillitem&#39;,</span>
+<span class="go"> &#39;_fillpath&#39;,</span>
+<span class="go"> &#39;_fullcircle&#39;,</span>
+<span class="go"> &#39;_getshapepoly&#39;,</span>
+<span class="go"> &#39;_go&#39;,</span>
+<span class="go"> &#39;_goto&#39;,</span>
+<span class="go"> &#39;_hidden_from_screen&#39;,</span>
+<span class="go"> &#39;_mode&#39;,</span>
+<span class="go"> &#39;_newLine&#39;,</span>
+<span class="go"> &#39;_orient&#39;,</span>
+<span class="go"> &#39;_outlinewidth&#39;,</span>
+<span class="go"> &#39;_pen&#39;,</span>
+<span class="go"> &#39;_pencolor&#39;,</span>
+<span class="go"> &#39;_pensize&#39;,</span>
+<span class="go"> &#39;_poly&#39;,</span>
+<span class="go"> &#39;_polytrafo&#39;,</span>
+<span class="go"> &#39;_position&#39;,</span>
+<span class="go"> &#39;_reset&#39;,</span>
+<span class="go"> &#39;_resizemode&#39;,</span>
+<span class="go"> &#39;_rotate&#39;,</span>
+<span class="go"> &#39;_screen&#39;,</span>
+<span class="go"> &#39;_setDegreesPerAU&#39;,</span>
+<span class="go"> &#39;_setmode&#39;,</span>
+<span class="go"> &#39;_shapetrafo&#39;,</span>
+<span class="go"> &#39;_shearfactor&#39;,</span>
+<span class="go"> &#39;_shown&#39;,</span>
+<span class="go"> &#39;_speed&#39;,</span>
+<span class="go"> &#39;_stretchfactor&#39;,</span>
+<span class="go"> &#39;_tilt&#39;,</span>
+<span class="go"> &#39;_tracer&#39;,</span>
+<span class="go"> &#39;_undo&#39;,</span>
+<span class="go"> &#39;_undobuffersize&#39;,</span>
+<span class="go"> &#39;_undogoto&#39;,</span>
+<span class="go"> &#39;_update&#39;,</span>
+<span class="go"> &#39;_update_data&#39;,</span>
+<span class="go"> &#39;_write&#39;,</span>
+<span class="go"> &#39;back&#39;,</span>
+<span class="go"> &#39;backward&#39;,</span>
+<span class="go"> &#39;begin_fill&#39;,</span>
+<span class="go"> &#39;begin_poly&#39;,</span>
+<span class="go"> &#39;bk&#39;,</span>
+<span class="go"> &#39;circle&#39;,</span>
+<span class="go"> &#39;clear&#39;,</span>
+<span class="go"> &#39;clearstamp&#39;,</span>
+<span class="go"> &#39;clearstamps&#39;,</span>
+<span class="go"> &#39;clone&#39;,</span>
+<span class="go"> &#39;color&#39;,</span>
+<span class="go"> &#39;currentLine&#39;,</span>
+<span class="go"> &#39;currentLineItem&#39;,</span>
+<span class="go"> &#39;degrees&#39;,</span>
+<span class="go"> &#39;distance&#39;,</span>
+<span class="go"> &#39;dot&#39;,</span>
+<span class="go"> &#39;down&#39;,</span>
+<span class="go"> &#39;drawingLineItem&#39;,</span>
+<span class="go"> &#39;end_fill&#39;,</span>
+<span class="go"> &#39;end_poly&#39;,</span>
+<span class="go"> &#39;fd&#39;,</span>
+<span class="go"> &#39;fillcolor&#39;,</span>
+<span class="go"> &#39;filling&#39;,</span>
+<span class="go"> &#39;forward&#39;,</span>
+<span class="go"> &#39;get_poly&#39;,</span>
+<span class="go"> &#39;get_shapepoly&#39;,</span>
+<span class="go"> &#39;getpen&#39;,</span>
+<span class="go"> &#39;getscreen&#39;,</span>
+<span class="go"> &#39;getturtle&#39;,</span>
+<span class="go"> &#39;goto&#39;,</span>
+<span class="go"> &#39;heading&#39;,</span>
+<span class="go"> &#39;hideturtle&#39;,</span>
+<span class="go"> &#39;home&#39;,</span>
+<span class="go"> &#39;ht&#39;,</span>
+<span class="go"> &#39;isdown&#39;,</span>
+<span class="go"> &#39;isvisible&#39;,</span>
+<span class="go"> &#39;items&#39;,</span>
+<span class="go"> &#39;left&#39;,</span>
+<span class="go"> &#39;lt&#39;,</span>
+<span class="go"> &#39;onclick&#39;,</span>
+<span class="go"> &#39;ondrag&#39;,</span>
+<span class="go"> &#39;onrelease&#39;,</span>
+<span class="go"> &#39;pd&#39;,</span>
+<span class="go"> &#39;pen&#39;,</span>
+<span class="go"> &#39;pencolor&#39;,</span>
+<span class="go"> &#39;pendown&#39;,</span>
+<span class="go"> &#39;pensize&#39;,</span>
+<span class="go"> &#39;penup&#39;,</span>
+<span class="go"> &#39;pos&#39;,</span>
+<span class="go"> &#39;position&#39;,</span>
+<span class="go"> &#39;pu&#39;,</span>
+<span class="go"> &#39;radians&#39;,</span>
+<span class="go"> &#39;reset&#39;,</span>
+<span class="go"> &#39;resizemode&#39;,</span>
+<span class="go"> &#39;right&#39;,</span>
+<span class="go"> &#39;rt&#39;,</span>
+<span class="go"> &#39;screen&#39;,</span>
+<span class="go"> &#39;screens&#39;,</span>
+<span class="go"> &#39;seth&#39;,</span>
+<span class="go"> &#39;setheading&#39;,</span>
+<span class="go"> &#39;setpos&#39;,</span>
+<span class="go"> &#39;setposition&#39;,</span>
+<span class="go"> &#39;settiltangle&#39;,</span>
+<span class="go"> &#39;setundobuffer&#39;,</span>
+<span class="go"> &#39;setx&#39;,</span>
+<span class="go"> &#39;sety&#39;,</span>
+<span class="go"> &#39;shape&#39;,</span>
+<span class="go"> &#39;shapesize&#39;,</span>
+<span class="go"> &#39;shapetransform&#39;,</span>
+<span class="go"> &#39;shearfactor&#39;,</span>
+<span class="go"> &#39;showturtle&#39;,</span>
+<span class="go"> &#39;speed&#39;,</span>
+<span class="go"> &#39;st&#39;,</span>
+<span class="go"> &#39;stamp&#39;,</span>
+<span class="go"> &#39;stampItems&#39;,</span>
+<span class="go"> &#39;tilt&#39;,</span>
+<span class="go"> &#39;tiltangle&#39;,</span>
+<span class="go"> &#39;towards&#39;,</span>
+<span class="go"> &#39;turtle&#39;,</span>
+<span class="go"> &#39;turtlesize&#39;,</span>
+<span class="go"> &#39;undo&#39;,</span>
+<span class="go"> &#39;undobuffer&#39;,</span>
+<span class="go"> &#39;undobufferentries&#39;,</span>
+<span class="go"> &#39;up&#39;,</span>
+<span class="go"> &#39;width&#39;,</span>
+<span class="go"> &#39;write&#39;,</span>
+<span class="go"> &#39;xcor&#39;,</span>
+<span class="go"> &#39;ycor&#39;]</span>
+</pre></div>
+</div>
+<p>Wow! That is a lot of methods!</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Did you notice all of the elements that started and ended with <code class="docutils literal"><span class="pre">__</span></code> (two
+underscore symbols)?  This is a standard Python naming convention.  Methods
+and attributes that are considered <strong>implementation details</strong> are named in
+this way.  A polite programmer is expected to ignore these items and only
+use methods that are not surrounded by <code class="docutils literal"><span class="pre">__</span></code>.  Start building a habit of
+ignoring these names!</p>
+</div>
+<p>If you see a method that you would like to learn more about, use
+<code class="docutils literal"><span class="pre">help</span></code> to see a little documentation on the method.  For example, suppose that
+we are interested in the <code class="docutils literal"><span class="pre">tilt</span></code> method of a turtle.  We find out more about
+this method by calling the <code class="docutils literal"><span class="pre">help</span></code> function on the method name.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">help</span><span class="p">(</span><span class="n">tess</span><span class="o">.</span><span class="n">tilt</span><span class="p">)</span>
+<span class="go">Help on method tilt in module turtle:</span>
+
+<span class="go">tilt(angle) method of turtle.Turtle instance</span>
+<span class="go">    Rotate the turtleshape by angle.</span>
+<span class="go">    </span>
+<span class="go">    Argument:</span>
+<span class="go">    angle - a number</span>
+<span class="go">    </span>
+<span class="go">    Rotate the turtleshape by angle from its current tilt-angle,</span>
+<span class="go">    but do NOT change the turtle&#39;s heading (direction of movement).</span>
+<span class="go">    </span>
+<span class="go">    Examples (for a Turtle instance named turtle):</span>
+<span class="go">    &gt;&gt;&gt; turtle.shape(&quot;circle&quot;)</span>
+<span class="go">    &gt;&gt;&gt; turtle.shapesize(5,2)</span>
+<span class="go">    &gt;&gt;&gt; turtle.tilt(30)</span>
+<span class="go">    &gt;&gt;&gt; turtle.fd(50)</span>
+<span class="go">    &gt;&gt;&gt; turtle.tilt(30)</span>
+<span class="go">    &gt;&gt;&gt; turtle.fd(50)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice that we are using the method name <code class="docutils literal"><span class="pre">tess.tilt</span></code>, <strong>not</strong> calling the
+method using parantheses!</p>
+</div>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_1_1">
+            <p>intro-12-169: Consider the following code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">turtle</span>
+<span class="n">wn</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>
+<span class="n">alex</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>
+<span class="n">alex</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">alex</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">alex</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What does the line &#8220;import turtle&#8221; do?</p>
+
+            <li data-component="answer"  id="test_question3_1_1_opt_a">(A) It creates a new turtle object that can be used for drawing.</li><li data-component="feedback" id="test_question3_1_1_opt_a">The line &quotalex = turtle.Turtle()&quot is what actually creates the turtle object.</li>
+            
+            <li data-component="answer" data-correct id="test_question3_1_1_opt_b">(B) It defines the module turtle which will allow you to create a Turtle object and draw with it.</li><li data-component="feedback" id="test_question3_1_1_opt_b">This line imports the module called turtle, which has all the built in functions for drawing on the screen with the Turtle object.</li>
+            
+            <li data-component="answer"  id="test_question3_1_1_opt_c">(C) It makes the turtle draw half of a rectangle on the screen.</li><li data-component="feedback" id="test_question3_1_1_opt_c">This functionality is performed with the lines: &quotalex.forward(150)&quot, &quotlex.left(90)&quot, and &quotalex.forward(75)&quot</li>
+            
+            <li data-component="answer"  id="test_question3_1_1_opt_d">(D) Nothing, it is unnecessary.</li><li data-component="feedback" id="test_question3_1_1_opt_d">If we leave it out, Python will give an error saying that it does not know about the name &quotturtle&quot when it reaches the line &quotwn = turtle.Screen()&quot</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_1_2">
+            intro-12-170: Why do we type <code class="docutils literal"><span class="pre">turtle.Turtle()</span></code> to get a new Turtle object?
+            <li data-component="answer"  id="test_question3_1_2_opt_a">(A) This is simply for clarity.  It would also work to just type "Turtle()" instead of "turtle.Turtle()".</li><li data-component="feedback" id="test_question3_1_2_opt_a">We must specify the name of the module where Python can find the Turtle object.</li>
+            
+            <li data-component="answer"  id="test_question3_1_2_opt_b">(B) The period (.) is what tells Python that we want to invoke a new object.</li><li data-component="feedback" id="test_question3_1_2_opt_b">The period separates the module name from the object name.  The parentheses at the end are what tell Python to invoke a new object.</li>
+            
+            <li data-component="answer" data-correct id="test_question3_1_2_opt_c">(C) The first "turtle" (before the period) tells Python that we are referring to the turtle module, which is where the object "Turtle" is found.</li><li data-component="feedback" id="test_question3_1_2_opt_c">Yes, the Turtle type is defined in the module turtle.  Remember that Python is case sensitive and Turtle is different from turtle.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_1_3">
+            intro-12-171: True or False: A Turtle object can have any name that follows the naming rules from Chapter 2.
+            <li data-component="answer" data-correct id="test_question3_1_3_opt_a">(A) True</li><li data-component="feedback" id="test_question3_1_3_opt_a">In this chapter you saw one named alex and one named tess, but any legal variable name is allowed.</li>
+            
+            <li data-component="answer"  id="test_question3_1_3_opt_b">(B) False</li><li data-component="feedback" id="test_question3_1_3_opt_b">A variable, including one referring to a Turtle object, can have whatever name you choose as long as it follows the naming conventions from Chapter 2.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_1_4">
+            <p>intro-12-172: Which of the following code would produce the following image?</p>
+<img alt="long line to north with shorter line to west on top" src="../_images/turtleTest1.png" />
+
+            <li data-component="answer"  id="test_question3_1_4_opt_a">(A) <img src="../_static/test1Alt1.png" alt="right turn of 90 degrees before drawing, draw a line 150 pixels long, turn left 90, and draw a line 75 pixels long"></li><li data-component="feedback" id="test_question3_1_4_opt_a">This code would turn the turtle to the south before drawing</li>
+            
+            <li data-component="answer"  id="test_question3_1_4_opt_b">(B) <img src="../_static/test1Alt2.png" alt="left turn of 180 degrees before drawing,  draw a line 150 pixels long, turn left 90, and draw a line 75 pixels long"></li><li data-component="feedback" id="test_question3_1_4_opt_b">This code would turn the turtle to the west before drawing</li>
+            
+            <li data-component="answer"  id="test_question3_1_4_opt_c">(C) <img src="../_static/test1Alt3.png" alt="left turn of 270 degrees before drawing,  draw a line 150 pixels long, turn left 90, and draw a line 75 pixels long"></li><li data-component="feedback" id="test_question3_1_4_opt_c">This code would turn the turtle to the south before drawing</li>
+            
+            <li data-component="answer"  id="test_question3_1_4_opt_d">(D) <img src="../_static/test1Alt4v2.png" alt="right turn of 270 degrees before drawing, draw a line 150 pixels long, turn right 90, and draw a line 75 pixels long"></li><li data-component="feedback" id="test_question3_1_4_opt_d">This code is almost correct, but the short end would be facing east instead of west.</li>
+            
+            <li data-component="answer" data-correct id="test_question3_1_4_opt_e">(E) <img src="../_static/test1correct.png" alt="left turn of 90 degrees before drawing,  draw a line 150 pixels long, turn left 90, and draw a line 75 pixels long"></li><li data-component="feedback" id="test_question3_1_4_opt_e">Yes, the turtle starts facing east, so to turn it north you can turn left 90 or right 270 degrees.</li>
+            
+
+            </ul>
+            </div>
+<div class="section" id="instances-a-herd-of-turtles">
+<h2>1.5.4. Instances &#8212; A Herd of Turtles<a class="headerlink" href="#instances-a-herd-of-turtles" title="Permalink to this headline">¶</a></h2>
+<p>Just like we can have many different integers in a program, we can have many
+turtles.  Each of them is an independent object and we call each one an
+<strong>instance</strong> of the Turtle type (class).  Each instance has its own attributes
+and methods &#8212; so alex might draw with a thin black pen and be at some
+position, while tess might be going in her own direction with a fat pink pen.
+So here is what happens when alex completes a square and tess completes her
+triangle:</p>
+
+<textarea data-component="activecode" id=ch03_3 data-lang="python"    data-timelimit=25000   data-audio='*doubleq*Overall Tour*doubleq*; 1-31: Example03_Tour01_Line01; 1-3: Example03_Tour01_Line02; 6-8: Example03_Tour01_Line03; 10: Example03_Tour01_Line04; 6,10: Example03_Tour01_Line05; 12-17: Example03_Tour01_Line06; 19-20: Example03_Tour01_Line07; 22-29: Example03_Tour01_Line08; 31: Example03_Tour01_Line09;*atype**doubleq*Line by Line Tour*doubleq*; 1: Example01_Tour02_Line01; 2: Example01_Tour02_Line02; 3: Example02_Tour02_Line03; 6: Example02_Tour02_Line04; 7: Example03_Tour02_Line05; 8: Example03_Tour02_Line06; 10: Example01_Tour02_Line03; 6,10: Example03_Tour01_Line05; 12-17: Example03_Tour02_Line09; 12-13: Example03_Tour02_Line10; 12: Example03_Tour02_Line11; 13: Example03_Tour02_Line12; 14-15: Example03_Tour02_Line13; 14: Example03_Tour02_Line14; 15: Example03_Tour02_Line15; 16-17: Example03_Tour02_Line16; 16: Example03_Tour02_Line17; 17: Example03_Tour02_Line18; 19-20: Example03_Tour01_Line07; 19: Example03_Tour02_Line20; 20: Example03_Tour02_Line21; 22-29: Example03_Tour01_Line08; 10: Example03_Tour02_Line23; 22-23: Example03_Tour02_Line24; 22: Example03_Tour02_Line25; 23: Example03_Tour02_Line26; 24-25: Example03_Tour02_Line27; 26-27: Example03_Tour02_Line28; 28-29: Example03_Tour02_Line29; 31: Example02_Tour02_Line10;*atype*'     >
+import turtle
+wn = turtle.Screen()             # Set up the window and its attributes
+wn.bgcolor("lightgreen")
+
+
+tess = turtle.Turtle()           # create tess and set some attributes
+tess.color("hotpink")
+tess.pensize(5)
+
+alex = turtle.Turtle()           # create alex
+
+tess.forward(80)                 # Let tess draw an equilateral triangle
+tess.left(120)
+tess.forward(80)
+tess.left(120)
+tess.forward(80)
+tess.left(120)                   # complete the triangle
+
+tess.right(180)                  # turn tess around
+tess.forward(80)                 # move her away from the origin
+
+alex.forward(50)                 # make alex draw a square
+alex.left(90)
+alex.forward(50)
+alex.left(90)
+alex.forward(50)
+alex.left(90)
+alex.forward(50)
+alex.left(90)
+
+wn.exitonclick()
+</textarea>
+<p>Here are some <em>How to think like a computer scientist</em> observations:</p>
+<ul class="simple">
+<li>There are 360 degrees in a full circle.  If you add up all the turns that a
+turtle makes, <em>no matter what steps occurred between the turns</em>, you can
+easily figure out if they add up to some multiple of 360.  This should
+convince you that alex is facing in exactly the same direction as he was when
+he was first created. (Geometry conventions have 0 degrees facing East and
+that is the case here too!)</li>
+<li>We could have left out the last turn for alex, but that would not have been
+as satisfying.  If you&#8217;re asked to draw a closed shape like a square or a
+rectangle, it is a good idea to complete all the turns and to leave the
+turtle back where it started, facing the same direction as it started in.
+This makes reasoning about the program and composing chunks of code into
+bigger programs easier for us humans!</li>
+<li>We did the same with tess: she drew her triangle and turned through a full
+360 degress.  Then we turned her around and moved her aside.  Even the blank
+line 18 is a hint about how the programmer&#8217;s <em>mental chunking</em> is working: in
+big terms, tess&#8217; movements were chunked as &#8220;draw the triangle&#8221;  (lines 12-17)
+and then &#8220;move away from the origin&#8221; (lines 19 and 20).</li>
+<li>One of the key uses for comments is to record your mental chunking, and big
+ideas.   They&#8217;re not always explicit in the code.</li>
+<li>And, uh-huh, two turtles may not be enough for a herd, but you get the idea!</li>
+</ul>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_2_1">
+            intro-12-173: True or False: You can only have one active turtle at a time.  If you create a second one, you will no longer be able to access or use the first.
+            <li data-component="answer"  id="test_question3_2_1_opt_a">(A) True</li><li data-component="feedback" id="test_question3_2_1_opt_a">You can create and use as many turtles as you like.  As long as they have different names, you can operate them independently, and make them move in any order you like.  To convince yourself this is true, try interleaving the instructions for alex and tess in ActiveCode box 3.</li>
+            
+            <li data-component="answer" data-correct id="test_question3_2_1_opt_b">(B) False</li><li data-component="feedback" id="test_question3_2_1_opt_b">You can create and use as many turtles as you like.  As long as they have different names, you can operate them independently, and make them move in any order you like.  If you are not totally convinced, try interleaving the instructions for alex and tess in ActiveCode box 3.</li>
+            
+
+            </ul>
+            </div>
+<div class="section" id="object-oriented-programming">
+<h2>1.5.5. Object-oriented programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this headline">¶</a></h2>
+<p>Python is an <strong>object-oriented programming language</strong>.  That means it
+provides features that support <a class="reference external" href="http://en.wikipedia.org/wiki/Object-oriented_programming">object-oriented programming</a> (<strong>OOP</strong>).</p>
+<p>Object-oriented programming has its roots in the 1960s, but it wasn&#8217;t until the
+mid 1980s that it became the main <a class="reference external" href="http://en.wikipedia.org/wiki/Programming_paradigm">programming paradigm</a> used in the creation of
+new software. It was developed as a way to handle the rapidly increasing size
+and complexity of software systems and to make it easier to modify these large
+and complex systems over time.</p>
+<p>Up to now, some of the programs we have been writing use a <a class="reference external" href="http://en.wikipedia.org/wiki/Procedural_programming">procedural
+programming</a> paradigm.
+In procedural programming the focus is on writing functions or <em>procedures</em>
+which operate on data. In object-oriented programming the focus is on the
+creation of <strong>objects</strong> which contain both data and functionality together.
+Usually, each object definition corresponds to some object or concept in the
+real world and the functions that operate on that object correspond to the ways
+real-world objects interact.</p>
+</div>
+<div class="section" id="a-change-of-perspective">
+<h2>1.5.6. A change of perspective<a class="headerlink" href="#a-change-of-perspective" title="Permalink to this headline">¶</a></h2>
+<p>Throughout the earlier chapters, we wrote functions and called them using a
+syntax such as <code class="docutils literal"><span class="pre">cos(pi/2)</span></code>.  This suggests that the function is the
+active agent. It says something like, <em>&#8220;Hey, ``cos``!  Here&#8217;s a number
+for you to process.&#8221;</em></p>
+<p>In object-oriented programming, the objects are considered the active agents.
+For example, in our early introduction to turtles, we used an object-oriented
+style. We said <code class="docutils literal"><span class="pre">tess.forward(100)</span></code>, which asks the turtle to move itself
+forward by the given number of steps.  An invocation like <code class="docutils literal"><span class="pre">tess.circle()</span></code> says
+<em>&#8220;Hey tess!  Please use your circle method!&#8221;</em></p>
+<p>In Python, every value is actually an object. Whether it be a turtle, a list, or
+even an integer, they are all objects.  Programs manipulate those objects either
+by performing computation with them or by asking them to perform methods.  To be
+more specific, we say that an object has a <strong>state</strong> and a collection of
+<strong>methods</strong> that it can perform.  The state of an object represents those things
+that the object knows about itself.  For example, as we have seen with turtle
+objects, each turtle has a state consisting of the turtle&#8217;s position, its color,
+its heading and so on.  Each turtle also has the ability to go forward,
+backward, or turn right or left.  Individual turtles are different in that even
+though they are all turtles, they differ in the specific values of the
+individual state attributes (maybe they are in a different location or have a
+different heading).</p>
+<img alt="Simple object has state and methods" src="../_images/objectpic1.png" />
 </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 1.6. Statements: When Expressions Are Not Enough' data-toggle="tooltip">
-    <a href="StatementsWhenExpressionsAreNotEnough.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 1.4. Sharing and Reusing Code with Modules' data-toggle="tooltip">
+    <a href="SharingAndReusingCodeWithModules.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="StatementsWhenExpressionsAreNotEnough.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="SharingAndReusingCodeWithModules.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 1.8. Sharing and Reusing Code with Modules' data-toggle="tooltip" >
-    <a href="SharingAndReusingCodeWithModules.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 1.6. Transforming Simple Data with Expressions' data-toggle="tooltip" >
+    <a href="TransformingSimpleDataWithExpressions.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="SharingAndReusingCodeWithModules.html" >Next Section - 1.8. Sharing and Reusing Code with Modules</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="TransformingSimpleDataWithExpressions.html" >Next Section - 1.6. Transforming Simple Data with Expressions</a>
 
 <script type="text/javascript">
 
