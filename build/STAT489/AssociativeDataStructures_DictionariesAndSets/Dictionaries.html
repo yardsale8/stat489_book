@@ -326,7 +326,7 @@ each fruit in stock.  If someone buys all of the pears, we can remove the entry 
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict4)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict4_trace = {"trace": [{"heap": {}, "event": "step_line", "ordered_globals": [], "func_name": "<module>", "line": 1, "stack_to_render": [], "stdout": "", "globals": {}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312], ["pears", 217]]}, "event": "step_line", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 3, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312]]}, "event": "return", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 3, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ndel inventory['pears']"};
+var ch12_dict4_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 3, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["pears", 217], ["oranges", 525]]}}, {"line": 3, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["oranges", 525]]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ndel inventory['pears']"};
 var ch12_dict4_vis;
 
 $(document).ready(function() {
@@ -374,7 +374,7 @@ example, instead of deleting the entry for <code class="docutils literal"><span 
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict4a)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict4a_trace = {"trace": [{"heap": {}, "event": "step_line", "ordered_globals": [], "func_name": "<module>", "line": 1, "stack_to_render": [], "stdout": "", "globals": {}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312], ["pears", 217]]}, "event": "step_line", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 3, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312], ["pears", 0]]}, "event": "return", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 3, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ninventory['pears'] = 0"};
+var ch12_dict4a_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 3, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["pears", 217], ["oranges", 525]]}}, {"line": 3, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["pears", 0], ["oranges", 525]]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ninventory['pears'] = 0"};
 var ch12_dict4a_vis;
 
 $(document).ready(function() {
@@ -421,7 +421,7 @@ a new shipment of 200 bananas arriving could be handled like this.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict5)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict5_trace = {"trace": [{"heap": {}, "event": "step_line", "ordered_globals": [], "func_name": "<module>", "line": 1, "stack_to_render": [], "stdout": "", "globals": {}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 312], ["pears", 217]]}, "event": "step_line", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 2, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 512], ["pears", 217]]}, "event": "step_line", "ordered_globals": ["inventory"], "func_name": "<module>", "line": 5, "stack_to_render": [], "stdout": "", "globals": {"inventory": ["REF", 1]}}, {"heap": {"1": ["DICT", ["apples", 430], ["oranges", 525], ["bananas", 512], ["pears", 217]]}, "event": "return", "ordered_globals": ["inventory", "numItems"], "func_name": "<module>", "line": 5, "stack_to_render": [], "stdout": "", "globals": {"numItems": 4, "inventory": ["REF", 1]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\ninventory['bananas'] = inventory['bananas'] + 200\n\n\nnumItems = len(inventory)"};
+var ch12_dict5_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 2, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["pears", 217], ["oranges", 525]]}}, {"line": 5, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 512], ["apples", 430], ["pears", 217], ["oranges", 525]]}}, {"line": 5, "globals": {"numItems": 4, "inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["inventory", "numItems"], "heap": {"1": ["DICT", ["bananas", 512], ["apples", 430], ["pears", 217], ["oranges", 525]]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\ninventory['bananas'] = inventory['bananas'] + 200\n\n\nnumItems = len(inventory)"};
 var ch12_dict5_vis;
 
 $(document).ready(function() {
@@ -465,7 +465,7 @@ of key-value pairs:</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_2_1">
-            <p>data-2-6: What is printed by the following statements?</p>
+            <p>Q-1: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">}</span>
 <span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;mouse&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;dog&quot;</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;mouse&quot;</span><span class="p">])</span>
@@ -606,7 +606,7 @@ print(inventory.get("cherries", 0))
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_1">
-            <p>data-2-7: What is printed by the following statements?</p>
+            <p>Q-2: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">keylist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mydict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="n">keylist</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -626,7 +626,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_2">
-            <p>data-2-8: What is printed by the following statements?</p>
+            <p>Q-3: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">answer</span> <span class="o">=</span> <span class="n">mydict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span> <span class="o">//</span> <span class="n">mydict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
@@ -645,7 +645,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_3">
-            <p>data-2-9: What is printed by the following statements?</p>
+            <p>Q-4: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">)</span>
 </pre></div>
@@ -659,7 +659,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_4">
-            <p>data-2-10: What is printed by the following statements?</p>
+            <p>Q-5: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="mi">23</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">)</span>
 </pre></div>
@@ -673,7 +673,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_5">
-            <p>data-2-11: What is printed by the following statements?</p>
+            <p>Q-6: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">:</span>
@@ -720,7 +720,7 @@ print(opposites['right'])
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_4_1">
-            <p>data-2-12: What is printed by the following statements?</p>
+            <p>Q-7: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">yourdict</span> <span class="o">=</span> <span class="n">mydict</span>
 <span class="n">yourdict</span><span class="p">[</span><span class="s2">&quot;elephant&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span>

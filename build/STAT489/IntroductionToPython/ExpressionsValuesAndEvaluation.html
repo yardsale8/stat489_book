@@ -101,7 +101,7 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="2. Expressions and Evalation" href="toctree2.html" />
+    <link rel="up" title="2. Expressions and Evaluation" href="toctree2.html" />
     <link rel="next" title="2.4. Statements: When Expressions Are Not Enough" href="StatementsWhenExpressionsAreNotEnough.html" />
     <link rel="prev" title="2.2. Saving Expressions for Later Execution - The lambda Expression" href="SavingExpressionsForLaterExecution.html" />
 <meta charset='utf-8'>
@@ -265,10 +265,9 @@
   <ul class="dropdown-menu localtoc"><ul>
 <li><a class="reference internal" href="#">2.3. Expressions, Values and Evaluation</a><ul>
 <li><a class="reference internal" href="#what-is-evaluation">2.3.1. What is Evaluation?</a></li>
-<li><a class="reference internal" href="#evaluation-of-variables-with-substitution">2.3.2. Evaluation of Variables with Substitution</a></li>
-<li><a class="reference internal" href="#evaluating-conditional-expressions">2.3.3. Evaluating Conditional Expressions</a></li>
-<li><a class="reference internal" href="#evaluating-lambda-function-application">2.3.4. Evaluating <cite>lambda</cite> Function Application</a></li>
-<li><a class="reference internal" href="#evaluating-the-application-of-lambda-function-composition">2.3.5. Evaluating the Application of <cite>lambda</cite> Function Composition</a></li>
+<li><a class="reference internal" href="#lambda-expressions-and-closures">2.3.2. Lambda Expressions and Closures</a></li>
+<li><a class="reference internal" href="#variable-scope-and-substitution">2.3.3. Variable Scope and Substitution</a></li>
+<li><a class="reference internal" href="#evaluation-strategy">2.3.4. Evaluation Strategy</a></li>
 </ul>
 </li>
 </ul>
@@ -317,20 +316,492 @@
   
   <div class="section" id="expressions-values-and-evaluation">
 <h1>2.3. Expressions, Values and Evaluation<a class="headerlink" href="#expressions-values-and-evaluation" title="Permalink to this headline">¶</a></h1>
+<p>The focus of this chapter has been using expressions in python to perform
+computations.  We have seen that we can use <code class="docutils literal"><span class="pre">lambda</span></code> expressions  to save
+expressions for later computation and the conditional expression to decide
+branch between two expressions depending on some condition.</p>
+<p>At this point, you may be wondering why there is so much focus on expressions.
+Expressions form the building blocks for functional programs and using the right
+expressions can lead to programs that are easier to understand.  In particular,
+expressions as defined above will be <em>referentially transparent</em>.  Part of a
+program is <strong>referentially transparent</strong> if it can be replaced with it&#8217;s value
+without changing the meaning of the program.</p>
+<p>For example, the expression <code class="docutils literal"><span class="pre">1+1</span></code> is referentially transparent, because it can
+be replaced with its value <code class="docutils literal"><span class="pre">2</span></code> without changing the program in any way.  On
+the other hand, a call to the <code class="docutils literal"><span class="pre">print</span></code> function is <strong>not</strong> referentially
+transparent.  <code class="docutils literal"><span class="pre">print</span></code> is an example of a <strong>void</strong> function, a function that
+returns no value.  In Python, all functions actually return something and void
+functions return <code class="docutils literal"><span class="pre">None</span></code>, a special value that stands in for <em>nothing</em>.  We can
+verify that <code class="docutils literal"><span class="pre">print</span></code> returns <code class="docutils literal"><span class="pre">None</span></code> using the <code class="docutils literal"><span class="pre">is</span></code> comparison.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hi&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span>
+<span class="go">Hi</span>
+<span class="gh">Out[1]: </span><span class="go">True</span>
+</pre></div>
+</div>
+<p>The problem with <code class="docutils literal"><span class="pre">print</span></code> is that it is <em>side-effecting</em>.  For our purposes, a
+<strong>side-effect</strong> is any effect of a function that can&#8217;t be determined looking at
+the input and output.  In the case of <code class="docutils literal"><span class="pre">print</span></code>, the side effect is printing
+some text to the screen.  Replacing a <code class="docutils literal"><span class="pre">print</span></code> function with its value of
+<code class="docutils literal"><span class="pre">None</span></code> clearly changes the <code class="docutils literal"><span class="pre">Hello</span> <span class="pre">World</span></code> program, illustrating the fact that
+<code class="docutils literal"><span class="pre">print</span></code> is not referentially transparent.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
+<span class="go">Hello World</span>
+
+<span class="go"># Replace print with its value None</span>
+<span class="gp">In [3]: </span><span class="bp">None</span>
+
+<span class="go"># Not the same program!</span>
+</pre></div>
+</div>
+<p>Here is an outline of a formal definition the expressions seen so far.</p>
+<div class="admonition-definition-of-expressions-so-far admonition">
+<p class="first admonition-title">Definition of Expressions (so far)</p>
+<p>An <strong>expression</strong> (EXPR for short) consists of</p>
+<ol class="last arabic simple">
+<li><strong>values:</strong> 5, &#8220;1&#8221;, True, ...</li>
+<li><strong>operations:</strong> EXPR1 OP EXPR2, where OP is any operator (+, -, and, ==, etc.)</li>
+<li><strong>conditional expressions:</strong> EXPR1 if EXPR2 else EXPR3</li>
+<li><strong>lambda expressions:</strong> lambda VAR: EXPR (special type of value)</li>
+<li><strong>function application:</strong> EXPR(EXPR)</li>
+</ol>
+</div>
+<p>This is an example of a <strong>recursive definition</strong> as we are using the term being
+defined (expression or EXPR) as part of the definition.  Recursive definitions
+lead to structures that can be thought of as a <strong>tree</strong>, and in the case of our
+expressions, the end of every branch in the tree will be a value.</p>
 <div class="section" id="what-is-evaluation">
 <h2>2.3.1. What is Evaluation?<a class="headerlink" href="#what-is-evaluation" title="Permalink to this headline">¶</a></h2>
+<p>When we type an expression into the Python (or IPython) interpreter, it is
+converted to a value.  The process of converting expressions to values is called
+<strong>evaluation</strong>.</p>
+<p>Evaluation of values and operations is fairly obvious.  The result of evaluating
+a value is that value. The evaluation of an operation such as <code class="docutils literal"><span class="pre">EXPR</span> <span class="pre">=</span> <span class="pre">EXPR1</span> <span class="pre">OP</span>
+<span class="pre">EXPR2</span></code> is also easy to understand.  We simply follow our order of operation by
+evaluating <code class="docutils literal"><span class="pre">EXPR1</span></code> and <code class="docutils literal"><span class="pre">EXPR2</span></code>, then apply the operation to the resulting
+values.</p>
+<p>To understand the evaluation of lambda expressions, we will need to understand
+two related topics <em>closures</em> and <em>the scope of a variable.</em>  These concepts are
+covered in the next two sections.</p>
 </div>
-<div class="section" id="evaluation-of-variables-with-substitution">
-<h2>2.3.2. Evaluation of Variables with Substitution<a class="headerlink" href="#evaluation-of-variables-with-substitution" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lambda-expressions-and-closures">
+<h2>2.3.2. Lambda Expressions and Closures<a class="headerlink" href="#lambda-expressions-and-closures" title="Permalink to this headline">¶</a></h2>
+<p>The expressions that we created so far have been pretty simple.  Note that the
+body of a lambda expression is also an expression. Consequently lambda
+expressions can be embedded in the body of another lambda expression.  For
+example, another way to generalize the <code class="docutils literal"><span class="pre">apply_tax</span></code> function is to create
+another function <code class="docutils literal"><span class="pre">make_apply_tax</span></code> that takes the tax rate as input and returns
+a lambda expression that uses this rate.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">make_apply_tax</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">rate</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">cost</span><span class="p">:</span> <span class="n">rate</span><span class="o">*</span><span class="n">cost</span>
+</pre></div>
 </div>
-<div class="section" id="evaluating-conditional-expressions">
-<h2>2.3.3. Evaluating Conditional Expressions<a class="headerlink" href="#evaluating-conditional-expressions" title="Permalink to this headline">¶</a></h2>
+<p>We have created a function that returns another function.  Such a function is
+called a <em>higher-order function</em> and we will look at these types of function in
+more depth in a later chapter.  The <code class="docutils literal"><span class="pre">make_apply_tax</span></code> function is a
+<em>function factory</em>, used to create specialize functions.  When working on a
+specific example, we will call <code class="docutils literal"><span class="pre">make_apply_tax</span></code> to create a specialized
+version of <code class="docutils literal"><span class="pre">apply_tax</span></code> for that problem.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">rate</span> <span class="o">=</span> <span class="mf">1.065</span>
+
+<span class="gp">In [6]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="n">make_apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">)</span>
+
+<span class="gp">In [7]: </span><span class="nb">type</span><span class="p">(</span><span class="n">apply_tax</span><span class="p">)</span>
+<span class="gh">Out[7]: </span><span class="go">function</span>
+
+<span class="gp">In [8]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">                 Out[8]: 1.065</span>
+
+<span class="gp">In [9]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.55</span><span class="p">)</span>
+<span class="go">                               Out[9]: 4.84575</span>
+</pre></div>
 </div>
-<div class="section" id="evaluating-lambda-function-application">
-<h2>2.3.4. Evaluating <cite>lambda</cite> Function Application<a class="headerlink" href="#evaluating-lambda-function-application" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s examine this program in codelens.</p>
+
+<div class="alert alert-warning cd_section">
+<div id="closures1"></div>
+<p class="cl_caption"><span class="cl_caption_text"> (closures1)</span> </p>
 </div>
-<div class="section" id="evaluating-the-application-of-lambda-function-composition">
-<h2>2.3.5. Evaluating the Application of <cite>lambda</cite> Function Composition<a class="headerlink" href="#evaluating-the-application-of-lambda-function-composition" title="Permalink to this headline">¶</a></h2>
+<script type="text/javascript">
+var closures1_trace = {"code": "make_apply_tax = lambda rate: lambda cost: rate*cost\nrate = 1.065\napply_tax = make_apply_tax(rate)\na = apply_tax(1)\nb = apply_tax(4.55)", "trace": [{"ordered_globals": [], "stdout": "", "stack_to_render": [], "line": 1, "globals": {}, "event": "step_line", "heap": {}, "func_name": "<module>"}, {"ordered_globals": ["make_apply_tax"], "stdout": "", "stack_to_render": [], "line": 2, "globals": {"make_apply_tax": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null]}, "func_name": "<module>"}, {"ordered_globals": ["make_apply_tax", "rate"], "stdout": "", "stack_to_render": [], "line": 3, "globals": {"rate": 1.065, "make_apply_tax": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null]}, "func_name": "<module>"}, {"ordered_globals": ["make_apply_tax", "rate"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["rate"], "unique_hash": "<lambda> <line 1>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"rate": 1.065, "make_apply_tax": ["REF", 1]}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "rate"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["rate"], "unique_hash": "<lambda> <line 1>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"rate": 1.065, "make_apply_tax": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "rate"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"rate": 1.065, "make_apply_tax": ["REF", 1]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "rate", "apply_tax"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 4, "globals": {"rate": 1.065, "apply_tax": ["REF", 2], "make_apply_tax": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<module>"}, {"ordered_globals": ["make_apply_tax", "rate", "apply_tax"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"cost": 1}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["cost"], "unique_hash": "<lambda> <line 1>_f2", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"rate": 1.065, "apply_tax": ["REF", 2], "make_apply_tax": ["REF", 1]}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "rate", "apply_tax"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"cost": 1}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["cost"], "unique_hash": "<lambda> <line 1>_f2", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"rate": 1.065, "apply_tax": ["REF", 2], "make_apply_tax": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "rate", "apply_tax"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"__return__": 1.065, "cost": 1}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["cost", "__return__"], "unique_hash": "<lambda> <line 1>_f2", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"rate": 1.065, "apply_tax": ["REF", 2], "make_apply_tax": ["REF", 1]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "rate", "apply_tax", "a"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 5, "globals": {"rate": 1.065, "apply_tax": ["REF", 2], "make_apply_tax": ["REF", 1], "a": 1.065}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<module>"}, {"ordered_globals": ["make_apply_tax", "rate", "apply_tax", "a"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"cost": 4.55}, "is_parent": false, "is_zombie": false, "frame_id": 3, "ordered_varnames": ["cost"], "unique_hash": "<lambda> <line 1>_f3", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"rate": 1.065, "apply_tax": ["REF", 2], "make_apply_tax": ["REF", 1], "a": 1.065}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "rate", "apply_tax", "a"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"cost": 4.55}, "is_parent": false, "is_zombie": false, "frame_id": 3, "ordered_varnames": ["cost"], "unique_hash": "<lambda> <line 1>_f3", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"rate": 1.065, "apply_tax": ["REF", 2], "make_apply_tax": ["REF", 1], "a": 1.065}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "rate", "apply_tax", "a"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"__return__": 4.8457, "cost": 4.55}, "is_parent": false, "is_zombie": false, "frame_id": 3, "ordered_varnames": ["cost", "__return__"], "unique_hash": "<lambda> <line 1>_f3", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"rate": 1.065, "apply_tax": ["REF", 2], "make_apply_tax": ["REF", 1], "a": 1.065}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "rate", "apply_tax", "a", "b"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.065, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 5, "globals": {"rate": 1.065, "apply_tax": ["REF", 2], "make_apply_tax": ["REF", 1], "b": 4.8457, "a": 1.065}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<module>"}]};
+var closures1_vis;
+
+$(document).ready(function() {
+    try {
+        closures1_vis = new ExecutionVisualizer('closures1',closures1_trace,
+                                    {embeddedMode: false,
+                                    verticalStack: false,
+                                    heightChangeCallback: redrawAllVisualizerArrows,
+                                    codeDivWidth: 500,
+                                    lang : 'py3'
+                                    });
+        attachLoggers(closures1_vis,'closures1');
+        styleButtons('closures1');
+        allVisualizers.push(closures1_vis);
+    } catch (e) {
+        console.log("Failed to Initialize CodeLens component closures1_vis" );
+        console.log(e.toString());
+    }
+
+});
+
+$(document).ready(function() {
+    $("#closures1_tracecheck").click(function() {
+        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'closures1'});
+    });
+});
+
+if (allVisualizers === undefined) {
+   var allVisualizers = [];
+}
+
+
+$(window).resize(function() {
+    if (closures1_vis) {
+        closures1_vis.redrawConnectors();
+    }
+});
+</script>
+<p>Step through the program until line 3 is evaluated (steps 4 through 7).  Notice
+that the <code class="docutils literal"><span class="pre">apply_tax</span></code> function is saved as <code class="docutils literal"><span class="pre">f1</span></code>.  Moreover, the function
+<code class="docutils literal"><span class="pre">apply_tax</span></code> is bundled with the <em>specific</em> value of rate (1.065) used at the
+time of creation.  This is an example of a <strong>closure</strong>, where a function bundled
+the outside values that it references.</p>
+<p>Designing functions as closures allows us to create multiple versions of
+<code class="docutils literal"><span class="pre">apply_tax</span></code> simultaneously.</p>
+
+<div class="alert alert-warning cd_section">
+<div id="closures2"></div>
+<p class="cl_caption"><span class="cl_caption_text"> (closures2)</span> </p>
+</div>
+<script type="text/javascript">
+var closures2_trace = {"code": "make_apply_tax = lambda rate: lambda cost: rate*cost\napply_tax1 = make_apply_tax(1.05)\napply_tax2 = make_apply_tax(1.10)\na = apply_tax1(1)\nb = apply_tax2(1)", "trace": [{"ordered_globals": [], "stdout": "", "stack_to_render": [], "line": 1, "globals": {}, "event": "step_line", "heap": {}, "func_name": "<module>"}, {"ordered_globals": ["make_apply_tax"], "stdout": "", "stack_to_render": [], "line": 2, "globals": {"make_apply_tax": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null]}, "func_name": "<module>"}, {"ordered_globals": ["make_apply_tax"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["rate"], "unique_hash": "<lambda> <line 1>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"make_apply_tax": ["REF", 1]}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["rate"], "unique_hash": "<lambda> <line 1>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"make_apply_tax": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"make_apply_tax": ["REF", 1]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 3, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<module>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["rate"], "unique_hash": "<lambda> <line 1>_f2", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1]}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["rate"], "unique_hash": "<lambda> <line 1>_f2", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1, "__return__": ["REF", 3]}, "is_parent": true, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f2_p", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1], "3": ["FUNCTION", "<lambda>(cost) <line 1>", 2]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1", "apply_tax2"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1, "__return__": ["REF", 3]}, "is_parent": true, "is_zombie": true, "frame_id": 2, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f2_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 4, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1], "apply_tax2": ["REF", 3]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1], "3": ["FUNCTION", "<lambda>(cost) <line 1>", 2]}, "func_name": "<module>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1", "apply_tax2"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1, "__return__": ["REF", 3]}, "is_parent": true, "is_zombie": true, "frame_id": 2, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f2_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"cost": 1}, "is_parent": false, "is_zombie": false, "frame_id": 3, "ordered_varnames": ["cost"], "unique_hash": "<lambda> <line 1>_f3", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1], "apply_tax2": ["REF", 3]}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1], "3": ["FUNCTION", "<lambda>(cost) <line 1>", 2]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1", "apply_tax2"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1, "__return__": ["REF", 3]}, "is_parent": true, "is_zombie": true, "frame_id": 2, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f2_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"cost": 1}, "is_parent": false, "is_zombie": false, "frame_id": 3, "ordered_varnames": ["cost"], "unique_hash": "<lambda> <line 1>_f3", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1], "apply_tax2": ["REF", 3]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1], "3": ["FUNCTION", "<lambda>(cost) <line 1>", 2]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1", "apply_tax2"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1, "__return__": ["REF", 3]}, "is_parent": true, "is_zombie": true, "frame_id": 2, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f2_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"__return__": 1.05, "cost": 1}, "is_parent": false, "is_zombie": false, "frame_id": 3, "ordered_varnames": ["cost", "__return__"], "unique_hash": "<lambda> <line 1>_f3", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1], "apply_tax2": ["REF", 3]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1], "3": ["FUNCTION", "<lambda>(cost) <line 1>", 2]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1", "apply_tax2", "a"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1, "__return__": ["REF", 3]}, "is_parent": true, "is_zombie": true, "frame_id": 2, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f2_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 5, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1], "apply_tax2": ["REF", 3], "a": 1.05}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1], "3": ["FUNCTION", "<lambda>(cost) <line 1>", 2]}, "func_name": "<module>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1", "apply_tax2", "a"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1, "__return__": ["REF", 3]}, "is_parent": true, "is_zombie": true, "frame_id": 2, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f2_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"cost": 1}, "is_parent": false, "is_zombie": false, "frame_id": 4, "ordered_varnames": ["cost"], "unique_hash": "<lambda> <line 1>_f4", "is_highlighted": true, "parent_frame_id_list": [2], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1], "apply_tax2": ["REF", 3], "a": 1.05}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1], "3": ["FUNCTION", "<lambda>(cost) <line 1>", 2]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1", "apply_tax2", "a"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1, "__return__": ["REF", 3]}, "is_parent": true, "is_zombie": true, "frame_id": 2, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f2_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"cost": 1}, "is_parent": false, "is_zombie": false, "frame_id": 4, "ordered_varnames": ["cost"], "unique_hash": "<lambda> <line 1>_f4", "is_highlighted": true, "parent_frame_id_list": [2], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1], "apply_tax2": ["REF", 3], "a": 1.05}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1], "3": ["FUNCTION", "<lambda>(cost) <line 1>", 2]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1", "apply_tax2", "a"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1, "__return__": ["REF", 3]}, "is_parent": true, "is_zombie": true, "frame_id": 2, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f2_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"__return__": 1.1, "cost": 1}, "is_parent": false, "is_zombie": false, "frame_id": 4, "ordered_varnames": ["cost", "__return__"], "unique_hash": "<lambda> <line 1>_f4", "is_highlighted": true, "parent_frame_id_list": [2], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1], "apply_tax2": ["REF", 3], "a": 1.05}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1], "3": ["FUNCTION", "<lambda>(cost) <line 1>", 2]}, "func_name": "<lambda>"}, {"ordered_globals": ["make_apply_tax", "apply_tax1", "apply_tax2", "a", "b"], "stdout": "", "stack_to_render": [{"encoded_locals": {"rate": 1.05, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}, {"encoded_locals": {"rate": 1.1, "__return__": ["REF", 3]}, "is_parent": true, "is_zombie": true, "frame_id": 2, "ordered_varnames": ["rate", "__return__"], "unique_hash": "<lambda> <line 1>_f2_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 5, "globals": {"b": 1.1, "apply_tax1": ["REF", 2], "make_apply_tax": ["REF", 1], "apply_tax2": ["REF", 3], "a": 1.05}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(rate) <line 1>", null], "2": ["FUNCTION", "<lambda>(cost) <line 1>", 1], "3": ["FUNCTION", "<lambda>(cost) <line 1>", 2]}, "func_name": "<module>"}]};
+var closures2_vis;
+
+$(document).ready(function() {
+    try {
+        closures2_vis = new ExecutionVisualizer('closures2',closures2_trace,
+                                    {embeddedMode: false,
+                                    verticalStack: false,
+                                    heightChangeCallback: redrawAllVisualizerArrows,
+                                    codeDivWidth: 500,
+                                    lang : 'py3'
+                                    });
+        attachLoggers(closures2_vis,'closures2');
+        styleButtons('closures2');
+        allVisualizers.push(closures2_vis);
+    } catch (e) {
+        console.log("Failed to Initialize CodeLens component closures2_vis" );
+        console.log(e.toString());
+    }
+
+});
+
+$(document).ready(function() {
+    $("#closures2_tracecheck").click(function() {
+        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'closures2'});
+    });
+});
+
+if (allVisualizers === undefined) {
+   var allVisualizers = [];
+}
+
+
+$(window).resize(function() {
+    if (closures2_vis) {
+        closures2_vis.redrawConnectors();
+    }
+});
+</script>
+<p>In this example, we see that each of the <code class="docutils literal"><span class="pre">apply_tax</span></code> functions is bundled with
+the appropriate value and the second call to <code class="docutils literal"><span class="pre">make_apply_tax</span></code> did not affect
+the first call in any way.  This explains, in detail, how Python evaluates a
+lambda expression.  Next, we consider the evaluation of a function call.  It
+turns out that the choice of order of this evaluation illustrate the distinction
+between <em>lazy evaluation</em> and <em>strict evaluation</em>.</p>
+</div>
+<div class="section" id="variable-scope-and-substitution">
+<h2>2.3.3. Variable Scope and Substitution<a class="headerlink" href="#variable-scope-and-substitution" title="Permalink to this headline">¶</a></h2>
+<p>The ability to nest lambda expressions brings about another problem.  Consider
+the following expression.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>The body of the outer function is a lambda function and the body of the inner
+function is <code class="docutils literal"><span class="pre">x**2</span></code>, but which <code class="docutils literal"><span class="pre">x</span></code> is this body referring to, the outer
+parameter or the inner parameter?  Let&#8217;s runs some code to find out, where we
+have added another wrinkle by introducing a global variable <code class="docutils literal"><span class="pre">x</span></code> as well.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="gp">In [11]: </span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="go"># Calling the outer function returns a function</span>
+<span class="gp">In [12]: </span><span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [13]: </span><span class="nb">type</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gh">Out[13]: </span><span class="go">function</span>
+
+<span class="gp">In [14]: </span><span class="n">g</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">                  Out[14]: 9</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal"><span class="pre">x**2</span></code> referred to the outer parameter, we would have seen <code class="docutils literal"><span class="pre">2**2</span> <span class="pre">=</span> <span class="pre">4</span></code> as
+the value of <code class="docutils literal"><span class="pre">g(3)</span></code>.  Similarly, <code class="docutils literal"><span class="pre">x</span></code> was not referring to the global
+variable, as we would have see <code class="docutils literal"><span class="pre">g(3)</span></code> returning <code class="docutils literal"><span class="pre">1**2</span> <span class="pre">=</span> <span class="pre">1</span></code>.  So clearly the
+<code class="docutils literal"><span class="pre">x</span></code> in the expression <code class="docutils literal"><span class="pre">x**2</span></code> is referring to the inner <code class="docutils literal"><span class="pre">x</span></code> parameter.
+What is going on here?  The answer has to do with a variables <em>scope</em>.  Recall
+that variables, whether constructed through an assignment statement or function
+call, are bound to values.  The (lexical) <strong>scope</strong> of a variable is the portion
+of the code for which that variable represents it&#8217;s value.  In other words, if a
+variable <code class="docutils literal"><span class="pre">x</span></code> is bound to <code class="docutils literal"><span class="pre">5</span></code>, the scope is all parts of the code where
+evaluating x will return <code class="docutils literal"><span class="pre">5</span></code>.</p>
+<p>Run the same program in codelens and see if things clear up.</p>
+
+<div class="alert alert-warning cd_section">
+<div id="scope1"></div>
+<p class="cl_caption"><span class="cl_caption_text"> (scope1)</span> </p>
+</div>
+<script type="text/javascript">
+var scope1_trace = {"code": "x = 1\nf = lambda x: lambda x: x**2\n# Calling the outer function returns a function\ng = f(2)\ntype(g)\ng(3)", "trace": [{"ordered_globals": [], "stdout": "", "stack_to_render": [], "line": 1, "globals": {}, "event": "step_line", "heap": {}, "func_name": "<module>"}, {"ordered_globals": ["x"], "stdout": "", "stack_to_render": [], "line": 2, "globals": {"x": 1}, "event": "step_line", "heap": {}, "func_name": "<module>"}, {"ordered_globals": ["x", "f"], "stdout": "", "stack_to_render": [], "line": 4, "globals": {"x": 1, "f": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x) <line 2>", null]}, "func_name": "<module>"}, {"ordered_globals": ["x", "f"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x": 2}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["x"], "unique_hash": "<lambda> <line 2>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x": 1, "f": ["REF", 1]}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(x) <line 2>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["x", "f"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x": 2}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["x"], "unique_hash": "<lambda> <line 2>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x": 1, "f": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x) <line 2>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["x", "f"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x": 2, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["x", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x": 1, "f": ["REF", 1]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(x) <line 2>", null], "2": ["FUNCTION", "<lambda>(x) <line 2>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["x", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x": 2, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 5, "globals": {"x": 1, "f": ["REF", 1], "g": ["REF", 2]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x) <line 2>", null], "2": ["FUNCTION", "<lambda>(x) <line 2>", 1]}, "func_name": "<module>"}, {"ordered_globals": ["x", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x": 2, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 6, "globals": {"x": 1, "f": ["REF", 1], "g": ["REF", 2]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x) <line 2>", null], "2": ["FUNCTION", "<lambda>(x) <line 2>", 1]}, "func_name": "<module>"}, {"ordered_globals": ["x", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x": 2, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}, {"encoded_locals": {"x": 3}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["x"], "unique_hash": "<lambda> <line 2>_f2", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x": 1, "f": ["REF", 1], "g": ["REF", 2]}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(x) <line 2>", null], "2": ["FUNCTION", "<lambda>(x) <line 2>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["x", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x": 2, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}, {"encoded_locals": {"x": 3}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["x"], "unique_hash": "<lambda> <line 2>_f2", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x": 1, "f": ["REF", 1], "g": ["REF", 2]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x) <line 2>", null], "2": ["FUNCTION", "<lambda>(x) <line 2>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["x", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x": 2, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}, {"encoded_locals": {"x": 3, "__return__": 9}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["x", "__return__"], "unique_hash": "<lambda> <line 2>_f2", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x": 1, "f": ["REF", 1], "g": ["REF", 2]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(x) <line 2>", null], "2": ["FUNCTION", "<lambda>(x) <line 2>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["x", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x": 2, "__return__": ["REF", 2]}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 6, "globals": {"x": 1, "f": ["REF", 1], "g": ["REF", 2]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(x) <line 2>", null], "2": ["FUNCTION", "<lambda>(x) <line 2>", 1]}, "func_name": "<module>"}]};
+var scope1_vis;
+
+$(document).ready(function() {
+    try {
+        scope1_vis = new ExecutionVisualizer('scope1',scope1_trace,
+                                    {embeddedMode: false,
+                                    verticalStack: false,
+                                    heightChangeCallback: redrawAllVisualizerArrows,
+                                    codeDivWidth: 500,
+                                    lang : 'py3'
+                                    });
+        attachLoggers(scope1_vis,'scope1');
+        styleButtons('scope1');
+        allVisualizers.push(scope1_vis);
+    } catch (e) {
+        console.log("Failed to Initialize CodeLens component scope1_vis" );
+        console.log(e.toString());
+    }
+
+});
+
+$(document).ready(function() {
+    $("#scope1_tracecheck").click(function() {
+        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'scope1'});
+    });
+});
+
+if (allVisualizers === undefined) {
+   var allVisualizers = [];
+}
+
+
+$(window).resize(function() {
+    if (scope1_vis) {
+        scope1_vis.redrawConnectors();
+    }
+});
+</script>
+<p>Functions and lambda expression complicate the issue, as their parameters are
+<strong>local variables</strong>, meaning that their scope is restricted to the body of the
+function or expression.</p>
+<p>So what happens if we use the same name for a parameter in nested lambda
+expressions?  The value bound to <code class="docutils literal"><span class="pre">x</span></code> changes based on the scope of the
+variable, using the value from the most local <code class="docutils literal"><span class="pre">x</span></code> variable.  The following
+figure illustrates the scope of all three <code class="docutils literal"><span class="pre">x</span></code> variables.</p>
+<div class="figure">
+<img alt="The scope of each variable." src="../_images/scope.png" />
+<div class="legend">
+This image shows the scope of each variable in the above example.  Start
+with the inner most <code class="docutils literal"><span class="pre">x</span></code>, which is bound to the the argument of <code class="docutils literal"><span class="pre">g(3)</span></code>,
+namely 3.  The scope of the inner most <code class="docutils literal"><span class="pre">x</span></code> is the body of the inner
+lambda.  The outer paramter gets bound to 2, and the scope of this variable
+is inside the body of the outer function, but not in the body of the inner
+lambda.  The global variable has a scope that consists of the global name
+space but is over-ridden in the body of both functions.</div>
+</div>
+<p>Ideally, we would like to think about evaluation of referentially transparent
+expressions using substitution: replace each expression with the right value.
+But substitution become tricky when using variables with the same name but
+different scopes.  The solution to rename the variable so that all variables
+are unique.</p>
+<div class="admonition-capture-free-variable-renaming-strategy admonition">
+<p class="first admonition-title">Capture-free variable renaming strategy</p>
+<p class="last">Starting with the inner-most expressions, rename all varaibles by adding a
+unique number to all instances of a variable in its scope.</p>
+</div>
+<p>After applying this transformation, it is now safe to use substitution to
+understand the code.  This renaming strategy is known as <strong>capture-free
+capture</strong> in lambda calculus.  A more precise definition is given on <a class="reference external" href="https://en.wikipedia.org/wiki/Lambda_calculus#Capture-avoiding_substitutions">Wikipedia</a>.
+You can explore the renamed code in codelens and the following figure shows the
+scope of the rename variables.</p>
+
+<div class="alert alert-warning cd_section">
+<div id="scope_renamed"></div>
+<p class="cl_caption"><span class="cl_caption_text"> (scope_renamed)</span> </p>
+</div>
+<script type="text/javascript">
+var scope_renamed_trace = {"code": "x3 = 1\nf = lambda x2: lambda x1: x1**2\n# Calling the outer function returns a function\ng = f(2)\ntype(g)\ng(3)", "trace": [{"ordered_globals": [], "stdout": "", "stack_to_render": [], "line": 1, "globals": {}, "event": "step_line", "heap": {}, "func_name": "<module>"}, {"ordered_globals": ["x3"], "stdout": "", "stack_to_render": [], "line": 2, "globals": {"x3": 1}, "event": "step_line", "heap": {}, "func_name": "<module>"}, {"ordered_globals": ["x3", "f"], "stdout": "", "stack_to_render": [], "line": 4, "globals": {"x3": 1, "f": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x2) <line 2>", null]}, "func_name": "<module>"}, {"ordered_globals": ["x3", "f"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x2": 2}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["x2"], "unique_hash": "<lambda> <line 2>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x3": 1, "f": ["REF", 1]}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(x2) <line 2>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["x3", "f"], "stdout": "", "stack_to_render": [{"encoded_locals": {"x2": 2}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["x2"], "unique_hash": "<lambda> <line 2>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x3": 1, "f": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x2) <line 2>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["x3", "f"], "stdout": "", "stack_to_render": [{"encoded_locals": {"__return__": ["REF", 2], "x2": 2}, "is_parent": true, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["x2", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x3": 1, "f": ["REF", 1]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(x2) <line 2>", null], "2": ["FUNCTION", "<lambda>(x1) <line 2>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["x3", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"__return__": ["REF", 2], "x2": 2}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x2", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 5, "globals": {"x3": 1, "g": ["REF", 2], "f": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x2) <line 2>", null], "2": ["FUNCTION", "<lambda>(x1) <line 2>", 1]}, "func_name": "<module>"}, {"ordered_globals": ["x3", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"__return__": ["REF", 2], "x2": 2}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x2", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 6, "globals": {"x3": 1, "g": ["REF", 2], "f": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x2) <line 2>", null], "2": ["FUNCTION", "<lambda>(x1) <line 2>", 1]}, "func_name": "<module>"}, {"ordered_globals": ["x3", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"__return__": ["REF", 2], "x2": 2}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x2", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}, {"encoded_locals": {"x1": 3}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["x1"], "unique_hash": "<lambda> <line 2>_f2", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x3": 1, "g": ["REF", 2], "f": ["REF", 1]}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(x2) <line 2>", null], "2": ["FUNCTION", "<lambda>(x1) <line 2>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["x3", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"__return__": ["REF", 2], "x2": 2}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x2", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}, {"encoded_locals": {"x1": 3}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["x1"], "unique_hash": "<lambda> <line 2>_f2", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x3": 1, "g": ["REF", 2], "f": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x2) <line 2>", null], "2": ["FUNCTION", "<lambda>(x1) <line 2>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["x3", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"__return__": ["REF", 2], "x2": 2}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x2", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}, {"encoded_locals": {"x1": 3, "__return__": 9}, "is_parent": false, "is_zombie": false, "frame_id": 2, "ordered_varnames": ["x1", "__return__"], "unique_hash": "<lambda> <line 2>_f2", "is_highlighted": true, "parent_frame_id_list": [1], "func_name": "<lambda> <line 2>"}], "line": 2, "globals": {"x3": 1, "g": ["REF", 2], "f": ["REF", 1]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(x2) <line 2>", null], "2": ["FUNCTION", "<lambda>(x1) <line 2>", 1]}, "func_name": "<lambda>"}, {"ordered_globals": ["x3", "f", "g"], "stdout": "", "stack_to_render": [{"encoded_locals": {"__return__": ["REF", 2], "x2": 2}, "is_parent": true, "is_zombie": true, "frame_id": 1, "ordered_varnames": ["x2", "__return__"], "unique_hash": "<lambda> <line 2>_f1_p_z", "is_highlighted": false, "parent_frame_id_list": [], "func_name": "<lambda> <line 2>"}], "line": 6, "globals": {"x3": 1, "g": ["REF", 2], "f": ["REF", 1]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(x2) <line 2>", null], "2": ["FUNCTION", "<lambda>(x1) <line 2>", 1]}, "func_name": "<module>"}]};
+var scope_renamed_vis;
+
+$(document).ready(function() {
+    try {
+        scope_renamed_vis = new ExecutionVisualizer('scope_renamed',scope_renamed_trace,
+                                    {embeddedMode: false,
+                                    verticalStack: false,
+                                    heightChangeCallback: redrawAllVisualizerArrows,
+                                    codeDivWidth: 500,
+                                    lang : 'py3'
+                                    });
+        attachLoggers(scope_renamed_vis,'scope_renamed');
+        styleButtons('scope_renamed');
+        allVisualizers.push(scope_renamed_vis);
+    } catch (e) {
+        console.log("Failed to Initialize CodeLens component scope_renamed_vis" );
+        console.log(e.toString());
+    }
+
+});
+
+$(document).ready(function() {
+    $("#scope_renamed_tracecheck").click(function() {
+        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'scope_renamed'});
+    });
+});
+
+if (allVisualizers === undefined) {
+   var allVisualizers = [];
+}
+
+
+$(window).resize(function() {
+    if (scope_renamed_vis) {
+        scope_renamed_vis.redrawConnectors();
+    }
+});
+</script>
+<div class="figure">
+<img alt="The scope of each renamed variable." src="../_images/scope_renamed.png" />
+<div class="legend">
+The scope of the renamed variables.  Once the variables have been renamed
+using a capture-free method, it is safe to replace all instances of the
+variable with the associated value.</div>
+</div>
+<p>One final note.  While you are encouraged to <strong>think</strong> about evaluating
+expressions using substitution, implementing a language through substitution is
+inefficient and most languages are implemented with <a class="reference external" href="https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-21.html#%25_sec_3.2">the enviroment model of
+evalution</a>.
+Regardless, substitution is still the easiest way to understand evaluation and
+explains the desire for referentially transparent code.</p>
+</div>
+<div class="section" id="evaluation-strategy">
+<h2>2.3.4. Evaluation Strategy<a class="headerlink" href="#evaluation-strategy" title="Permalink to this headline">¶</a></h2>
+<p>When evaluating an expression, we have two choices for the order of evaluation,
+<em>normal order</em> and <em>applicative</em> order.  When evaluating a function call using
+<strong>applicative order</strong>, arguments are evaluated first and then the resulting
+values are substituted into the body of the function.  Applicative order
+evaluation is a form of <strong>strict evaluation</strong>, where every expression is
+evaluated as soon as it is encountered.  The following sequence of expression
+represents the step-by-step process of applicative order evaluation.</p>
+<p><strong>Applicative Order Evaluation</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">pow</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span>
+<span class="nb">pow</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Evaluate the arguments</span>
+<span class="nb">pow</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1"># substitute these values in the body</span>
+<span class="mi">3</span><span class="o">**</span><span class="mi">4</span>
+<span class="c1"># Evaluate the body</span>
+<span class="mi">81</span>
+</pre></div>
+</div>
+<p>Using codelens, it becomes clear that Python is using strict evaluation, as
+<code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> are bound to <code class="docutils literal"><span class="pre">3</span></code> and <code class="docutils literal"><span class="pre">4</span></code>, respectively.</p>
+
+<div class="alert alert-warning cd_section">
+<div id="applicative_order"></div>
+<p class="cl_caption"><span class="cl_caption_text"> (applicative_order)</span> </p>
+</div>
+<script type="text/javascript">
+var applicative_order_trace = {"code": "pow = lambda x, y: x**y\npow(1 + 2, 2*2)", "trace": [{"ordered_globals": [], "stdout": "", "stack_to_render": [], "line": 1, "globals": {}, "event": "step_line", "heap": {}, "func_name": "<module>"}, {"ordered_globals": ["pow"], "stdout": "", "stack_to_render": [], "line": 2, "globals": {"pow": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<module>"}, {"ordered_globals": ["pow"], "stdout": "", "stack_to_render": [{"encoded_locals": {"y": 4, "x": 3}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["x", "y"], "unique_hash": "<lambda> <line 1>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"pow": ["REF", 1]}, "event": "call", "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["pow"], "stdout": "", "stack_to_render": [{"encoded_locals": {"y": 4, "x": 3}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["x", "y"], "unique_hash": "<lambda> <line 1>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"pow": ["REF", 1]}, "event": "step_line", "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["pow"], "stdout": "", "stack_to_render": [{"encoded_locals": {"y": 4, "x": 3, "__return__": 81}, "is_parent": false, "is_zombie": false, "frame_id": 1, "ordered_varnames": ["x", "y", "__return__"], "unique_hash": "<lambda> <line 1>_f1", "is_highlighted": true, "parent_frame_id_list": [], "func_name": "<lambda> <line 1>"}], "line": 1, "globals": {"pow": ["REF", 1]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<lambda>"}, {"ordered_globals": ["pow"], "stdout": "", "stack_to_render": [], "line": 2, "globals": {"pow": ["REF", 1]}, "event": "return", "heap": {"1": ["FUNCTION", "<lambda>(x, y) <line 1>", null]}, "func_name": "<module>"}]};
+var applicative_order_vis;
+
+$(document).ready(function() {
+    try {
+        applicative_order_vis = new ExecutionVisualizer('applicative_order',applicative_order_trace,
+                                    {embeddedMode: false,
+                                    verticalStack: false,
+                                    heightChangeCallback: redrawAllVisualizerArrows,
+                                    codeDivWidth: 500,
+                                    lang : 'py3'
+                                    });
+        attachLoggers(applicative_order_vis,'applicative_order');
+        styleButtons('applicative_order');
+        allVisualizers.push(applicative_order_vis);
+    } catch (e) {
+        console.log("Failed to Initialize CodeLens component applicative_order_vis" );
+        console.log(e.toString());
+    }
+
+});
+
+$(document).ready(function() {
+    $("#applicative_order_tracecheck").click(function() {
+        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'applicative_order'});
+    });
+});
+
+if (allVisualizers === undefined) {
+   var allVisualizers = [];
+}
+
+
+$(window).resize(function() {
+    if (applicative_order_vis) {
+        applicative_order_vis.redrawConnectors();
+    }
+});
+</script>
+<p>Clearly, the function <code class="docutils literal"><span class="pre">pow</span></code> is passed 3 and 4, the results of evaluating the
+arguments first.</p>
+<p>Conversely, function calls that are evaluated using <strong>normal order</strong> leave the
+arguments as <em>unevaluated expressions</em> and these expressions are substituted
+into the body of the function.  Using normal order to evaluate functions is a
+form of <strong>lazy evaluation</strong>, where we put off the evaluation of arguments as
+long as possible.</p>
+<p><strong>Normal Order Evaluation</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">pow</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span>
+<span class="nb">pow</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Don&#39;t evaluate arguments</span>
+<span class="c1"># Instead substitute in the unevaluated expressions</span>
+<span class="c1"># into the body of pow</span>
+<span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Now this expression is evaluated using normal order of operation</span>
+<span class="mi">3</span><span class="o">**</span><span class="mi">4</span>
+</pre></div>
+</div>
+<p>If it turns out that the arguments were not used in the function (possible
+because of a conditional expression), then we don&#8217;t waste time on evaluation.
+Consider the following scenario, where <code class="docutils literal"><span class="pre">cheap</span></code> is a function that executes
+quickly but <code class="docutils literal"><span class="pre">expensive</span></code> has a long execution time.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="k">if</span> <span class="n">cond</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">else</span> <span class="n">b</span>
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cheap</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">expensive</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>When using applicative order, both <code class="docutils literal"><span class="pre">cheap(x)</span></code> and <code class="docutils literal"><span class="pre">expensive(x)</span></code> will be
+evaluated before the body.  If it turns out that we didn&#8217;t need
+<code class="docutils literal"><span class="pre">expensive(x)</span></code>, we have wasted time.  Normal order evaluation will save us the
+execution time for <code class="docutils literal"><span class="pre">expensive(x)</span></code> when it is not needed.  There is always a
+trade-off and the trade-off for saving time using lazy evaluation is the
+possibility of <a class="reference external" href="http://queue.acm.org/detail.cfm?id=2538488">sapce leaks</a>,
+where the build up of unevaluated code can eat more and more memory.</p>
+<p>Haskell is an example of a language focused on lazy evaluation, but any
+language needs <em>some</em> strict evaluation or nothing would ever get done.
+Similarly, all languages also need some lazy evaluation, in particular
+conditional expressions and if-else constructions will be evaluated in a
+lazy fashion in any language.  Python uses strict evaluation in function
+calls, but we will look at other features of Python that allow lazy
+evaluation in subsequent chapter.</p>
+<p>Unfortunately, we won&#8217;t be using expressions for all of our programming.  In the
+next section, we will look at some of the statements that are much more
+convenience when our programs become more complicated.</p>
 </div>
 </div>
 

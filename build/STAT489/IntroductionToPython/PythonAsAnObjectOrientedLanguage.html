@@ -102,7 +102,7 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="1. Introduction to Python" href="toctree.html" />
-    <link rel="next" title="1.6. Transforming Simple Data with Expressions" href="TransformingSimpleDataWithExpressions.html" />
+    <link rel="next" title="1.6. Exercises" href="Exercises.html" />
     <link rel="prev" title="1.4. Sharing and Reusing Code with Modules" href="SharingAndReusingCodeWithModules.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -285,8 +285,8 @@
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 1.6. Transforming Simple Data with Expressions' data-toggle="tooltip" >
-    <a href="TransformingSimpleDataWithExpressions.html" >
+  <li id="relations-next" title='Next Chapter - 1.6. Exercises' data-toggle="tooltip" >
+    <a href="Exercises.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -358,7 +358,7 @@ After line 4 you will have a straight line going from the center of the
 drawing canvas towards the right.  After line 6, you will have a canvas with a
 turtle and a half drawn rectangle.  Press the run button to try it and see.</p>
 
-<textarea data-component="activecode" id=ch03_1 data-lang="python"    data-timelimit=25000   data-audio='*doubleq*Overall Tour*doubleq*; 1-6: Example01_Tour01_Line01; 3: Example01_Tour01_Line02; 4: Example01_Tour01_Line03; 5: Example01_Tour01_Line04; 6: Example01_Tour01_Line05;*atype**doubleq*Line by Line Tour*doubleq*; 1: Example01_Tour02_Line01; 2: Example01_Tour02_Line02; 3: Example01_Tour02_Line03; 4: Example01_Tour02_Line04; 5: Example01_Tour02_Line05; 6: Example01_Tour02_Line06;*atype*'     >
+<textarea data-component="activecode" id=ch03_1 data-lang="python"    data-timelimit=25000   data-audio='*doubleq*Line by Line Tour*doubleq*; 1: Example01_Tour02_Line01; 2: Example01_Tour02_Line02; 3: Example01_Tour02_Line03; 4: Example01_Tour02_Line04; 5: Example01_Tour02_Line05; 6: Example01_Tour02_Line06;*atype**doubleq*Overall Tour*doubleq*; 1-6: Example01_Tour01_Line01; 3: Example01_Tour01_Line02; 4: Example01_Tour01_Line03; 5: Example01_Tour01_Line04; 6: Example01_Tour01_Line05;*atype*'     >
 import turtle               # allows us to use the turtles library
 wn = turtle.Screen()        # creates a graphics window
 alex = turtle.Turtle()      # create a turtle named alex
@@ -391,7 +391,7 @@ the rectangle.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_1_0">
-            intro-12-168: Which direction does the Turtle face when it is created?
+            data-2-7: Which direction does the Turtle face when it is created?
             <li data-component="answer"  id="test_question3_1_0_opt_a">(A) North</li><li data-component="feedback" id="test_question3_1_0_opt_a">Some turtle systems start with the turtle facing north, but not this one.</li>
             
             <li data-component="answer"  id="test_question3_1_0_opt_b">(B) South</li><li data-component="feedback" id="test_question3_1_0_opt_b">No, look at the first example with a turtle.  Which direction does the turtle move?</li>
@@ -415,7 +415,7 @@ objects.</p>
 commented those lines that are different from the previous example.  Note also
 that we have decided to call our turtle object <em>tess</em>.</p>
 
-<textarea data-component="activecode" id=ch03_2 data-lang="python"    data-timelimit=25000   data-audio='*doubleq*Overall Tour*doubleq*; 1-10: Example02_Tour01_Line01; 4: Example02_Tour01_Line02; 6: Example02_Tour01_Line03; 7: Example02_Tour01_Line04; 8: Example02_Tour01_Line05; 10: Example02_Tour01_Line06; 11: Example02_Tour01_Line07; 12: Example02_Tour01_Line08; 14: Example02_Tour01_Line09;*atype**doubleq*Line by Line Tour*doubleq*; 1: Example01_Tour02_Line01; 3: Example01_Tour02_Line02; 4: Example02_Tour02_Line03; 6: Example02_Tour02_Line04; 7: Example02_Tour02_Line05; 8: Example02_Tour02_Line06; 10: Example02_Tour02_Line07; 11: Example02_Tour02_Line08; 12: Example02_Tour02_Line09; 14: Example02_Tour02_Line10;*atype*'     >
+<textarea data-component="activecode" id=ch03_2 data-lang="python"    data-timelimit=25000   data-audio='*doubleq*Line by Line Tour*doubleq*; 1: Example01_Tour02_Line01; 3: Example01_Tour02_Line02; 4: Example02_Tour02_Line03; 6: Example02_Tour02_Line04; 7: Example02_Tour02_Line05; 8: Example02_Tour02_Line06; 10: Example02_Tour02_Line07; 11: Example02_Tour02_Line08; 12: Example02_Tour02_Line09; 14: Example02_Tour02_Line10;*atype**doubleq*Overall Tour*doubleq*; 1-10: Example02_Tour01_Line01; 4: Example02_Tour01_Line02; 6: Example02_Tour01_Line03; 7: Example02_Tour01_Line04; 8: Example02_Tour01_Line05; 10: Example02_Tour01_Line06; 11: Example02_Tour01_Line07; 12: Example02_Tour01_Line08; 14: Example02_Tour01_Line09;*atype*'     >
 import turtle
 
 wn = turtle.Screen()
@@ -677,7 +677,7 @@ method using parantheses!</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_1_1">
-            <p>intro-12-169: Consider the following code:</p>
+            <p>data-2-8: Consider the following code:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">turtle</span>
 <span class="n">wn</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Screen</span><span class="p">()</span>
 <span class="n">alex</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>
@@ -700,7 +700,7 @@ method using parantheses!</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_1_2">
-            intro-12-170: Why do we type <code class="docutils literal"><span class="pre">turtle.Turtle()</span></code> to get a new Turtle object?
+            data-2-9: Why do we type <code class="docutils literal"><span class="pre">turtle.Turtle()</span></code> to get a new Turtle object?
             <li data-component="answer"  id="test_question3_1_2_opt_a">(A) This is simply for clarity.  It would also work to just type "Turtle()" instead of "turtle.Turtle()".</li><li data-component="feedback" id="test_question3_1_2_opt_a">We must specify the name of the module where Python can find the Turtle object.</li>
             
             <li data-component="answer"  id="test_question3_1_2_opt_b">(B) The period (.) is what tells Python that we want to invoke a new object.</li><li data-component="feedback" id="test_question3_1_2_opt_b">The period separates the module name from the object name.  The parentheses at the end are what tell Python to invoke a new object.</li>
@@ -711,7 +711,7 @@ method using parantheses!</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_1_3">
-            intro-12-171: True or False: A Turtle object can have any name that follows the naming rules from Chapter 2.
+            data-2-10: True or False: A Turtle object can have any name that follows the naming rules from Chapter 2.
             <li data-component="answer" data-correct id="test_question3_1_3_opt_a">(A) True</li><li data-component="feedback" id="test_question3_1_3_opt_a">In this chapter you saw one named alex and one named tess, but any legal variable name is allowed.</li>
             
             <li data-component="answer"  id="test_question3_1_3_opt_b">(B) False</li><li data-component="feedback" id="test_question3_1_3_opt_b">A variable, including one referring to a Turtle object, can have whatever name you choose as long as it follows the naming conventions from Chapter 2.</li>
@@ -720,7 +720,7 @@ method using parantheses!</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_1_4">
-            <p>intro-12-172: Which of the following code would produce the following image?</p>
+            <p>data-2-11: Which of the following code would produce the following image?</p>
 <img alt="long line to north with shorter line to west on top" src="../_images/turtleTest1.png" />
 
             <li data-component="answer"  id="test_question3_1_4_opt_a">(A) <img src="../_static/test1Alt1.png" alt="right turn of 90 degrees before drawing, draw a line 150 pixels long, turn left 90, and draw a line 75 pixels long"></li><li data-component="feedback" id="test_question3_1_4_opt_a">This code would turn the turtle to the south before drawing</li>
@@ -746,7 +746,7 @@ position, while tess might be going in her own direction with a fat pink pen.
 So here is what happens when alex completes a square and tess completes her
 triangle:</p>
 
-<textarea data-component="activecode" id=ch03_3 data-lang="python"    data-timelimit=25000   data-audio='*doubleq*Overall Tour*doubleq*; 1-31: Example03_Tour01_Line01; 1-3: Example03_Tour01_Line02; 6-8: Example03_Tour01_Line03; 10: Example03_Tour01_Line04; 6,10: Example03_Tour01_Line05; 12-17: Example03_Tour01_Line06; 19-20: Example03_Tour01_Line07; 22-29: Example03_Tour01_Line08; 31: Example03_Tour01_Line09;*atype**doubleq*Line by Line Tour*doubleq*; 1: Example01_Tour02_Line01; 2: Example01_Tour02_Line02; 3: Example02_Tour02_Line03; 6: Example02_Tour02_Line04; 7: Example03_Tour02_Line05; 8: Example03_Tour02_Line06; 10: Example01_Tour02_Line03; 6,10: Example03_Tour01_Line05; 12-17: Example03_Tour02_Line09; 12-13: Example03_Tour02_Line10; 12: Example03_Tour02_Line11; 13: Example03_Tour02_Line12; 14-15: Example03_Tour02_Line13; 14: Example03_Tour02_Line14; 15: Example03_Tour02_Line15; 16-17: Example03_Tour02_Line16; 16: Example03_Tour02_Line17; 17: Example03_Tour02_Line18; 19-20: Example03_Tour01_Line07; 19: Example03_Tour02_Line20; 20: Example03_Tour02_Line21; 22-29: Example03_Tour01_Line08; 10: Example03_Tour02_Line23; 22-23: Example03_Tour02_Line24; 22: Example03_Tour02_Line25; 23: Example03_Tour02_Line26; 24-25: Example03_Tour02_Line27; 26-27: Example03_Tour02_Line28; 28-29: Example03_Tour02_Line29; 31: Example02_Tour02_Line10;*atype*'     >
+<textarea data-component="activecode" id=ch03_3 data-lang="python"    data-timelimit=25000   data-audio='*doubleq*Line by Line Tour*doubleq*; 1: Example01_Tour02_Line01; 2: Example01_Tour02_Line02; 3: Example02_Tour02_Line03; 6: Example02_Tour02_Line04; 7: Example03_Tour02_Line05; 8: Example03_Tour02_Line06; 10: Example01_Tour02_Line03; 6,10: Example03_Tour01_Line05; 12-17: Example03_Tour02_Line09; 12-13: Example03_Tour02_Line10; 12: Example03_Tour02_Line11; 13: Example03_Tour02_Line12; 14-15: Example03_Tour02_Line13; 14: Example03_Tour02_Line14; 15: Example03_Tour02_Line15; 16-17: Example03_Tour02_Line16; 16: Example03_Tour02_Line17; 17: Example03_Tour02_Line18; 19-20: Example03_Tour01_Line07; 19: Example03_Tour02_Line20; 20: Example03_Tour02_Line21; 22-29: Example03_Tour01_Line08; 10: Example03_Tour02_Line23; 22-23: Example03_Tour02_Line24; 22: Example03_Tour02_Line25; 23: Example03_Tour02_Line26; 24-25: Example03_Tour02_Line27; 26-27: Example03_Tour02_Line28; 28-29: Example03_Tour02_Line29; 31: Example02_Tour02_Line10;*atype**doubleq*Overall Tour*doubleq*; 1-31: Example03_Tour01_Line01; 1-3: Example03_Tour01_Line02; 6-8: Example03_Tour01_Line03; 10: Example03_Tour01_Line04; 6,10: Example03_Tour01_Line05; 12-17: Example03_Tour01_Line06; 19-20: Example03_Tour01_Line07; 22-29: Example03_Tour01_Line08; 31: Example03_Tour01_Line09;*atype*'     >
 import turtle
 wn = turtle.Screen()             # Set up the window and its attributes
 wn.bgcolor("lightgreen")
@@ -805,7 +805,7 @@ ideas.   They&#8217;re not always explicit in the code.</li>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_2_1">
-            intro-12-173: True or False: You can only have one active turtle at a time.  If you create a second one, you will no longer be able to access or use the first.
+            data-2-12: True or False: You can only have one active turtle at a time.  If you create a second one, you will no longer be able to access or use the first.
             <li data-component="answer"  id="test_question3_2_1_opt_a">(A) True</li><li data-component="feedback" id="test_question3_2_1_opt_a">You can create and use as many turtles as you like.  As long as they have different names, you can operate them independently, and make them move in any order you like.  To convince yourself this is true, try interleaving the instructions for alex and tess in ActiveCode box 3.</li>
             
             <li data-component="answer" data-correct id="test_question3_2_1_opt_b">(B) False</li><li data-component="feedback" id="test_question3_2_1_opt_b">You can create and use as many turtles as you like.  As long as they have different names, you can operate them independently, and make them move in any order you like.  If you are not totally convinced, try interleaving the instructions for alex and tess in ActiveCode box 3.</li>
@@ -868,12 +868,12 @@ different heading).</p>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="SharingAndReusingCodeWithModules.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 1.6. Transforming Simple Data with Expressions' data-toggle="tooltip" >
-    <a href="TransformingSimpleDataWithExpressions.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 1.6. Exercises' data-toggle="tooltip" >
+    <a href="Exercises.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="TransformingSimpleDataWithExpressions.html" >Next Section - 1.6. Transforming Simple Data with Expressions</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="Exercises.html" >Next Section - 1.6. Exercises</a>
 
 <script type="text/javascript">
 

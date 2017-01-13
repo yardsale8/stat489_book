@@ -102,7 +102,7 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="1. Introduction to Python" href="toctree.html" />
-    <link rel="next" title="1.4. Python as an Object Oriented Language" href="PythonAsAnObjectOrientedLanguage.html" />
+    <link rel="next" title="1.4. Sharing and Reusing Code with Modules" href="SharingAndReusingCodeWithModules.html" />
     <link rel="prev" title="1.2. What is Python?" href="WhatIsPython.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -283,8 +283,8 @@
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 1.4. Python as an Object Oriented Language' data-toggle="tooltip" >
-    <a href="PythonAsAnObjectOrientedLanguage.html" >
+  <li id="relations-next" title='Next Chapter - 1.4. Sharing and Reusing Code with Modules' data-toggle="tooltip" >
+    <a href="SharingAndReusingCodeWithModules.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -619,7 +619,7 @@ To see this in even more detail, we can run the program using codelens.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch02_9_codelens)</span> </p>
 </div>
 <script type="text/javascript">
-var ch02_9_codelens_trace = {"code": "message = \"What's up, Doc?\"\nn = 17\npi = 3.14159\n\nprint(message)\nprint(n)\nprint(pi)", "trace": [{"stdout": "", "func_name": "<module>", "globals": {}, "event": "step_line", "stack_to_render": [], "line": 1, "heap": {}, "ordered_globals": []}, {"stdout": "", "func_name": "<module>", "globals": {"message": "What's up, Doc?"}, "event": "step_line", "stack_to_render": [], "line": 2, "heap": {}, "ordered_globals": ["message"]}, {"stdout": "", "func_name": "<module>", "globals": {"n": 17, "message": "What's up, Doc?"}, "event": "step_line", "stack_to_render": [], "line": 3, "heap": {}, "ordered_globals": ["message", "n"]}, {"stdout": "", "func_name": "<module>", "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "step_line", "stack_to_render": [], "line": 5, "heap": {}, "ordered_globals": ["message", "n", "pi"]}, {"stdout": "What's up, Doc?\n", "func_name": "<module>", "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "step_line", "stack_to_render": [], "line": 6, "heap": {}, "ordered_globals": ["message", "n", "pi"]}, {"stdout": "What's up, Doc?\n17\n", "func_name": "<module>", "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "step_line", "stack_to_render": [], "line": 7, "heap": {}, "ordered_globals": ["message", "n", "pi"]}, {"stdout": "What's up, Doc?\n17\n3.14159\n", "func_name": "<module>", "globals": {"n": 17, "message": "What's up, Doc?", "pi": 3.1416}, "event": "return", "stack_to_render": [], "line": 7, "heap": {}, "ordered_globals": ["message", "n", "pi"]}]};
+var ch02_9_codelens_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 2, "globals": {"message": "What's up, Doc?"}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["message"], "heap": {}}, {"line": 3, "globals": {"n": 17, "message": "What's up, Doc?"}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["message", "n"], "heap": {}}, {"line": 5, "globals": {"pi": 3.1416, "n": 17, "message": "What's up, Doc?"}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["message", "n", "pi"], "heap": {}}, {"line": 6, "globals": {"pi": 3.1416, "n": 17, "message": "What's up, Doc?"}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "What's up, Doc?\n", "ordered_globals": ["message", "n", "pi"], "heap": {}}, {"line": 7, "globals": {"pi": 3.1416, "n": 17, "message": "What's up, Doc?"}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "What's up, Doc?\n17\n", "ordered_globals": ["message", "n", "pi"], "heap": {}}, {"line": 7, "globals": {"pi": 3.1416, "n": 17, "message": "What's up, Doc?"}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "What's up, Doc?\n17\n3.14159\n", "ordered_globals": ["message", "n", "pi"], "heap": {}}], "code": "message = \"What's up, Doc?\"\nn = 17\npi = 3.14159\n\nprint(message)\nprint(n)\nprint(pi)"};
 var ch02_9_codelens_vis;
 
 $(document).ready(function() {
@@ -699,7 +699,7 @@ assignment we even give it a value that is of a different type.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch02_11)</span> </p>
 </div>
 <script type="text/javascript">
-var ch02_11_trace = {"code": "day = \"Thursday\"\nprint(day)\nday = \"Friday\"\nprint(day)\nday = 21\nprint(day)", "trace": [{"stdout": "", "func_name": "<module>", "globals": {}, "event": "step_line", "stack_to_render": [], "line": 1, "heap": {}, "ordered_globals": []}, {"stdout": "", "func_name": "<module>", "globals": {"day": "Thursday"}, "event": "step_line", "stack_to_render": [], "line": 2, "heap": {}, "ordered_globals": ["day"]}, {"stdout": "Thursday\n", "func_name": "<module>", "globals": {"day": "Thursday"}, "event": "step_line", "stack_to_render": [], "line": 3, "heap": {}, "ordered_globals": ["day"]}, {"stdout": "Thursday\n", "func_name": "<module>", "globals": {"day": "Friday"}, "event": "step_line", "stack_to_render": [], "line": 4, "heap": {}, "ordered_globals": ["day"]}, {"stdout": "Thursday\nFriday\n", "func_name": "<module>", "globals": {"day": "Friday"}, "event": "step_line", "stack_to_render": [], "line": 5, "heap": {}, "ordered_globals": ["day"]}, {"stdout": "Thursday\nFriday\n", "func_name": "<module>", "globals": {"day": 21}, "event": "step_line", "stack_to_render": [], "line": 6, "heap": {}, "ordered_globals": ["day"]}, {"stdout": "Thursday\nFriday\n21\n", "func_name": "<module>", "globals": {"day": 21}, "event": "return", "stack_to_render": [], "line": 6, "heap": {}, "ordered_globals": ["day"]}]};
+var ch02_11_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 2, "globals": {"day": "Thursday"}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["day"], "heap": {}}, {"line": 3, "globals": {"day": "Thursday"}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "Thursday\n", "ordered_globals": ["day"], "heap": {}}, {"line": 4, "globals": {"day": "Friday"}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "Thursday\n", "ordered_globals": ["day"], "heap": {}}, {"line": 5, "globals": {"day": "Friday"}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "Thursday\nFriday\n", "ordered_globals": ["day"], "heap": {}}, {"line": 6, "globals": {"day": 21}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "Thursday\nFriday\n", "ordered_globals": ["day"], "heap": {}}, {"line": 6, "globals": {"day": 21}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "Thursday\nFriday\n21\n", "ordered_globals": ["day"], "heap": {}}], "code": "day = \"Thursday\"\nprint(day)\nday = \"Friday\"\nprint(day)\nday = 21\nprint(day)"};
 var ch02_11_vis;
 
 $(document).ready(function() {
@@ -890,12 +890,12 @@ want it to have.</p>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="WhatIsPython.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 1.4. Python as an Object Oriented Language' data-toggle="tooltip" >
-    <a href="PythonAsAnObjectOrientedLanguage.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 1.4. Sharing and Reusing Code with Modules' data-toggle="tooltip" >
+    <a href="SharingAndReusingCodeWithModules.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="PythonAsAnObjectOrientedLanguage.html" >Next Section - 1.4. Python as an Object Oriented Language</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="SharingAndReusingCodeWithModules.html" >Next Section - 1.4. Sharing and Reusing Code with Modules</a>
 
 <script type="text/javascript">
 
