@@ -268,3 +268,17 @@ let's remove all of the punctuation from a string.
    .. activecode:: scratch_08_04
 
 
+Common Comprehension Patterns
+=============================
+
+TODO
+
+Use built-in helper functions
+-----------------------------
+
+TODO
+
+1. iterators: zip, enumerate, reversed
+2. reductions: max, min, sum, length, all, any
+3. working with tuples
+4. comprehensions for tables and matrices

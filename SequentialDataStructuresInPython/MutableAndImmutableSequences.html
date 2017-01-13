@@ -401,7 +401,7 @@ concatenate them with the new tuple.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_7_1">
-            <p>intro-12-408: What is printed by the following statements:</p>
+            <p>rec-5-21: What is printed by the following statements:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;Ball&quot;</span>
 <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -446,7 +446,7 @@ and see the changes to the list elements.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (item_assign)</span> </p>
 </div>
 <script type="text/javascript">
-var item_assign_trace = {"code": "fruit = [\"banana\", \"apple\", \"cherry\"]\n\nfruit[0] = \"pear\"\nfruit[-1] = \"orange\"", "trace": [{"heap": {}, "ordered_globals": [], "func_name": "<module>", "globals": {}, "event": "step_line", "stack_to_render": [], "line": 1, "stdout": ""}, {"heap": {"1": ["LIST", "banana", "apple", "cherry"]}, "ordered_globals": ["fruit"], "func_name": "<module>", "globals": {"fruit": ["REF", 1]}, "event": "step_line", "stack_to_render": [], "line": 3, "stdout": ""}, {"heap": {"1": ["LIST", "pear", "apple", "cherry"]}, "ordered_globals": ["fruit"], "func_name": "<module>", "globals": {"fruit": ["REF", 1]}, "event": "step_line", "stack_to_render": [], "line": 4, "stdout": ""}, {"heap": {"1": ["LIST", "pear", "apple", "orange"]}, "ordered_globals": ["fruit"], "func_name": "<module>", "globals": {"fruit": ["REF", 1]}, "event": "return", "stack_to_render": [], "line": 4, "stdout": ""}]};
+var item_assign_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 3, "globals": {"fruit": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["fruit"], "heap": {"1": ["LIST", "banana", "apple", "cherry"]}}, {"line": 4, "globals": {"fruit": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["fruit"], "heap": {"1": ["LIST", "pear", "apple", "cherry"]}}, {"line": 4, "globals": {"fruit": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["fruit"], "heap": {"1": ["LIST", "pear", "apple", "orange"]}}], "code": "fruit = [\"banana\", \"apple\", \"cherry\"]\n\nfruit[0] = \"pear\"\nfruit[-1] = \"orange\""};
 var item_assign_vis;
 
 $(document).ready(function() {
@@ -521,7 +521,7 @@ the desired location.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_7_1">
-            <p>intro-12-409: What is printed by the following statements?</p>
+            <p>rec-5-22: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">alist</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="k">print</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span>
@@ -576,32 +576,54 @@ the initial installation, the module will continue to remain avaiable.</p>
 persistent version of a list.  First, we illustrate the immutability of the
 <code class="docutils literal"><span class="pre">pvector</span></code> by trying to assign a new value at index 0.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="kn">from</span> <span class="nn">pyrsistent</span> <span class="kn">import</span> <span class="n">pvector</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-31-81723518c8f9&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">pyrsistent</span> <span class="kn">import</span> <span class="n">pvector</span>
+
+<span class="ne">ImportError</span>: No module named &#39;pyrsistent&#39;
 
 <span class="gp">In [32]: </span><span class="n">fruit</span> <span class="o">=</span> <span class="n">pvector</span><span class="p">([</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">])</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-32-20c23ee3ed4a&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 fruit = pvector([&quot;banana&quot;, &quot;apple&quot;, &quot;cherry&quot;])</span>
+
+<span class="go">NameError: name &#39;pvector&#39; is not defined</span>
 
 <span class="gp">In [33]: </span><span class="n">fruit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pear&quot;</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-33-13775da5cf96&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fruit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pear&quot;</span>
-
-<span class="ne">TypeError</span>: &#39;pvectorc.PVector&#39; object does not support item assignment
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">pvector</span></code> class provides a method called <code class="docutils literal"><span class="pre">set</span></code> that allows us to
 (efficiently) construct a new <code class="docutils literal"><span class="pre">pvector</span></code> with a new value assigned to a
 specific instance.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">new_fruit</span> <span class="o">=</span> <span class="n">fruit</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;pear&quot;</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-34-b35b0c94e556&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">new_fruit</span> <span class="o">=</span> <span class="n">fruit</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;pear&quot;</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;list&#39; object has no attribute &#39;set&#39;
 
 <span class="gp">In [35]: </span><span class="n">new_fruit</span>
-<span class="gh">Out[35]: </span><span class="go">pvector([&#39;pear&#39;, &#39;apple&#39;, &#39;cherry&#39;])</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-35-712565ad81cb&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 new_fruit</span>
+
+<span class="go">NameError: name &#39;new_fruit&#39; is not defined</span>
 </pre></div>
 </div>
 <p>Recall that the <code class="docutils literal"><span class="pre">id</span></code> function gives a unique id number to each value in
 memory.  We can use <code class="docutils literal"><span class="pre">id</span></code> to verify that <code class="docutils literal"><span class="pre">new_fruit</span></code> is indeed a new
 <code class="docutils literal"><span class="pre">pvector</span></code>, different than the original <code class="docutils literal"><span class="pre">fruit</span></code>.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="nb">id</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">new_fruit</span><span class="p">)</span>
-<span class="gh">Out[36]: </span><span class="go">False</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-36-334c8e63f592&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">id</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">new_fruit</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;new_fruit&#39; is not defined
 </pre></div>
 </div>
 <p>Other efficient features of the <code class="docutils literal"><span class="pre">pvector</span></code> include using <code class="docutils literal"><span class="pre">append</span></code> to add to
@@ -609,13 +631,12 @@ the end of the vector, as well as slicing the vector.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">fruit2</span> <span class="o">=</span> <span class="n">fruit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;watermelon&quot;</span><span class="p">)</span>
 
 <span class="gp">In [38]: </span><span class="n">fruit</span>  <span class="c1"># The original fruit</span>
-<span class="gh">Out[38]: </span><span class="go">pvector([&#39;banana&#39;, &#39;apple&#39;, &#39;cherry&#39;])</span>
+<span class="gh">Out[38]: </span><span class="go">[&#39;pear&#39;, &#39;apple&#39;, &#39;orange&#39;, &#39;watermelon&#39;]</span>
 
 <span class="gp">In [39]: </span><span class="n">fruit2</span>
-<span class="go">                                                Out[39]: pvector([&#39;banana&#39;, &#39;apple&#39;, &#39;cherry&#39;, &#39;watermelon&#39;])</span>
 
 <span class="gp">In [40]: </span><span class="nb">id</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span>  <span class="c1"># Not the same vector</span>
-<span class="go">                                                                                                              Out[40]: True</span>
+<span class="gh">Out[40]: </span><span class="go">True</span>
 </pre></div>
 </div>
 <p>When writing programs in the functional style, consider using persistent and
