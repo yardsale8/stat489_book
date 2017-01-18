@@ -84,9 +84,12 @@ Appendices
 ::::::::::
 
 .. toctree::
-   :caption: Appendices
-   :maxdepth: 1
+    :caption: Appendices
+    :maxdepth: 1
 
+    ClassesBasics/toctree.rst
+    ClassesDiggingDeeper/toctree.rst
+    Exceptions/toctree.rst
 
 Acknowledgements
 ::::::::::::::::

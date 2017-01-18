@@ -18,6 +18,7 @@ lists.  The general syntax is::
 
 where the if clause is optional.  For example,
 
+
 .. ipython:: python
 
     mylist = [1,2,3,4,5]
@@ -30,6 +31,21 @@ by the ``if`` clause if there is one.  In the example above, the ``for``
 statement lets ``item`` take on all the values in the list ``mylist`` one after
 the other. Each item is then squared before it is added to the list that is
 being built.  The result is a list of squares of the values in ``mylist``.
+
+
+
+.. figure:: http://python-3-patterns-idioms-test.readthedocs.io/en/latest/_images/listComprehensions.gif
+    :alt: Parts of a list comprehension
+
+    ..
+    
+    The three parts of a comprehension are the **output expression**, the
+    description of the sequence, and the (optional) **predicate**.  This image
+    is copied from the open source `Python 3 Patterns, Recipes and Idioms
+    <https://bitbucket.org/BruceEckel/python-3-patterns-idioms/src/8f0091a18c73074fca1da624c652a9adb456654b/src/Introduction.rst?at=default&fileviewer=file-view-default>`_
+    book and is shared under the `Creative Commons Attribution-Share Alike 3.0
+    <http://creativecommons.org/licenses/by-sa/3.0/>`_ license.
+
 
 The built-in ``range`` Python function is a useful tool for generating a
 sequence of numbers.  The sequence provided by ``range`` always starts with 0.
@@ -164,7 +180,8 @@ example, let's compute the cube root for all odd values less than 10.
 Why might we want to use this version of the comprehension?  Here we are using
 two explicit abstractions to describe the *intent* of our code.  This should
 make it easier for someone that later reads through the code to understand the
-meaning of this construction.
+meaning of this construction, i.e. that we are taking the *cube root* of *odd
+numbers* up to 10.
 
 
 **Check your understanding**
@@ -276,9 +293,211 @@ TODO
 Use built-in helper functions
 -----------------------------
 
+Use built-in functions to reduce a list to a value
+--------------------------------------------------
+
+There are a number of built-in Python functions that help us reduce a list to a
+value, including ``sum``, ``len``, ``max``, and ``min``.  Remember to use these
+functions along with a list comprehension to describe a computation on a
+sequence of values.
+
+For example, suppose that we want to compute `the sum of squares
+<https://en.wikipedia.org/wiki/Squared_deviations_from_the_mean>`_ for a small
+set of numbers.  Let's give this a try using the regular definition, shown
+below.
+
+.. math:: 
+
+    SS = \sum_{i=1}^n (y_i - \bar{y})^2
+
+For each value in the list we must subtract the mean and the square this
+difference.  Finally, we add up all of these values.  We will create a function
+for computing the mean and then another for computing the sum of squares.
+
+.. ipython:: python
+
+    mean = lambda L: sum(L)/len(L)
+    ss = lambda L: sum([(i - mean(L))**2 for i in L])
+    my_list = [1,2,3,4,5]
+    mean(my_list)
+    ss(my_list)
+
+On a modern computer, the above code is reasonably fast for fairly small lists.
+Next, we use the IPython ``%timeit`` magic to time our function on various size
+lists.
+
+.. sourcecode:: python
+
+    In [31]: %timeit ss(range(10**2))
+       ....: %timeit ss(range(10**3))
+       ....: %timeit ss(range(10**4))
+       ....: 
+    1000 loops, best of 3: 666 us per loop
+    10 loops, best of 3: 53.2 ms per loop
+    1 loop, best of 3: 5.97 s per loop
+
+Notice that the ``ss`` function is taking about 100 times as long each time we
+multiple the length of the list by 10.  This hints at a complexity of
+:math:`O(n^2)`.  Consider the complexity of these functions.  The ``mean``
+function must visit each element of the list and is :math:`O(n)`.  The
+inefficiency of the ``ss`` function results from calling the ``mean`` function
+**for each value in the list!**.  Thus the time complexity of ``ss`` is
+:math:`n*O(n) = O(n*n) = O(n^2)`.  We can fix this issue by using the usual
+simplification shown below.
+
+.. math:: 
+
+    SS = \sum_{i=1}^n{y_i^2} - \frac{\left(\sum_{i=1}^n y_i\right)^2}{n}
+
+.. ipython:: python
+
+    ss = lambda L: sum([i**2 for i in L]) - sum(L)**2/len(L)
+    my_list = [1,2,3,4,5]
+    ss(my_list)
+
+Now we refactor the code to clear up the meaning of each part.
+
+.. ipython:: python
+
+    sum_square_values = lambda L: sum([i**2 for i in L])
+    ss = lambda L: sum_square_values(L) - (sum(L))**2/len(L)
+    my_list = [1,2,3,4,5]
+    ss(my_list)
+
+Each of the component functions, ``len``, ``sum_values`` and
+``sum_square_values``, is :math:`O(n)` (they each visit a list element exactly
+once and perform a :math:`O(1)` computation).  Therefore, this implementation is
+:math:`O(n)`, which is illustrated below by the 10 fold increase in computation
+time when increasing the length of a list by a factor of 10.
+
+.. sourcecode:: python
+
+    In [31]: %timeit ss(range(10**2))
+       ....: %timeit ss(range(10**3))
+       ....: %timeit ss(range(10**4))
+    
+    10000 loops, best of 3: 42.5 us per loop
+    1000 loops, best of 3: 406 us per loop
+    100 loops, best of 3: 4.11 ms per loop
+
+.. admonition:: Beware of Premature Optimization!
+
+    A well-known computer scientist, `Donald Knuth
+    <https://en.wikipedia.org/wiki/Donald_Knuth>`_, `once said
+    <http://web.archive.org/web/20130731202547/http://pplab.snu.ac.kr/courses/adv_pl05/papers/p261-knuth.pdf>`_
+
+        Programmers waste enormous amounts of time thinking about, or worrying
+        about, the speed of noncritical parts of their programs, and these
+        attempts at efficiency actually have a strong negative impact when
+        debugging and maintenance are considered. We should forget about small
+        efficiencies, say about 97% of the time: **premature optimization is the
+        root of all evil.** Yet we should not pass up our opportunities in that
+        critical 3%. 
+    
+    It is important to think about the efficiency of your program, but follow
+    Knuth's advice and worry about it only after you have demonstrated it is
+    slow.  Instead, follow `another pieces of advice from Knuth
+    <https://en.wikiquote.org/wiki/Donald_Knuth>`_.
+
+        Let us change our traditional attitude to the construction of programs:
+        Instead of imagining that our main task is to instruct a computer what
+        to do, **let us concentrate rather on explaining to human beings what we
+        want a computer to do.** 
+
+    That is, you should focus on describing what your program does in such a way
+    that another programmer can understand just by reading your code.
+
+
+
+Use ``any`` and ``all`` for Boolean questions about a list
+----------------------------------------------------------
+
+There are two more functions that help use reduce a list to a value.  The Python
+built-in functions ``any`` and ``all`` are useful when asking Boolean questions
+about a list.  The function ``any`` takes a sequence as input nad returns True
+if *any* of the elements in the sequence evaluate to ``True``.  On the other
+hand, when ``all`` is applied to a sequence, it only evaluates to ``True`` if
+*all* of the elements of said sequence evaluate to ``True``.
+
+Suppose that we want to know if any or all of the elements of a list are even.
+We can write a lambda functions to perform each task as follows.
+
+.. ipython:: python
+
+    all_even = lambda L: all([ i % 2 == 0 for i in L])
+    any_even = lambda L: any([ i % 2 == 0 for i in L])
+    my_list = [1,2,3,4,5]
+    any_even(my_list)
+    all_even(my_list)
+
+Notice that this pattern involves
+
+1. Using a Boolean expression in the output expression of the comprehension.
+2. Applying ``any`` or ``all`` to the list of Boolean values.
+
+Let's refactor this code to clean it up, namely by introducing an ``is_even``
+function.
+
+.. ipython:: python
+
+    is_even = lambda n: n % 2 == 0
+    all_even = lambda L: all([is_even(i) for i in L])
+    any_even = lambda L: any([is_even(i) for i in L])
+    my_list = [1,2,3,4,5]
+    any_even(my_list)
+    all_even(my_list)
+
+Sometimes it is easier to describe what your don't want
+-------------------------------------------------------
+
+Suppose that we want to use list comprehensions to describe all the prime
+numbers up to ``n=120``.  A well-known algorithm for describing primes is the
+`Sieve of Eratosthenes <https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes>`_,
+For each number ``i`` between 2 and :math:`\sqrt{n}`, this algorithm crosses out all
+crossing out all the multiples of ``i``.  The remaining numbers will be prime.
+Notice that this algorithm describes numbers that are prime by *decribing all
+numbers that are not*.  The following two list comprehensions perform the task
+of finding all primes up to 120.
+
+.. ipython:: python
+
+    from math import sqrt
+    n = 120
+    not_prime = [j for i in range(2, int(sqrt(n) + 1)) for j in range(2*i,n + 1, i)]
+    prime = [i for i in range(2,n+1) if i not in not_prime]
+    prime
+
+**Illustration of the Sieve of Eratosthenes**
+
+.. figure:: https://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif
+    :alt: Illustration of the Sieve of Eratosthenes
+    
+    ..
+
+    The Sieve of Eratosthenes finds all the primes up to some number ``n`` by
+    crossing out all multiples of numbers from 2 to :math:`\sqrt{n}`.  This image was
+    copied from `Wikipedia
+    <https://commons.wikimedia.org/wiki/File:Sieve_of_Eratosthenes_animation.gif>`_
+    and is covered by the `GNU Free Documentation License
+    <https://en.wikipedia.org/wiki/en:GNU_Free_Documentation_License>`_.
+
+As always, we can clean this code up with a little refactoring.  Let's use two
+lambda expressions to give meaning to the two range function calls in
+``not_prime``.
+
+.. ipython:: python
+
+    from math import sqrt
+    n = 120
+    possible_factors = lambda n: range(2, int(sqrt(n) + 1)) 
+    multiples_of = lambda i, n: range(2*i,n + 1, i)
+    not_prime = [j for i in possible_factors(n) for j in multiples_of(i, n)]
+    prime = [i for i in range(2,n+1) if i not in not_prime]
+    prime
+
 TODO
 
+
 1. iterators: zip, enumerate, reversed
-2. reductions: max, min, sum, length, all, any
 3. working with tuples
 4. comprehensions for tables and matrices

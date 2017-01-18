@@ -102,7 +102,7 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="2. Expressions and Evaluation" href="toctree2.html" />
-    <link rel="next" title="2.8. Exercises" href="Exercises2.html" />
+    <link rel="next" title="2.5. Exercises" href="Exercises2.html" />
     <link rel="prev" title="2.3. Expressions, Values and Evaluation" href="ExpressionsValuesAndEvaluation.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -264,14 +264,15 @@
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
 <li><a class="reference internal" href="#">2.4. Statements: When Expressions Are Not Enough</a><ul>
-<li><a class="reference internal" href="#functions">2.4.1. Functions</a></li>
-<li><a class="reference internal" href="#functions-that-return-values">2.4.2. Functions that Return Values</a></li>
-<li><a class="reference internal" href="#chained-conditionals">2.4.3. Chained conditionals</a></li>
+<li><a class="reference internal" href="#function">2.4.1. Function</a></li>
+<li><a class="reference internal" href="#chained-conditionals">2.4.2. Chained conditionals</a></li>
+<li><a class="reference internal" href="#exception-handling-flow-of-control">2.4.3. Exception Handling Flow-of-control</a></li>
+<li><a class="reference internal" href="#what-is-an-exception">2.4.4. What is an exception?</a></li>
+<li><a class="reference internal" href="#the-for-loop">2.4.5. The <code class="docutils literal"><span class="pre">for</span></code> loop</a></li>
+<li><a class="reference internal" href="#aside-the-accumulator-pattern">2.4.6. Aside: The accumulator pattern</a></li>
+<li><a class="reference internal" href="#the-while-loop">2.4.7. The <code class="docutils literal"><span class="pre">while</span></code> loop</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#what-is-an-exception">2.5. What is an exception?</a></li>
-<li><a class="reference internal" href="#exception-handling-flow-of-control">2.6. Exception Handling Flow-of-control</a></li>
-<li><a class="reference internal" href="#summary">2.7. Summary</a></li>
 </ul>
 </ul>
 </li>
@@ -285,7 +286,7 @@
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 2.8. Exercises' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 2.5. Exercises' data-toggle="tooltip" >
     <a href="Exercises2.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -318,570 +319,120 @@
   
   <div class="section" id="statements-when-expressions-are-not-enough">
 <h1>2.4. Statements: When Expressions Are Not Enough<a class="headerlink" href="#statements-when-expressions-are-not-enough" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="functions">
-<span id="index-0"></span><h2>2.4.1. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<div id="function_intro" class="video_popup" >
-<video controls preload="none"  poster="../_static/function_intro.png">
-    <source src="http://media.interactivepython.org/thinkcsVideos/FunctionsIntro.mov" type="video/mp4"></source>
-    <source src="http://media.interactivepython.org/thinkcsVideos/FunctionsIntro.webm" type="video/webm"></source>
-    No supported video types
-</video>
+<p>While well constructed expressions are desirable and easy to understand, there
+are some python statements that will make our code easier to read in more
+complex situations.  Recall that a <em>statement</em> is a line or block of code that
+does not return a value.  The simplest example of a statement in Python is the
+<em>assignment statement</em>, which saves a value to a variable but does not return a
+value.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
 </div>
-<script>
-   jQuery(function($) {
-      var rb = new RunestoneBase();
-      $('#function_intro_thumb').click(function(e) {
-         $('#function_intro').show();
-         $('#function_intro_thumb').hide();
-         rb.logBookEvent({'event':'video','act':'play','div_id': 'function_intro'});
-         // Log the run event
-      });
-      $('#function_intro video').one("click", function(){
-        this.play();
-      });
-      $('#function_intro video').one("play", function(){
-        rb.logBookEvent({'event':'video','act':'play','div_id': 'function_intro'});
-      });
-   });
-</script>
-<p>In Python, a <strong>function</strong> is a named sequence of statements
-that belong together.  Their primary purpose is to help us
-organize programs into chunks that match how we think about
-the solution to the problem.</p>
+<p>Other statements that are useful in more complicated situations are the
+<em>function definition</em>, <em>if-elif-else block</em> and <em>try-expect blocks</em>, all
+discussed below.</p>
+<div class="section" id="function">
+<h2>2.4.1. Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h2>
+<p>We have already seen that the <code class="docutils literal"><span class="pre">lambda</span></code> expression can be used to create and
+save simple functions, but this expression comes with the restriction that the
+body must also be an expression.  This disallows, for example, assigning a value
+to a variable in the body of the function.  For more complicated situations, we
+will define functions using the <strong>function definition</strong> statement.</p>
 <p>The syntax for a <strong>function definition</strong> is:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">name</span><span class="p">(</span> <span class="n">parameters</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; docstring &quot;&quot;&quot;</span>
     <span class="n">statements</span>
 </pre></div>
 </div>
-<p>You can make up any names you want for the functions you create, except that
-you can&#8217;t use a name that is a Python keyword, and the names must follow the rules
-for legal identifiers that were given previously. The parameters specify
-what information, if any, you have to provide in order to use the new function.  Another way to say this is that the parameters specify what the function needs to do its work.</p>
+<p>You can make up any names you want for the functions you create, except that you
+can&#8217;t use a name that is a Python keyword, and the names must follow the rules
+for legal identifiers that were given previously. The parameters specify what
+information, if any, you have to provide in order to use the new function.
+Another way to say this is that the parameters specify what the function needs
+to do its work.</p>
 <p>There can be any number of statements inside the function, but they have to be
 indented from the <code class="docutils literal"><span class="pre">def</span></code>. In the examples in this book, we will use the
 standard indentation of four spaces. Function definitions are the second of
-several <strong>compound statements</strong> we will see, all of which have the same
-pattern:</p>
+several <strong>compound statements</strong> we will see, all of which have the same pattern:</p>
 <ol class="arabic simple">
 <li>A header line which begins with a keyword and ends with a colon.</li>
+<li>A <strong>docstring</strong> that documents the function.</li>
 <li>A <strong>body</strong> consisting of one or more Python statements, each
 indented the same amount &#8211; <em>4 spaces is the Python standard</em> &#8211; from
 the header line.</li>
 </ol>
-<p>We&#8217;ve already seen the <code class="docutils literal"><span class="pre">for</span></code> loop which follows this pattern.</p>
+<div class="admonition-docstrings admonition">
+<p class="first admonition-title">docstrings</p>
+<p>If the first thing after the function header is a string (some tools insist
+that it must be a triple-quoted string), it is called a <strong>docstring</strong> and
+gets special treatment in Python and in some of the programming tools.</p>
+<p>Another way to retrieve this information is to use the interactive
+interpreter, and enter the expression <code class="docutils literal"><span class="pre">&lt;function_name&gt;.__doc__</span></code>, which
+will retrieve the docstring for the function.  So the string you write as
+documentation at the start of a function is retrievable by python tools <em>at
+runtime</em>.  This is different from comments in your code, which are
+completely eliminated when the program is parsed.</p>
+<p class="last">By convention, Python programmers use docstrings for the key documentation
+of their functions.</p>
+</div>
 <p>In a function definition, the keyword in the header is <code class="docutils literal"><span class="pre">def</span></code>, which is
 followed by the name of the function and some <em>parameters</em> enclosed in
 parentheses. The parameter list may be empty, or it may contain any number of
-parameters separated from one another by commas. In either case, the parentheses are required.</p>
-<p>We need to say a bit more about the parameters.  In the definition, the parameter list is more specifically known
-as the <strong>formal parameters</strong>.  This list of names describes those things that the function will
-need to receive from the user of the function.  When you use a function, you provide values to the formal parameters.</p>
-<p>The figure below shows this relationship.  A function needs certain information to do its work.  These values, often called <strong>arguments</strong> or <strong>actual parameters</strong>, are passed to the function by the user.</p>
-<img alt="IntroductionToPython/Figures/blackboxproc.png" src="IntroductionToPython/Figures/blackboxproc.png" />
-<p>This type of diagram is often called a <strong>black-box diagram</strong> because it only states the requirements from the perspective of the user.  The user must know the name of the function and what arguments need to be passed.  The details of how the function works are hidden inside the &#8220;black-box&#8221;.</p>
-<p>Suppose we&#8217;re working with turtles and a common operation we need is to draw
-squares.  It would make sense if we did not have to duplicate all the steps each time we want to make a square.   &#8220;Draw a square&#8221; can be thought of as an <em>abstraction</em> of a number of smaller steps.  We will need to provide two pieces of information for the function to do its work: a turtle to do the drawing and a size for the side of the square.  We could represent this using the following black-box diagram.</p>
-<img alt="IntroductionToPython/Figures/turtleproc.png" src="IntroductionToPython/Figures/turtleproc.png" />
-<p>Here is a program containing a function to capture this idea.  Give it a try.</p>
+parameters separated from one another by commas. In either case, the parentheses
+are required.  Recall that the parameter list is more specifically known as the
+<strong>formal parameters</strong>.  This list of names describes those things that the
+function will need to receive from the user of the function.  When you use a
+function, you provide values to the formal parameters.</p>
+<p>The following code gives an example of defining a function named <code class="docutils literal"><span class="pre">square</span></code> that
+computes the square of <code class="docutils literal"><span class="pre">x</span></code>.  This value is save to a local variable <code class="docutils literal"><span class="pre">y</span></code> and
+returned using the <code class="docutils literal"><span class="pre">return</span></code> statement.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">y</span>
+<span class="gp">   ...: </span>
 
-<textarea data-component="activecode" id=ch04_1 data-lang="python"    data-timelimit=25000   data-audio=''     >
-import turtle
+<span class="gp">In [3]: </span><span class="n">number</span> <span class="o">=</span> <span class="mi">10</span>
 
-def drawSquare(t, sz):
-    """Make turtle t draw a square of with side sz."""
+<span class="gp">In [4]: </span><span class="n">result</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
 
-    for i in range(4):
-        t.forward(sz)
-        t.left(90)
-
-
-wn = turtle.Screen()              # Set up the window and its attributes
-wn.bgcolor("lightgreen")
-
-alex = turtle.Turtle()            # create alex
-drawSquare(alex, 50)             # Call the function to draw the square passing the actual turtle and the actual side size
-
-wn.exitonclick()
-</textarea>
-<p>This function is named <code class="docutils literal"><span class="pre">drawSquare</span></code>.  It has two parameters &#8212; one to tell
-the function which turtle to move around and the other to tell it the size
-of the square we want drawn.  In the function definition they are called <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">sz</span></code> respectively.   Make sure you know where the body of the function
-ends &#8212; it depends on the indentation and the blank lines don&#8217;t count for
-this purpose!</p>
-<div class="admonition-docstrings admonition">
-<p class="first admonition-title">docstrings</p>
-<p>If the first thing after the function header is a string (some tools insist that
-it must be a triple-quoted string), it is called a <strong>docstring</strong>
-and gets special treatment in Python and in some of the programming tools.</p>
-<p>Another way to retrieve this information is to use the interactive
-interpreter, and enter the expression <code class="docutils literal"><span class="pre">&lt;function_name&gt;.__doc__</span></code>, which will retrieve the
-docstring for the function.  So the string you write as documentation at the start of a function is
-retrievable by python tools <em>at runtime</em>.  This is different from comments in your code,
-which are completely eliminated when the program is parsed.</p>
-<p class="last">By convention, Python programmers use docstrings for the key documentation of
-their functions.</p>
-</div>
-<p>Defining a new function does not make the function run. To do that we need a
-<strong>function call</strong>.  This is also known as a <strong>function invocation</strong>. We&#8217;ve already seen how to call some built-in functions like
-<code class="docutils literal"><span class="pre">print</span></code>, <code class="docutils literal"><span class="pre">range</span></code> and <code class="docutils literal"><span class="pre">int</span></code>. Function calls contain the name of the function to be
-executed followed by a list of values, called <em>arguments</em>, which are assigned
-to the parameters in the function definition.  So in the second to the last line of
-the program, we call the function, and pass <code class="docutils literal"><span class="pre">alex</span></code> as the turtle to be manipulated,
-and 50 as the size of the square we want.</p>
-<p>Once we&#8217;ve defined a function, we can call it as often as we like and its
-statements will be executed each time we call it.  In this case, we could use it to get
-one of our turtles to draw a square and then we can move the turtle and have it draw a different square in a
-different location.  Note that we lift the tail so that when <code class="docutils literal"><span class="pre">alex</span></code> moves there is no trace.  We put the tail
-back down before drawing the next square.  Make sure you can identify both invocations of the <code class="docutils literal"><span class="pre">drawSquare</span></code> function.</p>
-
-<textarea data-component="activecode" id=ch04_1a data-lang="python"    data-timelimit=25000   data-audio=''     >
-import turtle
-
-def drawSquare(t, sz):
-    """Make turtle t draw a square of with side sz."""
-
-    for i in range(4):
-        t.forward(sz)
-        t.left(90)
-
-
-wn = turtle.Screen()          # Set up the window and its attributes
-wn.bgcolor("lightgreen")
-
-alex = turtle.Turtle()        # create alex
-drawSquare(alex, 50)          # Call the function to draw the square
-
-alex.penup()
-alex.goto(100,100)
-alex.pendown()
-
-drawSquare(alex,75)           # Draw another square
-
-wn.exitonclick()
-</textarea>
-<p>In the next example, we&#8217;ve changed the <code class="docutils literal"><span class="pre">drawSquare</span></code>
-function a little and we get <code class="docutils literal"><span class="pre">tess</span></code> to draw 15 squares with some variations.  Once the function has
-been defined, we can call it as many times as we like with whatever actual parameters we like.</p>
-
-<textarea data-component="activecode" id=ch04_2 data-lang="python"    data-timelimit=25000   data-audio=''     >
-import turtle
-
-def drawMulticolorSquare(t, sz):
-    """Make turtle t draw a multi-colour square of sz."""
-    for i in ['red','purple','hotpink','blue']:
-        t.color(i)
-        t.forward(sz)
-        t.left(90)
-
-wn = turtle.Screen()             # Set up the window and its attributes
-wn.bgcolor("lightgreen")
-
-tess = turtle.Turtle()           # create tess and set some attributes
-tess.pensize(3)
-
-size = 20                        # size of the smallest square
-for i in range(15):
-    drawMulticolorSquare(tess, size)
-    size = size + 10             # increase the size for next time
-    tess.forward(10)             # move tess along a little
-    tess.right(18)               # and give her some extra turn
-
-wn.exitonclick()
-</textarea>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
-
-<textarea data-component="activecode" id=scratch_05_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-
-
-</textarea>
-</div>
-<p><strong>Check your understanding</strong></p>
-
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_1">
-            func-1-1: What is a function in Python?
-            <li data-component="answer" data-correct id="test_question5_1_1_opt_a">(A) A named sequence of statements.</li><li data-component="feedback" id="test_question5_1_1_opt_a">Yes, a function is a named sequence of statements.</li>
-            
-            <li data-component="answer"  id="test_question5_1_1_opt_b">(B) Any sequence of statements.</li><li data-component="feedback" id="test_question5_1_1_opt_b">While functions contain sequences of statements, not all sequences of statements are considered functions.</li>
-            
-            <li data-component="answer"  id="test_question5_1_1_opt_c">(C) A mathematical expression that calculates a value.</li><li data-component="feedback" id="test_question5_1_1_opt_c">While some functions do calculate values, the python idea of a function is slightly different from the mathematical idea of a function in that not all functions calculate values.  Consider, for example, the turtle functions in this section.   They made the turtle draw a specific shape, rather than calculating a value.</li>
-            
-            <li data-component="answer"  id="test_question5_1_1_opt_d">(D) A statement of the form x = 5 + 4.</li><li data-component="feedback" id="test_question5_1_1_opt_d">This statement is called an assignment statement.  It assigns the value on the right (9), to the name on the left (x).</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_2">
-            func-1-2: What is one main purpose of a function?
-            <li data-component="answer"  id="test_question5_1_2_opt_a">(A) To improve the speed of execution</li><li data-component="feedback" id="test_question5_1_2_opt_a">Functions have little effect on how fast the program runs.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_2_opt_b">(B) To help the programmer organize programs into chunks that match how they think about the solution to the problem.</li><li data-component="feedback" id="test_question5_1_2_opt_b">While functions are not required, they help the programmer better think about the solution by organizing pieces of the solution into logical chunks that can be reused.</li>
-            
-            <li data-component="answer"  id="test_question5_1_2_opt_c">(C) All Python programs must be written using functions</li><li data-component="feedback" id="test_question5_1_2_opt_c">In the first several chapters, you have seen many examples of Python programs written without the use of functions.  While writing and using functions is desirable and essential for good programming style as your programs get longer, it is not required.</li>
-            
-            <li data-component="answer"  id="test_question5_1_2_opt_d">(D) To calculate values.</li><li data-component="feedback" id="test_question5_1_2_opt_d">Not all functions calculate values.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_3">
-            func-1-3: Which of the following is a valid function header (first line of a function definition)?
-            <li data-component="answer" data-correct id="test_question5_1_3_opt_a">(A) def drawCircle(t):</li><li data-component="feedback" id="test_question5_1_3_opt_a">A function may take zero or more parameters.  It does not have to have two.  In this case the size of the circle might be specified in the body of the function.</li>
-            
-            <li data-component="answer"  id="test_question5_1_3_opt_b">(B) def drawCircle:</li><li data-component="feedback" id="test_question5_1_3_opt_b">A function needs to specify its parameters in its header.</li>
-            
-            <li data-component="answer"  id="test_question5_1_3_opt_c">(C) drawCircle(t, sz):</li><li data-component="feedback" id="test_question5_1_3_opt_c">A function definition needs to include the keyword def.</li>
-            
-            <li data-component="answer"  id="test_question5_1_3_opt_d">(D) def drawCircle(t, sz)</li><li data-component="feedback" id="test_question5_1_3_opt_d">A function definition header must end in a colon (:).</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_4">
-            <p>func-1-4: What is the name of the following function?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="gp">In [5]: </span><span class="n">result</span>
+<span class="gh">Out[5]: </span><span class="go">100</span>
 </pre></div>
 </div>
-
-            <li data-component="answer"  id="test_question5_1_4_opt_a">(A) def drawSquare(t, sz)</li><li data-component="feedback" id="test_question5_1_4_opt_a">This line is the complete function header (except for the semi-colon) which includes the name as well as several other components.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_4_opt_b">(B) drawSquare</li><li data-component="feedback" id="test_question5_1_4_opt_b">Yes, the name of the function is given after the keyword def and before the list of parameters.</li>
-            
-            <li data-component="answer"  id="test_question5_1_4_opt_c">(C) drawSquare(t, sz)</li><li data-component="feedback" id="test_question5_1_4_opt_c">This includes the function name and its parameters</li>
-            
-            <li data-component="answer"  id="test_question5_1_4_opt_d">(D) Make turtle t draw a square with side sz.</li><li data-component="feedback" id="test_question5_1_4_opt_d">This is a comment stating what the function does.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_5">
-            <p>func-1-5: What are the parameters of the following function?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
+<p>More details about creating functions in Python will be provided in the upcoming
+chapter named <strong>Functional Programming</strong>.</p>
 </div>
-
-            <li data-component="answer"  id="test_question5_1_5_opt_a">(A) i</li><li data-component="feedback" id="test_question5_1_5_opt_a">i is a variable used inside of the function, but not a parameter, which is passed in to the function.</li>
-            
-            <li data-component="answer"  id="test_question5_1_5_opt_b">(B) t</li><li data-component="feedback" id="test_question5_1_5_opt_b">t is only one of the parameters to this function.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_5_opt_c">(C) t, sz</li><li data-component="feedback" id="test_question5_1_5_opt_c">Yes, the function specifies two parameters: t and sz.</li>
-            
-            <li data-component="answer"  id="test_question5_1_5_opt_d">(D) t, sz, i</li><li data-component="feedback" id="test_question5_1_5_opt_d">the parameters include only those variables whose values that the function expects to receive as input.  They are specified in the header of the function.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_6">
-            <p>func-1-6: Considering the function below, which of the following statements correctly invokes, or calls, this function (i.e., causes it to run)?  Assume we already have a turtle named alex.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question5_1_6_opt_a">(A) def drawSquare(t, sz)</li><li data-component="feedback" id="test_question5_1_6_opt_a">No, t and sz are the names of the formal parameters to this function.  When the function is called, it requires actual values to be passed in.</li>
-            
-            <li data-component="answer"  id="test_question5_1_6_opt_b">(B) drawSquare</li><li data-component="feedback" id="test_question5_1_6_opt_b">A function call always requires parentheses after the name of the function.</li>
-            
-            <li data-component="answer"  id="test_question5_1_6_opt_c">(C) drawSquare(10)</li><li data-component="feedback" id="test_question5_1_6_opt_c">This function takes two parameters (arguments)</li>
-            
-            <li data-component="answer"  id="test_question5_1_6_opt_d">(D) drawSquare(alex, 10):</li><li data-component="feedback" id="test_question5_1_6_opt_d">A colon is only required in a function definition.  It will cause an error with a function call.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_6_opt_e">(E) drawSquare(alex, 10)</li><li data-component="feedback" id="test_question5_1_6_opt_e">Since alex was already previously defined and 10 is a value, we have passed in two correct values for this function.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_7">
-            func-1-7: True or false: A function can be called several times by placing a function call in the body of a loop.
-            <li data-component="answer" data-correct id="test_question5_1_7_opt_a">(A) True</li><li data-component="feedback" id="test_question5_1_7_opt_a">Yes, you can call a function multiple times by putting the call in a loop.</li>
-            
-            <li data-component="answer"  id="test_question5_1_7_opt_b">(B) False</li><li data-component="feedback" id="test_question5_1_7_opt_b">One of the purposes of a function is to allow you to call it more than once.   Placing it in a loop allows it to executed multiple times as the body of the loop runs multiple times.</li>
-            
-
-            </ul>
-            </div>
-<div class="section" id="functions-that-return-values">
-<h2>2.4.2. Functions that Return Values<a class="headerlink" href="#functions-that-return-values" title="Permalink to this headline">¶</a></h2>
-<p>Most functions require arguments, values that control how the function does its
-job. For example, if you want to find the absolute value of a number, you have
-to indicate what the number is. Python has a built-in function for computing
-the absolute value:</p>
-
-<textarea data-component="activecode" id=ch04_4 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(abs(5))
-
-print(abs(-5))
-</textarea>
-<p>In this example, the arguments to the <code class="docutils literal"><span class="pre">abs</span></code> function are 5 and -5.</p>
-<p>Some functions take more than one argument. For example the math module contains a function
-called
-<code class="docutils literal"><span class="pre">pow</span></code> which takes two arguments, the base and the exponent.</p>
-
-<textarea data-component="activecode" id=ch04_5 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-import math
-print(math.pow(2, 3))
-
-print(math.pow(7, 4))
-</textarea>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Of course, we have already seen that raising a base to an exponent can be done with the ** operator.</p>
-</div>
-<p>Another built-in function that takes more than one argument is <code class="docutils literal"><span class="pre">max</span></code>.</p>
-
-<textarea data-component="activecode" id=ch04_6 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(max(7, 11))
-print(max(4, 1, 17, 2, 12))
-print(max(3 * 11, 5 ** 3, 512 - 9, 1024 ** 0))
-</textarea>
-<p><code class="docutils literal"><span class="pre">max</span></code> can be sent any number of arguments, separated by commas, and will
-return the maximum value sent. The arguments can be either simple values or
-expressions. In the last example, 503 is returned, since it is larger than 33,
-125, and 1.  Note that <code class="docutils literal"><span class="pre">max</span></code> also works on lists of values.</p>
-<p>Furthermore, functions like <code class="docutils literal"><span class="pre">range</span></code>, <code class="docutils literal"><span class="pre">int</span></code>, <code class="docutils literal"><span class="pre">abs</span></code> all return values that
-can be used to build more complex expressions.</p>
-<p>So an important difference between these functions and one like <code class="docutils literal"><span class="pre">drawSquare</span></code> is that
-<code class="docutils literal"><span class="pre">drawSquare</span></code> was not executed because we wanted it to compute a value &#8212; on the contrary,
-we wrote <code class="docutils literal"><span class="pre">drawSquare</span></code> because we wanted it to execute a sequence of steps that caused
-the turtle to draw a specific shape.</p>
-<p>Functions that return values are sometimes called <strong>fruitful functions</strong>.
-In many other languages, a chunk that doesn&#8217;t return a value is called a <strong>procedure</strong>,
-but we will stick here with the Python way of also calling it a function, or if we want
-to stress it, a <em>non-fruitful</em> function.</p>
-<p>Fruitful functions still allow the user to provide information (arguments).  However there is now an additional
-piece of data that is returned from the function.</p>
-<img alt="IntroductionToPython/Figures/blackboxfun.png" src="IntroductionToPython/Figures/blackboxfun.png" />
-<p>How do we write our own fruitful function?  Let&#8217;s start by creating a very simple
-mathematical function that we will call <code class="docutils literal"><span class="pre">square</span></code>.  The square function will take one number
-as a parameter and return the result of squaring that number.  Here is the
-black-box diagram with the Python code following.</p>
-<img alt="IntroductionToPython/Figures/squarefun.png" src="IntroductionToPython/Figures/squarefun.png" />
-
-<textarea data-component="activecode" id=ch04_square data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-def square(x):
-    y = x * x
-    return y
-
-toSquare = 10
-result = square(toSquare)
-print("The result of ", toSquare, " squared is ", result)
-</textarea>
-<p>The <strong>return</strong> statement is followed by an expression which is evaluated.  Its
-result is returned to the caller as the &#8220;fruit&#8221; of calling this function.
-Because the return statement can contain any Python expression we could have
-avoided creating the <strong>temporary variable</strong> <code class="docutils literal"><span class="pre">y</span></code> and simply used
-<code class="docutils literal"><span class="pre">return</span> <span class="pre">x*x</span></code>.
-Try modifying the square function above to see that this works just the same.
-On the other hand, using <strong>temporary variables</strong> like <code class="docutils literal"><span class="pre">y</span></code> in the program above makes
-debugging
-easier.  These temporary variables are referred to as <strong>local variables</strong>.</p>
-<p>Notice something important here. The name of the variable we pass as an
-argument &#8212; <code class="docutils literal"><span class="pre">toSquare</span></code> &#8212; has nothing to do with the name of the formal parameter
-&#8212; <code class="docutils literal"><span class="pre">x</span></code>.  It is as if  <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">toSquare</span></code> is executed when <code class="docutils literal"><span class="pre">square</span></code> is called.
-It doesn&#8217;t matter what the value was named in
-the caller. In <code class="docutils literal"><span class="pre">square</span></code>, it&#8217;s name is <code class="docutils literal"><span class="pre">x</span></code>.  You can see this very clearly in
-codelens, where the global variables and the local variables for the square
-function are in separate boxes.</p>
-<p>As you step through the example in codelens notice that the <strong>return</strong> statement not only causes the
-function to return a value, but it also returns the flow of control back to the place in the program
-where the function call was made.</p>
-
-<div class="alert alert-warning cd_section">
-<div id="ch04_clsquare"></div>
-<p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare)</span> </p>
-</div>
-<script type="text/javascript">
-var ch04_clsquare_trace = {"code": "def square(x):\n    y = x * x\n    return y\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)", "trace": [{"globals": {}, "stack_to_render": [], "stdout": "", "func_name": "<module>", "event": "step_line", "ordered_globals": [], "heap": {}, "line": 1}, {"globals": {"square": ["REF", 1]}, "stack_to_render": [], "stdout": "", "func_name": "<module>", "event": "step_line", "ordered_globals": ["square"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 5}, {"globals": {"square": ["REF", 1], "toSquare": 10}, "stack_to_render": [], "stdout": "", "func_name": "<module>", "event": "step_line", "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 6}, {"globals": {"square": ["REF", 1], "toSquare": 10}, "stack_to_render": [{"is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": [], "frame_id": 1, "is_highlighted": true, "ordered_varnames": ["x"], "func_name": "square", "encoded_locals": {"x": 10}}], "stdout": "", "func_name": "square", "event": "call", "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 1}, {"globals": {"square": ["REF", 1], "toSquare": 10}, "stack_to_render": [{"is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": [], "frame_id": 1, "is_highlighted": true, "ordered_varnames": ["x"], "func_name": "square", "encoded_locals": {"x": 10}}], "stdout": "", "func_name": "square", "event": "step_line", "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 2}, {"globals": {"square": ["REF", 1], "toSquare": 10}, "stack_to_render": [{"is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": [], "frame_id": 1, "is_highlighted": true, "ordered_varnames": ["x", "y"], "func_name": "square", "encoded_locals": {"x": 10, "y": 100}}], "stdout": "", "func_name": "square", "event": "step_line", "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3}, {"globals": {"square": ["REF", 1], "toSquare": 10}, "stack_to_render": [{"is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": [], "frame_id": 1, "is_highlighted": true, "ordered_varnames": ["x", "y", "__return__"], "func_name": "square", "encoded_locals": {"x": 10, "y": 100, "__return__": 100}}], "stdout": "", "func_name": "square", "event": "return", "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3}, {"globals": {"square": ["REF", 1], "toSquare": 10, "squareResult": 100}, "stack_to_render": [], "stdout": "", "func_name": "<module>", "event": "step_line", "ordered_globals": ["square", "toSquare", "squareResult"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7}, {"globals": {"square": ["REF", 1], "toSquare": 10, "squareResult": 100}, "stack_to_render": [], "stdout": "The result of  10  squared is  100\n", "func_name": "<module>", "event": "return", "ordered_globals": ["square", "toSquare", "squareResult"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7}]};
-var ch04_clsquare_vis;
-
-$(document).ready(function() {
-    try {
-        ch04_clsquare_vis = new ExecutionVisualizer('ch04_clsquare',ch04_clsquare_trace,
-                                    {embeddedMode: true,
-                                    verticalStack: false,
-                                    heightChangeCallback: redrawAllVisualizerArrows,
-                                    codeDivWidth: 500,
-                                    lang : 'py3'
-                                    });
-        attachLoggers(ch04_clsquare_vis,'ch04_clsquare');
-        styleButtons('ch04_clsquare');
-        allVisualizers.push(ch04_clsquare_vis);
-    } catch (e) {
-        console.log("Failed to Initialize CodeLens component ch04_clsquare_vis" );
-        console.log(e.toString());
-    }
-
-});
-
-$(document).ready(function() {
-    $("#ch04_clsquare_tracecheck").click(function() {
-        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'ch04_clsquare'});
-    });
-});
-
-if (allVisualizers === undefined) {
-   var allVisualizers = [];
-}
-
-
-$(window).resize(function() {
-    if (ch04_clsquare_vis) {
-        ch04_clsquare_vis.redrawConnectors();
-    }
-});
-</script>
-<p>Another important thing to notice as you step through this codelens
-demonstration is the movement of the red and green arrows.  Codelens uses these arrows to show you where it is currently executing.
-Recall that the red arrow always points to the next line of code that will be executed.  The light green arrow points to the line
-that was just executed in the last step.</p>
-<p>When you first start running this codelens demonstration you will notice that there is only a red arrow and it points to
-line 1.  This is because line 1 is the next line to be executed and since it is the first line, there is no previously executed line
-of code.</p>
-<p>When you click on the forward button, notice that the red arrow moves to line 5, skipping lines 2 and 3 of the function (and
-the light green arrow has now appeared on line 1).  Why is this?
-The answer is that function definition is not the same as function execution.  Lines 2
-and 3 will not be executed until the function is called on line 6.  Line 1 defines the function and the name <code class="docutils literal"><span class="pre">square</span></code> is added to the
-global variables, but that is all the <code class="docutils literal"><span class="pre">def</span></code> does at that point.  The body of the function will be executed later.  Continue to click
-the forward button to see how the flow of control moves from the call, back up to the body of the function, and then finally back to line 7, after the function has returned its value and the value has been assigned to <code class="docutils literal"><span class="pre">squareResult</span></code>.</p>
-<p>Finally, there is one more aspect of function return values that should be noted.  All Python functions return the value <code class="docutils literal"><span class="pre">None</span></code> unless there is an explicit return statement with
-a value other than <code class="docutils literal"><span class="pre">None.</span></code>
-Consider the following common mistake made by beginning Python
-programmers.  As you step through this example, pay very close attention to the return
-value in the local variables listing.  Then look at what is printed when the
-function returns.</p>
-
-<div class="alert alert-warning cd_section">
-<div id="ch04_clsquare_bad"></div>
-<p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare_bad)</span> </p>
-</div>
-<script type="text/javascript">
-var ch04_clsquare_bad_trace = {"code": "def square(x):\n    y = x * x\n    print(y)   # Bad! should use return instead!\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)", "trace": [{"globals": {}, "stack_to_render": [], "stdout": "", "func_name": "<module>", "event": "step_line", "ordered_globals": [], "heap": {}, "line": 1}, {"globals": {"square": ["REF", 1]}, "stack_to_render": [], "stdout": "", "func_name": "<module>", "event": "step_line", "ordered_globals": ["square"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 5}, {"globals": {"square": ["REF", 1], "toSquare": 10}, "stack_to_render": [], "stdout": "", "func_name": "<module>", "event": "step_line", "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 6}, {"globals": {"square": ["REF", 1], "toSquare": 10}, "stack_to_render": [{"is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": [], "frame_id": 1, "is_highlighted": true, "ordered_varnames": ["x"], "func_name": "square", "encoded_locals": {"x": 10}}], "stdout": "", "func_name": "square", "event": "call", "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 1}, {"globals": {"square": ["REF", 1], "toSquare": 10}, "stack_to_render": [{"is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": [], "frame_id": 1, "is_highlighted": true, "ordered_varnames": ["x"], "func_name": "square", "encoded_locals": {"x": 10}}], "stdout": "", "func_name": "square", "event": "step_line", "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 2}, {"globals": {"square": ["REF", 1], "toSquare": 10}, "stack_to_render": [{"is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": [], "frame_id": 1, "is_highlighted": true, "ordered_varnames": ["x", "y"], "func_name": "square", "encoded_locals": {"x": 10, "y": 100}}], "stdout": "", "func_name": "square", "event": "step_line", "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3}, {"globals": {"square": ["REF", 1], "toSquare": 10}, "stack_to_render": [{"is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": [], "frame_id": 1, "is_highlighted": true, "ordered_varnames": ["x", "y", "__return__"], "func_name": "square", "encoded_locals": {"x": 10, "y": 100, "__return__": null}}], "stdout": "100\n", "func_name": "square", "event": "return", "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3}, {"globals": {"square": ["REF", 1], "toSquare": 10, "squareResult": null}, "stack_to_render": [], "stdout": "100\n", "func_name": "<module>", "event": "step_line", "ordered_globals": ["square", "toSquare", "squareResult"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7}, {"globals": {"square": ["REF", 1], "toSquare": 10, "squareResult": null}, "stack_to_render": [], "stdout": "100\nThe result of  10  squared is  None\n", "func_name": "<module>", "event": "return", "ordered_globals": ["square", "toSquare", "squareResult"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7}]};
-var ch04_clsquare_bad_vis;
-
-$(document).ready(function() {
-    try {
-        ch04_clsquare_bad_vis = new ExecutionVisualizer('ch04_clsquare_bad',ch04_clsquare_bad_trace,
-                                    {embeddedMode: true,
-                                    verticalStack: false,
-                                    heightChangeCallback: redrawAllVisualizerArrows,
-                                    codeDivWidth: 500,
-                                    lang : 'py3'
-                                    });
-        attachLoggers(ch04_clsquare_bad_vis,'ch04_clsquare_bad');
-        styleButtons('ch04_clsquare_bad');
-        allVisualizers.push(ch04_clsquare_bad_vis);
-    } catch (e) {
-        console.log("Failed to Initialize CodeLens component ch04_clsquare_bad_vis" );
-        console.log(e.toString());
-    }
-
-});
-
-$(document).ready(function() {
-    $("#ch04_clsquare_bad_tracecheck").click(function() {
-        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'ch04_clsquare_bad'});
-    });
-});
-
-if (allVisualizers === undefined) {
-   var allVisualizers = [];
-}
-
-
-$(window).resize(function() {
-    if (ch04_clsquare_bad_vis) {
-        ch04_clsquare_bad_vis.redrawConnectors();
-    }
-});
-</script>
-<p>The problem with this function is that even though it prints the value of the square, that value will not be returned to the place
-where the call was done.  Since line 6 uses the return value as the right hand side of an assignment statement, the evaluation of the
-function will be <code class="docutils literal"><span class="pre">None</span></code>.  In this case, <code class="docutils literal"><span class="pre">squareResult</span></code> will refer to that value after the assignment statement and therefore the result printed in line 7 is incorrect.  Typically, functions will return values that can be printed or processed in some other way by the caller.</p>
-<p id="index-1"><strong>Check your understanding</strong></p>
-
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_2_1">
-            <p>func-1-8: What is wrong with the following function definition:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addEm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;the answer is&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question5_2_1_opt_a">(A) You should never use a print statement in a function definition.</li><li data-component="feedback" id="test_question5_2_1_opt_a">Although you should not mistake print for return, you may include print statements inside your functions.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_2_1_opt_b">(B) You should not have any statements in a function after the return statement.  Once the function gets to the return statement it will immediately stop executing the function.</li><li data-component="feedback" id="test_question5_2_1_opt_b">This is a very common mistake so be sure to watch out for it when you write your code!</li>
-            
-            <li data-component="answer"  id="test_question5_2_1_opt_c">(C) You must calculate the value of x+y+z before you return it.</li><li data-component="feedback" id="test_question5_2_1_opt_c">Python will automatically calculate the value x+y+z and then return it in the statement as it is written</li>
-            
-            <li data-component="answer"  id="test_question5_2_1_opt_d">(D) A function cannot return a number.</li><li data-component="feedback" id="test_question5_2_1_opt_d">Functions can return any legal data, including (but not limited to) numbers, strings, turtles, etc.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_2_2">
-            <p>func-1-9: What will the following function return?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addEm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer" data-correct id="test_question5_2_2_opt_a">(A) Nothing (no value)</li><li data-component="feedback" id="test_question5_2_2_opt_a">We have accidentally used print where we mean return.  Therefore, the function will return the value None by default.  This is a VERY COMMON mistake so watch out!  This mistake is also particularly difficult to find because when you run the function the output looks the same.  It is not until you try to assign its value to a variable that you can notice a difference.</li>
-            
-            <li data-component="answer"  id="test_question5_2_2_opt_b">(B) The value of x + y + z</li><li data-component="feedback" id="test_question5_2_2_opt_b">Careful!  This is a very common mistake.  Here we have printed the value x+y+z but we have not returned it.  To return a value we MUST use the return keyword.</li>
-            
-            <li data-component="answer"  id="test_question5_2_2_opt_c">(C) The string 'x + y + z'</li><li data-component="feedback" id="test_question5_2_2_opt_c">x+y+z calculates a number (assuming x+y+z are numbers) which represents the sum of the values x, y and z.</li>
-            
-
-            </ul>
-            </div>
 <div class="section" id="chained-conditionals">
-<h2>2.4.3. Chained conditionals<a class="headerlink" href="#chained-conditionals" title="Permalink to this headline">¶</a></h2>
-<p>Python provides an alternative way to write nested selection such as the one shown in the previous section.
-This is sometimes referred to as a <strong>chained
-conditional</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;x is less than y&quot;</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;x is greater than y&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;x and y must be equal&quot;</span><span class="p">)</span>
+<h2>2.4.2. Chained conditionals<a class="headerlink" href="#chained-conditionals" title="Permalink to this headline">¶</a></h2>
+<p>The conditional expression allows use to write simple branching logic in the
+midst of our expressions, but chaining conditional expressions to form more
+complicated logic can become hard to read.  Python provides a statement-block
+structure that will allow use to express more complicated Boolean logic in a
+clearer way. This is sometimes referred to as a <strong>chained conditional</strong></p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="k">def</span> <span class="nf">whichIsBigger</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="sd">&quot;&quot;&quot; returns a string describing which value is larger&quot;&quot;&quot;</span>
+<span class="gp">   ...: </span>    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">:</span>
+<span class="gp">   ...: </span>        <span class="k">return</span> <span class="s2">&quot;x is less than y&quot;</span>
+<span class="gp">   ...: </span>    <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">:</span>
+<span class="gp">   ...: </span>        <span class="k">return</span> <span class="s2">&quot;x is greater than y&quot;</span>
+<span class="gp">   ...: </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">   ...: </span>        <span class="k">return</span> <span class="s2">&quot;x and y must be equal&quot;</span>
+<span class="gp">   ...: </span><span class="n">whichIsBigger</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+<span class="gh">Out[6]: </span><span class="go">&#39;x is less than y&#39;</span>
 </pre></div>
 </div>
-<p>The flow of control can be drawn in a different orientation but the resulting pattern is identical to the one shown above.</p>
+<p>The flow of control can be drawn in a different orientation but the resulting
+pattern is identical to the one shown above.</p>
 <img alt="../_images/flowchart_chained_conditional.png" src="../_images/flowchart_chained_conditional.png" />
 <p><code class="docutils literal"><span class="pre">elif</span></code> is an abbreviation of <code class="docutils literal"><span class="pre">else</span> <span class="pre">if</span></code>. Again, exactly one branch will be
 executed. There is no limit of the number of <code class="docutils literal"><span class="pre">elif</span></code> statements but only a
-single (and optional) final <code class="docutils literal"><span class="pre">else</span></code> statement is allowed and it must be the last
-branch in the statement.</p>
+single (and optional) final <code class="docutils literal"><span class="pre">else</span></code> statement is allowed and it must be the
+last branch in the statement.</p>
 <p>Each condition is checked in order. If the first is false, the next is checked,
 and so on. If one of them is true, the corresponding branch executes, and the
 statement ends. Even if more than one condition is true, only the first true
 branch executes.</p>
-<p>Here is the same program using <code class="docutils literal"><span class="pre">elif</span></code>.</p>
-
-<textarea data-component="activecode" id=sel4 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-x = 10
-y = 10
-
-if x < y:
-    print("x is less than y")
-elif x > y:
-    print("x is greater than y")
-else:
-    print("x and y must be equal")
-</textarea>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
@@ -893,65 +444,8 @@ else:
 </div>
 <p><strong>Check your understanding</strong></p>
 
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_7_1">
-            <p>select-7-1: Which of I, II, and III below gives the same result as the following nested if?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># nested if-else statement</span>
-<span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
-<span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The negative number &quot;</span><span class="p">,</span>  <span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is not valid here.&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is a positive number&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is 0&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">I</span><span class="o">.</span>
-
-<span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The negative number &quot;</span><span class="p">,</span>  <span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is not valid here.&quot;</span><span class="p">)</span>
-<span class="k">else</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is a positive number&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is 0&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">II</span><span class="o">.</span>
-
-<span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The negative number &quot;</span><span class="p">,</span>  <span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is not valid here.&quot;</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is a positive number&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is 0&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">III</span><span class="o">.</span>
-
-<span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The negative number &quot;</span><span class="p">,</span>  <span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is not valid here.&quot;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is a positive number&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot; is 0&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question6_7_1_opt_a">(A) I only</li><li data-component="feedback" id="test_question6_7_1_opt_a">You can not use a Boolean expression after an else.</li>
-            
-            <li data-component="answer" data-correct id="test_question6_7_1_opt_b">(B) II only</li><li data-component="feedback" id="test_question6_7_1_opt_b">Yes, II will give the same result.</li>
-            
-            <li data-component="answer"  id="test_question6_7_1_opt_c">(C) III only</li><li data-component="feedback" id="test_question6_7_1_opt_c">No, III will not give the same result.  The first if statement will be true, but the second will be false, so the else part will execute.</li>
-            
-            <li data-component="answer"  id="test_question6_7_1_opt_d">(D) II and III</li><li data-component="feedback" id="test_question6_7_1_opt_d">No, Although II is correct III will not give the same result.  Try it.</li>
-            
-            <li data-component="answer"  id="test_question6_7_1_opt_e">(E) I, II, and III</li><li data-component="feedback" id="test_question6_7_1_opt_e">No, in I you can not have a Boolean expression after an else.</li>
-            
-
-            </ul>
-            
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_7_2">
-            <p>select-7-2: What will the following code print if x = 3, y = 5, and z = 2?</p>
+            <p>exceptions-4-1: What will the following code print if x = 3, y = 5, and z = 2?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">z</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
 <span class="k">elif</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">z</span><span class="p">:</span>
@@ -970,193 +464,448 @@ else:
 
             </ul>
             </div>
+<div class="section" id="exception-handling-flow-of-control">
+<h2>2.4.3. Exception Handling Flow-of-control<a class="headerlink" href="#exception-handling-flow-of-control" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it is useful to <em>catch</em> certain situations where we can determine that
+are function will crash.  Examples include dividing by zero or trying to open a
+non-existent file.  Python provides a statement for catch these types of
+mistakes: the <code class="docutils literal"><span class="pre">try-except</span></code> statement-block.</p>
 </div>
 <div class="section" id="what-is-an-exception">
-<h1>2.5. What is an exception?<a class="headerlink" href="#what-is-an-exception" title="Permalink to this headline">¶</a></h1>
+<h2>2.4.4. What is an exception?<a class="headerlink" href="#what-is-an-exception" title="Permalink to this headline">¶</a></h2>
 <p>An <em>exception</em> is a signal that a condition has occurred that can&#8217;t be easily
-handled using the normal flow-of-control of a Python program. <em>Exceptions</em>
-are often defined as being &#8220;errors&#8221; but this is not always the case. All
-errors in Python are dealt with using <em>exceptions</em>, but not all
-<em>exceptions</em> are errors.</p>
+handled using the normal flow-of-control of a Python program. <em>Exceptions</em> are
+often defined as being &#8220;errors&#8221; but this is not always the case. All errors in
+Python are dealt with using <em>exceptions</em>, but not all <em>exceptions</em> are errors.</p>
+<p>Just like everything else in Python, exceptions are values that represent an
+object of a certain type of class, in this case an exception class.  When our
+code comes upon an error, an exception value is returned.</p>
+<p>The <code class="docutils literal"><span class="pre">try-expect</span></code> statement can run our code and <strong>catch</strong> any exception,
+allowing us to perform some alternate action.  Here is an example of the
+<code class="docutils literal"><span class="pre">try-expect</span></code> block for catching division by zero.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="k">def</span> <span class="nf">safeDivision</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="sd">&quot;&quot;&quot; computes x/y and returns None on any exception&quot;&quot;&quot;</span>
+<span class="gp">   ...: </span>    <span class="k">try</span><span class="p">:</span>
+<span class="gp">   ...: </span>        <span class="n">output</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span>
+<span class="gp">   ...: </span>        <span class="k">return</span> <span class="n">output</span>
+<span class="gp">   ...: </span>    <span class="k">except</span><span class="p">:</span>
+<span class="gp">   ...: </span>        <span class="n">output</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="gp">   ...: </span>        <span class="k">return</span> <span class="n">output</span>
+<span class="gp">   ...: </span><span class="k">print</span><span class="p">(</span><span class="n">safeDivision</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">   ...: </span><span class="k">print</span><span class="p">(</span><span class="n">safeDivision</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">   ...: </span>
+<span class="go">2.0</span>
+<span class="go">None</span>
+</pre></div>
 </div>
-<div class="section" id="exception-handling-flow-of-control">
-<h1>2.6. Exception Handling Flow-of-control<a class="headerlink" href="#exception-handling-flow-of-control" title="Permalink to this headline">¶</a></h1>
-<p>To explain what an <em>exception</em> does, let&#8217;s review the normal &#8220;flow of control&#8221;
-in a Python program. In normal operation Python executes statements sequentially,
-one after the other. For three constructs, if-statements, loops and function
-invocations, this sequential execution is interrupted.</p>
+<p>This function guarantees that the function call will be error free.  There are
+many other patterns related to exceptions that will be covered in the appendix.</p>
+</div>
+<div class="section" id="the-for-loop">
+<h2>2.4.5. The <code class="docutils literal"><span class="pre">for</span></code> loop<a class="headerlink" href="#the-for-loop" title="Permalink to this headline">¶</a></h2>
+<p>Reader familiar with another programming language will probably notice how few
+loops are used in this book.  When working with data, we are able to use other
+construct called a <em>comprehension</em> to describe most situations that would use a
+loop in another language.  There will be times when more conventional loops are
+convenient, so we will give a brief description of the Python syntax for loops
+here.</p>
+<p>When we drew the square, it was quite tedious.  We had to move then turn, move
+then turn, etc. etc. four times.  If we were drawing a hexagon, or an octagon,
+or a polygon with 42 sides, it would have been a nightmare to duplicate all that
+code.</p>
+<p>A basic building block of all programs is to be able to repeat some code over
+and over again.  In computer science, we refer to this repetitive idea as
+<strong>iteration</strong>.  In this section, we will explore some mechanisms for basic
+iteration.</p>
+<p>In Python, the <strong>for</strong> statement allows us to write programs that implement
+iteration.   As a simple example, let&#8217;s say we have some friends, and we&#8217;d like
+to send them each an email inviting them to our party.  We don&#8217;t quite know how
+to send email yet, so for the moment we&#8217;ll just print a message for each friend.</p>
+
+<textarea data-component="activecode" id=ch03_4 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio='*doubleq*Overall Tour*doubleq*; 1-2: Example04_Tour01_Line01; 2: Example04_Tour01_Line02; 1: Example04_Tour01_Line03;*atype*'     >
+for name in ["Joe", "Amy", "Brad", "Angelina", "Zuki", "Thandi", "Paris"]:
+    print("Hi", name, "Please come to my party on Saturday!")
+</textarea>
+<p>Take a look at the output produced when you press the <code class="docutils literal"><span class="pre">run</span></code> button.  There is
+one line printed for each friend.  Here&#8217;s how it works:</p>
 <ul class="simple">
-<li>For <em>if-statements</em>, only one of several statement blocks is executed and
-then flow-of-control jumps to the first statement after the if-statement.</li>
-<li>For <em>loops</em>, when the end of the loop is reached, flow-of-control jumps back
-to the start of the loop and a test is used to determine if the loop needs
-to execute again. If the loop is finished, flow-of-control jumps to the
-first statement after the loop.</li>
-<li>For <em>function invocations</em>, flow-of-control jumps to the first statement in
-the called function, the function is executed, and the flow-of-control
-jumps back to the next statement after the function call.</li>
+<li><strong>name</strong> in this <code class="docutils literal"><span class="pre">for</span></code> statement is called the <strong>loop variable</strong>.</li>
+<li>The list of names in the square brackets is called a Python <strong>list</strong>.  Lists
+are very useful.  We will have much more to say about them later.</li>
+<li>Line 2  is the <strong>loop body</strong>.  The loop body is always
+indented. The indentation determines exactly what statements are &#8220;in the
+loop&#8221;.  The loop body is performed one time for each name in the list.</li>
+<li>On each <em>iteration</em> or <em>pass</em> of the loop, first a check is done to see if
+there are still more items to be processed.  If there are none left (this is
+called the <strong>terminating condition</strong> of the loop), the loop has finished.
+Program execution continues at the next statement after the loop body.</li>
+<li>If there are items still to be processed, the loop variable is updated to
+refer to the next item in the list.  This means, in this case, that the loop
+body is executed here 7 times, and each time <cite>name</cite> will refer to a different
+friend.</li>
+<li>At the end of each execution of the body of the loop, Python returns
+to the <code class="docutils literal"><span class="pre">for</span></code> statement, to see if there are more items to be handled.</li>
 </ul>
-<p>Do you see the pattern? If the flow-of-control is not purely sequential, it
-always executes the first statement immediately following the altered
-flow-of-control. That is why we can say that Python flow-of-control is
-sequential. But there are cases where this sequential flow-of-control does
-not work well. An example will best explain this.</p>
-<p>Let&#8217;s suppose that a program contains complex logic that is appropriately
-subdivided into functions. The program is running and it currently is executing
-function D, which was called by function C, which was called by function B,
-which was called by function A, which was called from the main function. This
-is illustrated by the following simplistic code example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">()</span>
-  <span class="n">A</span><span class="p">()</span>
+<p>As a program executes, the interpreter always keeps track of which statement is
+about to be executed.  We call this the <strong>control flow</strong>, or the <strong>flow of
+execution</strong> of the program.  Flow of control is often easy to visualize and
+understand if we draw a flowchart.  This flowchart shows the exact steps and
+logic of how the <code class="docutils literal"><span class="pre">for</span></code> statement executes.</p>
+<a class="reference internal image-reference" href="../_images/new_flowchart_for.png"><img alt="../_images/new_flowchart_for.png" class="align-center" src="../_images/new_flowchart_for.png" style="width: 300px;" /></a>
+<p>A codelens demonstration is a good way to help you visualize exactly how the
+flow of control works with the for loop.  Try stepping forward and backward
+through the program by pressing the buttons.  You can see the value of <code class="docutils literal"><span class="pre">number</span></code>
+change as the loop iterates through the list of friends.</p>
 
-<span class="k">def</span> <span class="nf">A</span><span class="p">():</span>
-  <span class="n">B</span><span class="p">()</span>
+<div class="alert alert-warning cd_section">
+<div id="vtest"></div>
+<p class="cl_caption"><span class="cl_caption_text"> (vtest)</span> </p>
+</div>
+<script type="text/javascript">
+var vtest_trace = {"trace": [{"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": [], "event": "step_line", "line": 1, "globals": {}, "heap": {}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 7, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n"], "encoded_locals": {"n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "call", "line": 1, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n"], "encoded_locals": {"n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 2, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total"], "encoded_locals": {"total": 0, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 3, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 0, "number": 1, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 4, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 1, "number": 1, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 3, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 1, "number": 2, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 4, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 3, "number": 2, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 3, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 3, "number": 3, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 4, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 6, "number": 3, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 3, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 6, "number": 4, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 4, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 10, "number": 4, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 3, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 10, "number": 5, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 4, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 15, "number": 5, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 3, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number"], "encoded_locals": {"total": 15, "number": 5, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 5, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["n", "total", "number", "__return__"], "encoded_locals": {"total": 15, "__return__": 15, "number": 5, "n": 5}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "return", "line": 5, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["sumTo"], "event": "return", "line": 7, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(n)", null]}}], "code": "def sumTo(n):\n    total = 0\n    for number in range(1,n+1):\n        total = total + number\n    return total\n\nsumTo(5)"};
+var vtest_vis;
 
-<span class="k">def</span> <span class="nf">B</span><span class="p">():</span>
-  <span class="n">C</span><span class="p">()</span>
+$(document).ready(function() {
+    try {
+        vtest_vis = new ExecutionVisualizer('vtest',vtest_trace,
+                                    {embeddedMode: true,
+                                    verticalStack: false,
+                                    heightChangeCallback: redrawAllVisualizerArrows,
+                                    codeDivWidth: 500,
+                                    lang : 'py3'
+                                    });
+        attachLoggers(vtest_vis,'vtest');
+        styleButtons('vtest');
+        allVisualizers.push(vtest_vis);
+    } catch (e) {
+        console.log("Failed to Initialize CodeLens component vtest_vis" );
+        console.log(e.toString());
+    }
 
-<span class="k">def</span> <span class="nf">C</span><span class="p">():</span>
-  <span class="n">D</span><span class="p">()</span>
+});
 
-<span class="k">def</span> <span class="nf">D</span><span class="p">()</span>
-  <span class="c1"># processing</span>
+$(document).ready(function() {
+    $("#vtest_tracecheck").click(function() {
+        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'vtest'});
+    });
+});
+
+if (allVisualizers === undefined) {
+   var allVisualizers = [];
+}
+
+
+$(window).resize(function() {
+    if (vtest_vis) {
+        vtest_vis.redrawConnectors();
+    }
+});
+</script>
+</div>
+<div class="section" id="aside-the-accumulator-pattern">
+<h2>2.4.6. Aside: The accumulator pattern<a class="headerlink" href="#aside-the-accumulator-pattern" title="Permalink to this headline">¶</a></h2>
+<p>The above program should represent a pattern that is familiar to anyone that
+has learned to program in an imperative or object oriented language.  Here is
+another program that follows the same pattern.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="n">runningtotal</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">   ...: </span>    <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ...: </span>        <span class="n">runningtotal</span> <span class="o">=</span> <span class="n">runningtotal</span> <span class="o">+</span> <span class="n">x</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">runningtotal</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [9]: </span><span class="n">toSquare</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="gp">In [10]: </span><span class="n">squareResult</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">toSquare</span><span class="p">)</span>
+
+<span class="gp">In [11]: </span><span class="n">squareResult</span>
+<span class="gh">Out[11]: </span><span class="go">100</span>
 </pre></div>
 </div>
-<p>Function D determines that the current processing won&#8217;t work for some reason
-and needs to send a message to the main function to try something different.
-However, all that function D can do using normal flow-of-control is to return
-a value to function C. So function D returns a special value to function C
-that means &#8220;try something else&#8221;. Function C has to recognize this value,
-quit its processing, and return the special value to function B. And so forth
-and so on. It would be very helpful if function D could communicate directly
-with the main function (or functions A and B) without sending a special value
-through the intermediate calling functions. Well, that is exactly what an
-<em>exception</em> does. An <em>exception</em> is a message to any function currently on the
-executing program&#8217;s &#8220;run-time-stack&#8221;. (The &#8220;run-time-stack&#8221; is what keeps track
-of the active function calls while a program is executing.)</p>
-<p>In Python, your create an <em>exception</em> message using the <code class="docutils literal"><span class="pre">raise</span></code> command. The
-simplest format for a <code class="docutils literal"><span class="pre">raise</span></code> command is the keyword <code class="docutils literal"><span class="pre">raise</span></code> followed by
-the name of an exception. For example:</p>
-<div class="highlight-Python"><div class="highlight"><pre><span></span><span class="k">raise</span> <span class="n">ExceptionName</span>
+<p>In the program above, notice that the variable <code class="docutils literal"><span class="pre">runningtotal</span></code> starts out with
+a value of 0.  Next, the iteration is performed <code class="docutils literal"><span class="pre">x</span></code> times.  Inside the for
+loop, the update occurs. <code class="docutils literal"><span class="pre">runningtotal</span></code> is reassigned a new value which is the
+old value plus the value of <code class="docutils literal"><span class="pre">x</span></code>.</p>
+<p>This pattern of iterating the updating of a variable is commonly referred to as
+the <strong>accumulator pattern</strong>.  We refer to the variable as the <strong>accumulator</strong>.
+This pattern will come up over and over again.  Remember that the key to making
+it work successfully is to be sure to initialize the variable before you start
+the iteration.  Once inside the iteration, it is required that you update the
+accumulator.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">What would happen if we put the assignment <code class="docutils literal"><span class="pre">runningTotal</span> <span class="pre">=</span> <span class="pre">0</span></code> inside
+the for statement?  Not sure? Try it and find out.</p>
+</div>
+<p>Here is the same program in codelens.  Step through the function and watch the
+&#8220;running total&#8221; accumulate the result.</p>
+
+<div class="alert alert-warning cd_section">
+<div id="sq_accum3"></div>
+<p class="cl_caption"><span class="cl_caption_text"> (sq_accum3)</span> </p>
+</div>
+<script type="text/javascript">
+var sq_accum3_trace = {"trace": [{"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": [], "event": "step_line", "line": 1, "globals": {}, "heap": {}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["square"], "event": "step_line", "line": 8, "globals": {"square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 9, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x"], "encoded_locals": {"x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "call", "line": 1, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x"], "encoded_locals": {"x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 2, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal"], "encoded_locals": {"runningtotal": 0, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 0, "counter": 0, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 4, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 10, "counter": 0, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 10, "counter": 1, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 4, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 20, "counter": 1, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 20, "counter": 2, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 4, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 30, "counter": 2, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 30, "counter": 3, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 4, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 40, "counter": 3, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 40, "counter": 4, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 4, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 50, "counter": 4, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 50, "counter": 5, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 4, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 60, "counter": 5, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 60, "counter": 6, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 4, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 70, "counter": 6, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 70, "counter": 7, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 4, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 80, "counter": 7, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 80, "counter": 8, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 4, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 90, "counter": 8, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 90, "counter": 9, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 4, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 100, "counter": 9, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 3, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter"], "encoded_locals": {"runningtotal": 100, "counter": 9, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "step_line", "line": 6, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "square_f1", "ordered_varnames": ["x", "runningtotal", "counter", "__return__"], "encoded_locals": {"runningtotal": 100, "__return__": 100, "counter": 9, "x": 10}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "square"}], "func_name": "square", "stdout": "", "ordered_globals": ["square", "toSquare"], "event": "return", "line": 6, "globals": {"toSquare": 10, "square": ["REF", 1]}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["square", "toSquare", "squareResult"], "event": "step_line", "line": 10, "globals": {"toSquare": 10, "square": ["REF", 1], "squareResult": 100}, "heap": {"1": ["FUNCTION", "square(x)", null]}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["square", "toSquare", "squareResult"], "event": "return", "line": 10, "globals": {"toSquare": 10, "square": ["REF", 1], "squareResult": 100}, "heap": {"1": ["FUNCTION", "square(x)", null]}}], "code": "def square(x):\n    runningtotal = 0\n    for counter in range(x):\n        runningtotal = runningtotal + x\n\n    return runningtotal\n\ntoSquare = 10\nsquareResult = square(toSquare)\nsquareResult"};
+var sq_accum3_vis;
+
+$(document).ready(function() {
+    try {
+        sq_accum3_vis = new ExecutionVisualizer('sq_accum3',sq_accum3_trace,
+                                    {embeddedMode: true,
+                                    verticalStack: false,
+                                    heightChangeCallback: redrawAllVisualizerArrows,
+                                    codeDivWidth: 500,
+                                    lang : 'py3'
+                                    });
+        attachLoggers(sq_accum3_vis,'sq_accum3');
+        styleButtons('sq_accum3');
+        allVisualizers.push(sq_accum3_vis);
+    } catch (e) {
+        console.log("Failed to Initialize CodeLens component sq_accum3_vis" );
+        console.log(e.toString());
+    }
+
+});
+
+$(document).ready(function() {
+    $("#sq_accum3_tracecheck").click(function() {
+        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'sq_accum3'});
+    });
+});
+
+if (allVisualizers === undefined) {
+   var allVisualizers = [];
+}
+
+
+$(window).resize(function() {
+    if (sq_accum3_vis) {
+        sq_accum3_vis.redrawConnectors();
+    }
+});
+</script>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The accumulator pattern is another pattern that won&#8217;t appear very often in
+this text.  In fact, later we will illustrate how pure functional programs
+use recursion as an alternate to loops in the chapter titled <strong>Recursion</strong>
+and how this pattern can be abstracted in the form of the <code class="docutils literal"><span class="pre">reduce</span></code>
+function in <strong>Higher Order Functions</strong>.  Being able to abstract an
+accumulator pattern to a reduction will be an important skill when using
+Hadoop and Spark.</p>
+</div>
+</div>
+<div class="section" id="the-while-loop">
+<h2>2.4.7. The <code class="docutils literal"><span class="pre">while</span></code> loop<a class="headerlink" href="#the-while-loop" title="Permalink to this headline">¶</a></h2>
+<p>There is another Python statement that can also be used to build an iteration.
+It is called the <code class="docutils literal"><span class="pre">while</span></code> statement.  The <code class="docutils literal"><span class="pre">while</span></code> statement provides a much
+more general mechanism for iterating.  Similar to the <code class="docutils literal"><span class="pre">if</span></code> statement, it uses
+a boolean expression to control the flow of execution.  The body of while will
+be repeated as long as the controlling boolean expression evaluates to <code class="docutils literal"><span class="pre">True</span></code>.</p>
+<p>The following figure shows the flow of control.</p>
+<img alt="../_images/while_flow.png" src="../_images/while_flow.png" />
+<p>We can use the <code class="docutils literal"><span class="pre">while</span></code> loop to create any type of iteration we wish, including
+anything that we have previously done with a <code class="docutils literal"><span class="pre">for</span></code> loop.  For example, the
+program in the previous section could be rewritten using <code class="docutils literal"><span class="pre">while</span></code>.  Instead of
+relying on the <code class="docutils literal"><span class="pre">range</span></code> function to produce the numbers for our summation, we
+will need to produce them ourselves.  To to this, we will create a variable
+called <code class="docutils literal"><span class="pre">aNumber</span></code> and initialize it to 1, the first number in the summation.
+Every iteration will add <code class="docutils literal"><span class="pre">aNumber</span></code> to the running total until all the values
+have been used.  In order to control the iteration, we must create a boolean
+expression that evaluates to <code class="docutils literal"><span class="pre">True</span></code> as long as we want to keep adding values
+to our running total.  In this case, as long as <code class="docutils literal"><span class="pre">aNumber</span></code> is less than or
+equal to the bound, we should keep going.</p>
+<p>Here is a new version of the summation program that uses a while statement.</p>
+
+<div class="alert alert-warning cd_section">
+<div id="ch07_while1"></div>
+<p class="cl_caption"><span class="cl_caption_text"> (ch07_while1)</span> </p>
+</div>
+<script type="text/javascript">
+var ch07_while1_trace = {"trace": [{"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": [], "event": "step_line", "line": 1, "globals": {}, "heap": {}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 11, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound"], "encoded_locals": {"aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "call", "line": 1, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound"], "encoded_locals": {"aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 4, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum"], "encoded_locals": {"theSum": 0, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 5, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 1, "theSum": 0, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 6, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 1, "theSum": 0, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 7, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 1, "theSum": 1, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 8, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 2, "theSum": 1, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 6, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 2, "theSum": 1, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 7, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 2, "theSum": 3, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 8, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 3, "theSum": 3, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 6, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 3, "theSum": 3, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 7, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 3, "theSum": 6, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 8, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 4, "theSum": 6, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 6, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 4, "theSum": 6, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 7, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 4, "theSum": 10, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 8, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 5, "theSum": 10, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 6, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 5, "theSum": 10, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 9, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber", "__return__"], "encoded_locals": {"__return__": 10, "aNumber": 5, "theSum": 10, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "return", "line": 9, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["sumTo"], "event": "return", "line": 11, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}], "code": "def sumTo(aBound):\n    \"\"\" Return the sum of 1+2+3 ... n \"\"\"\n\n    theSum  = 0\n    aNumber = 1\n    while aNumber <= aBound:\n        theSum = theSum + aNumber\n        aNumber = aNumber + 1\n    return theSum\n\nsumTo(4)"};
+var ch07_while1_vis;
+
+$(document).ready(function() {
+    try {
+        ch07_while1_vis = new ExecutionVisualizer('ch07_while1',ch07_while1_trace,
+                                    {embeddedMode: true,
+                                    verticalStack: false,
+                                    heightChangeCallback: redrawAllVisualizerArrows,
+                                    codeDivWidth: 500,
+                                    lang : 'py3'
+                                    });
+        attachLoggers(ch07_while1_vis,'ch07_while1');
+        styleButtons('ch07_while1');
+        allVisualizers.push(ch07_while1_vis);
+    } catch (e) {
+        console.log("Failed to Initialize CodeLens component ch07_while1_vis" );
+        console.log(e.toString());
+    }
+
+});
+
+$(document).ready(function() {
+    $("#ch07_while1_tracecheck").click(function() {
+        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'ch07_while1'});
+    });
+});
+
+if (allVisualizers === undefined) {
+   var allVisualizers = [];
+}
+
+
+$(window).resize(function() {
+    if (ch07_while1_vis) {
+        ch07_while1_vis.redrawConnectors();
+    }
+});
+</script>
+<p>You can almost read the <code class="docutils literal"><span class="pre">while</span></code> statement as if it were in natural language.
+It means, while <code class="docutils literal"><span class="pre">aNumber</span></code> is less than or equal to <code class="docutils literal"><span class="pre">aBound</span></code>, continue
+executing the body of the loop. Within the body, each time, update <code class="docutils literal"><span class="pre">theSum</span></code>
+using the accumulator pattern and increment <code class="docutils literal"><span class="pre">aNumber</span></code>. After the body of the
+loop, we go back up to the condition of the <code class="docutils literal"><span class="pre">while</span></code> and reevaluate it.  When
+<code class="docutils literal"><span class="pre">aNumber</span></code> becomes greater than <code class="docutils literal"><span class="pre">aBound</span></code>, the condition fails and flow of
+control continues to the <code class="docutils literal"><span class="pre">return</span></code> statement.</p>
+<p>The same program in codelens will allow you to observe the flow of execution.</p>
+
+<div class="alert alert-warning cd_section">
+<div id="ch07_while2"></div>
+<p class="cl_caption"><span class="cl_caption_text"> (ch07_while2)</span> </p>
+</div>
+<script type="text/javascript">
+var ch07_while2_trace = {"trace": [{"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": [], "event": "step_line", "line": 1, "globals": {}, "heap": {}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 11, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound"], "encoded_locals": {"aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "call", "line": 1, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound"], "encoded_locals": {"aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 4, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum"], "encoded_locals": {"theSum": 0, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 5, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 1, "theSum": 0, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 6, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 1, "theSum": 0, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 7, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 1, "theSum": 1, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 8, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 2, "theSum": 1, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 6, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 2, "theSum": 1, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 7, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 2, "theSum": 3, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 8, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 3, "theSum": 3, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 6, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 3, "theSum": 3, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 7, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 3, "theSum": 6, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 8, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 4, "theSum": 6, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 6, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 4, "theSum": 6, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 7, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 4, "theSum": 10, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 8, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 5, "theSum": 10, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 6, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber"], "encoded_locals": {"aNumber": 5, "theSum": 10, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "step_line", "line": 9, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "sumTo_f1", "ordered_varnames": ["aBound", "theSum", "aNumber", "__return__"], "encoded_locals": {"__return__": 10, "aNumber": 5, "theSum": 10, "aBound": 4}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "sumTo"}], "func_name": "sumTo", "stdout": "", "ordered_globals": ["sumTo"], "event": "return", "line": 9, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "10\n", "ordered_globals": ["sumTo"], "event": "return", "line": 11, "globals": {"sumTo": ["REF", 1]}, "heap": {"1": ["FUNCTION", "sumTo(aBound)", null]}}], "code": "def sumTo(aBound):\n    \"\"\" Return the sum of 1+2+3 ... n \"\"\"\n\n    theSum  = 0\n    aNumber = 1\n    while aNumber <= aBound:\n        theSum = theSum + aNumber\n        aNumber = aNumber + 1\n    return theSum\n\nprint(sumTo(4))"};
+var ch07_while2_vis;
+
+$(document).ready(function() {
+    try {
+        ch07_while2_vis = new ExecutionVisualizer('ch07_while2',ch07_while2_trace,
+                                    {embeddedMode: true,
+                                    verticalStack: false,
+                                    heightChangeCallback: redrawAllVisualizerArrows,
+                                    codeDivWidth: 500,
+                                    lang : 'py3'
+                                    });
+        attachLoggers(ch07_while2_vis,'ch07_while2');
+        styleButtons('ch07_while2');
+        allVisualizers.push(ch07_while2_vis);
+    } catch (e) {
+        console.log("Failed to Initialize CodeLens component ch07_while2_vis" );
+        console.log(e.toString());
+    }
+
+});
+
+$(document).ready(function() {
+    $("#ch07_while2_tracecheck").click(function() {
+        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'ch07_while2'});
+    });
+});
+
+if (allVisualizers === undefined) {
+   var allVisualizers = [];
+}
+
+
+$(window).resize(function() {
+    if (ch07_while2_vis) {
+        ch07_while2_vis.redrawConnectors();
+    }
+});
+</script>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The names of the variables have been chosen to help readability.</p>
+</div>
+<p>More formally, here is the flow of execution for a <code class="docutils literal"><span class="pre">while</span></code> statement:</p>
+<ol class="arabic simple">
+<li>Evaluate the condition, yielding <code class="docutils literal"><span class="pre">False</span></code> or <code class="docutils literal"><span class="pre">True</span></code>.</li>
+<li>If the condition is <code class="docutils literal"><span class="pre">False</span></code>, exit the <code class="docutils literal"><span class="pre">while</span></code> statement and continue
+execution at the next statement.</li>
+<li>If the condition is <code class="docutils literal"><span class="pre">True</span></code>, execute each of the statements in the body and
+then go back to step 1.</li>
+</ol>
+<p>The body consists of all of the statements below the header with the same
+indentation.</p>
+<p>This type of flow is called a <strong>loop</strong> because the third step loops back around
+to the top. Notice that if the condition is <code class="docutils literal"><span class="pre">False</span></code> the first time through the
+loop, the statements inside the loop are never executed.</p>
+<p>The body of the loop should change the value of one or more variables so that
+eventually the condition becomes <code class="docutils literal"><span class="pre">False</span></code> and the loop terminates. Otherwise the
+loop will repeat forever. This is called an <strong>infinite loop</strong>.
+An endless
+source of amusement for computer scientists is the observation that the
+directions written on the back of the shampoo bottle (lather, rinse, repeat) create an infinite loop.</p>
+<p>In the case shown above, we can prove that the loop terminates because we
+know that the value of <code class="docutils literal"><span class="pre">aBound</span></code> is finite, and we can see that the value of <code class="docutils literal"><span class="pre">aNumber</span></code>
+increments each time through the loop, so eventually it will have to exceed <code class="docutils literal"><span class="pre">aBound</span></code>. In
+other cases, it is not so easy to tell.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Introduction of the while statement causes us to think about the types of
+iteration we have seen.  The <code class="docutils literal"><span class="pre">for</span></code> statement will always iterate through a
+sequence of values like the list of names for the party or the list of
+numbers created by <code class="docutils literal"><span class="pre">range</span></code>.  Since we know that it will iterate once for
+each value in the collection, it is often said that a <code class="docutils literal"><span class="pre">for</span></code> loop creates a
+<strong>definite iteration</strong> because we definitely know how many times we are
+going to iterate.  On the other hand, the <code class="docutils literal"><span class="pre">while</span></code> statement is dependent
+on a condition that needs to evaluate to <code class="docutils literal"><span class="pre">False</span></code> in order for the loop to
+terminate.  Since we do not necessarily know when this will happen, it
+creates what we call <strong>indefinite iteration</strong>.  Indefinite iteration simply
+means that we don&#8217;t know how many times we will repeat but eventually the
+condition controlling the iteration will fail and the iteration will stop.
+(Unless we have an infinite loop which is of course a problem)</p>
+</div>
+<p>What you will notice here is that the <code class="docutils literal"><span class="pre">while</span></code> loop is more work for
+you &#8212; the programmer &#8212; than the equivalent <code class="docutils literal"><span class="pre">for</span></code> loop.  When using a <code class="docutils literal"><span class="pre">while</span></code>
+loop you have to control the loop variable yourself.  You give it an initial value, test
+for completion, and then make sure you change something in the body so that the loop
+terminates.</p>
+<p>So why have two kinds of loop if <code class="docutils literal"><span class="pre">for</span></code> looks easier?  This next example shows an indefinite iteration where
+we need the extra power that we get from the <code class="docutils literal"><span class="pre">while</span></code> loop.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
+
+<textarea data-component="activecode" id=scratch_07_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
+
+
+</textarea>
+</div>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question7_2_1">
+            exceptions-4-2: True or False: You can rewrite any for-loop as a while-loop.
+            <li data-component="answer" data-correct id="test_question7_2_1_opt_a">(A) True</li><li data-component="feedback" id="test_question7_2_1_opt_a">Although the while loop uses a different syntax, it is just as powerful as a for-loop and often more flexible.</li>
+            
+            <li data-component="answer"  id="test_question7_2_1_opt_b">(B) False</li><li data-component="feedback" id="test_question7_2_1_opt_b">Often a for-loop is more natural and convenient for a task, but that same task can always be expressed using a while loop.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question7_2_2">
+            <p>exceptions-4-3: The following code contains an infinite loop.  Which is the best explanation for why the loop does not terminate?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">answer</span> <span class="o">+</span> <span class="n">n</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>So what happens to an <em>exception</em> message after it is created? The normal
-flow-of-control of a Python program is interrupted and Python starts looking
-for any code in its run-time-stack that is interested in dealing with the
-message. It always searches from its current location at the bottom of the
-run-time-stack, up the stack, in the order the functions were originally
-called. A <code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block is used to say &#8220;hey,
-I can deal with that message.&#8221; The first <code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block that Python
-finds on its search back up the run-time-stack will be executed. If there
-is no <code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block found, the program &#8220;crashes&#8221; and prints its
-run-time-stack to the console.</p>
-<p>Let&#8217;s take a look at several code examples to illustrate this process. If
-function D had a <code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block around the code that <code class="docutils literal"><span class="pre">raised</span></code> a
-<code class="docutils literal"><span class="pre">MyException</span></code> message, then the flow-of-control would be passed to the
-local <code class="docutils literal"><span class="pre">except</span></code> block. That is, function D would handle it&#8217;s own issues.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">()</span>
-  <span class="n">A</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">A</span><span class="p">():</span>
-  <span class="n">B</span><span class="p">()</span>
+            <li data-component="answer" data-correct id="test_question7_2_2_opt_a">(A) n starts at 10 and is incremented by 1 each time through the loop, so it will always be positive</li><li data-component="feedback" id="test_question7_2_2_opt_a">The loop will run as long as n is positive.  In this case, we can see that n will never become non-positive.</li>
+            
+            <li data-component="answer"  id="test_question7_2_2_opt_b">(B) answer starts at 1 and is incremented by n each time, so it will always be positive</li><li data-component="feedback" id="test_question7_2_2_opt_b">While it is true that answer will always be positive, answer is not considered in the loop condition.</li>
+            
+            <li data-component="answer"  id="test_question7_2_2_opt_c">(C) You cannot compare n to 0 in while loop.  You must compare it to another variable.</li><li data-component="feedback" id="test_question7_2_2_opt_c">It is perfectly valid to compare n to 0.  Though indirectly, this is what causes the infinite loop.</li>
+            
+            <li data-component="answer"  id="test_question7_2_2_opt_d">(D) In the while loop body, we must set n to False, and this code does not do that.</li><li data-component="feedback" id="test_question7_2_2_opt_d">The loop condition must become False for the loop to terminate, but n by itself is not the condition in this case.</li>
+            
 
-<span class="k">def</span> <span class="nf">B</span><span class="p">():</span>
-  <span class="n">C</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">C</span><span class="p">():</span>
-  <span class="n">D</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">D</span><span class="p">()</span>
-  <span class="k">try</span><span class="p">:</span>
-    <span class="c1"># processing code</span>
-    <span class="k">if</span> <span class="n">something_special_happened</span><span class="p">:</span>
-      <span class="k">raise</span> <span class="n">MyException</span>
-  <span class="k">except</span> <span class="n">MyException</span><span class="p">:</span>
-    <span class="c1"># execute if the MyException message happened</span>
-</pre></div>
-</div>
-<p>But perhaps function C is better able to handle the issue, so you could put
-the <code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block in function C:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">()</span>
-  <span class="n">A</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">A</span><span class="p">():</span>
-  <span class="n">B</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">B</span><span class="p">():</span>
-  <span class="n">C</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">C</span><span class="p">():</span>
-  <span class="k">try</span><span class="p">:</span>
-    <span class="n">D</span><span class="p">()</span>
-  <span class="k">except</span> <span class="n">MyException</span><span class="p">:</span>
-    <span class="c1"># execute if the MyException message happened</span>
-
-<span class="k">def</span> <span class="nf">D</span><span class="p">()</span>
-  <span class="c1"># processing code</span>
-  <span class="k">if</span> <span class="n">something_special_happened</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="n">MyException</span>
-</pre></div>
-</div>
-<p>But perhaps the main function is better able to handle the issue, so you
-could put the <code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block in the main function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">()</span>
-  <span class="k">try</span><span class="p">:</span>
-    <span class="n">A</span><span class="p">()</span>
-  <span class="k">except</span> <span class="n">MyException</span><span class="p">:</span>
-    <span class="c1"># execute if the MyException message happened</span>
-
-<span class="k">def</span> <span class="nf">A</span><span class="p">():</span>
-  <span class="n">B</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">B</span><span class="p">():</span>
-  <span class="n">C</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">C</span><span class="p">():</span>
-  <span class="n">D</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">D</span><span class="p">()</span>
-  <span class="c1"># processing code</span>
-  <span class="k">if</span> <span class="n">something_special_happened</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="n">MyException</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="summary">
-<h1>2.7. Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
-<p>Let&#8217;s summarize our discussion. An <em>exception</em> is a message that something
-&#8220;out-of-the-ordinary&#8221; has happened and the normal flow-of-control needs to
-be abandoned. When an <em>exception</em> is <code class="docutils literal"><span class="pre">raised</span></code>, Python searches its run-time-stack
-for a <code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block that can appropriately deal with the condition.
-The first <code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block that knows how to deal with the issue is
-executed and then flow-of-control is returned to its normal sequential execution.
-If no appropriate <code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block is found, the program &#8220;crashes&#8221; and
-prints its run-time-stack to the console.</p>
-<p>As our final example, here is a program that crashes because no valid
-<code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block was found to process the <code class="docutils literal"><span class="pre">MyException</span></code> message.
-Notice that the <code class="docutils literal"><span class="pre">try:</span> <span class="pre">except:</span></code> block in the main function only knows how
-to deal with <code class="docutils literal"><span class="pre">ZeroDivisonError</span></code> messages, not <code class="docutils literal"><span class="pre">MyException</span></code> messages.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">()</span>
-  <span class="k">try</span><span class="p">:</span>
-    <span class="n">A</span><span class="p">()</span>
-  <span class="k">except</span> <span class="n">ZeroDivisonError</span><span class="p">:</span>
-    <span class="c1"># execute if a ZeroDivisonError message happened</span>
-
-<span class="k">def</span> <span class="nf">A</span><span class="p">():</span>
-  <span class="n">B</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">B</span><span class="p">():</span>
-  <span class="n">C</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">C</span><span class="p">():</span>
-  <span class="n">D</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">D</span><span class="p">()</span>
-  <span class="c1"># processing code</span>
-  <span class="k">if</span> <span class="n">something_special_happened</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="n">MyException</span>
-</pre></div>
-</div>
+            </ul>
+            </div>
 </div>
 
 
@@ -1169,12 +918,12 @@ to deal with <code class="docutils literal"><span class="pre">ZeroDivisonError</
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="ExpressionsValuesAndEvaluation.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 2.8. Exercises' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 2.5. Exercises' data-toggle="tooltip" >
     <a href="Exercises2.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="Exercises2.html" >Next Section - 2.8. Exercises</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="Exercises2.html" >Next Section - 2.5. Exercises</a>
 
 <script type="text/javascript">
 
