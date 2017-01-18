@@ -1,3 +1,12 @@
+..  Copyright (C)  Todd Iverson.  Permission is granted to copy, distribute
+    and/or modify this document under the terms of the GNU Free Documentation
+    License, Version 1.3 or any later version published by the Free Software
+    Foundation; with Invariant Sections being Forward, Prefaces, and
+    Contributor List, no Front-Cover Texts, and no Back-Cover Texts.  A copy of
+    the license is included in the section entitled "GNU Free Documentation
+    License".
+
+
 Expressions, Values and Evaluation
 ==================================
 
@@ -5,40 +14,6 @@ The focus of this chapter has been using expressions in python to perform
 computations.  We have seen that we can use ``lambda`` expressions  to save
 expressions for later computation and the conditional expression to decide
 branch between two expressions depending on some condition.
-
-At this point, you may be wondering why there is so much focus on expressions.
-Expressions form the building blocks for functional programs and using the right
-expressions can lead to programs that are easier to understand.  In particular,
-expressions as defined above will be *referentially transparent*.  Part of a
-program is **referentially transparent** if it can be replaced with it's value
-without changing the meaning of the program.
-
-For example, the expression ``1+1`` is referentially transparent, because it can
-be replaced with its value ``2`` without changing the program in any way.  On
-the other hand, a call to the ``print`` function is **not** referentially
-transparent.  ``print`` is an example of a **void** function, a function that
-returns no value.  In Python, all functions actually return something and void
-functions return ``None``, a special value that stands in for *nothing*.  We can
-verify that ``print`` returns ``None`` using the ``is`` comparison.
-
-.. ipython:: python
-
-    print("Hi") is None
-
-The problem with ``print`` is that it is *side-effecting*.  For our purposes, a
-**side-effect** is any effect of a function that can't be determined looking at
-the input and output.  In the case of ``print``, the side effect is printing
-some text to the screen.  Replacing a ``print`` function with its value of
-``None`` clearly changes the ``Hello World`` program, illustrating the fact that
-``print`` is not referentially transparent.
-
-
-.. ipython:: python
-
-    print("Hello World")
-    # Replace print with its value None
-    None
-    # Not the same program!
 
 Here is an outline of a formal definition the expressions seen so far.
 
@@ -59,6 +34,42 @@ expressions, the end of every branch in the tree will be a value.
 
 .. todo:: Add an image of an expression as a tree
 
+At this point, you may be wondering why there is so much focus on expressions.
+Expressions are the building blocks for functional programs and using the right
+expressions can lead to programs that are easier to understand.  In particular,
+part of a program is **referentially transparent** if it can be replaced with
+it's value without changing the meaning of the progra, making it easier to
+understand.  Expressions constructed out of lambda expressions, conditional
+expressions and operations will be *referentially transparent*.  
+
+For example, the expression ``1+1`` is referentially transparent, because it can
+be replaced with its value ``2`` without changing the program in any way.  On
+the other hand, a call to the ``print`` function is **not** referentially
+transparent.  ``print`` is an example of a **void** function, a function that
+returns no (meaningful) value.  In Python, all functions actually return
+something and void functions return ``None``, a special value that stands in for
+*nothing*.  We can verify that ``print`` returns ``None`` using the ``is``
+comparison.
+
+.. ipython:: python
+
+    print("Hi") is None
+
+The problem with ``print``, in terms of referential transparency, is that it is
+*side-effecting*.  For our purposes, a **side-effect** is any effect of a
+function that can't be determined looking at the input and output.  In the case
+of ``print``, the side effect is printing some text to the screen.  Replacing a
+``print`` function with its value of ``None`` clearly changes the ``Hello
+World`` program, illustrating the fact that ``print`` is not referentially
+transparent.
+
+.. ipython:: python
+
+    print("Hello World")
+    # Replace print with its value None
+    None
+    # Not the same program!
+
 What is Evaluation?
 -------------------
 
@@ -73,14 +84,13 @@ evaluating ``EXPR1`` and ``EXPR2``, then apply the operation to the resulting
 values.
 
 To understand the evaluation of lambda expressions, we will need to understand
-two related topics *closures* and *the scope of a variable.*  These concepts are
-covered in the next two sections.
+two related topics: *closures* and *the scope of a variable.*  
 
 Lambda Expressions and Closures
 -------------------------------
 
-The expressions that we created so far have been pretty simple.  Note that the
-body of a lambda expression is also an expression. Consequently lambda
+The lambda expressions that we created so far have been pretty simple.  Note
+that the body of a lambda expression is also an expression. Consequently lambda
 expressions can be embedded in the body of another lambda expression.  For
 example, another way to generalize the ``apply_tax`` function is to create
 another function ``make_apply_tax`` that takes the tax rate as input and returns
@@ -138,7 +148,9 @@ Designing functions as closures allows us to create multiple versions of
 In this example, we see that each of the ``apply_tax`` functions is bundled with
 the appropriate value and the second call to ``make_apply_tax`` did not affect
 the first call in any way.  This explains, in detail, how Python evaluates a
-lambda expression.  Next, we consider the evaluation of a function call.  It
+lambda expression: a value is placed in memory that includes the function plus a
+the value of any outer variable referenced in the body.  This type of value is
+known as a closure.  Next, we consider the evaluation of a function call.  It
 turns out that the choice of order of this evaluation illustrate the distinction
 between *lazy evaluation* and *strict evaluation*.
 
@@ -167,15 +179,16 @@ have added another wrinkle by introducing a global variable ``x`` as well.
     g(3)
 
 If ``x**2`` referred to the outer parameter, we would have seen ``2**2 = 4`` as
-the value of ``g(3)``.  Similarly, ``x`` was not referring to the global
-variable, as we would have see ``g(3)`` returning ``1**2 = 1``.  So clearly the
+the value of ``g(3)``.  Similarly, ``x`` was referring to the global
+variable, ``g(3)`` would return ``1**2 = 1``.  So clearly the
 ``x`` in the expression ``x**2`` is referring to the inner ``x`` parameter.
+
 What is going on here?  The answer has to do with a variables *scope*.  Recall
 that variables, whether constructed through an assignment statement or function
 call, are bound to values.  The (lexical) **scope** of a variable is the portion
 of the code for which that variable represents it's value.  In other words, if a
 variable ``x`` is bound to ``5``, the scope is all parts of the code where
-evaluating x will return ``5``.
+evaluating ``x`` will return ``5``.
 
 Run the same program in codelens and see if things clear up.
 
