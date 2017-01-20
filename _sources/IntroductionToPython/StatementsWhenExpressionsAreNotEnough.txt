@@ -11,29 +11,27 @@ Statements: When Expressions Are Not Enough
 ===========================================
 
 	
-While well constructed expressions are desirable and easy to understand, there
-are some python statements that will make our code easier to read in more
-complex situations.  Recall that a *statement* is a line or block of code that
-does not return a value.  The simplest example of a statement in Python is the
-*assignment statement*, which saves a value to a variable but does not return a
-value.
+Although well-constructed expressions are easy to understand, some python
+statements will improve the readability of our code in complex situations.
+A *statement* is a line or block of code that does not return a
+value.  The simplest example of a statement in Python is the *assignment
+statement*, which stores a value in a variable with nothing returned.
 
 .. ipython:: python
 
     a = 5
 
-Other statements that are useful in more complicated situations are the
-*function definition*, *if-elif-else block* and *try-expect blocks*, all
-discussed below.
+Other useful statements are the *function definition*, *if-elif-else block* and
+*try-expect blocks*, all discussed below.
 
 Function
 --------
 
-We have already seen that the ``lambda`` expression can be used to create and
-save simple functions, but this expression comes with the restriction that the
-body must also be an expression.  This disallows, for example, assigning a value
-to a variable in the body of the function.  For more complicated situations, we
-will define functions using the **function definition** statement.
+We have already seen how the ``lambda`` expression store simple expressions, but
+their body is restricted also be an
+expression.  This disallows, for example, assigning a value to a variable in the
+body of the function.  For complicated situations, we will define functions
+using the **function definition** statement.
 
 The syntax for a **function definition** is:
 
@@ -65,7 +63,7 @@ several **compound statements** we will see, all of which have the same pattern:
 
     If the first thing after the function header is a string (some tools insist
     that it must be a triple-quoted string), it is called a **docstring** and
-    gets special treatment in Python and in some of the programming tools.
+    gets special treatment in Python and in some programming tools.
 
     Another way to retrieve this information is to use the interactive
     interpreter, and enter the expression ``<function_name>.__doc__``, which
@@ -87,7 +85,7 @@ function will need to receive from the user of the function.  When you use a
 function, you provide values to the formal parameters.
 
 The following code gives an example of defining a function named ``square`` that
-computes the square of ``x``.  This value is save to a local variable ``y`` and
+computes the square of ``x``.  This value is saved to a local variable ``y`` and
 returned using the ``return`` statement.
 
 .. ipython:: python
@@ -111,7 +109,7 @@ Chained conditionals
 The conditional expression allows use to write simple branching logic in the
 midst of our expressions, but chaining conditional expressions to form more
 complicated logic can become hard to read.  Python provides a statement-block
-structure that will allow use to express more complicated Boolean logic in a
+structure that will allow us to express more complicated Boolean logic in a
 clearer way. This is sometimes referred to as a **chained conditional**
 
 .. ipython:: python
@@ -233,7 +231,7 @@ and over again.  In computer science, we refer to this repetitive idea as
 **iteration**.  In this section, we will explore some mechanisms for basic
 iteration.
 
-In Python, the **for** statement allows us to write programs that implement
+The **for** statement allows us to write programs that implement
 iteration.   As a simple example, let's say we have some friends, and we'd like
 to send them each an email inviting them to our party.  We don't quite know how
 to send email yet, so for the moment we'll just print a message for each friend.
@@ -255,7 +253,7 @@ one line printed for each friend.  Here's how it works:
   are very useful.  We will have much more to say about them later.
 * Line 2  is the **loop body**.  The loop body is always
   indented. The indentation determines exactly what statements are "in the
-  loop".  The loop body is performed one time for each name in the list.
+  loop".  The body is performed one time for each name in the list.
 * On each *iteration* or *pass* of the loop, first a check is done to see if
   there are still more items to be processed.  If there are none left (this is
   called the **terminating condition** of the loop), the loop has finished.
@@ -373,7 +371,7 @@ We can use the ``while`` loop to create any type of iteration we wish, including
 anything that we have previously done with a ``for`` loop.  For example, the
 program in the previous section could be rewritten using ``while``.  Instead of
 relying on the ``range`` function to produce the numbers for our summation, we
-will need to produce them ourselves.  To to this, we will create a variable
+will need to produce them ourselves.  To do this, we will create a variable
 called ``aNumber`` and initialize it to 1, the first number in the summation.
 Every iteration will add ``aNumber`` to the running total until all the values
 have been used.  In order to control the iteration, we must create a boolean
@@ -436,7 +434,7 @@ More formally, here is the flow of execution for a ``while`` statement:
 #. If the condition is ``True``, execute each of the statements in the body and
    then go back to step 1.
 
-The body consists of all of the statements below the header with the same
+The body consists of all the statements below the header with the same
 indentation.
 
 This type of flow is called a **loop** because the third step loops back around
@@ -444,11 +442,11 @@ to the top. Notice that if the condition is ``False`` the first time through the
 loop, the statements inside the loop are never executed.
 
 The body of the loop should change the value of one or more variables so that
-eventually the condition becomes ``False`` and the loop terminates. Otherwise the
-loop will repeat forever. This is called an **infinite loop**.
-An endless
+eventually the condition becomes ``False`` and the loop terminates. Otherwise,
+the loop will repeat forever. This is called an **infinite loop**.  An endless
 source of amusement for computer scientists is the observation that the
-directions written on the back of the shampoo bottle (lather, rinse, repeat) create an infinite loop.
+directions written on the back of the shampoo bottle (lather, rinse, repeat)
+create an infinite loop.
 
 In the case shown above, we can prove that the loop terminates because we
 know that the value of ``aBound`` is finite, and we can see that the value of ``aNumber``
@@ -472,13 +470,14 @@ other cases, it is not so easy to tell.
     (Unless we have an infinite loop which is of course a problem)
 
 What you will notice here is that the ``while`` loop is more work for
-you --- the programmer --- than the equivalent ``for`` loop.  When using a ``while``
+you --- the programmer --- than the equivalent ``for`` loop.  Using a ``while``
 loop you have to control the loop variable yourself.  You give it an initial value, test
 for completion, and then make sure you change something in the body so that the loop
 terminates.
 
-So why have two kinds of loop if ``for`` looks easier?  This next example shows an indefinite iteration where
-we need the extra power that we get from the ``while`` loop.
+So why have two kinds of loop if ``for`` looks easier?  This next example shows
+an indefinite iteration where we need the extra power that we get from the
+``while`` loop.
 
 
 .. note::

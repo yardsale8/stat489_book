@@ -213,6 +213,96 @@ numbers* up to 10.
 
     .. activecode:: scratch_08_01
 
+List Comprehensions for Two Dimensional Data
+------------------------------------------
+
+**Two dimensional (2D) data** is data that can be displayed in a table.  An
+examples of two dimensional data include matrices and images.  We can use list
+comprehensions to transform and filter 2D data by embedding one list
+comprehension in another.
+
+Consider the following matrix of integers.
+
+.. math::
+    \left[ \begin{array}{ccc}
+                1, 2, 3\\
+                4, 5, 6\\
+                7, 8, 9
+           \end{array}\right]
+
+
+One method for representing this matrix in Python is with a list of lists.
+
+.. ipython:: python
+
+    mat = [[1,2,3],[4,5,6],[7,8,9]]
+    mat
+
+To write a comprehension that transforms 2D data into another 2D list, we embed
+a comprehension inside a comprehension.
+
+.. figure:: Figures/2D_comprehension.png
+    :alt: 2D comprehension
+
+    ..
+
+    A 2D comprehension consists of a list comprehension inside another
+    comprehension.  The outer sequence consists of all rows of the matrix
+    and the inner sequence consists of elements from each row.  The inner
+    comprehension can be thought of as representing each of the new rows in
+    the resulting matrix.
+
+For example, the following code will generate a new matrix that contains the
+square of each value from the first matrix.
+
+.. ipython:: python
+
+    new_mat = [[e**2 for e in row] for row in mat]
+    new_mat
+
+
+
+For this example, we will transform an image by replacing all of the black
+pixels with white pixels.  Recall that an image from `skimage` is stored as a
+3D array of RGB values, but can be iterated over as a 2D matrix of tuples of 3
+values.  Consider the following code,
+
+.. sourcecode:: python
+
+    from skimage import data
+    import matplotlib.pylab as plt
+    import numpy as np
+    %matplotlib inline
+    hub = data.hubble_deep_field()
+    plt.imshow(hub)
+
+which displays the following image.
+
+.. image:: Figures/hubble_black.png
+
+The RGB code for (pure) black is `(0,0,0)`.  The following code splits the task
+into three parts.  First, the function `is_black` checks that each color is 0.
+Next, the function `black_to_white` switches black to white (rgb(255,255,255)),
+but otherwise leaves the color as is.  Finally, a 2D comprehension is used to
+make a new image matrix or tuples.  Note that this array needs to be converted
+to a `numpy array`.
+
+.. sourcecode:: python
+
+    # Black RGB is (0, 0, 0), we check that all colors == 0
+    is_black = lambda t: all([col == 0 for col in t])
+
+    # Replace black (0,0,0) with white (255, 255, 255) else leave it alone
+    black_to_white = lambda t: (255,255,255) if is_black(t) else t
+
+    #apply black_to_white to each RGB tuple
+    new_img = np.array([[black_to_white(tup) for tup in row] for row in hub])
+    plt.imshow(new_img)
+
+The resulting image is shown below.
+
+.. image:: Figures/hubble_white.png
+
 Character classification
 ------------------------
 
@@ -414,7 +504,7 @@ Use ``any`` and ``all`` for Boolean questions about a list
 
 There are two more functions that help use reduce a list to a value.  The Python
 built-in functions ``any`` and ``all`` are useful when asking Boolean questions
-about a list.  The function ``any`` takes a sequence as input nad returns True
+about a list.  The function ``any`` takes a sequence as input and returns True
 if *any* of the elements in the sequence evaluate to ``True``.  On the other
 hand, when ``all`` is applied to a sequence, it only evaluates to ``True`` if
 *all* of the elements of said sequence evaluate to ``True``.
@@ -447,17 +537,91 @@ function.
     any_even(my_list)
     all_even(my_list)
 
+Use ``for`` twice to get all combinations
+---------------------------------------
+
+Suppose that we have two list ``L`` and ``M`` and we want to perform some
+computation on all combinations of elements from these two lists.  This can be
+accomplished using two (independent) ``for`` twice, once for each list.  The code
+shown below creates a tuple of all combinations.
+
+.. ipython:: python
+
+    L = [1,2,3]
+    M = ["a", "b"]
+
+    new_list = [(i,j) for i in L for j in M]
+    new_list
+
+The second ``for`` can depend on the first
+------------------------------------------
+
+The last example illustrated a comprehension pattern for constructing all
+combinations of elements from two list.  Consider the following program, which
+applies this technique to one list versus itself.
+
+
+.. ipython:: python
+
+    L = [1,2,3]
+
+    new_list = [(i,j) for i in L for j in L]
+    new_list
+
+Notice that some combinations are repeated, e.g. ``(1,2)`` and ``(2,1)``.
+Suppose that instead we want all unique pairs of values.  In math, this
+collection is often described as all :math:`i,j` such that :math:`i \le j`.  We
+can use this approach with comprehensions as well.  Two methods are shown below.
+
+**Method 1 - Filter with ``if``**
+
+.. ipython:: python
+
+    L = [1,2,3]
+
+    new_list = [(i,j) for i in L for j in L if i <= j]
+    new_list
+
+The first approach matches the mathematical definition exactly and ensures that
+no value is matched with another value more than once by keeping the pairs
+sorted.  One of the reasons that comprehensions are useful is they mirror the
+mathematical language of describing a collection.  The only drawback to this
+approach is that it requires cycling through all combinations.  Because that are
+:math:`n` values to pair with each of :math:`n` values, this operation is
+:math:`O(n*n)=O(n^2)`.  Suppose that we know that there are no repeated values
+in ``L``.  In this case, we can filter by *indices* instead of *values*.  The
+resulting method, while still :math:`O(n^2)`, will be close to twice as fast.
+
+
+**Method 2 - Use indices and ``range`` to filter**
+
+.. ipython:: python
+
+    L = [1,2,3]
+    n = len(L)
+    new_list = [(L[i],L[j]) for i in range(n) for j in range(i,n)]
+    new_list
+
+This approach ensures that no indice is matched with another indice more than
+once.  The key point here is that we made the second ``range`` depend on the
+first, shortening the length of the sequence.  Provided that all the elements of
+``L`` are unique, this second method iterates over :math:`\frac{n(n-1)}{2}`
+elements instead of :math:`n^2`.  In the long run, this approach will be a
+little less than twice as fast but approach exactly twice as fast
+asymptotically.  Unfortunately, :math:`O\left(\frac{n(n-1)}{2}\right)=O\left(\frac{n^2}{2} -
+\frac{n}{2}\right)=O(n^2)`, so this will still be expensive for large list.
+
 Sometimes it is easier to describe what your don't want
 -------------------------------------------------------
 
 Suppose that we want to use list comprehensions to describe all the prime
 numbers up to ``n=120``.  A well-known algorithm for describing primes is the
 `Sieve of Eratosthenes <https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes>`_,
-For each number ``i`` between 2 and :math:`\sqrt{n}`, this algorithm crosses out all
-crossing out all the multiples of ``i``.  The remaining numbers will be prime.
-Notice that this algorithm describes numbers that are prime by *decribing all
-numbers that are not*.  The following two list comprehensions perform the task
-of finding all primes up to 120.
+For each number ``i`` between 2 and :math:`\sqrt{n}`, this algorithm crosses out
+all the multiples of ``i``.  The remaining numbers will be prime.  Notice that
+this algorithm describes numbers that are prime by *decribing all numbers that
+are not*.  The following two list comprehensions perform the task of finding all
+primes up to 120.
 
 .. ipython:: python
 
@@ -482,8 +646,7 @@ of finding all primes up to 120.
     <https://en.wikipedia.org/wiki/en:GNU_Free_Documentation_License>`_.
 
 As always, we can clean this code up with a little refactoring.  Let's use two
-lambda expressions to give meaning to the two range function calls in
-``not_prime``.
+lambda expressions to give meaning two applications of range in ``not_prime``.
 
 .. ipython:: python
 
@@ -495,6 +658,14 @@ lambda expressions to give meaning to the two range function calls in
     prime = [i for i in range(2,n+1) if i not in not_prime]
     prime
 
+.. admonition:: question
+
+    How might you make the last example more general?
+
+Apply Tranformations at Each Level of Abstraction
+-------------------------------------------------
+
+.. todo:: Include the examples found in ~/Desktop/grayscale.py
 TODO
 
 
