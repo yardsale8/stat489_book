@@ -79,11 +79,7 @@ Exercises
 
    .. shortanswer:: turtle_reflect
 
-      Turtle objects have methods and attributes. For example, a turtle has a
-      position and when you move the turtle forward, the position changes.
-      Think about the other methods shown in the summary above.  Which
-      attibutes, if any, does each method relate to?  Does the method change the
-      attribute?
+      Turtle objects have methods and attributes. For example, a turtle has a position and when you move the turtle forward, the position changes.  Think about the other methods shown in the summary above.  Which attibutes, if any, does each method relate to?  Does the method change the attribute?
 
 .. question:: turtle_ex_9
 
