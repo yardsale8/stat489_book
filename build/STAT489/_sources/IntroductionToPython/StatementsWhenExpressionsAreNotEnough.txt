@@ -106,7 +106,7 @@ chapter named **Functional Programming**.
 Chained conditionals
 --------------------
 
-The conditional expression allows use to write simple branching logic in the
+The conditional expression allows us to write simple branching logic in the
 midst of our expressions, but chaining conditional expressions to form more
 complicated logic can become hard to read.  Python provides a statement-block
 structure that will allow us to express more complicated Boolean logic in a

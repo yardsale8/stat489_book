@@ -38,7 +38,7 @@ At this point, you may be wondering why there is so much focus on expressions.
 Expressions are the building blocks for functional programs and using the right
 expressions can lead to programs that are easier to understand.  In particular,
 part of a program is **referentially transparent** if it can be replaced with
-it's value without changing the meaning of the progra, making it easier to
+it's value without changing the meaning of the program, making it easier to
 understand.  Expressions constructed out of lambda expressions, conditional
 expressions and operations will be *referentially transparent*.  
 
@@ -148,7 +148,7 @@ Designing functions as closures allows us to create multiple versions of
 In this example, we see that each of the ``apply_tax`` functions is bundled with
 the appropriate value and the second call to ``make_apply_tax`` did not affect
 the first call in any way.  This explains, in detail, how Python evaluates a
-lambda expression: a value is placed in memory that includes the function plus a
+lambda expression: a value is placed in memory that includes the function plus 
 the value of any outer variable referenced in the body.  This type of value is
 known as a closure.  Next, we consider the evaluation of a function call.  It
 turns out that the choice of order of this evaluation illustrate the distinction

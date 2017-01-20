@@ -243,7 +243,7 @@ Here is the example in activecode.  Give it a try!
     They don't appear in the result.
 
 Some people judge the quality of a programming language by the simplicity of
-the Hello, World! program. By this standard, Python does about as well as
+the Hello World program. By this standard, Python does about as well as
 possible.
 
 When working with data, it is natural to work *interactively*, e.g. execute a
@@ -271,7 +271,7 @@ are new to python.
 
     You should try to limit the use of print statements in your code.  In the
     interactive code blocks in the book, we are forced to use ``print`` to see
-    the output of our code, but you should should try to limit your use of the
+    the output of our code, but you should try to limit your use of the
     ``print`` function.
     
 .. admonition:: When to use `print` 
