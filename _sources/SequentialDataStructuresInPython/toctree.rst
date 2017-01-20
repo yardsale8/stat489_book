@@ -12,7 +12,7 @@ Sequential Data Structures in Python
     MutableAndImmutableSequences.rst
     ReferencesToSequences.rst
     SequenceMethodsandWorkingwithStringsAndLists.rst
-    TransformingSequencesWithComprehensions.rst
     ComputationalComplexityAndBigONotation.rst
+    TransformingSequencesWithComprehensions.rst
     OtherPythonSequenceTypes.rst
     Exercises.rst

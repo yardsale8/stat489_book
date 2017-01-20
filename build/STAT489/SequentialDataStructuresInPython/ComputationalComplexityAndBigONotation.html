@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.10. Computational Complexity and Big O Notation. &mdash; Runestone Interactive Overview</title>
+    <title>3.8. Computational Complexity and Big O Notation. &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="3. Sequential Data Structures in Python" href="toctree.html" />
-    <link rel="next" title="3.11. Other Python Sequence Types" href="OtherPythonSequenceTypes.html" />
-    <link rel="prev" title="3.8. Transforming Sequences with Comprehensions" href="TransformingSequencesWithComprehensions.html" />
+    <link rel="next" title="3.9. Transforming Sequences with Comprehensions" href="TransformingSequencesWithComprehensions.html" />
+    <link rel="prev" title="3.7. Sequence Methods and Working with Strings and Lists" href="SequenceMethodsandWorkingwithStringsAndLists.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,16 +263,16 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">3.10. Computational Complexity and Big O Notation.</a><ul>
-<li><a class="reference internal" href="#formal-definition">3.10.1. Formal definition</a></li>
-<li><a class="reference internal" href="#example">3.10.2. Example</a></li>
-<li><a class="reference internal" href="#infinite-asymptotics">3.10.3. Infinite asymptotics</a></li>
-<li><a class="reference internal" href="#properties">3.10.4. Properties</a></li>
-<li><a class="reference internal" href="#the-computational-complexity-of-the-find-method">3.10.5. The computational complexity of the <cite>find</cite> method</a></li>
-<li><a class="reference internal" href="#the-computational-complexity-of-item-lookup">3.10.6. The computational complexity of item lookup</a></li>
-<li><a class="reference internal" href="#the-complexity-of-the-slice-operator">3.10.7. The complexity of the slice operator</a></li>
-<li><a class="reference internal" href="#append-versus-concatenate">3.10.8. Append versus Concatenate</a></li>
-<li><a class="reference internal" href="#summary-of-computational-complexity-for-lists-and-strings">3.10.9. Summary of Computational Complexity for Lists and Strings</a></li>
+<li><a class="reference internal" href="#">3.8. Computational Complexity and Big O Notation.</a><ul>
+<li><a class="reference internal" href="#formal-definition">3.8.1. Formal definition</a></li>
+<li><a class="reference internal" href="#example">3.8.2. Example</a></li>
+<li><a class="reference internal" href="#infinite-asymptotics">3.8.3. Infinite asymptotics</a></li>
+<li><a class="reference internal" href="#properties">3.8.4. Properties</a></li>
+<li><a class="reference internal" href="#the-computational-complexity-of-the-find-method">3.8.5. The computational complexity of the <cite>find</cite> method</a></li>
+<li><a class="reference internal" href="#the-computational-complexity-of-item-lookup">3.8.6. The computational complexity of item lookup</a></li>
+<li><a class="reference internal" href="#the-complexity-of-the-slice-operator">3.8.7. The complexity of the slice operator</a></li>
+<li><a class="reference internal" href="#append-versus-concatenate">3.8.8. Append versus Concatenate</a></li>
+<li><a class="reference internal" href="#summary-of-computational-complexity-for-lists-and-strings">3.8.9. Summary of Computational Complexity for Lists and Strings</a></li>
 </ul>
 </li>
 </ul>
@@ -282,14 +282,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 3.8. Transforming Sequences with Comprehensions" data-toggle="tooltip">
-    <a href="TransformingSequencesWithComprehensions.html" >
+  <li id="relations-prev" title="Previous Chapter - 3.7. Sequence Methods and Working with Strings and Lists" data-toggle="tooltip">
+    <a href="SequenceMethodsandWorkingwithStringsAndLists.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 3.11. Other Python Sequence Types' data-toggle="tooltip" >
-    <a href="OtherPythonSequenceTypes.html" >
+  <li id="relations-next" title='Next Chapter - 3.9. Transforming Sequences with Comprehensions' data-toggle="tooltip" >
+    <a href="TransformingSequencesWithComprehensions.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -320,7 +320,7 @@
 <div class="container" id="main-content">
   
   <div class="section" id="computational-complexity-and-big-o-notation">
-<h1>3.10. Computational Complexity and Big O Notation.<a class="headerlink" href="#computational-complexity-and-big-o-notation" title="Permalink to this headline">¶</a></h1>
+<h1>3.8. Computational Complexity and Big O Notation.<a class="headerlink" href="#computational-complexity-and-big-o-notation" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This section is a modified copy of the <a class="reference external" href="https://en.wikipedia.org/wiki/Big_O_notation">Wikipedia page</a> on the big O notation,
@@ -345,7 +345,7 @@ the symbols <span class="math">\(o\)</span>, to describe other kinds of bounds o
 asymptotic growth rates.</p>
 <p>Big O notation is also used in many other fields to provide similar estimates.</p>
 <div class="section" id="formal-definition">
-<h2>3.10.1. Formal definition<a class="headerlink" href="#formal-definition" title="Permalink to this headline">¶</a></h2>
+<h2>3.8.1. Formal definition<a class="headerlink" href="#formal-definition" title="Permalink to this headline">¶</a></h2>
 <p>Let <span class="math">\(f\)</span> and <span class="math">\(g\)</span> be two functions defined on some subset of the
 real numbers. One writes</p>
 <div class="math">
@@ -369,7 +369,7 @@ This image illustrates the formal definition of the Big O notation.  The functio
 </div>
 </div>
 <div class="section" id="example">
-<h2>3.10.2. Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<h2>3.8.2. Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>In typical usage, the formal definition of <span class="math">\(O\)</span> notation is not used
 directly; rather, the <span class="math">\(O\)</span> notation for a function <span class="math">\(f\)</span> is derived by
 the following simplification rules:</p>
@@ -402,7 +402,7 @@ let <span class="math">\(x_0=1\)</span> and <span class="math">\(M=13\)</span>. 
 \[|6x^4 - 2x^3 + 5| \le 13 \,x^4 .\]</div>
 </div>
 <div class="section" id="infinite-asymptotics">
-<h2>3.10.3. Infinite asymptotics<a class="headerlink" href="#infinite-asymptotics" title="Permalink to this headline">¶</a></h2>
+<h2>3.8.3. Infinite asymptotics<a class="headerlink" href="#infinite-asymptotics" title="Permalink to this headline">¶</a></h2>
 <p>Big O notation is useful when analyzing algorithms for efficiency.  For
 example, the time (or the number of steps) it takes to complete a problem of
 size <span class="math">\(n\)</span> might be found to be <span class="math">\(T(n) = 4n^2 − 2n + 2\)</span>.  As <span class="math">\(n\)</span>
@@ -436,7 +436,7 @@ This image compares the rate of growth for functions from various Big O classes.
 </div>
 </div>
 <div class="section" id="properties">
-<h2>3.10.4. Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<h2>3.8.4. Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
 <p>If the function <span class="math">\(f\)</span> can be written as a finite sum of other functions,
 then the fastest growing one determines the order of <span class="math">\(f(n)\)</span>. For example</p>
 <div class="math">
@@ -492,7 +492,7 @@ g).\)</span></p>
 operations on Python lists.</p>
 </div>
 <div class="section" id="the-computational-complexity-of-the-find-method">
-<h2>3.10.5. The computational complexity of the <cite>find</cite> method<a class="headerlink" href="#the-computational-complexity-of-the-find-method" title="Permalink to this headline">¶</a></h2>
+<h2>3.8.5. The computational complexity of the <cite>find</cite> method<a class="headerlink" href="#the-computational-complexity-of-the-find-method" title="Permalink to this headline">¶</a></h2>
 <p>In this section, we will look at the run-time complexity of the <code class="docutils literal"><span class="pre">find</span></code> method
 of a list or a string.   For a list, we are interested in the order of growth
 of the <code class="docutils literal"><span class="pre">find</span></code> method as the length of the sequence <span class="math">\(n\)</span> grows without
@@ -525,7 +525,7 @@ assumptions.  A more formal discussion of this topic can be found on <a class="r
 </div>
 </div>
 <div class="section" id="the-computational-complexity-of-item-lookup">
-<h2>3.10.6. The computational complexity of item lookup<a class="headerlink" href="#the-computational-complexity-of-item-lookup" title="Permalink to this headline">¶</a></h2>
+<h2>3.8.6. The computational complexity of item lookup<a class="headerlink" href="#the-computational-complexity-of-item-lookup" title="Permalink to this headline">¶</a></h2>
 <p>Now consider the order of growth of the indexing operator.  Recall that Python
 lists are really a list of references to other objects in memory.  This means
 that a list really holds a list of memory addresses, e.g. which will be either
@@ -557,7 +557,7 @@ some experience in one of these languages.</p>
 </div>
 </div>
 <div class="section" id="the-complexity-of-the-slice-operator">
-<h2>3.10.7. The complexity of the slice operator<a class="headerlink" href="#the-complexity-of-the-slice-operator" title="Permalink to this headline">¶</a></h2>
+<h2>3.8.7. The complexity of the slice operator<a class="headerlink" href="#the-complexity-of-the-slice-operator" title="Permalink to this headline">¶</a></h2>
 <p>The complexity of the slice operator is a little more complicated and depends
 on the rate at which the range of values in the slice grow.  Recall that the
 slice returns a <strong>new list</strong>, which means that we will need to construct a new
@@ -588,7 +588,7 @@ Finally, we note that this case includes <code class="docutils literal"><span cl
 operator to copy the entire list.</p>
 </div>
 <div class="section" id="append-versus-concatenate">
-<h2>3.10.8. Append versus Concatenate<a class="headerlink" href="#append-versus-concatenate" title="Permalink to this headline">¶</a></h2>
+<h2>3.8.8. Append versus Concatenate<a class="headerlink" href="#append-versus-concatenate" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">append</span></code> method adds a new item to the end of a list.  It is also
 possible to add a new item to the end of a list by using the concatenation
 operator.  However, you need to be careful.</p>
@@ -774,7 +774,7 @@ to add memory and copy the list happens to infrequently, we can consider
             </ul>
             <span class="target" id="index-0"></span></div>
 <div class="section" id="summary-of-computational-complexity-for-lists-and-strings">
-<span id="index-1"></span><h2>3.10.9. Summary of Computational Complexity for Lists and Strings<a class="headerlink" href="#summary-of-computational-complexity-for-lists-and-strings" title="Permalink to this headline">¶</a></h2>
+<span id="index-1"></span><h2>3.8.9. Summary of Computational Complexity for Lists and Strings<a class="headerlink" href="#summary-of-computational-complexity-for-lists-and-strings" title="Permalink to this headline">¶</a></h2>
 <p>In this section, we looked at the complexity of various operations on lists and
 strings.  When selecting a data structure for your program, it is important to
 consider the operations that you will perform and select the best data
@@ -795,19 +795,19 @@ structures is</div></blockquote>
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 3.8. Transforming Sequences with Comprehensions' data-toggle="tooltip">
-    <a href="TransformingSequencesWithComprehensions.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 3.7. Sequence Methods and Working with Strings and Lists' data-toggle="tooltip">
+    <a href="SequenceMethodsandWorkingwithStringsAndLists.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="TransformingSequencesWithComprehensions.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="SequenceMethodsandWorkingwithStringsAndLists.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 3.11. Other Python Sequence Types' data-toggle="tooltip" >
-    <a href="OtherPythonSequenceTypes.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 3.9. Transforming Sequences with Comprehensions' data-toggle="tooltip" >
+    <a href="TransformingSequencesWithComprehensions.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="OtherPythonSequenceTypes.html" >Next Section - 3.11. Other Python Sequence Types</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="TransformingSequencesWithComprehensions.html" >Next Section - 3.9. Transforming Sequences with Comprehensions</a>
 
 <script type="text/javascript">
 

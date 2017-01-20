@@ -1,7 +1,8 @@
 Other Python Sequence Types
 ===========================
 
-There are number of modules that add specialized sequence data structures often useful in certain situations.
+There are number of modules that add specialized sequence data structures often
+useful in certain situations.
 
 * The ``collections`` module from the standard module, which includes
     * ``deque``, a list-like structure which can efficiently append objects to either ends.

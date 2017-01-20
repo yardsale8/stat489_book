@@ -219,7 +219,7 @@ figure illustrates the scope of all three ``x`` variables.
     This image shows the scope of each variable in the above example.  Start
     with the inner most ``x``, which is bound to the the argument of ``g(3)``,
     namely 3.  The scope of the inner most ``x`` is the body of the inner
-    lambda.  The outer paramter gets bound to 2, and the scope of this variable
+    lambda.  The outer parameter gets bound to 2, and the scope of this variable
     is inside the body of the outer function, but not in the body of the inner
     lambda.  The global variable has a scope that consists of the global name
     space but is over-ridden in the body of both functions.
@@ -227,13 +227,13 @@ figure illustrates the scope of all three ``x`` variables.
 
 Ideally, we would like to think about evaluation of referentially transparent
 expressions using substitution: replace each expression with the right value.
-But substitution become tricky when using variables with the same name but
+But substitution becomes tricky when using variables with the same name but
 different scopes.  The solution to rename the variable so that all variables
 are unique.
 
 .. admonition:: Capture-free variable renaming strategy
 
-    Starting with the inner-most expressions, rename all varaibles by adding a
+    Starting with the inner-most expressions, rename all variables by adding a
     unique number to all instances of a variable in its scope.
 
 After applying this transformation, it is now safe to use substitution to
