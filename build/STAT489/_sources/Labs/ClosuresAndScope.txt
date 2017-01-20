@@ -1,5 +1,6 @@
-Lab - Closures and Scope
-========================
+Lab 1 - Closures and Scope
+==========================
+
 **Instructions:** Open a new word document and document your work as you
 complete each task and answer each question.
 
@@ -163,3 +164,10 @@ Consider each of the following examples.
 
     Rewrite each of the examples from the last task, this time renaming the
     variables using the capture free approach.
+
+.. note::
+
+     If you are interested in the gritty details, the `top two answers to this
+     stackoverflow question
+     <http://stackoverflow.com/questions/4020419/why-arent-python-nested-functions-called-closures>`_
+     include more details.
