@@ -210,51 +210,69 @@ command.
 
 The ``pvector`` function from the ``pyrsistent`` module is an immutable
 persistent version of a list.  First, we illustrate the immutability of the
-``pvector`` by trying to assign a new value at index 0.
+``pvector``.  We are allowed to access the value of ``fruit`` at index ``0``,
+but now assign a new value at this index.
 
-.. ipython::
+.. ipython:: python
 
-    In [1]: from pyrsistent import pvector
+    from pyrsistent import pvector
+    fruit = pvector(["banana", "apple", "cherry"])
+    fruit[0]
+    fruit[0] = "pear"
 
-    In [2]: fruit = pvector(["banana", "apple", "cherry"])
+Slicing a ``pvector`` results in the output we would expect based on our
+experience slicing Python lists.
 
-    In [3]: fruit[0] = "pear"
-    ---------------------------------------------------------------------------
-    TypeError                                 Traceback (most recent call last)
-    <ipython-input-19-13775da5cf96> in <module>()
-    ----> 1 fruit[0] = "pear"
+.. ipython:: python
 
-    TypeError: 'pvectorc.PVector' object does not support item assignment
+    fruit[:3]
+    fruit[1:]
 
 The ``pvector`` class provides a method called ``set`` that allows us to
 (efficiently) construct a new ``pvector`` with a new value assigned to a
 specific instance.
 
+
 .. ipython:: 
 
-    In [4]: new_fruit = fruit.set(0, "pear")
+    new_fruit = fruit.set(0, "pear")
+    new_fruit
 
-    In [5]: new_fruit
-    Out[5]: pvector(['pear', 'apple', 'cherry'])
+Recall that the ``is`` operator can be used to decide whether or not two
+variables reference the same value in memory.  Below we verify that
+``new_fruit`` is indeed a new ``pvector``, different than the original
+``fruit``.
 
-Recall that the ``id`` function gives a unique id number to each value in
-memory.  We can use ``id`` to verify that ``new_fruit`` is indeed a new
-``pvector``, different than the original ``fruit``.
+.. ipython:: python 
 
-.. ipython::  
+    fruit is new_fruit
 
-    In [6]: id(fruit) == id(new_fruit)
-    Out[6]: False
+Slicing a ``pvector`` is more efficient than slicing a Python list.
+This is due to the fact that slicing and ``set`` are designed to share common
+data instead of copying all the data.  This results in a performance gain when
+slicing ``pvectors``.
+
+.. ipython:: python
+
+    L = list(range(10^15))
+    %timeit L[:]
+
+.. ipython:: python
+
+    V = pvector(range(10^15))
+    %timeit V[:]
+
 
 Other efficient features of the ``pvector`` include using ``append`` to add to
-the end of the vector, as well as slicing the vector. 
+the end of the vector.
 
 .. ipython:: python
 
     fruit2 = fruit.append("watermelon")
     fruit  # The original fruit
     fruit2
-    id(fruit) == id(fruit)  # Not the same vector
+    fruit is fruit2  # Not the same vector
+
 
 When writing programs in the functional style, consider using persistent and
 immutable data structures.  We will explore other data structures from this
@@ -266,3 +284,47 @@ module in later sections on associative data structures and recursion.
     activecode window to try out anything you like.
 
     .. activecode:: scratch_09_01
+
+
+.. mchoice:: mutable_0
+    :answer_a: Data can be changed without making a new copy of a data structure.
+    :answer_b: Data cannot be changed without making a new copy of a data structure.
+    :correct: a
+    
+    What does it mean for a data structure to be mutable?
+
+.. mchoice:: mutable_1
+    :answer_a: Mutable
+    :answer_b: Immutable
+    :correct: a
+    :feedback_a: Lists elements can be changed in place.
+    :feedback_b: Lists elements can be changed in place.
+    
+    Are python lists mutable or immutable?
+
+.. mchoice:: mutable_2
+    :answer_a: Mutable
+    :answer_b: Immutable
+    :correct: b
+    :feedback_a: You cannot change the characters in a string.
+    :feedback_b: You cannot change the characters in a string.
+
+    Are python strings mutable or immutable?
+
+.. mchoice:: mutable_3
+    :answer_a: Mutable
+    :answer_b: Immutable
+    :correct: b
+    :feedback_a: You cannot change the data in a tuple.
+    :feedback_b: You cannot change the data in a tuple.
+
+    Are python tuples mutable or immutable?
+
+.. mchoice:: mutable_4
+    :answer_a: Mutable
+    :answer_b: Immutable
+    :correct: b
+    :feedback_a: You cannot change the data in a pvector.
+    :feedback_b: You cannot change the data in a pvector.
+
+    Are python pvectors from the pyrsistent module mutable or immutable?

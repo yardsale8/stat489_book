@@ -1,4 +1,4 @@
-..  Copyright (C)  Todd Iverson.  Permission is granted to copy, distribute
+    ..  Copyright (C)  Todd Iverson.  Permission is granted to copy, distribute
     and/or modify this document under the terms of the GNU Free Documentation
     License, Version 1.3 or any later version published by the Free Software
     Foundation; with Invariant Sections being Forward, Prefaces, and
@@ -38,7 +38,7 @@ At this point, you may be wondering why there is so much focus on expressions.
 Expressions are the building blocks for functional programs and using the right
 expressions can lead to programs that are easier to understand.  In particular,
 part of a program is **referentially transparent** if it can be replaced with
-it's value without changing the meaning of the program, making it easier to
+it's value without changing the meaning of the progra, making it easier to
 understand.  Expressions constructed out of lambda expressions, conditional
 expressions and operations will be *referentially transparent*.  
 
@@ -147,12 +147,84 @@ Designing functions as closures allows us to create multiple versions of
 
 In this example, we see that each of the ``apply_tax`` functions is bundled with
 the appropriate value and the second call to ``make_apply_tax`` did not affect
-the first call in any way.  This explains, in detail, how Python evaluates a
-lambda expression: a value is placed in memory that includes the function plus 
-the value of any outer variable referenced in the body.  This type of value is
-known as a closure.  Next, we consider the evaluation of a function call.  It
-turns out that the choice of order of this evaluation illustrate the distinction
-between *lazy evaluation* and *strict evaluation*.
+the first call in any way.  This explains, in detail, how Python evaluates
+nested lambda expressions: a value is placed in memory that includes the
+function plus the value of any outer variable referenced in the body.  This type
+of value is known as a closure.  Next, we consider the evaluation of a function
+call.  It turns out that the choice of order of this evaluation illustrate the
+distinction between *lazy evaluation* and *strict evaluation*.
+
+There are two more subtle implementation details that we need to understand
+before we can understand the evaluation of functions and function calls in
+Python.  In the next section, we look at when Python creates a closure and how
+Python resolves local and global variables.
+
+Closure creation and the resolution of global and local variables
+-----------------------------------------------------------------
+
+Python functions are not always closures and whether or not Python creates a
+closure depends on whether or not the function references a *local variable
+bound outside its scope*.  Consider the following example.
+
+.. codelens:: closures3
+
+     # global variable
+     x = 2
+     f = lambda y: x*y
+     g = lambda y: lambda z: z*(x+y)
+     h = g(3)
+
+In the above example, the first two function are not closures but the third
+function is.  Function that are not closures do not get their own frame of
+reference, where as a closure does.  This is illustrated in the following
+figure.
+
+.. figure:: Figures/closure_and_not.png
+     :alt: Examples of Python functions that are and are not closures.
+
+     ..
+
+      In this figure, we see that the first two functions lack their own
+      frame-of-reference and are not closures.  On the other hand, the third
+      function contains a local frame that contains the value of ``y`` and is a
+      closure.  
+      
+Python's evaluation rules are different for references to global variables
+(variables defined in the main namespace) and local variables defined outside a
+function's body.  If a function does not reference any local variable outside of
+its scope, it won't be a closure.  Furthermore, references to global variables
+have **dynamic resolution**, meaning the value of the variable is resolved at
+run-time, not at the creation of the function.
+
+In the above example shown in codelens, we see that the third function ``h`` has
+a reference to a bound local variable outside its scope, namely ``y``.
+Furthermore, the value that is referenced in this local frame is the value of
+``y`` when ``h`` was created.  This method of resolving a variable is known as
+**lexical resolution**.  References to global variables have a different method
+of resolution in Python.
+
+.. codelens:: closures4
+
+     # global variable
+     x = 2
+     f = lambda y: lambda z: z*(x+y)
+
+     g = f(3)
+     x = 4
+     result = g(5)
+
+In this last example, we see that the value of ``x`` used in the calculation of
+``result`` was 4 and not 2.  This indicates  that references to global variables
+are resolved at run-time using the current state of the function at the time of
+the function call.  This type of resolution is known as **dynamic resolution**.
+
+.. .. note::
+.. 
+..      This section highlights some of the distinctions between Python and other
+..      high-level languages.  For example, JavaScript and Lua create closures for
+..      all functions.
+
+.. todo:: Fix the above section, a short google search shows it is more complicated than this.
 
 Variable Scope and Substitution
 -------------------------------

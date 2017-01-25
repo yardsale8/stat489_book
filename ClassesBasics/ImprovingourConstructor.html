@@ -101,6 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
+    <link rel="up" title="Classes and Objects - the Basics" href="toctree.html" />
+    <link rel="next" title="Adding Other Methods to our Class" href="AddingOtherMethodstoourClass.html" />
+    <link rel="prev" title="User Defined Classes" href="UserDefinedClasses.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -268,6 +271,18 @@
         
         
           
+  <li id="relations-prev" title="Previous Chapter - User Defined Classes" data-toggle="tooltip">
+    <a href="UserDefinedClasses.html" >
+      <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
+    </a>
+  </li>
+  
+  <li id="relations-next" title='Next Chapter - Adding Other Methods to our Class' data-toggle="tooltip" >
+    <a href="AddingOtherMethodstoourClass.html" >
+      <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
+    </a>
+  </li>
+  <li class="divider-vertical"></li>
 
 <script type="text/javascript">
   opts = {'placement':'bottom',
@@ -305,7 +320,7 @@ the <code class="docutils literal"><span class="pre">__init__</span></code> meth
 <p class="cl_caption"><span class="cl_caption_text"> (chp13_improveconstructor)</span> </p>
 </div>
 <script type="text/javascript">
-var chp13_improveconstructor_trace = {"trace": [{"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": [], "event": "step_line", "line": 1, "globals": {}, "heap": {}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["Point"], "event": "step_line", "line": 9, "globals": {"Point": ["REF", 1]}, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "__init___f1", "ordered_varnames": ["self", "initX", "initY"], "encoded_locals": {"initY": 6, "self": ["REF", 3], "initX": 7}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "__init__"}], "func_name": "__init__", "stdout": "", "ordered_globals": ["Point"], "event": "call", "line": 4, "globals": {"Point": ["REF", 1]}, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null], "3": ["INSTANCE", "Point"]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "__init___f1", "ordered_varnames": ["self", "initX", "initY"], "encoded_locals": {"initY": 6, "self": ["REF", 3], "initX": 7}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "__init__"}], "func_name": "__init__", "stdout": "", "ordered_globals": ["Point"], "event": "step_line", "line": 6, "globals": {"Point": ["REF", 1]}, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null], "3": ["INSTANCE", "Point"]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "__init___f1", "ordered_varnames": ["self", "initX", "initY"], "encoded_locals": {"initY": 6, "self": ["REF", 3], "initX": 7}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "__init__"}], "func_name": "__init__", "stdout": "", "ordered_globals": ["Point"], "event": "step_line", "line": 7, "globals": {"Point": ["REF", 1]}, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null], "3": ["INSTANCE", "Point", ["x", 7]]}}, {"stack_to_render": [{"is_highlighted": true, "unique_hash": "__init___f1", "ordered_varnames": ["self", "initX", "initY", "__return__"], "encoded_locals": {"initY": 6, "__return__": null, "self": ["REF", 3], "initX": 7}, "is_zombie": false, "frame_id": 1, "is_parent": false, "parent_frame_id_list": [], "func_name": "__init__"}], "func_name": "__init__", "stdout": "", "ordered_globals": ["Point"], "event": "return", "line": 7, "globals": {"Point": ["REF", 1]}, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null], "3": ["INSTANCE", "Point", ["x", 7], ["y", 6]]}}, {"stack_to_render": [], "func_name": "<module>", "stdout": "", "ordered_globals": ["Point", "p"], "event": "return", "line": 9, "globals": {"Point": ["REF", 1], "p": ["REF", 3]}, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null], "3": ["INSTANCE", "Point", ["x", 7], ["y", 6]]}}], "code": "class Point:\n    \"\"\" Point class for representing and manipulating x,y coordinates. \"\"\"\n\n    def __init__(self, initX, initY):\n        \"\"\" Create a new point at the given coordinates. \"\"\"\n        self.x = initX\n        self.y = initY\n\np = Point(7, 6)"};
+var chp13_improveconstructor_trace = {"code": "class Point:\n    \"\"\" Point class for representing and manipulating x,y coordinates. \"\"\"\n\n    def __init__(self, initX, initY):\n        \"\"\" Create a new point at the given coordinates. \"\"\"\n        self.x = initX\n        self.y = initY\n\np = Point(7, 6)", "trace": [{"ordered_globals": [], "line": 1, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {}, "stdout": ""}, {"ordered_globals": ["Point"], "line": 9, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null]}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"Point": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["Point"], "line": 4, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null], "3": ["INSTANCE", "Point"]}, "stack_to_render": [{"is_highlighted": true, "frame_id": 1, "unique_hash": "__init___f1", "encoded_locals": {"self": ["REF", 3], "initY": 6, "initX": 7}, "parent_frame_id_list": [], "func_name": "__init__", "is_zombie": false, "is_parent": false, "ordered_varnames": ["self", "initX", "initY"]}], "event": "call", "func_name": "__init__", "globals": {"Point": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["Point"], "line": 6, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null], "3": ["INSTANCE", "Point"]}, "stack_to_render": [{"is_highlighted": true, "frame_id": 1, "unique_hash": "__init___f1", "encoded_locals": {"self": ["REF", 3], "initY": 6, "initX": 7}, "parent_frame_id_list": [], "func_name": "__init__", "is_zombie": false, "is_parent": false, "ordered_varnames": ["self", "initX", "initY"]}], "event": "step_line", "func_name": "__init__", "globals": {"Point": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["Point"], "line": 7, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null], "3": ["INSTANCE", "Point", ["x", 7]]}, "stack_to_render": [{"is_highlighted": true, "frame_id": 1, "unique_hash": "__init___f1", "encoded_locals": {"self": ["REF", 3], "initY": 6, "initX": 7}, "parent_frame_id_list": [], "func_name": "__init__", "is_zombie": false, "is_parent": false, "ordered_varnames": ["self", "initX", "initY"]}], "event": "step_line", "func_name": "__init__", "globals": {"Point": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["Point"], "line": 7, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null], "3": ["INSTANCE", "Point", ["x", 7], ["y", 6]]}, "stack_to_render": [{"is_highlighted": true, "frame_id": 1, "unique_hash": "__init___f1", "encoded_locals": {"self": ["REF", 3], "initY": 6, "__return__": null, "initX": 7}, "parent_frame_id_list": [], "func_name": "__init__", "is_zombie": false, "is_parent": false, "ordered_varnames": ["self", "initX", "initY", "__return__"]}], "event": "return", "func_name": "__init__", "globals": {"Point": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["Point", "p"], "line": 9, "heap": {"1": ["CLASS", "Point", [], ["__init__", ["REF", 2]]], "2": ["FUNCTION", "__init__(self, initX, initY)", null], "3": ["INSTANCE", "Point", ["x", 7], ["y", 6]]}, "stack_to_render": [], "event": "return", "func_name": "<module>", "globals": {"p": ["REF", 3], "Point": ["REF", 1]}, "stdout": ""}]};
 var chp13_improveconstructor_vis;
 
 $(document).ready(function() {
@@ -351,6 +366,19 @@ $(window).resize(function() {
 
   
       
+  <li id="relations-prev" class="navLink" title='Previous Section - User Defined Classes' data-toggle="tooltip">
+    <a href="UserDefinedClasses.html" >
+      <i class='prevNav glyphicon glyphicon-chevron-left'></i>
+    </a>
+  </li>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="UserDefinedClasses.html" ></a>
+  
+  <li id="relations-next" class="navLink" title='Next Section - Adding Other Methods to our Class' data-toggle="tooltip" >
+    <a href="AddingOtherMethodstoourClass.html" >
+      <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
+    </a>
+  </li>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="AddingOtherMethodstoourClass.html" >Next Section - Adding Other Methods to our Class</a>
 
 <script type="text/javascript">
 
