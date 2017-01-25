@@ -342,65 +342,52 @@ you simply write a boolean expression using the equality operator.</p>
 <span class="go">              Out[7]: True</span>
 </pre></div>
 </div>
-<div class="admonition caution">
-<p class="first admonition-title">Caution</p>
-<p>Tests for equality on list don&#8217;t work in the same way, which we will explain
-in a later section when discussing mutable and immutable sequences.</p>
-<div class="last highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-
-<span class="gp">In [9]: </span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-
-<span class="gp">In [10]: </span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
-<span class="gh">Out[10]: </span><span class="go">True</span>
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="the-in-and-not-in-operators">
 <h2>3.4.2. The <code class="docutils literal"><span class="pre">in</span></code> and <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> operators<a class="headerlink" href="#the-in-and-not-in-operators" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">in</span></code> operator tests if one string is a substring of another:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="s1">&#39;p&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
-<span class="gh">Out[11]: </span><span class="go">True</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="s1">&#39;p&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="gh">Out[8]: </span><span class="go">True</span>
 
-<span class="gp">In [12]: </span><span class="s1">&#39;i&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
-<span class="go">              Out[12]: False</span>
+<span class="gp">In [9]: </span><span class="s1">&#39;i&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="go">             Out[9]: False</span>
 
-<span class="gp">In [13]: </span><span class="s1">&#39;ap&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
-<span class="go">                             Out[13]: True</span>
+<span class="gp">In [10]: </span><span class="s1">&#39;ap&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="go">                           Out[10]: True</span>
 
-<span class="gp">In [14]: </span><span class="s1">&#39;pa&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
-<span class="go">                                           Out[14]: False</span>
+<span class="gp">In [11]: </span><span class="s1">&#39;pa&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="go">                                         Out[11]: False</span>
 </pre></div>
 </div>
 <p>Note that a string is a substring of itself, and the empty string is a substring
 of any other string. (Also note that computer scientists like to think about
 these edge cases quite carefully!)</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="s1">&#39;a&#39;</span> <span class="ow">in</span> <span class="s1">&#39;a&#39;</span>
-<span class="gh">Out[15]: </span><span class="go">True</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="s1">&#39;a&#39;</span> <span class="ow">in</span> <span class="s1">&#39;a&#39;</span>
+<span class="gh">Out[12]: </span><span class="go">True</span>
 
-<span class="gp">In [16]: </span><span class="s1">&#39;apple&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
-<span class="go">              Out[16]: True</span>
+<span class="gp">In [13]: </span><span class="s1">&#39;apple&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="go">              Out[13]: True</span>
 
-<span class="gp">In [17]: </span><span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="s1">&#39;a&#39;</span>
-<span class="go">                            Out[17]: True</span>
+<span class="gp">In [14]: </span><span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="s1">&#39;a&#39;</span>
+<span class="go">                            Out[14]: True</span>
 
-<span class="gp">In [18]: </span><span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
-<span class="go">                                          Out[18]: True</span>
+<span class="gp">In [15]: </span><span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="go">                                          Out[15]: True</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> operator returns the logical opposite result of <code class="docutils literal"><span class="pre">in</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="s1">&#39;x&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
-<span class="gh">Out[19]: </span><span class="go">True</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="s1">&#39;x&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;apple&#39;</span>
+<span class="gh">Out[16]: </span><span class="go">True</span>
 </pre></div>
 </div>
 <p>We can also use <code class="docutils literal"><span class="pre">in</span></code> and <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> to test membership for lists.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">fruit</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">fruit</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
 
-<span class="gp">In [21]: </span><span class="s2">&quot;apple&quot;</span> <span class="ow">in</span> <span class="n">fruit</span>
-<span class="gh">Out[21]: </span><span class="go">True</span>
+<span class="gp">In [18]: </span><span class="s2">&quot;apple&quot;</span> <span class="ow">in</span> <span class="n">fruit</span>
+<span class="gh">Out[18]: </span><span class="go">True</span>
 
-<span class="gp">In [22]: </span><span class="s2">&quot;pear&quot;</span> <span class="ow">in</span> <span class="n">fruit</span>
-<span class="go">              Out[22]: False</span>
+<span class="gp">In [19]: </span><span class="s2">&quot;pear&quot;</span> <span class="ow">in</span> <span class="n">fruit</span>
+<span class="go">              Out[19]: False</span>
 </pre></div>
 </div>
 <p><strong>Check your understanding</strong></p>
@@ -439,26 +426,26 @@ these edge cases quite carefully!)</p>
 <a class="reference external" href="http://en.wikipedia.org/wiki/Lexicographic_order">lexicographical order</a>.
 This is similar to the alphabetical order you would use with a dictionary,
 except that all the uppercase letters come before all the lowercase letters.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;zebra&quot;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;zebra&quot;</span>
 
-<span class="gp">In [24]: </span><span class="n">word</span> <span class="o">&lt;</span> <span class="s2">&quot;banana&quot;</span>
-<span class="gh">Out[24]: </span><span class="go">False</span>
+<span class="gp">In [21]: </span><span class="n">word</span> <span class="o">&lt;</span> <span class="s2">&quot;banana&quot;</span>
+<span class="gh">Out[21]: </span><span class="go">False</span>
 
-<span class="gp">In [25]: </span><span class="n">word</span> <span class="o">&gt;</span> <span class="s2">&quot;banana&quot;</span>
-<span class="go">               Out[25]: True</span>
+<span class="gp">In [22]: </span><span class="n">word</span> <span class="o">&gt;</span> <span class="s2">&quot;banana&quot;</span>
+<span class="go">               Out[22]: True</span>
 </pre></div>
 </div>
 <p>It is probably clear to you that the word <cite>apple</cite> would be less than (come
 before) the word <code class="docutils literal"><span class="pre">banana</span></code>.  After all, <cite>a</cite> is before <cite>b</cite> in the alphabet.  But
 what if we consider the words <code class="docutils literal"><span class="pre">apple</span></code> and <code class="docutils literal"><span class="pre">Apple</span></code>?  Are they the same?</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;banana&quot;</span>
-<span class="gh">Out[26]: </span><span class="go">True</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;banana&quot;</span>
+<span class="gh">Out[23]: </span><span class="go">True</span>
 
-<span class="gp">In [27]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">==</span> <span class="s2">&quot;Apple&quot;</span>
-<span class="go">              Out[27]: False</span>
+<span class="gp">In [24]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">==</span> <span class="s2">&quot;Apple&quot;</span>
+<span class="go">              Out[24]: False</span>
 
-<span class="gp">In [28]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;Apple&quot;</span>
-<span class="go">                             Out[28]: False</span>
+<span class="gp">In [25]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;Apple&quot;</span>
+<span class="go">                             Out[25]: False</span>
 </pre></div>
 </div>
 <p>It turns out, as you recall from our discussion of variable names, that
@@ -467,20 +454,20 @@ The way the computer knows they are different is that each character is assigned
 a unique integer value.  &#8220;A&#8221; is 65, &#8220;B&#8221; is 66, and &#8220;5&#8221; is 53.  The way you can
 find out the so-called <strong>ordinal value</strong> for a given character is to use a
 character function called <code class="docutils literal"><span class="pre">ord</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
-<span class="gh">Out[29]: </span><span class="go">65</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="gh">Out[26]: </span><span class="go">65</span>
 
-<span class="gp">In [30]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
-<span class="go">            Out[30]: 66</span>
+<span class="gp">In [27]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="go">            Out[27]: 66</span>
 
-<span class="gp">In [31]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
-<span class="go">                        Out[31]: 53</span>
+<span class="gp">In [28]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+<span class="go">                        Out[28]: 53</span>
 
-<span class="gp">In [32]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
-<span class="go">                                    Out[32]: 97</span>
+<span class="gp">In [29]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="go">                                    Out[29]: 97</span>
 
-<span class="gp">In [33]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">&gt;</span> <span class="s2">&quot;Apple&quot;</span>
-<span class="go">                                                Out[33]: True</span>
+<span class="gp">In [30]: </span><span class="s2">&quot;apple&quot;</span> <span class="o">&gt;</span> <span class="s2">&quot;Apple&quot;</span>
+<span class="go">                                                Out[30]: True</span>
 </pre></div>
 </div>
 <p>When you compare characters or strings to one another, Python converts the
@@ -492,22 +479,22 @@ computers do not.  A common way to address this issue is to convert strings to a
 standard format, such as all lowercase, before performing the comparison.</p>
 <p>There is also a similar function called <code class="docutils literal"><span class="pre">chr</span></code> that converts integers into
 their character equivalent.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span>
-<span class="gh">Out[34]: </span><span class="go">&#39;A&#39;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span>
+<span class="gh">Out[31]: </span><span class="go">&#39;A&#39;</span>
 
-<span class="gp">In [35]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">66</span><span class="p">)</span>
-<span class="go">             Out[35]: &#39;B&#39;</span>
+<span class="gp">In [32]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">66</span><span class="p">)</span>
+<span class="go">             Out[32]: &#39;B&#39;</span>
 
-<span class="gp">In [36]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
-<span class="go">                          Out[36]: &#39;1&#39;</span>
+<span class="gp">In [33]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
+<span class="go">                          Out[33]: &#39;1&#39;</span>
 
-<span class="gp">In [37]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">53</span><span class="p">)</span>
-<span class="go">                                       Out[37]: &#39;5&#39;</span>
+<span class="gp">In [34]: </span><span class="nb">chr</span><span class="p">(</span><span class="mi">53</span><span class="p">)</span>
+<span class="go">                                       Out[34]: &#39;5&#39;</span>
 
-<span class="gp">In [38]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-<span class="go">                                                    Out[38]: 32</span>
+<span class="gp">In [35]: </span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="go">                                                    Out[35]: 32</span>
 
-<span class="gp">In [39]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;The character for 32 is&quot;</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="s2">&quot;!!!&quot;</span><span class="p">)</span>
+<span class="gp">In [36]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;The character for 32 is&quot;</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="s2">&quot;!!!&quot;</span><span class="p">)</span>
 <span class="go">                                                                The character for 32 is   !!!</span>
 </pre></div>
 </div>

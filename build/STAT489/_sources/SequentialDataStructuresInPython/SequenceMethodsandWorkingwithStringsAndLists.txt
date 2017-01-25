@@ -166,187 +166,32 @@ List Methods
 ------------
 
 The dot operator can also be used to access built-in methods of list objects.
-``append`` is a list method which adds the argument passed to it to the end of
-the list. Continuing with this example, we show several other list methods.
-Many of them are easy to understand.  
+This example shows several other list methods, all of which are easy to
+understand.  
 
 .. ipython:: python
 
-    mylist = []
-    mylist.append(5)
-    mylist.append(27)
-    mylist.append(3)
-    mylist.append(12)
-    mylist
-
-    mylist.insert(1, 12)
-    mylist
+    mylist = [5, 27, 3, 12]
     mylist.count(12)
-
     mylist.index(3)
-    mylist.count(5)
-
-    mylist.reverse()
-    mylist
-
-    mylist.sort()
-    mylist
-
-    mylist.remove(5)
-    mylist
+    list2 = sorted(mylist)
+    list2
+    mylist is list2
+    l3 = reverse(mylist)
+    l3
+    l3 is mylist
 
 .. note::
 
-    It should be noted that many of these methods *mutate* the list in place.
-    mutating data in place in memory can be efficient, but is also confusing.  to
-    understand code that mutates a list (or even a variable) we are forced to track
-    the **state** of each object throughout the program.  programs that focus on
-    mutation are not only harder to understand, but harder to distribute over many
-    machines.  it is for this second reason that distributed systems such as hadoop,
-    mapreduce, and spark use **stateless**, immutable constructions.
+    It should be noted that many of Python's list methods *mutate* the list in
+    place.  While mutating data in place in memory can be efficient, it also
+    makes code hard to read.  To understand code that mutates a list (or even a
+    variable) we are forced to track the **state** of each object throughout the
+    program.  Programs that focus on mutation are not only harder to understand,
+    but harder to distribute over many machines.  It is for this second reason
+    that distributed systems such as Hadoop, MapReduce, and Spark use
+    **stateless**, immutable constructions.
 
-Next, we look at one last list method, namely ``pop``.
-
-.. ipython:: python
-
-    lastitem = mylist.pop()
-    lastitem
-    mylist
-
-There are two ways to use the ``pop`` method.  The first, with no parameter,
-will remove and return the last item of the list.  If you provide a parameter
-for the position, ``pop`` will remove and return the item at that position.
-Either way the list is changed.
-
-The following table provides a summary of the list methods shown above.  The
-column labeled `result` gives an explanation as to what the return value is as
-it relates to the new value of the list.  The word **mutator** means that the
-list is changed by the method but nothing is returned (actually ``None`` is
-returned).  A **hybrid** method is one that not only changes the list but also
-returns a value as its result.  Finally, if the result is simply a return, then
-the list is unchanged by the method.
-
-Be sure to experiment with these methods to gain a better understanding of what
-they do.
-
-
-
-
-==========  ==============  ============  ================================================
-Method      Parameters       Result       Description
-==========  ==============  ============  ================================================
-append      item            mutator       Adds a new item to the end of a list
-insert      position, item  mutator       Inserts a new item at the position given
-pop         none            hybrid        Removes and returns the last item
-pop         position        hybrid        Removes and returns the item at position
-sort        none            mutator       Modifies a list to be sorted
-reverse     none            mutator       Modifies a list to be in reverse order
-index       item            return idx    Returns the position of first occurrence of item
-count       item            return ct     Returns the number of occurrences of item
-remove      item            mutator       Removes the first occurrence of item
-==========  ==============  ============  ================================================
-
-
-Details for these and others can be found in the `Python Documentation
-<http://docs.python.org/py3k/library/stdtypes.html#sequence-types-str-bytes-bytearray-list-tuple-range>`_.
-
-It is important to remember that methods like ``append``, ``sort``, and
-``reverse`` all return ``None``.  This means that re-assigning ``mylist`` to the
-result of sorting ``mylist`` will result in losing the entire list.  Calls like
-these will likely never appear as part of an assignment statement (see line 8
-below).
-
-.. ipython:: python
-
-    mylist = []
-    mylist.append(5)
-    mylist.append(27)
-    mylist.append(3)
-    mylist.append(12)
-    mylist
-
-    mylist = mylist.sort()   #probably an error
-    mylist
-
-**Check your understanding**
-
-.. mchoice:: test_question9_13_1
-   :answer_a: [4, 2, 8, 6, 5, False, True]
-   :answer_b: [4, 2, 8, 6, 5, True, False]
-   :answer_c: [True, False, 4, 2, 8, 6, 5]
-   :correct: b
-   :feedback_a: True was added first, then False was added last.
-   :feedback_b: Yes, each item is added to the end of the list.
-   :feedback_c: append adds at the end, not the beginning.
-   
-   What is printed by the following statements?
-   
-   .. code-block:: python
-
-     alist = [4, 2, 8, 6, 5]
-     alist.append(True)
-     alist.append(False)
-     print(alist)
-
-
-
-.. mchoice:: test_question9_13_2
-   :answer_a: [False, 4, 2, True, 8, 6, 5]
-   :answer_b: [4, False, True, 2, 8, 6, 5]
-   :answer_c: [False, 2, True, 6, 5]
-   :correct: a
-   :feedback_a: Yes, first True was added at index 2, then False was added at index 0.
-   :feedback_b: insert will place items at the index position specified and move everything down to the right.
-   :feedback_c: insert does not remove anything or replace anything.
-   
-   What is printed by the following statements?
-   
-   .. code-block:: python
-
-     alist = [4, 2, 8, 6, 5]
-     alist.insert(2, True)
-     alist.insert(0, False)
-     print(alist)
-
-
-.. mchoice:: test_question9_13_3
-   :answer_a: [4, 8, 6]
-   :answer_b: [2, 6, 5]
-   :answer_c: [4, 2, 6]
-   :correct: c
-   :feedback_a: pop(2) removes the item at index 2, not the 2 itself.
-   :feedback_b: pop() removes the last item, not the first.
-   :feedback_c: Yes, first the 8 was removed, then the last item, which was 5.
-   
-   What is printed by the following statements?
-   
-   .. code-block:: python
-
-     alist = [4, 2, 8, 6, 5]
-     temp = alist.pop(2)
-     temp = alist.pop()
-     print(alist)
-
-   
-   
-.. mchoice:: test_question9_13_4
-   :answer_a: [2, 8, 6, 5]
-   :answer_b: [4, 2, 8, 6, 5]
-   :answer_c: 4
-   :answer_d: None
-   :correct: c
-   :feedback_a: alist is now the value that was returned from pop(0).
-   :feedback_b: pop(0) changes the list by removing the first item.
-   :feedback_c: Yes, first the 4 was removed from the list, then returned and assigned to alist.  The list is lost.
-   :feedback_d: pop(0) returns the first item in the list so alist has now been changed.
-   
-   What is printed by the following statements?
-   
-   .. code-block:: python
-
-     alist = [4, 2, 8, 6, 5]
-     alist = alist.pop(0)
-     print(alist)
 
 .. note::
 
@@ -461,6 +306,9 @@ place each element of the original sequence in the new list.  When working with
 strings, this is very different than the result of the ``split`` method.
 Whereas ``split`` will break a string into a list of "words", ``list`` will
 always break it into a list of characters.
+
+We give more information about working with strings and lists in the section on
+**Common Comprehension Patterns**.
     
 
 .. note::

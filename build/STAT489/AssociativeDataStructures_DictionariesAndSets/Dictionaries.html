@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>5.1. Mapping One Value to Another with Dictionaries &mdash; Runestone Interactive Overview</title>
+    <title>6.1. Mapping One Value to Another with Dictionaries &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="5. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
-    <link rel="next" title="5.2. Checking and Comparing Membership with Sets" href="Sets.html" />
-    <link rel="prev" title="5. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
+    <link rel="up" title="6. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
+    <link rel="next" title="6.2. Checking and Comparing Membership with Sets" href="Sets.html" />
+    <link rel="prev" title="6. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,10 +263,10 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">5.1. Mapping One Value to Another with Dictionaries</a><ul>
-<li><a class="reference internal" href="#dictionary-operations">5.1.1. Dictionary Operations</a></li>
-<li><a class="reference internal" href="#dictionary-methods">5.1.2. Dictionary Methods</a></li>
-<li><a class="reference internal" href="#aliasing-and-copying">5.1.3. Aliasing and Copying</a></li>
+<li><a class="reference internal" href="#">6.1. Mapping One Value to Another with Dictionaries</a><ul>
+<li><a class="reference internal" href="#dictionary-operations">6.1.1. Dictionary Operations</a></li>
+<li><a class="reference internal" href="#dictionary-methods">6.1.2. Dictionary Methods</a></li>
+<li><a class="reference internal" href="#aliasing-and-copying">6.1.3. Aliasing and Copying</a></li>
 </ul>
 </li>
 </ul>
@@ -276,13 +276,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 5. Associative Data Structures - Dictionaries and Sets" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 6. Associative Data Structures - Dictionaries and Sets" data-toggle="tooltip">
     <a href="toctree.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 5.2. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 6.2. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
     <a href="Sets.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -314,9 +314,9 @@
 <div class="container" id="main-content">
   
   <div class="section" id="mapping-one-value-to-another-with-dictionaries">
-<h1>5.1. Mapping One Value to Another with Dictionaries<a class="headerlink" href="#mapping-one-value-to-another-with-dictionaries" title="Permalink to this headline">¶</a></h1>
+<h1>6.1. Mapping One Value to Another with Dictionaries<a class="headerlink" href="#mapping-one-value-to-another-with-dictionaries" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="dictionary-operations">
-<h2>5.1.1. Dictionary Operations<a class="headerlink" href="#dictionary-operations" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.1. Dictionary Operations<a class="headerlink" href="#dictionary-operations" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">del</span></code> statement removes a key-value pair from a dictionary. For example,
 the following dictionary contains the names of various fruits and the number of
 each fruit in stock.  If someone buys all of the pears, we can remove the entry from the dictionary.</p>
@@ -326,7 +326,7 @@ each fruit in stock.  If someone buys all of the pears, we can remove the entry 
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict4)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict4_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 3, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["pears", 217], ["oranges", 525]]}}, {"line": 3, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["oranges", 525]]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ndel inventory['pears']"};
+var ch12_dict4_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ndel inventory['pears']", "trace": [{"ordered_globals": [], "line": 1, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {}, "stdout": ""}, {"ordered_globals": ["inventory"], "line": 3, "heap": {"1": ["DICT", ["oranges", 525], ["pears", 217], ["bananas", 312], ["apples", 430]]}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"inventory": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["inventory"], "line": 3, "heap": {"1": ["DICT", ["oranges", 525], ["bananas", 312], ["apples", 430]]}, "stack_to_render": [], "event": "return", "func_name": "<module>", "globals": {"inventory": ["REF", 1]}, "stdout": ""}]};
 var ch12_dict4_vis;
 
 $(document).ready(function() {
@@ -374,7 +374,7 @@ example, instead of deleting the entry for <code class="docutils literal"><span 
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict4a)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict4a_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 3, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["pears", 217], ["oranges", 525]]}}, {"line": 3, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["pears", 0], ["oranges", 525]]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ninventory['pears'] = 0"};
+var ch12_dict4a_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ninventory['pears'] = 0", "trace": [{"ordered_globals": [], "line": 1, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {}, "stdout": ""}, {"ordered_globals": ["inventory"], "line": 3, "heap": {"1": ["DICT", ["oranges", 525], ["pears", 217], ["bananas", 312], ["apples", 430]]}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"inventory": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["inventory"], "line": 3, "heap": {"1": ["DICT", ["oranges", 525], ["pears", 0], ["bananas", 312], ["apples", 430]]}, "stack_to_render": [], "event": "return", "func_name": "<module>", "globals": {"inventory": ["REF", 1]}, "stdout": ""}]};
 var ch12_dict4a_vis;
 
 $(document).ready(function() {
@@ -421,7 +421,7 @@ a new shipment of 200 bananas arriving could be handled like this.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict5)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict5_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 2, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["pears", 217], ["oranges", 525]]}}, {"line": 5, "globals": {"inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["inventory"], "heap": {"1": ["DICT", ["bananas", 512], ["apples", 430], ["pears", 217], ["oranges", 525]]}}, {"line": 5, "globals": {"numItems": 4, "inventory": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["inventory", "numItems"], "heap": {"1": ["DICT", ["bananas", 512], ["apples", 430], ["pears", 217], ["oranges", 525]]}}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\ninventory['bananas'] = inventory['bananas'] + 200\n\n\nnumItems = len(inventory)"};
+var ch12_dict5_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\ninventory['bananas'] = inventory['bananas'] + 200\n\n\nnumItems = len(inventory)", "trace": [{"ordered_globals": [], "line": 1, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {}, "stdout": ""}, {"ordered_globals": ["inventory"], "line": 2, "heap": {"1": ["DICT", ["oranges", 525], ["pears", 217], ["bananas", 312], ["apples", 430]]}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"inventory": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["inventory"], "line": 5, "heap": {"1": ["DICT", ["oranges", 525], ["pears", 217], ["bananas", 512], ["apples", 430]]}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"inventory": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["inventory", "numItems"], "line": 5, "heap": {"1": ["DICT", ["oranges", 525], ["pears", 217], ["bananas", 512], ["apples", 430]]}, "stack_to_render": [], "event": "return", "func_name": "<module>", "globals": {"numItems": 4, "inventory": ["REF", 1]}, "stdout": ""}]};
 var ch12_dict5_vis;
 
 $(document).ready(function() {
@@ -484,7 +484,7 @@ of key-value pairs:</p>
             </ul>
             </div>
 <div class="section" id="dictionary-methods">
-<h2>5.1.2. Dictionary Methods<a class="headerlink" href="#dictionary-methods" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.2. Dictionary Methods<a class="headerlink" href="#dictionary-methods" title="Permalink to this headline">¶</a></h2>
 <p>Dictionaries have a number of useful built-in methods.
 The following table provides a summary and more details can be found in the
 <a class="reference external" href="http://docs.python.org/py3k/library/stdtypes.html#mapping-types-dict">Python Documentation</a>.</p>
@@ -695,7 +695,7 @@ print(inventory.get("cherries", 0))
             </ul>
             </div>
 <div class="section" id="aliasing-and-copying">
-<span id="index-0"></span><h2>5.1.3. Aliasing and Copying<a class="headerlink" href="#aliasing-and-copying" title="Permalink to this headline">¶</a></h2>
+<span id="index-0"></span><h2>6.1.3. Aliasing and Copying<a class="headerlink" href="#aliasing-and-copying" title="Permalink to this headline">¶</a></h2>
 <p>Because dictionaries are mutable, you need to be aware of aliasing (as we saw with lists).  Whenever
 two variables refer to the same dictionary object, changes to one affect the other.
 For example, <code class="docutils literal"><span class="pre">opposites</span></code> is a dictionary that contains pairs
@@ -744,19 +744,19 @@ print(opposites['right'])
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 5. Associative Data Structures - Dictionaries and Sets' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 6. Associative Data Structures - Dictionaries and Sets' data-toggle="tooltip">
     <a href="toctree.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="toctree.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 5.2. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 6.2. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
     <a href="Sets.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="Sets.html" >Next Section - 5.2. Checking and Comparing Membership with Sets</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="Sets.html" >Next Section - 6.2. Checking and Comparing Membership with Sets</a>
 
 <script type="text/javascript">
 

@@ -83,6 +83,7 @@ turtle and a half drawn rectangle.  Press the run button to try it and see.
     alex.left(90)           	# turn by 90 degrees
     alex.forward(75)         	# complete the second side of a rectangle
 
+    wn.exitonclick()                # wait for a user click on the canvas
 
 
 
@@ -239,12 +240,108 @@ You can explore the available methods using the ``dir`` and ``help``
 functions.  First, perform ``dir`` on an object to see all of the available
 methods.  
 
-.. ipython:: python
-    
-    import turtle
+.. sourcecode:: python
+    In [1]: import turtle
 
-    tess = turtle.Turtle()
-    dir(tess)
+    In [2]: tess = turtle.Turtle()
+
+    In [3]: dir(tess)
+    Out[3]:
+    ['DEFAULT_ANGLEOFFSET',
+     'DEFAULT_ANGLEORIENT',
+     'DEFAULT_MODE',
+     'START_ORIENTATION',
+     .
+     .
+     .
+     'back',
+     'backward',
+     'begin_fill',
+     'begin_poly',
+     'bk',
+     'circle',
+     'clear',
+     'clearstamp',
+     'clearstamps',
+     'clone',
+     'color',
+     'currentLine',
+     'currentLineItem',
+     'degrees',
+     'distance',
+     'dot',
+     'down',
+     'drawingLineItem',
+     'end_fill',
+     'end_poly',
+     'fd',
+     'fillcolor',
+     'filling',
+     'forward',
+     'get_poly',
+     'get_shapepoly',
+     'getpen',
+     'getscreen',
+     'getturtle',
+     'goto',
+     'heading',
+     'hideturtle',
+     'home',
+     'ht',
+     'isdown',
+     'isvisible',
+     'items',
+     'left',
+     'lt',
+     'onclick',
+     'ondrag',
+     'onrelease',
+     'pd',
+     'pen',
+     'pencolor',
+     'pendown',
+     'pensize',
+     'penup',
+     'pos',
+     'position',
+     'pu',
+     'radians',
+     'reset',
+     'resizemode',
+     'right',
+     'rt',
+     'screen',
+     'screens',
+     'seth',
+     'setheading',
+     'setpos',
+     'setposition',
+     'settiltangle',
+     'setundobuffer',
+     'setx',
+     'sety',
+     'shape',
+     'shapesize',
+     'shapetransform',
+     'shearfactor',
+     'showturtle',
+     'speed',
+     'st',
+     'stamp',
+     'stampItems',
+     'tilt',
+     'tiltangle',
+     'towards',
+     'turtle',
+     'turtlesize',
+     'undo',
+     'undobuffer',
+     'undobufferentries',
+     'up',
+     'width',
+     'write',
+     'xcor',
+     'ycor'] 
 
 Wow! That is a lot of methods!
 
@@ -263,9 +360,27 @@ we are interested in the ``tilt`` method of a turtle.  We find out more about
 this method by calling the ``help`` function on the method name.
 
 
-.. ipython:: python
+.. sourcecode:: python
 
-    help(tess.tilt)
+    In [3]: help(tess.tilt)
+    Help on method tilt in module turtle:
+
+    tilt(angle) method of turtle.Turtle instance
+        Rotate the turtleshape by angle.
+
+        Argument:
+        angle - a number
+
+        Rotate the turtleshape by angle from its current tilt-angle,
+        but do NOT change the turtle's heading (direction of movement).
+
+        Examples (for a Turtle instance named turtle):
+        >>> turtle.shape("circle")
+        >>> turtle.shapesize(5,2)
+        >>> turtle.tilt(30)
+        >>> turtle.fd(50)
+        >>> turtle.tilt(30)
+        >>> turtle.fd(50)
 
 .. note:: 
 

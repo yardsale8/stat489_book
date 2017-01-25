@@ -470,7 +470,7 @@ to compute the correct values.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch02_19_codelens)</span> </p>
 </div>
 <script type="text/javascript">
-var ch02_19_codelens_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 2, "globals": {"total_secs": 7684}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["total_secs"], "heap": {}}, {"line": 3, "globals": {"total_secs": 7684, "hours": 2}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["total_secs", "hours"], "heap": {}}, {"line": 4, "globals": {"secs_still_remaining": 484, "hours": 2, "total_secs": 7684}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["total_secs", "hours", "secs_still_remaining"], "heap": {}}, {"line": 5, "globals": {"total_secs": 7684, "secs_still_remaining": 484, "minutes": 8, "hours": 2}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["total_secs", "hours", "secs_still_remaining", "minutes"], "heap": {}}, {"line": 5, "globals": {"secs_still_remaining": 484, "total_secs": 7684, "hours": 2, "secs_finally_remaining": 4, "minutes": 8}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["total_secs", "hours", "secs_still_remaining", "minutes", "secs_finally_remaining"], "heap": {}}], "code": "total_secs = 7684\nhours = total_secs // 3600\nsecs_still_remaining = total_secs % 3600\nminutes =  secs_still_remaining // 60\nsecs_finally_remaining = secs_still_remaining  % 60"};
+var ch02_19_codelens_trace = {"code": "total_secs = 7684\nhours = total_secs // 3600\nsecs_still_remaining = total_secs % 3600\nminutes =  secs_still_remaining // 60\nsecs_finally_remaining = secs_still_remaining  % 60", "trace": [{"ordered_globals": [], "line": 1, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {}, "stdout": ""}, {"ordered_globals": ["total_secs"], "line": 2, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"total_secs": 7684}, "stdout": ""}, {"ordered_globals": ["total_secs", "hours"], "line": 3, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"hours": 2, "total_secs": 7684}, "stdout": ""}, {"ordered_globals": ["total_secs", "hours", "secs_still_remaining"], "line": 4, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"hours": 2, "secs_still_remaining": 484, "total_secs": 7684}, "stdout": ""}, {"ordered_globals": ["total_secs", "hours", "secs_still_remaining", "minutes"], "line": 5, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"hours": 2, "minutes": 8, "secs_still_remaining": 484, "total_secs": 7684}, "stdout": ""}, {"ordered_globals": ["total_secs", "hours", "secs_still_remaining", "minutes", "secs_finally_remaining"], "line": 5, "heap": {}, "stack_to_render": [], "event": "return", "func_name": "<module>", "globals": {"hours": 2, "minutes": 8, "total_secs": 7684, "secs_finally_remaining": 4, "secs_still_remaining": 484}, "stdout": ""}]};
 var ch02_19_codelens_vis;
 
 $(document).ready(function() {
@@ -512,7 +512,7 @@ $(window).resize(function() {
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_6_1">
-            <p>debug-4-2: What value is printed when the following statement executes?</p>
+            <p>data-2-26: What value is printed when the following statement executes?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="mi">18</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -529,7 +529,7 @@ $(window).resize(function() {
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_6_2">
-            <p>debug-4-3: What value is printed when the following statement executes?</p>
+            <p>data-2-27: What value is printed when the following statement executes?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="mi">18</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -546,7 +546,7 @@ $(window).resize(function() {
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_6_3">
-            <p>debug-4-4: What value is printed when the following statement executes?</p>
+            <p>data-2-28: What value is printed when the following statement executes?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="mi">18</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -602,7 +602,7 @@ exponentiation is involved:</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_8_1">
-            <p>debug-4-5: What is the value of the following expression:</p>
+            <p>data-2-29: What is the value of the following expression:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">16</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">//</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -619,7 +619,7 @@ exponentiation is involved:</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question2_8_2">
-            <p>debug-4-6: What is the value of the following expression:</p>
+            <p>data-2-30: What is the value of the following expression:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span>
 </pre></div>
 </div>
@@ -698,7 +698,7 @@ is legal and <code class="docutils literal"><span class="pre">7</span> <span cla
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="true"  id="test_question6_1_1">
-            debug-4-7: Which of the following is a Boolean expression?  Select all that apply.
+            data-2-31: Which of the following is a Boolean expression?  Select all that apply.
             <li data-component="answer" data-correct id="test_question6_1_1_opt_a">(A) True</li><li data-component="feedback" id="test_question6_1_1_opt_a">True and False are both Boolean literals.</li>
             
             <li data-component="answer" data-correct id="test_question6_1_1_opt_b">(B) 3 == 4</li><li data-component="feedback" id="test_question6_1_1_opt_b">The comparison between two numbers via == results in either True or False (in this case False),  both Boolean values.</li>
@@ -750,7 +750,7 @@ typing but it is absolutely necessary.  You cannot take a shortcut.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_2_1">
-            debug-4-8: What is the correct Python expression for checking to see if a number stored in a variable x is between 0 and 5.
+            data-2-32: What is the correct Python expression for checking to see if a number stored in a variable x is between 0 and 5.
             <li data-component="answer"  id="test_question6_2_1_opt_a">(A) x &gt; 0 and &lt; 5</li><li data-component="feedback" id="test_question6_2_1_opt_a">Each comparison must be between exactly two values.  In this case the right-hand expression &lt; 5 lacks a value on its left.</li>
             
             <li data-component="answer"  id="test_question6_2_1_opt_b">(B) 0 &lt; x &lt; 5</li><li data-component="feedback" id="test_question6_2_1_opt_b">This is tricky.  Although most other programming languages do not allow this syntax, in Python, this syntax is allowed.  However, you should not use it.  Instead, make multiple comparisons by using and or or.</li>
@@ -833,7 +833,7 @@ window to try out anything you like.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_3_1">
-            debug-4-9: Which of the following properly expresses the precedence of operators (using parentheses) in the following expression: 5*3 &gt; 10 and 4+6==11
+            data-2-33: Which of the following properly expresses the precedence of operators (using parentheses) in the following expression: 5*3 &gt; 10 and 4+6==11
             <li data-component="answer" data-correct id="test_question6_3_1_opt_a">(A) ((5*3) &gt; 10) and ((4+6) == 11)</li><li data-component="feedback" id="test_question6_3_1_opt_a">Yes, * and + have higher precedence, followed by &gt; and ==, and then the keyword &quot;and&quot;</li>
             
             <li data-component="answer"  id="test_question6_3_1_opt_b">(B) (5*(3 &gt; 10)) and (4 + (6 == 11))</li><li data-component="feedback" id="test_question6_3_1_opt_b">Arithmetic operators (*, +) have higher precedence than comparison operators (&gt;, ==)</li>
@@ -904,7 +904,7 @@ with this limitation.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_4_1">
-            debug-4-10: How many statements can appear in each expression (the if and the else) in a conditional expression?
+            data-2-34: How many statements can appear in each expression (the if and the else) in a conditional expression?
             <li data-component="answer"  id="test_question6_4_1_opt_a">(A) Just one.</li><li data-component="feedback" id="test_question6_4_1_opt_a">The conditional expression may only consist of other expressions.</li>
             
             <li data-component="answer"  id="test_question6_4_1_opt_b">(B) Zero or more.</li><li data-component="feedback" id="test_question6_4_1_opt_b">The conditional expression may only consist of other expressions.</li>
@@ -917,7 +917,7 @@ with this limitation.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question6_4_2">
-            <p>debug-4-11: What is the value of the following expression?</p>
+            <p>data-2-35: What is the value of the following expression?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">True</span> <span class="k">if</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">10</span> <span class="k">else</span> <span class="bp">False</span>
 </pre></div>
 </div>

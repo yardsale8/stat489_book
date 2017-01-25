@@ -13,6 +13,5 @@ Sequential Data Structures in Python
     ReferencesToSequences.rst
     SequenceMethodsandWorkingwithStringsAndLists.rst
     ComputationalComplexityAndBigONotation.rst
-    TransformingSequencesWithComprehensions.rst
     OtherPythonSequenceTypes.rst
     Exercises.rst

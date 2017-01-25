@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.10. Common Comprehension Patterns &mdash; Runestone Interactive Overview</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/activecode.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/clickable.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pytutor.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/modal-basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/datafile.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/dragndrop.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fitb.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/livecode.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/parsons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/lib/prettify.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/poll.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/tabbedstuff.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/video.css" type="text/css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootswatch/2.3.1/""/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jquery-ui-1.10.3.custom.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/user-highlights.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/runestone-custom-sphinx-bootstrap.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/runestonebase.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jquery.highlight.js"></script>
+    <script type="text/javascript" src="../_static/bookfuncs.js"></script>
+    <script type="text/javascript" src="../_static/codemirror.js"></script>
+    <script type="text/javascript" src="../_static/xml.js"></script>
+    <script type="text/javascript" src="../_static/css.js"></script>
+    <script type="text/javascript" src="../_static/htmlmixed.js"></script>
+    <script type="text/javascript" src="../_static/python.js"></script>
+    <script type="text/javascript" src="../_static/javascript.js"></script>
+    <script type="text/javascript" src="../_static/activecode.js"></script>
+    <script type="text/javascript" src="../_static/skulpt.min.js"></script>
+    <script type="text/javascript" src="../_static/skulpt-stdlib.js"></script>
+    <script type="text/javascript" src="../_static/clike.js"></script>
+    <script type="text/javascript" src="../_static/timed_activecode.js"></script>
+    <script type="text/javascript" src="../_static/animationbase.js"></script>
+    <script type="text/javascript" src="../_static/mchoice.js"></script>
+    <script type="text/javascript" src="../_static/timedmc.js"></script>
+    <script type="text/javascript" src="../_static/timed.js"></script>
+    <script type="text/javascript" src="../_static/clickable.js"></script>
+    <script type="text/javascript" src="../_static/timedclickable.js"></script>
+    <script type="text/javascript" src="../_static/d3.v2.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery.ba-bbq.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery.jsPlumb-1.3.10-all-min.js"></script>
+    <script type="text/javascript" src="../_static/pytutor.js"></script>
+    <script type="text/javascript" src="../_static/codelens.js"></script>
+    <script type="text/javascript" src="../_static/skulpt.min.js"></script>
+    <script type="text/javascript" src="../_static/skulpt-stdlib.js"></script>
+    <script type="text/javascript" src="../_static/datafile.js"></script>
+    <script type="text/javascript" src="../_static/dragndrop.js"></script>
+    <script type="text/javascript" src="../_static/timeddnd.js"></script>
+    <script type="text/javascript" src="../_static/fitb.js"></script>
+    <script type="text/javascript" src="../_static/timedfitb.js"></script>
+    <script type="text/javascript" src="../_static/livecode.js"></script>
+    <script type="text/javascript" src="../_static/clike.js"></script>
+    <script type="text/javascript" src="../_static/lib/prettify.js"></script>
+    <script type="text/javascript" src="../_static/lib/hammer.min.js"></script>
+    <script type="text/javascript" src="../_static/parsons.js"></script>
+    <script type="text/javascript" src="../_static/timedparsons.js"></script>
+    <script type="text/javascript" src="../_static/poll.js"></script>
+    <script type="text/javascript" src="../_static/reveal.js"></script>
+    <script type="text/javascript" src="../_static/shortanswer.js"></script>
+    <script type="text/javascript" src="../_static/timed_shortanswer.js"></script>
+    <script type="text/javascript" src="../_static/tabbedstuff.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/waypoints.min.js"></script>
+    <script type="text/javascript" src="../_static/rangy-core.js"></script>
+    <script type="text/javascript" src="../_static/rangy-textrange.js"></script>
+    <script type="text/javascript" src="../_static/rangy-cssclassapplier.js"></script>
+    <script type="text/javascript" src="../_static/user-highlights.js"></script>
+    <script type="text/javascript" src="../_static/jquery.idle-timer.js"></script>
+    <script type="text/javascript" src="../_static/processing-1.4.1.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
+    <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
+    <link rel="up" title="3. Sequential Data Structures in Python" href="toctree.html" />
+    <link rel="next" title="3.11. Other Python Sequence Types" href="OtherPythonSequenceTypes.html" />
+    <link rel="prev" title="3.9. Transforming Sequences with Comprehensions" href="TransformingSequencesWithComprehensions.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<link rel="shortcut icon" href="/runestone/static/favicon.ico" type="image/ico" />
+
+<script type="text/javascript">
+  eBookConfig = {};
+  eBookConfig.host = 'http://127.0.0.1:8000' ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:8000';
+  eBookConfig.app = eBookConfig.host+'/runestone';
+  eBookConfig.ajaxURL = eBookConfig.app+'/ajax/';
+  eBookConfig.course = 'STAT489';
+  eBookConfig.logLevel = 0;
+  eBookConfig.loginRequired = false;
+  eBookConfig.build_info = "unknown";
+  eBookConfig.isLoggedIn = false;
+  eBookConfig.useRunestoneServices = false;
+  eBookConfig.python3 = true;
+  eBookConfig.basecourse = 'STAT489';
+</script>
+
+<div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&status=0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+  </head>
+  <body role="document">
+
+
+<!-- Begin navbar -->
+<div id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+  <div class="container">
+
+    <div class="navbar-header">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button type='button' class='navbar-toggle' data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <div>
+        <a class="brand-logo" style='background: transparent url("../_static/img/logo_small.png") no-repeat 0px 0px;' href="/runestone/default/user/login">&nbsp; </a>
+        <a class="navbar-brand" href="../index.html">STAT489</a>
+      </div>
+    </div>
+
+    <div class="navbar-collapse collapse navbar-ex1-collapse">
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="divider-vertical"></li>
+
+        <!-- social media dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-share-alt" style="opacity: 0.9"></i>
+          </a>
+          <ul class="dropdown-menu social-menu">
+              <li>
+                <div>
+                  <b>Runestone in social media:</b>
+                </div>
+                <a href="https://twitter.com/iRunestone" class="twitter-follow-button" data-show-count="true">Follow @iRunestone</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                <div class="fb-like" data-href="https://www.facebook.com/RunestoneInteractive" data-send="false" data-layout="button_count" data-width="300" data-show-faces="false" data-font="arial"></div>
+              </li>
+
+              <li class="divider"></li>
+              <li>
+                <div>
+                  <b>Help support us:</b>
+                </div>
+                <div>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_s-xclick">
+                  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHNwYJKoZIhvcNAQcEoIIHKDCCByQCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAcrkqh1hn3lYqIpfXxNqe1T82EhXzCJGy1yMAmklpyZshyMkfDGe1Bhx+iwyGeoYRTTyphFmP+9M3NyO0+Q5XdHxgZPx/zYjjBxlZHgEV6jhE8bN2fHkkPf0VHfz0a0QQylQOPlKiOTZV7B37Jpk6yM47oVZ1tG/KNm0NkfmB76DELMAkGBSsOAwIaBQAwgbQGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIi0GmFfOlcjuAgZBbYOo9UO+CpMQa+PYqwsUmUnJvXIImeMeNI3KVTUx5Cfk9gNMo3WzPeiB5IqZo9nRAQ0mf1qL2ecLeB5tidM+lgBUhOxfj3/FecpnVFa0263gp4g+PLw8jzhvVRdUon1K3SeO1Rzh23fIRKwnrD6btt73uwtj0sl3tGd8qz+6GIcwPDdRk9VcUffiBJT/ZagKgggOHMIIDgzCCAuygAwIBAgIBADANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wHhcNMDQwMjEzMTAxMzE1WhcNMzUwMjEzMTAxMzE1WjCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMFHTt38RMxLXJyO2SmS+Ndl72T7oKJ4u4uw+6awntALWh03PewmIJuzbALScsTS4sZoS1fKciBGoh11gIfHzylvkdNe/hJl66/RGqrj5rFb08sAABNTzDTiqqNpJeBsYs/c2aiGozptX2RlnBktH+SUNpAajW724Nv2Wvhif6sFAgMBAAGjge4wgeswHQYDVR0OBBYEFJaffLvGbxe9WT9S1wob7BDWZJRrMIG7BgNVHSMEgbMwgbCAFJaffLvGbxe9WT9S1wob7BDWZJRroYGUpIGRMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbYIBADAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAIFfOlaagFrl71+jq6OKidbWFSE+Q4FqROvdgIONth+8kSK//Y/4ihuE4Ymvzn5ceE3S/iBSQQMjyvb+s2TWbQYDwcp129OPIbD9epdr4tJOUNiSojw7BHwYRiPh58S1xGlFgHFXwrEBb3dgNbMUa+u4qectsMAXpVHnD9wIyfmHMYIBmjCCAZYCAQEwgZQwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tAgEAMAkGBSsOAwIaBQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xMzExMDMxMzQxMzFaMCMGCSqGSIb3DQEJBDEWBBRDJF8w+zsMr7FSk+pwinB5f5D4rzANBgkqhkiG9w0BAQEFAASBgHw1LMHpkpaqHIvDGdFE0eG+2mZlmMnUeDCBhQlbc7QMzFQYKTV94NfaebBO4PmNdADe1rq4WidSRZZbE7CzkX9IGENYnBTWY0hb2l0lGdGrJdGeWyV3ekg9WVaFMMumrekds96h3Cx7dGz2kWDzIai2iEXE/qoE+xpkyXAYZNV3-----END PKCS7-----
+                  ">
+                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                  </form>
+
+                </div>
+              </li>
+          </ul>
+        </li>
+        <!-- end social media dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        <!-- search dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-search" style='opacity:0.9;'></i>
+          </a>
+          <ul class='dropdown-menu'>
+            
+                <li><a href='../index.html'>Table of Contents</a></li>
+            
+            <li><a href='/runestone/static/STAT489/genindex.html'>Book Index</a></li>
+            <li class="divider"></li>
+            <li id="scratch_ac_link"><a href="javascript:ACFactory.toggleScratchActivecode()">Scratch ActiveCode</a></li>
+            <li class="divider"></li>
+            <li style="width: 240px;">
+              <form class="navbar-search" style="margin:10px;" action="../search.html" method="get">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="q" placeholder="Search this book" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" style="margin:0;" type="submit">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                  </span>
+                </div><!-- /input-group -->
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+            </li>
+          </ul>
+        </li>
+        <!-- end search dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        
+        <li class="divider-vertical"></li>
+
+        <!-- help menu dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-question-sign" style="opacity:0.9;"></i>
+          </a>
+          <ul class="dropdown-menu user-menu">
+            <li><a href='/runestone/static/STAT489/navhelp.html'>Navigation Help</a></li>
+            <li><a href='/runestone/static/overview/instructor.html'>Help for Instructors</a></li>
+            <li class="divider"></li>
+            <li><a href='http://runestoneinteractive.org'>About Runestone</a></li>
+            <li><a href='/runestone/default/reportabug?course=STAT489&page=CommonComprehensionPatterns'>Report A Problem</a></li>
+          </ul>
+        </li>
+        <!-- end help menu dropdown -->
+
+        <li class="divider-vertical"></li>
+
+      </ul>
+
+      <ul class="nav navbar-nav">
+        <li class="divider-vertical"></li>
+        <!--
+          <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><ul>
+<li><a class="reference internal" href="#">3.10. Common Comprehension Patterns</a><ul>
+<li><a class="reference internal" href="#combine-information-in-tuples">3.10.1. Combine information in tuples</a></li>
+<li><a class="reference internal" href="#use-built-in-helper-functions">3.10.2. Use built-in helper functions</a></li>
+<li><a class="reference internal" href="#use-built-in-functions-to-reduce-a-list-to-a-value">3.10.3. Use built-in functions to reduce a list to a value</a></li>
+<li><a class="reference internal" href="#use-any-and-all-for-boolean-questions-about-a-list">3.10.4. Use <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> for Boolean questions about a list</a></li>
+<li><a class="reference internal" href="#use-a-comprehension-to-apply-many-functions-to-a-value">3.10.5. Use a comprehension to apply many functions to a value</a></li>
+<li><a class="reference internal" href="#filter-and-count-using-len">3.10.6. Filter and count using <code class="docutils literal"><span class="pre">len</span></code></a></li>
+<li><a class="reference internal" href="#use-for-twice-to-get-all-combinations">3.10.7. Use <code class="docutils literal"><span class="pre">for</span></code> twice to get all combinations</a></li>
+<li><a class="reference internal" href="#the-second-for-can-depend-on-the-first">3.10.8. The second <code class="docutils literal"><span class="pre">for</span></code> can depend on the first</a></li>
+<li><a class="reference internal" href="#flatten-a-2d-data-structure">3.10.9. Flatten a 2D data structure</a></li>
+<li><a class="reference internal" href="#sometimes-it-is-easier-to-describe-what-your-don-t-want">3.10.10. Sometimes it is easier to describe what your don&#8217;t want</a></li>
+<li><a class="reference internal" href="#joining-tables">3.10.11. Joining Tables</a></li>
+<li><a class="reference internal" href="#apply-tranformations-at-each-level-of-abstraction">3.10.12. Apply Tranformations at Each Level of Abstraction</a></li>
+<li><a class="reference internal" href="#more-on-working-with-strings-and-lists">3.10.13. More on working with strings and lists</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+          <li class="divider-vertical"></li>
+        
+        
+          
+  <li id="relations-prev" title="Previous Chapter - 3.9. Transforming Sequences with Comprehensions" data-toggle="tooltip">
+    <a href="TransformingSequencesWithComprehensions.html" >
+      <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
+    </a>
+  </li>
+  
+  <li id="relations-next" title='Next Chapter - 3.11. Other Python Sequence Types' data-toggle="tooltip" >
+    <a href="OtherPythonSequenceTypes.html" >
+      <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
+    </a>
+  </li>
+  <li class="divider-vertical"></li>
+
+<script type="text/javascript">
+  opts = {'placement':'bottom',
+          'selector': '',
+          'delay': { show: 100, hide: 50}
+         };
+
+  $('#relations-prev').tooltip(opts);
+  $('#relations-next').tooltip(opts);
+</script>
+        -->
+        
+          <li></li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container" id="continue-reading"></div>
+
+<div class="container" id="main-content">
+  
+  <div class="section" id="common-comprehension-patterns">
+<h1>3.10. Common Comprehension Patterns<a class="headerlink" href="#common-comprehension-patterns" title="Permalink to this headline">¶</a></h1>
+<p>List comprehensions can replace <code class="docutils literal"><span class="pre">for</span></code> loops in  many (most) situations.  In
+the following sections, we will highlight some useful techniques for describing
+a new list using comprehensions.</p>
+<div class="section" id="combine-information-in-tuples">
+<h2>3.10.1. Combine information in tuples<a class="headerlink" href="#combine-information-in-tuples" title="Permalink to this headline">¶</a></h2>
+<p>We start with useful pattern for list comprehensions involves combining
+information into a tuple.  For example, lets compute the cube-root of all the
+numbers between 1 and 10 and use a tuple to store both the original number and
+the value of the cube-root.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">cube_root</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="gp">In [2]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[(</span><span class="n">val</span><span class="p">,</span> <span class="n">cube_root</span><span class="p">(</span><span class="n">val</span><span class="p">))</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="gp">In [3]: </span><span class="n">L</span>
+<span class="gh">Out[3]: </span><span class="go"></span>
+<span class="go">[(1, 1.0),</span>
+<span class="go"> (2, 1.2599210498948732),</span>
+<span class="go"> (3, 1.4422495703074083),</span>
+<span class="go"> (4, 1.5874010519681994),</span>
+<span class="go"> (5, 1.7099759466766968),</span>
+<span class="go"> (6, 1.8171205928321397),</span>
+<span class="go"> (7, 1.912931182772389),</span>
+<span class="go"> (8, 2.0),</span>
+<span class="go"> (9, 2.080083823051904)]</span>
+</pre></div>
+</div>
+<p>When applying a list comprehension to a list of tuples, we can save each of the
+values to a separate variable by providing a comma-separated sequence of
+variables between <code class="docutils literal"><span class="pre">for</span></code> and <code class="docutils literal"><span class="pre">in</span></code>, as illustrated below.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">cube_root_less_than_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span> <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">cube_root</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">cube_root</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="gp">In [5]: </span><span class="n">cube_root_less_than_2</span>
+<span class="gh">Out[5]: </span><span class="go">[1, 2, 3, 4, 5, 6, 7]</span>
+</pre></div>
+</div>
+<p>This approach will work for any list of tuples regardless of the length of the
+tuples, provided that the number of variables matches the length of the tuples.</p>
+</div>
+<div class="section" id="use-built-in-helper-functions">
+<h2>3.10.2. Use built-in helper functions<a class="headerlink" href="#use-built-in-helper-functions" title="Permalink to this headline">¶</a></h2>
+<p>The functions <code class="docutils literal"><span class="pre">enumerate</span></code> and <code class="docutils literal"><span class="pre">zip</span></code> both exhibit the pattern from the last
+section.  The <code class="docutils literal"><span class="pre">enumerate</span></code> function can be used to
+return both the index and value of each element of a sequence.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+
+<span class="gp">In [7]: </span><span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L</span><span class="p">)]</span>
+
+<span class="gp">In [8]: </span><span class="n">pairs</span>
+<span class="gh">Out[8]: </span><span class="go">[(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6)]</span>
+</pre></div>
+</div>
+<p>This can be useful if we are describing a transformation that involves both the
+value and the position of the value in the sequence.  For example, suppose we
+want to add 3 to the first 3 values of <code class="docutils literal"><span class="pre">L</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">new_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span> <span class="o">+</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="n">val</span> <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L</span><span class="p">)]</span>
+
+<span class="gp">In [10]: </span><span class="n">new_list</span>
+<span class="gh">Out[10]: </span><span class="go">[4, 5, 6, 4, 5, 6]</span>
+</pre></div>
+</div>
+<p>Without <code class="docutils literal"><span class="pre">enumerate</span></code>, we would have had to focus on the index and used the
+indexing operator to access the value.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">new_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">ind</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="k">else</span> <span class="n">L</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">))]</span>
+
+<span class="gp">In [12]: </span><span class="n">new_list</span>
+<span class="gh">Out[12]: </span><span class="go">[4, 5, 6, 7, 5, 6]</span>
+</pre></div>
+</div>
+<p>Clearly using <code class="docutils literal"><span class="pre">enumerate</span></code> led to a simpler and easier to read construction.
+Be sure to use this function whenever you need both the index and value of a
+sequence.</p>
+<p>The <code class="docutils literal"><span class="pre">zip</span></code> function combines two sequences into one sequence
+of pairs.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="gp">In [14]: </span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
+
+<span class="gp">In [15]: </span><span class="n">new_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Lval</span><span class="p">,</span> <span class="n">Mval</span><span class="p">)</span> <span class="k">for</span> <span class="n">Lval</span><span class="p">,</span> <span class="n">Mval</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">M</span><span class="p">)]</span>
+
+<span class="gp">In [16]: </span><span class="n">new_list</span>
+<span class="gh">Out[16]: </span><span class="go">[(1, &#39;a&#39;), (2, &#39;b&#39;), (3, &#39;c&#39;)]</span>
+</pre></div>
+</div>
+<p>Notice that the length of the new list is the same as the shorter list.  One
+example of an application of <code class="docutils literal"><span class="pre">zip</span></code> comes from probability.  Suppose that
+<span class="math">\(X\)</span> and <span class="math">\(Y\)</span> are random variables that are the results of rolling
+fair 6 an 20 sided die, respectively.  We wish to simulate the distribution of
+the sum of these two values.  We can accomplish this by generating a number of
+trials for each the dice separately, then computing the sum using a list
+comprehension and <code class="docutils literal"><span class="pre">zip</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+<span class="gp">In [18]: </span><span class="n">N_trials</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="gp">In [19]: </span><span class="n">six_sided</span> <span class="o">=</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_trials</span><span class="p">)]</span>
+
+<span class="gp">In [20]: </span><span class="n">six_sided</span>
+<span class="gh">Out[20]: </span><span class="go">[4, 4, 1, 3, 5, 4, 4, 3, 4, 3]</span>
+
+<span class="gp">In [21]: </span><span class="n">twenty_sided</span> <span class="o">=</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_trials</span><span class="p">)]</span>
+
+<span class="gp">In [22]: </span><span class="n">twenty_sided</span>
+<span class="gh">Out[22]: </span><span class="go">[19, 7, 17, 5, 10, 5, 4, 20, 9, 18]</span>
+
+<span class="gp">In [23]: </span><span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="n">r6</span> <span class="o">+</span> <span class="n">r20</span> <span class="k">for</span> <span class="n">r6</span><span class="p">,</span> <span class="n">r20</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">six_sided</span><span class="p">,</span> <span class="n">twenty_sided</span><span class="p">)]</span>
+
+<span class="gp">In [24]: </span><span class="n">sums</span>
+<span class="gh">Out[24]: </span><span class="go">[23, 11, 18, 8, 15, 9, 8, 23, 13, 21]</span>
+</pre></div>
+</div>
+<p>To generalize this process, we use <code class="docutils literal"><span class="pre">lambda</span></code> expressions to create general
+functions for creating each sequence such that the value of the number of trials
+<code class="docutils literal"><span class="pre">N</span></code> can be adjusted.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">six_sided</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+<span class="gp">In [26]: </span><span class="n">twenty_sided</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+<span class="gp">In [27]: </span><span class="n">sums</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">r6</span> <span class="o">+</span> <span class="n">r20</span> <span class="k">for</span> <span class="n">r6</span><span class="p">,</span> <span class="n">r20</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">six_sided</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">twenty_sided</span><span class="p">(</span><span class="n">N</span><span class="p">))]</span>
+
+<span class="gp">In [28]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="gp">In [29]: </span><span class="n">mean</span><span class="p">(</span><span class="n">sums</span><span class="p">(</span><span class="mi">1000000</span><span class="p">))</span>
+<span class="gh">Out[29]: </span><span class="go">13.995521</span>
+</pre></div>
+</div>
+<p>Above we illustrate this refactoring of the original code and use the newly
+constructed functions to simulate the average of 1 million rolls.  As both
+<code class="docutils literal"><span class="pre">six_sided</span></code> and <code class="docutils literal"><span class="pre">twenty_sided</span></code> are now functions, the value of <code class="docutils literal"><span class="pre">N</span></code> need to
+be passed along in the definition of <code class="docutils literal"><span class="pre">sums</span></code>.</p>
+<p>This is another example of how lambda expressions can be used to transform a
+specific example into a more general solution.  This is done by identifying the
+variable(s) we would like to change and adding them as formal parameters to a
+lambda expression.  This is as simple as appending the <code class="docutils literal"><span class="pre">lambda</span> <span class="pre">N:</span></code> to the
+front of our expressions and changing some variable references to function
+calls.</p>
+<p>Finally, we highlight the <code class="docutils literal"><span class="pre">reversed</span></code> function, which allows us to
+iterate through a sequence from back to front.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+
+<span class="gp">In [31]: </span><span class="n">new_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">L</span><span class="p">)]</span>
+
+<span class="gp">In [32]: </span><span class="n">new_list</span>
+<span class="gh">Out[32]: </span><span class="go">[6, 5, 4, 3, 2, 1]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-built-in-functions-to-reduce-a-list-to-a-value">
+<h2>3.10.3. Use built-in functions to reduce a list to a value<a class="headerlink" href="#use-built-in-functions-to-reduce-a-list-to-a-value" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of built-in Python functions that help us reduce a list to a
+value, including <code class="docutils literal"><span class="pre">sum</span></code>, <code class="docutils literal"><span class="pre">len</span></code>, <code class="docutils literal"><span class="pre">max</span></code>, and <code class="docutils literal"><span class="pre">min</span></code>.  Remember to use these
+functions along with a list comprehension to describe a computation on a
+sequence of values.</p>
+<p>For example, suppose that we want to compute <a class="reference external" href="https://en.wikipedia.org/wiki/Squared_deviations_from_the_mean">the sum of squares</a> for a small
+set of numbers.  Let&#8217;s give this a try using the regular definition, shown
+below.</p>
+<div class="math">
+\[SS = \sum_{i=1}^n (y_i - \bar{y})^2\]</div>
+<p>For each value in the list we must subtract the mean and the square this
+difference.  Finally, we add up all of these values.  We will create a function
+for computing the mean and then another for computing the sum of squares.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="gp">In [34]: </span><span class="n">ss</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([(</span><span class="n">i</span> <span class="o">-</span> <span class="n">mean</span><span class="p">(</span><span class="n">L</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
+
+<span class="gp">In [35]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [36]: </span><span class="n">mean</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="gh">Out[36]: </span><span class="go">3.0</span>
+
+<span class="gp">In [37]: </span><span class="n">ss</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="go">             Out[37]: 10.0</span>
+</pre></div>
+</div>
+<p>On a modern computer, the above code is reasonably fast for fairly small lists.
+Next, we use the IPython <code class="docutils literal"><span class="pre">%timeit</span></code> magic to time our function on various size
+lists.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">31</span><span class="p">]:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">ss</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+   <span class="o">....</span><span class="p">:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">ss</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
+   <span class="o">....</span><span class="p">:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">ss</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">))</span>
+   <span class="o">....</span><span class="p">:</span>
+<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">666</span> <span class="n">us</span> <span class="n">per</span> <span class="n">loop</span>
+<span class="mi">10</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">53.2</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span>
+<span class="mi">1</span> <span class="n">loop</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">5.97</span> <span class="n">s</span> <span class="n">per</span> <span class="n">loop</span>
+</pre></div>
+</div>
+<p>Notice that the <code class="docutils literal"><span class="pre">ss</span></code> function is taking about 100 times as long each time we
+multiple the length of the list by 10.  This hints at a complexity of
+<span class="math">\(O(n^2)\)</span>.  Consider the complexity of these functions.  The <code class="docutils literal"><span class="pre">mean</span></code>
+function must visit each element of the list and is <span class="math">\(O(n)\)</span>.  The
+inefficiency of the <code class="docutils literal"><span class="pre">ss</span></code> function results from calling the <code class="docutils literal"><span class="pre">mean</span></code> function
+<strong>for each value in the list!</strong>.  Thus the time complexity of <code class="docutils literal"><span class="pre">ss</span></code> is
+<span class="math">\(n*O(n) = O(n*n) = O(n^2)\)</span>.  We can fix this issue by using the usual
+simplification shown below.</p>
+<div class="math">
+\[SS = \sum_{i=1}^n{y_i^2} - \frac{\left(\sum_{i=1}^n y_i\right)^2}{n}\]</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">ss</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="gp">In [39]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [40]: </span><span class="n">ss</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="gh">Out[40]: </span><span class="go">10.0</span>
+</pre></div>
+</div>
+<p>Now we refactor the code to clear up the meaning of each part.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">sum_square_values</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
+
+<span class="gp">In [42]: </span><span class="n">ss</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="n">sum_square_values</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="gp">In [43]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [44]: </span><span class="n">ss</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="gh">Out[44]: </span><span class="go">10.0</span>
+</pre></div>
+</div>
+<p>Each of the component functions, <code class="docutils literal"><span class="pre">len</span></code>, <code class="docutils literal"><span class="pre">sum_values</span></code> and
+<code class="docutils literal"><span class="pre">sum_square_values</span></code>, is <span class="math">\(O(n)\)</span> (they each visit a list element exactly
+once and perform a <span class="math">\(O(1)\)</span> computation).  Therefore, this implementation is
+<span class="math">\(O(n)\)</span>, which is illustrated below by the 10 fold increase in computation
+time when increasing the length of a list by a factor of 10.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">31</span><span class="p">]:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">ss</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+   <span class="o">....</span><span class="p">:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">ss</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
+   <span class="o">....</span><span class="p">:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">ss</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="mi">10000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">42.5</span> <span class="n">us</span> <span class="n">per</span> <span class="n">loop</span>
+<span class="mi">1000</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">406</span> <span class="n">us</span> <span class="n">per</span> <span class="n">loop</span>
+<span class="mi">100</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">4.11</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span>
+</pre></div>
+</div>
+<div class="admonition-beware-of-premature-optimization admonition">
+<p class="first admonition-title">Beware of Premature Optimization!</p>
+<p>A well-known computer scientist, <a class="reference external" href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a>, <a class="reference external" href="http://web.archive.org/web/20130731202547/http://pplab.snu.ac.kr/courses/adv_pl05/papers/p261-knuth.pdf">once said</a></p>
+<blockquote>
+<div>Programmers waste enormous amounts of time thinking about, or worrying
+about, the speed of noncritical parts of their programs, and these
+attempts at efficiency actually have a strong negative impact when
+debugging and maintenance are considered. We should forget about small
+efficiencies, say about 97% of the time: <strong>premature optimization is the
+root of all evil.</strong> Yet we should not pass up our opportunities in that
+critical 3%.</div></blockquote>
+<p>It is important to think about the efficiency of your program, but follow
+Knuth&#8217;s advice and worry about it only after you have demonstrated it is
+slow.  Instead, follow <a class="reference external" href="https://en.wikiquote.org/wiki/Donald_Knuth">another pieces of advice from Knuth</a>.</p>
+<blockquote>
+<div>Let us change our traditional attitude to the construction of programs:
+Instead of imagining that our main task is to instruct a computer what
+to do, <strong>let us concentrate rather on explaining to human beings what we
+want a computer to do.</strong></div></blockquote>
+<p class="last">That is, you should focus on describing what your program does in such a way
+that another programmer can understand just by reading your code.</p>
+</div>
+</div>
+<div class="section" id="use-any-and-all-for-boolean-questions-about-a-list">
+<h2>3.10.4. Use <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> for Boolean questions about a list<a class="headerlink" href="#use-any-and-all-for-boolean-questions-about-a-list" title="Permalink to this headline">¶</a></h2>
+<p>There are two more functions that help use reduce a list to a value.  The Python
+built-in functions <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> are useful when asking Boolean questions
+about a list.  The function <code class="docutils literal"><span class="pre">any</span></code> takes a sequence as input and returns True
+if <em>any</em> of the elements in the sequence evaluate to <code class="docutils literal"><span class="pre">True</span></code>.  On the other
+hand, when <code class="docutils literal"><span class="pre">all</span></code> is applied to a sequence, it only evaluates to <code class="docutils literal"><span class="pre">True</span></code> if
+<em>all</em> of the elements of said sequence evaluate to <code class="docutils literal"><span class="pre">True</span></code>.</p>
+<p>Suppose that we want to know if any or all of the elements of a list are even.
+We can write a lambda functions to perform each task as follows.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">all_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">all</span><span class="p">([</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
+
+<span class="gp">In [46]: </span><span class="n">any_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
+
+<span class="gp">In [47]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [48]: </span><span class="n">any_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="gh">Out[48]: </span><span class="go">True</span>
+
+<span class="gp">In [49]: </span><span class="n">all_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="go">              Out[49]: False</span>
+</pre></div>
+</div>
+<p>Notice that this pattern involves</p>
+<ol class="arabic simple">
+<li>Using a Boolean expression in the output expression of the comprehension.</li>
+<li>Applying <code class="docutils literal"><span class="pre">any</span></code> or <code class="docutils literal"><span class="pre">all</span></code> to the list of Boolean values.</li>
+</ol>
+<p>Let&#8217;s refactor this code to clean it up, namely by introducing an <code class="docutils literal"><span class="pre">is_even</span></code>
+function.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="n">is_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="gp">In [51]: </span><span class="n">all_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">all</span><span class="p">([</span><span class="n">is_even</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
+
+<span class="gp">In [52]: </span><span class="n">any_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="n">is_even</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
+
+<span class="gp">In [53]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [54]: </span><span class="n">any_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="gh">Out[54]: </span><span class="go">True</span>
+
+<span class="gp">In [55]: </span><span class="n">all_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="go">              Out[55]: False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-a-comprehension-to-apply-many-functions-to-a-value">
+<h2>3.10.5. Use a comprehension to apply many functions to a value<a class="headerlink" href="#use-a-comprehension-to-apply-many-functions-to-a-value" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that we want to apply many functions to the same value.  We can
+accomplish this using a list of functions and a list comprehension.  In the
+first example, we will compute a number of statistics on the same list.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="gp">In [57]: </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="nb">min</span><span class="p">]</span>
+
+<span class="gp">In [58]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [59]: </span><span class="n">stats</span> <span class="o">=</span> <span class="p">[</span><span class="n">stat_func</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="k">for</span> <span class="n">stat_func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">]</span>
+
+<span class="gp">In [60]: </span><span class="n">stats</span>
+<span class="gh">Out[60]: </span><span class="go">[3.0, 5, 1]</span>
+</pre></div>
+</div>
+<p>In the previous example, each function is pulled out of the <code class="docutils literal"><span class="pre">funcs</span></code> list and
+applied to the list in sequence. We can use a similar approach, combined with
+the <code class="docutils literal"><span class="pre">any</span></code> function, to check if a given value is a number of some sort, be it
+int, real or complex.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [61]: </span><span class="n">is_type_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">,</span>
+<span class="gp">   ....: </span>                 <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">,</span>
+<span class="gp">   ....: </span>                 <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">complex</span><span class="p">]</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [62]: </span><span class="n">is_number</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="n">is_type_func</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">is_type_func</span> <span class="ow">in</span> <span class="n">is_type_funcs</span><span class="p">])</span>
+
+<span class="gp">In [63]: </span><span class="n">is_number</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gh">Out[63]: </span><span class="go">True</span>
+
+<span class="gp">In [64]: </span><span class="n">is_number</span><span class="p">(</span><span class="mf">2.3</span><span class="p">)</span>
+<span class="go">              Out[64]: True</span>
+
+<span class="gp">In [65]: </span><span class="n">is_number</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="go">                            Out[65]: False</span>
+</pre></div>
+</div>
+<p>One thing to note about the last example is that we used to anonymous nature of a
+lambda expression to define each of the functions for checking a type <em>inside
+the list definition</em> without assigning each to a separate name.</p>
+</div>
+<div class="section" id="filter-and-count-using-len">
+<h2>3.10.6. Filter and count using <code class="docutils literal"><span class="pre">len</span></code><a class="headerlink" href="#filter-and-count-using-len" title="Permalink to this headline">¶</a></h2>
+<p>You can use the <code class="docutils literal"><span class="pre">if</span></code> clause along with the length function to count the number
+of elements that satisfy a condition.  In a previous example, we simulated the
+distribution of the sum of rolls on a six and twenty sided die. Suppose that we
+wish to estimate the frequency of the result of the sum being prime.   First, we
+will use filtering and <code class="docutils literal"><span class="pre">len</span></code> to answer the question.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">six_sided</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+<span class="gp">In [67]: </span><span class="n">twenty_sided</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+<span class="gp">In [68]: </span><span class="n">sum_rolls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">r6</span> <span class="o">+</span> <span class="n">r20</span> <span class="k">for</span> <span class="n">r6</span><span class="p">,</span> <span class="n">r20</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">six_sided</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">twenty_sided</span><span class="p">(</span><span class="n">N</span><span class="p">))]</span>
+
+<span class="gp">In [69]: </span><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span>
+
+<span class="gp">In [70]: </span><span class="n">num_primes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">])</span>
+
+<span class="gp">In [71]: </span><span class="n">prop_primes</span> <span class="o">=</span> <span class="n">num_primes</span><span class="o">/</span><span class="mi">10000</span>
+
+<span class="gp">In [72]: </span><span class="n">prop_primes</span>
+<span class="gh">Out[72]: </span><span class="go">0.3466</span>
+</pre></div>
+</div>
+<p>We get the number of primes in the simulation by filtering with <code class="docutils literal"><span class="pre">if</span> <span class="pre">i</span> <span class="pre">in</span>
+<span class="pre">prime</span></code> and then using <code class="docutils literal"><span class="pre">len</span></code> to count the number of results.</p>
+<p>Another approach to the last example is to map results to 0 or 1 based on the
+condition, then using sum to answer the question.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="n">primes_rolls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
+
+<span class="gp">In [74]: </span><span class="n">prop_primes</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">primes_rolls</span><span class="p">)</span><span class="o">/</span><span class="mi">10000</span>
+
+<span class="gp">In [75]: </span><span class="n">prop_primes</span>
+<span class="gh">Out[75]: </span><span class="go">0.3393</span>
+</pre></div>
+</div>
+<p>We can compare the efficiency of these methods using the IPython <code class="docutils literal"><span class="pre">%timeit</span></code>
+magic after abstracting each approach with a lambda expression.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="n">with_zero_one</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span><span class="o">/</span><span class="n">N</span>
+
+<span class="gp">In [77]: </span><span class="o">%</span><span class="k">timeit</span> with_zero_one(10000)
+<span class="go">10 loops, best of 3: 34.9 ms per loop</span>
+</pre></div>
+</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [78]: </span><span class="n">with_len</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">])</span><span class="o">/</span><span class="n">N</span>
+
+<span class="gp">In [79]: </span><span class="o">%</span><span class="k">timeit</span> with_len(10000)
+<span class="go">10 loops, best of 3: 34.3 ms per loop</span>
+</pre></div>
+</div>
+<p>It is not surprising that these methods have nearly the same efficiency, as they
+both have to visit each entry once and must count values.</p>
+<div class="admonition-question admonition">
+<p class="first admonition-title">Question</p>
+<p class="last">Can you prove that each of these approaches is <span class="math">\(O(n)\)</span>?</p>
+</div>
+</div>
+<div class="section" id="use-for-twice-to-get-all-combinations">
+<h2>3.10.7. Use <code class="docutils literal"><span class="pre">for</span></code> twice to get all combinations<a class="headerlink" href="#use-for-twice-to-get-all-combinations" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that we have two list <code class="docutils literal"><span class="pre">L</span></code> and <code class="docutils literal"><span class="pre">M</span></code> and we want to perform some
+computation on all combinations of elements from these two lists.  This can be
+accomplished using two (independent) <code class="docutils literal"><span class="pre">for</span></code> twice, once for each list.  The code
+shown below creates a tuple of all combinations.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [80]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [81]: </span><span class="n">M</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]</span>
+
+<span class="gp">In [82]: </span><span class="n">new_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">M</span><span class="p">]</span>
+
+<span class="gp">In [83]: </span><span class="n">new_list</span>
+<span class="gh">Out[83]: </span><span class="go">[(1, &#39;a&#39;), (1, &#39;b&#39;), (2, &#39;a&#39;), (2, &#39;b&#39;), (3, &#39;a&#39;), (3, &#39;b&#39;)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-second-for-can-depend-on-the-first">
+<h2>3.10.8. The second <code class="docutils literal"><span class="pre">for</span></code> can depend on the first<a class="headerlink" href="#the-second-for-can-depend-on-the-first" title="Permalink to this headline">¶</a></h2>
+<p>The last example illustrated a comprehension pattern for constructing all
+combinations of elements from two list.  Consider the following program, which
+applies this technique to one list versus itself.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [84]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [85]: </span><span class="n">new_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">L</span><span class="p">]</span>
+
+<span class="gp">In [86]: </span><span class="n">new_list</span>
+<span class="gh">Out[86]: </span><span class="go">[(1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3)]</span>
+</pre></div>
+</div>
+<p>Notice that some combinations are repeated, e.g. <code class="docutils literal"><span class="pre">(1,2)</span></code> and <code class="docutils literal"><span class="pre">(2,1)</span></code>.
+Suppose that instead we want all unique pairs of values.  In math, this
+collection is often described as all <span class="math">\(i,j\)</span> such that <span class="math">\(i \le j\)</span>.  We
+can use this approach with comprehensions as well.  Two methods are shown below.</p>
+<p><strong>Method 1 - Filter with ``if``</strong></p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [87]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [88]: </span><span class="n">new_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">]</span>
+
+<span class="gp">In [89]: </span><span class="n">new_list</span>
+<span class="gh">Out[89]: </span><span class="go">[(1, 1), (1, 2), (1, 3), (2, 2), (2, 3), (3, 3)]</span>
+</pre></div>
+</div>
+<p>The first approach matches the mathematical definition exactly and ensures that
+no value is matched with another value more than once by keeping the pairs
+sorted.  One of the reasons that comprehensions are useful is they mirror the
+mathematical language of describing a collection.  The only drawback to this
+approach is that it requires cycling through all combinations.  Because that are
+<span class="math">\(n\)</span> values to pair with each of <span class="math">\(n\)</span> values, this operation is
+<span class="math">\(O(n*n)=O(n^2)\)</span>.  Suppose that we know that there are no repeated values
+in <code class="docutils literal"><span class="pre">L</span></code>.  In this case, we can filter by <em>indices</em> instead of <em>values</em>.  The
+resulting method, while still <span class="math">\(O(n^2)\)</span>, will be close to twice as fast.</p>
+<p><strong>Method 2 - Use indices and ``range`` to filter</strong></p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [90]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [91]: </span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="gp">In [92]: </span><span class="n">new_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">)]</span>
+
+<span class="gp">In [93]: </span><span class="n">new_list</span>
+<span class="gh">Out[93]: </span><span class="go">[(1, 1), (1, 2), (1, 3), (2, 2), (2, 3), (3, 3)]</span>
+</pre></div>
+</div>
+<p>This approach ensures that no index is matched with another index more than
+once.  The key point here is that we made the second <code class="docutils literal"><span class="pre">range</span></code> depend on the
+first, shortening the length of the sequence.  Provided that all the elements of
+<code class="docutils literal"><span class="pre">L</span></code> are unique, this second method iterates over <span class="math">\(\frac{n(n-1)}{2}\)</span>
+elements instead of <span class="math">\(n^2\)</span>.  In the long run, this approach will be a
+little less than twice as fast but approach exactly twice as fast
+asymptotically.  Unfortunately, <span class="math">\(O\left(\frac{n(n-1)}{2}\right)=O\left(\frac{n^2}{2} -
+\frac{n}{2}\right)=O(n^2)\)</span>, so this will still be expensive for large list.</p>
+</div>
+<div class="section" id="flatten-a-2d-data-structure">
+<h2>3.10.9. Flatten a 2D data structure<a class="headerlink" href="#flatten-a-2d-data-structure" title="Permalink to this headline">¶</a></h2>
+<p>A 2D data structure can be flattened using two <code class="docutils literal"><span class="pre">for</span></code> expressions.  The second
+<code class="docutils literal"><span class="pre">for</span></code> will iterate over the <em>rows</em> from the first <code class="docutils literal"><span class="pre">for</span></code>.  To flatten the
+data structure, don&#8217;t include an inner comprehension.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [94]: </span><span class="n">list_of_lists</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">]]</span>
+
+<span class="gp">In [95]: </span><span class="n">flat_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">list_of_lists</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+
+<span class="gp">In [96]: </span><span class="n">flat_list</span>
+<span class="gh">Out[96]: </span><span class="go">[1, 1, 2, 4, 5, &#39;a&#39;]</span>
+</pre></div>
+</div>
+<p>This pattern can take some time to get used to, but we note that it matches the
+imperative approach to the sample problem.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [97]: </span><span class="n">flat_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="gp">In [98]: </span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">list_of_lists</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">flat_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [99]: </span><span class="n">flat_list</span>
+<span class="gh">Out[99]: </span><span class="go">[1, 1, 2, 4, 5, &#39;a&#39;]</span>
+</pre></div>
+</div>
+<p>The following figure illustrates this connection.</p>
+<div class="figure">
+<img alt="A comparison of a double for loop and list comprehension with two ``for`` expressions" src="../_images/two_for_diagram.png" />
+<div class="legend">
+The list comprehension for looping through all rows and items preserves the
+order shown in the double for loop from the imperative approach.</div>
+</div>
+<p>In general, readers familiar with writing imperative loops can use those
+patterns to transition to comprehensions.</p>
+</div>
+<div class="section" id="sometimes-it-is-easier-to-describe-what-your-don-t-want">
+<h2>3.10.10. Sometimes it is easier to describe what your don&#8217;t want<a class="headerlink" href="#sometimes-it-is-easier-to-describe-what-your-don-t-want" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that we want to use list comprehensions to describe all the prime
+numbers up to <code class="docutils literal"><span class="pre">n=120</span></code>.  A well-known algorithm for describing primes is the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">Sieve of Eratosthenes</a>,
+For each number <code class="docutils literal"><span class="pre">i</span></code> between 2 and <span class="math">\(\sqrt{n}\)</span>, this algorithm crosses out
+all the multiples of <code class="docutils literal"><span class="pre">i</span></code>.  The remaining numbers will be prime.  Notice that
+this algorithm describes numbers that are prime by <em>decribing all numbers that
+are not</em>.  The following two list comprehensions perform the task of finding all
+primes up to 120.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [100]: </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+
+<span class="gp">In [101]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">120</span>
+
+<span class="gp">In [102]: </span><span class="n">not_prime</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span>
+
+<span class="gp">In [103]: </span><span class="n">prime</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">not_prime</span><span class="p">]</span>
+
+<span class="gp">In [104]: </span><span class="n">prime</span>
+<span class="gh">Out[104]: </span><span class="go"></span>
+<span class="go">[2,</span>
+<span class="go"> 3,</span>
+<span class="go"> 5,</span>
+<span class="go"> 7,</span>
+<span class="go"> 11,</span>
+<span class="go"> 13,</span>
+<span class="go"> 17,</span>
+<span class="go"> 19,</span>
+<span class="go"> 23,</span>
+<span class="go"> 29,</span>
+<span class="go"> 31,</span>
+<span class="go"> 37,</span>
+<span class="go"> 41,</span>
+<span class="go"> 43,</span>
+<span class="go"> 47,</span>
+<span class="go"> 53,</span>
+<span class="go"> 59,</span>
+<span class="go"> 61,</span>
+<span class="go"> 67,</span>
+<span class="go"> 71,</span>
+<span class="go"> 73,</span>
+<span class="go"> 79,</span>
+<span class="go"> 83,</span>
+<span class="go"> 89,</span>
+<span class="go"> 97,</span>
+<span class="go"> 101,</span>
+<span class="go"> 103,</span>
+<span class="go"> 107,</span>
+<span class="go"> 109,</span>
+<span class="go"> 113]</span>
+</pre></div>
+</div>
+<p><strong>Illustration of the Sieve of Eratosthenes</strong></p>
+<div class="figure">
+<img alt="Illustration of the Sieve of Eratosthenes" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif" />
+<div class="legend">
+The Sieve of Eratosthenes finds all the primes up to some number <code class="docutils literal"><span class="pre">n</span></code> by
+crossing out all multiples of numbers from 2 to <span class="math">\(\sqrt{n}\)</span>.  This image was
+copied from <a class="reference external" href="https://commons.wikimedia.org/wiki/File:Sieve_of_Eratosthenes_animation.gif">Wikipedia</a>
+and is covered by the <a class="reference external" href="https://en.wikipedia.org/wiki/en:GNU_Free_Documentation_License">GNU Free Documentation License</a>.</div>
+</div>
+<p>As always, we can clean this code up with a little refactoring.  Let&#8217;s use two
+lambda expressions to give meaning two applications of range in <code class="docutils literal"><span class="pre">not_prime</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [105]: </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+
+<span class="gp">In [106]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">120</span>
+
+<span class="gp">In [107]: </span><span class="n">possible_factors</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="gp">In [108]: </span><span class="n">multiples_of</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+<span class="gp">In [109]: </span><span class="n">not_prime</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">possible_factors</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">multiples_of</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span>
+
+<span class="gp">In [110]: </span><span class="n">prime</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">not_prime</span><span class="p">]</span>
+
+<span class="gp">In [111]: </span><span class="n">prime</span>
+<span class="gh">Out[111]: </span><span class="go"></span>
+<span class="go">[2,</span>
+<span class="go"> 3,</span>
+<span class="go"> 5,</span>
+<span class="go"> 7,</span>
+<span class="go"> 11,</span>
+<span class="go"> 13,</span>
+<span class="go"> 17,</span>
+<span class="go"> 19,</span>
+<span class="go"> 23,</span>
+<span class="go"> 29,</span>
+<span class="go"> 31,</span>
+<span class="go"> 37,</span>
+<span class="go"> 41,</span>
+<span class="go"> 43,</span>
+<span class="go"> 47,</span>
+<span class="go"> 53,</span>
+<span class="go"> 59,</span>
+<span class="go"> 61,</span>
+<span class="go"> 67,</span>
+<span class="go"> 71,</span>
+<span class="go"> 73,</span>
+<span class="go"> 79,</span>
+<span class="go"> 83,</span>
+<span class="go"> 89,</span>
+<span class="go"> 97,</span>
+<span class="go"> 101,</span>
+<span class="go"> 103,</span>
+<span class="go"> 107,</span>
+<span class="go"> 109,</span>
+<span class="go"> 113]</span>
+</pre></div>
+</div>
+<div class="admonition-question admonition">
+<p class="first admonition-title">question</p>
+<p class="last">How might you make the last example more general?</p>
+</div>
+</div>
+<div class="section" id="joining-tables">
+<h2>3.10.11. Joining Tables<a class="headerlink" href="#joining-tables" title="Permalink to this headline">¶</a></h2>
+<p>If our lists represent 2D tables of data, we can use comprehensions to join two
+tables, a common operation in SQL.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you don&#8217;t recall the distinctions between the different types of joins,
+see the first answer to <a class="reference external" href="http://stackoverflow.com/questions/38549/what-is-the-difference-between-inner-join-and-outer-join">this stack overflow question</a>.</p>
+</div>
+<p>Recall that an <em>inner-join</em> combines all rows such that the rows match in some
+way.  For example, if we have two lists that contain our employees hours and job
+title, respectively.  The following program computes the inner join of these two
+tables when matching the employees name.  Any rows for employees that don&#8217;t
+appear in both tables will be dropped.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [112]: </span><span class="n">hours</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">43</span><span class="p">],</span>
+<span class="gp">   .....: </span>           <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">37</span><span class="p">],</span>
+<span class="gp">   .....: </span>           <span class="p">[</span><span class="s2">&quot;Fred&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">]]</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [113]: </span><span class="n">titles</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Manager&quot;</span><span class="p">],</span>
+<span class="gp">   .....: </span>          <span class="p">[</span><span class="s2">&quot;Betty&quot;</span><span class="p">,</span> <span class="s2">&quot;Consultant&quot;</span><span class="p">],</span>
+<span class="gp">   .....: </span>          <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Assistant&quot;</span><span class="p">]]</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [114]: </span><span class="n">inner_join</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">nameH</span><span class="p">,</span> <span class="n">ttl</span><span class="p">,</span> <span class="n">hrs</span><span class="p">)</span> <span class="k">for</span> <span class="n">nameH</span><span class="p">,</span> <span class="n">hrs</span> <span class="ow">in</span> <span class="n">hours</span> <span class="k">for</span> <span class="n">nameT</span><span class="p">,</span> <span class="n">ttl</span> <span class="ow">in</span> <span class="n">titles</span> <span class="k">if</span> <span class="n">nameH</span> <span class="o">==</span> <span class="n">nameT</span><span class="p">]</span>
+
+<span class="gp">In [115]: </span><span class="n">inner_join</span>
+<span class="gh">Out[115]: </span><span class="go">[(&#39;Alice&#39;, &#39;Manager&#39;, 43), (&#39;Bob&#39;, &#39;Assistant&#39;, 37)]</span>
+</pre></div>
+</div>
+<p>The left outer join of the tables will include all of the rows from the first
+list, as well as the values from the second table if present.  Here is the code
+for performing a left outer join using a list comprehension.  We do this by
+combining the inner join with the rows that only appear in the left table.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [116]: </span><span class="n">hours</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">43</span><span class="p">],</span>
+<span class="gp">   .....: </span>           <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">37</span><span class="p">],</span>
+<span class="gp">   .....: </span>           <span class="p">[</span><span class="s2">&quot;Fred&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">]]</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [117]: </span><span class="n">titles</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Manager&quot;</span><span class="p">],</span>
+<span class="gp">   .....: </span>          <span class="p">[</span><span class="s2">&quot;Betty&quot;</span><span class="p">,</span> <span class="s2">&quot;Consultant&quot;</span><span class="p">],</span>
+<span class="gp">   .....: </span>          <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Assistant&quot;</span><span class="p">]]</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [118]: </span><span class="n">left_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hours</span><span class="p">]</span>
+
+<span class="gp">In [119]: </span><span class="n">right_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">]</span>
+
+<span class="gp">In [120]: </span><span class="n">inner_join</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">nameH</span><span class="p">,</span> <span class="n">ttl</span><span class="p">,</span> <span class="n">hrs</span><span class="p">)</span> <span class="k">for</span> <span class="n">nameH</span><span class="p">,</span> <span class="n">hrs</span> <span class="ow">in</span> <span class="n">hours</span> <span class="k">for</span> <span class="n">nameT</span><span class="p">,</span> <span class="n">ttl</span> <span class="ow">in</span> <span class="n">titles</span> <span class="k">if</span> <span class="n">nameH</span> <span class="o">==</span> <span class="n">nameT</span><span class="p">]</span>
+
+<span class="gp">In [121]: </span><span class="n">left_only_rows</span> <span class="o">=</span> <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">hrs</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">hrs</span> <span class="ow">in</span> <span class="n">hours</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">right_names</span><span class="p">]</span>
+
+<span class="gp">In [122]: </span><span class="n">left_join</span> <span class="o">=</span> <span class="n">inner_join</span> <span class="o">+</span> <span class="n">left_only_rows</span>
+
+<span class="gp">In [123]: </span><span class="n">left_join</span>
+<span class="gh">Out[123]: </span><span class="go">[(&#39;Alice&#39;, &#39;Manager&#39;, 43), (&#39;Bob&#39;, &#39;Assistant&#39;, 37), (&#39;Fred&#39;, None, 15)]</span>
+</pre></div>
+</div>
+<p>You may have noticed that this approach required us to iterate through each
+table a number of times.  This is not the most efficient implementation, and a
+solution that uses a relational database should be used to larger problems, but
+for small problem this approach should be fine.</p>
+</div>
+<div class="section" id="apply-tranformations-at-each-level-of-abstraction">
+<h2>3.10.12. Apply Tranformations at Each Level of Abstraction<a class="headerlink" href="#apply-tranformations-at-each-level-of-abstraction" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="more-on-working-with-strings-and-lists">
+<h2>3.10.13. More on working with strings and lists<a class="headerlink" href="#more-on-working-with-strings-and-lists" title="Permalink to this headline">¶</a></h2>
+<p>There are two common patterns that are applied when processing strings.  Both
+patterns start by using the string <code class="docutils literal"><span class="pre">split</span></code> method to split the string into a
+list of strings.  Then a list comprehension is used to transform the list of
+strings and some post-processing is applied.</p>
+<p>The first pattern is used when computing statistics about a string.  The
+following figure illustrates this process.</p>
+<div class="figure">
+<img alt="The process of computing statistics about a string" src="../_images/string_statistic_diagram.png" />
+<div class="legend">
+The process for computing a statistic about a string envolves splitting
+the string into a list of strings, tranforming the string into another
+list and then reducing that list to a value.</div>
+</div>
+<p>Let&#8217;s start by counting the number of vowels in a word.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [124]: </span><span class="n">vowels</span> <span class="o">=</span> <span class="s2">&quot;aeiou&quot;</span>
+
+<span class="gp">In [125]: </span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;Mississippi&quot;</span>
+
+<span class="gp">In [126]: </span><span class="n">num_vowels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">word</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">])</span>
+
+<span class="gp">In [127]: </span><span class="n">num_vowels</span>
+<span class="gh">Out[127]: </span><span class="go">4</span>
+</pre></div>
+</div>
+<p>We generalized this expression with lambda expression.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [128]: </span><span class="n">num_vowels</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">word</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">word</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">])</span>
+
+<span class="gp">In [129]: </span><span class="n">num_vowels</span><span class="p">(</span><span class="s2">&quot;Minnesota&quot;</span><span class="p">)</span>
+<span class="gh">Out[129]: </span><span class="go">4</span>
+</pre></div>
+</div>
+<p>Next, we will use this function to compute the average number of words in a
+sentence.  We start by going through the process step-by-step.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [130]: </span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span>
+
+<span class="gp">In [131]: </span><span class="n">quote</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;I know something ain&#39;t right.</span>
+<span class="gp">   .....: </span><span class="s1">    Sweetie, we&#39;re crooks. If everything were right, we&#39;d be in jail.&#39;&#39;&#39;</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [132]: </span><span class="n">s_no_punc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">quote</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
+
+<span class="gp">In [133]: </span><span class="n">s_no_punc</span>
+<span class="gh">Out[133]: </span><span class="go">&#39;i know something aint right\n    sweetie were crooks if everything were right wed be in jail&#39;</span>
+
+<span class="gp">In [134]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">quote</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="gp">In [135]: </span><span class="n">words</span>
+<span class="gh">Out[135]: </span><span class="go"></span>
+<span class="go">[&#39;I&#39;,</span>
+<span class="go"> &#39;know&#39;,</span>
+<span class="go"> &#39;something&#39;,</span>
+<span class="go"> &quot;ain&#39;t&quot;,</span>
+<span class="go"> &#39;right.&#39;,</span>
+<span class="go"> &#39;Sweetie,&#39;,</span>
+<span class="go"> &quot;we&#39;re&quot;,</span>
+<span class="go"> &#39;crooks.&#39;,</span>
+<span class="go"> &#39;If&#39;,</span>
+<span class="go"> &#39;everything&#39;,</span>
+<span class="go"> &#39;were&#39;,</span>
+<span class="go"> &#39;right,&#39;,</span>
+<span class="go"> &quot;we&#39;d&quot;,</span>
+<span class="go"> &#39;be&#39;,</span>
+<span class="go"> &#39;in&#39;,</span>
+<span class="go"> &#39;jail.&#39;]</span>
+
+<span class="gp">In [136]: </span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+
+<span class="gp">In [137]: </span><span class="n">nums</span>
+<span class="gh">Out[137]: </span><span class="go">[1, 1, 3, 2, 1, 4, 2, 2, 1, 3, 2, 1, 1, 1, 1, 2]</span>
+
+<span class="go"># Using the mean function defined in earlier examples</span>
+<span class="gp">In [138]: </span><span class="n">average_num_vowels</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+
+<span class="gp">In [139]: </span><span class="n">average_num_vowels</span>
+<span class="gh">Out[139]: </span><span class="go">1.75</span>
+</pre></div>
+</div>
+<p>Finally, we generalize this process with a little refactoring.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [140]: </span><span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
+
+<span class="gp">In [141]: </span><span class="n">clean_and_split</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="gp">In [142]: </span><span class="n">average_num_vowels</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">mean</span><span class="p">([</span><span class="n">num_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">clean_and_split</span><span class="p">(</span><span class="n">s</span><span class="p">)])</span>
+
+<span class="gp">In [143]: </span><span class="n">average_num_vowels</span><span class="p">(</span><span class="s2">&quot;Long, long ago in a galaxy far, far away.&quot;</span><span class="p">)</span>
+<span class="gh">Out[143]: </span><span class="go">1.3333333333333333</span>
+</pre></div>
+</div>
+<p>A second string processing pattern that is commonly applied involves
+transforming one string into another.  Again we illustrate the process with a
+diagram.</p>
+<div class="figure">
+<img alt="The process of computing statistics about a string" src="../_images/building_a_string_diagram.png" />
+<div class="legend">
+The process for computing a statistic about a string envolves splitting
+the string into a list of strings, tranforming the string into another
+list and then reducing that list to a value.</div>
+</div>
+</div>
+</div>
+
+
+  
+      
+  <li id="relations-prev" class="navLink" title='Previous Section - 3.9. Transforming Sequences with Comprehensions' data-toggle="tooltip">
+    <a href="TransformingSequencesWithComprehensions.html" >
+      <i class='prevNav glyphicon glyphicon-chevron-left'></i>
+    </a>
+  </li>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="TransformingSequencesWithComprehensions.html" ></a>
+  
+  <li id="relations-next" class="navLink" title='Next Section - 3.11. Other Python Sequence Types' data-toggle="tooltip" >
+    <a href="OtherPythonSequenceTypes.html" >
+      <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
+    </a>
+  </li>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="OtherPythonSequenceTypes.html" >Next Section - 3.11. Other Python Sequence Types</a>
+
+<script type="text/javascript">
+
+  $('#relations-prev').tooltip({'placement':'right', 'selector': '', 'delay': { show: 100, hide: 50}});
+  $('#relations-next').tooltip({'placement':'left', 'selector': '', 'delay': { show: 100, hide: 50}});
+  
+</script>
+  
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      
+      | <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015 bn8210wy.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+    </p>
+  </div>
+</footer>
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-32029811-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

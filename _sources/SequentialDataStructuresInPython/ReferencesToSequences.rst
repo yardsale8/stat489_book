@@ -1,5 +1,5 @@
-Referenes to Sequences
-======================
+References to Sequences
+=======================
 
 In the next section, we will explore Python's implementation of lists.  In the
 process the idea of an alias is defined and illustrated, which will help explain

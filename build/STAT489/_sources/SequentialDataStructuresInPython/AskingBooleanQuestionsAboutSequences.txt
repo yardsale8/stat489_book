@@ -29,18 +29,6 @@ We can perform tests of equality on a simple tuples as well.
     b == c
 
 
-.. caution::
-
-    Tests for equality on list don't work in the same way, which we will explain
-    in a later section when discussing mutable and immutable sequences.
-
-    .. ipython:: python
-        
-        a = [1,2,3]
-        b = [1,2,3]
-
-        a == b
-
 
 The ``in`` and ``not in`` operators
 -----------------------------------

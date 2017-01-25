@@ -102,7 +102,7 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="3. Sequential Data Structures in Python" href="toctree.html" />
-    <link rel="next" title="3.9. Transforming Sequences with Comprehensions" href="TransformingSequencesWithComprehensions.html" />
+    <link rel="next" title="3.9. Other Python Sequence Types" href="OtherPythonSequenceTypes.html" />
     <link rel="prev" title="3.7. Sequence Methods and Working with Strings and Lists" href="SequenceMethodsandWorkingwithStringsAndLists.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -288,8 +288,8 @@
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 3.9. Transforming Sequences with Comprehensions' data-toggle="tooltip" >
-    <a href="TransformingSequencesWithComprehensions.html" >
+  <li id="relations-next" title='Next Chapter - 3.9. Other Python Sequence Types' data-toggle="tooltip" >
+    <a href="OtherPythonSequenceTypes.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -600,7 +600,7 @@ add the word &#8220;cat&#8221; to the end of the list.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (appcon1)</span> </p>
 </div>
 <script type="text/javascript">
-var appcon1_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 3, "globals": {"origlist": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["origlist"], "heap": {"1": ["LIST", 45, 32, 88]}}, {"line": 3, "globals": {"origlist": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["origlist"], "heap": {"1": ["LIST", 45, 32, 88, "cat"]}}], "code": "origlist = [45, 32, 88]\n\noriglist.append(\"cat\")"};
+var appcon1_trace = {"code": "origlist = [45, 32, 88]\n\noriglist.append(\"cat\")", "trace": [{"ordered_globals": [], "line": 1, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {}, "stdout": ""}, {"ordered_globals": ["origlist"], "line": 3, "heap": {"1": ["LIST", 45, 32, 88]}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"origlist": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["origlist"], "line": 3, "heap": {"1": ["LIST", 45, 32, 88, "cat"]}, "stack_to_render": [], "event": "return", "func_name": "<module>", "globals": {"origlist": ["REF", 1]}, "stdout": ""}]};
 var appcon1_vis;
 
 $(document).ready(function() {
@@ -653,7 +653,7 @@ operator needs two lists to do its work.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (appcon2)</span> </p>
 </div>
 <script type="text/javascript">
-var appcon2_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 3, "globals": {"origlist": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["origlist"], "heap": {"1": ["LIST", 45, 32, 88]}}, {"line": 3, "globals": {"origlist": ["REF", 2]}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["origlist"], "heap": {"2": ["LIST", 45, 32, 88, "cat"]}}], "code": "origlist = [45, 32, 88]\n\noriglist = origlist + [\"cat\"]"};
+var appcon2_trace = {"code": "origlist = [45, 32, 88]\n\noriglist = origlist + [\"cat\"]", "trace": [{"ordered_globals": [], "line": 1, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {}, "stdout": ""}, {"ordered_globals": ["origlist"], "line": 3, "heap": {"1": ["LIST", 45, 32, 88]}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"origlist": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["origlist"], "line": 3, "heap": {"2": ["LIST", 45, 32, 88, "cat"]}, "stack_to_render": [], "event": "return", "func_name": "<module>", "globals": {"origlist": ["REF", 2]}, "stdout": ""}]};
 var appcon2_vis;
 
 $(document).ready(function() {
@@ -704,7 +704,7 @@ it did before the concatenation.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (appcon3)</span> </p>
 </div>
 <script type="text/javascript">
-var appcon3_trace = {"trace": [{"line": 1, "globals": {}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": [], "heap": {}}, {"line": 3, "globals": {"origlist": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "step_line", "stdout": "", "ordered_globals": ["origlist"], "heap": {"1": ["LIST", 45, 32, 88]}}, {"line": 3, "globals": {"newlist": ["REF", 2], "origlist": ["REF", 1]}, "stack_to_render": [], "func_name": "<module>", "event": "return", "stdout": "", "ordered_globals": ["origlist", "newlist"], "heap": {"1": ["LIST", 45, 32, 88], "2": ["LIST", 45, 32, 88, "cat"]}}], "code": "origlist = [45, 32, 88]\n\nnewlist = origlist + [\"cat\"]"};
+var appcon3_trace = {"code": "origlist = [45, 32, 88]\n\nnewlist = origlist + [\"cat\"]", "trace": [{"ordered_globals": [], "line": 1, "heap": {}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {}, "stdout": ""}, {"ordered_globals": ["origlist"], "line": 3, "heap": {"1": ["LIST", 45, 32, 88]}, "stack_to_render": [], "event": "step_line", "func_name": "<module>", "globals": {"origlist": ["REF", 1]}, "stdout": ""}, {"ordered_globals": ["origlist", "newlist"], "line": 3, "heap": {"1": ["LIST", 45, 32, 88], "2": ["LIST", 45, 32, 88, "cat"]}, "stack_to_render": [], "event": "return", "func_name": "<module>", "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "stdout": ""}]};
 var appcon3_vis;
 
 $(document).ready(function() {
@@ -759,7 +759,7 @@ to add memory and copy the list happens to infrequently, we can consider
 <p><strong>Check you understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_15_1">
-            <p>rec-5-20: What is printed by the following statements?</p>
+            <p>rec-5-21: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">alist</span> <span class="o">=</span> <span class="n">alist</span> <span class="o">+</span> <span class="mi">999</span>
 <span class="k">print</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span>
@@ -802,12 +802,12 @@ structures is</div></blockquote>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="SequenceMethodsandWorkingwithStringsAndLists.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 3.9. Transforming Sequences with Comprehensions' data-toggle="tooltip" >
-    <a href="TransformingSequencesWithComprehensions.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 3.9. Other Python Sequence Types' data-toggle="tooltip" >
+    <a href="OtherPythonSequenceTypes.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="TransformingSequencesWithComprehensions.html" >Next Section - 3.9. Transforming Sequences with Comprehensions</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="OtherPythonSequenceTypes.html" >Next Section - 3.9. Other Python Sequence Types</a>
 
 <script type="text/javascript">
 
