@@ -102,7 +102,7 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="4. Expression-Oriented Sequence Transformations" href="toctree.html" />
-    <link rel="next" title="4.2. Common Comprehension Patterns" href="CommonComprehensionPatterns.html" />
+    <link rel="next" title="4.2. Working with Strings and Lists" href="WorkingWithStringAndList.html" />
     <link rel="prev" title="4. Expression-Oriented Sequence Transformations" href="toctree.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -266,7 +266,6 @@
 <li><a class="reference internal" href="#">4.1. Transforming Sequences with Comprehensions</a><ul>
 <li><a class="reference internal" href="#list-comprehensions">4.1.1. List Comprehensions</a></li>
 <li><a class="reference internal" href="#list-comprehensions-for-two-dimensional-data">4.1.2. List Comprehensions for Two Dimensional Data</a></li>
-<li><a class="reference internal" href="#character-classification">4.1.3. Character classification</a></li>
 </ul>
 </li>
 </ul>
@@ -282,8 +281,8 @@
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 4.2. Common Comprehension Patterns' data-toggle="tooltip" >
-    <a href="CommonComprehensionPatterns.html" >
+  <li id="relations-next" title='Next Chapter - 4.2. Working with Strings and Lists' data-toggle="tooltip" >
+    <a href="WorkingWithStringAndList.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -407,7 +406,7 @@ accomplished using a negative step size.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_5_1">
-            rec-5-52: In the command range(3, 10, 2), what does the second argument (10) specify?
+            data-2-250: In the command range(3, 10, 2), what does the second argument (10) specify?
             <li data-component="answer" data-correct id="test_question3_5_1_opt_a">(A) Range should generate a list that stops at 9 (including 9).</li><li data-component="feedback" id="test_question3_5_1_opt_a">Range will generate the list [3, 5, 7, 9].</li>
             
             <li data-component="answer"  id="test_question3_5_1_opt_b">(B) Range should generate a list that starts at 10 (including 10).</li><li data-component="feedback" id="test_question3_5_1_opt_b">The first argument (3) tells range what number to start at.</li>
@@ -420,7 +419,7 @@ accomplished using a negative step size.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_5_2">
-            rec-5-53: What command correctly generates the list [2, 5, 8]?
+            data-2-251: What command correctly generates the list [2, 5, 8]?
             <li data-component="answer"  id="test_question3_5_2_opt_a">(A) range(2, 5, 8)</li><li data-component="feedback" id="test_question3_5_2_opt_a">This command generates the list [2] because the first number (2) tells range where to start, the second number tells range where to end (5, not inclusive) and the third number tells range how many numbers to skip between elements (8).  Since 10>= 8, there is only one number in this list.</li>
             
             <li data-component="answer"  id="test_question3_5_2_opt_b">(B) range(2, 8, 3)</li><li data-component="feedback" id="test_question3_5_2_opt_b">This command generates the list [2, 5] because 8 is not less than 8 (the specified ending number).</li>
@@ -433,7 +432,7 @@ accomplished using a negative step size.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question3_5_3">
-            rec-5-54: What happens if you give range only one argument?  For example: range(4)
+            data-2-252: What happens if you give range only one argument?  For example: range(4)
             <li data-component="answer" data-correct id="test_question3_5_3_opt_a">(A) It will generate a list starting at 0, with every number included up to but not including the argument it was passed.</li><li data-component="feedback" id="test_question3_5_3_opt_a">Yes, if you only give one number to range it starts with 0 and ends before the number specified incrementing by 1.</li>
             
             <li data-component="answer"  id="test_question3_5_3_opt_b">(B) It will generate a list starting at 1, with every number up to but not including the argument it was passed.</li><li data-component="feedback" id="test_question3_5_3_opt_b">Range starts at 0 unless otherwise specified.</li>
@@ -487,7 +486,7 @@ numbers</em> up to 10.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_20_1">
-            <p>rec-5-55: What is printed by the following statements?</p>
+            <p>data-2-253: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 <span class="n">blist</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span><span class="o">*</span><span class="mi">2</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">alist</span> <span class="k">if</span> <span class="n">num</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">blist</span><span class="p">)</span>
@@ -538,7 +537,7 @@ comprehension in another.</p>
 <p>To write a comprehension that transforms 2D data into another 2D list, we embed
 a comprehension inside a comprehension.</p>
 <div class="figure">
-<img alt="2D comprehension" src="TheExpressionOrientedSequenceTransformation/Figures/2D_comprehension.png" />
+<img alt="2D comprehension" src="../_images/2D_comprehension.png" />
 <div class="legend">
 A 2D comprehension consists of a list comprehension inside another
 comprehension.  The outer sequence consists of all rows of the matrix
@@ -567,7 +566,7 @@ values.  Consider the following code,</p>
 </pre></div>
 </div>
 <p>which displays the following image.</p>
-<img alt="TheExpressionOrientedSequenceTransformation/Figures/hubble_black.png" src="TheExpressionOrientedSequenceTransformation/Figures/hubble_black.png" />
+<img alt="../_images/hubble_black.png" src="../_images/hubble_black.png" />
 <p>The RGB code for (pure) black is <cite>(0,0,0)</cite>.  The following code splits the task
 into three parts.  First, the function <cite>is_black</cite> checks that each color is 0.
 Next, the function <cite>black_to_white</cite> switches black to white (rgb(255,255,255)),
@@ -586,128 +585,7 @@ to a <cite>numpy array</cite>.</p>
 </pre></div>
 </div>
 <p>The resulting image is shown below.</p>
-<img alt="TheExpressionOrientedSequenceTransformation/Figures/hubble_white.png" src="TheExpressionOrientedSequenceTransformation/Figures/hubble_white.png" />
-</div>
-<div class="section" id="character-classification">
-<h2>4.1.3. Character classification<a class="headerlink" href="#character-classification" title="Permalink to this headline">¶</a></h2>
-<p>It is often helpful to examine a character and test whether it is upper- or
-lowercase, or whether it is a character or a digit. The <code class="docutils literal"><span class="pre">string</span></code> module
-provides several constants that are useful for these purposes. One of these,
-<code class="docutils literal"><span class="pre">string.digits</span></code> is equivalent to &#8220;0123456789&#8221;.  It can be used to check if a
-character is a digit using the <code class="docutils literal"><span class="pre">in</span></code> operator.</p>
-<p>The string <code class="docutils literal"><span class="pre">string.ascii_lowercase</span></code> contains all of the ascii letters that the
-system considers to be lowercase. Similarly, <code class="docutils literal"><span class="pre">string.ascii_uppercase</span></code> contains
-all of the uppercase letters. <code class="docutils literal"><span class="pre">string.punctuation</span></code> comprises all the
-characters considered to be punctuation. Try the following and see what you get.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="kn">import</span> <span class="nn">string</span>
-
-<span class="gp">In [20]: </span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span>
-<span class="gh">Out[20]: </span><span class="go">&#39;abcdefghijklmnopqrstuvwxyz&#39;</span>
-
-<span class="gp">In [21]: </span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span>
-<span class="go">                                      Out[21]: &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span>
-
-<span class="gp">In [22]: </span><span class="n">string</span><span class="o">.</span><span class="n">digits</span>
-<span class="go">                                                                            Out[22]: &#39;0123456789&#39;</span>
-
-<span class="gp">In [23]: </span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span>
-<span class="go">                                                                                                  Out[23]: &#39;!&quot;#$%&amp;\&#39;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~&#39;</span>
-</pre></div>
-</div>
-<p>For more information consult the <code class="docutils literal"><span class="pre">string</span></code> module documentation (see <a class="reference external" href="http://docs.python.org/py3k/py-modindex.html">Global
-Module Index</a>).</p>
-<p>We can use list comprehensions to describe a new string, but we need to convert
-the result back to a string using the <code class="docutils literal"><span class="pre">str</span></code> conversion function.  For example,
-let&#8217;s remove all of the punctuation from a string.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">zen_of_python</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;The Zen of Python, by Tim Peters</span>
-<span class="gp">   ....: </span><span class="s1">Beautiful is better than ugly.</span>
-<span class="gp">   ....: </span><span class="s1">Explicit is better than implicit.</span>
-<span class="gp">   ....: </span><span class="s1">Simple is better than complex.</span>
-<span class="gp">   ....: </span><span class="s1">Complex is better than complicated.</span>
-<span class="gp">   ....: </span><span class="s1">Flat is better than nested.</span>
-<span class="gp">   ....: </span><span class="s1">Sparse is better than dense.</span>
-<span class="gp">   ....: </span><span class="s1">Readability counts.</span>
-<span class="gp">   ....: </span><span class="s1">Special cases aren&#39;t special enough to break the rules.</span>
-<span class="gp">   ....: </span><span class="s1">Although practicality beats purity.</span>
-<span class="gp">   ....: </span><span class="s1">Errors should never pass silently.</span>
-<span class="gp">   ....: </span><span class="s1">Unless explicitly silenced.</span>
-<span class="gp">   ....: </span><span class="s1">In the face of ambiguity, refuse the temptation to guess.</span>
-<span class="gp">   ....: </span><span class="s1">There should be one-- and preferably only one --obvious way to do it.</span>
-<span class="gp">   ....: </span><span class="s1">Although that way may not be obvious at first unless you&#39;re Dutch.</span>
-<span class="gp">   ....: </span><span class="s1">Now is better than never.</span>
-<span class="gp">   ....: </span><span class="s1">Although never is often better than *right* now.</span>
-<span class="gp">   ....: </span><span class="s1">If the implementation is hard to explain, it&#39;s a bad idea.</span>
-<span class="gp">   ....: </span><span class="s1">If the implementation is easy to explain, it may be a good idea.</span>
-<span class="gp">   ....: </span><span class="s1">Namespaces are one honking great idea -- let&#39;s do more of those!&#39;&#39;&#39;</span>
-<span class="gp">   ....: </span>
-
-<span class="gp">In [25]: </span><span class="n">zen_list_no_punc</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">zen_of_python</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">]</span>
-
-<span class="gp">In [26]: </span><span class="k">print</span><span class="p">(</span><span class="n">zen_list_no_punc</span><span class="p">)</span>
-<span class="go">[&#39;T&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;Z&#39;, &#39;e&#39;, &#39;n&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39; &#39;, &#39;P&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;b&#39;, &#39;y&#39;, &#39; &#39;, &#39;T&#39;, &#39;i&#39;, &#39;m&#39;, &#39; &#39;, &#39;P&#39;, &#39;e&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;B&#39;, &#39;e&#39;, &#39;a&#39;, &#39;u&#39;, &#39;t&#39;, &#39;i&#39;, &#39;f&#39;, &#39;u&#39;, &#39;l&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;u&#39;, &#39;g&#39;, &#39;l&#39;, &#39;y&#39;, &#39;\n&#39;, &#39;E&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;i&#39;, &#39;t&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;i&#39;, &#39;t&#39;, &#39;\n&#39;, &#39;S&#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;c&#39;, &#39;o&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;x&#39;, &#39;\n&#39;, &#39;C&#39;, &#39;o&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;x&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;c&#39;, &#39;o&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;a&#39;, &#39;t&#39;, &#39;e&#39;, &#39;d&#39;, &#39;\n&#39;, &#39;F&#39;, &#39;l&#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;s&#39;, &#39;t&#39;, &#39;e&#39;, &#39;d&#39;, &#39;\n&#39;, &#39;S&#39;, &#39;p&#39;, &#39;a&#39;, &#39;r&#39;, &#39;s&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;d&#39;, &#39;e&#39;, &#39;n&#39;, &#39;s&#39;, &#39;e&#39;, &#39;\n&#39;, &#39;R&#39;, &#39;e&#39;, &#39;a&#39;, &#39;d&#39;, &#39;a&#39;, &#39;b&#39;, &#39;i&#39;, &#39;l&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39; &#39;, &#39;c&#39;, &#39;o&#39;, &#39;u&#39;, &#39;n&#39;, &#39;t&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;S&#39;, &#39;p&#39;, &#39;e&#39;, &#39;c&#39;, &#39;i&#39;, &#39;a&#39;, &#39;l&#39;, &#39; &#39;, &#39;c&#39;, &#39;a&#39;, &#39;s&#39;, &#39;e&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39;r&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39; &#39;, &#39;s&#39;, &#39;p&#39;, &#39;e&#39;, &#39;c&#39;, &#39;i&#39;, &#39;a&#39;, &#39;l&#39;, &#39; &#39;, &#39;e&#39;, &#39;n&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;b&#39;, &#39;r&#39;, &#39;e&#39;, &#39;a&#39;, &#39;k&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;r&#39;, &#39;u&#39;, &#39;l&#39;, &#39;e&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;A&#39;, &#39;l&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;p&#39;, &#39;r&#39;, &#39;a&#39;, &#39;c&#39;, &#39;t&#39;, &#39;i&#39;, &#39;c&#39;, &#39;a&#39;, &#39;l&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;a&#39;, &#39;t&#39;, &#39;s&#39;, &#39; &#39;, &#39;p&#39;, &#39;u&#39;, &#39;r&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39;\n&#39;, &#39;E&#39;, &#39;r&#39;, &#39;r&#39;, &#39;o&#39;, &#39;r&#39;, &#39;s&#39;, &#39; &#39;, &#39;s&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;l&#39;, &#39;d&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;v&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;p&#39;, &#39;a&#39;, &#39;s&#39;, &#39;s&#39;, &#39; &#39;, &#39;s&#39;, &#39;i&#39;, &#39;l&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39;l&#39;, &#39;y&#39;, &#39;\n&#39;, &#39;U&#39;, &#39;n&#39;, &#39;l&#39;, &#39;e&#39;, &#39;s&#39;, &#39;s&#39;, &#39; &#39;, &#39;e&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;i&#39;, &#39;t&#39;, &#39;l&#39;, &#39;y&#39;, &#39; &#39;, &#39;s&#39;, &#39;i&#39;, &#39;l&#39;, &#39;e&#39;, &#39;n&#39;, &#39;c&#39;, &#39;e&#39;, &#39;d&#39;, &#39;\n&#39;, &#39;I&#39;, &#39;n&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;f&#39;, &#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39; &#39;, &#39;a&#39;, &#39;m&#39;, &#39;b&#39;, &#39;i&#39;, &#39;g&#39;, &#39;u&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39; &#39;, &#39;r&#39;, &#39;e&#39;, &#39;f&#39;, &#39;u&#39;, &#39;s&#39;, &#39;e&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;t&#39;, &#39;e&#39;, &#39;m&#39;, &#39;p&#39;, &#39;t&#39;, &#39;a&#39;, &#39;t&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;g&#39;, &#39;u&#39;, &#39;e&#39;, &#39;s&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;T&#39;, &#39;h&#39;, &#39;e&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;s&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;l&#39;, &#39;d&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;e&#39;, &#39; &#39;, &#39;a&#39;, &#39;n&#39;, &#39;d&#39;, &#39; &#39;, &#39;p&#39;, &#39;r&#39;, &#39;e&#39;, &#39;f&#39;, &#39;e&#39;, &#39;r&#39;, &#39;a&#39;, &#39;b&#39;, &#39;l&#39;, &#39;y&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;l&#39;, &#39;y&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;b&#39;, &#39;v&#39;, &#39;i&#39;, &#39;o&#39;, &#39;u&#39;, &#39;s&#39;, &#39; &#39;, &#39;w&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;d&#39;, &#39;o&#39;, &#39; &#39;, &#39;i&#39;, &#39;t&#39;, &#39;\n&#39;, &#39;A&#39;, &#39;l&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;w&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;m&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;n&#39;, &#39;o&#39;, &#39;t&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;b&#39;, &#39;v&#39;, &#39;i&#39;, &#39;o&#39;, &#39;u&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;f&#39;, &#39;i&#39;, &#39;r&#39;, &#39;s&#39;, &#39;t&#39;, &#39; &#39;, &#39;u&#39;, &#39;n&#39;, &#39;l&#39;, &#39;e&#39;, &#39;s&#39;, &#39;s&#39;, &#39; &#39;, &#39;y&#39;, &#39;o&#39;, &#39;u&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;D&#39;, &#39;u&#39;, &#39;t&#39;, &#39;c&#39;, &#39;h&#39;, &#39;\n&#39;, &#39;N&#39;, &#39;o&#39;, &#39;w&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;v&#39;, &#39;e&#39;, &#39;r&#39;, &#39;\n&#39;, &#39;A&#39;, &#39;l&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;v&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39;t&#39;, &#39;e&#39;, &#39;n&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;r&#39;, &#39;i&#39;, &#39;g&#39;, &#39;h&#39;, &#39;t&#39;, &#39; &#39;, &#39;n&#39;, &#39;o&#39;, &#39;w&#39;, &#39;\n&#39;, &#39;I&#39;, &#39;f&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;m&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39;a&#39;, &#39;t&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;h&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;e&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;a&#39;, &#39;i&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;t&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39; &#39;, &#39;b&#39;, &#39;a&#39;, &#39;d&#39;, &#39; &#39;, &#39;i&#39;, &#39;d&#39;, &#39;e&#39;, &#39;a&#39;, &#39;\n&#39;, &#39;I&#39;, &#39;f&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;m&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39;a&#39;, &#39;t&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;e&#39;, &#39;a&#39;, &#39;s&#39;, &#39;y&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;e&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;a&#39;, &#39;i&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;t&#39;, &#39; &#39;, &#39;m&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39; &#39;, &#39;a&#39;, &#39; &#39;, &#39;g&#39;, &#39;o&#39;, &#39;o&#39;, &#39;d&#39;, &#39; &#39;, &#39;i&#39;, &#39;d&#39;, &#39;e&#39;, &#39;a&#39;, &#39;\n&#39;, &#39;N&#39;, &#39;a&#39;, &#39;m&#39;, &#39;e&#39;, &#39;s&#39;, &#39;p&#39;, &#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;e&#39;, &#39; &#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;, &#39;k&#39;, &#39;i&#39;, &#39;n&#39;, &#39;g&#39;, &#39; &#39;, &#39;g&#39;, &#39;r&#39;, &#39;e&#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;i&#39;, &#39;d&#39;, &#39;e&#39;, &#39;a&#39;, &#39; &#39;, &#39; &#39;, &#39;l&#39;, &#39;e&#39;, &#39;t&#39;, &#39;s&#39;, &#39; &#39;, &#39;d&#39;, &#39;o&#39;, &#39; &#39;, &#39;m&#39;, &#39;o&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;s&#39;, &#39;e&#39;]</span>
-
-<span class="gp">In [27]: </span><span class="n">zen_string_no_punc</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">zen_list_no_punc</span><span class="p">)</span>
-
-<span class="gp">In [28]: </span><span class="k">print</span><span class="p">(</span><span class="n">zen_string_no_punc</span><span class="p">)</span>
-<span class="go">The Zen of Python by Tim Peters</span>
-<span class="go">Beautiful is better than ugly</span>
-<span class="go">Explicit is better than implicit</span>
-<span class="go">Simple is better than complex</span>
-<span class="go">Complex is better than complicated</span>
-<span class="go">Flat is better than nested</span>
-<span class="go">Sparse is better than dense</span>
-<span class="go">Readability counts</span>
-<span class="go">Special cases arent special enough to break the rules</span>
-<span class="go">Although practicality beats purity</span>
-<span class="go">Errors should never pass silently</span>
-<span class="go">Unless explicitly silenced</span>
-<span class="go">In the face of ambiguity refuse the temptation to guess</span>
-<span class="go">There should be one and preferably only one obvious way to do it</span>
-<span class="go">Although that way may not be obvious at first unless youre Dutch</span>
-<span class="go">Now is better than never</span>
-<span class="go">Although never is often better than right now</span>
-<span class="go">If the implementation is hard to explain its a bad idea</span>
-<span class="go">If the implementation is easy to explain it may be a good idea</span>
-<span class="go">Namespaces are one honking great idea  lets do more of those</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>You can contemplate the zen of Python anytime by executing <code class="docutils literal"><span class="pre">import</span> <span class="pre">this</span></code>.</p>
-<div class="last highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="kn">import</span> <span class="nn">this</span>
-<span class="go">The Zen of Python, by Tim Peters</span>
-
-<span class="go">Beautiful is better than ugly.</span>
-<span class="go">Explicit is better than implicit.</span>
-<span class="go">Simple is better than complex.</span>
-<span class="go">Complex is better than complicated.</span>
-<span class="go">Flat is better than nested.</span>
-<span class="go">Sparse is better than dense.</span>
-<span class="go">Readability counts.</span>
-<span class="go">Special cases aren&#39;t special enough to break the rules.</span>
-<span class="go">Although practicality beats purity.</span>
-<span class="go">Errors should never pass silently.</span>
-<span class="go">Unless explicitly silenced.</span>
-<span class="go">In the face of ambiguity, refuse the temptation to guess.</span>
-<span class="go">There should be one-- and preferably only one --obvious way to do it.</span>
-<span class="go">Although that way may not be obvious at first unless you&#39;re Dutch.</span>
-<span class="go">Now is better than never.</span>
-<span class="go">Although never is often better than *right* now.</span>
-<span class="go">If the implementation is hard to explain, it&#39;s a bad idea.</span>
-<span class="go">If the implementation is easy to explain, it may be a good idea.</span>
-<span class="go">Namespaces are one honking great idea -- let&#39;s do more of those!</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
-
-<textarea data-component="activecode" id=scratch_08_04 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-
-
-</textarea>
-</div>
+<img alt="../_images/hubble_white.png" src="../_images/hubble_white.png" />
 </div>
 </div>
 
@@ -721,12 +599,12 @@ let&#8217;s remove all of the punctuation from a string.</p>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="toctree.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 4.2. Common Comprehension Patterns' data-toggle="tooltip" >
-    <a href="CommonComprehensionPatterns.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 4.2. Working with Strings and Lists' data-toggle="tooltip" >
+    <a href="WorkingWithStringAndList.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="CommonComprehensionPatterns.html" >Next Section - 4.2. Common Comprehension Patterns</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="WorkingWithStringAndList.html" >Next Section - 4.2. Working with Strings and Lists</a>
 
 <script type="text/javascript">
 

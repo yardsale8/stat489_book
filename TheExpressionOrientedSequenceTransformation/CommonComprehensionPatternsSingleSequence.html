@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Common Comprehension Patterns for a Single Sequence &mdash; Runestone Interactive Overview</title>
+    <title>4.3. Common Comprehension Patterns for a Single Sequence &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,6 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
+    <link rel="up" title="4. Expression-Oriented Sequence Transformations" href="toctree.html" />
+    <link rel="next" title="4.4. Common Comprehension Patterns for Two Sequences" href="CommonComprehensionPatternsTwoSequences.html" />
+    <link rel="prev" title="4.2. Working with Strings and Lists" href="WorkingWithStringAndList.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -245,7 +248,7 @@
             <li><a href='/runestone/static/overview/instructor.html'>Help for Instructors</a></li>
             <li class="divider"></li>
             <li><a href='http://runestoneinteractive.org'>About Runestone</a></li>
-            <li><a href='/runestone/default/reportabug?course=STAT489&page=CommonComprehensionPatterns'>Report A Problem</a></li>
+            <li><a href='/runestone/default/reportabug?course=STAT489&page=CommonComprehensionPatternsSingleSequence'>Report A Problem</a></li>
           </ul>
         </li>
         <!-- end help menu dropdown -->
@@ -260,13 +263,13 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">Common Comprehension Patterns for a Single Sequence</a><ul>
-<li><a class="reference internal" href="#combine-information-in-tuples">Combine information in tuples</a></li>
-<li><a class="reference internal" href="#use-built-in-helper-functions">Use built-in helper functions</a></li>
-<li><a class="reference internal" href="#use-built-in-functions-to-reduce-a-list-to-a-value">Use built-in functions to reduce a list to a value</a></li>
-<li><a class="reference internal" href="#use-any-and-all-for-boolean-questions-about-a-list">Use <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> for Boolean questions about a list</a></li>
-<li><a class="reference internal" href="#use-a-comprehension-to-apply-many-functions-to-a-value">Use a comprehension to apply many functions to a value</a></li>
-<li><a class="reference internal" href="#filter-and-count-using-len">Filter and count using <code class="docutils literal"><span class="pre">len</span></code></a></li>
+<li><a class="reference internal" href="#">4.3. Common Comprehension Patterns for a Single Sequence</a><ul>
+<li><a class="reference internal" href="#combine-information-in-tuples">4.3.1. Combine information in tuples</a></li>
+<li><a class="reference internal" href="#use-built-in-helper-functions">4.3.2. Use built-in helper functions</a></li>
+<li><a class="reference internal" href="#use-built-in-functions-to-reduce-a-list-to-a-value">4.3.3. Use built-in functions to reduce a list to a value</a></li>
+<li><a class="reference internal" href="#use-any-and-all-for-boolean-questions-about-a-list">4.3.4. Use <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> for Boolean questions about a list</a></li>
+<li><a class="reference internal" href="#use-a-comprehension-to-apply-many-functions-to-a-value">4.3.5. Use a comprehension to apply many functions to a value</a></li>
+<li><a class="reference internal" href="#filter-and-count-using-len">4.3.6. Filter and count using <code class="docutils literal"><span class="pre">len</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -276,6 +279,18 @@
         
         
           
+  <li id="relations-prev" title="Previous Chapter - 4.2. Working with Strings and Lists" data-toggle="tooltip">
+    <a href="WorkingWithStringAndList.html" >
+      <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
+    </a>
+  </li>
+  
+  <li id="relations-next" title='Next Chapter - 4.4. Common Comprehension Patterns for Two Sequences' data-toggle="tooltip" >
+    <a href="CommonComprehensionPatternsTwoSequences.html" >
+      <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
+    </a>
+  </li>
+  <li class="divider-vertical"></li>
 
 <script type="text/javascript">
   opts = {'placement':'bottom',
@@ -302,12 +317,12 @@
 <div class="container" id="main-content">
   
   <div class="section" id="common-comprehension-patterns-for-a-single-sequence">
-<h1>Common Comprehension Patterns for a Single Sequence<a class="headerlink" href="#common-comprehension-patterns-for-a-single-sequence" title="Permalink to this headline">¶</a></h1>
+<h1>4.3. Common Comprehension Patterns for a Single Sequence<a class="headerlink" href="#common-comprehension-patterns-for-a-single-sequence" title="Permalink to this headline">¶</a></h1>
 <p>List comprehensions can replace <code class="docutils literal"><span class="pre">for</span></code> loops in  many (most) situations.  In
 the following sections, we will highlight some useful techniques for describing
 a new list using comprehensions.</p>
 <div class="section" id="combine-information-in-tuples">
-<h2>Combine information in tuples<a class="headerlink" href="#combine-information-in-tuples" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.1. Combine information in tuples<a class="headerlink" href="#combine-information-in-tuples" title="Permalink to this headline">¶</a></h2>
 <p>We start with useful pattern for list comprehensions involves combining
 information into a tuple.  For example, lets compute the cube-root of all the
 numbers between 1 and 10 and use a tuple to store both the original number and
@@ -342,7 +357,7 @@ variables between <code class="docutils literal"><span class="pre">for</span></c
 tuples, provided that the number of variables matches the length of the tuples.</p>
 </div>
 <div class="section" id="use-built-in-helper-functions">
-<h2>Use built-in helper functions<a class="headerlink" href="#use-built-in-helper-functions" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.2. Use built-in helper functions<a class="headerlink" href="#use-built-in-helper-functions" title="Permalink to this headline">¶</a></h2>
 <p>The functions <code class="docutils literal"><span class="pre">enumerate</span></code> and <code class="docutils literal"><span class="pre">zip</span></code> both exhibit the pattern from the last
 section.  The <code class="docutils literal"><span class="pre">enumerate</span></code> function can be used to
 return both the index and value of each element of a sequence.</p>
@@ -450,7 +465,7 @@ iterate through a sequence from back to front.</p>
 </div>
 </div>
 <div class="section" id="use-built-in-functions-to-reduce-a-list-to-a-value">
-<h2>Use built-in functions to reduce a list to a value<a class="headerlink" href="#use-built-in-functions-to-reduce-a-list-to-a-value" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.3. Use built-in functions to reduce a list to a value<a class="headerlink" href="#use-built-in-functions-to-reduce-a-list-to-a-value" title="Permalink to this headline">¶</a></h2>
 <p>There are a number of built-in Python functions that help us reduce a list to a
 value, including <code class="docutils literal"><span class="pre">sum</span></code>, <code class="docutils literal"><span class="pre">len</span></code>, <code class="docutils literal"><span class="pre">max</span></code>, and <code class="docutils literal"><span class="pre">min</span></code>.  Remember to use these
 functions along with a list comprehension to describe a computation on a
@@ -555,7 +570,7 @@ that another programmer can understand just by reading your code.</p>
 </div>
 </div>
 <div class="section" id="use-any-and-all-for-boolean-questions-about-a-list">
-<h2>Use <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> for Boolean questions about a list<a class="headerlink" href="#use-any-and-all-for-boolean-questions-about-a-list" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.4. Use <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> for Boolean questions about a list<a class="headerlink" href="#use-any-and-all-for-boolean-questions-about-a-list" title="Permalink to this headline">¶</a></h2>
 <p>There are two more functions that help use reduce a list to a value.  The Python
 built-in functions <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> are useful when asking Boolean questions
 about a list.  The function <code class="docutils literal"><span class="pre">any</span></code> takes a sequence as input and returns True
@@ -601,7 +616,7 @@ function.</p>
 </div>
 </div>
 <div class="section" id="use-a-comprehension-to-apply-many-functions-to-a-value">
-<h2>Use a comprehension to apply many functions to a value<a class="headerlink" href="#use-a-comprehension-to-apply-many-functions-to-a-value" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.5. Use a comprehension to apply many functions to a value<a class="headerlink" href="#use-a-comprehension-to-apply-many-functions-to-a-value" title="Permalink to this headline">¶</a></h2>
 <p>Suppose that we want to apply many functions to the same value.  We can
 accomplish this using a list of functions and a list comprehension.  In the
 first example, we will compute a number of statistics on the same list.</p>
@@ -643,7 +658,7 @@ lambda expression to define each of the functions for checking a type <em>inside
 the list definition</em> without assigning each to a separate name.</p>
 </div>
 <div class="section" id="filter-and-count-using-len">
-<h2>Filter and count using <code class="docutils literal"><span class="pre">len</span></code><a class="headerlink" href="#filter-and-count-using-len" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.6. Filter and count using <code class="docutils literal"><span class="pre">len</span></code><a class="headerlink" href="#filter-and-count-using-len" title="Permalink to this headline">¶</a></h2>
 <p>You can use the <code class="docutils literal"><span class="pre">if</span></code> clause along with the length function to count the number
 of elements that satisfy a condition.  In a previous example, we simulated the
 distribution of the sum of rolls on a six and twenty sided die. Suppose that we
@@ -682,13 +697,13 @@ magic after abstracting each approach with a lambda expression.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="n">with_zero_one</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span><span class="o">/</span><span class="n">N</span>
 
 <span class="gp">In [77]: </span><span class="o">%</span><span class="k">timeit</span> with_zero_one(10000)
-<span class="go">10 loops, best of 3: 32.6 ms per loop</span>
+<span class="go">10 loops, best of 3: 33.4 ms per loop</span>
 </pre></div>
 </div>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [78]: </span><span class="n">with_len</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">])</span><span class="o">/</span><span class="n">N</span>
 
 <span class="gp">In [79]: </span><span class="o">%</span><span class="k">timeit</span> with_len(10000)
-<span class="go">10 loops, best of 3: 32.2 ms per loop</span>
+<span class="go">10 loops, best of 3: 33.1 ms per loop</span>
 </pre></div>
 </div>
 <p>It is not surprising that these methods have nearly the same efficiency, as they
@@ -703,6 +718,19 @@ both have to visit each entry once and must count values.</p>
 
   
       
+  <li id="relations-prev" class="navLink" title='Previous Section - 4.2. Working with Strings and Lists' data-toggle="tooltip">
+    <a href="WorkingWithStringAndList.html" >
+      <i class='prevNav glyphicon glyphicon-chevron-left'></i>
+    </a>
+  </li>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="WorkingWithStringAndList.html" ></a>
+  
+  <li id="relations-next" class="navLink" title='Next Section - 4.4. Common Comprehension Patterns for Two Sequences' data-toggle="tooltip" >
+    <a href="CommonComprehensionPatternsTwoSequences.html" >
+      <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
+    </a>
+  </li>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="CommonComprehensionPatternsTwoSequences.html" >Next Section - 4.4. Common Comprehension Patterns for Two Sequences</a>
 
 <script type="text/javascript">
 

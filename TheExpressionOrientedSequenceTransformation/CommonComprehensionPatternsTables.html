@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.8. Exercises &mdash; Runestone Interactive Overview</title>
+    <title>4.5. Common Comprehension Patterns for Tables &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="4. Expression-Oriented Sequence Transformations" href="toctree.html" />
-    <link rel="next" title="5. Reading Data from Files" href="../ReadingDataFromFiles/toctree.html" />
-    <link rel="prev" title="4.7. The Computational Complexity of a List Comprehension" href="TheComplexityOfListComprehensions.html" />
+    <link rel="next" title="4.6. Levels of Abstraction" href="LevelsOfAbstraction.html" />
+    <link rel="prev" title="4.4. Common Comprehension Patterns for Two Sequences" href="CommonComprehensionPatternsTwoSequences.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -248,7 +248,7 @@
             <li><a href='/runestone/static/overview/instructor.html'>Help for Instructors</a></li>
             <li class="divider"></li>
             <li><a href='http://runestoneinteractive.org'>About Runestone</a></li>
-            <li><a href='/runestone/default/reportabug?course=STAT489&page=Exercises'>Report A Problem</a></li>
+            <li><a href='/runestone/default/reportabug?course=STAT489&page=CommonComprehensionPatternsTables'>Report A Problem</a></li>
           </ul>
         </li>
         <!-- end help menu dropdown -->
@@ -263,7 +263,11 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">4.8. Exercises</a></li>
+<li><a class="reference internal" href="#">4.5. Common Comprehension Patterns for Tables</a><ul>
+<li><a class="reference internal" href="#flatten-a-2d-data-structure">4.5.1. Flatten a 2D data structure</a></li>
+<li><a class="reference internal" href="#joining-tables">4.5.2. Joining Tables</a></li>
+</ul>
+</li>
 </ul>
 </ul>
 </li>
@@ -271,14 +275,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 4.7. The Computational Complexity of a List Comprehension" data-toggle="tooltip">
-    <a href="TheComplexityOfListComprehensions.html" >
+  <li id="relations-prev" title="Previous Chapter - 4.4. Common Comprehension Patterns for Two Sequences" data-toggle="tooltip">
+    <a href="CommonComprehensionPatternsTwoSequences.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 5. Reading Data from Files' data-toggle="tooltip" >
-    <a href="../ReadingDataFromFiles/toctree.html" >
+  <li id="relations-next" title='Next Chapter - 4.6. Levels of Abstraction' data-toggle="tooltip" >
+    <a href="LevelsOfAbstraction.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -308,406 +312,127 @@
 
 <div class="container" id="main-content">
   
-  <div class="section" id="exercises">
-<h1>4.8. Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
-<ol class="arabic">
-<li><p class="first">In Robert McCloskey&#8217;s book <em>Make Way for Ducklings</em>, the names of the
-ducklings are Jack, Kack, Lack, Mack, Nack, Ouack, Pack, and Quack.  This
-loop tries to output these names in order.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">prefixes</span> <span class="o">=</span> <span class="s2">&quot;JKLMNOPQ&quot;</span>
-<span class="n">suffix</span> <span class="o">=</span> <span class="s2">&quot;ack&quot;</span>
+  <div class="section" id="common-comprehension-patterns-for-tables">
+<h1>4.5. Common Comprehension Patterns for Tables<a class="headerlink" href="#common-comprehension-patterns-for-tables" title="Permalink to this headline">¶</a></h1>
+<p>In this final section on common comprehension patterns, we look at using
+comprehensions to transform 2D data structures.</p>
+<div class="section" id="flatten-a-2d-data-structure">
+<h2>4.5.1. Flatten a 2D data structure<a class="headerlink" href="#flatten-a-2d-data-structure" title="Permalink to this headline">¶</a></h2>
+<p>A 2D data structure can be flattened using two <code class="docutils literal"><span class="pre">for</span></code> expressions.  The second
+<code class="docutils literal"><span class="pre">for</span></code> will iterate over the <em>rows</em> from the first <code class="docutils literal"><span class="pre">for</span></code>.  To flatten the
+data structure, don&#8217;t include an inner comprehension.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">list_of_lists</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">]]</span>
 
-<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">first</span> <span class="o">+</span> <span class="n">suffix</span> <span class="k">for</span> <span class="n">first</span> <span class="ow">in</span> <span class="n">prefixes</span><span class="p">]</span>
+<span class="gp">In [2]: </span><span class="n">flat_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">list_of_lists</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+
+<span class="gp">In [3]: </span><span class="n">flat_list</span>
+<span class="gh">Out[3]: </span><span class="go">[1, 1, 2, 4, 5, &#39;a&#39;]</span>
 </pre></div>
 </div>
-<p>Of course, that&#8217;s not quite right because Ouack and Quack are misspelled.
-Can you fix it?</p>
-<blockquote>
-<div>
-<textarea data-component="activecode" id=ex_8_2 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
+<p>This pattern can take some time to get used to, but we note that it matches the
+imperative approach to the sample problem.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">flat_list</span> <span class="o">=</span> <span class="p">[]</span>
 
+<span class="gp">In [5]: </span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">list_of_lists</span><span class="p">:</span>
+<span class="gp">   ...: </span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+<span class="gp">   ...: </span>        <span class="n">flat_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="gp">   ...: </span>
 
-</textarea>
-</div></blockquote>
-</li>
-<li><div id='q3' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
-<blockquote>
-<div><p>Create a function that takes a value <cite>n</cite> as input and constructs a
-multiplication table for whole numbers up to <span class="math">\(n\)</span>.</p>
-</div></blockquote>
-
-<textarea data-component="activecode" id=ex_8_3 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-
-
-</textarea>
-</div><div data-component="tab" data-tabname="Answer" >
-
-<textarea data-component="activecode" id=q3_answer data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-table = lambda n: [i*j for i in range(1,n+1) for j in range(1,n+1)]
-print(table(12))
-</textarea>
+<span class="gp">In [6]: </span><span class="n">flat_list</span>
+<span class="gh">Out[6]: </span><span class="go">[1, 1, 2, 4, 5, &#39;a&#39;]</span>
+</pre></div>
 </div>
-    </div>
-
-</li>
-<li><p class="first">Print out a neatly formatted multiplication table, up to 12 x 12.  You should
-do this by constructing a string.  For full credit, each column should be
-right-justified and your solution should include only comprehensions and
-lambda functions. <strong>Hint:</strong> Write a lambda function pads a number with the
-right number of spaces.</p>
-
-<textarea data-component="activecode" id=ex_8_4 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-
-
-</textarea>
-</li>
-<li><div id='q5' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
-<p>Write a function that will return the number of digits in an integer.</p>
-
-<textarea data-component="activecode" id=ex_7_10 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-numDigits = lambda n: 0  # your code here
-
-====
-
-from unittest.gui import TestCaseGui
-
-class myTests(TestCaseGui):
-
-  def testOne(self):
-      self.assertEqual(numDigits(2),1,"Tested numDigits on input of 2")
-      self.assertEqual(numDigits(55),2,"Tested numDigits on input of 55")
-      self.assertEqual(numDigits(1352),4,"Tested numDigits on input of 1352")
-      self.assertEqual(numDigits(444),3,"Tested numDigits on input of 444")
-
-
-
-myTests().main()
-</textarea>
-</div><div data-component="tab" data-tabname="Answer" >
-
-<textarea data-component="activecode" id=q5_answer data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-numDigits = lambda n: len(str(n))
-
-print(numDigits(50))
-print(numDigits(20000))
-print(numDigits(1))
-</textarea>
+<p>The following figure illustrates this connection.</p>
+<div class="figure">
+<img alt="A comparison of a double for loop and list comprehension with two ``for`` expressions" src="../_images/two_for_diagram.png" />
+<div class="legend">
+The list comprehension for looping through all rows and items preserves the
+order shown in the double for loop from the imperative approach.</div>
 </div>
-    </div>
-
-</li>
-<li><p class="first">Write a function that reverses its string argument.</p>
-
-<textarea data-component="activecode" id=ex_8_5 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true"  data-audio=''    data-gradebutton=true >
-reverse = lambda astring: "a" # your code here
-
-====
-
-from unittest.gui import TestCaseGui
-
-class myTests(TestCaseGui):
-
-  def testOne(self):
-      self.assertEqual(reverse("happy"),"yppah","Tested reverse on input of 'happy'")
-      self.assertEqual(reverse("Python"),"nohtyP","Tested reverse on input of 'Python'")
-      self.assertEqual(reverse(""),"","Tested reverse on input of ''")
-
-
-
-
-myTests().main()
-</textarea>
-</li>
-<li><div id='q7' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
-<p>Write a function that takes a string and mirrors its argument.</p>
-
-<textarea data-component="activecode" id=ex_8_6 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true"  data-audio=''    data-gradebutton=true >
-mirror = lambda mystr: "abba" # your code here
-
-====
-
-from unittest.gui import TestCaseGui
-
-class myTests(TestCaseGui):
-
-    def testOne(self):
-        self.assertEqual(mirror("good"),"gooddoog","Tested mirror on input of 'good'")
-        self.assertEqual(mirror("Python"),"PythonnohtyP","Tested mirror on input of 'Python'")
-        self.assertEqual(mirror(""),"","Tested mirror on input of ''")
-        self.assertEqual(mirror("a"),"aa","Tested mirror on input of 'a'")
-
-
-myTests().main()
-</textarea>
-</div><div data-component="tab" data-tabname="Answer" >
-
-<textarea data-component="activecode" id=q7_answer data-lang="python"    data-timelimit=25000   data-audio=''     >
-reverse = lambda mystr: ''.join([ c for c in reversed(mystr)])
-mirror = lambda mystr: mystr + reverse(mystr)
-</textarea>
+<p>In general, readers familiar with writing imperative loops can use those
+patterns to transition to comprehensions.</p>
 </div>
-    </div>
-
-</li>
-<li><p class="first">Write a function that removes all occurrences of a given letter from a string.</p>
-
-<textarea data-component="activecode" id=ex_8_7 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true"  data-audio=''    data-gradebutton=true >
-remove_letter = lambda theLetter, theString: "stuff" # your code here
-
-====
-
-
-from unittest.gui import TestCaseGui
-
-class myTests(TestCaseGui):
-
-  def testOne(self):
-      self.assertEqual(remove_letter("a","apple"),"pple","Tested remove_letter on inputs of 'a' and 'apple'")
-      self.assertEqual(remove_letter("a","banana"),"bnn","Tested remove_letter on inputs of 'a' and 'banana'")
-      self.assertEqual(remove_letter("z","banana"),"banana","Tested remove_letter on inputs of 'z' and 'banana'")
-
-
-
-myTests().main()
-</textarea>
-</li>
-<li><div id='q9' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
-<p>Write a function that recognizes palindromes. (Hint: use your
-<code class="docutils literal"><span class="pre">reverse</span></code> function to make this easy!).  <strong>Hint:</strong> Use all,
-reversed and zip.</p>
-
-<textarea data-component="activecode" id=ex_8_8 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true"  data-audio=''    data-gradebutton=true >
-is_palindrome lambda myStr: False # your code here
-
-====
-
-
-from unittest.gui import TestCaseGui
-
-class myTests(TestCaseGui):
-
-    def testOne(self):
-        self.assertEqual(is_palindrome("abba"),True,"Tested is_palindrome on input of 'abba'")
-        self.assertEqual(is_palindrome("abab"),False,"Tested is_palindrome on input of 'abab'")
-        self.assertEqual(is_palindrome("straw warts"),True,"Tested is_palindrome on input of 'straw warts'")
-        self.assertEqual(is_palindrome("a"),True,"Tested is_palindrome on input of 'a'")
-        self.assertEqual(is_palindrome(""),True,"Tested is_palindrome on input of ''")
-
-
-
-
-myTests().main()
-</textarea>
-</div><div data-component="tab" data-tabname="Answer" >
-
-<textarea data-component="activecode" id=q9_answer data-lang="python"    data-timelimit=25000   data-audio=''     >
-pairs = lambda mystr: [(i, j) for i, j in zip(mystr,reversed(mystr))]
-check_each_pair = lambda mypairs: [i == j for i, j in pairs]
-is_palindrome lambda myStr: all(check_each_pair(myStr))
-
-# Or all together
-
-is_palindrome_alt = lambda s: all([i ==j for i, j in zip(s, reversed(s))])
-</textarea>
+<div class="section" id="joining-tables">
+<h2>4.5.2. Joining Tables<a class="headerlink" href="#joining-tables" title="Permalink to this headline">¶</a></h2>
+<p>If our lists represent 2D tables of data, we can use comprehensions to join two
+tables, a common operation in SQL.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you don&#8217;t recall the distinctions between the different types of joins,
+see the first answer to <a class="reference external" href="http://stackoverflow.com/questions/38549/what-is-the-difference-between-inner-join-and-outer-join">this stack overflow question</a>.</p>
 </div>
-    </div>
+<p>Recall that an <em>inner-join</em> combines all rows such that the rows match in some
+way.  For example, if we have two lists that contain our employees hours and job
+title, respectively.  The following program computes the inner join of these two
+tables when matching the employees name.  Any rows for employees that don&#8217;t
+appear in both tables will be dropped.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">hours</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">43</span><span class="p">],</span>
+<span class="gp">   ...: </span>           <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">37</span><span class="p">],</span>
+<span class="gp">   ...: </span>           <span class="p">[</span><span class="s2">&quot;Fred&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">]]</span>
+<span class="gp">   ...: </span>
 
-</li>
-<li><p class="first">Write a function that removes all occurrences of a string from another string.</p>
+<span class="gp">In [8]: </span><span class="n">titles</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Manager&quot;</span><span class="p">],</span>
+<span class="gp">   ...: </span>          <span class="p">[</span><span class="s2">&quot;Betty&quot;</span><span class="p">,</span> <span class="s2">&quot;Consultant&quot;</span><span class="p">],</span>
+<span class="gp">   ...: </span>          <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Assistant&quot;</span><span class="p">]]</span>
+<span class="gp">   ...: </span>
 
-<textarea data-component="activecode" id=ex_8_11 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-def remove_all(substr,theStr):
-    # your code here
+<span class="gp">In [9]: </span><span class="n">inner_join</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">nameH</span><span class="p">,</span> <span class="n">ttl</span><span class="p">,</span> <span class="n">hrs</span><span class="p">)</span> <span class="k">for</span> <span class="n">nameH</span><span class="p">,</span> <span class="n">hrs</span> <span class="ow">in</span> <span class="n">hours</span> <span class="k">for</span> <span class="n">nameT</span><span class="p">,</span> <span class="n">ttl</span> <span class="ow">in</span> <span class="n">titles</span> <span class="k">if</span> <span class="n">nameH</span> <span class="o">==</span> <span class="n">nameT</span><span class="p">]</span>
 
-
-
-====
-
-from unittest.gui import TestCaseGui
-
-class myTests(TestCaseGui):
-
-  def testOne(self):
-      self.assertEqual(remove_all("an","banana"),"ba","Tested remove_all on inputs of 'an' and 'banana'")
-      self.assertEqual(remove_all("cyc","bicycle"),"bile","Tested remove_all on inputs of 'cyc' and 'bicycle'")
-      self.assertEqual(remove_all("iss","Mississippi"),"Mippi","Tested remove_all on inputs of 'iss' and 'Mississippi'")
-      self.assertEqual(remove_all("eggs","bicycle"),"bicycle","Tested remove_all on inputs of 'eggs' and 'bicycle'")
-
-
-
-myTests().main()
-</textarea>
-</li>
-<li><p class="first">Create a list containing 100 random integers between 0 and 1000 (use iteration, append, and the random module).  Write a function called <code class="docutils literal"><span class="pre">average</span></code> that will take the list as a parameter and return the average.</p>
-
-<textarea data-component="activecode" id=ex_9_4 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-
-
-</textarea>
-</li>
-<li><div id='q5' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
-<p>Write a Python function that takes <code class="docutils literal"><span class="pre">n</span></code> and <code class="docutils literal"><span class="pre">m</span></code> as input and
-returns the maximum valu of a the list of <code class="docutils literal"><span class="pre">n</span></code> random integers
-between 0 and <code class="docutils literal"><span class="pre">m</span></code>.  (Note:.  there is a builtin function named
-<code class="docutils literal"><span class="pre">max</span></code>.)</p>
-
-<textarea data-component="activecode" id=ex_9_5 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-
-
-</textarea>
-</div><div data-component="tab" data-tabname="Answer" >
-
-<textarea data-component="activecode" id=q5_answer data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-from random import randint
-
-rand_max = lambda n, m: max([randint(0,m) for i in range(n)])
-</textarea>
+<span class="gp">In [10]: </span><span class="n">inner_join</span>
+<span class="gh">Out[10]: </span><span class="go">[(&#39;Alice&#39;, &#39;Manager&#39;, 43), (&#39;Bob&#39;, &#39;Assistant&#39;, 37)]</span>
+</pre></div>
 </div>
-    </div>
+<p>The left outer join of the tables will include all of the rows from the first
+list, as well as the values from the second table if present.  Here is the code
+for performing a left outer join using a list comprehension.  We do this by
+combining the inner join with the rows that only appear in the left table.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">hours</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">43</span><span class="p">],</span>
+<span class="gp">   ....: </span>           <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">37</span><span class="p">],</span>
+<span class="gp">   ....: </span>           <span class="p">[</span><span class="s2">&quot;Fred&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">]]</span>
+<span class="gp">   ....: </span>
 
-</li>
-<li><p class="first">Write a function that computes the mean of <code class="docutils literal"><span class="pre">n</span></code> randomly selected values
-taken from a normal distribution with mean <code class="docutils literal"><span class="pre">m</span></code> and standard deviation
-<code class="docutils literal"><span class="pre">sd</span></code>.</p>
+<span class="gp">In [12]: </span><span class="n">titles</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Manager&quot;</span><span class="p">],</span>
+<span class="gp">   ....: </span>          <span class="p">[</span><span class="s2">&quot;Betty&quot;</span><span class="p">,</span> <span class="s2">&quot;Consultant&quot;</span><span class="p">],</span>
+<span class="gp">   ....: </span>          <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Assistant&quot;</span><span class="p">]]</span>
+<span class="gp">   ....: </span>
 
-<textarea data-component="activecode" id=ex_9_4 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
+<span class="gp">In [13]: </span><span class="n">left_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hours</span><span class="p">]</span>
 
+<span class="gp">In [14]: </span><span class="n">right_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">]</span>
 
-</textarea>
-</li>
-<li><p class="first">Write a function <code class="docutils literal"><span class="pre">sum_of_squares(xs)</span></code> that computes the sum
-of the squares of the numbers in the list <code class="docutils literal"><span class="pre">xs</span></code>.  For example,
-<code class="docutils literal"><span class="pre">sum_of_squares([2,</span> <span class="pre">3,</span> <span class="pre">4])</span></code> should return 4+9+16 which is 29:</p>
+<span class="gp">In [15]: </span><span class="n">inner_join</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">nameH</span><span class="p">,</span> <span class="n">ttl</span><span class="p">,</span> <span class="n">hrs</span><span class="p">)</span> <span class="k">for</span> <span class="n">nameH</span><span class="p">,</span> <span class="n">hrs</span> <span class="ow">in</span> <span class="n">hours</span> <span class="k">for</span> <span class="n">nameT</span><span class="p">,</span> <span class="n">ttl</span> <span class="ow">in</span> <span class="n">titles</span> <span class="k">if</span> <span class="n">nameH</span> <span class="o">==</span> <span class="n">nameT</span><span class="p">]</span>
 
-<textarea data-component="activecode" id=ex_7_11 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-sum_of_squares = lambda xs: 1 # your code here
+<span class="gp">In [16]: </span><span class="n">left_only_rows</span> <span class="o">=</span> <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">hrs</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">hrs</span> <span class="ow">in</span> <span class="n">hours</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">right_names</span><span class="p">]</span>
 
-====
-from unittest.gui import TestCaseGui
+<span class="gp">In [17]: </span><span class="n">left_join</span> <span class="o">=</span> <span class="n">inner_join</span> <span class="o">+</span> <span class="n">left_only_rows</span>
 
-class myTests(TestCaseGui):
-
-    def testOne(self):
-        self.assertEqual(sum_of_squares([2,3,4]),29,"Tested sum_of_squares on input [2,3,4]")
-        self.assertEqual(sum_of_squares([0,1,-1]),2,"Tested sum_of_squares on input [0,1,-1]")
-        self.assertEqual(sum_of_squares([5,12,14]),365,"Tested sum_of_squares on input [5,12,14]")
-
-myTests().main()
-</textarea>
-</li>
-<li><div id='q7' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
-<p>Write a function to count how many odd numbers are in a list.</p>
-
-<textarea data-component="activecode" id=ex_9_6 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-countOdd = lambda lst: 3 # your code here
-
-====
-from unittest.gui import TestCaseGui
-
-class myTests(TestCaseGui):
-
-    def testOne(self):
-        self.assertEqual(countOdd([1,3,5,7,9]),5,"Tested countOdd on input [1,3,5,7,9]")
-        self.assertEqual(countOdd([1,2,3,4,5]),3,"Tested countOdd on input [-1,-2,-3,-4,-5]")
-        self.assertEqual(countOdd([2,4,6,8,10]),0,"Tested countOdd on input [2,4,6,8,10]")
-        self.assertEqual(countOdd([0,-1,12,-33]),2,"Tested countOdd on input [0,-1,12,-33]")
-
-myTests().main()
-</textarea>
-</div><div data-component="tab" data-tabname="Answer" >
-
-<textarea data-component="activecode" id=q7_answer data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-import random
-
-countOdd = lambda lst: sum([1 for i in lst of i % 2 == 1])
-
-# make a random list to test the function
-lst = [random.randint(0, 1000) for i in range(100)]
-
-print(countOdd(lst))
-</textarea>
+<span class="gp">In [18]: </span><span class="n">left_join</span>
+<span class="gh">Out[18]: </span><span class="go">[(&#39;Alice&#39;, &#39;Manager&#39;, 43), (&#39;Bob&#39;, &#39;Assistant&#39;, 37), (&#39;Fred&#39;, None, 15)]</span>
+</pre></div>
 </div>
-    </div>
-
-</li>
-<li><p class="first">Sum up all the even numbers in a list.</p>
-
-<textarea data-component="activecode" id=ex_9_7 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-sumEven = lambda lst: 42 # your code here
-
-====
-from unittest.gui import TestCaseGui
-
-class myTests(TestCaseGui):
-
-    def testOne(self):
-        self.assertEqual(sumEven([1,3,5,7,9]),0,"Tested sumEven on input [1,3,5,7,9]")
-        self.assertEqual(sumEven([-1,-2,-3,-4,-5]),-6,"Tested sumEven on input [-1,-2,-3,-4,-5]")
-        self.assertEqual(sumEven([2,4,6,7,9]),12,"Tested sumEven on input [2,4,6,7,9]")
-        self.assertEqual(sumEven([0,1,12,33]),12,"Tested sumEven on input [0,1,12,33]")
-
-myTests().main()
-</textarea>
-</li>
-<li><div id='q9' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
-<p>Sum up all the negative numbers in a list.</p>
-
-<textarea data-component="activecode" id=ex_9_8 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-sumNegatives = lambda lst: -1 # your code here
-
-====
-from unittest.gui import TestCaseGui
-
-class myTests(TestCaseGui):
-
-    def testOne(self):
-        self.assertEqual(sumNegatives([-1,-2,-3,-4,-5]),-15,"Tested sumNegatives on input [-1,-2,-3,-4,-5]")
-        self.assertEqual(sumNegatives([1,-3,5,-7,9]),-10,"Tested sumNegatives on input [1,-3,5,-7,9]")
-        self.assertEqual(sumNegatives([-2,-4,6,-7,9]),-13,"Tested sumNegatives on input [-2,-4,6,-7,9]")
-        self.assertEqual(sumNegatives([0,1,2,3,4]),0,"Tested sumNegatives on input [0,1,2,3,4]")
-
-myTests().main()
-</textarea>
-</div><div data-component="tab" data-tabname="Answer" >
-
-<textarea data-component="activecode" id=q9_answer data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-import random
-
-sumNegatives = lambda lst: sum([1 for i in lst if i < 0])
-
-lst = [random.randint(0, 1000) for i in range(100)]
-
-print(sumNegative(lst))
-</textarea>
+<p>You may have noticed that this approach required us to iterate through each
+table a number of times.  This is not the most efficient implementation, and a
+solution that uses a relational database should be more efficient and used to
+larger problems, but for small problem this approach should be fine.</p>
 </div>
-    </div>
-
-</li>
-<li><p class="first">Count how many words in a list have length 5.</p>
-
-<textarea data-component="activecode" id=ex_9_9 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-countWords = lambda lst: 23 # your code here
-</textarea>
-</li>
-</ol>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 4.7. The Computational Complexity of a List Comprehension' data-toggle="tooltip">
-    <a href="TheComplexityOfListComprehensions.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 4.4. Common Comprehension Patterns for Two Sequences' data-toggle="tooltip">
+    <a href="CommonComprehensionPatternsTwoSequences.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="TheComplexityOfListComprehensions.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="CommonComprehensionPatternsTwoSequences.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 5. Reading Data from Files' data-toggle="tooltip" >
-    <a href="../ReadingDataFromFiles/toctree.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 4.6. Levels of Abstraction' data-toggle="tooltip" >
+    <a href="LevelsOfAbstraction.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="../ReadingDataFromFiles/toctree.html" >Next Section - 5. Reading Data from Files</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="LevelsOfAbstraction.html" >Next Section - 4.6. Levels of Abstraction</a>
 
 <script type="text/javascript">
 
