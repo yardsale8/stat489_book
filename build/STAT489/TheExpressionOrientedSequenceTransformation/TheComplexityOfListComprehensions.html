@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.3. The Computational Complexity of a List Comprehension &mdash; Runestone Interactive Overview</title>
+    <title>4.7. The Computational Complexity of a List Comprehension &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="4. Expression-Oriented Sequence Transformations" href="toctree.html" />
-    <link rel="next" title="4.4. Exercises" href="Exercises.html" />
-    <link rel="prev" title="4.2. Common Comprehension Patterns" href="CommonComprehensionPatterns.html" />
+    <link rel="next" title="4.8. Exercises" href="Exercises.html" />
+    <link rel="prev" title="4.6. Levels of Abstraction" href="LevelsOfAbstraction.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,7 +263,7 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">4.3. The Computational Complexity of a List Comprehension</a></li>
+<li><a class="reference internal" href="#">4.7. The Computational Complexity of a List Comprehension</a></li>
 </ul>
 </ul>
 </li>
@@ -271,13 +271,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 4.2. Common Comprehension Patterns" data-toggle="tooltip">
-    <a href="CommonComprehensionPatterns.html" >
+  <li id="relations-prev" title="Previous Chapter - 4.6. Levels of Abstraction" data-toggle="tooltip">
+    <a href="LevelsOfAbstraction.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 4.4. Exercises' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 4.8. Exercises' data-toggle="tooltip" >
     <a href="Exercises.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -309,37 +309,46 @@
 <div class="container" id="main-content">
   
   <div class="section" id="the-computational-complexity-of-a-list-comprehension">
-<h1>4.3. The Computational Complexity of a List Comprehension<a class="headerlink" href="#the-computational-complexity-of-a-list-comprehension" title="Permalink to this headline">¶</a></h1>
+<h1>4.7. The Computational Complexity of a List Comprehension<a class="headerlink" href="#the-computational-complexity-of-a-list-comprehension" title="Permalink to this headline">¶</a></h1>
 <p>The structure of a list comprehension makes it easy to determine
 computational complexity.  The following figure illustrates the process of
 computing the complexity of each part of a comprehension and combining the
 results into the overall complexity.</p>
 <div class="figure">
-<img alt="The computational complexity of a list comprehension." src="TheExpressionOrientedSequenceTransformation/2D_comprehension_complexity.png" />
+<img alt="The computational complexity of a list comprehension." src="../_images/comprehension_complexity.png" />
 <div class="legend">
 Each <code class="docutils literal"><span class="pre">for</span></code> in the comprehension iterates over the coorespoonding sequence
-and has complexity <span class="math">\(O(len(L))`\)</span>.  We combine the compexity of the
+and has complexity O(len(L)).  We combine the compexity of the
 output expression with the complexity of iterating over each sequence by
 multiplication.</div>
+</div>
+<p>For example, consider the complexity of squaring all the entries in a matrix.
+The figure shown above shows how we can quickly determine that this operation
+has a time complexity of <span class="math">\(O(nm)\)</span>.</p>
+<div class="figure">
+<img alt="The computational complexity of a list comprehension." src="../_images/2D_comprehension_complexity.png" />
+<div class="legend">
+Here we determine the complexity of squaring each element of a matrix.  Note
+the output expression for the outer comprehension is itself a comprehension.</div>
 </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 4.2. Common Comprehension Patterns' data-toggle="tooltip">
-    <a href="CommonComprehensionPatterns.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 4.6. Levels of Abstraction' data-toggle="tooltip">
+    <a href="LevelsOfAbstraction.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="CommonComprehensionPatterns.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="LevelsOfAbstraction.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 4.4. Exercises' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 4.8. Exercises' data-toggle="tooltip" >
     <a href="Exercises.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="Exercises.html" >Next Section - 4.4. Exercises</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="Exercises.html" >Next Section - 4.8. Exercises</a>
 
 <script type="text/javascript">
 

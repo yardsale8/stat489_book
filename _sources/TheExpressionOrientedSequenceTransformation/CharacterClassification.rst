@@ -1,0 +1,79 @@
+..  Copyright (C)  Brad Miller, David Ranum, Jeffrey Elkner, Peter Wentworth, Allen B. Downey, Chris
+    Meyers, and Dario Mitchell.  Permission is granted to copy, distribute
+    and/or modify this document under the terms of the GNU Free Documentation
+    License, Version 1.3 or any later version published by the Free Software
+    Foundation; with Invariant Sections being Forward, Prefaces, and
+    Contributor List, no Front-Cover Texts, and no Back-Cover Texts.  A copy of
+    the license is included in the section entitled "GNU Free Documentation
+    License".
+
+Character classification
+------------------------
+
+It is often helpful to examine a character and test whether it is upper- or
+lowercase, or whether it is a character or a digit. The ``string`` module
+provides several constants that are useful for these purposes. One of these,
+``string.digits`` is equivalent to "0123456789".  It can be used to check if a
+character is a digit using the ``in`` operator.
+
+The string ``string.ascii_lowercase`` contains all of the ascii letters that the
+system considers to be lowercase. Similarly, ``string.ascii_uppercase`` contains
+all of the uppercase letters. ``string.punctuation`` comprises all the
+characters considered to be punctuation. Try the following and see what you get.
+
+.. ipython:: python
+   
+    import string
+    string.ascii_lowercase
+    string.ascii_uppercase
+    string.digits
+    string.punctuation
+
+For more information consult the ``string`` module documentation (see `Global
+Module Index <http://docs.python.org/py3k/py-modindex.html>`_).
+
+We can use list comprehensions to describe a new string, but we need to convert
+the result back to a string using the ``str`` conversion function.  For example,
+let's remove all of the punctuation from a string.
+
+.. ipython:: python
+
+    zen_of_python = '''The Zen of Python, by Tim Peters
+    Beautiful is better than ugly.
+    Explicit is better than implicit.
+    Simple is better than complex.
+    Complex is better than complicated.
+    Flat is better than nested.
+    Sparse is better than dense.
+    Readability counts.
+    Special cases aren't special enough to break the rules.
+    Although practicality beats purity.
+    Errors should never pass silently.
+    Unless explicitly silenced.
+    In the face of ambiguity, refuse the temptation to guess.
+    There should be one-- and preferably only one --obvious way to do it.
+    Although that way may not be obvious at first unless you're Dutch.
+    Now is better than never.
+    Although never is often better than *right* now.
+    If the implementation is hard to explain, it's a bad idea.
+    If the implementation is easy to explain, it may be a good idea.
+    Namespaces are one honking great idea -- let's do more of those!'''
+
+    zen_list_no_punc = [ch for ch in zen_of_python if ch not in string.punctuation]
+    print(zen_list_no_punc)
+    zen_string_no_punc = ''.join(zen_list_no_punc)
+    print(zen_string_no_punc)
+
+.. note::
+
+    You can contemplate the zen of Python anytime by executing ``import this``.
+
+    .. ipython:: python
+
+        import this
+
+.. note::
+
+   This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
+
+   .. activecode:: scratch_08_04

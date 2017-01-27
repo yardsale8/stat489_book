@@ -34,6 +34,11 @@ useful in certain situations.
 
           np.cos(v)
 
+.. note:: 
+
+     If you are interested in learning more about ``numpy``, there is a `online
+     textbook by Nicolas Rougier <http://www.labri.fr/perso/nrougier/from-python-to-numpy/>`_, which includes a `bibliography of other numpy resources <http://www.labri.fr/perso/nrougier/from-python-to-numpy/#bibliography>`_.
+
 * The ``pandas`` library provides
     * data frames similar in construction and usage to the ``data.frame`` from R
 

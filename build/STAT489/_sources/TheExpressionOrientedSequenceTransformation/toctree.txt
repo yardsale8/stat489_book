@@ -6,6 +6,10 @@ Expression-Oriented Sequence Transformations
     :maxdepth: 1
 
     TransformingSequencesWithComprehensions.rst
-    CommonComprehensionPatterns.rst
+    WorkingWithStringAndList.rst
+    CommonComprehensionPatternsSingleSequence.rst
+    CommonComprehensionPatternsTwoSequences.rst
+    CommonComprehensionPatternsTables.rst
+    LevelsOfAbstraction.rst
     TheComplexityOfListComprehensions.rst
     Exercises.rst
