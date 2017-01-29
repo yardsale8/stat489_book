@@ -10,8 +10,11 @@
 Exercises
 ---------
 
+.. basic
 
-#. In Robert McCloskey's book *Make Way for Ducklings*, the names of the
+.. question:: 15 
+   
+   In Robert McCloskey's book *Make Way for Ducklings*, the names of the
    ducklings are Jack, Kack, Lack, Mack, Nack, Ouack, Pack, and Quack.  This
    loop tries to output these names in order.
 
@@ -28,38 +31,10 @@ Exercises
 
     .. actex:: ex_8_2
 
-#.
 
-    .. tabbed:: q3
+.. basic
 
-        .. tab:: Question
-
-            Create a function that takes a value `n` as input and constructs a
-            multiplication table for whole numbers up to :math:`n`.
-
-           .. actex:: ex_8_3
-
-
-        .. tab:: Answer
-
-            .. activecode:: q3_answer
-                
-                table = lambda n: [i*j for i in range(1,n+1) for j in range(1,n+1)]
-                print(table(12))
-
-
-
-
-#. Print out a neatly formatted multiplication table, up to 12 x 12.  You should
-   do this by constructing a string.  For full credit, each column should be
-   right-justified and your solution should include only comprehensions and
-   lambda functions. **Hint:** Write a lambda function pads a number with the
-   right number of spaces.
-
-   .. actex:: ex_8_4
-
-
-#.
+.. question:: 37
 
     .. tabbed:: q5
 
@@ -100,8 +75,11 @@ Exercises
                 print(numDigits(1))
 
 
+.. built-in iterator
 
-#. Write a function that reverses its string argument.
+.. question:: 80 
+   
+   Write a function that reverses its string argument.
 
    .. actex:: ex_8_5
       :nocodelens:
@@ -124,7 +102,9 @@ Exercises
 
       myTests().main()
 
-#.
+.. built-in interator
+
+.. question:: 107
 
     .. tabbed:: q7
 
@@ -163,9 +143,11 @@ Exercises
                 mirror = lambda mystr: mystr + reverse(mystr)
 
 
+.. working with strings
 
-
-#. Write a function that removes all occurrences of a given letter from a string.
+.. question:: 148 
+   
+   Write a function that removes all occurrences of a given letter from a string.
 
    .. actex:: ex_8_7
       :nocodelens:
@@ -189,8 +171,9 @@ Exercises
       myTests().main()
 
 
+.. basic strings
 
-#.
+.. question:: 176
 
     .. tabbed:: q9
 
@@ -241,10 +224,12 @@ Exercises
 
 
 
+.. working with strings
 
 
-
-#. Write a function that removes all occurrences of a string from another string.
+.. question:: 230 
+   
+   Write a function that removes all occurrences of a string from another string.
 
    .. actex:: ex_8_11
 
@@ -275,20 +260,26 @@ Exercises
 
 
 
+.. reducing built-in
 
-
-#. Create a list containing 100 random integers between 0 and 1000 (use iteration, append, and the random module).  Write a function called ``average`` that will take the list as a parameter and return the average.
+.. question:: 265 
+   
+   Create a list containing 100 random integers between 0 and 1000 (use
+   iteration, append, and the random module).  Write a function called
+   ``average`` that will take the list as a parameter and return the average.
 
    .. actex:: ex_9_4
 
-#. 
+.. reducing built-ins
+
+.. question:: 275 
 
    .. tabbed:: q5
 
         .. tab:: Question
 
            Write a Python function that takes ``n`` and ``m`` as input and
-           returns the maximum valu of a the list of ``n`` random integers
+           returns the maximum value of a the list of ``n`` random integers
            between 0 and ``m``.  (Note:.  there is a builtin function named
            ``max``.)
 
@@ -303,15 +294,22 @@ Exercises
 
                 rand_max = lambda n, m: max([randint(0,m) for i in range(n)])
 
-#. Write a function that computes the mean of ``n`` randomly selected values
+.. reducing built-ins
+
+.. question:: 299 
+   
+   Write a function that computes the mean of ``n`` randomly selected values
    taken from a normal distribution with mean ``m`` and standard deviation
    ``sd``.
 
    .. actex:: ex_9_4
                 
 
+.. reducing built-ins
 
-#. Write a function ``sum_of_squares(xs)`` that computes the sum
+.. question:: 310 
+   
+   Write a function ``sum_of_squares(xs)`` that computes the sum
    of the squares of the numbers in the list ``xs``.  For example,
    ``sum_of_squares([2, 3, 4])`` should return 4+9+16 which is 29:
 
@@ -331,7 +329,9 @@ Exercises
 
       myTests().main()
 
-#. 
+.. reducing built-ins
+
+.. question:: 334 
 
    .. tabbed:: q7
 
@@ -372,8 +372,11 @@ Exercises
                 print(countOdd(lst))
 
 
+.. reducing built-ins
 
-#. Sum up all the even numbers in a list.
+.. question:: 377 
+
+   Sum up all the even numbers in a list.
 
    .. actex:: ex_9_7
 
@@ -392,7 +395,9 @@ Exercises
 
       myTests().main()
 
-#.
+.. reducing built-ins
+
+.. question:: 400
 
    .. tabbed:: q9
 
@@ -432,8 +437,9 @@ Exercises
                 print(sumNegative(lst))
 
 
+.. reducing built-ins working with strings
 
-#. 
+.. question:: 442 
 
    Count how many words in a list have length 5.
 
@@ -441,3 +447,98 @@ Exercises
 
       countWords = lambda lst: 23 # your code here
 
+.. question:: emma
+
+   Count how many words in Emma have length of at least 5.
+
+.. all_combos
+
+.. question:: 452
+
+    .. tabbed:: q3
+
+        .. tab:: Question
+
+            Create a function that takes a value `n` as input and constructs a
+            multiplication table for whole numbers up to :math:`n`.
+
+           .. actex:: ex_8_3
+
+
+        .. tab:: Answer
+
+            .. activecode:: q3_answer
+                
+                table = lambda n: [i*j for i in range(1,n+1) for j in range(1,n+1)]
+                print(table(12))
+
+
+.. all_combos
+
+.. question:: 474 
+   
+   Print out a neatly formatted multiplication table, up to 12 x 12.  You should
+   do this by constructing a string.  For full credit, each column should be
+   right-justified and your solution should include only comprehensions and
+   lambda functions. **Hint:** Write a lambda function pads a number with the
+   right number of spaces.
+
+   .. actex:: ex_8_4
+
+.. tables
+
+.. question:: 486 
+
+   Use list comprehensions to filter the hours table to include only managers.
+   In SQL this would be performed using SELECT and WHERE.  **Hint:** ``zip`` is
+   useful here!
+
+   .. actex:: select-where
+
+        hours = [["Alice", 43],
+                   ["Bob", 37],
+                   ["Fred", 15]]
+        titles = [["Alice", "Manager"],
+                  ["Betty", "Consultant"],
+                  ["Bob", "Assistant"]]
+.. tables
+
+.. question:: 502 
+
+   Use list comprehensions to decide if the following tables contain a manager
+   that worked at least 40 hours.
+
+   .. actex:: select-where
+
+        hours = [["Alice", 43],
+                   ["Bob", 37],
+                   ["Fred", 15]]
+        titles = [["Alice", "Manager"],
+                  ["Betty", "Consultant"],
+                  ["Bob", "Assistant"]]
+
+.. tables
+
+.. question:: 518 
+
+   Use list comprehensions to perform a right outer join on the following lists.
+
+   .. actex:: right_join
+
+        hours = [["Alice", 43],
+                   ["Bob", 37],
+                   ["Fred", 15]]
+        titles = [["Alice", "Manager"],
+                  ["Betty", "Consultant"],
+                  ["Bob", "Assistant"]]
+
+.. question:: 531
+
+    Use a list comprehension and lambda expression to create a sequence of
+    functions that combine to average two matrices.  A complete solution will
+    provide functions for each level of abstraction. 
+
+   .. actex:: average-matrices
+       
+        M1 = [[1, 2], [3, 4]]
+        M2 = [[5, 6], [7, 8]]
