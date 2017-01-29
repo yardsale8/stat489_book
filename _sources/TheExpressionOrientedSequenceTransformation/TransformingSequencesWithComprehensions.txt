@@ -222,6 +222,8 @@ numbers* up to 10.
 
     .. activecode:: scratch_08_01
 
+
+
 List Comprehensions for Two Dimensional Data
 ------------------------------------------
 

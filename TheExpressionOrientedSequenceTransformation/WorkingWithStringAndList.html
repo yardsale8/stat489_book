@@ -102,7 +102,7 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="4. Expression-Oriented Sequence Transformations" href="toctree.html" />
-    <link rel="next" title="4.3. Common Comprehension Patterns" href="CommonComprehensionPatterns.html" />
+    <link rel="next" title="4.3. Common Comprehension Patterns for a Single Sequence" href="CommonComprehensionPatternsSingleSequence.html" />
     <link rel="prev" title="4.1. Transforming Sequences with Comprehensions" href="TransformingSequencesWithComprehensions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -264,8 +264,9 @@
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
 <li><a class="reference internal" href="#">4.2. Working with Strings and Lists</a><ul>
-<li><a class="reference internal" href="#more-on-working-with-strings-and-lists">4.2.1. More on working with strings and lists</a></li>
-<li><a class="reference internal" href="#character-classification">4.2.2. Character classification</a></li>
+<li><a class="reference internal" href="#character-classification">4.2.1. Character classification</a></li>
+<li><a class="reference internal" href="#more-on-working-with-strings-and-lists">4.2.2. More on working with strings and lists</a></li>
+<li><a class="reference internal" href="#installing-project-gutenberg-texts-with-nltk">4.2.3. Installing Project Gutenberg texts with NLTK</a></li>
 </ul>
 </li>
 </ul>
@@ -281,8 +282,8 @@
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 4.3. Common Comprehension Patterns' data-toggle="tooltip" >
-    <a href="CommonComprehensionPatterns.html" >
+  <li id="relations-next" title='Next Chapter - 4.3. Common Comprehension Patterns for a Single Sequence' data-toggle="tooltip" >
+    <a href="CommonComprehensionPatternsSingleSequence.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -312,22 +313,44 @@
 
 <div class="container" id="main-content">
   
-  <blockquote>
-<div>and/or modify this document under the terms of the GNU Free Documentation
-License, Version 1.3 or any later version published by the Free Software
-Foundation; with Invariant Sections being Forward, Prefaces, and
-Contributor List, no Front-Cover Texts, and no Back-Cover Texts.  A copy of
-the license is included in the section entitled &#8220;GNU Free Documentation
-License&#8221;.</div></blockquote>
-<div class="section" id="working-with-strings-and-lists">
+  <div class="section" id="working-with-strings-and-lists">
 <h1>4.2. Working with Strings and Lists<a class="headerlink" href="#working-with-strings-and-lists" title="Permalink to this headline">¶</a></h1>
 <p>Data wrangling envolves transforming data from some raw form to another more
 useful form.  Often this raw form is text saved in a text file, which
 corresponds to the Python string data structure.  In this section, we will
 illustrate the process of converting and transforming textual data list
 comprehensions and the <code class="docutils literal"><span class="pre">split</span></code>, <code class="docutils literal"><span class="pre">join</span></code> and <code class="docutils literal"><span class="pre">format</span></code> methods.</p>
+<div class="section" id="character-classification">
+<h2>4.2.1. Character classification<a class="headerlink" href="#character-classification" title="Permalink to this headline">¶</a></h2>
+<p>It is often helpful to examine a character and test whether it is upper- or
+lowercase, or whether it is a character or a digit. The <code class="docutils literal"><span class="pre">string</span></code> module
+provides several constants that are useful for these purposes. One of these,
+<code class="docutils literal"><span class="pre">string.digits</span></code> is equivalent to &#8220;0123456789&#8221;.  It can be used to check if a
+character is a digit using the <code class="docutils literal"><span class="pre">in</span></code> operator.</p>
+<p>The string <code class="docutils literal"><span class="pre">string.ascii_lowercase</span></code> contains all of the ascii letters that the
+system considers to be lowercase. Similarly, <code class="docutils literal"><span class="pre">string.ascii_uppercase</span></code> contains
+all of the uppercase letters. <code class="docutils literal"><span class="pre">string.punctuation</span></code> comprises all the
+characters considered to be punctuation. Try the following and see what you get.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">string</span>
+
+<span class="gp">In [2]: </span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span>
+<span class="gh">Out[2]: </span><span class="go">&#39;abcdefghijklmnopqrstuvwxyz&#39;</span>
+
+<span class="gp">In [3]: </span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span>
+<span class="go">                                     Out[3]: &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span>
+
+<span class="gp">In [4]: </span><span class="n">string</span><span class="o">.</span><span class="n">digits</span>
+<span class="go">                                                                          Out[4]: &#39;0123456789&#39;</span>
+
+<span class="gp">In [5]: </span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span>
+<span class="go">                                                                                               Out[5]: &#39;!&quot;#$%&amp;\&#39;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~&#39;</span>
+</pre></div>
+</div>
+<p>For more information consult the <code class="docutils literal"><span class="pre">string</span></code> module documentation (see <a class="reference external" href="http://docs.python.org/py3k/py-modindex.html">Global
+Module Index</a>).</p>
+</div>
 <div class="section" id="more-on-working-with-strings-and-lists">
-<h2>4.2.1. More on working with strings and lists<a class="headerlink" href="#more-on-working-with-strings-and-lists" title="Permalink to this headline">¶</a></h2>
+<h2>4.2.2. More on working with strings and lists<a class="headerlink" href="#more-on-working-with-strings-and-lists" title="Permalink to this headline">¶</a></h2>
 <p>There are two common patterns that are applied when processing strings.  Both
 patterns start by using the string <code class="docutils literal"><span class="pre">split</span></code> method to split the string into a
 list of strings.  Then a list comprehension is used to transform the list of
@@ -398,22 +421,23 @@ sentence.  We start by going through the process step-by-step.</p>
 <span class="gp">In [14]: </span><span class="n">nums</span>
 <span class="gh">Out[14]: </span><span class="go">[1, 1, 3, 2, 1, 4, 2, 2, 1, 3, 2, 1, 1, 1, 1, 2]</span>
 
-<span class="go"># Using the mean function defined in earlier examples</span>
-<span class="gp">In [15]: </span><span class="n">average_num_vowels</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="gp">In [15]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
 
-<span class="gp">In [16]: </span><span class="n">average_num_vowels</span>
-<span class="gh">Out[16]: </span><span class="go">1.75</span>
+<span class="gp">In [16]: </span><span class="n">average_num_vowels</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+
+<span class="gp">In [17]: </span><span class="n">average_num_vowels</span>
+<span class="gh">Out[17]: </span><span class="go">1.75</span>
 </pre></div>
 </div>
 <p>Finally, we generalize this process with a little refactoring.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
 
-<span class="gp">In [18]: </span><span class="n">clean_and_split</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="gp">In [19]: </span><span class="n">clean_and_split</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
-<span class="gp">In [19]: </span><span class="n">average_num_vowels</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">mean</span><span class="p">([</span><span class="n">num_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">clean_and_split</span><span class="p">(</span><span class="n">s</span><span class="p">)])</span>
+<span class="gp">In [20]: </span><span class="n">average_num_vowels</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">mean</span><span class="p">([</span><span class="n">num_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">clean_and_split</span><span class="p">(</span><span class="n">s</span><span class="p">)])</span>
 
-<span class="gp">In [20]: </span><span class="n">average_num_vowels</span><span class="p">(</span><span class="s2">&quot;Long, long ago in a galaxy far, far away.&quot;</span><span class="p">)</span>
-<span class="gh">Out[20]: </span><span class="go">1.3333333333333333</span>
+<span class="gp">In [21]: </span><span class="n">average_num_vowels</span><span class="p">(</span><span class="s2">&quot;Long, long ago in a galaxy far, far away.&quot;</span><span class="p">)</span>
+<span class="gh">Out[21]: </span><span class="go">1.3333333333333333</span>
 </pre></div>
 </div>
 <p>A second string processing pattern that is commonly applied involves
@@ -426,68 +450,39 @@ The process for computing a statistic about a string envolves splitting
 the string into a list of strings, tranforming the string into another
 list and then reducing that list to a value.</div>
 </div>
-</div>
-<div class="section" id="character-classification">
-<h2>4.2.2. Character classification<a class="headerlink" href="#character-classification" title="Permalink to this headline">¶</a></h2>
-<p>It is often helpful to examine a character and test whether it is upper- or
-lowercase, or whether it is a character or a digit. The <code class="docutils literal"><span class="pre">string</span></code> module
-provides several constants that are useful for these purposes. One of these,
-<code class="docutils literal"><span class="pre">string.digits</span></code> is equivalent to &#8220;0123456789&#8221;.  It can be used to check if a
-character is a digit using the <code class="docutils literal"><span class="pre">in</span></code> operator.</p>
-<p>The string <code class="docutils literal"><span class="pre">string.ascii_lowercase</span></code> contains all of the ascii letters that the
-system considers to be lowercase. Similarly, <code class="docutils literal"><span class="pre">string.ascii_uppercase</span></code> contains
-all of the uppercase letters. <code class="docutils literal"><span class="pre">string.punctuation</span></code> comprises all the
-characters considered to be punctuation. Try the following and see what you get.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">string</span>
-
-<span class="gp">In [2]: </span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span>
-<span class="gh">Out[2]: </span><span class="go">&#39;abcdefghijklmnopqrstuvwxyz&#39;</span>
-
-<span class="gp">In [3]: </span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span>
-<span class="go">                                     Out[3]: &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span>
-
-<span class="gp">In [4]: </span><span class="n">string</span><span class="o">.</span><span class="n">digits</span>
-<span class="go">                                                                          Out[4]: &#39;0123456789&#39;</span>
-
-<span class="gp">In [5]: </span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span>
-<span class="go">                                                                                               Out[5]: &#39;!&quot;#$%&amp;\&#39;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~&#39;</span>
-</pre></div>
-</div>
-<p>For more information consult the <code class="docutils literal"><span class="pre">string</span></code> module documentation (see <a class="reference external" href="http://docs.python.org/py3k/py-modindex.html">Global
-Module Index</a>).</p>
 <p>We can use list comprehensions to describe a new string, but we need to convert
 the result back to a string using the <code class="docutils literal"><span class="pre">str</span></code> conversion function.  For example,
 let&#8217;s remove all of the punctuation from a string.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">zen_of_python</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;The Zen of Python, by Tim Peters</span>
-<span class="gp">   ...: </span><span class="s1">Beautiful is better than ugly.</span>
-<span class="gp">   ...: </span><span class="s1">Explicit is better than implicit.</span>
-<span class="gp">   ...: </span><span class="s1">Simple is better than complex.</span>
-<span class="gp">   ...: </span><span class="s1">Complex is better than complicated.</span>
-<span class="gp">   ...: </span><span class="s1">Flat is better than nested.</span>
-<span class="gp">   ...: </span><span class="s1">Sparse is better than dense.</span>
-<span class="gp">   ...: </span><span class="s1">Readability counts.</span>
-<span class="gp">   ...: </span><span class="s1">Special cases aren&#39;t special enough to break the rules.</span>
-<span class="gp">   ...: </span><span class="s1">Although practicality beats purity.</span>
-<span class="gp">   ...: </span><span class="s1">Errors should never pass silently.</span>
-<span class="gp">   ...: </span><span class="s1">Unless explicitly silenced.</span>
-<span class="gp">   ...: </span><span class="s1">In the face of ambiguity, refuse the temptation to guess.</span>
-<span class="gp">   ...: </span><span class="s1">There should be one-- and preferably only one --obvious way to do it.</span>
-<span class="gp">   ...: </span><span class="s1">Although that way may not be obvious at first unless you&#39;re Dutch.</span>
-<span class="gp">   ...: </span><span class="s1">Now is better than never.</span>
-<span class="gp">   ...: </span><span class="s1">Although never is often better than *right* now.</span>
-<span class="gp">   ...: </span><span class="s1">If the implementation is hard to explain, it&#39;s a bad idea.</span>
-<span class="gp">   ...: </span><span class="s1">If the implementation is easy to explain, it may be a good idea.</span>
-<span class="gp">   ...: </span><span class="s1">Namespaces are one honking great idea -- let&#39;s do more of those!&#39;&#39;&#39;</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">zen_of_python</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;The Zen of Python, by Tim Peters</span>
+<span class="gp">   ....: </span><span class="s1">Beautiful is better than ugly.</span>
+<span class="gp">   ....: </span><span class="s1">Explicit is better than implicit.</span>
+<span class="gp">   ....: </span><span class="s1">Simple is better than complex.</span>
+<span class="gp">   ....: </span><span class="s1">Complex is better than complicated.</span>
+<span class="gp">   ....: </span><span class="s1">Flat is better than nested.</span>
+<span class="gp">   ....: </span><span class="s1">Sparse is better than dense.</span>
+<span class="gp">   ....: </span><span class="s1">Readability counts.</span>
+<span class="gp">   ....: </span><span class="s1">Special cases aren&#39;t special enough to break the rules.</span>
+<span class="gp">   ....: </span><span class="s1">Although practicality beats purity.</span>
+<span class="gp">   ....: </span><span class="s1">Errors should never pass silently.</span>
+<span class="gp">   ....: </span><span class="s1">Unless explicitly silenced.</span>
+<span class="gp">   ....: </span><span class="s1">In the face of ambiguity, refuse the temptation to guess.</span>
+<span class="gp">   ....: </span><span class="s1">There should be one-- and preferably only one --obvious way to do it.</span>
+<span class="gp">   ....: </span><span class="s1">Although that way may not be obvious at first unless you&#39;re Dutch.</span>
+<span class="gp">   ....: </span><span class="s1">Now is better than never.</span>
+<span class="gp">   ....: </span><span class="s1">Although never is often better than *right* now.</span>
+<span class="gp">   ....: </span><span class="s1">If the implementation is hard to explain, it&#39;s a bad idea.</span>
+<span class="gp">   ....: </span><span class="s1">If the implementation is easy to explain, it may be a good idea.</span>
+<span class="gp">   ....: </span><span class="s1">Namespaces are one honking great idea -- let&#39;s do more of those!&#39;&#39;&#39;</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [7]: </span><span class="n">zen_list_no_punc</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">zen_of_python</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">]</span>
+<span class="gp">In [23]: </span><span class="n">zen_list_no_punc</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">zen_of_python</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">]</span>
 
-<span class="gp">In [8]: </span><span class="k">print</span><span class="p">(</span><span class="n">zen_list_no_punc</span><span class="p">)</span>
+<span class="gp">In [24]: </span><span class="k">print</span><span class="p">(</span><span class="n">zen_list_no_punc</span><span class="p">)</span>
 <span class="go">[&#39;T&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;Z&#39;, &#39;e&#39;, &#39;n&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39; &#39;, &#39;P&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;b&#39;, &#39;y&#39;, &#39; &#39;, &#39;T&#39;, &#39;i&#39;, &#39;m&#39;, &#39; &#39;, &#39;P&#39;, &#39;e&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;B&#39;, &#39;e&#39;, &#39;a&#39;, &#39;u&#39;, &#39;t&#39;, &#39;i&#39;, &#39;f&#39;, &#39;u&#39;, &#39;l&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;u&#39;, &#39;g&#39;, &#39;l&#39;, &#39;y&#39;, &#39;\n&#39;, &#39;E&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;i&#39;, &#39;t&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;i&#39;, &#39;t&#39;, &#39;\n&#39;, &#39;S&#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;c&#39;, &#39;o&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;x&#39;, &#39;\n&#39;, &#39;C&#39;, &#39;o&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;x&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;c&#39;, &#39;o&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;a&#39;, &#39;t&#39;, &#39;e&#39;, &#39;d&#39;, &#39;\n&#39;, &#39;F&#39;, &#39;l&#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;s&#39;, &#39;t&#39;, &#39;e&#39;, &#39;d&#39;, &#39;\n&#39;, &#39;S&#39;, &#39;p&#39;, &#39;a&#39;, &#39;r&#39;, &#39;s&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;d&#39;, &#39;e&#39;, &#39;n&#39;, &#39;s&#39;, &#39;e&#39;, &#39;\n&#39;, &#39;R&#39;, &#39;e&#39;, &#39;a&#39;, &#39;d&#39;, &#39;a&#39;, &#39;b&#39;, &#39;i&#39;, &#39;l&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39; &#39;, &#39;c&#39;, &#39;o&#39;, &#39;u&#39;, &#39;n&#39;, &#39;t&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;S&#39;, &#39;p&#39;, &#39;e&#39;, &#39;c&#39;, &#39;i&#39;, &#39;a&#39;, &#39;l&#39;, &#39; &#39;, &#39;c&#39;, &#39;a&#39;, &#39;s&#39;, &#39;e&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39;r&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39; &#39;, &#39;s&#39;, &#39;p&#39;, &#39;e&#39;, &#39;c&#39;, &#39;i&#39;, &#39;a&#39;, &#39;l&#39;, &#39; &#39;, &#39;e&#39;, &#39;n&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;b&#39;, &#39;r&#39;, &#39;e&#39;, &#39;a&#39;, &#39;k&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;r&#39;, &#39;u&#39;, &#39;l&#39;, &#39;e&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;A&#39;, &#39;l&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;p&#39;, &#39;r&#39;, &#39;a&#39;, &#39;c&#39;, &#39;t&#39;, &#39;i&#39;, &#39;c&#39;, &#39;a&#39;, &#39;l&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;a&#39;, &#39;t&#39;, &#39;s&#39;, &#39; &#39;, &#39;p&#39;, &#39;u&#39;, &#39;r&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39;\n&#39;, &#39;E&#39;, &#39;r&#39;, &#39;r&#39;, &#39;o&#39;, &#39;r&#39;, &#39;s&#39;, &#39; &#39;, &#39;s&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;l&#39;, &#39;d&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;v&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;p&#39;, &#39;a&#39;, &#39;s&#39;, &#39;s&#39;, &#39; &#39;, &#39;s&#39;, &#39;i&#39;, &#39;l&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39;l&#39;, &#39;y&#39;, &#39;\n&#39;, &#39;U&#39;, &#39;n&#39;, &#39;l&#39;, &#39;e&#39;, &#39;s&#39;, &#39;s&#39;, &#39; &#39;, &#39;e&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;i&#39;, &#39;t&#39;, &#39;l&#39;, &#39;y&#39;, &#39; &#39;, &#39;s&#39;, &#39;i&#39;, &#39;l&#39;, &#39;e&#39;, &#39;n&#39;, &#39;c&#39;, &#39;e&#39;, &#39;d&#39;, &#39;\n&#39;, &#39;I&#39;, &#39;n&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;f&#39;, &#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39; &#39;, &#39;a&#39;, &#39;m&#39;, &#39;b&#39;, &#39;i&#39;, &#39;g&#39;, &#39;u&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39; &#39;, &#39;r&#39;, &#39;e&#39;, &#39;f&#39;, &#39;u&#39;, &#39;s&#39;, &#39;e&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;t&#39;, &#39;e&#39;, &#39;m&#39;, &#39;p&#39;, &#39;t&#39;, &#39;a&#39;, &#39;t&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;g&#39;, &#39;u&#39;, &#39;e&#39;, &#39;s&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;T&#39;, &#39;h&#39;, &#39;e&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;s&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;l&#39;, &#39;d&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;e&#39;, &#39; &#39;, &#39;a&#39;, &#39;n&#39;, &#39;d&#39;, &#39; &#39;, &#39;p&#39;, &#39;r&#39;, &#39;e&#39;, &#39;f&#39;, &#39;e&#39;, &#39;r&#39;, &#39;a&#39;, &#39;b&#39;, &#39;l&#39;, &#39;y&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;l&#39;, &#39;y&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;b&#39;, &#39;v&#39;, &#39;i&#39;, &#39;o&#39;, &#39;u&#39;, &#39;s&#39;, &#39; &#39;, &#39;w&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;d&#39;, &#39;o&#39;, &#39; &#39;, &#39;i&#39;, &#39;t&#39;, &#39;\n&#39;, &#39;A&#39;, &#39;l&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;w&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;m&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;n&#39;, &#39;o&#39;, &#39;t&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;b&#39;, &#39;v&#39;, &#39;i&#39;, &#39;o&#39;, &#39;u&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;f&#39;, &#39;i&#39;, &#39;r&#39;, &#39;s&#39;, &#39;t&#39;, &#39; &#39;, &#39;u&#39;, &#39;n&#39;, &#39;l&#39;, &#39;e&#39;, &#39;s&#39;, &#39;s&#39;, &#39; &#39;, &#39;y&#39;, &#39;o&#39;, &#39;u&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;D&#39;, &#39;u&#39;, &#39;t&#39;, &#39;c&#39;, &#39;h&#39;, &#39;\n&#39;, &#39;N&#39;, &#39;o&#39;, &#39;w&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;v&#39;, &#39;e&#39;, &#39;r&#39;, &#39;\n&#39;, &#39;A&#39;, &#39;l&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;v&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39;t&#39;, &#39;e&#39;, &#39;n&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;r&#39;, &#39;i&#39;, &#39;g&#39;, &#39;h&#39;, &#39;t&#39;, &#39; &#39;, &#39;n&#39;, &#39;o&#39;, &#39;w&#39;, &#39;\n&#39;, &#39;I&#39;, &#39;f&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;m&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39;a&#39;, &#39;t&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;h&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;e&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;a&#39;, &#39;i&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;t&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39; &#39;, &#39;b&#39;, &#39;a&#39;, &#39;d&#39;, &#39; &#39;, &#39;i&#39;, &#39;d&#39;, &#39;e&#39;, &#39;a&#39;, &#39;\n&#39;, &#39;I&#39;, &#39;f&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;m&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39;a&#39;, &#39;t&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;e&#39;, &#39;a&#39;, &#39;s&#39;, &#39;y&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;e&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;a&#39;, &#39;i&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;t&#39;, &#39; &#39;, &#39;m&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39; &#39;, &#39;a&#39;, &#39; &#39;, &#39;g&#39;, &#39;o&#39;, &#39;o&#39;, &#39;d&#39;, &#39; &#39;, &#39;i&#39;, &#39;d&#39;, &#39;e&#39;, &#39;a&#39;, &#39;\n&#39;, &#39;N&#39;, &#39;a&#39;, &#39;m&#39;, &#39;e&#39;, &#39;s&#39;, &#39;p&#39;, &#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;e&#39;, &#39; &#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;, &#39;k&#39;, &#39;i&#39;, &#39;n&#39;, &#39;g&#39;, &#39; &#39;, &#39;g&#39;, &#39;r&#39;, &#39;e&#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;i&#39;, &#39;d&#39;, &#39;e&#39;, &#39;a&#39;, &#39; &#39;, &#39; &#39;, &#39;l&#39;, &#39;e&#39;, &#39;t&#39;, &#39;s&#39;, &#39; &#39;, &#39;d&#39;, &#39;o&#39;, &#39; &#39;, &#39;m&#39;, &#39;o&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;s&#39;, &#39;e&#39;]</span>
 
-<span class="gp">In [9]: </span><span class="n">zen_string_no_punc</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">zen_list_no_punc</span><span class="p">)</span>
+<span class="gp">In [25]: </span><span class="n">zen_string_no_punc</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">zen_list_no_punc</span><span class="p">)</span>
 
-<span class="gp">In [10]: </span><span class="k">print</span><span class="p">(</span><span class="n">zen_string_no_punc</span><span class="p">)</span>
+<span class="gp">In [26]: </span><span class="k">print</span><span class="p">(</span><span class="n">zen_string_no_punc</span><span class="p">)</span>
 <span class="go">The Zen of Python by Tim Peters</span>
 <span class="go">Beautiful is better than ugly</span>
 <span class="go">Explicit is better than implicit</span>
@@ -513,9 +508,113 @@ let&#8217;s remove all of the punctuation from a string.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>You can contemplate the zen of Python anytime by executing <code class="docutils literal"><span class="pre">import</span> <span class="pre">this</span></code>.</p>
-<div class="last highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="kn">import</span> <span class="nn">this</span>
+<div class="last highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="kn">import</span> <span class="nn">this</span>
+<span class="go">The Zen of Python, by Tim Peters</span>
+
+<span class="go">Beautiful is better than ugly.</span>
+<span class="go">Explicit is better than implicit.</span>
+<span class="go">Simple is better than complex.</span>
+<span class="go">Complex is better than complicated.</span>
+<span class="go">Flat is better than nested.</span>
+<span class="go">Sparse is better than dense.</span>
+<span class="go">Readability counts.</span>
+<span class="go">Special cases aren&#39;t special enough to break the rules.</span>
+<span class="go">Although practicality beats purity.</span>
+<span class="go">Errors should never pass silently.</span>
+<span class="go">Unless explicitly silenced.</span>
+<span class="go">In the face of ambiguity, refuse the temptation to guess.</span>
+<span class="go">There should be one-- and preferably only one --obvious way to do it.</span>
+<span class="go">Although that way may not be obvious at first unless you&#39;re Dutch.</span>
+<span class="go">Now is better than never.</span>
+<span class="go">Although never is often better than *right* now.</span>
+<span class="go">If the implementation is hard to explain, it&#39;s a bad idea.</span>
+<span class="go">If the implementation is easy to explain, it may be a good idea.</span>
+<span class="go">Namespaces are one honking great idea -- let&#39;s do more of those!</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="installing-project-gutenberg-texts-with-nltk">
+<h2>4.2.3. Installing Project Gutenberg texts with NLTK<a class="headerlink" href="#installing-project-gutenberg-texts-with-nltk" title="Permalink to this headline">¶</a></h2>
+<p>We can access a large number of freely available books using the <code class="docutils literal"><span class="pre">ntlk</span></code> python
+library.  First, use <code class="docutils literal"><span class="pre">conda</span></code> to install/update the <code class="docutils literal"><span class="pre">ntlk</span></code> library.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ conda install ntlk
+</pre></div>
+</div>
+<p>The you will need to <code class="docutils literal"><span class="pre">import</span></code> and download the books from a python console.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This will open another window that can be used to download part of the <code class="docutils literal"><span class="pre">nltk</span></code>
+module.  At the very least you should download <code class="docutils literal"><span class="pre">gutenberg</span></code> from the <em>Corpora</em>
+table.</p>
+<img alt="TheExpressionOrientedSequenceTransformation/Figures/nltk_download_gutenberg.png" src="TheExpressionOrientedSequenceTransformation/Figures/nltk_download_gutenberg.png" />
+<p>Now we can access the full content of novels such as Jane Austen&#8217;s Emma.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">gutenberg</span>
+
+<span class="gp">In [29]: </span><span class="n">gutenberg</span><span class="o">.</span><span class="n">fileids</span><span class="p">()</span>
+<span class="gh">Out[29]: </span><span class="go"></span>
+<span class="go">[&#39;austen-emma.txt&#39;,</span>
+<span class="go"> &#39;austen-persuasion.txt&#39;,</span>
+<span class="go"> &#39;austen-sense.txt&#39;,</span>
+<span class="go"> &#39;bible-kjv.txt&#39;,</span>
+<span class="go"> &#39;blake-poems.txt&#39;,</span>
+<span class="go"> &#39;bryant-stories.txt&#39;,</span>
+<span class="go"> &#39;burgess-busterbrown.txt&#39;,</span>
+<span class="go"> &#39;carroll-alice.txt&#39;,</span>
+<span class="go"> &#39;chesterton-ball.txt&#39;,</span>
+<span class="go"> &#39;chesterton-brown.txt&#39;,</span>
+<span class="go"> &#39;chesterton-thursday.txt&#39;,</span>
+<span class="go"> &#39;edgeworth-parents.txt&#39;,</span>
+<span class="go"> &#39;melville-moby_dick.txt&#39;,</span>
+<span class="go"> &#39;milton-paradise.txt&#39;,</span>
+<span class="go"> &#39;shakespeare-caesar.txt&#39;,</span>
+<span class="go"> &#39;shakespeare-hamlet.txt&#39;,</span>
+<span class="go"> &#39;shakespeare-macbeth.txt&#39;,</span>
+<span class="go"> &#39;whitman-leaves.txt&#39;]</span>
+
+<span class="gp">In [30]: </span><span class="n">emma</span> <span class="o">=</span> <span class="n">gutenberg</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="s1">&#39;austen-emma.txt&#39;</span><span class="p">)</span>
+
+<span class="gp">In [31]: </span><span class="n">emma</span><span class="p">[:</span><span class="mi">1000</span><span class="p">]</span>
+<span class="gh">Out[31]: </span><span class="go">&quot;[Emma by Jane Austen 1816]\n\nVOLUME I\n\nCHAPTER I\n\n\nEmma Woodhouse, handsome, clever, and rich, with a comfortable home\nand happy disposition, seemed to unite some of the best blessings\nof existence; and had lived nearly twenty-one years in the world\nwith very little to distress or vex her.\n\nShe was the youngest of the two daughters of a most affectionate,\nindulgent father; and had, in consequence of her sister&#39;s marriage,\nbeen mistress of his house from a very early period.  Her mother\nhad died too long ago for her to have more than an indistinct\nremembrance of her caresses; and her place had been supplied\nby an excellent woman as governess, who had fallen little short\nof a mother in affection.\n\nSixteen years had Miss Taylor been in Mr. Woodhouse&#39;s family,\nless as a governess than a friend, very fond of both daughters,\nbut particularly of Emma.  Between _them_ it was more the intimacy\nof sisters.  Even before Miss Taylor had ceased to hold the nominal\noffice of governess, the mildness o&quot;</span>
+</pre></div>
+</div>
+<p>Once we have the novel imported into Python, it can be processed to answer
+questions about the text.  Suppose that we want to know the average word length
+in Emma.  First, the text is preprocessed to clean and remove unwanted
+charaters, in this case any punctuation or whitespace.  (We also make all of the
+text lowercase out of habit.)</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span><span class="p">,</span> <span class="n">whitespace</span>
+
+<span class="gp">In [33]: </span><span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
+
+<span class="gp">In [34]: </span><span class="n">make_lower_case</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="gp">In [35]: </span><span class="n">fix_whitespace</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">whitespace</span> <span class="k">else</span> <span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
+
+<span class="gp">In [36]: </span><span class="n">emma</span> <span class="o">=</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">make_lower_case</span><span class="p">(</span><span class="n">fix_whitespace</span><span class="p">(</span><span class="n">emma</span><span class="p">)))</span>
+
+<span class="gp">In [37]: </span><span class="n">emma</span><span class="p">[:</span><span class="mi">1000</span><span class="p">]</span>
+<span class="gh">Out[37]: </span><span class="go">&#39;emma by jane austen 1816  volume i  chapter i   emma woodhouse handsome clever and rich with a comfortable home and happy disposition seemed to unite some of the best blessings of existence and had lived nearly twentyone years in the world with very little to distress or vex her  she was the youngest of the two daughters of a most affectionate indulgent father and had in consequence of her sisters marriage been mistress of his house from a very early period  her mother had died too long ago for her to have more than an indistinct remembrance of her caresses and her place had been supplied by an excellent woman as governess who had fallen little short of a mother in affection  sixteen years had miss taylor been in mr woodhouses family less as a governess than a friend very fond of both daughters but particularly of emma  between them it was more the intimacy of sisters  even before miss taylor had ceased to hold the nominal office of governess the mildness of her temper had hardly allow&#39;</span>
+</pre></div>
+</div>
+<p>Next, the text is split into a list of words and the statistic is computed.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">emma_words</span> <span class="o">=</span> <span class="n">emma</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># split by whitespace</span>
+
+<span class="gp">In [39]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="gp">In [40]: </span><span class="n">average_word_length</span> <span class="o">=</span> <span class="n">mean</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">emma_words</span><span class="p">])</span>
+
+<span class="gp">In [41]: </span><span class="n">average_word_length</span>
+<span class="gh">Out[41]: </span><span class="go">4.327759895276701</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">We were pretty careless in our preprocessing in this example.  For example,
+the first portion of the text should be removed and we might have given
+separate consideration to chapter titles.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -539,12 +638,12 @@ let&#8217;s remove all of the punctuation from a string.</p>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="TransformingSequencesWithComprehensions.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 4.3. Common Comprehension Patterns' data-toggle="tooltip" >
-    <a href="CommonComprehensionPatterns.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 4.3. Common Comprehension Patterns for a Single Sequence' data-toggle="tooltip" >
+    <a href="CommonComprehensionPatternsSingleSequence.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="CommonComprehensionPatterns.html" >Next Section - 4.3. Common Comprehension Patterns</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="CommonComprehensionPatternsSingleSequence.html" >Next Section - 4.3. Common Comprehension Patterns for a Single Sequence</a>
 
 <script type="text/javascript">
 

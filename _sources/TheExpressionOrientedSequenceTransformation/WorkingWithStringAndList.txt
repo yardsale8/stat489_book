@@ -1,4 +1,4 @@
-    ..  Copyright (C)  Todd Iverson.  Permission is granted to copy, distribute
+..  Copyright (C)  Todd Iverson.  Permission is granted to copy, distribute
     and/or modify this document under the terms of the GNU Free Documentation
     License, Version 1.3 or any later version published by the Free Software
     Foundation; with Invariant Sections being Forward, Prefaces, and
@@ -16,7 +16,7 @@ illustrate the process of converting and transforming textual data list
 comprehensions and the ``split``, ``join`` and ``format`` methods.
 
 
-
+.. include:: CharacterClassification.rst
 
 More on working with strings and lists
 --------------------------------------
@@ -70,7 +70,7 @@ sentence.  We start by going through the process step-by-step.
 
     nums = [num_vowels(word) for word in words]
     nums
-    # Using the mean function defined in earlier examples
+    mean = lambda L: sum(L)/len(L)
     average_num_vowels = mean(nums)
     average_num_vowels
 
@@ -97,4 +97,137 @@ diagram.
     the string into a list of strings, tranforming the string into another
     list and then reducing that list to a value.
 
-.. include:: CharacterClassification.rst
+We can use list comprehensions to describe a new string, but we need to convert
+the result back to a string using the ``str`` conversion function.  For example,
+let's remove all of the punctuation from a string.
+
+.. ipython:: python
+
+    zen_of_python = '''The Zen of Python, by Tim Peters
+    Beautiful is better than ugly.
+    Explicit is better than implicit.
+    Simple is better than complex.
+    Complex is better than complicated.
+    Flat is better than nested.
+    Sparse is better than dense.
+    Readability counts.
+    Special cases aren't special enough to break the rules.
+    Although practicality beats purity.
+    Errors should never pass silently.
+    Unless explicitly silenced.
+    In the face of ambiguity, refuse the temptation to guess.
+    There should be one-- and preferably only one --obvious way to do it.
+    Although that way may not be obvious at first unless you're Dutch.
+    Now is better than never.
+    Although never is often better than *right* now.
+    If the implementation is hard to explain, it's a bad idea.
+    If the implementation is easy to explain, it may be a good idea.
+    Namespaces are one honking great idea -- let's do more of those!'''
+
+    zen_list_no_punc = [ch for ch in zen_of_python if ch not in string.punctuation]
+    print(zen_list_no_punc)
+    zen_string_no_punc = ''.join(zen_list_no_punc)
+    print(zen_string_no_punc)
+
+.. note::
+
+    You can contemplate the zen of Python anytime by executing ``import this``.
+
+    .. ipython:: python
+
+        import this
+
+Installing Project Gutenberg texts with NLTK
+--------------------------------------------
+
+We can access a large number of freely available books using the ``ntlk`` python
+library.  First, use ``conda`` to install/update the ``ntlk`` library.
+
+.. sourcecode:: bash
+
+     $ conda install ntlk
+
+The you will need to ``import`` and download the books from a python console.
+
+.. sourcecode:: python
+
+     import nltk
+     nltk.download()
+
+This will open another window that can be used to download part of the ``nltk``
+module.  At the very least you should download ``gutenberg`` from the *Corpora*
+table.
+
+.. image:: Figures/nltk_download_gutenberg.png
+
+Now we can access the full content of novels such as Jane Austen's Emma.
+
+.. ipython:: python
+
+    from nltk.corpus import gutenberg
+    gutenberg.fileids()
+    emma = gutenberg.raw('austen-emma.txt')
+
+    emma[:1000]
+
+Once we have the novel imported into Python, it can be processed to answer
+questions about the text.  Suppose that we want to know the average word length
+in Emma.  First, the text is preprocessed to clean and remove unwanted
+charaters, in this case any punctuation or whitespace.  (We also make all of the
+text lowercase out of habit.)
+
+.. ipython:: python
+
+    from string import punctuation, whitespace
+    remove_punc = lambda s: "".join([ch for ch in s if ch not in punctuation])
+    make_lower_case = lambda s: s.lower()
+    fix_whitespace = lambda s: "".join([" " if ch in whitespace else ch for ch in s])
+
+    emma = remove_punc(make_lower_case(fix_whitespace(emma)))
+    emma[:1000]
+
+Next, the text is split into a list of words and the statistic is computed.
+
+.. ipython:: python
+
+    emma_words = emma.split() # split by whitespace
+    mean = lambda L: sum(L)/len(L)
+    average_word_length = mean([len(word) for word in emma_words])
+    average_word_length
+
+.. caution:: 
+
+    We were pretty careless in our preprocessing in this example.  For example,
+    the first portion of the text should be removed and we might have given
+    separate consideration to chapter titles.
+
+.. The ``nltk`` is an acronym for *Natural Language Toolkit* and consists of a
+.. large collection of utilities for natural language processing.  For example, the
+.. submodule ``nltk.sentiment`` can be used to score the sentiment of a text.
+.. Below, we illustrate by computing the average sentiment of all sentences in
+.. Emma.
+.. 
+.. .. note::
+.. 
+..     You will need to download the ``opinion lexicon`` corpus the run this
+..     example using ``nltk.download()`` from a Python console.
+.. 
+.. .. ipython:: python
+.. 
+..      from nltk.sentiment.util  import demo_liu_hu_lexicon as lex
+..      sents = emma.split('.')
+..      flatten = lambda table: [item for row in table for item in row]
+..      sents = flatten([portion.split('?') for portion in sents])
+..      sents = flatten([portion.split('!') for portion in sents])
+.. 
+..      mean = lambda L: sum(L)/len(L)
+..      average_sentiment = mean([lex(sent) for sent in sents])
+..      average_sentiment
+
+
+.. note::
+
+   This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
+
+   .. activecode:: scratch_08_04
+
