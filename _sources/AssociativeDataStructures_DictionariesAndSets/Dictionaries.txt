@@ -1,27 +1,108 @@
+..  Copyright (C)  Brad Miller, David Ranum, Jeffrey Elkner, Peter Wentworth, Allen B. Downey, Chris
+    Meyers, and Dario Mitchell.  Permission is granted to copy, distribute
+    and/or modify this document under the terms of the GNU Free Documentation
+    License, Version 1.3 or any later version published by the Free Software
+    Foundation; with Invariant Sections being Forward, Prefaces, and
+    Contributor List, no Front-Cover Texts, and no Back-Cover Texts.  A copy of
+    the license is included in the section entitled "GNU Free Documentation
+    License".
+
 Mapping One Value to Another with Dictionaries
 ==============================================
 
+All of the compound data types we have studied in detail so far --- strings,
+lists, and tuples --- are sequential collections.  This means that the items in
+the collection are ordered from left to right and they use integers as indices
+to access the values they contain.
 
+**Dictionaries** and **Sets** are a different kinds of collections. They are
+Python's built-in associative data types.  The dictionary associates one value
+with another, whereas the set associates a value with membership in some
+collection or group.  In this chapter, we will introduce these two data
+structures and discuss their application in data wrangling and analysis.
+
+Dictionaries
+============
+
+The dictionary is a **mapping type**.  A map is an unordered, associative
+collection.  The association, or mapping, is from a **key**, which can be any
+immutable type, to a **value**, which can be any Python data object.  As an
+example, we will create a dictionary to translate English words into Spanish.
+For this dictionary, the keys are strings and the values will also be strings.
+
+
+We can create a dictionary by providing a list of key-value pairs separated by
+``:`` between the keys and values and ``,`` between each pair.
+
+.. ipython:: python
+    
+    eng2sp = {'three': 'tres', 'one': 'uno', 'two': 'dos'}
+    eng2sp
+
+It doesn't matter what order we write the pairs. The values in a dictionary are
+accessed with keys, not with indices, so there is no need to care about
+ordering.
+
+Here is how we use a key to look up the corresponding value.
+
+.. ipython:: python
+
+    eng2sp = {'three': 'tres', 'one': 'uno', 'two': 'dos'}
+
+    eng2sp['two']
+
+
+The key ``'two'`` yields the value ``'dos'``.
+
+
+.. note::
+
+    This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
+
+    .. activecode:: scratch_11_01
+
+
+**Check your understanding**
+
+.. mchoice:: test_question11_1_1
+   :answer_a: False
+   :answer_b: True
+   :correct: b
+   :feedback_a: Dictionaries associate keys with values but there is no assumed order for the entries.
+   :feedback_b: Yes, dictionaries are associative collections meaning that they store key-value pairs.
+
+   A dictionary is an unordered collection of key-value pairs.
+
+
+.. mchoice:: test_question11_1_2
+   :answer_a: 12
+   :answer_b: 6
+   :answer_c: 23
+   :answer_d: Error, you cannot use the index operator with a dictionary.
+   :correct: b
+   :feedback_a: 12 is associated with the key cat.
+   :feedback_b: Yes, 6 is associated with the key dog.
+   :feedback_c: 23 is associated with the key elephant.
+   :feedback_d: The [ ] operator, when used with a dictionary, will look up a value based on its key.
+   
+   
+   What is printed by the following statements?
+   
+   .. sourcecode:: python
+
+     mydict = {"cat":12, "dog":6, "elephant":23}
+     print(mydict["dog"])
 
 
 
 Dictionary Operations
 ---------------------
 
-The ``del`` statement removes a key-value pair from a dictionary. For example,
-the following dictionary contains the names of various fruits and the number of
-each fruit in stock.  If someone buys all of the pears, we can remove the entry from the dictionary.
 
-.. codelens:: ch12_dict4
-    
-    inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
-    
-    del inventory['pears']
-
-
-Dictionaries are also mutable.  As we've seen before with lists, this means that the dictionary can
-be modified by referencing an association on the left hand side of the assignment statement.  In the previous
-example, instead of deleting the entry for ``pears``, we could have set the inventory to ``0``.
+Dictionaries are mutable.  As we've seen before with lists, this means that
+the dictionary can be modified by referencing an association on the left hand
+side of the assignment statement.  In the previous example, instead of deleting
+the entry for ``pears``, we could have set the inventory to ``0``.
 
 .. codelens:: ch12_dict4a
     
@@ -29,10 +110,7 @@ example, instead of deleting the entry for ``pears``, we could have set the inve
     
     inventory['pears'] = 0
 
-
-
-Similarily,
-a new shipment of 200 bananas arriving could be handled like this.
+Similarily, a new shipment of 200 bananas arriving could be handled like this.
 
 .. codelens:: ch12_dict5
 
@@ -42,10 +120,9 @@ a new shipment of 200 bananas arriving could be handled like this.
 
     numItems = len(inventory)
 
-Notice that there are now 512 bananas---the dictionary has been modified.  Note also that the ``len`` function also works on dictionaries.  It returns the number
-of key-value pairs:
-
-
+Notice that there are now 512 bananas---the dictionary has been modified.  Note
+also that the ``len`` function also works on dictionaries.  It returns the
+number of key-value pairs:
 
 
 **Check your understanding**
@@ -70,12 +147,6 @@ of key-value pairs:
      mydict["mouse"] = mydict["cat"] + mydict["dog"]
      print(mydict["mouse"])
 
-
-
-
-
-
-
 Dictionary Methods
 ------------------
 
@@ -93,97 +164,111 @@ get         key                 Returns the value associated with key; None othe
 get         key,alt             Returns the value associated with key; alt otherwise
 ==========  ==============      =======================================================
 
-The ``keys`` method returns what Python 3 calls a **view** of its underlying keys.  
-We can iterate over the view or turn the view into a 
-list by using the ``list`` conversion function.
+The ``keys`` method returns what Python 3 calls a **view** over its
+underlying keys.  An view is an example of an **iterable**. 
 
-.. activecode:: chp12_dict6
+.. ipython:: python
+    
+    inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}  
+
+    ks = inventory.keys()
+    type(ks)
+    ks
+
+We can turn the iterable item into an iterator using the ``iter`` function.  An
+**iterator** is a lazy construction that allows through the keys, one after the
+other using the ``next`` function.
+
+.. ipython:: python
+    
+    iter_ks = iter(ks)
+    type(iter_ks)
+    next(iter_ks)
+    next(iter_ks)
+    next(iter_ks)
+    next(iter_ks)
+    next(iter_ks)
+
+An exception will be thrown once we reach the end of the iterator.  After the
+iterator has stepped through the sequence once, it is empty and can't be used
+again.
+
+While understanding this gives a deeper insight into how Python works, Python
+takes care of all of the details for us.  When we process an iterable value in a
+list comprehension, Python hides the detail of making the iterator, using
+``next`` to step through the sequence and stopping when the exception is thrown.
+
+.. note:: 
+
+     It is important to note that there is no guarentee the order of the keys
+     will be returned!  Dictionaries are unorder sets.  If order is important
+     either sort or use a sequence data structure.
+
+We can use the iterator to iterate through the keys using a
+list comprehension or by converting the view into a list.
+
+.. ipython:: python
     
     inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}  
   
-    for akey in inventory.keys():     # the order in which we get the keys is not defined
-       print("Got key", akey, "which maps to value", inventory[akey])     
-       
+    keys = [akey for akey in inventory.keys()]
+    keys 
     ks = list(inventory.keys())
-    print(ks)
+    ks
+    [akey for akey in inventory]
 
-    
-It is so common to iterate over the keys in a dictionary that you can
-omit the ``keys`` method call in the ``for`` loop --- iterating over
-a dictionary implicitly iterates over its keys.
-
-.. activecode:: chp12_dict7
-    
-    inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}  
-    
-    for k in inventory:     
-       print("Got key", k)
-
- 
 As we saw earlier with strings and lists, dictionary methods use dot notation,
 which specifies the name of the method to the right of the dot and the name of
-the object on which to apply the method immediately to the left of the dot. The empty
-parentheses in the case of ``keys`` indicate that this method takes no parameters.
+the object on which to apply the method immediately to the left of the dot. The
+empty parentheses in the case of ``keys`` indicate that this method takes no
+parameters.   Finally, we note that iterating over the dictionary name iterates
+over the keys.
 
-The ``values`` and ``items`` methods are similar to ``keys``. They return  view objects which can be turned
-into lists or iterated over directly.  Note that the items are shown as tuples containing the key and the associated value.
+The ``values`` and ``items`` methods are similar to ``keys``. They return  view
+objects which can be turned into lists or iterated over directly.  Note that the
+items are shown as tuples containing the key and the associated value.
 
-.. activecode:: chp12_dict8
+.. ipython:: python
     
     inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}  
     
-    print(list(inventory.values()))
-    print(list(inventory.items()))
+    list(inventory.values())
 
-    for (k,v) in inventory.items():
-        print("Got", k, "that maps to", v)
-
-    for k in inventory:
-        print("Got", k, "that maps to", inventory[k])
+    pairs = [(k,v) for k,v in inventory.items()]
     
-Note that tuples are often useful for getting both the key and the value at the same
-time while you are looping.  The two loops do the same thing.
-
+Note that tuples are often useful for getting both the key and the value at the
+same time while you are looping.  
     
 The ``in`` and ``not in`` operators can test if a key is in the dictionary:
 
-.. activecode:: chp12_dict9
+.. ipython:: python
     
     inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
-    print('apples' in inventory)
-    print('cherries' in inventory)
+    'apples' in inventory
+    'cherries' in inventory
 
-    if 'bananas' in inventory:
-        print(inventory['bananas'])
-    else:
-        print("We have no bananas")
+    inventory['bananas'] if 'bananas' in inventory "We have no bananas"
      
 
 This operator can be very useful since looking up a non-existent key in a
 dictionary causes a runtime error.
 
-The ``get`` method allows us to access the value associated with a key, similar to the ``[ ]`` operator.
-The important difference is that ``get`` will not cause a runtime error if the key is not present.  It
-will instead return None.  There exists a variation of ``get`` that allows a second parameter that serves as an alternative return value
-in the case where the key is not present.  This can be seen in the final example below.  In this case, since "cherries" is not a key, return 0 (instead of None).
+The ``get`` method allows us to access the value associated with a key, similar
+to the ``[ ]`` operator.  The important difference is that ``get`` will not
+cause a runtime error if the key is not present.  It will instead return None.
+There exists a variation of ``get`` that allows a second parameter that serves
+as an alternative return value in the case where the key is not present.  This
+can be seen in the final example below.  In this case, since "cherries" is not a
+key, return 0 (instead of None).
 
-.. activecode:: chp12_dict10
+.. ipython:: python
     
     inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
     
-    print(inventory.get("apples"))
-    print(inventory.get("cherries"))
+    inventory.get("apples")
+    inventory.get("cherries")
+    inventory.get("cherries", 0)
 
-    print(inventory.get("cherries", 0))
-
-
-
-
-.. note::
-
-    This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
-
-    .. activecode:: scratch_11_02
 
 
 **Check your understanding**
@@ -281,44 +366,36 @@ in the case where the key is not present.  This can be seen in the final example
    
    .. sourcecode:: python
 
-      total = 0
       mydict = {"cat":12, "dog":6, "elephant":23, "bear":20}
-      for akey in mydict:
-         if len(akey) > 3:
-            total = total + mydict[akey]
+      total = sum([mydict[akey] for akey in mydict if len(akey) > 3])
       print(total)
    
-
-
-.. index:: aliases
-
-
-
 
 Aliasing and Copying
 --------------------
 
-Because dictionaries are mutable, you need to be aware of aliasing (as we saw with lists).  Whenever
-two variables refer to the same dictionary object, changes to one affect the other.
-For example, ``opposites`` is a dictionary that contains pairs
-of opposites.
+Because dictionaries are mutable, you need to be aware of aliasing (as we saw
+with lists).  Whenever two variables refer to the same dictionary object,
+changes to one affect the other.  For example, ``opposites`` is a dictionary
+that contains pairs of opposites.
 
-.. activecode:: ch12_dict11
+.. ipython:: python
     
     opposites = {'up': 'down', 'right': 'wrong', 'true': 'false'}
     alias = opposites
 
-    print(alias is opposites)
+    alias is opposites
 
     alias['right'] = 'left'
-    print(opposites['right'])
-    
+    opposites['right']
 
 
-As you can see from the ``is`` operator, ``alias`` and ``opposites`` refer to the same object.
+As you can see from the ``is`` operator, ``alias`` and ``opposites`` refer to
+the same object.
 
-If you want to modify a dictionary and keep a copy of the original, use the dictionary 
-``copy`` method.  Since *acopy* is a copy of the dictionary, changes to it will not effect the original.
+If you want to modify a dictionary and keep a copy of the original, use the
+dictionary ``copy`` method.  Since *acopy* is a copy of the dictionary, changes
+to it will not effect the original.
 
 .. sourcecode:: python
     
@@ -346,7 +423,4 @@ If you want to modify a dictionary and keep a copy of the original, use the dict
      yourdict = mydict
      yourdict["elephant"] = 999
      print(mydict["elephant"])
-
-
-.. index:: matrix
 

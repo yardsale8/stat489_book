@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.1. Mapping One Value to Another with Dictionaries &mdash; Runestone Interactive Overview</title>
+    <title>7.1. Mapping One Value to Another with Dictionaries &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="6. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
-    <link rel="next" title="6.2. Checking and Comparing Membership with Sets" href="Sets.html" />
-    <link rel="prev" title="6. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
+    <link rel="up" title="7. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
+    <link rel="next" title="7.3. Checking and Comparing Membership with Sets" href="Sets.html" />
+    <link rel="prev" title="7. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,10 +263,11 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6.1. Mapping One Value to Another with Dictionaries</a><ul>
-<li><a class="reference internal" href="#dictionary-operations">6.1.1. Dictionary Operations</a></li>
-<li><a class="reference internal" href="#dictionary-methods">6.1.2. Dictionary Methods</a></li>
-<li><a class="reference internal" href="#aliasing-and-copying">6.1.3. Aliasing and Copying</a></li>
+<li><a class="reference internal" href="#">7.1. Mapping One Value to Another with Dictionaries</a></li>
+<li><a class="reference internal" href="#dictionaries">7.2. Dictionaries</a><ul>
+<li><a class="reference internal" href="#dictionary-operations">7.2.1. Dictionary Operations</a></li>
+<li><a class="reference internal" href="#dictionary-methods">7.2.2. Dictionary Methods</a></li>
+<li><a class="reference internal" href="#aliasing-and-copying">7.2.3. Aliasing and Copying</a></li>
 </ul>
 </li>
 </ul>
@@ -276,13 +277,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 6. Associative Data Structures - Dictionaries and Sets" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 7. Associative Data Structures - Dictionaries and Sets" data-toggle="tooltip">
     <a href="toctree.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 6.2. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 7.3. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
     <a href="Sets.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -314,67 +315,93 @@
 <div class="container" id="main-content">
   
   <div class="section" id="mapping-one-value-to-another-with-dictionaries">
-<h1>6.1. Mapping One Value to Another with Dictionaries<a class="headerlink" href="#mapping-one-value-to-another-with-dictionaries" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="dictionary-operations">
-<h2>6.1.1. Dictionary Operations<a class="headerlink" href="#dictionary-operations" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">del</span></code> statement removes a key-value pair from a dictionary. For example,
-the following dictionary contains the names of various fruits and the number of
-each fruit in stock.  If someone buys all of the pears, we can remove the entry from the dictionary.</p>
-
-<div class="alert alert-warning cd_section">
-<div id="ch12_dict4"></div>
-<p class="cl_caption"><span class="cl_caption_text"> (ch12_dict4)</span> </p>
+<h1>7.1. Mapping One Value to Another with Dictionaries<a class="headerlink" href="#mapping-one-value-to-another-with-dictionaries" title="Permalink to this headline">¶</a></h1>
+<p>All of the compound data types we have studied in detail so far &#8212; strings,
+lists, and tuples &#8212; are sequential collections.  This means that the items in
+the collection are ordered from left to right and they use integers as indices
+to access the values they contain.</p>
+<p><strong>Dictionaries</strong> and <strong>Sets</strong> are a different kinds of collections. They are
+Python&#8217;s built-in associative data types.  The dictionary associates one value
+with another, whereas the set associates a value with membership in some
+collection or group.  In this chapter, we will introduce these two data
+structures and discuss their application in data wrangling and analysis.</p>
 </div>
-<script type="text/javascript">
-var ch12_dict4_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ndel inventory['pears']", "trace": [{"globals": {}, "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"inventory": ["REF", 1]}, "ordered_globals": ["inventory"], "line": 3, "func_name": "<module>", "heap": {"1": ["DICT", ["pears", 217], ["bananas", 312], ["apples", 430], ["oranges", 525]]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"inventory": ["REF", 1]}, "ordered_globals": ["inventory"], "line": 3, "func_name": "<module>", "heap": {"1": ["DICT", ["bananas", 312], ["apples", 430], ["oranges", 525]]}, "stack_to_render": [], "event": "return", "stdout": ""}]};
-var ch12_dict4_vis;
+<div class="section" id="dictionaries">
+<h1>7.2. Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h1>
+<p>The dictionary is a <strong>mapping type</strong>.  A map is an unordered, associative
+collection.  The association, or mapping, is from a <strong>key</strong>, which can be any
+immutable type, to a <strong>value</strong>, which can be any Python data object.  As an
+example, we will create a dictionary to translate English words into Spanish.
+For this dictionary, the keys are strings and the values will also be strings.</p>
+<p>We can create a dictionary by providing a list of key-value pairs separated by
+<code class="docutils literal"><span class="pre">:</span></code> between the keys and values and <code class="docutils literal"><span class="pre">,</span></code> between each pair.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">eng2sp</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;three&#39;</span><span class="p">:</span> <span class="s1">&#39;tres&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">:</span> <span class="s1">&#39;uno&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">:</span> <span class="s1">&#39;dos&#39;</span><span class="p">}</span>
 
-$(document).ready(function() {
-    try {
-        ch12_dict4_vis = new ExecutionVisualizer('ch12_dict4',ch12_dict4_trace,
-                                    {embeddedMode: true,
-                                    verticalStack: false,
-                                    heightChangeCallback: redrawAllVisualizerArrows,
-                                    codeDivWidth: 500,
-                                    lang : 'py3'
-                                    });
-        attachLoggers(ch12_dict4_vis,'ch12_dict4');
-        styleButtons('ch12_dict4');
-        allVisualizers.push(ch12_dict4_vis);
-    } catch (e) {
-        console.log("Failed to Initialize CodeLens component ch12_dict4_vis" );
-        console.log(e.toString());
-    }
+<span class="gp">In [2]: </span><span class="n">eng2sp</span>
+<span class="gh">Out[2]: </span><span class="go">{&#39;one&#39;: &#39;uno&#39;, &#39;three&#39;: &#39;tres&#39;, &#39;two&#39;: &#39;dos&#39;}</span>
+</pre></div>
+</div>
+<p>It doesn&#8217;t matter what order we write the pairs. The values in a dictionary are
+accessed with keys, not with indices, so there is no need to care about
+ordering.</p>
+<p>Here is how we use a key to look up the corresponding value.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">eng2sp</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;three&#39;</span><span class="p">:</span> <span class="s1">&#39;tres&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">:</span> <span class="s1">&#39;uno&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">:</span> <span class="s1">&#39;dos&#39;</span><span class="p">}</span>
 
-});
+<span class="gp">In [4]: </span><span class="n">eng2sp</span><span class="p">[</span><span class="s1">&#39;two&#39;</span><span class="p">]</span>
+<span class="gh">Out[4]: </span><span class="go">&#39;dos&#39;</span>
+</pre></div>
+</div>
+<p>The key <code class="docutils literal"><span class="pre">'two'</span></code> yields the value <code class="docutils literal"><span class="pre">'dos'</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
 
-$(document).ready(function() {
-    $("#ch12_dict4_tracecheck").click(function() {
-        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'ch12_dict4'});
-    });
-});
-
-if (allVisualizers === undefined) {
-   var allVisualizers = [];
-}
+<textarea data-component="activecode" id=scratch_11_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
 
 
-$(window).resize(function() {
-    if (ch12_dict4_vis) {
-        ch12_dict4_vis.redrawConnectors();
-    }
-});
-</script>
-<p>Dictionaries are also mutable.  As we&#8217;ve seen before with lists, this means that the dictionary can
-be modified by referencing an association on the left hand side of the assignment statement.  In the previous
-example, instead of deleting the entry for <code class="docutils literal"><span class="pre">pears</span></code>, we could have set the inventory to <code class="docutils literal"><span class="pre">0</span></code>.</p>
+</textarea>
+</div>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_1_1">
+            Q-1: A dictionary is an unordered collection of key-value pairs.
+            <li data-component="answer"  id="test_question11_1_1_opt_a">(A) False</li><li data-component="feedback" id="test_question11_1_1_opt_a">Dictionaries associate keys with values but there is no assumed order for the entries.</li>
+            
+            <li data-component="answer" data-correct id="test_question11_1_1_opt_b">(B) True</li><li data-component="feedback" id="test_question11_1_1_opt_b">Yes, dictionaries are associative collections meaning that they store key-value pairs.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_1_2">
+            <p>Q-2: What is printed by the following statements?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;dog&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="test_question11_1_2_opt_a">(A) 12</li><li data-component="feedback" id="test_question11_1_2_opt_a">12 is associated with the key cat.</li>
+            
+            <li data-component="answer" data-correct id="test_question11_1_2_opt_b">(B) 6</li><li data-component="feedback" id="test_question11_1_2_opt_b">Yes, 6 is associated with the key dog.</li>
+            
+            <li data-component="answer"  id="test_question11_1_2_opt_c">(C) 23</li><li data-component="feedback" id="test_question11_1_2_opt_c">23 is associated with the key elephant.</li>
+            
+            <li data-component="answer"  id="test_question11_1_2_opt_d">(D) Error, you cannot use the index operator with a dictionary.</li><li data-component="feedback" id="test_question11_1_2_opt_d">The [ ] operator, when used with a dictionary, will look up a value based on its key.</li>
+            
+
+            </ul>
+            <div class="section" id="dictionary-operations">
+<h2>7.2.1. Dictionary Operations<a class="headerlink" href="#dictionary-operations" title="Permalink to this headline">¶</a></h2>
+<p>Dictionaries are mutable.  As we&#8217;ve seen before with lists, this means that
+the dictionary can be modified by referencing an association on the left hand
+side of the assignment statement.  In the previous example, instead of deleting
+the entry for <code class="docutils literal"><span class="pre">pears</span></code>, we could have set the inventory to <code class="docutils literal"><span class="pre">0</span></code>.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="ch12_dict4a"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict4a)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict4a_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ninventory['pears'] = 0", "trace": [{"globals": {}, "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"inventory": ["REF", 1]}, "ordered_globals": ["inventory"], "line": 3, "func_name": "<module>", "heap": {"1": ["DICT", ["pears", 217], ["bananas", 312], ["apples", 430], ["oranges", 525]]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"inventory": ["REF", 1]}, "ordered_globals": ["inventory"], "line": 3, "func_name": "<module>", "heap": {"1": ["DICT", ["pears", 0], ["bananas", 312], ["apples", 430], ["oranges", 525]]}, "stack_to_render": [], "event": "return", "stdout": ""}]};
+var ch12_dict4a_trace = {"trace": [{"heap": {}, "func_name": "<module>", "ordered_globals": [], "globals": {}, "event": "step_line", "line": 1, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["DICT", ["bananas", 312], ["oranges", 525], ["pears", 217], ["apples", 430]]}, "func_name": "<module>", "ordered_globals": ["inventory"], "globals": {"inventory": ["REF", 1]}, "event": "step_line", "line": 3, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["DICT", ["bananas", 312], ["oranges", 525], ["pears", 0], ["apples", 430]]}, "func_name": "<module>", "ordered_globals": ["inventory"], "globals": {"inventory": ["REF", 1]}, "event": "return", "line": 3, "stack_to_render": [], "stdout": ""}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ninventory['pears'] = 0"};
 var ch12_dict4a_vis;
 
 $(document).ready(function() {
@@ -413,15 +440,14 @@ $(window).resize(function() {
     }
 });
 </script>
-<p>Similarily,
-a new shipment of 200 bananas arriving could be handled like this.</p>
+<p>Similarily, a new shipment of 200 bananas arriving could be handled like this.</p>
 
 <div class="alert alert-warning cd_section">
 <div id="ch12_dict5"></div>
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict5)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict5_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\ninventory['bananas'] = inventory['bananas'] + 200\n\n\nnumItems = len(inventory)", "trace": [{"globals": {}, "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"inventory": ["REF", 1]}, "ordered_globals": ["inventory"], "line": 2, "func_name": "<module>", "heap": {"1": ["DICT", ["pears", 217], ["bananas", 312], ["apples", 430], ["oranges", 525]]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"inventory": ["REF", 1]}, "ordered_globals": ["inventory"], "line": 5, "func_name": "<module>", "heap": {"1": ["DICT", ["pears", 217], ["bananas", 512], ["apples", 430], ["oranges", 525]]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"numItems": 4, "inventory": ["REF", 1]}, "ordered_globals": ["inventory", "numItems"], "line": 5, "func_name": "<module>", "heap": {"1": ["DICT", ["pears", 217], ["bananas", 512], ["apples", 430], ["oranges", 525]]}, "stack_to_render": [], "event": "return", "stdout": ""}]};
+var ch12_dict5_trace = {"trace": [{"heap": {}, "func_name": "<module>", "ordered_globals": [], "globals": {}, "event": "step_line", "line": 1, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["DICT", ["bananas", 312], ["oranges", 525], ["pears", 217], ["apples", 430]]}, "func_name": "<module>", "ordered_globals": ["inventory"], "globals": {"inventory": ["REF", 1]}, "event": "step_line", "line": 2, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["DICT", ["bananas", 512], ["oranges", 525], ["pears", 217], ["apples", 430]]}, "func_name": "<module>", "ordered_globals": ["inventory"], "globals": {"inventory": ["REF", 1]}, "event": "step_line", "line": 5, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["DICT", ["bananas", 512], ["oranges", 525], ["pears", 217], ["apples", 430]]}, "func_name": "<module>", "ordered_globals": ["inventory", "numItems"], "globals": {"numItems": 4, "inventory": ["REF", 1]}, "event": "return", "line": 5, "stack_to_render": [], "stdout": ""}], "code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\ninventory['bananas'] = inventory['bananas'] + 200\n\n\nnumItems = len(inventory)"};
 var ch12_dict5_vis;
 
 $(document).ready(function() {
@@ -460,12 +486,13 @@ $(window).resize(function() {
     }
 });
 </script>
-<p>Notice that there are now 512 bananas&#8212;the dictionary has been modified.  Note also that the <code class="docutils literal"><span class="pre">len</span></code> function also works on dictionaries.  It returns the number
-of key-value pairs:</p>
+<p>Notice that there are now 512 bananas&#8212;the dictionary has been modified.  Note
+also that the <code class="docutils literal"><span class="pre">len</span></code> function also works on dictionaries.  It returns the
+number of key-value pairs:</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_2_1">
-            <p>Q-1: What is printed by the following statements?</p>
+            <p>Q-3: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">}</span>
 <span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;mouse&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;dog&quot;</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;mouse&quot;</span><span class="p">])</span>
@@ -484,7 +511,7 @@ of key-value pairs:</p>
             </ul>
             </div>
 <div class="section" id="dictionary-methods">
-<h2>6.1.2. Dictionary Methods<a class="headerlink" href="#dictionary-methods" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.2. Dictionary Methods<a class="headerlink" href="#dictionary-methods" title="Permalink to this headline">¶</a></h2>
 <p>Dictionaries have a number of useful built-in methods.
 The following table provides a summary and more details can be found in the
 <a class="reference external" href="http://docs.python.org/py3k/library/stdtypes.html#mapping-types-dict">Python Documentation</a>.</p>
@@ -523,90 +550,138 @@ The following table provides a summary and more details can be found in the
 </tr>
 </tbody>
 </table>
-<p>The <code class="docutils literal"><span class="pre">keys</span></code> method returns what Python 3 calls a <strong>view</strong> of its underlying keys.
-We can iterate over the view or turn the view into a
-list by using the <code class="docutils literal"><span class="pre">list</span></code> conversion function.</p>
+<p>The <code class="docutils literal"><span class="pre">keys</span></code> method returns what Python 3 calls a <strong>view</strong> over its
+underlying keys.  An view is an example of an <strong>iterable</strong>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">430</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span> <span class="s1">&#39;oranges&#39;</span><span class="p">:</span> <span class="mi">525</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">:</span> <span class="mi">217</span><span class="p">}</span>
 
-<textarea data-component="activecode" id=chp12_dict6 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
+<span class="gp">In [6]: </span><span class="n">ks</span> <span class="o">=</span> <span class="n">inventory</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
-for akey in inventory.keys():     # the order in which we get the keys is not defined
-   print("Got key", akey, "which maps to value", inventory[akey])
+<span class="gp">In [7]: </span><span class="nb">type</span><span class="p">(</span><span class="n">ks</span><span class="p">)</span>
+<span class="gh">Out[7]: </span><span class="go">dict_keys</span>
 
-ks = list(inventory.keys())
-print(ks)
-</textarea>
-<p>It is so common to iterate over the keys in a dictionary that you can
-omit the <code class="docutils literal"><span class="pre">keys</span></code> method call in the <code class="docutils literal"><span class="pre">for</span></code> loop &#8212; iterating over
-a dictionary implicitly iterates over its keys.</p>
+<span class="gp">In [8]: </span><span class="n">ks</span>
+<span class="go">                  Out[8]: dict_keys([&#39;bananas&#39;, &#39;oranges&#39;, &#39;pears&#39;, &#39;apples&#39;])</span>
+</pre></div>
+</div>
+<p>We can turn the iterable item into an iterator using the <code class="docutils literal"><span class="pre">iter</span></code> function.  An
+<strong>iterator</strong> is a lazy construction that allows through the keys, one after the
+other using the <code class="docutils literal"><span class="pre">next</span></code> function.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">iter_ks</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">ks</span><span class="p">)</span>
 
-<textarea data-component="activecode" id=chp12_dict7 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
+<span class="gp">In [10]: </span><span class="nb">type</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go">dict_keyiterator</span>
 
-for k in inventory:
-   print("Got key", k)
-</textarea>
-<p>As we saw earlier with strings and lists, dictionary methods use dot notation,
-which specifies the name of the method to the right of the dot and the name of
-the object on which to apply the method immediately to the left of the dot. The empty
-parentheses in the case of <code class="docutils literal"><span class="pre">keys</span></code> indicate that this method takes no parameters.</p>
-<p>The <code class="docutils literal"><span class="pre">values</span></code> and <code class="docutils literal"><span class="pre">items</span></code> methods are similar to <code class="docutils literal"><span class="pre">keys</span></code>. They return  view objects which can be turned
-into lists or iterated over directly.  Note that the items are shown as tuples containing the key and the associated value.</p>
+<span class="gp">In [11]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
+<span class="go">                          Out[11]: &#39;bananas&#39;</span>
 
-<textarea data-component="activecode" id=chp12_dict8 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
+<span class="gp">In [12]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
+<span class="go">                                             Out[12]: &#39;oranges&#39;</span>
 
-print(list(inventory.values()))
-print(list(inventory.items()))
+<span class="gp">In [13]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
+<span class="go">                                                                Out[13]: &#39;pears&#39;</span>
 
-for (k,v) in inventory.items():
-    print("Got", k, "that maps to", v)
+<span class="gp">In [14]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
+<span class="go">                                                                                 Out[14]: &#39;apples&#39;</span>
 
-for k in inventory:
-    print("Got", k, "that maps to", inventory[k])
-</textarea>
-<p>Note that tuples are often useful for getting both the key and the value at the same
-time while you are looping.  The two loops do the same thing.</p>
-<p>The <code class="docutils literal"><span class="pre">in</span></code> and <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> operators can test if a key is in the dictionary:</p>
+<span class="gp">In [15]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
+<span class="go">                                                                                                   ---------------------------------------------------------------------------</span>
+<span class="go">StopIteration                             Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-15-a86c12757b9e&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 next(iter_ks)</span>
 
-<textarea data-component="activecode" id=chp12_dict9 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
-print('apples' in inventory)
-print('cherries' in inventory)
-
-if 'bananas' in inventory:
-    print(inventory['bananas'])
-else:
-    print("We have no bananas")
-</textarea>
-<p>This operator can be very useful since looking up a non-existent key in a
-dictionary causes a runtime error.</p>
-<p>The <code class="docutils literal"><span class="pre">get</span></code> method allows us to access the value associated with a key, similar to the <code class="docutils literal"><span class="pre">[</span> <span class="pre">]</span></code> operator.
-The important difference is that <code class="docutils literal"><span class="pre">get</span></code> will not cause a runtime error if the key is not present.  It
-will instead return None.  There exists a variation of <code class="docutils literal"><span class="pre">get</span></code> that allows a second parameter that serves as an alternative return value
-in the case where the key is not present.  This can be seen in the final example below.  In this case, since &#8220;cherries&#8221; is not a key, return 0 (instead of None).</p>
-
-<textarea data-component="activecode" id=chp12_dict10 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
-
-print(inventory.get("apples"))
-print(inventory.get("cherries"))
-
-print(inventory.get("cherries", 0))
-</textarea>
+<span class="go">StopIteration: </span>
+</pre></div>
+</div>
+<p>An exception will be thrown once we reach the end of the iterator.  After the
+iterator has stepped through the sequence once, it is empty and can&#8217;t be used
+again.</p>
+<p>While understanding this gives a deeper insight into how Python works, Python
+takes care of all of the details for us.  When we process an iterable value in a
+list comprehension, Python hides the detail of making the iterator, using
+<code class="docutils literal"><span class="pre">next</span></code> to step through the sequence and stopping when the exception is thrown.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
+<p class="last">It is important to note that there is no guarentee the order of the keys
+will be returned!  Dictionaries are unorder sets.  If order is important
+either sort or use a sequence data structure.</p>
+</div>
+<p>We can use the iterator to iterate through the keys using a
+list comprehension or by converting the view into a list.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">430</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span> <span class="s1">&#39;oranges&#39;</span><span class="p">:</span> <span class="mi">525</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">:</span> <span class="mi">217</span><span class="p">}</span>
 
-<textarea data-component="activecode" id=scratch_11_02 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
+<span class="gp">In [17]: </span><span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">akey</span> <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
+<span class="gp">In [18]: </span><span class="n">keys</span>
+<span class="gh">Out[18]: </span><span class="go">[&#39;bananas&#39;, &#39;oranges&#39;, &#39;pears&#39;, &#39;apples&#39;]</span>
 
-</textarea>
+<span class="gp">In [19]: </span><span class="n">ks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">inventory</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="gp">In [20]: </span><span class="n">ks</span>
+<span class="gh">Out[20]: </span><span class="go">[&#39;bananas&#39;, &#39;oranges&#39;, &#39;pears&#39;, &#39;apples&#39;]</span>
+
+<span class="gp">In [21]: </span><span class="p">[</span><span class="n">akey</span> <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">inventory</span><span class="p">]</span>
+<span class="go">                                                   Out[21]: [&#39;bananas&#39;, &#39;oranges&#39;, &#39;pears&#39;, &#39;apples&#39;]</span>
+</pre></div>
+</div>
+<p>As we saw earlier with strings and lists, dictionary methods use dot notation,
+which specifies the name of the method to the right of the dot and the name of
+the object on which to apply the method immediately to the left of the dot. The
+empty parentheses in the case of <code class="docutils literal"><span class="pre">keys</span></code> indicate that this method takes no
+parameters.   Finally, we note that iterating over the dictionary name iterates
+over the keys.</p>
+<p>The <code class="docutils literal"><span class="pre">values</span></code> and <code class="docutils literal"><span class="pre">items</span></code> methods are similar to <code class="docutils literal"><span class="pre">keys</span></code>. They return  view
+objects which can be turned into lists or iterated over directly.  Note that the
+items are shown as tuples containing the key and the associated value.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">430</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span> <span class="s1">&#39;oranges&#39;</span><span class="p">:</span> <span class="mi">525</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">:</span> <span class="mi">217</span><span class="p">}</span>
+
+<span class="gp">In [23]: </span><span class="nb">list</span><span class="p">(</span><span class="n">inventory</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="gh">Out[23]: </span><span class="go">[312, 525, 217, 430]</span>
+
+<span class="gp">In [24]: </span><span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+</pre></div>
+</div>
+<p>Note that tuples are often useful for getting both the key and the value at the
+same time while you are looping.</p>
+<p>The <code class="docutils literal"><span class="pre">in</span></code> and <code class="docutils literal"><span class="pre">not</span> <span class="pre">in</span></code> operators can test if a key is in the dictionary:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">430</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span> <span class="s1">&#39;oranges&#39;</span><span class="p">:</span> <span class="mi">525</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">:</span> <span class="mi">217</span><span class="p">}</span>
+
+<span class="gp">In [26]: </span><span class="s1">&#39;apples&#39;</span> <span class="ow">in</span> <span class="n">inventory</span>
+<span class="gh">Out[26]: </span><span class="go">True</span>
+
+<span class="gp">In [27]: </span><span class="s1">&#39;cherries&#39;</span> <span class="ow">in</span> <span class="n">inventory</span>
+<span class="go">              Out[27]: False</span>
+
+<span class="gp">In [28]: </span><span class="n">inventory</span><span class="p">[</span><span class="s1">&#39;bananas&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;bananas&#39;</span> <span class="ow">in</span> <span class="n">inventory</span> <span class="s2">&quot;We have no bananas&quot;</span>
+<span class="go">                               File &quot;&lt;ipython-input-28-19d49c47e252&gt;&quot;, line 1</span>
+<span class="go">    inventory[&#39;bananas&#39;] if &#39;bananas&#39; in inventory &quot;We have no bananas&quot;</span>
+<span class="go">                                                                      ^</span>
+<span class="go">SyntaxError: invalid syntax</span>
+</pre></div>
+</div>
+<p>This operator can be very useful since looking up a non-existent key in a
+dictionary causes a runtime error.</p>
+<p>The <code class="docutils literal"><span class="pre">get</span></code> method allows us to access the value associated with a key, similar
+to the <code class="docutils literal"><span class="pre">[</span> <span class="pre">]</span></code> operator.  The important difference is that <code class="docutils literal"><span class="pre">get</span></code> will not
+cause a runtime error if the key is not present.  It will instead return None.
+There exists a variation of <code class="docutils literal"><span class="pre">get</span></code> that allows a second parameter that serves
+as an alternative return value in the case where the key is not present.  This
+can be seen in the final example below.  In this case, since &#8220;cherries&#8221; is not a
+key, return 0 (instead of None).</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">430</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span> <span class="s1">&#39;oranges&#39;</span><span class="p">:</span> <span class="mi">525</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">:</span> <span class="mi">217</span><span class="p">}</span>
+
+<span class="gp">In [30]: </span><span class="n">inventory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;apples&quot;</span><span class="p">)</span>
+<span class="gh">Out[30]: </span><span class="go">430</span>
+
+<span class="gp">In [31]: </span><span class="n">inventory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cherries&quot;</span><span class="p">)</span>
+
+<span class="gp">In [32]: </span><span class="n">inventory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cherries&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gh">Out[32]: </span><span class="go">0</span>
+</pre></div>
 </div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_1">
-            <p>Q-2: What is printed by the following statements?</p>
+            <p>Q-4: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">keylist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mydict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="n">keylist</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -626,7 +701,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_2">
-            <p>Q-3: What is printed by the following statements?</p>
+            <p>Q-5: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">answer</span> <span class="o">=</span> <span class="n">mydict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span> <span class="o">//</span> <span class="n">mydict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
@@ -645,7 +720,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_3">
-            <p>Q-4: What is printed by the following statements?</p>
+            <p>Q-6: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">)</span>
 </pre></div>
@@ -659,7 +734,7 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_4">
-            <p>Q-5: What is printed by the following statements?</p>
+            <p>Q-7: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="mi">23</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">)</span>
 </pre></div>
@@ -673,12 +748,9 @@ print(inventory.get("cherries", 0))
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_5">
-            <p>Q-6: What is printed by the following statements?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
-<span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">:</span>
-   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">akey</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
-      <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">mydict</span><span class="p">[</span><span class="n">akey</span><span class="p">]</span>
+            <p>Q-8: What is printed by the following statements?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">mydict</span><span class="p">[</span><span class="n">akey</span><span class="p">]</span> <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">mydict</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">akey</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -695,24 +767,29 @@ print(inventory.get("cherries", 0))
             </ul>
             </div>
 <div class="section" id="aliasing-and-copying">
-<span id="index-0"></span><h2>6.1.3. Aliasing and Copying<a class="headerlink" href="#aliasing-and-copying" title="Permalink to this headline">¶</a></h2>
-<p>Because dictionaries are mutable, you need to be aware of aliasing (as we saw with lists).  Whenever
-two variables refer to the same dictionary object, changes to one affect the other.
-For example, <code class="docutils literal"><span class="pre">opposites</span></code> is a dictionary that contains pairs
-of opposites.</p>
+<h2>7.2.3. Aliasing and Copying<a class="headerlink" href="#aliasing-and-copying" title="Permalink to this headline">¶</a></h2>
+<p>Because dictionaries are mutable, you need to be aware of aliasing (as we saw
+with lists).  Whenever two variables refer to the same dictionary object,
+changes to one affect the other.  For example, <code class="docutils literal"><span class="pre">opposites</span></code> is a dictionary
+that contains pairs of opposites.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="n">opposites</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;up&#39;</span><span class="p">:</span> <span class="s1">&#39;down&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span> <span class="s1">&#39;wrong&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">:</span> <span class="s1">&#39;false&#39;</span><span class="p">}</span>
 
-<textarea data-component="activecode" id=ch12_dict11 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-opposites = {'up': 'down', 'right': 'wrong', 'true': 'false'}
-alias = opposites
+<span class="gp">In [34]: </span><span class="n">alias</span> <span class="o">=</span> <span class="n">opposites</span>
 
-print(alias is opposites)
+<span class="gp">In [35]: </span><span class="n">alias</span> <span class="ow">is</span> <span class="n">opposites</span>
+<span class="gh">Out[35]: </span><span class="go">True</span>
 
-alias['right'] = 'left'
-print(opposites['right'])
-</textarea>
-<p>As you can see from the <code class="docutils literal"><span class="pre">is</span></code> operator, <code class="docutils literal"><span class="pre">alias</span></code> and <code class="docutils literal"><span class="pre">opposites</span></code> refer to the same object.</p>
-<p>If you want to modify a dictionary and keep a copy of the original, use the dictionary
-<code class="docutils literal"><span class="pre">copy</span></code> method.  Since <em>acopy</em> is a copy of the dictionary, changes to it will not effect the original.</p>
+<span class="gp">In [36]: </span><span class="n">alias</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span>
+
+<span class="gp">In [37]: </span><span class="n">opposites</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span>
+<span class="gh">Out[37]: </span><span class="go">&#39;left&#39;</span>
+</pre></div>
+</div>
+<p>As you can see from the <code class="docutils literal"><span class="pre">is</span></code> operator, <code class="docutils literal"><span class="pre">alias</span></code> and <code class="docutils literal"><span class="pre">opposites</span></code> refer to
+the same object.</p>
+<p>If you want to modify a dictionary and keep a copy of the original, use the
+dictionary <code class="docutils literal"><span class="pre">copy</span></code> method.  Since <em>acopy</em> is a copy of the dictionary, changes
+to it will not effect the original.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">acopy</span> <span class="o">=</span> <span class="n">opposites</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">acopy</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span>    <span class="c1"># does not change opposites</span>
 </pre></div>
@@ -720,7 +797,7 @@ print(opposites['right'])
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_4_1">
-            <p>Q-7: What is printed by the following statements?</p>
+            <p>Q-9: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">yourdict</span> <span class="o">=</span> <span class="n">mydict</span>
 <span class="n">yourdict</span><span class="p">[</span><span class="s2">&quot;elephant&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span>
@@ -738,25 +815,25 @@ print(opposites['right'])
             
 
             </ul>
-            <span class="target" id="index-1"></span></div>
+            </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 6. Associative Data Structures - Dictionaries and Sets' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 7. Associative Data Structures - Dictionaries and Sets' data-toggle="tooltip">
     <a href="toctree.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="toctree.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 6.2. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 7.3. Checking and Comparing Membership with Sets' data-toggle="tooltip" >
     <a href="Sets.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="Sets.html" >Next Section - 6.2. Checking and Comparing Membership with Sets</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="Sets.html" >Next Section - 7.3. Checking and Comparing Membership with Sets</a>
 
 <script type="text/javascript">
 

@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>7.2. What Are Functions? &mdash; Runestone Interactive Overview</title>
+    <title>Functions &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,6 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="7. Functional Programming" href="toctree.html" />
-    <link rel="next" title="7.3. Understanding Name and Variable Scope" href="UnderstandingScope.html" />
-    <link rel="prev" title="7.1. Three Programming Paradigms" href="ThreeProgramingParadgyms.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,14 +260,8 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">7.2. What Are Functions?</a><ul>
-<li><a class="reference internal" href="#lambda-expressions-are-functions">7.2.1. Lambda Expressions are Functions</a></li>
-<li><a class="reference internal" href="#functions">7.2.2. Functions</a></li>
-<li><a class="reference internal" href="#functions-that-return-values">7.2.3. Functions that Return Values</a></li>
-<li><a class="reference internal" href="#program-development">7.2.4. Program Development</a></li>
-<li><a class="reference internal" href="#composition">7.2.5. Composition</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Functions</a></li>
+<li><a class="reference internal" href="#program-development">Program Development</a></li>
 </ul>
 </ul>
 </li>
@@ -278,18 +269,6 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 7.1. Three Programming Paradigms" data-toggle="tooltip">
-    <a href="ThreeProgramingParadgyms.html" >
-      <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
-    </a>
-  </li>
-  
-  <li id="relations-next" title='Next Chapter - 7.3. Understanding Name and Variable Scope' data-toggle="tooltip" >
-    <a href="UnderstandingScope.html" >
-      <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
-    </a>
-  </li>
-  <li class="divider-vertical"></li>
 
 <script type="text/javascript">
   opts = {'placement':'bottom',
@@ -315,38 +294,147 @@
 
 <div class="container" id="main-content">
   
-  <div class="section" id="what-are-functions">
-<h1>7.2. What Are Functions?<a class="headerlink" href="#what-are-functions" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="lambda-expressions-are-functions">
-<h2>7.2.1. Lambda Expressions are Functions<a class="headerlink" href="#lambda-expressions-are-functions" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+  <p>In Python, a <strong>function</strong> is a named sequence of statements that belong
+together.  Their primary purpose is to help us organize programs into chunks
+that match how we think about the solution to the problem.  Thus far, we have
+defined our function using expressions and lambdas, but as functions becomes
+more complicated, we will want to use the function definition statement to make
+the function definition more readable.</p>
+<p>The syntax for a <strong>function definition</strong> statement is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">name</span><span class="p">(</span> <span class="n">parameters</span> <span class="p">):</span>
+    <span class="n">statements</span>
+</pre></div>
 </div>
-<div class="section" id="functions">
-<h2>7.2.2. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<p>When writing functional programs, we focus on functions that return values are
-sometimes called <strong>fruitful functions</strong>.  In many other languages, a chunk that
-doesn&#8217;t return a value is called a <strong>procedure</strong>, but we will stick here with
-the Python way of also calling it a function, or if we want to stress it, a
-<em>non-fruitful</em> function.  Note that non-fruitful functions will almost always be
-side-effecting.  Understanding a program that uses side-effecting functions can
-be difficult, because the nature of the side-effect is not obvious in the
-function call.  Consequently, functional programs involve writing <em>pure</em>
-fruitful functions whenever possible.  A <strong>pure</strong> function is a side-effect free
-fruitful function, making it referentially transparent.</p>
-<p>Fruitful functions still allow the user to provide information (arguments).
-However there is now an additional piece of data that is returned from the
-function.</p>
-<img alt="../_images/blackboxfun.png" src="../_images/blackboxfun.png" />
-<p>This type of diagram is often called a <strong>black-box diagram</strong> because it only
-states the requirements from the perspective of the user.  The user must know
-the name of the function and what arguments need to be passed.  The details of
-how the function works are hidden inside the &#8220;black-box&#8221;.</p>
+<p>In a function definition, the keyword in the header is <code class="docutils literal"><span class="pre">def</span></code>, which is
+followed by the name of the function and some <em>parameters</em> enclosed in
+parentheses. The parameter list may be empty, or it may contain any number of
+parameters separated from one another by commas. In either case, the parentheses
+are required.</p>
+<p>You can make up any names you want for the functions you create, except that you
+can&#8217;t use a name that is a Python keyword, and the names must follow the rules
+for legal identifiers that were given previously.</p>
+<p>One of the primary distinctions between the function definition statement and
+lambda expressions is that functions defined with this statement will almost
+exclusively consist of statements.  There can be any number of statements inside
+the function, but they have to be indented from the <code class="docutils literal"><span class="pre">def</span></code>. In the examples in
+this book, we will use the standard indentation of four spaces. Function
+definitions are and example of <strong>compound statements</strong> we will see, all
+of which have the same pattern:</p>
+<ol class="arabic simple">
+<li>A header line which begins with a keyword and ends with a colon.</li>
+<li>A <strong>body</strong> consisting of one or more Python statements, each
+indented the same amount &#8211; <em>4 spaces is the Python standard</em> &#8211; from
+the header line.</li>
+</ol>
+<p>In functional programs the body of a function will mostly consist of assignment
+statements and possible an <code class="docutils literal"><span class="pre">if-elif-else</span></code> or <code class="docutils literal"><span class="pre">try-except</span></code> block.  As we have
+seen, most iteration can be handled by a list comprehension and we in this
+chapter we will an additional alternative for loops in the form of recursion.
+The most important part of a <strong>fruitful</strong> function is the <code class="docutils literal"><span class="pre">return</span></code> statement
+the halts the function and returns one or more values.</p>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_1">
+            exceptions-4-13: What is a function in Python?
+            <li data-component="answer" data-correct id="test_question5_1_1_opt_a">(A) A named sequence of statements.</li><li data-component="feedback" id="test_question5_1_1_opt_a">Yes, a function is a named sequence of statements.</li>
+            
+            <li data-component="answer"  id="test_question5_1_1_opt_b">(B) Any sequence of statements.</li><li data-component="feedback" id="test_question5_1_1_opt_b">While functions contain sequences of statements, not all sequences of statements are considered functions.</li>
+            
+            <li data-component="answer"  id="test_question5_1_1_opt_c">(C) A mathematical expression that calculates a value.</li><li data-component="feedback" id="test_question5_1_1_opt_c">While some functions do calculate values, the python idea of a function is slightly different from the mathematical idea of a function in that not all functions calculate values.  Consider, for example, the turtle functions in this section.   They made the turtle draw a specific shape, rather than calculating a value.</li>
+            
+            <li data-component="answer"  id="test_question5_1_1_opt_d">(D) A statement of the form x = 5 + 4.</li><li data-component="feedback" id="test_question5_1_1_opt_d">This statement is called an assignment statement.  It assigns the value on the right (9), to the name on the left (x).</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_2">
+            exceptions-4-14: What is one main purpose of a function?
+            <li data-component="answer"  id="test_question5_1_2_opt_a">(A) To improve the speed of execution</li><li data-component="feedback" id="test_question5_1_2_opt_a">Functions have little effect on how fast the program runs.</li>
+            
+            <li data-component="answer" data-correct id="test_question5_1_2_opt_b">(B) To help the programmer organize programs into chunks that match how they think about the solution to the problem.</li><li data-component="feedback" id="test_question5_1_2_opt_b">While functions are not required, they help the programmer better think about the solution by organizing pieces of the solution into logical chunks that can be reused.</li>
+            
+            <li data-component="answer"  id="test_question5_1_2_opt_c">(C) All Python programs must be written using functions</li><li data-component="feedback" id="test_question5_1_2_opt_c">In the first several chapters, you have seen many examples of Python programs written without the use of functions.  While writing and using functions is desirable and essential for good programming style as your programs get longer, it is not required.</li>
+            
+            <li data-component="answer"  id="test_question5_1_2_opt_d">(D) To calculate values.</li><li data-component="feedback" id="test_question5_1_2_opt_d">Not all functions calculate values.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_3">
+            exceptions-4-15: Which of the following is a valid function header (first line of a function definition)?
+            <li data-component="answer" data-correct id="test_question5_1_3_opt_a">(A) def drawCircle(t):</li><li data-component="feedback" id="test_question5_1_3_opt_a">A function may take zero or more parameters.  It does not have to have two.  In this case the size of the circle might be specified in the body of the function.</li>
+            
+            <li data-component="answer"  id="test_question5_1_3_opt_b">(B) def drawCircle:</li><li data-component="feedback" id="test_question5_1_3_opt_b">A function needs to specify its parameters in its header.</li>
+            
+            <li data-component="answer"  id="test_question5_1_3_opt_c">(C) drawCircle(t, sz):</li><li data-component="feedback" id="test_question5_1_3_opt_c">A function definition needs to include the keyword def.</li>
+            
+            <li data-component="answer"  id="test_question5_1_3_opt_d">(D) def drawCircle(t, sz)</li><li data-component="feedback" id="test_question5_1_3_opt_d">A function definition header must end in a colon (:).</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_5">
+            <p>exceptions-4-16: What are the parameters of the following function?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="test_question5_1_5_opt_a">(A) i</li><li data-component="feedback" id="test_question5_1_5_opt_a">i is a variable used inside of the function, but not a parameter, which is passed in to the function.</li>
+            
+            <li data-component="answer"  id="test_question5_1_5_opt_b">(B) t</li><li data-component="feedback" id="test_question5_1_5_opt_b">t is only one of the parameters to this function.</li>
+            
+            <li data-component="answer" data-correct id="test_question5_1_5_opt_c">(C) t, sz</li><li data-component="feedback" id="test_question5_1_5_opt_c">Yes, the function specifies two parameters: t and sz.</li>
+            
+            <li data-component="answer"  id="test_question5_1_5_opt_d">(D) t, sz, i</li><li data-component="feedback" id="test_question5_1_5_opt_d">the parameters include only those variables whose values that the function expects to receive as input.  They are specified in the header of the function.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_6">
+            <p>exceptions-4-17: Considering the function below, which of the following statements correctly invokes, or calls, this function (i.e., causes it to run)?  Assume we already have a turtle named alex.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="test_question5_1_6_opt_a">(A) def drawSquare(t, sz)</li><li data-component="feedback" id="test_question5_1_6_opt_a">No, t and sz are the names of the formal parameters to this function.  When the function is called, it requires actual values to be passed in.</li>
+            
+            <li data-component="answer"  id="test_question5_1_6_opt_b">(B) drawSquare</li><li data-component="feedback" id="test_question5_1_6_opt_b">A function call always requires parentheses after the name of the function.</li>
+            
+            <li data-component="answer"  id="test_question5_1_6_opt_c">(C) drawSquare(10)</li><li data-component="feedback" id="test_question5_1_6_opt_c">This function takes two parameters (arguments)</li>
+            
+            <li data-component="answer"  id="test_question5_1_6_opt_d">(D) drawSquare(alex, 10):</li><li data-component="feedback" id="test_question5_1_6_opt_d">A colon is only required in a function definition.  It will cause an error with a function call.</li>
+            
+            <li data-component="answer" data-correct id="test_question5_1_6_opt_e">(E) drawSquare(alex, 10)</li><li data-component="feedback" id="test_question5_1_6_opt_e">Since alex was already previously defined and 10 is a value, we have passed in two correct values for this function.</li>
+            
+
+            </ul>
+            <div class="section" id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
+<p>When writing functional programs, we focus on functions that return values,
+called <strong>fruitful functions</strong>.  In many other languages, a chunk that doesn&#8217;t
+return a value is called a <strong>procedure</strong>, which we will call <strong>non-fruitful</strong>.
+It is worth noting that non-fruitful functions will almost always be
+side-effecting (what else could they do?).  Understanding a program that uses
+side-effecting functions can be difficult, because the nature of the side-effect
+is not obvious in the function call.  Consequently, functional programs involve
+writing <em>pure</em> fruitful functions whenever possible.  A <strong>pure</strong> function is a
+side-effect free fruitful function, making it referentially transparent.</p>
+<img alt="../_images/blackboxfun1.png" src="../_images/blackboxfun1.png" />
 <p>How do we write our own fruitful function?  Let&#8217;s start by creating a very
 simple mathematical function that we will call <code class="docutils literal"><span class="pre">square</span></code>.  The square function
 will take one number as a parameter and return the result of squaring that
 number.  Here is the black-box diagram with the Python code following.</p>
-<img alt="../_images/squarefun.png" src="../_images/squarefun.png" />
+<img alt="../_images/squarefun1.png" src="../_images/squarefun1.png" />
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="sd">&quot;&quot;&quot; Return the square of the number x&quot;&quot;&quot;</span>
 <span class="gp">   ...: </span>    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 <span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">y</span>
 <span class="gp">   ...: </span>
@@ -364,15 +452,26 @@ result is returned to the caller as the &#8220;fruit&#8221; of calling this func
 Because the return statement can contain any Python expression we could have
 avoided creating the <strong>temporary variable</strong> <code class="docutils literal"><span class="pre">y</span></code> and simply used <code class="docutils literal"><span class="pre">return</span>
 <span class="pre">x*x</span></code>.  On the other hand, using <strong>temporary variables</strong> like <code class="docutils literal"><span class="pre">y</span></code> in the
-program above makes the code easier to read and debug.  These temporary
-variables are referred to as <strong>local variables</strong>.</p>
-<p>Defining a new function does not make the function run. To do that we need a
-<strong>function call</strong>.  This is also known as a <strong>function invocation</strong>. We&#8217;ve
-already seen how to call functions in Python, be they built-in functions like
-<code class="docutils literal"><span class="pre">print</span></code>, <code class="docutils literal"><span class="pre">range</span></code> and <code class="docutils literal"><span class="pre">int</span></code> or functions defined through a <code class="docutils literal"><span class="pre">lambda</span></code>
-expression. When calling Function calls contain the name of the function to be
-executed followed by a list of values, called <em>arguments</em>, which are assigned to
-the parameters in the function definition.</p>
+program above makes the code easier to read and debug.  Temporary
+variables assigned inside the body of a function are <strong>local variables</strong> and
+have a scope that includes the body of the functions.</p>
+<div class="admonition-docstrings admonition">
+<p class="first admonition-title">docstrings</p>
+<p>If the first thing after the function header is a string (some tools insist
+that it must be a triple-quoted string), it is called a <strong>docstring</strong> and
+gets special treatment in Python and in some of the programming tools.</p>
+<p>Another way to retrieve this information is to use the interactive
+interpreter, and enter the expression <code class="docutils literal"><span class="pre">&lt;function_name&gt;.__doc__</span></code>, which
+will retrieve the docstring for the function.  So the string you write as
+documentation at the start of a function is retrievable by python tools <em>at
+runtime</em>.  This is different from comments in your code, which are
+completely eliminated when the program is parsed.</p>
+<p class="last">By convention, Python programmers use docstrings for the key documentation of
+their functions.</p>
+</div>
+<p>As with lambda expressions, defining a new function does not make the function
+run. To do that we need a <strong>function call</strong> using the same syntax as used with
+built-in functions and lambda expressions.</p>
 <p>Notice something important here. The name of the variable we pass as an argument
 &#8212; <code class="docutils literal"><span class="pre">number</span></code> &#8212; has nothing to do with the name of the formal parameter &#8212;
 <code class="docutils literal"><span class="pre">x</span></code>.  It is as if  <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">toSquare</span></code> is executed when <code class="docutils literal"><span class="pre">square</span></code> is called.  It
@@ -388,7 +487,7 @@ control back to the place in the program where the function call was made.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare)</span> </p>
 </div>
 <script type="text/javascript">
-var ch04_clsquare_trace = {"code": "def square(x):\n    y = x * x\n    return y\n\nnumber = 10\nresult = square(number)\nresult", "trace": [{"globals": {}, "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"square": ["REF", 1]}, "ordered_globals": ["square"], "line": 5, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"square": ["REF", 1], "number": 10}, "ordered_globals": ["square", "number"], "line": 6, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"square": ["REF", 1], "number": 10}, "ordered_globals": ["square", "number"], "line": 1, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10}, "is_zombie": false, "ordered_varnames": ["x"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "call", "stdout": ""}, {"globals": {"square": ["REF", 1], "number": 10}, "ordered_globals": ["square", "number"], "line": 2, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10}, "is_zombie": false, "ordered_varnames": ["x"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "step_line", "stdout": ""}, {"globals": {"square": ["REF", 1], "number": 10}, "ordered_globals": ["square", "number"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10, "y": 100}, "is_zombie": false, "ordered_varnames": ["x", "y"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "step_line", "stdout": ""}, {"globals": {"square": ["REF", 1], "number": 10}, "ordered_globals": ["square", "number"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10, "__return__": 100, "y": 100}, "is_zombie": false, "ordered_varnames": ["x", "y", "__return__"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "return", "stdout": ""}, {"globals": {"square": ["REF", 1], "result": 100, "number": 10}, "ordered_globals": ["square", "number", "result"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"square": ["REF", 1], "result": 100, "number": 10}, "ordered_globals": ["square", "number", "result"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "return", "stdout": ""}]};
+var ch04_clsquare_trace = {"trace": [{"heap": {}, "func_name": "<module>", "ordered_globals": [], "globals": {}, "event": "step_line", "line": 1, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "<module>", "ordered_globals": ["square"], "globals": {"square": ["REF", 1]}, "event": "step_line", "line": 5, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "<module>", "ordered_globals": ["square", "number"], "globals": {"square": ["REF", 1], "number": 10}, "event": "step_line", "line": 6, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "square", "ordered_globals": ["square", "number"], "globals": {"square": ["REF", 1], "number": 10}, "event": "call", "line": 1, "stack_to_render": [{"is_zombie": false, "encoded_locals": {"x": 10}, "is_highlighted": true, "ordered_varnames": ["x"], "frame_id": 1, "parent_frame_id_list": [], "is_parent": false, "func_name": "square", "unique_hash": "square_f1"}], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "square", "ordered_globals": ["square", "number"], "globals": {"square": ["REF", 1], "number": 10}, "event": "step_line", "line": 2, "stack_to_render": [{"is_zombie": false, "encoded_locals": {"x": 10}, "is_highlighted": true, "ordered_varnames": ["x"], "frame_id": 1, "parent_frame_id_list": [], "is_parent": false, "func_name": "square", "unique_hash": "square_f1"}], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "square", "ordered_globals": ["square", "number"], "globals": {"square": ["REF", 1], "number": 10}, "event": "step_line", "line": 3, "stack_to_render": [{"is_zombie": false, "encoded_locals": {"x": 10, "y": 100}, "is_highlighted": true, "ordered_varnames": ["x", "y"], "frame_id": 1, "parent_frame_id_list": [], "is_parent": false, "func_name": "square", "unique_hash": "square_f1"}], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "square", "ordered_globals": ["square", "number"], "globals": {"square": ["REF", 1], "number": 10}, "event": "return", "line": 3, "stack_to_render": [{"is_zombie": false, "encoded_locals": {"x": 10, "y": 100, "__return__": 100}, "is_highlighted": true, "ordered_varnames": ["x", "y", "__return__"], "frame_id": 1, "parent_frame_id_list": [], "is_parent": false, "func_name": "square", "unique_hash": "square_f1"}], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "<module>", "ordered_globals": ["square", "number", "result"], "globals": {"square": ["REF", 1], "number": 10, "result": 100}, "event": "step_line", "line": 7, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "<module>", "ordered_globals": ["square", "number", "result"], "globals": {"square": ["REF", 1], "number": 10, "result": 100}, "event": "return", "line": 7, "stack_to_render": [], "stdout": ""}], "code": "def square(x):\n    y = x * x\n    return y\n\nnumber = 10\nresult = square(number)\nresult"};
 var ch04_clsquare_vis;
 
 $(document).ready(function() {
@@ -458,7 +557,7 @@ variables listing.  Then look at what is printed when the function returns.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare_bad)</span> </p>
 </div>
 <script type="text/javascript">
-var ch04_clsquare_bad_trace = {"code": "def square(x):\n    y = x * x\n    print(y)   # Bad! should use return instead!\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)", "trace": [{"globals": {}, "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"square": ["REF", 1]}, "ordered_globals": ["square"], "line": 5, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 6, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 1, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10}, "is_zombie": false, "ordered_varnames": ["x"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "call", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 2, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10}, "is_zombie": false, "ordered_varnames": ["x"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10, "y": 100}, "is_zombie": false, "ordered_varnames": ["x", "y"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10, "__return__": null, "y": 100}, "is_zombie": false, "ordered_varnames": ["x", "y", "__return__"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "return", "stdout": "100\n"}, {"globals": {"toSquare": 10, "squareResult": null, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare", "squareResult"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": "100\n"}, {"globals": {"toSquare": 10, "squareResult": null, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare", "squareResult"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "return", "stdout": "100\nThe result of  10  squared is  None\n"}]};
+var ch04_clsquare_bad_trace = {"trace": [{"heap": {}, "func_name": "<module>", "ordered_globals": [], "globals": {}, "event": "step_line", "line": 1, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "<module>", "ordered_globals": ["square"], "globals": {"square": ["REF", 1]}, "event": "step_line", "line": 5, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "<module>", "ordered_globals": ["square", "toSquare"], "globals": {"square": ["REF", 1], "toSquare": 10}, "event": "step_line", "line": 6, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "square", "ordered_globals": ["square", "toSquare"], "globals": {"square": ["REF", 1], "toSquare": 10}, "event": "call", "line": 1, "stack_to_render": [{"is_zombie": false, "encoded_locals": {"x": 10}, "is_highlighted": true, "ordered_varnames": ["x"], "frame_id": 1, "parent_frame_id_list": [], "is_parent": false, "func_name": "square", "unique_hash": "square_f1"}], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "square", "ordered_globals": ["square", "toSquare"], "globals": {"square": ["REF", 1], "toSquare": 10}, "event": "step_line", "line": 2, "stack_to_render": [{"is_zombie": false, "encoded_locals": {"x": 10}, "is_highlighted": true, "ordered_varnames": ["x"], "frame_id": 1, "parent_frame_id_list": [], "is_parent": false, "func_name": "square", "unique_hash": "square_f1"}], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "square", "ordered_globals": ["square", "toSquare"], "globals": {"square": ["REF", 1], "toSquare": 10}, "event": "step_line", "line": 3, "stack_to_render": [{"is_zombie": false, "encoded_locals": {"x": 10, "y": 100}, "is_highlighted": true, "ordered_varnames": ["x", "y"], "frame_id": 1, "parent_frame_id_list": [], "is_parent": false, "func_name": "square", "unique_hash": "square_f1"}], "stdout": ""}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "square", "ordered_globals": ["square", "toSquare"], "globals": {"square": ["REF", 1], "toSquare": 10}, "event": "return", "line": 3, "stack_to_render": [{"is_zombie": false, "encoded_locals": {"x": 10, "y": 100, "__return__": null}, "is_highlighted": true, "ordered_varnames": ["x", "y", "__return__"], "frame_id": 1, "parent_frame_id_list": [], "is_parent": false, "func_name": "square", "unique_hash": "square_f1"}], "stdout": "100\n"}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "<module>", "ordered_globals": ["square", "toSquare", "squareResult"], "globals": {"square": ["REF", 1], "toSquare": 10, "squareResult": null}, "event": "step_line", "line": 7, "stack_to_render": [], "stdout": "100\n"}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "func_name": "<module>", "ordered_globals": ["square", "toSquare", "squareResult"], "globals": {"square": ["REF", 1], "toSquare": 10, "squareResult": null}, "event": "return", "line": 7, "stack_to_render": [], "stdout": "100\nThe result of  10  squared is  None\n"}], "code": "def square(x):\n    y = x * x\n    print(y)   # Bad! should use return instead!\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)"};
 var ch04_clsquare_bad_vis;
 
 $(document).ready(function() {
@@ -504,12 +603,12 @@ statement, the evaluation of the function will be <code class="docutils literal"
 <code class="docutils literal"><span class="pre">squareResult</span></code> will refer to that value after the assignment statement and
 therefore the result printed in line 7 is incorrect.  Typically, functions will
 return values that can be printed or processed in some other way by the caller.</p>
-<p>Occassionally, we will also need to write non-fruitful functions, which are also
+<p>Occasionally, we will also need to write non-fruitful functions, which are also
 sometimes referred to as <strong>procedures</strong> or <strong>void functions</strong>.  The figure below
 illustrates the black-box diagram of a void function.  These values, often
 called <strong>arguments</strong> or <strong>actual parameters</strong>, are passed to the function by the
 user.</p>
-<img alt="../_images/blackboxproc.png" src="../_images/blackboxproc.png" />
+<img alt="../_images/blackboxproc1.png" src="../_images/blackboxproc1.png" />
 <p>Suppose we&#8217;re working with turtles and a common operation we need is to draw
 squares.  It would make sense if we did not have to duplicate all the steps each
 time we want to make a square.   &#8220;Draw a square&#8221; can be thought of as an
@@ -517,7 +616,7 @@ time we want to make a square.   &#8220;Draw a square&#8221; can be thought of a
 of information for the function to do its work: a turtle to do the drawing and a
 size for the side of the square.  We could represent this using the following
 black-box diagram.</p>
-<img alt="../_images/turtleproc.png" src="../_images/turtleproc.png" />
+<img alt="../_images/turtleproc1.png" src="../_images/turtleproc1.png" />
 <p>Here is a program containing a function to capture this idea.  Give it a try.</p>
 
 <textarea data-component="activecode" id=ch04_1 data-lang="python"    data-timelimit=25000   data-audio=''     >
@@ -552,7 +651,7 @@ functions to confirm that they are correct and once tested, we will know that
 they are not the source of any bugs in our program.</li>
 <li>Write small functions and provide a quality name for each.  Each function
 should perform one and only one abstract task.</li>
-<li>Refactor longer functions by idenifying portions of the code that perform
+<li>Refactor longer functions by identifying portions of the code that perform
 some task and putting this code in another function.</li>
 </ol>
 <ol class="arabic simple" start="2">
@@ -560,156 +659,11 @@ some task and putting this code in another function.</li>
 in a small number of functions.  Side-effecting functions are much hard to
 test, which is one of the reasons that we will keep them to a minimum.</li>
 </ol>
-<p>We will dedicate more time to each of these topics in the upcoming chapter on
-functions.</p>
-<p>Most functions require arguments, values that control how the function does its
-job. For example, if you want to find the absolute value of a number, you have
-to indicate what the number is. Python has a built-in function for computing
-the absolute value:</p>
-
-<textarea data-component="activecode" id=ch04_4 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-abs(5)
-abs(-5)
-</textarea>
-<p>In this example, the arguments to the <code class="docutils literal"><span class="pre">abs</span></code> function are 5 and -5.</p>
-<p>Some functions take more than one argument. For example the math module contains
-a function called <code class="docutils literal"><span class="pre">pow</span></code> which takes two arguments, the base and the exponent.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="kn">import</span> <span class="nn">math</span>
-
-<span class="gp">In [6]: </span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gh">Out[6]: </span><span class="go">8.0</span>
-
-<span class="gp">In [7]: </span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="go">            Out[7]: 2401.0</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
-
-<textarea data-component="activecode" id=scratch_05_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-
-
-</textarea>
-</div>
+<p>We will dedicate more time to each of these topics in the upcoming sections.</p>
 <p><strong>Check your understanding</strong></p>
 
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_1">
-            exceptions-4-6: What is a function in Python?
-            <li data-component="answer" data-correct id="test_question5_1_1_opt_a">(A) A named sequence of statements.</li><li data-component="feedback" id="test_question5_1_1_opt_a">Yes, a function is a named sequence of statements.</li>
-            
-            <li data-component="answer"  id="test_question5_1_1_opt_b">(B) Any sequence of statements.</li><li data-component="feedback" id="test_question5_1_1_opt_b">While functions contain sequences of statements, not all sequences of statements are considered functions.</li>
-            
-            <li data-component="answer"  id="test_question5_1_1_opt_c">(C) A mathematical expression that calculates a value.</li><li data-component="feedback" id="test_question5_1_1_opt_c">While some functions do calculate values, the python idea of a function is slightly different from the mathematical idea of a function in that not all functions calculate values.  Consider, for example, the turtle functions in this section.   They made the turtle draw a specific shape, rather than calculating a value.</li>
-            
-            <li data-component="answer"  id="test_question5_1_1_opt_d">(D) A statement of the form x = 5 + 4.</li><li data-component="feedback" id="test_question5_1_1_opt_d">This statement is called an assignment statement.  It assigns the value on the right (9), to the name on the left (x).</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_2">
-            exceptions-4-7: What is one main purpose of a function?
-            <li data-component="answer"  id="test_question5_1_2_opt_a">(A) To improve the speed of execution</li><li data-component="feedback" id="test_question5_1_2_opt_a">Functions have little effect on how fast the program runs.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_2_opt_b">(B) To help the programmer organize programs into chunks that match how they think about the solution to the problem.</li><li data-component="feedback" id="test_question5_1_2_opt_b">While functions are not required, they help the programmer better think about the solution by organizing pieces of the solution into logical chunks that can be reused.</li>
-            
-            <li data-component="answer"  id="test_question5_1_2_opt_c">(C) All Python programs must be written using functions</li><li data-component="feedback" id="test_question5_1_2_opt_c">In the first several chapters, you have seen many examples of Python programs written without the use of functions.  While writing and using functions is desirable and essential for good programming style as your programs get longer, it is not required.</li>
-            
-            <li data-component="answer"  id="test_question5_1_2_opt_d">(D) To calculate values.</li><li data-component="feedback" id="test_question5_1_2_opt_d">Not all functions calculate values.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_3">
-            exceptions-4-8: Which of the following is a valid function header (first line of a function definition)?
-            <li data-component="answer" data-correct id="test_question5_1_3_opt_a">(A) def drawCircle(t):</li><li data-component="feedback" id="test_question5_1_3_opt_a">A function may take zero or more parameters.  It does not have to have two.  In this case the size of the circle might be specified in the body of the function.</li>
-            
-            <li data-component="answer"  id="test_question5_1_3_opt_b">(B) def drawCircle:</li><li data-component="feedback" id="test_question5_1_3_opt_b">A function needs to specify its parameters in its header.</li>
-            
-            <li data-component="answer"  id="test_question5_1_3_opt_c">(C) drawCircle(t, sz):</li><li data-component="feedback" id="test_question5_1_3_opt_c">A function definition needs to include the keyword def.</li>
-            
-            <li data-component="answer"  id="test_question5_1_3_opt_d">(D) def drawCircle(t, sz)</li><li data-component="feedback" id="test_question5_1_3_opt_d">A function definition header must end in a colon (:).</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_4">
-            <p>exceptions-4-9: What is the name of the following function?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question5_1_4_opt_a">(A) def drawSquare(t, sz)</li><li data-component="feedback" id="test_question5_1_4_opt_a">This line is the complete function header (except for the semi-colon) which includes the name as well as several other components.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_4_opt_b">(B) drawSquare</li><li data-component="feedback" id="test_question5_1_4_opt_b">Yes, the name of the function is given after the keyword def and before the list of parameters.</li>
-            
-            <li data-component="answer"  id="test_question5_1_4_opt_c">(C) drawSquare(t, sz)</li><li data-component="feedback" id="test_question5_1_4_opt_c">This includes the function name and its parameters</li>
-            
-            <li data-component="answer"  id="test_question5_1_4_opt_d">(D) Make turtle t draw a square with side sz.</li><li data-component="feedback" id="test_question5_1_4_opt_d">This is a comment stating what the function does.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_5">
-            <p>exceptions-4-10: What are the parameters of the following function?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question5_1_5_opt_a">(A) i</li><li data-component="feedback" id="test_question5_1_5_opt_a">i is a variable used inside of the function, but not a parameter, which is passed in to the function.</li>
-            
-            <li data-component="answer"  id="test_question5_1_5_opt_b">(B) t</li><li data-component="feedback" id="test_question5_1_5_opt_b">t is only one of the parameters to this function.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_5_opt_c">(C) t, sz</li><li data-component="feedback" id="test_question5_1_5_opt_c">Yes, the function specifies two parameters: t and sz.</li>
-            
-            <li data-component="answer"  id="test_question5_1_5_opt_d">(D) t, sz, i</li><li data-component="feedback" id="test_question5_1_5_opt_d">the parameters include only those variables whose values that the function expects to receive as input.  They are specified in the header of the function.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_6">
-            <p>exceptions-4-11: Considering the function below, which of the following statements correctly invokes, or calls, this function (i.e., causes it to run)?  Assume we already have a turtle named alex.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question5_1_6_opt_a">(A) def drawSquare(t, sz)</li><li data-component="feedback" id="test_question5_1_6_opt_a">No, t and sz are the names of the formal parameters to this function.  When the function is called, it requires actual values to be passed in.</li>
-            
-            <li data-component="answer"  id="test_question5_1_6_opt_b">(B) drawSquare</li><li data-component="feedback" id="test_question5_1_6_opt_b">A function call always requires parentheses after the name of the function.</li>
-            
-            <li data-component="answer"  id="test_question5_1_6_opt_c">(C) drawSquare(10)</li><li data-component="feedback" id="test_question5_1_6_opt_c">This function takes two parameters (arguments)</li>
-            
-            <li data-component="answer"  id="test_question5_1_6_opt_d">(D) drawSquare(alex, 10):</li><li data-component="feedback" id="test_question5_1_6_opt_d">A colon is only required in a function definition.  It will cause an error with a function call.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_6_opt_e">(E) drawSquare(alex, 10)</li><li data-component="feedback" id="test_question5_1_6_opt_e">Since alex was already previously defined and 10 is a value, we have passed in two correct values for this function.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_7">
-            exceptions-4-12: True or false: A function can be called several times by placing a function call in the body of a loop.
-            <li data-component="answer" data-correct id="test_question5_1_7_opt_a">(A) True</li><li data-component="feedback" id="test_question5_1_7_opt_a">Yes, you can call a function multiple times by putting the call in a loop.</li>
-            
-            <li data-component="answer"  id="test_question5_1_7_opt_b">(B) False</li><li data-component="feedback" id="test_question5_1_7_opt_b">One of the purposes of a function is to allow you to call it more than once.   Placing it in a loop allows it to executed multiple times as the body of the loop runs multiple times.</li>
-            
-
-            </ul>
-            <p id="index-0"><strong>Check your understanding</strong></p>
-
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_2_1">
-            <p>exceptions-4-13: What is wrong with the following function definition:</p>
+            <p>exceptions-4-18: What is wrong with the following function definition:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addEm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;the answer is&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span>
@@ -728,532 +682,7 @@ a function called <code class="docutils literal"><span class="pre">pow</span></c
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_2_2">
-            <p>exceptions-4-14: What will the following function return?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addEm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer" data-correct id="test_question5_2_2_opt_a">(A) Nothing (no value)</li><li data-component="feedback" id="test_question5_2_2_opt_a">We have accidentally used print where we mean return.  Therefore, the function will return the value None by default.  This is a VERY COMMON mistake so watch out!  This mistake is also particularly difficult to find because when you run the function the output looks the same.  It is not until you try to assign its value to a variable that you can notice a difference.</li>
-            
-            <li data-component="answer"  id="test_question5_2_2_opt_b">(B) The value of x + y + z</li><li data-component="feedback" id="test_question5_2_2_opt_b">Careful!  This is a very common mistake.  Here we have printed the value x+y+z but we have not returned it.  To return a value we MUST use the return keyword.</li>
-            
-            <li data-component="answer"  id="test_question5_2_2_opt_c">(C) The string 'x + y + z'</li><li data-component="feedback" id="test_question5_2_2_opt_c">x+y+z calculates a number (assuming x+y+z are numbers) which represents the sum of the values x, y and z.</li>
-            
-
-            </ul>
-            <div id="function_intro" class="video_popup" >
-<video controls preload="none"  poster="../_static/function_intro.png">
-    <source src="http://media.interactivepython.org/thinkcsVideos/FunctionsIntro.mov" type="video/mp4"></source>
-    <source src="http://media.interactivepython.org/thinkcsVideos/FunctionsIntro.webm" type="video/webm"></source>
-    No supported video types
-</video>
-</div>
-<script>
-   jQuery(function($) {
-      var rb = new RunestoneBase();
-      $('#function_intro_thumb').click(function(e) {
-         $('#function_intro').show();
-         $('#function_intro_thumb').hide();
-         rb.logBookEvent({'event':'video','act':'play','div_id': 'function_intro'});
-         // Log the run event
-      });
-      $('#function_intro video').one("click", function(){
-        this.play();
-      });
-      $('#function_intro video').one("play", function(){
-        rb.logBookEvent({'event':'video','act':'play','div_id': 'function_intro'});
-      });
-   });
-</script>
-<p>In Python, a <strong>function</strong> is a named sequence of statements
-that belong together.  Their primary purpose is to help us
-organize programs into chunks that match how we think about
-the solution to the problem.</p>
-<p>The syntax for a <strong>function definition</strong> is:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">name</span><span class="p">(</span> <span class="n">parameters</span> <span class="p">):</span>
-    <span class="n">statements</span>
-</pre></div>
-</div>
-<p>You can make up any names you want for the functions you create, except that
-you can&#8217;t use a name that is a Python keyword, and the names must follow the rules
-for legal identifiers that were given previously. The parameters specify
-what information, if any, you have to provide in order to use the new function.  Another way to say this is that the parameters specify what the function needs to do its work.</p>
-<p>There can be any number of statements inside the function, but they have to be
-indented from the <code class="docutils literal"><span class="pre">def</span></code>. In the examples in this book, we will use the
-standard indentation of four spaces. Function definitions are the second of
-several <strong>compound statements</strong> we will see, all of which have the same
-pattern:</p>
-<ol class="arabic simple">
-<li>A header line which begins with a keyword and ends with a colon.</li>
-<li>A <strong>body</strong> consisting of one or more Python statements, each
-indented the same amount &#8211; <em>4 spaces is the Python standard</em> &#8211; from
-the header line.</li>
-</ol>
-<p>We&#8217;ve already seen the <code class="docutils literal"><span class="pre">for</span></code> loop which follows this pattern.</p>
-<p>In a function definition, the keyword in the header is <code class="docutils literal"><span class="pre">def</span></code>, which is
-followed by the name of the function and some <em>parameters</em> enclosed in
-parentheses. The parameter list may be empty, or it may contain any number of
-parameters separated from one another by commas. In either case, the parentheses are required.</p>
-<p>We need to say a bit more about the parameters.  In the definition, the parameter list is more specifically known
-as the <strong>formal parameters</strong>.  This list of names describes those things that the function will
-need to receive from the user of the function.  When you use a function, you provide values to the formal parameters.</p>
-<p>The figure below shows this relationship.  A function needs certain information to do its work.  These values, often called <strong>arguments</strong> or <strong>actual parameters</strong>, are passed to the function by the user.</p>
-<img alt="../_images/blackboxproc.png" src="../_images/blackboxproc.png" />
-<p>This type of diagram is often called a <strong>black-box diagram</strong> because it only states the requirements from the perspective of the user.  The user must know the name of the function and what arguments need to be passed.  The details of how the function works are hidden inside the &#8220;black-box&#8221;.</p>
-<p>Suppose we&#8217;re working with turtles and a common operation we need is to draw
-squares.  It would make sense if we did not have to duplicate all the steps each time we want to make a square.   &#8220;Draw a square&#8221; can be thought of as an <em>abstraction</em> of a number of smaller steps.  We will need to provide two pieces of information for the function to do its work: a turtle to do the drawing and a size for the side of the square.  We could represent this using the following black-box diagram.</p>
-<img alt="../_images/turtleproc.png" src="../_images/turtleproc.png" />
-<p>Here is a program containing a function to capture this idea.  Give it a try.</p>
-
-<textarea data-component="activecode" id=ch04_1 data-lang="python"    data-timelimit=25000   data-audio=''     >
-import turtle
-
-def drawSquare(t, sz):
-    """Make turtle t draw a square of with side sz."""
-
-    for i in range(4):
-        t.forward(sz)
-        t.left(90)
-
-
-wn = turtle.Screen()              # Set up the window and its attributes
-wn.bgcolor("lightgreen")
-
-alex = turtle.Turtle()            # create alex
-drawSquare(alex, 50)             # Call the function to draw the square passing the actual turtle and the actual side size
-
-wn.exitonclick()
-</textarea>
-<p>This function is named <code class="docutils literal"><span class="pre">drawSquare</span></code>.  It has two parameters &#8212; one to tell
-the function which turtle to move around and the other to tell it the size
-of the square we want drawn.  In the function definition they are called <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">sz</span></code> respectively.   Make sure you know where the body of the function
-ends &#8212; it depends on the indentation and the blank lines don&#8217;t count for
-this purpose!</p>
-<div class="admonition-docstrings admonition">
-<p class="first admonition-title">docstrings</p>
-<p>If the first thing after the function header is a string (some tools insist that
-it must be a triple-quoted string), it is called a <strong>docstring</strong>
-and gets special treatment in Python and in some of the programming tools.</p>
-<p>Another way to retrieve this information is to use the interactive
-interpreter, and enter the expression <code class="docutils literal"><span class="pre">&lt;function_name&gt;.__doc__</span></code>, which will retrieve the
-docstring for the function.  So the string you write as documentation at the start of a function is
-retrievable by python tools <em>at runtime</em>.  This is different from comments in your code,
-which are completely eliminated when the program is parsed.</p>
-<p class="last">By convention, Python programmers use docstrings for the key documentation of
-their functions.</p>
-</div>
-<p>Defining a new function does not make the function run. To do that we need a
-<strong>function call</strong>.  This is also known as a <strong>function invocation</strong>. We&#8217;ve already seen how to call some built-in functions like
-<code class="docutils literal"><span class="pre">print</span></code>, <code class="docutils literal"><span class="pre">range</span></code> and <code class="docutils literal"><span class="pre">int</span></code>. Function calls contain the name of the function to be
-executed followed by a list of values, called <em>arguments</em>, which are assigned
-to the parameters in the function definition.  So in the second to the last line of
-the program, we call the function, and pass <code class="docutils literal"><span class="pre">alex</span></code> as the turtle to be manipulated,
-and 50 as the size of the square we want.</p>
-<p>Once we&#8217;ve defined a function, we can call it as often as we like and its
-statements will be executed each time we call it.  In this case, we could use it to get
-one of our turtles to draw a square and then we can move the turtle and have it draw a different square in a
-different location.  Note that we lift the tail so that when <code class="docutils literal"><span class="pre">alex</span></code> moves there is no trace.  We put the tail
-back down before drawing the next square.  Make sure you can identify both invocations of the <code class="docutils literal"><span class="pre">drawSquare</span></code> function.</p>
-
-<textarea data-component="activecode" id=ch04_1a data-lang="python"    data-timelimit=25000   data-audio=''     >
-import turtle
-
-def drawSquare(t, sz):
-    """Make turtle t draw a square of with side sz."""
-
-    for i in range(4):
-        t.forward(sz)
-        t.left(90)
-
-
-wn = turtle.Screen()          # Set up the window and its attributes
-wn.bgcolor("lightgreen")
-
-alex = turtle.Turtle()        # create alex
-drawSquare(alex, 50)          # Call the function to draw the square
-
-alex.penup()
-alex.goto(100,100)
-alex.pendown()
-
-drawSquare(alex,75)           # Draw another square
-
-wn.exitonclick()
-</textarea>
-<p>In the next example, we&#8217;ve changed the <code class="docutils literal"><span class="pre">drawSquare</span></code>
-function a little and we get <code class="docutils literal"><span class="pre">tess</span></code> to draw 15 squares with some variations.  Once the function has
-been defined, we can call it as many times as we like with whatever actual parameters we like.</p>
-
-<textarea data-component="activecode" id=ch04_2 data-lang="python"    data-timelimit=25000   data-audio=''     >
-import turtle
-
-def drawMulticolorSquare(t, sz):
-    """Make turtle t draw a multi-colour square of sz."""
-    for i in ['red','purple','hotpink','blue']:
-        t.color(i)
-        t.forward(sz)
-        t.left(90)
-
-wn = turtle.Screen()             # Set up the window and its attributes
-wn.bgcolor("lightgreen")
-
-tess = turtle.Turtle()           # create tess and set some attributes
-tess.pensize(3)
-
-size = 20                        # size of the smallest square
-for i in range(15):
-    drawMulticolorSquare(tess, size)
-    size = size + 10             # increase the size for next time
-    tess.forward(10)             # move tess along a little
-    tess.right(18)               # and give her some extra turn
-
-wn.exitonclick()
-</textarea>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.</p>
-
-<textarea data-component="activecode" id=scratch_05_01 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-
-
-</textarea>
-</div>
-<p><strong>Check your understanding</strong></p>
-
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_1">
-            exceptions-4-15: What is a function in Python?
-            <li data-component="answer" data-correct id="test_question5_1_1_opt_a">(A) A named sequence of statements.</li><li data-component="feedback" id="test_question5_1_1_opt_a">Yes, a function is a named sequence of statements.</li>
-            
-            <li data-component="answer"  id="test_question5_1_1_opt_b">(B) Any sequence of statements.</li><li data-component="feedback" id="test_question5_1_1_opt_b">While functions contain sequences of statements, not all sequences of statements are considered functions.</li>
-            
-            <li data-component="answer"  id="test_question5_1_1_opt_c">(C) A mathematical expression that calculates a value.</li><li data-component="feedback" id="test_question5_1_1_opt_c">While some functions do calculate values, the python idea of a function is slightly different from the mathematical idea of a function in that not all functions calculate values.  Consider, for example, the turtle functions in this section.   They made the turtle draw a specific shape, rather than calculating a value.</li>
-            
-            <li data-component="answer"  id="test_question5_1_1_opt_d">(D) A statement of the form x = 5 + 4.</li><li data-component="feedback" id="test_question5_1_1_opt_d">This statement is called an assignment statement.  It assigns the value on the right (9), to the name on the left (x).</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_2">
-            exceptions-4-16: What is one main purpose of a function?
-            <li data-component="answer"  id="test_question5_1_2_opt_a">(A) To improve the speed of execution</li><li data-component="feedback" id="test_question5_1_2_opt_a">Functions have little effect on how fast the program runs.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_2_opt_b">(B) To help the programmer organize programs into chunks that match how they think about the solution to the problem.</li><li data-component="feedback" id="test_question5_1_2_opt_b">While functions are not required, they help the programmer better think about the solution by organizing pieces of the solution into logical chunks that can be reused.</li>
-            
-            <li data-component="answer"  id="test_question5_1_2_opt_c">(C) All Python programs must be written using functions</li><li data-component="feedback" id="test_question5_1_2_opt_c">In the first several chapters, you have seen many examples of Python programs written without the use of functions.  While writing and using functions is desirable and essential for good programming style as your programs get longer, it is not required.</li>
-            
-            <li data-component="answer"  id="test_question5_1_2_opt_d">(D) To calculate values.</li><li data-component="feedback" id="test_question5_1_2_opt_d">Not all functions calculate values.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_3">
-            exceptions-4-17: Which of the following is a valid function header (first line of a function definition)?
-            <li data-component="answer" data-correct id="test_question5_1_3_opt_a">(A) def drawCircle(t):</li><li data-component="feedback" id="test_question5_1_3_opt_a">A function may take zero or more parameters.  It does not have to have two.  In this case the size of the circle might be specified in the body of the function.</li>
-            
-            <li data-component="answer"  id="test_question5_1_3_opt_b">(B) def drawCircle:</li><li data-component="feedback" id="test_question5_1_3_opt_b">A function needs to specify its parameters in its header.</li>
-            
-            <li data-component="answer"  id="test_question5_1_3_opt_c">(C) drawCircle(t, sz):</li><li data-component="feedback" id="test_question5_1_3_opt_c">A function definition needs to include the keyword def.</li>
-            
-            <li data-component="answer"  id="test_question5_1_3_opt_d">(D) def drawCircle(t, sz)</li><li data-component="feedback" id="test_question5_1_3_opt_d">A function definition header must end in a colon (:).</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_4">
-            <p>exceptions-4-18: What is the name of the following function?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question5_1_4_opt_a">(A) def drawSquare(t, sz)</li><li data-component="feedback" id="test_question5_1_4_opt_a">This line is the complete function header (except for the semi-colon) which includes the name as well as several other components.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_4_opt_b">(B) drawSquare</li><li data-component="feedback" id="test_question5_1_4_opt_b">Yes, the name of the function is given after the keyword def and before the list of parameters.</li>
-            
-            <li data-component="answer"  id="test_question5_1_4_opt_c">(C) drawSquare(t, sz)</li><li data-component="feedback" id="test_question5_1_4_opt_c">This includes the function name and its parameters</li>
-            
-            <li data-component="answer"  id="test_question5_1_4_opt_d">(D) Make turtle t draw a square with side sz.</li><li data-component="feedback" id="test_question5_1_4_opt_d">This is a comment stating what the function does.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_5">
-            <p>exceptions-4-19: What are the parameters of the following function?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question5_1_5_opt_a">(A) i</li><li data-component="feedback" id="test_question5_1_5_opt_a">i is a variable used inside of the function, but not a parameter, which is passed in to the function.</li>
-            
-            <li data-component="answer"  id="test_question5_1_5_opt_b">(B) t</li><li data-component="feedback" id="test_question5_1_5_opt_b">t is only one of the parameters to this function.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_5_opt_c">(C) t, sz</li><li data-component="feedback" id="test_question5_1_5_opt_c">Yes, the function specifies two parameters: t and sz.</li>
-            
-            <li data-component="answer"  id="test_question5_1_5_opt_d">(D) t, sz, i</li><li data-component="feedback" id="test_question5_1_5_opt_d">the parameters include only those variables whose values that the function expects to receive as input.  They are specified in the header of the function.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_6">
-            <p>exceptions-4-20: Considering the function below, which of the following statements correctly invokes, or calls, this function (i.e., causes it to run)?  Assume we already have a turtle named alex.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawSquare</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make turtle t draw a square of with side sz.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question5_1_6_opt_a">(A) def drawSquare(t, sz)</li><li data-component="feedback" id="test_question5_1_6_opt_a">No, t and sz are the names of the formal parameters to this function.  When the function is called, it requires actual values to be passed in.</li>
-            
-            <li data-component="answer"  id="test_question5_1_6_opt_b">(B) drawSquare</li><li data-component="feedback" id="test_question5_1_6_opt_b">A function call always requires parentheses after the name of the function.</li>
-            
-            <li data-component="answer"  id="test_question5_1_6_opt_c">(C) drawSquare(10)</li><li data-component="feedback" id="test_question5_1_6_opt_c">This function takes two parameters (arguments)</li>
-            
-            <li data-component="answer"  id="test_question5_1_6_opt_d">(D) drawSquare(alex, 10):</li><li data-component="feedback" id="test_question5_1_6_opt_d">A colon is only required in a function definition.  It will cause an error with a function call.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_1_6_opt_e">(E) drawSquare(alex, 10)</li><li data-component="feedback" id="test_question5_1_6_opt_e">Since alex was already previously defined and 10 is a value, we have passed in two correct values for this function.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_1_7">
-            exceptions-4-21: True or false: A function can be called several times by placing a function call in the body of a loop.
-            <li data-component="answer" data-correct id="test_question5_1_7_opt_a">(A) True</li><li data-component="feedback" id="test_question5_1_7_opt_a">Yes, you can call a function multiple times by putting the call in a loop.</li>
-            
-            <li data-component="answer"  id="test_question5_1_7_opt_b">(B) False</li><li data-component="feedback" id="test_question5_1_7_opt_b">One of the purposes of a function is to allow you to call it more than once.   Placing it in a loop allows it to executed multiple times as the body of the loop runs multiple times.</li>
-            
-
-            </ul>
-            </div>
-<div class="section" id="functions-that-return-values">
-<h2>7.2.3. Functions that Return Values<a class="headerlink" href="#functions-that-return-values" title="Permalink to this headline">¶</a></h2>
-<p>Most functions require arguments, values that control how the function does its
-job. For example, if you want to find the absolute value of a number, you have
-to indicate what the number is. Python has a built-in function for computing
-the absolute value:</p>
-
-<textarea data-component="activecode" id=ch04_4 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(abs(5))
-
-print(abs(-5))
-</textarea>
-<p>In this example, the arguments to the <code class="docutils literal"><span class="pre">abs</span></code> function are 5 and -5.</p>
-<p>Some functions take more than one argument. For example the math module contains a function
-called
-<code class="docutils literal"><span class="pre">pow</span></code> which takes two arguments, the base and the exponent.</p>
-
-<textarea data-component="activecode" id=ch04_5 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-import math
-print(math.pow(2, 3))
-
-print(math.pow(7, 4))
-</textarea>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Of course, we have already seen that raising a base to an exponent can be done with the ** operator.</p>
-</div>
-<p>Another built-in function that takes more than one argument is <code class="docutils literal"><span class="pre">max</span></code>.</p>
-
-<textarea data-component="activecode" id=ch04_6 data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-print(max(7, 11))
-print(max(4, 1, 17, 2, 12))
-print(max(3 * 11, 5 ** 3, 512 - 9, 1024 ** 0))
-</textarea>
-<p><code class="docutils literal"><span class="pre">max</span></code> can be sent any number of arguments, separated by commas, and will
-return the maximum value sent. The arguments can be either simple values or
-expressions. In the last example, 503 is returned, since it is larger than 33,
-125, and 1.  Note that <code class="docutils literal"><span class="pre">max</span></code> also works on lists of values.</p>
-<p>Furthermore, functions like <code class="docutils literal"><span class="pre">range</span></code>, <code class="docutils literal"><span class="pre">int</span></code>, <code class="docutils literal"><span class="pre">abs</span></code> all return values that
-can be used to build more complex expressions.</p>
-<p>So an important difference between these functions and one like <code class="docutils literal"><span class="pre">drawSquare</span></code> is that
-<code class="docutils literal"><span class="pre">drawSquare</span></code> was not executed because we wanted it to compute a value &#8212; on the contrary,
-we wrote <code class="docutils literal"><span class="pre">drawSquare</span></code> because we wanted it to execute a sequence of steps that caused
-the turtle to draw a specific shape.</p>
-<p>Functions that return values are sometimes called <strong>fruitful functions</strong>.
-In many other languages, a chunk that doesn&#8217;t return a value is called a <strong>procedure</strong>,
-but we will stick here with the Python way of also calling it a function, or if we want
-to stress it, a <em>non-fruitful</em> function.</p>
-<p>Fruitful functions still allow the user to provide information (arguments).  However there is now an additional
-piece of data that is returned from the function.</p>
-<img alt="../_images/blackboxfun.png" src="../_images/blackboxfun.png" />
-<p>How do we write our own fruitful function?  Let&#8217;s start by creating a very simple
-mathematical function that we will call <code class="docutils literal"><span class="pre">square</span></code>.  The square function will take one number
-as a parameter and return the result of squaring that number.  Here is the
-black-box diagram with the Python code following.</p>
-<img alt="../_images/squarefun.png" src="../_images/squarefun.png" />
-
-<textarea data-component="activecode" id=ch04_square data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-def square(x):
-    y = x * x
-    return y
-
-toSquare = 10
-result = square(toSquare)
-print("The result of ", toSquare, " squared is ", result)
-</textarea>
-<p>The <strong>return</strong> statement is followed by an expression which is evaluated.  Its
-result is returned to the caller as the &#8220;fruit&#8221; of calling this function.
-Because the return statement can contain any Python expression we could have
-avoided creating the <strong>temporary variable</strong> <code class="docutils literal"><span class="pre">y</span></code> and simply used
-<code class="docutils literal"><span class="pre">return</span> <span class="pre">x*x</span></code>.
-Try modifying the square function above to see that this works just the same.
-On the other hand, using <strong>temporary variables</strong> like <code class="docutils literal"><span class="pre">y</span></code> in the program above makes
-debugging
-easier.  These temporary variables are referred to as <strong>local variables</strong>.</p>
-<p>Notice something important here. The name of the variable we pass as an
-argument &#8212; <code class="docutils literal"><span class="pre">toSquare</span></code> &#8212; has nothing to do with the name of the formal parameter
-&#8212; <code class="docutils literal"><span class="pre">x</span></code>.  It is as if  <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">toSquare</span></code> is executed when <code class="docutils literal"><span class="pre">square</span></code> is called.
-It doesn&#8217;t matter what the value was named in
-the caller. In <code class="docutils literal"><span class="pre">square</span></code>, it&#8217;s name is <code class="docutils literal"><span class="pre">x</span></code>.  You can see this very clearly in
-codelens, where the global variables and the local variables for the square
-function are in separate boxes.</p>
-<p>As you step through the example in codelens notice that the <strong>return</strong> statement not only causes the
-function to return a value, but it also returns the flow of control back to the place in the program
-where the function call was made.</p>
-
-<div class="alert alert-warning cd_section">
-<div id="ch04_clsquare"></div>
-<p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare)</span> </p>
-</div>
-<script type="text/javascript">
-var ch04_clsquare_trace = {"code": "def square(x):\n    y = x * x\n    return y\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)", "trace": [{"globals": {}, "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"square": ["REF", 1]}, "ordered_globals": ["square"], "line": 5, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 6, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 1, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10}, "is_zombie": false, "ordered_varnames": ["x"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "call", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 2, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10}, "is_zombie": false, "ordered_varnames": ["x"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10, "y": 100}, "is_zombie": false, "ordered_varnames": ["x", "y"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10, "__return__": 100, "y": 100}, "is_zombie": false, "ordered_varnames": ["x", "y", "__return__"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "return", "stdout": ""}, {"globals": {"toSquare": 10, "squareResult": 100, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare", "squareResult"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "squareResult": 100, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare", "squareResult"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "return", "stdout": "The result of  10  squared is  100\n"}]};
-var ch04_clsquare_vis;
-
-$(document).ready(function() {
-    try {
-        ch04_clsquare_vis = new ExecutionVisualizer('ch04_clsquare',ch04_clsquare_trace,
-                                    {embeddedMode: true,
-                                    verticalStack: false,
-                                    heightChangeCallback: redrawAllVisualizerArrows,
-                                    codeDivWidth: 500,
-                                    lang : 'py3'
-                                    });
-        attachLoggers(ch04_clsquare_vis,'ch04_clsquare');
-        styleButtons('ch04_clsquare');
-        allVisualizers.push(ch04_clsquare_vis);
-    } catch (e) {
-        console.log("Failed to Initialize CodeLens component ch04_clsquare_vis" );
-        console.log(e.toString());
-    }
-
-});
-
-$(document).ready(function() {
-    $("#ch04_clsquare_tracecheck").click(function() {
-        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'ch04_clsquare'});
-    });
-});
-
-if (allVisualizers === undefined) {
-   var allVisualizers = [];
-}
-
-
-$(window).resize(function() {
-    if (ch04_clsquare_vis) {
-        ch04_clsquare_vis.redrawConnectors();
-    }
-});
-</script>
-<p>Another important thing to notice as you step through this codelens
-demonstration is the movement of the red and green arrows.  Codelens uses these arrows to show you where it is currently executing.
-Recall that the red arrow always points to the next line of code that will be executed.  The light green arrow points to the line
-that was just executed in the last step.</p>
-<p>When you first start running this codelens demonstration you will notice that there is only a red arrow and it points to
-line 1.  This is because line 1 is the next line to be executed and since it is the first line, there is no previously executed line
-of code.</p>
-<p>When you click on the forward button, notice that the red arrow moves to line 5, skipping lines 2 and 3 of the function (and
-the light green arrow has now appeared on line 1).  Why is this?
-The answer is that function definition is not the same as function execution.  Lines 2
-and 3 will not be executed until the function is called on line 6.  Line 1 defines the function and the name <code class="docutils literal"><span class="pre">square</span></code> is added to the
-global variables, but that is all the <code class="docutils literal"><span class="pre">def</span></code> does at that point.  The body of the function will be executed later.  Continue to click
-the forward button to see how the flow of control moves from the call, back up to the body of the function, and then finally back to line 7, after the function has returned its value and the value has been assigned to <code class="docutils literal"><span class="pre">squareResult</span></code>.</p>
-<p>Finally, there is one more aspect of function return values that should be noted.  All Python functions return the value <code class="docutils literal"><span class="pre">None</span></code> unless there is an explicit return statement with
-a value other than <code class="docutils literal"><span class="pre">None.</span></code>
-Consider the following common mistake made by beginning Python
-programmers.  As you step through this example, pay very close attention to the return
-value in the local variables listing.  Then look at what is printed when the
-function returns.</p>
-
-<div class="alert alert-warning cd_section">
-<div id="ch04_clsquare_bad"></div>
-<p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare_bad)</span> </p>
-</div>
-<script type="text/javascript">
-var ch04_clsquare_bad_trace = {"code": "def square(x):\n    y = x * x\n    print(y)   # Bad! should use return instead!\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)", "trace": [{"globals": {}, "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"square": ["REF", 1]}, "ordered_globals": ["square"], "line": 5, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 6, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 1, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10}, "is_zombie": false, "ordered_varnames": ["x"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "call", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 2, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10}, "is_zombie": false, "ordered_varnames": ["x"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10, "y": 100}, "is_zombie": false, "ordered_varnames": ["x", "y"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "step_line", "stdout": ""}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [{"unique_hash": "square_f1", "encoded_locals": {"x": 10, "__return__": null, "y": 100}, "is_zombie": false, "ordered_varnames": ["x", "y", "__return__"], "parent_frame_id_list": [], "is_parent": false, "is_highlighted": true, "func_name": "square", "frame_id": 1}], "event": "return", "stdout": "100\n"}, {"globals": {"toSquare": 10, "squareResult": null, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare", "squareResult"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "step_line", "stdout": "100\n"}, {"globals": {"toSquare": 10, "squareResult": null, "square": ["REF", 1]}, "ordered_globals": ["square", "toSquare", "squareResult"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "stack_to_render": [], "event": "return", "stdout": "100\nThe result of  10  squared is  None\n"}]};
-var ch04_clsquare_bad_vis;
-
-$(document).ready(function() {
-    try {
-        ch04_clsquare_bad_vis = new ExecutionVisualizer('ch04_clsquare_bad',ch04_clsquare_bad_trace,
-                                    {embeddedMode: true,
-                                    verticalStack: false,
-                                    heightChangeCallback: redrawAllVisualizerArrows,
-                                    codeDivWidth: 500,
-                                    lang : 'py3'
-                                    });
-        attachLoggers(ch04_clsquare_bad_vis,'ch04_clsquare_bad');
-        styleButtons('ch04_clsquare_bad');
-        allVisualizers.push(ch04_clsquare_bad_vis);
-    } catch (e) {
-        console.log("Failed to Initialize CodeLens component ch04_clsquare_bad_vis" );
-        console.log(e.toString());
-    }
-
-});
-
-$(document).ready(function() {
-    $("#ch04_clsquare_bad_tracecheck").click(function() {
-        logBookEvent({'event':'codelens', 'act': 'check', 'div_id':'ch04_clsquare_bad'});
-    });
-});
-
-if (allVisualizers === undefined) {
-   var allVisualizers = [];
-}
-
-
-$(window).resize(function() {
-    if (ch04_clsquare_bad_vis) {
-        ch04_clsquare_bad_vis.redrawConnectors();
-    }
-});
-</script>
-<p>The problem with this function is that even though it prints the value of the square, that value will not be returned to the place
-where the call was done.  Since line 6 uses the return value as the right hand side of an assignment statement, the evaluation of the
-function will be <code class="docutils literal"><span class="pre">None</span></code>.  In this case, <code class="docutils literal"><span class="pre">squareResult</span></code> will refer to that value after the assignment statement and therefore the result printed in line 7 is incorrect.  Typically, functions will return values that can be printed or processed in some other way by the caller.</p>
-<p id="index-1"><strong>Check your understanding</strong></p>
-
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_2_1">
-            <p>exceptions-4-22: What is wrong with the following function definition:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addEm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;the answer is&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span>
-</pre></div>
-</div>
-
-            <li data-component="answer"  id="test_question5_2_1_opt_a">(A) You should never use a print statement in a function definition.</li><li data-component="feedback" id="test_question5_2_1_opt_a">Although you should not mistake print for return, you may include print statements inside your functions.</li>
-            
-            <li data-component="answer" data-correct id="test_question5_2_1_opt_b">(B) You should not have any statements in a function after the return statement.  Once the function gets to the return statement it will immediately stop executing the function.</li><li data-component="feedback" id="test_question5_2_1_opt_b">This is a very common mistake so be sure to watch out for it when you write your code!</li>
-            
-            <li data-component="answer"  id="test_question5_2_1_opt_c">(C) You must calculate the value of x+y+z before you return it.</li><li data-component="feedback" id="test_question5_2_1_opt_c">Python will automatically calculate the value x+y+z and then return it in the statement as it is written</li>
-            
-            <li data-component="answer"  id="test_question5_2_1_opt_d">(D) A function cannot return a number.</li><li data-component="feedback" id="test_question5_2_1_opt_d">Functions can return any legal data, including (but not limited to) numbers, strings, turtles, etc.</li>
-            
-
-            </ul>
-            
-            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question5_2_2">
-            <p>exceptions-4-23: What will the following function return?</p>
+            <p>exceptions-4-19: What will the following function return?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addEm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span>
 </pre></div>
@@ -1269,7 +698,7 @@ function will be <code class="docutils literal"><span class="pre">None</span></c
             </ul>
             </div>
 <div class="section" id="program-development">
-<h2>7.2.4. Program Development<a class="headerlink" href="#program-development" title="Permalink to this headline">¶</a></h2>
+<h1>Program Development<a class="headerlink" href="#program-development" title="Permalink to this headline">¶</a></h1>
 <p>At this point, you should be able to look at complete functions and tell what
 they do. Also, if you have been doing the exercises, you have written some
 small functions. As you write larger functions, you might start to have more
@@ -1281,7 +710,7 @@ at a time.</p>
 <p>As an example, suppose you want to find the distance between two points, given
 by the coordinates (x<sub>1</sub>, y<sub>1</sub>) and
 (x<sub>2</sub>, y<sub>2</sub>).  By the Pythagorean theorem, the distance is:</p>
-<img alt="Distance formula" src="../_images/distance_formula.png" />
+<img alt="Distance formula" src="../_images/distance_formula1.png" />
 <p>The first step is to consider what a <code class="docutils literal"><span class="pre">distance</span></code> function should look like in
 Python. In other words, what are the inputs (parameters) and what is the output
 (return value)?</p>
@@ -1361,74 +790,10 @@ into compound expressions,
 but only do this if it does not make the program more difficult to read.</li>
 </ol>
 </div>
-<div class="section" id="composition">
-<span id="index-2"></span><h2>7.2.5. Composition<a class="headerlink" href="#composition" title="Permalink to this headline">¶</a></h2>
-<p>As we have already seen, you can call one function from within another.
-This ability to build functions by using other functions is called <strong>composition</strong>.</p>
-<p>As an example, we&#8217;ll write a function that takes two points, the center of the
-circle and a point on the perimeter, and computes the area of the circle.</p>
-<p>Assume that the center point is stored in the variables <code class="docutils literal"><span class="pre">xc</span></code> and <code class="docutils literal"><span class="pre">yc</span></code>, and
-the perimeter point is in <code class="docutils literal"><span class="pre">xp</span></code> and <code class="docutils literal"><span class="pre">yp</span></code>. The first step is to find the
-radius of the circle, which is the distance between the two points.
-Fortunately, we&#8217;ve just written a function, <code class="docutils literal"><span class="pre">distance</span></code>, that does just that,
-so now all we have to do is use it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">radius</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The second step is to find the area of a circle with that radius and return it.
-Again we will use one of our earlier functions:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">area</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">result</span>
-</pre></div>
-</div>
-<p>Wrapping that up in a function, we get:</p>
-
-<textarea data-component="activecode" id=ch06_newarea data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-def distance(x1, y1, x2, y2):
-        dx = x2 - x1
-        dy = y2 - y1
-        dsquared = dx**2 + dy**2
-        result = dsquared**0.5
-        return result
-
-def area(radius):
-    b = 3.14159 * radius**2
-    return b
-
-def area2(xc, yc, xp, yp):
-    radius = distance(xc, yc, xp, yp)
-    result = area(radius)
-    return result
-
-print(area2(0,0,1,1))
-</textarea>
-<p>We called this function <code class="docutils literal"><span class="pre">area2</span></code> to distinguish it from the <code class="docutils literal"><span class="pre">area</span></code> function
-defined earlier. There can only be one function with a given name within a
-module.</p>
-<p>Note that we could have written the composition without storing the intermediate results.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">area2</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">area</span><span class="p">(</span><span class="n">distance</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">))</span>
-</pre></div>
-</div>
-<span class="target" id="index-3"></span></div>
-</div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 7.1. Three Programming Paradigms' data-toggle="tooltip">
-    <a href="ThreeProgramingParadgyms.html" >
-      <i class='prevNav glyphicon glyphicon-chevron-left'></i>
-    </a>
-  </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="ThreeProgramingParadgyms.html" ></a>
-  
-  <li id="relations-next" class="navLink" title='Next Section - 7.3. Understanding Name and Variable Scope' data-toggle="tooltip" >
-    <a href="UnderstandingScope.html" >
-      <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
-    </a>
-  </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="UnderstandingScope.html" >Next Section - 7.3. Understanding Name and Variable Scope</a>
 
 <script type="text/javascript">
 

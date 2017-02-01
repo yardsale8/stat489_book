@@ -1,15 +1,37 @@
+..  Copyright (C)  Brad Miller, David Ranum, Jeffrey Elkner, Peter Wentworth, Allen B. Downey, Chris
+    Meyers, and Dario Mitchell.  Permission is granted to copy, distribute
+    and/or modify this document under the terms of the GNU Free Documentation
+    License, Version 1.3 or any later version published by the Free Software
+    Foundation; with Invariant Sections being Forward, Prefaces, and
+    Contributor List, no Front-Cover Texts, and no Back-Cover Texts.  A copy of
+    the license is included in the section entitled "GNU Free Documentation
+    License".
+
 Reading and Writing Files
 =========================
 
+So far, the data we have used in this book have all been either coded right into
+the program, or have been entered by the user.  In real life data reside in
+files.  For example the images we worked with in the image processing unit
+ultimately live in files on your hard drive.  Web pages, and word processing
+documents, and music are other examples of data that live in files.  In this
+short chapter we will introduce the Python concepts necessary to use data from
+files in our programs.
 
 Working with Data Files
 -----------------------
 
-So far, the data we have used in this book have all been either coded right into the program, or have been entered by the user.  In real life data reside in files.  For example the images we worked with in the image processing unit ultimately live in files on your hard drive.  Web pages, and word processing documents, and music are other examples of data that live in files.  In this short chapter we will introduce the Python concepts necessary to use data from files in our programs.
+For our purposes, we will assume that our data files are text files--that is,
+files filled with characters. The Python programs that you write are stored as
+text files.  We can create these files in any of a number of ways. For example,
+we could use a text editor to type in and save the data.  We could also download
+the data from a website and then save it in a file. Regardless of how the file
+is created, Python will allow us to manipulate the contents.
 
-For our purposes, we will assume that our data files are text files--that is, files filled with characters. The Python programs that you write are stored as text files.  We can create these files in any of a number of ways. For example, we could use a text editor to type in and save the data.  We could also download the data from a website and then save it in a file. Regardless of how the file is created, Python will allow us to manipulate the contents.
-
-In Python, we must **open** files before we can use them and **close** them when we are done with them. As you might expect, once a file is opened it becomes a Python object just like all other data. :ref:`Table 1<filemethods1a>` shows the functions and methods that can be used to open and close files.
+In Python, we must **open** files before we can use them and **close** them when
+we are done with them. As you might expect, once a file is opened it becomes a
+Python object just like all other data. :ref:`Table 1<filemethods1a>` shows the
+functions and methods that can be used to open and close files.
 
 .. _filemethods1a:
 
@@ -23,19 +45,17 @@ In Python, we must **open** files before we can use them and **close** them when
 
 
 
-
-
 Finding a File on your Disk
 ---------------------------
 
 Opening a file requires that you, as a programmer, and Python agree about the
-location of the file on your disk.  The way that files are located on disk is
-by their **path**  You can think of the filename as the short name for a file,
-and the path as the full name.  For example on a Mac if you save the file
+location of the file on your disk.  The way that files are located on disk is by
+their **path**  You can think of the filename as the short name for a file, and
+the path as the full name.  For example on a Mac if you save the file
 ``hello.txt`` in your home directory the path to that file is
-``/Users/yourname/hello.txt``  On a Windows machine the path looks a bit different
-but the same principles are in use.  For example on windows the path might be
-``C:\Users\yourname\My Documents\hello.txt``
+``/Users/yourname/hello.txt``  On a Windows machine the path looks a bit
+different but the same principles are in use.  For example on windows the path
+might be ``C:\Users\yourname\My Documents\hello.txt``
 
 .. sidebar:: The History of Path Separators
 
@@ -53,26 +73,26 @@ but the same principles are in use.  For example on windows the path might be
    character to separate folder names in a path, and even on Windows
    system the file path will work just fine.
 
-You can access files in sub-folders, also called directories, under your home directory
-by adding a slash and the name of the folder.  For example, if you had a file
-called ``hello.py`` in a folder called ``CS150`` that is inside a folder called
-``PyCharmProjects`` under your home directory, then the full name for the file
-``hello.py`` is ``/Users/yourname/PyCharmProjects/CS150/hello.py``.
-This is called an *absolute file path*. An *absolute file path* typically
-only works on a specific computer. Think about it for a second. What other
-computer in the world is going to have an *absolute file path* that starts with
+You can access files in sub-folders, also called directories, under your home
+directory by adding a slash and the name of the folder.  For example, if you had
+a file called ``hello.py`` in a folder called ``CS150`` that is inside a folder
+called ``PyCharmProjects`` under your home directory, then the full name for the
+file ``hello.py`` is ``/Users/yourname/PyCharmProjects/CS150/hello.py``.  This
+is called an *absolute file path*. An *absolute file path* typically only works
+on a specific computer. Think about it for a second. What other computer in the
+world is going to have an *absolute file path* that starts with
 ``/Users/yourname``?
 
-If a file is not in the same folder as your python program, you need to tell
-the computer how to reach it. A *relative file path* starts from the folder
-that contains your python program and follows a computer's file hierarchy. A
-file hierarchy contains folders which contains files and other sub-folders.
-Specifying a sub-folder is easy -- you simply specify the sub-folder's name.
-To specify a *parent* folder you use the special ``..`` notation because every file
-and folder has one unique parent. You can use the ``..``
-notation multiple times in a file path to move multiple levels up a file
-hierarchy. Here is an example file hierarchy that contains multiple folders,
-files, and sub-folders. Folders in the diagram are displayed in **bold** type.
+If a file is not in the same folder as your python program, you need to tell the
+computer how to reach it. A *relative file path* starts from the folder that
+contains your python program and follows a computer's file hierarchy. A file
+hierarchy contains folders which contains files and other sub-folders.
+Specifying a sub-folder is easy -- you simply specify the sub-folder's name.  To
+specify a *parent* folder you use the special ``..`` notation because every file
+and folder has one unique parent. You can use the ``..`` notation multiple times
+in a file path to move multiple levels up a file hierarchy. Here is an example
+file hierarchy that contains multiple folders, files, and sub-folders. Folders
+in the diagram are displayed in **bold** type.
 
 .. image:: Figures/ExampleFileHierarchy.png
   :align: center
@@ -88,8 +108,8 @@ could access each of the data files using the following *relative file paths*:
 Here's the important rule to remember: If your file and your Python program are
 in the same directory you can simply use the filename like this:
 ``open('myfile.txt', 'r')``. If your file and your Python program are in
-different directories then you must use a *relative file path* to the file
-like this: ``open('../myData/data3.txt', 'r')``.
+different directories then you must use a *relative file path* to the file like
+this: ``open('../myData/data3.txt', 'r')``.
 
 Glossary
 --------
@@ -119,6 +139,7 @@ would be possible to consider entering this data by hand each time it is used,
 you can imagine that it would be time-consuming and error-prone to do this. In
 addition, it is likely that there could be data from more quarterbacks and
 other years. The format of the data file is as follows
+
 ::
 
     First Name, Last Name, Position, Team, Completions, Attempts, Yards, TDs, Ints, Comp%, Rating
@@ -175,103 +196,109 @@ use ``fileref`` will result in an error.
             >>>fileref.close()
             >>>
 
+The process of opening and closing a file should be accomplished using the
+``with`` statement, as shown below.
 
+.. ipython:: python
 
+    with open('qbdata.txt') as f:
+        lines = [line for line in f]
+    lines[:5]
+
+.. note:: 
+
+    Using the ``with`` statement when working with files in Python is considered
+    a best-practice, as it guarentees that files are properly opened and closed
+    at the right time.
 
 Writing Text Files
 ------------------
 
-One of the most commonly performed data processing tasks is to read data from a file, manipulate it in some way, and then write the resulting data out to a new data file to be used for other purposes later.  To accomplish this, the ``open`` function discussed above can also be used to create a new file prepared for writing.  Note in :ref:`Table 1<filemethods1a>` above that the only difference between opening a file for writing and  opening a file for reading is the use of the ``'w'`` flag instead of the ``'r'`` flag as the second parameter.  When we open a file for writing, a new, empty file with that name is created and made ready to accept our data. As before, the function returns a reference to the new file object.
+One of the most commonly performed data processing tasks is to read data from a
+file, manipulate it in some way, and then write the resulting data out to a new
+data file to be used for other purposes later.  To accomplish this, the ``open``
+function discussed above can also be used to create a new file prepared for
+writing.  Note in :ref:`Table 1<filemethods1a>` above that the only difference
+between opening a file for writing and  opening a file for reading is the use of
+the ``'w'`` flag instead of the ``'r'`` flag as the second parameter.  When we
+open a file for writing, a new, empty file with that name is created and made
+ready to accept our data. As before, the function returns a reference to the new
+file object.
 
-:ref:`Table 2 <filemethods2a>` above shows one additional file method that we have not used thus far.  The ``write`` method allows us to add data to a text file.  Recall that text files contain sequences of characters.  We usually think of these character sequences as being the lines of the file where each line ends with the newline ``\n`` character.  Be very careful to notice that the ``write`` method takes one parameter, a string.  When invoked, the characters of the string will be added to the end of the file.  This means that it is the programmers job to include the newline characters as part of the string if desired.
+:ref:`Table 2 <filemethods2a>` above shows one additional file method that we
+have not used thus far.  The ``write`` method allows us to add data to a text
+file.  Recall that text files contain sequences of characters.  We usually think
+of these character sequences as being the lines of the file where each line ends
+with the newline ``\n`` character.  Be very careful to notice that the ``write``
+method takes one parameter, a string.  When invoked, the characters of the
+string will be added to the end of the file.  This means that it is the
+programmers job to include the newline characters as part of the string if
+desired.
 
-As an example, consider the ``qbdata.txt`` file once again.  Assume that we have been asked to provide a file consisting of only the names of the
-quarterbacks.  In addition, the names should be in the order last name followed by first name with the names separated by a comma.  This
-is a very common type of request, usually due to the fact that someone has a program that requires its data input format to be different from what is available.
+As an example, consider the ``qbdata.txt`` file once again.  Assume that we have
+been asked to provide a file consisting of only the names of the quarterbacks.
+In addition, the names should be in the order last name followed by first name
+with the names separated by a comma.  This is a very common type of request,
+usually due to the fact that someone has a program that requires its data input
+format to be different from what is available.
 
-To construct this file, we will approach the problem using a similar algorithm as above.  After opening the file, we will iterate through the
-lines, break each line into its parts, choose the parts that we need, and then output them.  Eventually, the output will be written to a file.
+To construct this file, we will approach the problem using a similar algorithm
+as above.  We start by reading the lines into a list called ``lines``.  Then the
+lines are split into rows using whitespace.  
 
-The program below solves part of the problem.  Notice that it reads the data and creates a string consisting of last name followed by a comma followed by the first name.  In this example, we simply print the lines as they are created.
+.. ipython:: python
 
-.. sourcecode:: python
+    with open("qbdata.txt", "r") as infile:
+         lines = [line for line in infile]
+    split_line = lambda line: line.split()
+    rows = [split_line(line) for line in lines]
+    rows[:2]
 
-    infile = open("qbdata.txt", "r")
-    aline = infile.readline()
-    while aline:
-        items = aline.split()
-        dataline = items[1] + ',' + items[0]
-        print(dataline)
-        aline = infile.readline()
+These lines need to be transformed into rows that contain the lastname and first
+names, in that order and separated by commas.  This is accomplished with two
+comprehensions, first transforming the rows (list of strings) into rows (list of
+strings) and then joining the rows (list of strings) into a string using the
+``join`` method with a ``,`` as the "glue."
 
-    infile.close()
+.. ipython:: python
 
-When we run this program, we see the lines of output on the screen.  Once we are satisfied that it is creating the appropriate output, the next step is to add the necessary pieces to produce an output file and write the data lines to it.  To start, we need to open a new output file by adding another call to the ``open`` function, ``outfile = open("qbnames.txt",'w')``, using the ``'w'`` flag.  We can choose any file name we like.  If the file does not exist, it will be created.  However, if the file does exist, it will be reinitialized as empty and you will lose any previous contents.  
+    names = [(row[1], row[0]) for row in rows]
+    comma_separate = lambda row: ",".join(row)
+    new_lines = [comma_separate(row) for row in names]
+    new_lines[:5]
 
-Once the file has been created, we just need to call the ``write`` method passing the string that we wish to add to the file.  In this case, the string is already being printed so we will just change the ``print`` into a call to the ``write`` method.  However, there is one additional part of the data line that we need to include.  The newline character needs to be concatenated  to the end of the line.  The entire line now becomes ``outfile.write(dataline + '\n')``.  We also need to close the file when we are done.
+When we run this program, we see the lines of output on the screen.  Once we are
+satisfied that it is creating the appropriate output, the next step is to add
+the necessary pieces to produce an output file and write the data lines to it.
+To start, we need to open a new output file by adding another ``with``
+statement, where ``outfile`` will be the alias for ``open("qbnames.csv",'w')``,
+using the ``'w'`` flag.  We can choose any file name we like.  If the file does
+not exist, it will be created.  However, if the file does exist, it will be
+reinitialized as empty and you will lose any previous contents.  
 
-The complete program is shown below.
+Once the file has been created, we just need to call the ``print`` function
+passing the file object in as a parameter.  By default, the ``print`` function
+will append a ``\n`` to each line.  See ``help(print)`` for more information
+about the optional ``end`` and ``sep`` arguments.
 
-.. sourcecode:: python
+.. ipython:: python
 
-    infile = open("qbdata.txt", "r")
-    outfile = open("qbnames.txt", "w")
+    with open('qbnames.csv', 'w') as outfile:
+         for line in new_lines:
+              print(line, file = outfile)
 
-    aline = infile.readline()
-    while aline:
-        items = aline.split()
-        dataline = items[1] + ',' + items[0]
-        outfile.write(dataline + '\n')
-        aline = infile.readline()
-
-    infile.close()
-    outfile.close()
     
-    
-The contents of the ``qbnames.txt`` file are as follows.
+The contents of the ``qbnames.csv`` file can be shown using the IPython ``%cat``
+magic.
 
-.. raw:: html
+.. ipython:: python
 
-    <pre id="">
-    McCoy,Colt
-    Freeman,Josh
-    Vick,Michael
-    Schaub,Matt
-    Rivers,Philip
-    Hasselbeck,Matt
-    Clausen,Jimmy
-    Flacco,Joe
-    Orton,Kyle
-    Campbell,Jason
-    Manning,Peyton
-    Brees,Drew
-    Ryan,Matt
-    Cassel,Matt
-    Sanchez,Mark
-    Favre,Brett
-    Garrard,David
-    Manning,Eli
-    Palmer,Carson
-    Smith,Alex
-    Henne,Chad
-    Romo,Tony
-    Cutler,Jay
-    Kitna,Jon
-    Brady,Tom
-    Roethlisberger,Ben
-    Collins,Kerry
-    Anderson,Derek
-    Fitzpatrick,Ryan
-    McNabb,Donovan
-    Kolb,Kevin
-    Rodgers,Aaron
-    Bradford,Sam
-    Hill,Shaun
-    </pre>
-    
+    %cat qbnames.csv
 
+.. note::  
 
-
+    IPython magic such as ``pwd``, ``ls``, and ``cat`` make working iteratively
+    with the file system a breeze.
 
 Alternative File Reading Methods
 --------------------------------
@@ -319,15 +346,12 @@ Again, recall the contents of the qbdata.txt file.
 
 
 
-In addition to the ``for`` loop, Python provides three methods to read data
-from the input file. The ``readline`` method reads one line from the file and
-returns it as a string. The string returned by ``readline`` will contain the
-newline character at the end. This method returns the empty string when it
-reaches the end of the file. The ``readlines`` method returns the contents of
-the entire file as a list of strings, where each item in the list represents
-one line of the file. It is also possible to read the entire file into a
-single string with ``read``. :ref:`Table 2 <filemethods2a>` summarizes these methods
-and the following session shows them in action.
+In addition to using a list comprehension to read in the lines, we can simplify
+this process using ``readline``.  The ``readlines`` method returns the
+contents of the entire file as a list of strings, where each item in the list
+represents one line of the file. It is also possible to read the entire file
+into a single string with ``read``. :ref:`Table 2 <filemethods2a>` summarizes
+these methods and the following session shows them in action.
 
 Note that we need to reopen the file before each read so that we start from
 the beginning. Each file has a marker that denotes the current read position
@@ -338,35 +362,12 @@ in the file. In the case of ``read`` or ``readlines`` the marker is moved to
 the end of the file.
 
 
-::
+.. ipython:: python
 
-    >>> infile = open("qbdata.txt", "r")
-    >>> aline = infile.readline()
-    >>> aline
-    'Colt McCoy QB, CLE\t135\t222\t1576\t6\t9\t60.8%\t74.5\n'
-    >>>
-    >>> infile = open("qbdata.txt", "r")
-    >>> linelist = infile.readlines()
-    >>> print(len(linelist))
-    34
-    >>> print(linelist[0:4])
-    ['Colt McCoy QB CLE\t135\t222\t1576\t6\t9\t60.8%\t74.5\n',
-     'Josh Freeman QB TB\t291\t474\t3451\t25\t6\t61.4%\t95.9\n',
-     'Michael Vick QB PHI\t233\t372\t3018\t21\t6\t62.6%\t100.2\n',
-     'Matt Schaub QB HOU\t365\t574\t4370\t24\t12\t63.6%\t92.0\n']
-    >>>
-    >>> infile = open("qbdata.txt", "r")
-    >>> filestring = infile.read()
-    >>> print(len(filestring))
-    1708
-    >>> print(filestring[:256])
-    Colt McCoy QB CLE	135	222	1576	6	9	60.8%	74.5
-    Josh Freeman QB TB	291	474	3451	25	6	61.4%	95.9
-    Michael Vick QB PHI	233	372	3018	21	6	62.6%	100.2
-    Matt Schaub QB HOU	365	574	4370	24	12	63.6%	92.0
-    Philip Rivers QB SD	357	541	4710	30	13	66.0%	101.8
-    Matt Ha
-    >>>
+    with  open("qbdata.txt", "r") as infile:
+        linelist = infile.readlines()
+    len(linelist)
+    linelist[0:4]
 
 .. _filemethods2a:
 
@@ -394,33 +395,86 @@ the end of the file.
                                                       returned.
 ======================== =========================== =====================================
 
-Now let's look at another method of reading our file using a ``while`` loop.  This is important because many other programming languages do not support the ``for`` loop style for reading files but they do support the pattern we'll show you here.
+Importing csv files
+===================
 
-.. activecode:: files_while
-    :nocodelens:
+The ``csv`` standard module comes with a ``reader`` function that saves us the
+work of splitting each line into a list of values.  The ``reader`` takes a file
+object as an argument, along with a number of optional arguments like
+``delimiter``.  See `the Python documentation
+<https://docs.python.org/2/library/csv.html#csv-fmt-params>`_ for more
+information.
 
-    infile = open("qbdata.txt", "r")
-    line = infile.readline()
-    while line:
-        values = line.split()
-        print('QB ', values[0], values[1], 'had a rating of ', values[10] )
-        line = infile.readline()
+Below, we import and use the ``csv.reader`` to read in ``qbdata.txt``, using
+``delimiter=' '`` for this space separated file.
 
-    infile.close()
+.. ipython:: python
 
-The important thing to notice is that on line 2 we have the statement ``line =
-infile.readline()``.  We call this initial read the **priming read**.  It is
-very important because the while condition needs to have a value for the
-``line`` variable.  The ``readline`` method will return the empty string if
-there is no more data in the file.  The condition ``while line:`` means `while
-the content of line is not the empty string`.  Remember that a blank line in the
-file actually has a single character, the ``\n`` character (newline).  So, the
-only way that a line of data from the file can be empty is if you are reading at
-the end of the file.
+    from csv import reader
+    with open("qbdata.txt") as infile:
+         infile_reader = reader(infile, delimiter=' ')
+         table = [row for row in infile_reader]
+    table[:2]
 
-Finally, notice that the last line of the body of the ``while`` loop performs
-another ``readline``.  This statement will reassign the variable ``line`` to the
-next line of the file.  It represents the `change of state` that is necessary
-for the iteration to function correctly.  Without it, there would be an infinite
-loop processing the same line of data over and over.
+As you can see, space delimited files can be a problem, as the ``csv.reader``
+split at each individual space.  This is due to the fact that a space separated
+file is not a proper csv file.  In this case, reading the lines using the string
+``split`` methods is preferrable.  A better way to split data with whitespace is
+to use a tab, which is represented as the special charater ``\t``.
 
+Let's create a tab separated version of qbdata, titled ``qbdata.csv``.
+
+.. ipython:: python
+
+    with open('qbdata.txt') as infile:
+         lines = infile.readlines()
+    split_lines = [row.split() for row in lines]
+    tab_sep_lines = ['\t'.join(row) for row in split_lines]
+    with open('qbdata.csv', 'w') as outfile:
+        for line in tab_sep_lines:
+              print(line, file=outfile)
+    %cat qbdata.csv
+
+Now we read the tab separated file using the ``csv.reader``, which result in a
+much cleaner representation of the data.
+
+.. ipython:: python
+
+    from csv import reader
+    with open("qbdata.csv") as infile:
+         infile_reader = reader(infile, delimiter='\t')
+         table = [row for row in infile_reader]
+    table[:2]
+
+The ``qbnames.csv`` can also be read in, and in this case, we can skip the
+``delimiter`` parameter since the default is a ``,``.
+
+.. ipython:: python
+
+    with open("qbnames.csv") as infile:
+         infile_reader = reader(infile)
+         table = [row for row in infile_reader]
+    table[:5]
+
+Reading and Writing Large Files
+===============================
+
+There is a major advantage to using Python (e.g. versus R) to process large data
+files: **Python can process a file line-by-line without the whole file being
+read into memory.**   R, on the other hand, reads the whole file into memory,
+making processing large files tricky.
+
+A basic framework for processing a large files is to read the file, line by
+line, and write out the transformed data at the same time.
+
+.. sourcecode:: python
+
+     with open('large-infile.txt') as infile:
+          with open('outfile.txt') as outfile:
+               for old_line in infile:
+                    new_line = process_line(old_line)
+                    print(new_line, file=outfile)
+
+Using thie approach, Python will make sure that only a small portion of the file
+will be in memory at any given time.  You will practice this type of processing
+as part of **Lab 2**.

@@ -541,36 +541,47 @@ another.</p>
 <span class="go">                                                                                                      Out[14]: &#39;*             banana bread*&#39;</span>
 </pre></div>
 </div>
+<p>We can use <code class="docutils literal"><span class="pre">startswith</span></code> to ask questions about the beginning of the string.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">food</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="gh">Out[15]: </span><span class="go">True</span>
+
+<span class="gp">In [16]: </span><span class="n">food</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Banana&quot;</span><span class="p">)</span>
+<span class="go">              Out[16]: False</span>
+
+<span class="gp">In [17]: </span><span class="n">food</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;bana&quot;</span><span class="p">)</span>
+<span class="go">                             Out[17]: True</span>
+</pre></div>
+</div>
 <p>and finally some methods for finding and counting sub-sequences.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">food</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
-<span class="gh">Out[15]: </span><span class="go">4</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">food</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="gh">Out[18]: </span><span class="go">4</span>
 
-<span class="gp">In [16]: </span><span class="n">food</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
-<span class="go">           Out[16]: 9</span>
+<span class="gp">In [19]: </span><span class="n">food</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+<span class="go">           Out[19]: 9</span>
 
-<span class="gp">In [17]: </span><span class="n">food</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;na&quot;</span><span class="p">)</span>
-<span class="go">                      Out[17]: 2</span>
+<span class="gp">In [20]: </span><span class="n">food</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;na&quot;</span><span class="p">)</span>
+<span class="go">                      Out[20]: 2</span>
 
-<span class="gp">In [18]: </span><span class="n">food</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
-<span class="go">                                 Out[18]: 0</span>
+<span class="gp">In [21]: </span><span class="n">food</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="go">                                 Out[21]: 0</span>
 
-<span class="gp">In [19]: </span><span class="n">food</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
-<span class="go">                                            Out[19]: 9</span>
+<span class="gp">In [22]: </span><span class="n">food</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+<span class="go">                                            Out[22]: 9</span>
 
-<span class="gp">In [20]: </span><span class="n">food</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;na&quot;</span><span class="p">)</span>
-<span class="go">                                                       Out[20]: 4</span>
+<span class="gp">In [23]: </span><span class="n">food</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;na&quot;</span><span class="p">)</span>
+<span class="go">                                                       Out[23]: 4</span>
 
-<span class="gp">In [21]: </span><span class="n">food</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
-<span class="go">                                                                  Out[21]: 7</span>
+<span class="gp">In [24]: </span><span class="n">food</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="go">                                                                  Out[24]: 7</span>
 
-<span class="gp">In [22]: </span><span class="n">food</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
-<span class="go">                                                                             Out[22]: 9</span>
+<span class="gp">In [25]: </span><span class="n">food</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+<span class="go">                                                                             Out[25]: 9</span>
 </pre></div>
 </div>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_3_1">
-            <p>rec-5-39: What is printed by the following statements?</p>
+            <p>rec-5-62: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python rocks&quot;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">))</span>
 </pre></div>
@@ -586,7 +597,7 @@ another.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_3_2">
-            <p>rec-5-40: What is printed by the following statements?</p>
+            <p>rec-5-63: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python rocks&quot;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">))</span>
 </pre></div>
@@ -599,6 +610,20 @@ another.</p>
             <li data-component="answer"  id="test_question8_3_2_opt_c">(C) n</li><li data-component="feedback" id="test_question8_3_2_opt_c">This expression uses the index of n</li>
             
             <li data-component="answer"  id="test_question8_3_2_opt_d">(D) Error, you cannot combine all those things together.</li><li data-component="feedback" id="test_question8_3_2_opt_d">This is fine, the repetition operator used the result of indexing and the index method.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question8_3_3">
+            <p>rec-5-64: What is printed by the following statements?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;He&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="test_question8_3_3_opt_a">(A) True</li><li data-component="feedback" id="test_question8_3_3_opt_a">Remember that "H" and "h" are different characters.</li>
+            
+            <li data-component="answer" data-correct id="test_question8_3_3_opt_b">(B) False</li><li data-component="feedback" id="test_question8_3_3_opt_b">"H" and "h" are different characters.</li>
             
 
             </ul>
@@ -617,45 +642,34 @@ another.</p>
 <p>The dot operator can also be used to access built-in methods of list objects.
 This example shows several other list methods, all of which are easy to
 understand.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
 
-<span class="gp">In [24]: </span><span class="n">mylist</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<span class="gh">Out[24]: </span><span class="go">1</span>
+<span class="gp">In [27]: </span><span class="n">mylist</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="gh">Out[27]: </span><span class="go">1</span>
 
-<span class="gp">In [25]: </span><span class="n">mylist</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">           Out[25]: 2</span>
+<span class="gp">In [28]: </span><span class="n">mylist</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">           Out[28]: 2</span>
 
-<span class="gp">In [26]: </span><span class="n">list2</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+<span class="gp">In [29]: </span><span class="n">list2</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
 
-<span class="gp">In [27]: </span><span class="n">list2</span>
-<span class="gh">Out[27]: </span><span class="go">[3, 5, 12, 27]</span>
+<span class="gp">In [30]: </span><span class="n">list2</span>
+<span class="gh">Out[30]: </span><span class="go">[3, 5, 12, 27]</span>
 
-<span class="gp">In [28]: </span><span class="n">mylist</span> <span class="ow">is</span> <span class="n">list2</span>
-<span class="go">                        Out[28]: False</span>
+<span class="gp">In [31]: </span><span class="n">mylist</span> <span class="ow">is</span> <span class="n">list2</span>
+<span class="go">                        Out[31]: False</span>
 
-<span class="gp">In [29]: </span><span class="n">l3</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
-<span class="go">                                       ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-29-de6d82155368&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 l3 = reverse(mylist)</span>
+<span class="gp">In [32]: </span><span class="n">l3</span> <span class="o">=</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
 
-<span class="go">NameError: name &#39;reverse&#39; is not defined</span>
+<span class="gp">In [33]: </span><span class="n">l3</span>
+<span class="gh">Out[33]: </span><span class="go">&lt;list_reverseiterator at 0x10cd00400&gt;</span>
 
-<span class="gp">In [30]: </span><span class="n">l3</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-30-80e1ae03134b&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 l3</span>
+<span class="gp">In [34]: </span><span class="n">l4</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">l3</span><span class="p">)</span>
 
-<span class="go">NameError: name &#39;l3&#39; is not defined</span>
+<span class="gp">In [35]: </span><span class="n">l4</span>
+<span class="gh">Out[35]: </span><span class="go">[12, 3, 27, 5]</span>
 
-<span class="gp">In [31]: </span><span class="n">l3</span> <span class="ow">is</span> <span class="n">mylist</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-31-a67f2f31f830&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 l3 is mylist</span>
-
-<span class="go">NameError: name &#39;l3&#39; is not defined</span>
+<span class="gp">In [36]: </span><span class="n">l4</span> <span class="ow">is</span> <span class="n">mylist</span>
+<span class="go">                        Out[36]: False</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -684,44 +698,44 @@ that distributed systems such as Hadoop, MapReduce, and Spark use
 <p>Two of the most useful methods on strings involve lists of strings. The
 <code class="docutils literal"><span class="pre">split</span></code> method breaks a string into a list of words.  By default, any number
 of whitespace characters is considered a word boundary.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">song</span> <span class="o">=</span> <span class="s2">&quot;The rain in Spain...&quot;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">song</span> <span class="o">=</span> <span class="s2">&quot;The rain in Spain...&quot;</span>
 
-<span class="gp">In [33]: </span><span class="n">wds</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="gp">In [38]: </span><span class="n">wds</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
-<span class="gp">In [34]: </span><span class="n">wds</span>
-<span class="gh">Out[34]: </span><span class="go">[&#39;The&#39;, &#39;rain&#39;, &#39;in&#39;, &#39;Spain...&#39;]</span>
+<span class="gp">In [39]: </span><span class="n">wds</span>
+<span class="gh">Out[39]: </span><span class="go">[&#39;The&#39;, &#39;rain&#39;, &#39;in&#39;, &#39;Spain...&#39;]</span>
 </pre></div>
 </div>
 <p>An optional argument called a <strong>delimiter</strong> can be used to specify which
 characters to use as word boundaries. The following example uses the string
 <code class="docutils literal"><span class="pre">ai</span></code> as the delimiter:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">wds</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;ai&#39;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">wds</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;ai&#39;</span><span class="p">)</span>
 
-<span class="gp">In [36]: </span><span class="n">wds</span>
-<span class="gh">Out[36]: </span><span class="go">[&#39;The r&#39;, &#39;n in Sp&#39;, &#39;n...&#39;]</span>
+<span class="gp">In [41]: </span><span class="n">wds</span>
+<span class="gh">Out[41]: </span><span class="go">[&#39;The r&#39;, &#39;n in Sp&#39;, &#39;n...&#39;]</span>
 </pre></div>
 </div>
 <p>Notice that the delimiter doesn&#8217;t appear in the result.</p>
 <p>The inverse of the <code class="docutils literal"><span class="pre">split</span></code> method is <code class="docutils literal"><span class="pre">join</span></code>.  You choose a desired
 <strong>separator</strong> string, (often called the <em>glue</em>) and join the list with the glue
 between each of the elements.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">wds</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">wds</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">]</span>
 
-<span class="gp">In [38]: </span><span class="n">glue</span> <span class="o">=</span> <span class="s1">&#39;;&#39;</span>
+<span class="gp">In [43]: </span><span class="n">glue</span> <span class="o">=</span> <span class="s1">&#39;;&#39;</span>
 
-<span class="gp">In [39]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">glue</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span>
+<span class="gp">In [44]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">glue</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span>
 
-<span class="gp">In [40]: </span><span class="n">s</span>
-<span class="gh">Out[40]: </span><span class="go">&#39;red;blue;green&#39;</span>
+<span class="gp">In [45]: </span><span class="n">s</span>
+<span class="gh">Out[45]: </span><span class="go">&#39;red;blue;green&#39;</span>
 
-<span class="gp">In [41]: </span><span class="n">wds</span>
-<span class="go">                          Out[41]: [&#39;red&#39;, &#39;blue&#39;, &#39;green&#39;]</span>
+<span class="gp">In [46]: </span><span class="n">wds</span>
+<span class="go">                          Out[46]: [&#39;red&#39;, &#39;blue&#39;, &#39;green&#39;]</span>
 
-<span class="gp">In [42]: </span><span class="s2">&quot;***&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span>
-<span class="go">                                                            Out[42]: &#39;red***blue***green&#39;</span>
+<span class="gp">In [47]: </span><span class="s2">&quot;***&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span>
+<span class="go">                                                            Out[47]: &#39;red***blue***green&#39;</span>
 
-<span class="gp">In [43]: </span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span>
-<span class="go">                                                                                          Out[43]: &#39;redbluegreen&#39;</span>
+<span class="gp">In [48]: </span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span>
+<span class="go">                                                                                          Out[48]: &#39;redbluegreen&#39;</span>
 </pre></div>
 </div>
 <p>The list that you glue together (<code class="docutils literal"><span class="pre">wds</span></code> in this example) is not modified.
@@ -729,7 +743,7 @@ Also, you can use empty glue or multi-character strings as glue.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question9_22_1">
-            <p>rec-5-41: What is printed by the following statements?</p>
+            <p>rec-5-65: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">myname</span> <span class="o">=</span> <span class="s2">&quot;Edgar Allan Poe&quot;</span>
 <span class="n">namelist</span> <span class="o">=</span> <span class="n">myname</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 <span class="n">init</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -763,10 +777,10 @@ Also, you can use empty glue or multi-character strings as glue.</p>
 <h2>3.7.4. <code class="docutils literal"><span class="pre">list</span></code> Type Conversion Function<a class="headerlink" href="#list-type-conversion-function" title="Permalink to this headline">¶</a></h2>
 <p>Python has a built-in type conversion function called <code class="docutils literal"><span class="pre">list</span></code> that tries to
 turn whatever you give it into a list.  For example, try the following:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">xs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;Crunchy Frog&quot;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">xs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;Crunchy Frog&quot;</span><span class="p">)</span>
 
-<span class="gp">In [45]: </span><span class="n">xs</span>
-<span class="gh">Out[45]: </span><span class="go">[&#39;C&#39;, &#39;r&#39;, &#39;u&#39;, &#39;n&#39;, &#39;c&#39;, &#39;h&#39;, &#39;y&#39;, &#39; &#39;, &#39;F&#39;, &#39;r&#39;, &#39;o&#39;, &#39;g&#39;]</span>
+<span class="gp">In [50]: </span><span class="n">xs</span>
+<span class="gh">Out[50]: </span><span class="go">[&#39;C&#39;, &#39;r&#39;, &#39;u&#39;, &#39;n&#39;, &#39;c&#39;, &#39;h&#39;, &#39;y&#39;, &#39; &#39;, &#39;F&#39;, &#39;r&#39;, &#39;o&#39;, &#39;g&#39;]</span>
 </pre></div>
 </div>
 <p>The string <code class="docutils literal"><span class="pre">&quot;Crunchy</span> <span class="pre">Frog&quot;</span></code> is turned into a list by taking each character in
