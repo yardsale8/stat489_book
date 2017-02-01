@@ -7,4 +7,4 @@ Reading Data from Files
 
 
     ReadingAndWritingFiles.rst
-    ProcessingFileswithComprehensions.rst
+    Exercises.rst

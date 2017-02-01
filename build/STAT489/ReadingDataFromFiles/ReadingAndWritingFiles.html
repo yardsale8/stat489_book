@@ -102,7 +102,7 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="5. Reading Data from Files" href="toctree.html" />
-    <link rel="next" title="5.2. Processing Files with List Comprehensions" href="ProcessingFileswithComprehensions.html" />
+    <link rel="next" title="5.4. Exercises" href="Exercises.html" />
     <link rel="prev" title="5. Reading Data from Files" href="toctree.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -272,6 +272,8 @@
 <li><a class="reference internal" href="#alternative-file-reading-methods">5.1.6. Alternative File Reading Methods</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#importing-csv-files">5.2. Importing csv files</a></li>
+<li><a class="reference internal" href="#reading-and-writing-large-files">5.3. Reading and Writing Large Files</a></li>
 </ul>
 </ul>
 </li>
@@ -285,8 +287,8 @@
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 5.2. Processing Files with List Comprehensions' data-toggle="tooltip" >
-    <a href="ProcessingFileswithComprehensions.html" >
+  <li id="relations-next" title='Next Chapter - 5.4. Exercises' data-toggle="tooltip" >
+    <a href="Exercises.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -318,11 +320,25 @@
   
   <div class="section" id="reading-and-writing-files">
 <h1>5.1. Reading and Writing Files<a class="headerlink" href="#reading-and-writing-files" title="Permalink to this headline">¶</a></h1>
+<p>So far, the data we have used in this book have all been either coded right into
+the program, or have been entered by the user.  In real life data reside in
+files.  For example the images we worked with in the image processing unit
+ultimately live in files on your hard drive.  Web pages, and word processing
+documents, and music are other examples of data that live in files.  In this
+short chapter we will introduce the Python concepts necessary to use data from
+files in our programs.</p>
 <div class="section" id="working-with-data-files">
 <h2>5.1.1. Working with Data Files<a class="headerlink" href="#working-with-data-files" title="Permalink to this headline">¶</a></h2>
-<p>So far, the data we have used in this book have all been either coded right into the program, or have been entered by the user.  In real life data reside in files.  For example the images we worked with in the image processing unit ultimately live in files on your hard drive.  Web pages, and word processing documents, and music are other examples of data that live in files.  In this short chapter we will introduce the Python concepts necessary to use data from files in our programs.</p>
-<p>For our purposes, we will assume that our data files are text files&#8211;that is, files filled with characters. The Python programs that you write are stored as text files.  We can create these files in any of a number of ways. For example, we could use a text editor to type in and save the data.  We could also download the data from a website and then save it in a file. Regardless of how the file is created, Python will allow us to manipulate the contents.</p>
-<p>In Python, we must <strong>open</strong> files before we can use them and <strong>close</strong> them when we are done with them. As you might expect, once a file is opened it becomes a Python object just like all other data. <a class="reference internal" href="#filemethods1a"><span class="std std-ref">Table 1</span></a> shows the functions and methods that can be used to open and close files.</p>
+<p>For our purposes, we will assume that our data files are text files&#8211;that is,
+files filled with characters. The Python programs that you write are stored as
+text files.  We can create these files in any of a number of ways. For example,
+we could use a text editor to type in and save the data.  We could also download
+the data from a website and then save it in a file. Regardless of how the file
+is created, Python will allow us to manipulate the contents.</p>
+<p>In Python, we must <strong>open</strong> files before we can use them and <strong>close</strong> them when
+we are done with them. As you might expect, once a file is opened it becomes a
+Python object just like all other data. <a class="reference internal" href="#filemethods1a"><span class="std std-ref">Table 1</span></a> shows the
+functions and methods that can be used to open and close files.</p>
 <table border="1" class="docutils" id="filemethods1a">
 <colgroup>
 <col width="11%" />
@@ -354,13 +370,13 @@
 <div class="section" id="finding-a-file-on-your-disk">
 <h2>5.1.2. Finding a File on your Disk<a class="headerlink" href="#finding-a-file-on-your-disk" title="Permalink to this headline">¶</a></h2>
 <p>Opening a file requires that you, as a programmer, and Python agree about the
-location of the file on your disk.  The way that files are located on disk is
-by their <strong>path</strong>  You can think of the filename as the short name for a file,
-and the path as the full name.  For example on a Mac if you save the file
+location of the file on your disk.  The way that files are located on disk is by
+their <strong>path</strong>  You can think of the filename as the short name for a file, and
+the path as the full name.  For example on a Mac if you save the file
 <code class="docutils literal"><span class="pre">hello.txt</span></code> in your home directory the path to that file is
-<code class="docutils literal"><span class="pre">/Users/yourname/hello.txt</span></code>  On a Windows machine the path looks a bit different
-but the same principles are in use.  For example on windows the path might be
-<code class="docutils literal"><span class="pre">C:\Users\yourname\My</span> <span class="pre">Documents\hello.txt</span></code></p>
+<code class="docutils literal"><span class="pre">/Users/yourname/hello.txt</span></code>  On a Windows machine the path looks a bit
+different but the same principles are in use.  For example on windows the path
+might be <code class="docutils literal"><span class="pre">C:\Users\yourname\My</span> <span class="pre">Documents\hello.txt</span></code></p>
 <div class="sidebar">
 <p class="first sidebar-title">The History of Path Separators</p>
 <p class="last">Why is the path separator a <code class="docutils literal"><span class="pre">/</span></code> on Unix/Linux/MacOS systems and <code class="docutils literal"><span class="pre">\</span></code> on
@@ -377,25 +393,25 @@ as <code class="docutils literal"><span class="pre">\n</span></code> for a new l
 character to separate folder names in a path, and even on Windows
 system the file path will work just fine.</p>
 </div>
-<p>You can access files in sub-folders, also called directories, under your home directory
-by adding a slash and the name of the folder.  For example, if you had a file
-called <code class="docutils literal"><span class="pre">hello.py</span></code> in a folder called <code class="docutils literal"><span class="pre">CS150</span></code> that is inside a folder called
-<code class="docutils literal"><span class="pre">PyCharmProjects</span></code> under your home directory, then the full name for the file
-<code class="docutils literal"><span class="pre">hello.py</span></code> is <code class="docutils literal"><span class="pre">/Users/yourname/PyCharmProjects/CS150/hello.py</span></code>.
-This is called an <em>absolute file path</em>. An <em>absolute file path</em> typically
-only works on a specific computer. Think about it for a second. What other
-computer in the world is going to have an <em>absolute file path</em> that starts with
+<p>You can access files in sub-folders, also called directories, under your home
+directory by adding a slash and the name of the folder.  For example, if you had
+a file called <code class="docutils literal"><span class="pre">hello.py</span></code> in a folder called <code class="docutils literal"><span class="pre">CS150</span></code> that is inside a folder
+called <code class="docutils literal"><span class="pre">PyCharmProjects</span></code> under your home directory, then the full name for the
+file <code class="docutils literal"><span class="pre">hello.py</span></code> is <code class="docutils literal"><span class="pre">/Users/yourname/PyCharmProjects/CS150/hello.py</span></code>.  This
+is called an <em>absolute file path</em>. An <em>absolute file path</em> typically only works
+on a specific computer. Think about it for a second. What other computer in the
+world is going to have an <em>absolute file path</em> that starts with
 <code class="docutils literal"><span class="pre">/Users/yourname</span></code>?</p>
-<p>If a file is not in the same folder as your python program, you need to tell
-the computer how to reach it. A <em>relative file path</em> starts from the folder
-that contains your python program and follows a computer&#8217;s file hierarchy. A
-file hierarchy contains folders which contains files and other sub-folders.
-Specifying a sub-folder is easy &#8211; you simply specify the sub-folder&#8217;s name.
-To specify a <em>parent</em> folder you use the special <code class="docutils literal"><span class="pre">..</span></code> notation because every file
-and folder has one unique parent. You can use the <code class="docutils literal"><span class="pre">..</span></code>
-notation multiple times in a file path to move multiple levels up a file
-hierarchy. Here is an example file hierarchy that contains multiple folders,
-files, and sub-folders. Folders in the diagram are displayed in <strong>bold</strong> type.</p>
+<p>If a file is not in the same folder as your python program, you need to tell the
+computer how to reach it. A <em>relative file path</em> starts from the folder that
+contains your python program and follows a computer&#8217;s file hierarchy. A file
+hierarchy contains folders which contains files and other sub-folders.
+Specifying a sub-folder is easy &#8211; you simply specify the sub-folder&#8217;s name.  To
+specify a <em>parent</em> folder you use the special <code class="docutils literal"><span class="pre">..</span></code> notation because every file
+and folder has one unique parent. You can use the <code class="docutils literal"><span class="pre">..</span></code> notation multiple times
+in a file path to move multiple levels up a file hierarchy. Here is an example
+file hierarchy that contains multiple folders, files, and sub-folders. Folders
+in the diagram are displayed in <strong>bold</strong> type.</p>
 <img alt="../_images/ExampleFileHierarchy.png" class="align-center" src="../_images/ExampleFileHierarchy.png" />
 <p>Using the example file hierarchy above, the program, <code class="docutils literal"><span class="pre">myPythonProgram.py</span></code>
 could access each of the data files using the following <em>relative file paths</em>:</p>
@@ -408,8 +424,8 @@ could access each of the data files using the following <em>relative file paths<
 <p>Here&#8217;s the important rule to remember: If your file and your Python program are
 in the same directory you can simply use the filename like this:
 <code class="docutils literal"><span class="pre">open('myfile.txt',</span> <span class="pre">'r')</span></code>. If your file and your Python program are in
-different directories then you must use a <em>relative file path</em> to the file
-like this: <code class="docutils literal"><span class="pre">open('../myData/data3.txt',</span> <span class="pre">'r')</span></code>.</p>
+different directories then you must use a <em>relative file path</em> to the file like
+this: <code class="docutils literal"><span class="pre">open('../myData/data3.txt',</span> <span class="pre">'r')</span></code>.</p>
 </div>
 <div class="section" id="glossary">
 <h2>5.1.3. Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
@@ -481,82 +497,170 @@ use <code class="docutils literal"><span class="pre">fileref</span></code> will 
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
+<p>The process of opening and closing a file should be accomplished using the
+<code class="docutils literal"><span class="pre">with</span></code> statement, as shown below.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">   ...: </span>    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [2]: </span><span class="n">lines</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[2]: </span><span class="go"></span>
+<span class="go">[&#39;Colt McCoy QB CLE  135 222 1576    6   9   60.8%   74.5\n&#39;,</span>
+<span class="go"> &#39;Josh Freeman QB TB 291 474 3451    25  6   61.4%   95.9\n&#39;,</span>
+<span class="go"> &#39;Michael Vick QB PHI    233 372 3018    21  6   62.6%   100.2\n&#39;,</span>
+<span class="go"> &#39;Matt Schaub QB HOU 365 574 4370    24  12  63.6%   92.0\n&#39;,</span>
+<span class="go"> &#39;Philip Rivers QB SD    357 541 4710    30  13  66.0%   101.8\n&#39;]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Using the <code class="docutils literal"><span class="pre">with</span></code> statement when working with files in Python is considered
+a best-practice, as it guarentees that files are properly opened and closed
+at the right time.</p>
+</div>
 </div>
 <div class="section" id="writing-text-files">
 <h2>5.1.5. Writing Text Files<a class="headerlink" href="#writing-text-files" title="Permalink to this headline">¶</a></h2>
-<p>One of the most commonly performed data processing tasks is to read data from a file, manipulate it in some way, and then write the resulting data out to a new data file to be used for other purposes later.  To accomplish this, the <code class="docutils literal"><span class="pre">open</span></code> function discussed above can also be used to create a new file prepared for writing.  Note in <a class="reference internal" href="#filemethods1a"><span class="std std-ref">Table 1</span></a> above that the only difference between opening a file for writing and  opening a file for reading is the use of the <code class="docutils literal"><span class="pre">'w'</span></code> flag instead of the <code class="docutils literal"><span class="pre">'r'</span></code> flag as the second parameter.  When we open a file for writing, a new, empty file with that name is created and made ready to accept our data. As before, the function returns a reference to the new file object.</p>
-<p><a class="reference internal" href="#filemethods2a"><span class="std std-ref">Table 2</span></a> above shows one additional file method that we have not used thus far.  The <code class="docutils literal"><span class="pre">write</span></code> method allows us to add data to a text file.  Recall that text files contain sequences of characters.  We usually think of these character sequences as being the lines of the file where each line ends with the newline <code class="docutils literal"><span class="pre">\n</span></code> character.  Be very careful to notice that the <code class="docutils literal"><span class="pre">write</span></code> method takes one parameter, a string.  When invoked, the characters of the string will be added to the end of the file.  This means that it is the programmers job to include the newline characters as part of the string if desired.</p>
-<p>As an example, consider the <code class="docutils literal"><span class="pre">qbdata.txt</span></code> file once again.  Assume that we have been asked to provide a file consisting of only the names of the
-quarterbacks.  In addition, the names should be in the order last name followed by first name with the names separated by a comma.  This
-is a very common type of request, usually due to the fact that someone has a program that requires its data input format to be different from what is available.</p>
-<p>To construct this file, we will approach the problem using a similar algorithm as above.  After opening the file, we will iterate through the
-lines, break each line into its parts, choose the parts that we need, and then output them.  Eventually, the output will be written to a file.</p>
-<p>The program below solves part of the problem.  Notice that it reads the data and creates a string consisting of last name followed by a comma followed by the first name.  In this example, we simply print the lines as they are created.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-<span class="n">aline</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="k">while</span> <span class="n">aline</span><span class="p">:</span>
-    <span class="n">items</span> <span class="o">=</span> <span class="n">aline</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-    <span class="n">dataline</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">dataline</span><span class="p">)</span>
-    <span class="n">aline</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<p>One of the most commonly performed data processing tasks is to read data from a
+file, manipulate it in some way, and then write the resulting data out to a new
+data file to be used for other purposes later.  To accomplish this, the <code class="docutils literal"><span class="pre">open</span></code>
+function discussed above can also be used to create a new file prepared for
+writing.  Note in <a class="reference internal" href="#filemethods1a"><span class="std std-ref">Table 1</span></a> above that the only difference
+between opening a file for writing and  opening a file for reading is the use of
+the <code class="docutils literal"><span class="pre">'w'</span></code> flag instead of the <code class="docutils literal"><span class="pre">'r'</span></code> flag as the second parameter.  When we
+open a file for writing, a new, empty file with that name is created and made
+ready to accept our data. As before, the function returns a reference to the new
+file object.</p>
+<p><a class="reference internal" href="#filemethods2a"><span class="std std-ref">Table 2</span></a> above shows one additional file method that we
+have not used thus far.  The <code class="docutils literal"><span class="pre">write</span></code> method allows us to add data to a text
+file.  Recall that text files contain sequences of characters.  We usually think
+of these character sequences as being the lines of the file where each line ends
+with the newline <code class="docutils literal"><span class="pre">\n</span></code> character.  Be very careful to notice that the <code class="docutils literal"><span class="pre">write</span></code>
+method takes one parameter, a string.  When invoked, the characters of the
+string will be added to the end of the file.  This means that it is the
+programmers job to include the newline characters as part of the string if
+desired.</p>
+<p>As an example, consider the <code class="docutils literal"><span class="pre">qbdata.txt</span></code> file once again.  Assume that we have
+been asked to provide a file consisting of only the names of the quarterbacks.
+In addition, the names should be in the order last name followed by first name
+with the names separated by a comma.  This is a very common type of request,
+usually due to the fact that someone has a program that requires its data input
+format to be different from what is available.</p>
+<p>To construct this file, we will approach the problem using a similar algorithm
+as above.  We start by reading the lines into a list called <code class="docutils literal"><span class="pre">lines</span></code>.  Then the
+lines are split into rows using whitespace.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<span class="gp">   ...: </span>     <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">infile</span><span class="p">]</span>
+<span class="gp">   ...: </span>
 
-<span class="n">infile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="gp">In [4]: </span><span class="n">split_line</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="gp">In [5]: </span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">split_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+
+<span class="gp">In [6]: </span><span class="n">rows</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gh">Out[6]: </span><span class="go"></span>
+<span class="go">[[&#39;Colt&#39;,</span>
+<span class="go">  &#39;McCoy&#39;,</span>
+<span class="go">  &#39;QB&#39;,</span>
+<span class="go">  &#39;CLE&#39;,</span>
+<span class="go">  &#39;135&#39;,</span>
+<span class="go">  &#39;222&#39;,</span>
+<span class="go">  &#39;1576&#39;,</span>
+<span class="go">  &#39;6&#39;,</span>
+<span class="go">  &#39;9&#39;,</span>
+<span class="go">  &#39;60.8%&#39;,</span>
+<span class="go">  &#39;74.5&#39;],</span>
+<span class="go"> [&#39;Josh&#39;,</span>
+<span class="go">  &#39;Freeman&#39;,</span>
+<span class="go">  &#39;QB&#39;,</span>
+<span class="go">  &#39;TB&#39;,</span>
+<span class="go">  &#39;291&#39;,</span>
+<span class="go">  &#39;474&#39;,</span>
+<span class="go">  &#39;3451&#39;,</span>
+<span class="go">  &#39;25&#39;,</span>
+<span class="go">  &#39;6&#39;,</span>
+<span class="go">  &#39;61.4%&#39;,</span>
+<span class="go">  &#39;95.9&#39;]]</span>
 </pre></div>
 </div>
-<p>When we run this program, we see the lines of output on the screen.  Once we are satisfied that it is creating the appropriate output, the next step is to add the necessary pieces to produce an output file and write the data lines to it.  To start, we need to open a new output file by adding another call to the <code class="docutils literal"><span class="pre">open</span></code> function, <code class="docutils literal"><span class="pre">outfile</span> <span class="pre">=</span> <span class="pre">open(&quot;qbnames.txt&quot;,'w')</span></code>, using the <code class="docutils literal"><span class="pre">'w'</span></code> flag.  We can choose any file name we like.  If the file does not exist, it will be created.  However, if the file does exist, it will be reinitialized as empty and you will lose any previous contents.</p>
-<p>Once the file has been created, we just need to call the <code class="docutils literal"><span class="pre">write</span></code> method passing the string that we wish to add to the file.  In this case, the string is already being printed so we will just change the <code class="docutils literal"><span class="pre">print</span></code> into a call to the <code class="docutils literal"><span class="pre">write</span></code> method.  However, there is one additional part of the data line that we need to include.  The newline character needs to be concatenated  to the end of the line.  The entire line now becomes <code class="docutils literal"><span class="pre">outfile.write(dataline</span> <span class="pre">+</span> <span class="pre">'\n')</span></code>.  We also need to close the file when we are done.</p>
-<p>The complete program is shown below.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-<span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbnames.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<p>These lines need to be transformed into rows that contain the lastname and first
+names, in that order and separated by commas.  This is accomplished with two
+comprehensions, first transforming the rows (list of strings) into rows (list of
+strings) and then joining the rows (list of strings) into a string using the
+<code class="docutils literal"><span class="pre">join</span></code> method with a <code class="docutils literal"><span class="pre">,</span></code> as the &#8220;glue.&#8221;</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">names</span> <span class="o">=</span> <span class="p">[(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
 
-<span class="n">aline</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="k">while</span> <span class="n">aline</span><span class="p">:</span>
-    <span class="n">items</span> <span class="o">=</span> <span class="n">aline</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-    <span class="n">dataline</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dataline</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">aline</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="gp">In [8]: </span><span class="n">comma_separate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
-<span class="n">infile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="gp">In [9]: </span><span class="n">new_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">comma_separate</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+
+<span class="gp">In [10]: </span><span class="n">new_lines</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[10]: </span><span class="go">[&#39;McCoy,Colt&#39;, &#39;Freeman,Josh&#39;, &#39;Vick,Michael&#39;, &#39;Schaub,Matt&#39;, &#39;Rivers,Philip&#39;]</span>
 </pre></div>
 </div>
-<p>The contents of the <code class="docutils literal"><span class="pre">qbnames.txt</span></code> file are as follows.</p>
-<pre id="">
-McCoy,Colt
-Freeman,Josh
-Vick,Michael
-Schaub,Matt
-Rivers,Philip
-Hasselbeck,Matt
-Clausen,Jimmy
-Flacco,Joe
-Orton,Kyle
-Campbell,Jason
-Manning,Peyton
-Brees,Drew
-Ryan,Matt
-Cassel,Matt
-Sanchez,Mark
-Favre,Brett
-Garrard,David
-Manning,Eli
-Palmer,Carson
-Smith,Alex
-Henne,Chad
-Romo,Tony
-Cutler,Jay
-Kitna,Jon
-Brady,Tom
-Roethlisberger,Ben
-Collins,Kerry
-Anderson,Derek
-Fitzpatrick,Ryan
-McNabb,Donovan
-Kolb,Kevin
-Rodgers,Aaron
-Bradford,Sam
-Hill,Shaun
+<p>When we run this program, we see the lines of output on the screen.  Once we are
+satisfied that it is creating the appropriate output, the next step is to add
+the necessary pieces to produce an output file and write the data lines to it.
+To start, we need to open a new output file by adding another <code class="docutils literal"><span class="pre">with</span></code>
+statement, where <code class="docutils literal"><span class="pre">outfile</span></code> will be the alias for <code class="docutils literal"><span class="pre">open(&quot;qbnames.csv&quot;,'w')</span></code>,
+using the <code class="docutils literal"><span class="pre">'w'</span></code> flag.  We can choose any file name we like.  If the file does
+not exist, it will be created.  However, if the file does exist, it will be
+reinitialized as empty and you will lose any previous contents.</p>
+<p>Once the file has been created, we just need to call the <code class="docutils literal"><span class="pre">print</span></code> function
+passing the file object in as a parameter.  By default, the <code class="docutils literal"><span class="pre">print</span></code> function
+will append a <code class="docutils literal"><span class="pre">\n</span></code> to each line.  See <code class="docutils literal"><span class="pre">help(print)</span></code> for more information
+about the optional <code class="docutils literal"><span class="pre">end</span></code> and <code class="docutils literal"><span class="pre">sep</span></code> arguments.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbnames.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<span class="gp">   ....: </span>     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">new_lines</span><span class="p">:</span>
+<span class="gp">   ....: </span>          <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">outfile</span><span class="p">)</span>
+<span class="gp">   ....: </span>
 </pre></div>
+</div>
+<p>The contents of the <code class="docutils literal"><span class="pre">qbnames.csv</span></code> file can be shown using the IPython <code class="docutils literal"><span class="pre">%cat</span></code>
+magic.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="o">%</span><span class="k">cat</span> qbnames.csv
+<span class="go">McCoy,Colt</span>
+<span class="go">Freeman,Josh</span>
+<span class="go">Vick,Michael</span>
+<span class="go">Schaub,Matt</span>
+<span class="go">Rivers,Philip</span>
+<span class="go">Hasselbeck,Matt</span>
+<span class="go">Clausen,Jimmy</span>
+<span class="go">Flacco,Joe</span>
+<span class="go">Orton,Kyle</span>
+<span class="go">Campbell,Jason</span>
+<span class="go">Manning,Peyton</span>
+<span class="go">Brees,Drew</span>
+<span class="go">Ryan,Matt</span>
+<span class="go">Cassel,Matt</span>
+<span class="go">Sanchez,Mark</span>
+<span class="go">Favre,Brett</span>
+<span class="go">Garrard,David</span>
+<span class="go">Manning,Eli</span>
+<span class="go">Palmer,Carson</span>
+<span class="go">Smith,Alex</span>
+<span class="go">Henne,Chad</span>
+<span class="go">Romo,Tony</span>
+<span class="go">Cutler,Jay</span>
+<span class="go">Kitna,Jon</span>
+<span class="go">Brady,Tom</span>
+<span class="go">Roethlisberger,Ben</span>
+<span class="go">Collins,Kerry</span>
+<span class="go">Anderson,Derek</span>
+<span class="go">Fitzpatrick,Ryan</span>
+<span class="go">McNabb,Donovan</span>
+<span class="go">Kolb,Kevin</span>
+<span class="go">Rodgers,Aaron</span>
+<span class="go">Bradford,Sam</span>
+<span class="go">Hill,Shaun</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">IPython magic such as <code class="docutils literal"><span class="pre">pwd</span></code>, <code class="docutils literal"><span class="pre">ls</span></code>, and <code class="docutils literal"><span class="pre">cat</span></code> make working iteratively
+with the file system a breeze.</p>
+</div>
+</div>
 <div class="section" id="alternative-file-reading-methods">
 <h2>5.1.6. Alternative File Reading Methods<a class="headerlink" href="#alternative-file-reading-methods" title="Permalink to this headline">¶</a></h2>
 <p>Again, recall the contents of the qbdata.txt file.</p>
@@ -595,15 +699,12 @@ Kevin Kolb QB PHI  115 189 1197    7   7   60.8%   76.1
 Aaron Rodgers QB GB    312 475 3922    28  11  65.7%   101.2
 Sam Bradford QB STL    354 590 3512    18  15  60.0%   76.5
 Shaun Hill QB DET  257 416 2686    16  12  61.8%   81.3
-</pre><p>In addition to the <code class="docutils literal"><span class="pre">for</span></code> loop, Python provides three methods to read data
-from the input file. The <code class="docutils literal"><span class="pre">readline</span></code> method reads one line from the file and
-returns it as a string. The string returned by <code class="docutils literal"><span class="pre">readline</span></code> will contain the
-newline character at the end. This method returns the empty string when it
-reaches the end of the file. The <code class="docutils literal"><span class="pre">readlines</span></code> method returns the contents of
-the entire file as a list of strings, where each item in the list represents
-one line of the file. It is also possible to read the entire file into a
-single string with <code class="docutils literal"><span class="pre">read</span></code>. <a class="reference internal" href="#filemethods2a"><span class="std std-ref">Table 2</span></a> summarizes these methods
-and the following session shows them in action.</p>
+</pre><p>In addition to using a list comprehension to read in the lines, we can simplify
+this process using <code class="docutils literal"><span class="pre">readline</span></code>.  The <code class="docutils literal"><span class="pre">readlines</span></code> method returns the
+contents of the entire file as a list of strings, where each item in the list
+represents one line of the file. It is also possible to read the entire file
+into a single string with <code class="docutils literal"><span class="pre">read</span></code>. <a class="reference internal" href="#filemethods2a"><span class="std std-ref">Table 2</span></a> summarizes
+these methods and the following session shows them in action.</p>
 <p>Note that we need to reopen the file before each read so that we start from
 the beginning. Each file has a marker that denotes the current read position
 in the file. Any time one of the read methods is called the marker is moved to
@@ -611,33 +712,19 @@ the character immediately following the last character returned. In the case
 of <code class="docutils literal"><span class="pre">readline</span></code> this moves the marker to the first character of the next line
 in the file. In the case of <code class="docutils literal"><span class="pre">read</span></code> or <code class="docutils literal"><span class="pre">readlines</span></code> the marker is moved to
 the end of the file.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">aline</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">aline</span>
-<span class="go">&#39;Colt McCoy QB, CLE\t135\t222\t1576\t6\t9\t60.8%\t74.5\n&#39;</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">linelist</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">linelist</span><span class="p">))</span>
-<span class="go">34</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">linelist</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
-<span class="go">[&#39;Colt McCoy QB CLE\t135\t222\t1576\t6\t9\t60.8%\t74.5\n&#39;,</span>
-<span class="go"> &#39;Josh Freeman QB TB\t291\t474\t3451\t25\t6\t61.4%\t95.9\n&#39;,</span>
-<span class="go"> &#39;Michael Vick QB PHI\t233\t372\t3018\t21\t6\t62.6%\t100.2\n&#39;,</span>
-<span class="go"> &#39;Matt Schaub QB HOU\t365\t574\t4370\t24\t12\t63.6%\t92.0\n&#39;]</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">filestring</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filestring</span><span class="p">))</span>
-<span class="go">1708</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">filestring</span><span class="p">[:</span><span class="mi">256</span><span class="p">])</span>
-<span class="go">Colt McCoy QB CLE   135     222     1576    6       9       60.8%   74.5</span>
-<span class="go">Josh Freeman QB TB  291     474     3451    25      6       61.4%   95.9</span>
-<span class="go">Michael Vick QB PHI 233     372     3018    21      6       62.6%   100.2</span>
-<span class="go">Matt Schaub QB HOU  365     574     4370    24      12      63.6%   92.0</span>
-<span class="go">Philip Rivers QB SD 357     541     4710    30      13      66.0%   101.8</span>
-<span class="go">Matt Ha</span>
-<span class="go">&gt;&gt;&gt;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="k">with</span>  <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="n">linelist</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [14]: </span><span class="nb">len</span><span class="p">(</span><span class="n">linelist</span><span class="p">)</span>
+<span class="gh">Out[14]: </span><span class="go">34</span>
+
+<span class="gp">In [15]: </span><span class="n">linelist</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="go">            Out[15]: </span>
+<span class="go">[&#39;Colt McCoy QB CLE  135 222 1576    6   9   60.8%   74.5\n&#39;,</span>
+<span class="go"> &#39;Josh Freeman QB TB 291 474 3451    25  6   61.4%   95.9\n&#39;,</span>
+<span class="go"> &#39;Michael Vick QB PHI    233 372 3018    21  6   62.6%   100.2\n&#39;,</span>
+<span class="go"> &#39;Matt Schaub QB HOU 365 574 4370    24  12  63.6%   92.0\n&#39;]</span>
 </pre></div>
 </div>
 <table border="1" class="docutils" id="filemethods2a">
@@ -686,33 +773,194 @@ returned.</td>
 </tr>
 </tbody>
 </table>
-<p>Now let&#8217;s look at another method of reading our file using a <code class="docutils literal"><span class="pre">while</span></code> loop.  This is important because many other programming languages do not support the <code class="docutils literal"><span class="pre">for</span></code> loop style for reading files but they do support the pattern we&#8217;ll show you here.</p>
-
-<textarea data-component="activecode" id=files_while data-lang="python"    data-timelimit=25000   data-audio=''     >
-infile = open("qbdata.txt", "r")
-line = infile.readline()
-while line:
-    values = line.split()
-    print('QB ', values[0], values[1], 'had a rating of ', values[10] )
-    line = infile.readline()
-
-infile.close()
-</textarea>
-<p>The important thing to notice is that on line 2 we have the statement <code class="docutils literal"><span class="pre">line</span> <span class="pre">=</span>
-<span class="pre">infile.readline()</span></code>.  We call this initial read the <strong>priming read</strong>.  It is
-very important because the while condition needs to have a value for the
-<code class="docutils literal"><span class="pre">line</span></code> variable.  The <code class="docutils literal"><span class="pre">readline</span></code> method will return the empty string if
-there is no more data in the file.  The condition <code class="docutils literal"><span class="pre">while</span> <span class="pre">line:</span></code> means <cite>while
-the content of line is not the empty string</cite>.  Remember that a blank line in the
-file actually has a single character, the <code class="docutils literal"><span class="pre">\n</span></code> character (newline).  So, the
-only way that a line of data from the file can be empty is if you are reading at
-the end of the file.</p>
-<p>Finally, notice that the last line of the body of the <code class="docutils literal"><span class="pre">while</span></code> loop performs
-another <code class="docutils literal"><span class="pre">readline</span></code>.  This statement will reassign the variable <code class="docutils literal"><span class="pre">line</span></code> to the
-next line of the file.  It represents the <cite>change of state</cite> that is necessary
-for the iteration to function correctly.  Without it, there would be an infinite
-loop processing the same line of data over and over.</p>
 </div>
+</div>
+<div class="section" id="importing-csv-files">
+<h1>5.2. Importing csv files<a class="headerlink" href="#importing-csv-files" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal"><span class="pre">csv</span></code> standard module comes with a <code class="docutils literal"><span class="pre">reader</span></code> function that saves us the
+work of splitting each line into a list of values.  The <code class="docutils literal"><span class="pre">reader</span></code> takes a file
+object as an argument, along with a number of optional arguments like
+<code class="docutils literal"><span class="pre">delimiter</span></code>.  See <a class="reference external" href="https://docs.python.org/2/library/csv.html#csv-fmt-params">the Python documentation</a> for more
+information.</p>
+<p>Below, we import and use the <code class="docutils literal"><span class="pre">csv.reader</span></code> to read in <code class="docutils literal"><span class="pre">qbdata.txt</span></code>, using
+<code class="docutils literal"><span class="pre">delimiter='</span> <span class="pre">'</span></code> for this space separated file.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
+
+<span class="gp">In [17]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<span class="gp">   ....: </span>     <span class="n">infile_reader</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>     <span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">infile_reader</span><span class="p">]</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [18]: </span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gh">Out[18]: </span><span class="go"></span>
+<span class="go">[[&#39;Colt&#39;,</span>
+<span class="go">  &#39;McCoy&#39;,</span>
+<span class="go">  &#39;QB&#39;,</span>
+<span class="go">  &#39;CLE&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;135&#39;,</span>
+<span class="go">  &#39;222&#39;,</span>
+<span class="go">  &#39;1576&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;6&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;9&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;60.8%&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;74.5&#39;],</span>
+<span class="go"> [&#39;Josh&#39;,</span>
+<span class="go">  &#39;Freeman&#39;,</span>
+<span class="go">  &#39;QB&#39;,</span>
+<span class="go">  &#39;TB&#39;,</span>
+<span class="go">  &#39;291&#39;,</span>
+<span class="go">  &#39;474&#39;,</span>
+<span class="go">  &#39;3451&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;25&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;6&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;61.4%&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;&#39;,</span>
+<span class="go">  &#39;95.9&#39;]]</span>
+</pre></div>
+</div>
+<p>As you can see, space delimited files can be a problem, as the <code class="docutils literal"><span class="pre">csv.reader</span></code>
+split at each individual space.  This is due to the fact that a space separated
+file is not a proper csv file.  In this case, reading the lines using the string
+<code class="docutils literal"><span class="pre">split</span></code> methods is preferrable.  A better way to split data with whitespace is
+to use a tab, which is represented as the special charater <code class="docutils literal"><span class="pre">\t</span></code>.</p>
+<p>Let&#8217;s create a tab separated version of qbdata, titled <code class="docutils literal"><span class="pre">qbdata.csv</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<span class="gp">   ....: </span>     <span class="n">lines</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [20]: </span><span class="n">split_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+
+<span class="gp">In [21]: </span><span class="n">tab_sep_lines</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">split_lines</span><span class="p">]</span>
+
+<span class="gp">In [22]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">tab_sep_lines</span><span class="p">:</span>
+<span class="gp">   ....: </span>          <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [23]: </span><span class="o">%</span><span class="k">cat</span> qbdata.csv
+<span class="go">Colt	McCoy	QB	CLE	135	222	1576	6	9	60.8%	74.5</span>
+<span class="go">Josh	Freeman	QB	TB	291	474	3451	25	6	61.4%	95.9</span>
+<span class="go">Michael	Vick	QB	PHI	233	372	3018	21	6	62.6%	100.2</span>
+<span class="go">Matt	Schaub	QB	HOU	365	574	4370	24	12	63.6%	92.0</span>
+<span class="go">Philip	Rivers	QB	SD	357	541	4710	30	13	66.0%	101.8</span>
+<span class="go">Matt	Hasselbeck	QB	SEA	266	444	3001	12	17	59.9%	73.2</span>
+<span class="go">Jimmy	Clausen	QB	CAR	157	299	1558	3	9	52.5%	58.4</span>
+<span class="go">Joe	Flacco	QB	BAL	306	489	3622	25	10	62.6%	93.6</span>
+<span class="go">Kyle	Orton	QB	DEN	293	498	3653	20	9	58.8%	87.5</span>
+<span class="go">Jason	Campbell	QB	OAK	194	329	2387	13	8	59.0%	84.5</span>
+<span class="go">Peyton	Manning	QB	IND	450	679	4700	33	17	66.3%	91.9</span>
+<span class="go">Drew	Brees	QB	NO	448	658	4620	33	22	68.1%	90.9</span>
+<span class="go">Matt	Ryan	QB	ATL	357	571	3705	28	9	62.5%	91.0</span>
+<span class="go">Matt	Cassel	QB	KC	262	450	3116	27	7	58.2%	93.0</span>
+<span class="go">Mark	Sanchez	QB	NYJ	278	507	3291	17	13	54.8%	75.3</span>
+<span class="go">Brett	Favre	QB	MIN	217	358	2509	11	19	60.6%	69.9</span>
+<span class="go">David	Garrard	QB	JAC	236	366	2734	23	15	64.5%	90.8</span>
+<span class="go">Eli	Manning	QB	NYG	339	539	4002	31	25	62.9%	85.3</span>
+<span class="go">Carson	Palmer	QB	CIN	362	586	3970	26	20	61.8%	82.4</span>
+<span class="go">Alex	Smith	QB	SF	204	342	2370	14	10	59.6%	82.1</span>
+<span class="go">Chad	Henne	QB	MIA	301	490	3301	15	19	61.4%	75.4</span>
+<span class="go">Tony	Romo	QB	DAL	148	213	1605	11	7	69.5%	94.9</span>
+<span class="go">Jay	Cutler	QB	CHI	261	432	3274	23	16	60.4%	86.3</span>
+<span class="go">Jon	Kitna	QB	DAL	209	318	2365	16	12	65.7%	88.9</span>
+<span class="go">Tom	Brady	QB	NE	324	492	3900	36	4	65.9%	111.0</span>
+<span class="go">Ben	Roethlisberger	QB	PIT	240	389	3200	17	5	61.7%	97.0</span>
+<span class="go">Kerry	Collins	QB	TEN	160	278	1823	14	8	57.6%	82.2</span>
+<span class="go">Derek	Anderson	QB	ARI	169	327	2065	7	10	51.7%	65.9</span>
+<span class="go">Ryan	Fitzpatrick	QB	BUF	255	441	3000	23	15	57.8%	81.8</span>
+<span class="go">Donovan	McNabb	QB	WAS	275	472	3377	14	15	58.3%	77.1</span>
+<span class="go">Kevin	Kolb	QB	PHI	115	189	1197	7	7	60.8%	76.1</span>
+<span class="go">Aaron	Rodgers	QB	GB	312	475	3922	28	11	65.7%	101.2</span>
+<span class="go">Sam	Bradford	QB	STL	354	590	3512	18	15	60.0%	76.5</span>
+<span class="go">Shaun	Hill	QB	DET	257	416	2686	16	12	61.8%	81.3</span>
+</pre></div>
+</div>
+<p>Now we read the tab separated file using the <code class="docutils literal"><span class="pre">csv.reader</span></code>, which result in a
+much cleaner representation of the data.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
+
+<span class="gp">In [25]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<span class="gp">   ....: </span>     <span class="n">infile_reader</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>     <span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">infile_reader</span><span class="p">]</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [26]: </span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gh">Out[26]: </span><span class="go"></span>
+<span class="go">[[&#39;Colt&#39;,</span>
+<span class="go">  &#39;McCoy&#39;,</span>
+<span class="go">  &#39;QB&#39;,</span>
+<span class="go">  &#39;CLE&#39;,</span>
+<span class="go">  &#39;135&#39;,</span>
+<span class="go">  &#39;222&#39;,</span>
+<span class="go">  &#39;1576&#39;,</span>
+<span class="go">  &#39;6&#39;,</span>
+<span class="go">  &#39;9&#39;,</span>
+<span class="go">  &#39;60.8%&#39;,</span>
+<span class="go">  &#39;74.5&#39;],</span>
+<span class="go"> [&#39;Josh&#39;,</span>
+<span class="go">  &#39;Freeman&#39;,</span>
+<span class="go">  &#39;QB&#39;,</span>
+<span class="go">  &#39;TB&#39;,</span>
+<span class="go">  &#39;291&#39;,</span>
+<span class="go">  &#39;474&#39;,</span>
+<span class="go">  &#39;3451&#39;,</span>
+<span class="go">  &#39;25&#39;,</span>
+<span class="go">  &#39;6&#39;,</span>
+<span class="go">  &#39;61.4%&#39;,</span>
+<span class="go">  &#39;95.9&#39;]]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">qbnames.csv</span></code> can also be read in, and in this case, we can skip the
+<code class="docutils literal"><span class="pre">delimiter</span></code> parameter since the default is a <code class="docutils literal"><span class="pre">,</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbnames.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<span class="gp">   ....: </span>     <span class="n">infile_reader</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+<span class="gp">   ....: </span>     <span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">infile_reader</span><span class="p">]</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [28]: </span><span class="n">table</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[28]: </span><span class="go"></span>
+<span class="go">[[&#39;McCoy&#39;, &#39;Colt&#39;],</span>
+<span class="go"> [&#39;Freeman&#39;, &#39;Josh&#39;],</span>
+<span class="go"> [&#39;Vick&#39;, &#39;Michael&#39;],</span>
+<span class="go"> [&#39;Schaub&#39;, &#39;Matt&#39;],</span>
+<span class="go"> [&#39;Rivers&#39;, &#39;Philip&#39;]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-and-writing-large-files">
+<h1>5.3. Reading and Writing Large Files<a class="headerlink" href="#reading-and-writing-large-files" title="Permalink to this headline">¶</a></h1>
+<p>There is a major advantage to using Python (e.g. versus R) to process large data
+files: <strong>Python can process a file line-by-line without the whole file being
+read into memory.</strong>   R, on the other hand, reads the whole file into memory,
+making processing large files tricky.</p>
+<p>A basic framework for processing a large files is to read the file, line by
+line, and write out the transformed data at the same time.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;large-infile.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;outfile.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+          <span class="k">for</span> <span class="n">old_line</span> <span class="ow">in</span> <span class="n">infile</span><span class="p">:</span>
+               <span class="n">new_line</span> <span class="o">=</span> <span class="n">process_line</span><span class="p">(</span><span class="n">old_line</span><span class="p">)</span>
+               <span class="k">print</span><span class="p">(</span><span class="n">new_line</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using thie approach, Python will make sure that only a small portion of the file
+will be in memory at any given time.  You will practice this type of processing
+as part of <strong>Lab 2</strong>.</p>
 </div>
 
 
@@ -725,12 +973,12 @@ loop processing the same line of data over and over.</p>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="toctree.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 5.2. Processing Files with List Comprehensions' data-toggle="tooltip" >
-    <a href="ProcessingFileswithComprehensions.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 5.4. Exercises' data-toggle="tooltip" >
+    <a href="Exercises.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="ProcessingFileswithComprehensions.html" >Next Section - 5.2. Processing Files with List Comprehensions</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="Exercises.html" >Next Section - 5.4. Exercises</a>
 
 <script type="text/javascript">
 

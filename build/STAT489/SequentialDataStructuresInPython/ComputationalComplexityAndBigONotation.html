@@ -600,7 +600,7 @@ add the word &#8220;cat&#8221; to the end of the list.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (appcon1)</span> </p>
 </div>
 <script type="text/javascript">
-var appcon1_trace = {"code": "origlist = [45, 32, 88]\n\noriglist.append(\"cat\")", "trace": [{"globals": {}, "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"origlist": ["REF", 1]}, "ordered_globals": ["origlist"], "line": 3, "func_name": "<module>", "heap": {"1": ["LIST", 45, 32, 88]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"origlist": ["REF", 1]}, "ordered_globals": ["origlist"], "line": 3, "func_name": "<module>", "heap": {"1": ["LIST", 45, 32, 88, "cat"]}, "stack_to_render": [], "event": "return", "stdout": ""}]};
+var appcon1_trace = {"trace": [{"heap": {}, "func_name": "<module>", "ordered_globals": [], "globals": {}, "event": "step_line", "line": 1, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["LIST", 45, 32, 88]}, "func_name": "<module>", "ordered_globals": ["origlist"], "globals": {"origlist": ["REF", 1]}, "event": "step_line", "line": 3, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["LIST", 45, 32, 88, "cat"]}, "func_name": "<module>", "ordered_globals": ["origlist"], "globals": {"origlist": ["REF", 1]}, "event": "return", "line": 3, "stack_to_render": [], "stdout": ""}], "code": "origlist = [45, 32, 88]\n\noriglist.append(\"cat\")"};
 var appcon1_vis;
 
 $(document).ready(function() {
@@ -653,7 +653,7 @@ operator needs two lists to do its work.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (appcon2)</span> </p>
 </div>
 <script type="text/javascript">
-var appcon2_trace = {"code": "origlist = [45, 32, 88]\n\noriglist = origlist + [\"cat\"]", "trace": [{"globals": {}, "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"origlist": ["REF", 1]}, "ordered_globals": ["origlist"], "line": 3, "func_name": "<module>", "heap": {"1": ["LIST", 45, 32, 88]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"origlist": ["REF", 2]}, "ordered_globals": ["origlist"], "line": 3, "func_name": "<module>", "heap": {"2": ["LIST", 45, 32, 88, "cat"]}, "stack_to_render": [], "event": "return", "stdout": ""}]};
+var appcon2_trace = {"trace": [{"heap": {}, "func_name": "<module>", "ordered_globals": [], "globals": {}, "event": "step_line", "line": 1, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["LIST", 45, 32, 88]}, "func_name": "<module>", "ordered_globals": ["origlist"], "globals": {"origlist": ["REF", 1]}, "event": "step_line", "line": 3, "stack_to_render": [], "stdout": ""}, {"heap": {"2": ["LIST", 45, 32, 88, "cat"]}, "func_name": "<module>", "ordered_globals": ["origlist"], "globals": {"origlist": ["REF", 2]}, "event": "return", "line": 3, "stack_to_render": [], "stdout": ""}], "code": "origlist = [45, 32, 88]\n\noriglist = origlist + [\"cat\"]"};
 var appcon2_vis;
 
 $(document).ready(function() {
@@ -704,7 +704,7 @@ it did before the concatenation.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (appcon3)</span> </p>
 </div>
 <script type="text/javascript">
-var appcon3_trace = {"code": "origlist = [45, 32, 88]\n\nnewlist = origlist + [\"cat\"]", "trace": [{"globals": {}, "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"origlist": ["REF", 1]}, "ordered_globals": ["origlist"], "line": 3, "func_name": "<module>", "heap": {"1": ["LIST", 45, 32, 88]}, "stack_to_render": [], "event": "step_line", "stdout": ""}, {"globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "ordered_globals": ["origlist", "newlist"], "line": 3, "func_name": "<module>", "heap": {"1": ["LIST", 45, 32, 88], "2": ["LIST", 45, 32, 88, "cat"]}, "stack_to_render": [], "event": "return", "stdout": ""}]};
+var appcon3_trace = {"trace": [{"heap": {}, "func_name": "<module>", "ordered_globals": [], "globals": {}, "event": "step_line", "line": 1, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["LIST", 45, 32, 88]}, "func_name": "<module>", "ordered_globals": ["origlist"], "globals": {"origlist": ["REF", 1]}, "event": "step_line", "line": 3, "stack_to_render": [], "stdout": ""}, {"heap": {"1": ["LIST", 45, 32, 88], "2": ["LIST", 45, 32, 88, "cat"]}, "func_name": "<module>", "ordered_globals": ["origlist", "newlist"], "globals": {"origlist": ["REF", 1], "newlist": ["REF", 2]}, "event": "return", "line": 3, "stack_to_render": [], "stdout": ""}], "code": "origlist = [45, 32, 88]\n\nnewlist = origlist + [\"cat\"]"};
 var appcon3_vis;
 
 $(document).ready(function() {

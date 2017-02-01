@@ -1,13 +1,14 @@
-Functional Programming
-======================
+Functional List Processing
+::::::::::::::::::::::::::
 
 .. toctree::
-    :caption: Functional Programming
+    :caption: Functional List Processing
     :maxdepth: 1
 
-
-    ThreeProgramingParadgyms.rst
-    WhatAreFunctions.rst
-    UnderstandingScope.rst
-    WhyUseFunctionalProgramming.rst
-    OtherFeaturesOfPythonFunctions.rst
+    ThreeGeneralTasks.rst
+    MoreAboutPythonFunctions.rst
+    RecursiveDataDefinitions.rst
+    RecursiveListProcessing.rst
+    TailRecursionAndAccumulators.rst
+    ListComprehensionVsRecursion.rst
+    Exercises.rst

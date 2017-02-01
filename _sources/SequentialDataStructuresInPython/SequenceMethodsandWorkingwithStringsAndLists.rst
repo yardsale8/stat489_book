@@ -97,6 +97,14 @@ Here are some other methods for transforming a string,
     "*" + food.center(25) + "*"
     "*" + food.ljust(25)  + "*"     # stars added to show bounds
     "*" + food.rjust(25)  + "*"
+We can use ``startswith`` to ask questions about the beginning of the string.
+
+.. ipython:: python
+
+    food.startswith("b")
+    food.startswith("Banana")
+    food.startswith("bana")
+
 
 and finally some methods for finding and counting sub-sequences.
 
@@ -156,6 +164,20 @@ and finally some methods for finding and counting sub-sequences.
       s = "python rocks"
       print(s[1] * s.index("n"))
 
+.. mchoice:: test_question8_3_3
+   :answer_a: True
+   :answer_b: False
+   :correct: b
+   :feedback_a: Remember that "H" and "h" are different characters.
+   :feedback_b: "H" and "h" are different characters.
+
+   What is printed by the following statements?
+   
+   .. code-block:: python
+   
+      bool = "hello".startswith("He")
+      print(bool)
+
 .. note::
 
     This workspace is provided for your convenience.  You can use this activecode window to try out anything you like.
@@ -177,9 +199,11 @@ understand.
     list2 = sorted(mylist)
     list2
     mylist is list2
-    l3 = reverse(mylist)
+    l3 = reversed(mylist)
     l3
-    l3 is mylist
+    l4 = list(l3)
+    l4
+    l4 is mylist
 
 .. note::
 

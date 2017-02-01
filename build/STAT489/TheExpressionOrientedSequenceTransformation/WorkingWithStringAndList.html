@@ -382,67 +382,111 @@ list and then reducing that list to a value.</div>
 <span class="gh">Out[6]: </span><span class="go">4</span>
 </pre></div>
 </div>
+<p>This illustrates an important pattern when working with expression.</p>
+<ol class="arabic simple">
+<li>Work with an example until an expression is developed to accomplish a task.</li>
+<li>Package that expression in a function.</li>
+<li>Update your example and move to the next task.</li>
+</ol>
+<p><strong>Task: Find the average number of vowels in the words in a string</strong></p>
 <p>Next, we will use this function to compute the average number of words in a
 sentence.  We start by going through the process step-by-step.</p>
+<p>First, we need to remove punctuation so that it doesn&#8217;t add artificial length to
+the strings.  We will accomplish this be removing any punctuation (determined by
+importing punctuation from string and checking each character.)</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span>
 
-<span class="gp">In [8]: </span><span class="n">quote</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;I know something ain&#39;t right.</span>
+<span class="gp">In [8]: </span><span class="n">punctuation</span>
+<span class="gh">Out[8]: </span><span class="go">&#39;!&quot;#$%&amp;\&#39;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~&#39;</span>
+
+<span class="gp">In [9]: </span><span class="n">quote</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;I know something ain&#39;t right.</span>
 <span class="gp">   ...: </span><span class="s1">    Sweetie, we&#39;re crooks. If everything were right, we&#39;d be in jail.&#39;&#39;&#39;</span>
 <span class="gp">   ...: </span>
 
-<span class="gp">In [9]: </span><span class="n">s_no_punc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">quote</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
+<span class="gp">In [10]: </span><span class="n">characters_no_punc</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">quote</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">]</span>
 
-<span class="gp">In [10]: </span><span class="n">s_no_punc</span>
-<span class="gh">Out[10]: </span><span class="go">&#39;i know something aint right\n    sweetie were crooks if everything were right wed be in jail&#39;</span>
+<span class="gp">In [11]: </span><span class="n">characters_no_punc</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="gh">Out[11]: </span><span class="go">[&#39;i&#39;, &#39; &#39;, &#39;k&#39;, &#39;n&#39;, &#39;o&#39;, &#39;w&#39;, &#39; &#39;, &#39;s&#39;, &#39;o&#39;, &#39;m&#39;]</span>
+</pre></div>
+</div>
+<p>Notice that this returns a list of (lower case) characters, skipping the
+punctuations marks.  To make this back into a string, we <code class="docutils literal"><span class="pre">join</span></code> the strings in
+the list back together.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">str_no_punc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">characters_no_punc</span><span class="p">)</span>
 
-<span class="gp">In [11]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">quote</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="gp">In [13]: </span><span class="n">str_no_punc</span>
+<span class="gh">Out[13]: </span><span class="go">&#39;i know something aint right\n    sweetie were crooks if everything were right wed be in jail&#39;</span>
+</pre></div>
+</div>
+<p>Let&#8217;s combine these two steps into one expression</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">s_no_punc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">quote</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
 
-<span class="gp">In [12]: </span><span class="n">words</span>
-<span class="gh">Out[12]: </span><span class="go"></span>
-<span class="go">[&#39;I&#39;,</span>
+<span class="gp">In [15]: </span><span class="n">s_no_punc</span>
+<span class="gh">Out[15]: </span><span class="go">&#39;i know something aint right\n    sweetie were crooks if everything were right wed be in jail&#39;</span>
+</pre></div>
+</div>
+<p>and turn this expression into a general function by replacing <code class="docutils literal"><span class="pre">quote</span></code> with a
+most general variable (<code class="docutils literal"><span class="pre">S</span></code> for string.)  This function is tested on the quote
+to make sure it still works.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">S</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">S</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
+
+<span class="gp">In [17]: </span><span class="n">s_no_punc</span> <span class="o">=</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">quote</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Since we are interested in the words in the string, we split by whitespace
+(default action of <code class="docutils literal"><span class="pre">split</span></code>).</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">s_no_punc</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="gp">In [19]: </span><span class="n">words</span>
+<span class="gh">Out[19]: </span><span class="go"></span>
+<span class="go">[&#39;i&#39;,</span>
 <span class="go"> &#39;know&#39;,</span>
 <span class="go"> &#39;something&#39;,</span>
-<span class="go"> &quot;ain&#39;t&quot;,</span>
-<span class="go"> &#39;right.&#39;,</span>
-<span class="go"> &#39;Sweetie,&#39;,</span>
-<span class="go"> &quot;we&#39;re&quot;,</span>
-<span class="go"> &#39;crooks.&#39;,</span>
-<span class="go"> &#39;If&#39;,</span>
+<span class="go"> &#39;aint&#39;,</span>
+<span class="go"> &#39;right&#39;,</span>
+<span class="go"> &#39;sweetie&#39;,</span>
+<span class="go"> &#39;were&#39;,</span>
+<span class="go"> &#39;crooks&#39;,</span>
+<span class="go"> &#39;if&#39;,</span>
 <span class="go"> &#39;everything&#39;,</span>
 <span class="go"> &#39;were&#39;,</span>
-<span class="go"> &#39;right,&#39;,</span>
-<span class="go"> &quot;we&#39;d&quot;,</span>
+<span class="go"> &#39;right&#39;,</span>
+<span class="go"> &#39;wed&#39;,</span>
 <span class="go"> &#39;be&#39;,</span>
 <span class="go"> &#39;in&#39;,</span>
-<span class="go"> &#39;jail.&#39;]</span>
+<span class="go"> &#39;jail&#39;]</span>
+</pre></div>
+</div>
+<p>This list of words is then transformed into a list that givens the number of
+vowels using the function defined above.  Finally the mean function is applied.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
 
-<span class="gp">In [13]: </span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+<span class="gp">In [21]: </span><span class="n">nums</span>
+<span class="gh">Out[21]: </span><span class="go">[1, 1, 3, 2, 1, 4, 2, 2, 1, 3, 2, 1, 1, 1, 1, 2]</span>
 
-<span class="gp">In [14]: </span><span class="n">nums</span>
-<span class="gh">Out[14]: </span><span class="go">[1, 1, 3, 2, 1, 4, 2, 2, 1, 3, 2, 1, 1, 1, 1, 2]</span>
+<span class="gp">In [22]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
 
-<span class="gp">In [15]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="gp">In [23]: </span><span class="n">average_num_vowels</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
 
-<span class="gp">In [16]: </span><span class="n">average_num_vowels</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-
-<span class="gp">In [17]: </span><span class="n">average_num_vowels</span>
-<span class="gh">Out[17]: </span><span class="go">1.75</span>
+<span class="gp">In [24]: </span><span class="n">average_num_vowels</span>
+<span class="gh">Out[24]: </span><span class="go">1.75</span>
 </pre></div>
 </div>
 <p>Finally, we generalize this process with a little refactoring.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
 
-<span class="gp">In [19]: </span><span class="n">clean_and_split</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="gp">In [26]: </span><span class="n">clean_and_split</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
-<span class="gp">In [20]: </span><span class="n">average_num_vowels</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">mean</span><span class="p">([</span><span class="n">num_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">clean_and_split</span><span class="p">(</span><span class="n">s</span><span class="p">)])</span>
+<span class="gp">In [27]: </span><span class="n">average_num_vowels</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">mean</span><span class="p">([</span><span class="n">num_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">clean_and_split</span><span class="p">(</span><span class="n">s</span><span class="p">)])</span>
 
-<span class="gp">In [21]: </span><span class="n">average_num_vowels</span><span class="p">(</span><span class="s2">&quot;Long, long ago in a galaxy far, far away.&quot;</span><span class="p">)</span>
-<span class="gh">Out[21]: </span><span class="go">1.3333333333333333</span>
+<span class="gp">In [28]: </span><span class="n">average_num_vowels</span><span class="p">(</span><span class="s2">&quot;Long, long ago in a galaxy far, far away.&quot;</span><span class="p">)</span>
+<span class="gh">Out[28]: </span><span class="go">1.3333333333333333</span>
 </pre></div>
 </div>
 <p>A second string processing pattern that is commonly applied involves
-transforming one string into another.  Again we illustrate the process with a
-diagram.</p>
+transforming one string into another.  This pattern appeared in the
+<code class="docutils literal"><span class="pre">remove_punc</span></code> function from the last example.  This pattern illustrate the
+process with a diagram.</p>
 <div class="figure">
 <img alt="The process of computing statistics about a string" src="../_images/building_a_string_diagram.png" />
 <div class="legend">
@@ -453,7 +497,7 @@ list and then reducing that list to a value.</div>
 <p>We can use list comprehensions to describe a new string, but we need to convert
 the result back to a string using the <code class="docutils literal"><span class="pre">str</span></code> conversion function.  For example,
 let&#8217;s remove all of the punctuation from a string.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">zen_of_python</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;The Zen of Python, by Tim Peters</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">zen_of_python</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;The Zen of Python, by Tim Peters</span>
 <span class="gp">   ....: </span><span class="s1">Beautiful is better than ugly.</span>
 <span class="gp">   ....: </span><span class="s1">Explicit is better than implicit.</span>
 <span class="gp">   ....: </span><span class="s1">Simple is better than complex.</span>
@@ -475,14 +519,14 @@ let&#8217;s remove all of the punctuation from a string.</p>
 <span class="gp">   ....: </span><span class="s1">Namespaces are one honking great idea -- let&#39;s do more of those!&#39;&#39;&#39;</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [23]: </span><span class="n">zen_list_no_punc</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">zen_of_python</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">]</span>
+<span class="gp">In [30]: </span><span class="n">zen_list_no_punc</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">zen_of_python</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">]</span>
 
-<span class="gp">In [24]: </span><span class="k">print</span><span class="p">(</span><span class="n">zen_list_no_punc</span><span class="p">)</span>
+<span class="gp">In [31]: </span><span class="k">print</span><span class="p">(</span><span class="n">zen_list_no_punc</span><span class="p">)</span>
 <span class="go">[&#39;T&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;Z&#39;, &#39;e&#39;, &#39;n&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39; &#39;, &#39;P&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;b&#39;, &#39;y&#39;, &#39; &#39;, &#39;T&#39;, &#39;i&#39;, &#39;m&#39;, &#39; &#39;, &#39;P&#39;, &#39;e&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;B&#39;, &#39;e&#39;, &#39;a&#39;, &#39;u&#39;, &#39;t&#39;, &#39;i&#39;, &#39;f&#39;, &#39;u&#39;, &#39;l&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;u&#39;, &#39;g&#39;, &#39;l&#39;, &#39;y&#39;, &#39;\n&#39;, &#39;E&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;i&#39;, &#39;t&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;i&#39;, &#39;t&#39;, &#39;\n&#39;, &#39;S&#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;c&#39;, &#39;o&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;x&#39;, &#39;\n&#39;, &#39;C&#39;, &#39;o&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;x&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;c&#39;, &#39;o&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;a&#39;, &#39;t&#39;, &#39;e&#39;, &#39;d&#39;, &#39;\n&#39;, &#39;F&#39;, &#39;l&#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;s&#39;, &#39;t&#39;, &#39;e&#39;, &#39;d&#39;, &#39;\n&#39;, &#39;S&#39;, &#39;p&#39;, &#39;a&#39;, &#39;r&#39;, &#39;s&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;d&#39;, &#39;e&#39;, &#39;n&#39;, &#39;s&#39;, &#39;e&#39;, &#39;\n&#39;, &#39;R&#39;, &#39;e&#39;, &#39;a&#39;, &#39;d&#39;, &#39;a&#39;, &#39;b&#39;, &#39;i&#39;, &#39;l&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39; &#39;, &#39;c&#39;, &#39;o&#39;, &#39;u&#39;, &#39;n&#39;, &#39;t&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;S&#39;, &#39;p&#39;, &#39;e&#39;, &#39;c&#39;, &#39;i&#39;, &#39;a&#39;, &#39;l&#39;, &#39; &#39;, &#39;c&#39;, &#39;a&#39;, &#39;s&#39;, &#39;e&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39;r&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39; &#39;, &#39;s&#39;, &#39;p&#39;, &#39;e&#39;, &#39;c&#39;, &#39;i&#39;, &#39;a&#39;, &#39;l&#39;, &#39; &#39;, &#39;e&#39;, &#39;n&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;b&#39;, &#39;r&#39;, &#39;e&#39;, &#39;a&#39;, &#39;k&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;r&#39;, &#39;u&#39;, &#39;l&#39;, &#39;e&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;A&#39;, &#39;l&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;p&#39;, &#39;r&#39;, &#39;a&#39;, &#39;c&#39;, &#39;t&#39;, &#39;i&#39;, &#39;c&#39;, &#39;a&#39;, &#39;l&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;a&#39;, &#39;t&#39;, &#39;s&#39;, &#39; &#39;, &#39;p&#39;, &#39;u&#39;, &#39;r&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39;\n&#39;, &#39;E&#39;, &#39;r&#39;, &#39;r&#39;, &#39;o&#39;, &#39;r&#39;, &#39;s&#39;, &#39; &#39;, &#39;s&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;l&#39;, &#39;d&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;v&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;p&#39;, &#39;a&#39;, &#39;s&#39;, &#39;s&#39;, &#39; &#39;, &#39;s&#39;, &#39;i&#39;, &#39;l&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39;l&#39;, &#39;y&#39;, &#39;\n&#39;, &#39;U&#39;, &#39;n&#39;, &#39;l&#39;, &#39;e&#39;, &#39;s&#39;, &#39;s&#39;, &#39; &#39;, &#39;e&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;i&#39;, &#39;c&#39;, &#39;i&#39;, &#39;t&#39;, &#39;l&#39;, &#39;y&#39;, &#39; &#39;, &#39;s&#39;, &#39;i&#39;, &#39;l&#39;, &#39;e&#39;, &#39;n&#39;, &#39;c&#39;, &#39;e&#39;, &#39;d&#39;, &#39;\n&#39;, &#39;I&#39;, &#39;n&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;f&#39;, &#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39; &#39;, &#39;a&#39;, &#39;m&#39;, &#39;b&#39;, &#39;i&#39;, &#39;g&#39;, &#39;u&#39;, &#39;i&#39;, &#39;t&#39;, &#39;y&#39;, &#39; &#39;, &#39;r&#39;, &#39;e&#39;, &#39;f&#39;, &#39;u&#39;, &#39;s&#39;, &#39;e&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;t&#39;, &#39;e&#39;, &#39;m&#39;, &#39;p&#39;, &#39;t&#39;, &#39;a&#39;, &#39;t&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;g&#39;, &#39;u&#39;, &#39;e&#39;, &#39;s&#39;, &#39;s&#39;, &#39;\n&#39;, &#39;T&#39;, &#39;h&#39;, &#39;e&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;s&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;l&#39;, &#39;d&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;e&#39;, &#39; &#39;, &#39;a&#39;, &#39;n&#39;, &#39;d&#39;, &#39; &#39;, &#39;p&#39;, &#39;r&#39;, &#39;e&#39;, &#39;f&#39;, &#39;e&#39;, &#39;r&#39;, &#39;a&#39;, &#39;b&#39;, &#39;l&#39;, &#39;y&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;l&#39;, &#39;y&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;b&#39;, &#39;v&#39;, &#39;i&#39;, &#39;o&#39;, &#39;u&#39;, &#39;s&#39;, &#39; &#39;, &#39;w&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;d&#39;, &#39;o&#39;, &#39; &#39;, &#39;i&#39;, &#39;t&#39;, &#39;\n&#39;, &#39;A&#39;, &#39;l&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;w&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;m&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;n&#39;, &#39;o&#39;, &#39;t&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;b&#39;, &#39;v&#39;, &#39;i&#39;, &#39;o&#39;, &#39;u&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;f&#39;, &#39;i&#39;, &#39;r&#39;, &#39;s&#39;, &#39;t&#39;, &#39; &#39;, &#39;u&#39;, &#39;n&#39;, &#39;l&#39;, &#39;e&#39;, &#39;s&#39;, &#39;s&#39;, &#39; &#39;, &#39;y&#39;, &#39;o&#39;, &#39;u&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;D&#39;, &#39;u&#39;, &#39;t&#39;, &#39;c&#39;, &#39;h&#39;, &#39;\n&#39;, &#39;N&#39;, &#39;o&#39;, &#39;w&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;v&#39;, &#39;e&#39;, &#39;r&#39;, &#39;\n&#39;, &#39;A&#39;, &#39;l&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;u&#39;, &#39;g&#39;, &#39;h&#39;, &#39; &#39;, &#39;n&#39;, &#39;e&#39;, &#39;v&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39;t&#39;, &#39;e&#39;, &#39;n&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;t&#39;, &#39;e&#39;, &#39;r&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;r&#39;, &#39;i&#39;, &#39;g&#39;, &#39;h&#39;, &#39;t&#39;, &#39; &#39;, &#39;n&#39;, &#39;o&#39;, &#39;w&#39;, &#39;\n&#39;, &#39;I&#39;, &#39;f&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;m&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39;a&#39;, &#39;t&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;h&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;e&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;a&#39;, &#39;i&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;t&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39; &#39;, &#39;b&#39;, &#39;a&#39;, &#39;d&#39;, &#39; &#39;, &#39;i&#39;, &#39;d&#39;, &#39;e&#39;, &#39;a&#39;, &#39;\n&#39;, &#39;I&#39;, &#39;f&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;e&#39;, &#39; &#39;, &#39;i&#39;, &#39;m&#39;, &#39;p&#39;, &#39;l&#39;, &#39;e&#39;, &#39;m&#39;, &#39;e&#39;, &#39;n&#39;, &#39;t&#39;, &#39;a&#39;, &#39;t&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;s&#39;, &#39; &#39;, &#39;e&#39;, &#39;a&#39;, &#39;s&#39;, &#39;y&#39;, &#39; &#39;, &#39;t&#39;, &#39;o&#39;, &#39; &#39;, &#39;e&#39;, &#39;x&#39;, &#39;p&#39;, &#39;l&#39;, &#39;a&#39;, &#39;i&#39;, &#39;n&#39;, &#39; &#39;, &#39;i&#39;, &#39;t&#39;, &#39; &#39;, &#39;m&#39;, &#39;a&#39;, &#39;y&#39;, &#39; &#39;, &#39;b&#39;, &#39;e&#39;, &#39; &#39;, &#39;a&#39;, &#39; &#39;, &#39;g&#39;, &#39;o&#39;, &#39;o&#39;, &#39;d&#39;, &#39; &#39;, &#39;i&#39;, &#39;d&#39;, &#39;e&#39;, &#39;a&#39;, &#39;\n&#39;, &#39;N&#39;, &#39;a&#39;, &#39;m&#39;, &#39;e&#39;, &#39;s&#39;, &#39;p&#39;, &#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39;s&#39;, &#39; &#39;, &#39;a&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;n&#39;, &#39;e&#39;, &#39; &#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;, &#39;k&#39;, &#39;i&#39;, &#39;n&#39;, &#39;g&#39;, &#39; &#39;, &#39;g&#39;, &#39;r&#39;, &#39;e&#39;, &#39;a&#39;, &#39;t&#39;, &#39; &#39;, &#39;i&#39;, &#39;d&#39;, &#39;e&#39;, &#39;a&#39;, &#39; &#39;, &#39; &#39;, &#39;l&#39;, &#39;e&#39;, &#39;t&#39;, &#39;s&#39;, &#39; &#39;, &#39;d&#39;, &#39;o&#39;, &#39; &#39;, &#39;m&#39;, &#39;o&#39;, &#39;r&#39;, &#39;e&#39;, &#39; &#39;, &#39;o&#39;, &#39;f&#39;, &#39; &#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;s&#39;, &#39;e&#39;]</span>
 
-<span class="gp">In [25]: </span><span class="n">zen_string_no_punc</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">zen_list_no_punc</span><span class="p">)</span>
+<span class="gp">In [32]: </span><span class="n">zen_string_no_punc</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">zen_list_no_punc</span><span class="p">)</span>
 
-<span class="gp">In [26]: </span><span class="k">print</span><span class="p">(</span><span class="n">zen_string_no_punc</span><span class="p">)</span>
+<span class="gp">In [33]: </span><span class="k">print</span><span class="p">(</span><span class="n">zen_string_no_punc</span><span class="p">)</span>
 <span class="go">The Zen of Python by Tim Peters</span>
 <span class="go">Beautiful is better than ugly</span>
 <span class="go">Explicit is better than implicit</span>
@@ -505,10 +549,66 @@ let&#8217;s remove all of the punctuation from a string.</p>
 <span class="go">Namespaces are one honking great idea  lets do more of those</span>
 </pre></div>
 </div>
+<p>Finally, let&#8217;s count how many of the lines in the Zen of Python start with a
+vowel.  Recall that we want to make everything lowercase, split the list into
+pieces (this time by line using <code class="docutils literal"><span class="pre">&quot;\n&quot;</span></code>), filter out the lines that start with
+a vowel, and using <code class="docutils literal"><span class="pre">len</span></code> to process.</p>
+<p>First, make the list lowercase,</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">zen_lower</span> <span class="o">=</span> <span class="n">zen_string_no_punc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>then split it into lines,</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">lines</span> <span class="o">=</span> <span class="n">zen_lower</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="gp">In [36]: </span><span class="n">lines</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[36]: </span><span class="go"></span>
+<span class="go">[&#39;the zen of python by tim peters&#39;,</span>
+<span class="go"> &#39;beautiful is better than ugly&#39;,</span>
+<span class="go"> &#39;explicit is better than implicit&#39;,</span>
+<span class="go"> &#39;simple is better than complex&#39;,</span>
+<span class="go"> &#39;complex is better than complicated&#39;]</span>
+</pre></div>
+</div>
+<p>use a comprehension to filter out the lines that start with vowels,</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">lines_no_vowels</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">]</span>
+
+<span class="gp">In [38]: </span><span class="n">lines_no_vowels</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[38]: </span><span class="go"></span>
+<span class="go">[&#39;explicit is better than implicit&#39;,</span>
+<span class="go"> &#39;although practicality beats purity&#39;,</span>
+<span class="go"> &#39;errors should never pass silently&#39;,</span>
+<span class="go"> &#39;unless explicitly silenced&#39;,</span>
+<span class="go"> &#39;in the face of ambiguity refuse the temptation to guess&#39;]</span>
+</pre></div>
+</div>
+<p>and use the <code class="docutils literal"><span class="pre">len</span></code> function to count the result.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">num_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines_no_vowels</span><span class="p">)</span>
+
+<span class="gp">In [40]: </span><span class="n">num_lines</span>
+<span class="gh">Out[40]: </span><span class="go">9</span>
+</pre></div>
+</div>
+<p>Let&#8217;s combine these steps into one overall expression.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">num_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">zen_string_no_punc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">])</span>
+
+<span class="gp">In [42]: </span><span class="n">num_lines</span>
+<span class="gh">Out[42]: </span><span class="go">9</span>
+</pre></div>
+</div>
+<p>and make this into a general function.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [43]: </span><span class="n">num_lines</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">S</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">S</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">])</span>
+
+<span class="gp">In [44]: </span><span class="n">num_lines</span><span class="p">(</span><span class="n">zen_string_no_punc</span><span class="p">)</span>
+<span class="gh">Out[44]: </span><span class="go">9</span>
+</pre></div>
+</div>
+<p>Anytime that we create a function, we should evaluate it, looking for parts that
+are overly complex.  In this case, the <code class="docutils literal"><span class="pre">S.lower().split('\n')</span></code> is complicated.
+Let&#8217;s refactor by making this a different function with a better name.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>You can contemplate the zen of Python anytime by executing <code class="docutils literal"><span class="pre">import</span> <span class="pre">this</span></code>.</p>
-<div class="last highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="kn">import</span> <span class="nn">this</span>
+<div class="last highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="kn">import</span> <span class="nn">this</span>
 <span class="go">The Zen of Python, by Tim Peters</span>
 
 <span class="go">Beautiful is better than ugly.</span>
@@ -551,63 +651,46 @@ module.  At the very least you should download <code class="docutils literal"><s
 table.</p>
 <img alt="TheExpressionOrientedSequenceTransformation/Figures/nltk_download_gutenberg.png" src="TheExpressionOrientedSequenceTransformation/Figures/nltk_download_gutenberg.png" />
 <p>Now we can access the full content of novels such as Jane Austen&#8217;s Emma.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">gutenberg</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">gutenberg</span>
 
-<span class="gp">In [29]: </span><span class="n">gutenberg</span><span class="o">.</span><span class="n">fileids</span><span class="p">()</span>
-<span class="gh">Out[29]: </span><span class="go"></span>
-<span class="go">[&#39;austen-emma.txt&#39;,</span>
-<span class="go"> &#39;austen-persuasion.txt&#39;,</span>
-<span class="go"> &#39;austen-sense.txt&#39;,</span>
-<span class="go"> &#39;bible-kjv.txt&#39;,</span>
-<span class="go"> &#39;blake-poems.txt&#39;,</span>
-<span class="go"> &#39;bryant-stories.txt&#39;,</span>
-<span class="go"> &#39;burgess-busterbrown.txt&#39;,</span>
-<span class="go"> &#39;carroll-alice.txt&#39;,</span>
-<span class="go"> &#39;chesterton-ball.txt&#39;,</span>
-<span class="go"> &#39;chesterton-brown.txt&#39;,</span>
-<span class="go"> &#39;chesterton-thursday.txt&#39;,</span>
-<span class="go"> &#39;edgeworth-parents.txt&#39;,</span>
-<span class="go"> &#39;melville-moby_dick.txt&#39;,</span>
-<span class="go"> &#39;milton-paradise.txt&#39;,</span>
-<span class="go"> &#39;shakespeare-caesar.txt&#39;,</span>
-<span class="go"> &#39;shakespeare-hamlet.txt&#39;,</span>
-<span class="go"> &#39;shakespeare-macbeth.txt&#39;,</span>
-<span class="go"> &#39;whitman-leaves.txt&#39;]</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">emma</span> <span class="o">=</span> <span class="n">gutenberg</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="s1">&#39;austen-emma.txt&#39;</span><span class="p">)</span>
 
-<span class="gp">In [30]: </span><span class="n">emma</span> <span class="o">=</span> <span class="n">gutenberg</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="s1">&#39;austen-emma.txt&#39;</span><span class="p">)</span>
-
-<span class="gp">In [31]: </span><span class="n">emma</span><span class="p">[:</span><span class="mi">1000</span><span class="p">]</span>
-<span class="gh">Out[31]: </span><span class="go">&quot;[Emma by Jane Austen 1816]\n\nVOLUME I\n\nCHAPTER I\n\n\nEmma Woodhouse, handsome, clever, and rich, with a comfortable home\nand happy disposition, seemed to unite some of the best blessings\nof existence; and had lived nearly twenty-one years in the world\nwith very little to distress or vex her.\n\nShe was the youngest of the two daughters of a most affectionate,\nindulgent father; and had, in consequence of her sister&#39;s marriage,\nbeen mistress of his house from a very early period.  Her mother\nhad died too long ago for her to have more than an indistinct\nremembrance of her caresses; and her place had been supplied\nby an excellent woman as governess, who had fallen little short\nof a mother in affection.\n\nSixteen years had Miss Taylor been in Mr. Woodhouse&#39;s family,\nless as a governess than a friend, very fond of both daughters,\nbut particularly of Emma.  Between _them_ it was more the intimacy\nof sisters.  Even before Miss Taylor had ceased to hold the nominal\noffice of governess, the mildness o&quot;</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">emma</span><span class="p">[:</span><span class="mi">1000</span><span class="p">]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="s2">&quot;[Emma by Jane Austen 1816]</span><span class="se">\n\n</span><span class="s2">VOLUME I</span><span class="se">\n\n</span><span class="s2">CHAPTER I</span><span class="se">\n\n\n</span><span class="s2">Emma Woodhouse, handsome, clever, and rich, with a comfortable home</span><span class="se">\n</span><span class="s2">and happy disposition, seemed to unite some of the best blessings</span><span class="se">\n</span><span class="s2">of existence; and had lived nearly twenty-one years in the world</span><span class="se">\n</span><span class="s2">with very little to distress or vex her.</span><span class="se">\n\n</span><span class="s2">She was the youngest of the two daughters of a most affectionate,</span><span class="se">\n</span><span class="s2">indulgent father; and had, in consequence of her sister&#39;s marriage,</span><span class="se">\n</span><span class="s2">been mistress of his house from a very early period.  Her mother</span><span class="se">\n</span><span class="s2">had died too long ago for her to have more than an indistinct</span><span class="se">\n</span><span class="s2">remembrance of her caresses; and her place had been supplied</span><span class="se">\n</span><span class="s2">by an excellent woman as governess, who had fallen little short</span><span class="se">\n</span><span class="s2">of a mother in affection.</span><span class="se">\n\n</span><span class="s2">Sixteen years had Miss Taylor been in Mr. Woodhouse&#39;s family,</span><span class="se">\n</span><span class="s2">less as a governess than a friend, very fond of both daughters,</span><span class="se">\n</span><span class="s2">but particularly of Emma.  Between _them_ it was more the intimacy</span><span class="se">\n</span><span class="s2">of sisters.  Even before Miss Taylor had ceased to hold the nominal</span><span class="se">\n</span><span class="s2">office of governess, the mildness o&quot;</span>
 </pre></div>
 </div>
 <p>Once we have the novel imported into Python, it can be processed to answer
 questions about the text.  Suppose that we want to know the average word length
 in Emma.  First, the text is preprocessed to clean and remove unwanted
-charaters, in this case any punctuation or whitespace.  (We also make all of the
+characters, in this case any punctuation or whitespace.  (We also make all of the
 text lowercase out of habit.)</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span><span class="p">,</span> <span class="n">whitespace</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span><span class="p">,</span> <span class="n">whitespace</span>
 
-<span class="gp">In [33]: </span><span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span>
+<span class="n">punctuation</span><span class="p">])</span>
 
-<span class="gp">In [34]: </span><span class="n">make_lower_case</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">make_lower_case</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+   <span class="o">...</span><span class="p">:</span>
 
-<span class="gp">In [35]: </span><span class="n">fix_whitespace</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">whitespace</span> <span class="k">else</span> <span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">fix_whitespace</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">whitespace</span> <span class="k">else</span> <span class="n">ch</span> <span class="k">for</span>
+<span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
 
-<span class="gp">In [36]: </span><span class="n">emma</span> <span class="o">=</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">make_lower_case</span><span class="p">(</span><span class="n">fix_whitespace</span><span class="p">(</span><span class="n">emma</span><span class="p">)))</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">emma</span> <span class="o">=</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">make_lower_case</span><span class="p">(</span><span class="n">fix_whitespace</span><span class="p">(</span><span class="n">emma</span><span class="p">)))</span>
 
-<span class="gp">In [37]: </span><span class="n">emma</span><span class="p">[:</span><span class="mi">1000</span><span class="p">]</span>
-<span class="gh">Out[37]: </span><span class="go">&#39;emma by jane austen 1816  volume i  chapter i   emma woodhouse handsome clever and rich with a comfortable home and happy disposition seemed to unite some of the best blessings of existence and had lived nearly twentyone years in the world with very little to distress or vex her  she was the youngest of the two daughters of a most affectionate indulgent father and had in consequence of her sisters marriage been mistress of his house from a very early period  her mother had died too long ago for her to have more than an indistinct remembrance of her caresses and her place had been supplied by an excellent woman as governess who had fallen little short of a mother in affection  sixteen years had miss taylor been in mr woodhouses family less as a governess than a friend very fond of both daughters but particularly of emma  between them it was more the intimacy of sisters  even before miss taylor had ceased to hold the nominal office of governess the mildness of her temper had hardly allow&#39;</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">emma</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="s1">&#39;emma by jane austen 1816  volume i  chapter i   emma woodhouse handsome</span>
+<span class="n">clever</span> <span class="ow">and</span> <span class="n">rich</span> <span class="k">with</span> <span class="n">a</span> <span class="n">comfo</span><span class="s1">&#39;</span>
 </pre></div>
 </div>
 <p>Next, the text is split into a list of words and the statistic is computed.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">emma_words</span> <span class="o">=</span> <span class="n">emma</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># split by whitespace</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">emma_words</span> <span class="o">=</span> <span class="n">emma</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
-<span class="gp">In [39]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
 
-<span class="gp">In [40]: </span><span class="n">average_word_length</span> <span class="o">=</span> <span class="n">mean</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">emma_words</span><span class="p">])</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">average_word_length</span> <span class="o">=</span> <span class="n">mean</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">emma_words</span><span class="p">])</span>
 
-<span class="gp">In [41]: </span><span class="n">average_word_length</span>
-<span class="gh">Out[41]: </span><span class="go">4.327759895276701</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">average_word_length</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="mf">4.327759895276701</span>
 </pre></div>
 </div>
 <div class="admonition caution">
