@@ -9,7 +9,7 @@
 Working with Strings and Lists
 ==============================
 
-Data wrangling envolves transforming data from some raw form to another more
+Data wrangling involves transforming data from some raw form to another more
 useful form.  Often this raw form is text saved in a text file, which
 corresponds to the Python string data structure.  In this section, we will
 illustrate the process of converting and transforming textual data list
@@ -245,12 +245,12 @@ Let's refactor by making this a different function with a better name.
 Installing Project Gutenberg texts with NLTK
 --------------------------------------------
 
-We can access a large number of freely available books using the ``ntlk`` python
-library.  First, use ``conda`` to install/update the ``ntlk`` library.
+We can access a large number of freely available books using the ``nltk`` python
+library.  First, use ``conda`` to install/update the ``nltk`` library.
 
 .. sourcecode:: bash
 
-     $ conda install ntlk
+     $ conda install nltk
 
 The you will need to ``import`` and download the books from a python console.
 

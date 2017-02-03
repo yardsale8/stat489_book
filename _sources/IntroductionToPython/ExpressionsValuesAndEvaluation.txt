@@ -251,7 +251,7 @@ have added another wrinkle by introducing a global variable ``x`` as well.
     g(3)
 
 If ``x**2`` referred to the outer parameter, we would have seen ``2**2 = 4`` as
-the value of ``g(3)``.  Similarly, ``x`` was referring to the global
+the value of ``g(3)``.  Similarly, if ``x`` was referring to the global
 variable, ``g(3)`` would return ``1**2 = 1``.  So clearly the
 ``x`` in the expression ``x**2`` is referring to the inner ``x`` parameter.
 

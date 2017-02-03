@@ -9,3 +9,6 @@
 
 Generators
 ==========
+
+
+.. Good recursive example (see the tree example):: http://stackoverflow.com/questions/38254304/can-generators-be-recursive 
