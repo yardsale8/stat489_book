@@ -245,12 +245,12 @@ Let's refactor by making this a different function with a better name.
 Installing Project Gutenberg texts with NLTK
 --------------------------------------------
 
-We can access a large number of freely available books using the ``ntlk`` python
-library.  First, use ``conda`` to install/update the ``ntlk`` library.
+We can access a large number of freely available books using the ``nltk`` python
+library.  First, use ``conda`` to install/update the ``nltk`` library.
 
 .. sourcecode:: bash
 
-     $ conda install ntlk
+     $ conda install nltk
 
 The you will need to ``import`` and download the books from a python console.
 

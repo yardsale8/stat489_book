@@ -10,7 +10,7 @@
 Exercises
 ---------
 
-#.
+.. question:: 0013
 
     .. tabbed:: q1
 
@@ -41,7 +41,7 @@ Exercises
             #. 'pineapple' < 'Peach' = False
 
 
-#.
+.. question:: 0044
 
    .. tabbed:: q1
 
@@ -67,7 +67,7 @@ Exercises
                 :shortname: interactivepython
                 :identifier: disqus_12314cf40dbe407cb145f029870c0347
 
-#.
+.. question:: 0070
    Draw a reference diagram for ``a`` and ``b`` before and after the third line of
    the following python code is executed:
 
@@ -78,9 +78,15 @@ Exercises
        c = 3*b
        c[0] = 5
 
-#. 
+.. question:: 0081 
    
-   **Question:** Determine the complexity of the following stask: Sum up all the negative numbers in a list.
+   **Question:** Determine the complexity of the following task: Sum up all the negative numbers in a list.
+
+
+
+.. question:: 0087 
+
+   **Question:** Determine the complexity of the following task: Count how many words in a list have length 5.
 
    **Answer:**
 
@@ -94,8 +100,5 @@ Exercises
 
        Thus the total complexity is :math:`n*O(1) + n*O(1) + m*O(1) < n*(3*O(1)) = O(n*1) = O(n)`
 
-
-#. Determine the complexity of the following stask: Count how many words in a list have length 5.
-
-#. Determine the complexity of the following stask: Add up all of the entries of an :math:`n\cross n` matrix
+.. question:: 0101 Determine the complexity of the following task: Add up all of the entries of an :math:`n\cross n` matrix
 

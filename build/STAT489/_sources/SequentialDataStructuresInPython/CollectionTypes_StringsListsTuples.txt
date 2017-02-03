@@ -22,7 +22,7 @@ strings in much more detail.
 A Collection Data Type
 ----------------------
 
-So far we have seen built-in types like: ``int``, ``float``, ``bool``, ``str``
+So far we have seen built-in types like: ``int``, ``float``, ``bool``, ``str``,
 ``int``, ``float``, and ``bool`` are considered to be simple or primitive data
 types because their values are not composed of any smaller parts.  They cannot
 be broken down.  On the other hand, strings are different from the others

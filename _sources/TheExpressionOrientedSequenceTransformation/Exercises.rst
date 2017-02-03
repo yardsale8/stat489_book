@@ -13,6 +13,7 @@ Exercises
 .. basic
 
 .. question:: 15 
+   :number: 1
    
    In Robert McCloskey's book *Make Way for Ducklings*, the names of the
    ducklings are Jack, Kack, Lack, Mack, Nack, Ouack, Pack, and Quack.  This
