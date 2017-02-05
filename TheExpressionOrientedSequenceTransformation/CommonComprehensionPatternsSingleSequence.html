@@ -267,9 +267,10 @@
 <li><a class="reference internal" href="#combine-information-in-tuples">4.3.1. Combine information in tuples</a></li>
 <li><a class="reference internal" href="#use-built-in-helper-functions">4.3.2. Use built-in helper functions</a></li>
 <li><a class="reference internal" href="#use-built-in-functions-to-reduce-a-list-to-a-value">4.3.3. Use built-in functions to reduce a list to a value</a></li>
-<li><a class="reference internal" href="#use-any-and-all-for-boolean-questions-about-a-list">4.3.4. Use <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> for Boolean questions about a list</a></li>
-<li><a class="reference internal" href="#use-a-comprehension-to-apply-many-functions-to-a-value">4.3.5. Use a comprehension to apply many functions to a value</a></li>
-<li><a class="reference internal" href="#filter-and-count-using-len">4.3.6. Filter and count using <code class="docutils literal"><span class="pre">len</span></code></a></li>
+<li><a class="reference internal" href="#use-a-key-function-with-max-and-min-to-process-tuples">4.3.4. Use a key function with <code class="docutils literal"><span class="pre">max</span></code> and <code class="docutils literal"><span class="pre">min</span></code> to process tuples</a></li>
+<li><a class="reference internal" href="#use-any-and-all-for-boolean-questions-about-a-list">4.3.5. Use <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> for Boolean questions about a list</a></li>
+<li><a class="reference internal" href="#use-a-comprehension-to-apply-many-functions-to-a-value">4.3.6. Use a comprehension to apply many functions to a value</a></li>
+<li><a class="reference internal" href="#filter-and-count-using-len">4.3.7. Filter and count using <code class="docutils literal"><span class="pre">len</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -389,7 +390,44 @@ indexing operator to access the value.</p>
 <p>Clearly using <code class="docutils literal"><span class="pre">enumerate</span></code> led to a simpler and easier to read construction.
 Be sure to use this function whenever you need both the index and value of a
 sequence.</p>
-<p>The <code class="docutils literal"><span class="pre">zip</span></code> function combines two sequences into one sequence
+<p><strong>Check your Understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="enumerate_1">
+            <p>rec-5-85: What will be printed by executing the following code block?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="enumerate_1_opt_a">(A) [(1, 0), (2, 1), (3, 2)]</li><li data-component="feedback" id="enumerate_1_opt_a">Remember that Python starts counting at 0!  So does enumerate.</li>
+            
+            <li data-component="answer"  id="enumerate_1_opt_b">(B) [(0, 1), (1, 2), (2, 3)]</li><li data-component="feedback" id="enumerate_1_opt_b">Remember that Python starts counting at 0!  So does range.</li>
+            
+            <li data-component="answer" data-correct id="enumerate_1_opt_c">(C) [(0, 0), (1, 1), (2, 2)]</li><li data-component="feedback" id="enumerate_1_opt_c"></li>
+            
+            <li data-component="answer"  id="enumerate_1_opt_d">(D) [(0, 1, 2), (0, 1, 2)]</li><li data-component="feedback" id="enumerate_1_opt_d">Enumerate pairs the index with the original value.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="enumerate_2">
+            <p>rec-5-86: What will be printed by executing the following code block?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="enumerate_2_opt_a">(A) [(1, 0), (2, 1), (3, 2)]</li><li data-component="feedback" id="enumerate_2_opt_a">Enumerate returns pairs with the index in the first entry and the value in the second.</li>
+            
+            <li data-component="answer" data-correct id="enumerate_2_opt_b">(B) [(0, 1), (1, 2), (2, 3)]</li><li data-component="feedback" id="enumerate_2_opt_b"></li>
+            
+            <li data-component="answer"  id="enumerate_2_opt_c">(C) [(0, 0), (1, 1), (2, 2)]</li><li data-component="feedback" id="enumerate_2_opt_c">This range function starts at 1 and goes up to (but not including) 4.</li>
+            
+            <li data-component="answer"  id="enumerate_2_opt_d">(D) [(0, 1, 2), (1, 2, 3)]</li><li data-component="feedback" id="enumerate_2_opt_d">Enumerate pairs the index with the original value.</li>
+            
+
+            </ul>
+            <p>The <code class="docutils literal"><span class="pre">zip</span></code> function combines two sequences into one sequence
 of pairs.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 
@@ -415,17 +453,17 @@ comprehension and <code class="docutils literal"><span class="pre">zip</span></c
 <span class="gp">In [19]: </span><span class="n">six_sided</span> <span class="o">=</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_trials</span><span class="p">)]</span>
 
 <span class="gp">In [20]: </span><span class="n">six_sided</span>
-<span class="gh">Out[20]: </span><span class="go">[5, 1, 5, 1, 4, 4, 6, 4, 2, 1]</span>
+<span class="gh">Out[20]: </span><span class="go">[4, 4, 1, 3, 5, 4, 4, 3, 4, 3]</span>
 
 <span class="gp">In [21]: </span><span class="n">twenty_sided</span> <span class="o">=</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_trials</span><span class="p">)]</span>
 
 <span class="gp">In [22]: </span><span class="n">twenty_sided</span>
-<span class="gh">Out[22]: </span><span class="go">[3, 6, 5, 6, 7, 20, 14, 11, 4, 19]</span>
+<span class="gh">Out[22]: </span><span class="go">[19, 7, 17, 5, 10, 5, 4, 20, 9, 18]</span>
 
 <span class="gp">In [23]: </span><span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="n">r6</span> <span class="o">+</span> <span class="n">r20</span> <span class="k">for</span> <span class="n">r6</span><span class="p">,</span> <span class="n">r20</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">six_sided</span><span class="p">,</span> <span class="n">twenty_sided</span><span class="p">)]</span>
 
 <span class="gp">In [24]: </span><span class="n">sums</span>
-<span class="gh">Out[24]: </span><span class="go">[8, 7, 10, 7, 11, 24, 20, 15, 6, 20]</span>
+<span class="gh">Out[24]: </span><span class="go">[23, 11, 18, 8, 15, 9, 8, 23, 13, 21]</span>
 </pre></div>
 </div>
 <p>To generalize this process, we use <code class="docutils literal"><span class="pre">lambda</span></code> expressions to create general
@@ -440,7 +478,7 @@ functions for creating each sequence such that the value of the number of trials
 <span class="gp">In [28]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
 
 <span class="gp">In [29]: </span><span class="n">mean</span><span class="p">(</span><span class="n">sums</span><span class="p">(</span><span class="mi">1000000</span><span class="p">))</span>
-<span class="gh">Out[29]: </span><span class="go">14.004148</span>
+<span class="gh">Out[29]: </span><span class="go">13.995521</span>
 </pre></div>
 </div>
 <p>Above we illustrate this refactoring of the original code and use the newly
@@ -453,7 +491,44 @@ variable(s) we would like to change and adding them as formal parameters to a
 lambda expression.  This is as simple as appending the <code class="docutils literal"><span class="pre">lambda</span> <span class="pre">N:</span></code> to the
 front of our expressions and changing some variable references to function
 calls.</p>
-<p>Finally, we highlight the <code class="docutils literal"><span class="pre">reversed</span></code> function, which allows us to
+<p><strong>Check Your Understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="zip_1">
+            <p>rec-5-87: What will be printed by executing the following code block?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="zip_1_opt_a">(A) [(1, 0), (2, 1), (3, 2)]</li><li data-component="feedback" id="zip_1_opt_a">Zip preserves the order of the original arguments.  In this case the values from range(3) will preceed the values from range(1,4).</li>
+            
+            <li data-component="answer" data-correct id="zip_1_opt_b">(B) [(0, 1), (1, 2), (2, 3)]</li><li data-component="feedback" id="zip_1_opt_b"></li>
+            
+            <li data-component="answer"  id="zip_1_opt_c">(C) [(0, 0), (1, 1), (2, 2)]</li><li data-component="feedback" id="zip_1_opt_c">The second range function starts at 1 and goes up to (but not including) 4.</li>
+            
+            <li data-component="answer"  id="zip_1_opt_d">(D) [(0, 1, 2), (1, 2, 3)]</li><li data-component="feedback" id="zip_1_opt_d">Zip combines the sequences in pairs based on index (1st with 1st, 2nd with 2nd, ...)</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="zip_2">
+            <p>rec-5-88: What will be printed by executing the following code block?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="zip_2_opt_a">(A) [(1, 0), (2, 1), (3, 2)]</li><li data-component="feedback" id="zip_2_opt_a">The first range starts at 0 and counts up to 2.</li>
+            
+            <li data-component="answer"  id="zip_2_opt_b">(B) [(0, 1), (1, 2), (2, 3)]</li><li data-component="feedback" id="zip_2_opt_b">The second range starts at 0 and counts up to 3.</li>
+            
+            <li data-component="answer" data-correct id="zip_2_opt_c">(C) [(0, 0), (1, 1), (2, 2)]</li><li data-component="feedback" id="zip_2_opt_c">If given sequences of different length, zip will stop at the end of the shorted sequence.</li>
+            
+            <li data-component="answer"  id="zip_2_opt_d">(D) Error, you can't zip lists of different length.</li><li data-component="feedback" id="zip_2_opt_d">If given sequences of different length, zip will stop at the end of the shorted sequence.</li>
+            
+
+            </ul>
+            <p>Finally, we highlight the <code class="docutils literal"><span class="pre">reversed</span></code> function, which allows us to
 iterate through a sequence from back to front.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
 
@@ -568,9 +643,136 @@ want a computer to do.</strong></div></blockquote>
 <p class="last">That is, you should focus on describing what your program does in such a way
 that another programmer can understand just by reading your code.</p>
 </div>
+<p><strong>Check Your Understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="reduce_sum_1">
+            <p>rec-5-89: What will be printed when executing the following code?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
 </div>
+
+            <li data-component="answer"  id="reduce_sum_1_opt_a">(A) 21</li><li data-component="feedback" id="reduce_sum_1_opt_a">The range will not include 6 and will only include values divisible by 3 (x % 3 == 0).</li>
+            
+            <li data-component="answer"  id="reduce_sum_1_opt_b">(B) 15</li><li data-component="feedback" id="reduce_sum_1_opt_b">The comprehension will only include values divisible by 3 (x % 3 == 0).</li>
+            
+            <li data-component="answer" data-correct id="reduce_sum_1_opt_c">(C) 3</li><li data-component="feedback" id="reduce_sum_1_opt_c"></li>
+            
+            <li data-component="answer"  id="reduce_sum_1_opt_d">(D) 9</li><li data-component="feedback" id="reduce_sum_1_opt_d">The range will not include 6</li>
+            
+
+            </ul>
+            </div>
+<div class="section" id="use-a-key-function-with-max-and-min-to-process-tuples">
+<h2>4.3.4. Use a key function with <code class="docutils literal"><span class="pre">max</span></code> and <code class="docutils literal"><span class="pre">min</span></code> to process tuples<a class="headerlink" href="#use-a-key-function-with-max-and-min-to-process-tuples" title="Permalink to this headline">¶</a></h2>
+<p>The built-in reduction function <code class="docutils literal"><span class="pre">max</span></code> and <code class="docutils literal"><span class="pre">min</span></code> have an optional keyword
+parameter that accepts a key function.  This can be used to search a list of
+lists, specifying the entry by which we wish to compare values.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">help</span><span class="p">(</span><span class="nb">max</span><span class="p">)</span>
+<span class="go">Help on built-in function max in module builtins:</span>
+
+<span class="go">max(...)</span>
+<span class="go">    max(iterable, *[, default=obj, key=func]) -&gt; value</span>
+<span class="go">    max(arg1, arg2, *args, *[, key=func]) -&gt; value</span>
+<span class="go">    </span>
+<span class="go">    With a single iterable argument, return its biggest item. The</span>
+<span class="go">    default keyword-only argument specifies an object to return if</span>
+<span class="go">    the provided iterable is empty.</span>
+<span class="go">    With two or more arguments, return the largest argument.</span>
+</pre></div>
+</div>
+<p>For example, consider the <code class="docutils literal"><span class="pre">hours</span></code> table in the following code.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">hours</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">43</span><span class="p">],</span>
+<span class="gp">   ....: </span>           <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">37</span><span class="p">],</span>
+<span class="gp">   ....: </span>           <span class="p">[</span><span class="s2">&quot;Fred&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">]]</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<p>Suppose that we want to determine the name of the employee that worked the most
+hours last week.  In this case, we want to compare the rows based on the 2nd
+entry (index 1).  This is accomplished by defining a key function that takes a
+row and returns the 2nd element.  Then the <code class="docutils literal"><span class="pre">max</span></code> function will apply this
+function before comparing the rows.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [47]: </span><span class="n">get_hours</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">In [48]: </span><span class="n">max_row</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">get_hours</span><span class="p">)</span>
+
+<span class="gp">In [49]: </span><span class="n">max_row</span>
+<span class="gh">Out[49]: </span><span class="go">[&#39;Alice&#39;, 43]</span>
+
+<span class="gp">In [50]: </span><span class="n">get_name</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="gp">In [51]: </span><span class="n">employee_max_hours</span> <span class="o">=</span> <span class="n">get_name</span><span class="p">(</span><span class="n">max_row</span><span class="p">)</span>
+
+<span class="gp">In [52]: </span><span class="n">employee_max_hours</span>
+<span class="gh">Out[52]: </span><span class="go">&#39;Alice&#39;</span>
+</pre></div>
+</div>
+<p>This process is generalized by combining the expressions for <code class="docutils literal"><span class="pre">max_row</span></code> and
+<code class="docutils literal"><span class="pre">employee_max_hours</span></code> into a lambda expression.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [53]: </span><span class="n">get_name</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="gp">In [54]: </span><span class="n">get_hours</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">In [55]: </span><span class="n">employee_max_hours</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">hours_table</span><span class="p">:</span> <span class="n">get_name</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">hours_table</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">get_hours</span><span class="p">))</span>
+
+<span class="gp">In [56]: </span><span class="n">employee_max_hours</span><span class="p">(</span><span class="n">hours</span><span class="p">)</span>
+<span class="gh">Out[56]: </span><span class="go">&#39;Alice&#39;</span>
+</pre></div>
+</div>
+<p>A similar technique can be used to returns a sorted table using the <code class="docutils literal"><span class="pre">sorted</span></code>
+function, which also accepts a key function.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">help</span><span class="p">(</span><span class="nb">sorted</span><span class="p">)</span>
+<span class="go">Help on built-in function sorted in module builtins:</span>
+
+<span class="go">sorted(iterable, key=None, reverse=False)</span>
+<span class="go">    Return a new list containing all items from the iterable in ascending order.</span>
+<span class="go">    </span>
+<span class="go">    A custom key function can be supplied to customise the sort order, and the</span>
+<span class="go">    reverse flag can be set to request the result in descending order.</span>
+</pre></div>
+</div>
+<p>We can sort the table by hours worked (defaults is smallest-to-largest),</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [58]: </span><span class="nb">sorted</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="n">get_hours</span><span class="p">)</span>
+<span class="gh">Out[58]: </span><span class="go">[[&#39;Fred&#39;, 15], [&#39;Bob&#39;, 37], [&#39;Alice&#39;, 43]]</span>
+</pre></div>
+</div>
+<p>by hours worked sorted from largest to smallest using <code class="docutils literal"><span class="pre">reverse=True</span></code>,</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="nb">sorted</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="n">get_hours</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gh">Out[59]: </span><span class="go">[[&#39;Alice&#39;, 43], [&#39;Bob&#39;, 37], [&#39;Fred&#39;, 15]]</span>
+</pre></div>
+</div>
+<p>or put the list in alphabetical order by creating a new key function that
+returns a lower-case name.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [60]: </span><span class="n">lower_names</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">get_name</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="gp">In [61]: </span><span class="nb">sorted</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">lower_names</span><span class="p">)</span>
+<span class="gh">Out[61]: </span><span class="go">[[&#39;Alice&#39;, 43], [&#39;Bob&#39;, 37], [&#39;Fred&#39;, 15]]</span>
+</pre></div>
+</div>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="reduce_sum_1">
+            <p>rec-5-90: What will be printed when executing the following code?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">get_second</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">val</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="n">get_second</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="reduce_sum_1_opt_a">(A) [0, 1, 2]</li><li data-component="feedback" id="reduce_sum_1_opt_a">This would be the minimum row.</li>
+            
+            <li data-component="answer"  id="reduce_sum_1_opt_b">(B) [2, 3, 4, 5]</li><li data-component="feedback" id="reduce_sum_1_opt_b">This is the largest column, not largest row</li>
+            
+            <li data-component="answer" data-correct id="reduce_sum_1_opt_c">(C) [3, 4, 5]</li><li data-component="feedback" id="reduce_sum_1_opt_c">This is the row with the largest 2nd entry.</li>
+            
+            <li data-component="answer"  id="reduce_sum_1_opt_d">(D) Error, the table isn't square.</li><li data-component="feedback" id="reduce_sum_1_opt_d">the max function can process any table, as long as the key function works for all rows (even if all the rows are not the same length)</li>
+            
+
+            </ul>
+            </div>
 <div class="section" id="use-any-and-all-for-boolean-questions-about-a-list">
-<h2>4.3.4. Use <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> for Boolean questions about a list<a class="headerlink" href="#use-any-and-all-for-boolean-questions-about-a-list" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.5. Use <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> for Boolean questions about a list<a class="headerlink" href="#use-any-and-all-for-boolean-questions-about-a-list" title="Permalink to this headline">¶</a></h2>
 <p>There are two more functions that help use reduce a list to a value.  The Python
 built-in functions <code class="docutils literal"><span class="pre">any</span></code> and <code class="docutils literal"><span class="pre">all</span></code> are useful when asking Boolean questions
 about a list.  The function <code class="docutils literal"><span class="pre">any</span></code> takes a sequence as input and returns True
@@ -579,17 +781,17 @@ hand, when <code class="docutils literal"><span class="pre">all</span></code> is
 <em>all</em> of the elements of said sequence evaluate to <code class="docutils literal"><span class="pre">True</span></code>.</p>
 <p>Suppose that we want to know if any or all of the elements of a list are even.
 We can write a lambda functions to perform each task as follows.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">all_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">all</span><span class="p">([</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">all_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">all</span><span class="p">([</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
 
-<span class="gp">In [46]: </span><span class="n">any_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
+<span class="gp">In [63]: </span><span class="n">any_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
 
-<span class="gp">In [47]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">In [64]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 
-<span class="gp">In [48]: </span><span class="n">any_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
-<span class="gh">Out[48]: </span><span class="go">True</span>
+<span class="gp">In [65]: </span><span class="n">any_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="gh">Out[65]: </span><span class="go">True</span>
 
-<span class="gp">In [49]: </span><span class="n">all_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
-<span class="go">              Out[49]: False</span>
+<span class="gp">In [66]: </span><span class="n">all_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="go">              Out[66]: False</span>
 </pre></div>
 </div>
 <p>Notice that this pattern involves</p>
@@ -599,111 +801,159 @@ We can write a lambda functions to perform each task as follows.</p>
 </ol>
 <p>Let&#8217;s refactor this code to clean it up, namely by introducing an <code class="docutils literal"><span class="pre">is_even</span></code>
 function.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="n">is_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [67]: </span><span class="n">is_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
 
-<span class="gp">In [51]: </span><span class="n">all_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">all</span><span class="p">([</span><span class="n">is_even</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
+<span class="gp">In [68]: </span><span class="n">all_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">all</span><span class="p">([</span><span class="n">is_even</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
 
-<span class="gp">In [52]: </span><span class="n">any_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="n">is_even</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
+<span class="gp">In [69]: </span><span class="n">any_even</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="n">is_even</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">])</span>
 
-<span class="gp">In [53]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">In [70]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 
-<span class="gp">In [54]: </span><span class="n">any_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
-<span class="gh">Out[54]: </span><span class="go">True</span>
+<span class="gp">In [71]: </span><span class="n">any_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="gh">Out[71]: </span><span class="go">True</span>
 
-<span class="gp">In [55]: </span><span class="n">all_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
-<span class="go">              Out[55]: False</span>
+<span class="gp">In [72]: </span><span class="n">all_even</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="go">              Out[72]: False</span>
 </pre></div>
 </div>
+<p><strong>Check Your Understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="any_1">
+            <p>rec-5-91: What will be printed when executing the following code?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="nb">any</span><span class="p">([</span><span class="n">n</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
 </div>
+
+            <li data-component="answer" data-correct id="any_1_opt_a">(A) True</li><li data-component="feedback" id="any_1_opt_a">0 is divisible by 4 (and any other int).</li>
+            
+            <li data-component="answer"  id="any_1_opt_b">(B) False</li><li data-component="feedback" id="any_1_opt_b">0 is divisible by 4 (and any other int).</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="all_1">
+            <p>rec-5-92: What will be printed when executing the following code?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="nb">all</span><span class="p">([</span><span class="n">n</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="all_1_opt_a">(A) True</li><li data-component="feedback" id="all_1_opt_a">1 is not divisible by 4.</li>
+            
+            <li data-component="answer" data-correct id="all_1_opt_b">(B) False</li><li data-component="feedback" id="all_1_opt_b">1 is not divisible by 4.</li>
+            
+
+            </ul>
+            </div>
 <div class="section" id="use-a-comprehension-to-apply-many-functions-to-a-value">
-<h2>4.3.5. Use a comprehension to apply many functions to a value<a class="headerlink" href="#use-a-comprehension-to-apply-many-functions-to-a-value" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.6. Use a comprehension to apply many functions to a value<a class="headerlink" href="#use-a-comprehension-to-apply-many-functions-to-a-value" title="Permalink to this headline">¶</a></h2>
 <p>Suppose that we want to apply many functions to the same value.  We can
 accomplish this using a list of functions and a list comprehension.  In the
 first example, we will compute a number of statistics on the same list.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
 
-<span class="gp">In [57]: </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="nb">min</span><span class="p">]</span>
+<span class="gp">In [74]: </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="nb">min</span><span class="p">]</span>
 
-<span class="gp">In [58]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">In [75]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 
-<span class="gp">In [59]: </span><span class="n">stats</span> <span class="o">=</span> <span class="p">[</span><span class="n">stat_func</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="k">for</span> <span class="n">stat_func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">]</span>
+<span class="gp">In [76]: </span><span class="n">stats</span> <span class="o">=</span> <span class="p">[</span><span class="n">stat_func</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="k">for</span> <span class="n">stat_func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">]</span>
 
-<span class="gp">In [60]: </span><span class="n">stats</span>
-<span class="gh">Out[60]: </span><span class="go">[3.0, 5, 1]</span>
+<span class="gp">In [77]: </span><span class="n">stats</span>
+<span class="gh">Out[77]: </span><span class="go">[3.0, 5, 1]</span>
 </pre></div>
 </div>
 <p>In the previous example, each function is pulled out of the <code class="docutils literal"><span class="pre">funcs</span></code> list and
 applied to the list in sequence. We can use a similar approach, combined with
 the <code class="docutils literal"><span class="pre">any</span></code> function, to check if a given value is a number of some sort, be it
 int, real or complex.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [61]: </span><span class="n">is_type_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">,</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [78]: </span><span class="n">is_type_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">,</span>
 <span class="gp">   ....: </span>                 <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">,</span>
 <span class="gp">   ....: </span>                 <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">complex</span><span class="p">]</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [62]: </span><span class="n">is_number</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="n">is_type_func</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">is_type_func</span> <span class="ow">in</span> <span class="n">is_type_funcs</span><span class="p">])</span>
+<span class="gp">In [79]: </span><span class="n">is_number</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="n">is_type_func</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">is_type_func</span> <span class="ow">in</span> <span class="n">is_type_funcs</span><span class="p">])</span>
 
-<span class="gp">In [63]: </span><span class="n">is_number</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="gh">Out[63]: </span><span class="go">True</span>
+<span class="gp">In [80]: </span><span class="n">is_number</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gh">Out[80]: </span><span class="go">True</span>
 
-<span class="gp">In [64]: </span><span class="n">is_number</span><span class="p">(</span><span class="mf">2.3</span><span class="p">)</span>
-<span class="go">              Out[64]: True</span>
+<span class="gp">In [81]: </span><span class="n">is_number</span><span class="p">(</span><span class="mf">2.3</span><span class="p">)</span>
+<span class="go">              Out[81]: True</span>
 
-<span class="gp">In [65]: </span><span class="n">is_number</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
-<span class="go">                            Out[65]: False</span>
+<span class="gp">In [82]: </span><span class="n">is_number</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="go">                            Out[82]: False</span>
 </pre></div>
 </div>
 <p>One thing to note about the last example is that we used to anonymous nature of a
 lambda expression to define each of the functions for checking a type <em>inside
 the list definition</em> without assigning each to a separate name.</p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="apply_functions_1">
+            <p>rec-5-93: What will be printed when executing the following code?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">identity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+<span class="n">sqr</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">cube</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">sqr</span><span class="p">,</span> <span class="n">cube</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
 </div>
+
+            <li data-component="answer" data-correct id="apply_functions_1_opt_a">(A) [3, 9, 27]</li><li data-component="feedback" id="apply_functions_1_opt_a">This comprehension will apply call function in order with an argument of 3.</li>
+            
+            <li data-component="answer"  id="apply_functions_1_opt_b">(B) [9, 3, 27]</li><li data-component="feedback" id="apply_functions_1_opt_b">This comprehension will apply call function in same order as given in the list.</li>
+            
+            <li data-component="answer"  id="apply_functions_1_opt_c">(C) Error, you can not iterate over a list of functions.</li><li data-component="feedback" id="apply_functions_1_opt_c">Functions are objects and can be iterated over like any other Python value.</li>
+            
+
+            </ul>
+            </div>
 <div class="section" id="filter-and-count-using-len">
-<h2>4.3.6. Filter and count using <code class="docutils literal"><span class="pre">len</span></code><a class="headerlink" href="#filter-and-count-using-len" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.7. Filter and count using <code class="docutils literal"><span class="pre">len</span></code><a class="headerlink" href="#filter-and-count-using-len" title="Permalink to this headline">¶</a></h2>
 <p>You can use the <code class="docutils literal"><span class="pre">if</span></code> clause along with the length function to count the number
 of elements that satisfy a condition.  In a previous example, we simulated the
 distribution of the sum of rolls on a six and twenty sided die. Suppose that we
 wish to estimate the frequency of the result of the sum being prime.   First, we
 will use filtering and <code class="docutils literal"><span class="pre">len</span></code> to answer the question.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">six_sided</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [83]: </span><span class="n">six_sided</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
 
-<span class="gp">In [67]: </span><span class="n">twenty_sided</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+<span class="gp">In [84]: </span><span class="n">twenty_sided</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
 
-<span class="gp">In [68]: </span><span class="n">sum_rolls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">r6</span> <span class="o">+</span> <span class="n">r20</span> <span class="k">for</span> <span class="n">r6</span><span class="p">,</span> <span class="n">r20</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">six_sided</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">twenty_sided</span><span class="p">(</span><span class="n">N</span><span class="p">))]</span>
+<span class="gp">In [85]: </span><span class="n">sum_rolls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">[</span><span class="n">r6</span> <span class="o">+</span> <span class="n">r20</span> <span class="k">for</span> <span class="n">r6</span><span class="p">,</span> <span class="n">r20</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">six_sided</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">twenty_sided</span><span class="p">(</span><span class="n">N</span><span class="p">))]</span>
 
-<span class="gp">In [69]: </span><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span>
+<span class="gp">In [86]: </span><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span>
 
-<span class="gp">In [70]: </span><span class="n">num_primes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">])</span>
+<span class="gp">In [87]: </span><span class="n">num_primes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">])</span>
 
-<span class="gp">In [71]: </span><span class="n">prop_primes</span> <span class="o">=</span> <span class="n">num_primes</span><span class="o">/</span><span class="mi">10000</span>
+<span class="gp">In [88]: </span><span class="n">prop_primes</span> <span class="o">=</span> <span class="n">num_primes</span><span class="o">/</span><span class="mi">10000</span>
 
-<span class="gp">In [72]: </span><span class="n">prop_primes</span>
-<span class="gh">Out[72]: </span><span class="go">0.3469</span>
+<span class="gp">In [89]: </span><span class="n">prop_primes</span>
+<span class="gh">Out[89]: </span><span class="go">0.3466</span>
 </pre></div>
 </div>
 <p>We get the number of primes in the simulation by filtering with <code class="docutils literal"><span class="pre">if</span> <span class="pre">i</span> <span class="pre">in</span>
 <span class="pre">prime</span></code> and then using <code class="docutils literal"><span class="pre">len</span></code> to count the number of results.</p>
 <p>Another approach to the last example is to map results to 0 or 1 based on the
 condition, then using sum to answer the question.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="n">primes_rolls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [90]: </span><span class="n">primes_rolls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
 
-<span class="gp">In [74]: </span><span class="n">prop_primes</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">primes_rolls</span><span class="p">)</span><span class="o">/</span><span class="mi">10000</span>
+<span class="gp">In [91]: </span><span class="n">prop_primes</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">primes_rolls</span><span class="p">)</span><span class="o">/</span><span class="mi">10000</span>
 
-<span class="gp">In [75]: </span><span class="n">prop_primes</span>
-<span class="gh">Out[75]: </span><span class="go">0.3449</span>
+<span class="gp">In [92]: </span><span class="n">prop_primes</span>
+<span class="gh">Out[92]: </span><span class="go">0.3393</span>
 </pre></div>
 </div>
 <p>We can compare the efficiency of these methods using the IPython <code class="docutils literal"><span class="pre">%timeit</span></code>
 magic after abstracting each approach with a lambda expression.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="n">with_zero_one</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span><span class="o">/</span><span class="n">N</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [93]: </span><span class="n">with_zero_one</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span><span class="o">/</span><span class="n">N</span>
 
-<span class="gp">In [77]: </span><span class="o">%</span><span class="k">timeit</span> with_zero_one(10000)
-<span class="go">10 loops, best of 3: 41.1 ms per loop</span>
+<span class="gp">In [94]: </span><span class="o">%</span><span class="k">timeit</span> with_zero_one(10000)
+<span class="go">10 loops, best of 3: 35 ms per loop</span>
 </pre></div>
 </div>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [78]: </span><span class="n">with_len</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">])</span><span class="o">/</span><span class="n">N</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [95]: </span><span class="n">with_len</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">])</span><span class="o">/</span><span class="n">N</span>
 
-<span class="gp">In [79]: </span><span class="o">%</span><span class="k">timeit</span> with_len(10000)
-<span class="go">10 loops, best of 3: 39 ms per loop</span>
+<span class="gp">In [96]: </span><span class="o">%</span><span class="k">timeit</span> with_len(10000)
+<span class="go">10 loops, best of 3: 35.6 ms per loop</span>
 </pre></div>
 </div>
 <p>It is not surprising that these methods have nearly the same efficiency, as they
@@ -712,6 +962,7 @@ both have to visit each entry once and must count values.</p>
 <p class="first admonition-title">Question</p>
 <p class="last">Can you prove that each of these approaches is <span class="math">\(O(n)\)</span>?</p>
 </div>
+<p><strong>Check Your Understanding</strong></p>
 </div>
 </div>
 
