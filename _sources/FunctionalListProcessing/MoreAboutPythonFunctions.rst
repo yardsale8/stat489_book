@@ -569,7 +569,7 @@ variable number of inputs.
     print(1,2,3)
 
 How does that work?  It turns out that we can design similar functions using the
-``*arg`` variable args in our definition.  When we use ``*args`` as a parameter,
+variable arguments in our definition.  When we use ``*args`` as a parameter,
 Python will except any number of arguments and give them to us in a tuple named
 ``args``. You should think of ``*args`` to represent *zero or more arguments*
 stored in a tuple named ``args``.  In the case of the ``add`` function, we can
@@ -626,3 +626,5 @@ number of parameters with the unpacking operator allows us to write and use very
 general functions.  Here we have a function that will work on any number of
 arguments, as well as on unpacked lists.   In particular, applying this function
 to the list allows us to add up a list of undetermined length!
+
+
