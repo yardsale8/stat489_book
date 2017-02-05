@@ -11,6 +11,7 @@ Exercises
 ---------
 
 .. question:: 0013
+    :number: 1
 
     .. tabbed:: q1
 
@@ -68,6 +69,7 @@ Exercises
                 :identifier: disqus_12314cf40dbe407cb145f029870c0347
 
 .. question:: 0070
+
    Draw a reference diagram for ``a`` and ``b`` before and after the third line of
    the following python code is executed:
 
@@ -100,5 +102,7 @@ Exercises
 
        Thus the total complexity is :math:`n*O(1) + n*O(1) + m*O(1) < n*(3*O(1)) = O(n*1) = O(n)`
 
-.. question:: 0101 Determine the complexity of the following task: Add up all of the entries of an :math:`n\cross n` matrix
+.. question:: 0101 
+
+     Determine the complexity of the following task: Add up all of the entries of an :math:`n\times n` matrix
 

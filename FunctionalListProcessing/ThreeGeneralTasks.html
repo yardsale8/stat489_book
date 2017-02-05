@@ -327,6 +327,7 @@ of a list.  An example would be squaring all the elements in a list.</p>
 </div>
 <p>In fact, the form of applying a map with a list comprehension will always have
 the following form shown below for some function <code class="docutils literal"><span class="pre">f</span></code>.</p>
+<p><strong>General Form of a map</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mapped_L</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">L</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -335,27 +336,19 @@ that fit some condition.  For example, we would filter out all of the odd number
 from a list of numbers.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 
-<span class="gp">In [6]: </span><span class="n">is_odd</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
-<span class="gp">   ...: </span><span class="n">sqr_L</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">L</span> <span class="n">is_odd</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
-<span class="gp">   ...: </span><span class="n">sqr_L</span>
-<span class="gp">   ...: </span>
-<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-6-d83c5b2bb96c&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
-    <span class="n">is_odd</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
-                          <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<span class="gp">In [6]: </span><span class="n">is_odd</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
 
-<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-7-4832395b1e6b&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
-    <span class="n">sqr_L</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">L</span> <span class="n">is_odd</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
-                               <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<span class="gp">In [7]: </span><span class="n">odd_L</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">is_odd</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
 
-<span class="gh">Out[8]: </span><span class="go">[1, 4, 9, 16, 25]</span>
+<span class="gp">In [8]: </span><span class="n">odd_L</span>
+<span class="gh">Out[8]: </span><span class="go">[1, 3, 5]</span>
 </pre></div>
 </div>
 <p>Once again, the basic form of a filter is easy to express in the form of a list
 comprehension.  Let <code class="docutils literal"><span class="pre">predicate</span></code> be a Boolean function that checks the
 condition by which we filter.  Then a filter operation can be expressed as
 follows.</p>
+<p><strong>General form of a filter</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">filtered_L</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">L</span> <span class="n">predicate</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
 </pre></div>
 </div>
@@ -374,26 +367,12 @@ count the number of odd values in a list by combining a filter with the <code cl
 reducer function.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 
-<span class="gp">In [10]: </span><span class="n">is_odd</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
-<span class="gp">   ....: </span><span class="n">num_odd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">L</span> <span class="n">is_odd</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
-<span class="gp">   ....: </span><span class="n">num_odd</span>
-<span class="gp">   ....: </span>
-<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-10-d83c5b2bb96c&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
-    <span class="n">is_odd</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
-                          <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<span class="gp">In [10]: </span><span class="n">is_odd</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
 
-<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-11-a3c4fa57227a&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
-<span class="nn">    num_odd = len([x for x</span> in <span class="ni">L is_odd</span><span class="nt">(x)])</span>
-                                     <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<span class="gp">In [11]: </span><span class="n">num_odd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">is_odd</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
 
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-12-f83f676acc9b&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">num_odd</span>
-
-<span class="ne">NameError</span>: name &#39;num_odd&#39; is not defined
+<span class="gp">In [12]: </span><span class="n">num_odd</span>
+<span class="gh">Out[12]: </span><span class="go">3</span>
 </pre></div>
 </div>
 <p>This action <em>reduced</em> the list to a value, namely the number of odd entries.
@@ -404,8 +383,168 @@ out the odd values and then <em>reduce</em> that list to the length of the list.
 had to rely on Python built-in functions to reduce lists to values.  In general,
 we will need to look for a more general solution to these problems and the
 standard functional approach is through recursion.</p>
-<p>We will investigate recursion in the upcoming chapters, but first we look at
-Python functions in more detail.</p>
+<p>Let&#8217;s look at the imperative solution to a few reduction problems and see if we
+can see a pattern.</p>
+<p><strong>Problem 1 - Compute the sum of all the numbers in a list</strong></p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [14]: </span><span class="k">def</span> <span class="nf">sum_list</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">item</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">acc</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [15]: </span><span class="n">sum_list</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="gh">Out[15]: </span><span class="go">15</span>
+</pre></div>
+</div>
+<p><strong>Problem 2 - Join all the strings in a list into one string</strong></p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">my_strings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
+
+<span class="gp">In [17]: </span><span class="k">def</span> <span class="nf">join_strings</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">acc</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+<span class="gp">   ....: </span>        <span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">item</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">acc</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [18]: </span><span class="n">join_strings</span><span class="p">(</span><span class="n">my_strings</span><span class="p">)</span>
+<span class="gh">Out[18]: </span><span class="go">&#39;abc&#39;</span>
+</pre></div>
+</div>
+<p><strong>Problem 3 - Take a list of numbers and return a list of cumulative sums</strong></p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">my_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [20]: </span><span class="k">def</span> <span class="nf">cumult_sum</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">acc</span> <span class="o">=</span> <span class="p">[</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+<span class="gp">   ....: </span>        <span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">+</span> <span class="p">[</span><span class="n">acc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">item</span><span class="p">]</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">acc</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [21]: </span><span class="n">cumult_sum</span><span class="p">(</span><span class="n">my_numbers</span><span class="p">)</span>
+<span class="gh">Out[21]: </span><span class="go">[1, 3, 6, 10, 15]</span>
+</pre></div>
+</div>
+<p>First note that <code class="docutils literal"><span class="pre">join_strings</span></code> uses the first entry in the sequence as the
+initial value and iterates over the rest of the sequence.  This approach will be
+valid with many reduction problems, and will make a nice default for our initial
+value.</p>
+<p>Each of the solutions shown above are examples of the accumulator pattern.  In
+each case, the variable <code class="docutils literal"><span class="pre">acc</span></code> is set to some initial value and then updated as
+we iterate though each value.  Also note how very similar the <em>shape</em> of the
+code is in these examples.  A little refactoring will make this very clear.  We
+will modify the code in two ways.  First, the initial value will be made a
+parameter of each function.  Second, we will define and use a separate function
+to update the accumulator.</p>
+<p><strong>Problem 1 - Compute the sum of all the numbers in a list</strong></p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [23]: </span><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">item</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [24]: </span><span class="k">def</span> <span class="nf">sum_list</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">init</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">acc</span> <span class="o">=</span> <span class="n">init</span>
+<span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">acc</span> <span class="o">=</span> <span class="n">update</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">acc</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [25]: </span><span class="n">sum_list</span><span class="p">(</span><span class="n">my_list</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gh">Out[25]: </span><span class="go">15</span>
+</pre></div>
+</div>
+<p><strong>Problem 2 - Join all the strings in a list into one string</strong></p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">my_strings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
+
+<span class="gp">In [27]: </span><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">item</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [28]: </span><span class="k">def</span> <span class="nf">join_strings</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">init</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">acc</span> <span class="o">=</span> <span class="n">init</span>
+<span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">acc</span> <span class="o">=</span> <span class="n">update</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">acc</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [29]: </span><span class="n">join_strings</span><span class="p">(</span><span class="n">my_strings</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">my_strings</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gh">Out[29]: </span><span class="go">&#39;abc&#39;</span>
+</pre></div>
+</div>
+<p><strong>Problem 3 - Take a list of numbers and return a list of cumulative sums</strong></p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">my_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [31]: </span><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">acc</span> <span class="o">+</span> <span class="p">[</span><span class="n">acc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">item</span><span class="p">]</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [32]: </span><span class="k">def</span> <span class="nf">cumult_sum</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">init</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">acc</span> <span class="o">=</span> <span class="n">init</span>
+<span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">acc</span> <span class="o">=</span> <span class="n">update</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">acc</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [33]: </span><span class="n">cumult_sum</span><span class="p">(</span><span class="n">my_numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">:],[</span><span class="n">my_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="gh">Out[33]: </span><span class="go">[1, 3, 6, 10, 15]</span>
+</pre></div>
+</div>
+<p>These three functions look to be identical, but they are all referencing a
+different (globally defined) <code class="docutils literal"><span class="pre">update</span></code> function.  Recall that all Python data
+are object, including functions.  The final modification we will make, it adding
+a parameter for the update function, allowing us to answer all three problems
+with one function.  In Python and LISP, this function is know as <code class="docutils literal"><span class="pre">reduce</span></code>.  In
+other languages, such as HAskell, this function is called <code class="docutils literal"><span class="pre">foldl</span></code> for <em>fold
+from the left</em>.  In the process of making this last refactor, we will also set
+up a default value of init, making sure to iterate through the rest of the list
+if using the default.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [35]: </span><span class="n">my_strings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
+
+<span class="gp">In [36]: </span><span class="n">my_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [37]: </span><span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span><span class="n">init</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">if</span> <span class="n">init</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">acc</span> <span class="o">=</span> <span class="n">init</span>
+<span class="gp">   ....: </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">acc</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">   ....: </span>        <span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="k">try</span><span class="p">:</span>
+<span class="gp">   ....: </span>            <span class="n">acc</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+<span class="gp">   ....: </span>        <span class="k">except</span><span class="p">:</span>
+<span class="gp">   ....: </span>            <span class="k">print</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">acc</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [38]: </span><span class="n">list_sum</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">my_list</span><span class="p">)</span>
+
+<span class="gp">In [39]: </span><span class="n">list_sum</span>
+<span class="gh">Out[39]: </span><span class="go">15</span>
+
+<span class="gp">In [40]: </span><span class="n">my_str</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">my_strings</span><span class="p">)</span>
+
+<span class="gp">In [41]: </span><span class="n">my_str</span>
+<span class="gh">Out[41]: </span><span class="go">&#39;abc&#39;</span>
+
+<span class="gp">In [42]: </span><span class="n">csum</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">],</span> <span class="n">my_numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="p">[</span><span class="n">my_numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+<span class="gp">In [43]: </span><span class="n">csum</span>
+<span class="gh">Out[43]: </span><span class="go">[1, 3, 6, 10, 15]</span>
+</pre></div>
+</div>
+<p>In reality, we didn&#8217;t need to write this function, as it is provided in the
+standard <code class="docutils literal"><span class="pre">functools</span></code> library.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+
+<span class="gp">In [45]: </span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gh">Out[45]: </span><span class="go">55</span>
+</pre></div>
+</div>
 </div>
 
 
