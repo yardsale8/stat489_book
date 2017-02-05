@@ -75,6 +75,42 @@ Clearly using ``enumerate`` led to a simpler and easier to read construction.
 Be sure to use this function whenever you need both the index and value of a
 sequence.
 
+**Check your Understanding**
+
+.. mchoice:: enumerate_1
+    :answer_a: [(1, 0), (2, 1), (3, 2)]
+    :answer_b: [(0, 1), (1, 2), (2, 3)]
+    :answer_c: [(0, 0), (1, 1), (2, 2)]
+    :answer_d: [(0, 1, 2), (0, 1, 2)]
+    :correct: c
+    :feedback_a: Remember that Python starts counting at 0!  So does enumerate.
+    :feedback_b: Remember that Python starts counting at 0!  So does range.
+    :feedback_d: Enumerate pairs the index with the original value.
+
+    What will be printed by executing the following code block?
+
+    .. sourcecode:: python
+     
+        L = list(enumerate(range(3)))
+        print(L)
+
+.. mchoice:: enumerate_2
+    :answer_a: [(1, 0), (2, 1), (3, 2)]
+    :answer_b: [(0, 1), (1, 2), (2, 3)]
+    :answer_c: [(0, 0), (1, 1), (2, 2)]
+    :answer_d: [(0, 1, 2), (1, 2, 3)]
+    :correct: b
+    :feedback_a: Enumerate returns pairs with the index in the first entry and the value in the second.
+    :feedback_c: This range function starts at 1 and goes up to (but not including) 4.
+    :feedback_d: Enumerate pairs the index with the original value.
+
+    What will be printed by executing the following code block?
+
+    .. sourcecode:: python
+     
+        L = list(enumerate(range(1,4)))
+        print(L)
+
 The ``zip`` function combines two sequences into one sequence
 of pairs.
 
@@ -130,6 +166,44 @@ variable(s) we would like to change and adding them as formal parameters to a
 lambda expression.  This is as simple as appending the ``lambda N:`` to the
 front of our expressions and changing some variable references to function
 calls.
+
+**Check Your Understanding**
+
+.. mchoice:: zip_1
+    :answer_a: [(1, 0), (2, 1), (3, 2)]
+    :answer_b: [(0, 1), (1, 2), (2, 3)]
+    :answer_c: [(0, 0), (1, 1), (2, 2)]
+    :answer_d: [(0, 1, 2), (1, 2, 3)]
+    :correct: b
+    :feedback_a: Zip preserves the order of the original arguments.  In this case the values from range(3) will preceed the values from range(1,4).
+    :feedback_c: The second range function starts at 1 and goes up to (but not including) 4.
+    :feedback_d: Zip combines the sequences in pairs based on index (1st with 1st, 2nd with 2nd, ...)
+
+    What will be printed by executing the following code block?
+
+    .. sourcecode:: python
+     
+        L = list(zip(range(3), range(1,4)))
+        print(L)
+
+
+.. mchoice:: zip_2
+    :answer_a: [(1, 0), (2, 1), (3, 2)]
+    :answer_b: [(0, 1), (1, 2), (2, 3)]
+    :answer_c: [(0, 0), (1, 1), (2, 2)]
+    :answer_d: Error, you can't zip lists of different length.
+    :correct: c
+    :feedback_a: The first range starts at 0 and counts up to 2.
+    :feedback_b: The second range starts at 0 and counts up to 3.
+    :feedback_c: If given sequences of different length, zip will stop at the end of the shorted sequence.
+    :feedback_d: If given sequences of different length, zip will stop at the end of the shorted sequence.
+
+    What will be printed by executing the following code block?
+
+    .. sourcecode:: python
+     
+        L = list(zip(range(3), range(4)))
+        print(L)
 
 Finally, we highlight the ``reversed`` function, which allows us to
 iterate through a sequence from back to front.
@@ -254,6 +328,115 @@ time when increasing the length of a list by a factor of 10.
     That is, you should focus on describing what your program does in such a way
     that another programmer can understand just by reading your code.
 
+**Check Your Understanding**
+
+.. mchoice:: reduce_sum_1
+    :answer_a: 21
+    :answer_b: 15
+    :answer_c: 3
+    :answer_d: 9
+    :correct: c
+    :feedback_a: The range will not include 6 and will only include values divisible by 3 (x % 3 == 0).
+    :feedback_b: The comprehension will only include values divisible by 3 (x % 3 == 0).
+    :feedback_d: The range will not include 6
+
+    What will be printed when executing the following code?
+
+    .. sourcecode:: python
+
+        val = sum([x for x in range(6) if x % 3 == 0])
+        print(val)
+
+Use a key function with ``max`` and ``min`` to process tuples
+-------------------------------------------------------------
+
+The built-in reduction function ``max`` and ``min`` have an optional keyword
+parameter that accepts a key function.  This can be used to search a list of
+lists, specifying the entry by which we wish to compare values.
+
+.. ipython:: python
+
+    help(max)
+
+For example, consider the ``hours`` table in the following code.  
+
+.. ipython:: python
+
+    hours = [["Alice", 43],
+               ["Bob", 37],
+               ["Fred", 15]]
+
+Suppose that we want to determine the name of the employee that worked the most
+hours last week.  In this case, we want to compare the rows based on the 2nd
+entry (index 1).  This is accomplished by defining a key function that takes a
+row and returns the 2nd element.  Then the ``max`` function will apply this
+function before comparing the rows.
+
+.. ipython:: python
+
+    get_hours = lambda row: row[1] 
+    max_row = max(hours, key=get_hours)
+    max_row
+    get_name = lambda row: row[0]
+    employee_max_hours = get_name(max_row)
+    employee_max_hours
+
+This process is generalized by combining the expressions for ``max_row`` and
+``employee_max_hours`` into a lambda expression.
+
+.. ipython:: python
+
+    get_name = lambda row: row[0]
+    get_hours = lambda row: row[1] 
+    employee_max_hours = lambda hours_table: get_name(max(hours_table, key=get_hours))
+    employee_max_hours(hours)
+
+A similar technique can be used to returns a sorted table using the ``sorted``
+function, which also accepts a key function.
+
+.. ipython:: python
+
+    help(sorted)
+
+We can sort the table by hours worked (defaults is smallest-to-largest),
+
+.. ipython:: python
+
+    sorted(hours, key = get_hours)
+
+by hours worked sorted from largest to smallest using ``reverse=True``,
+
+.. ipython:: python
+
+    sorted(hours, key = get_hours, reverse=True)
+
+or put the list in alphabetical order by creating a new key function that
+returns a lower-case name.
+
+.. ipython:: python
+
+    lower_names = lambda row: get_name(row).lower()
+    sorted(hours, key=lower_names)
+
+.. mchoice:: reduce_sum_1
+    :answer_a: [0, 1, 2]
+    :answer_b: [2, 3, 4, 5]
+    :answer_c: [3, 4, 5]
+    :answer_d: Error, the table isn't square.
+    :correct: c
+    :feedback_a: This would be the minimum row.
+    :feedback_b: This is the largest column, not largest row
+    :feedback_c: This is the row with the largest 2nd entry.
+    :feedback_d: the max function can process any table, as long as the key function works for all rows (even if all the rows are not the same length)
+
+    What will be printed when executing the following code?
+
+    .. sourcecode:: python
+
+        get_second = lambda row: row[1]
+        table = [list(range(i, i+3)) for i in range(4)]
+        val = max(table, key = get_second)
+        print(val)
 
 
 Use ``any`` and ``all`` for Boolean questions about a list
@@ -294,6 +477,36 @@ function.
     any_even(my_list)
     all_even(my_list)
 
+**Check Your Understanding**
+
+.. mchoice:: any_1
+    :answer_a: True
+    :answer_b: False
+    :correct: a
+    :feedback_a: 0 is divisible by 4 (and any other int).
+    :feedback_b: 0 is divisible by 4 (and any other int).
+
+    What will be printed when executing the following code?
+
+    .. sourcecode:: python
+
+        val = any([n % 4 == 0 for n in range(4)])
+        print(val)
+
+.. mchoice:: all_1
+    :answer_a: True
+    :answer_b: False
+    :correct: b
+    :feedback_a: 1 is not divisible by 4. 
+    :feedback_b: 1 is not divisible by 4. 
+
+    What will be printed when executing the following code?
+
+    .. sourcecode:: python
+
+        val = all([n % 4 == 0 for n in range(4)])
+        print(val)
+
 Use a comprehension to apply many functions to a value
 ------------------------------------------------------
 
@@ -328,6 +541,26 @@ int, real or complex.
 One thing to note about the last example is that we used to anonymous nature of a
 lambda expression to define each of the functions for checking a type *inside
 the list definition* without assigning each to a separate name.
+
+
+.. mchoice:: apply_functions_1
+    :answer_a: [3, 9, 27]
+    :answer_b: [9, 3, 27]
+    :answer_c:  Error, you can not iterate over a list of functions.
+    :correct: a
+    :feedback_a: This comprehension will apply call function in order with an argument of 3.
+    :feedback_b: This comprehension will apply call function in same order as given in the list.
+    :feedback_c: Functions are objects and can be iterated over like any other Python value.
+
+    What will be printed when executing the following code?
+
+    .. sourcecode:: python
+
+        identity = lambda x: x
+        sqr = lambda x: x**2
+        cube = lambda x: x**3
+        vals = [f(3) for f in (identity, sqr, cube)]
+        print(val)
 
 Filter and count using ``len``
 ------------------------------
@@ -381,4 +614,25 @@ both have to visit each entry once and must count values.
 .. admonition:: Question
 
      Can you prove that each of these approaches is :math:`O(n)`?
+
+**Check Your Understanding**
+
+.. mchoice:: count_sum_1
+    :answer_a: 5
+    :answer_b: 10
+    :answer_c: 9
+    :answer_d: 4
+    :correct: a
+    :feedback_a: There are 5 odd number in range(10) (1, 3, 5, 7, 9)
+    :feedback_b: There are 5 odd number in range(10) (1, 3, 5, 7, 9)
+    :feedback_c: There are 5 odd number in range(10) (1, 3, 5, 7, 9)
+    :feedback_c: There are 5 odd number in range(10) (1, 3, 5, 7, 9)
+
+    What will be printed when executing the following code?
+
+    .. sourcecode:: python
+
+        is_odd = lambda num: num % 2 == 1
+        val = sum([1 if is_odd(n) else 0 for n in range(10)])
+        print(val)
 

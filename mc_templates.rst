@@ -5,6 +5,8 @@
     :feedback_a:
     :feedback_b:
 
+    question
+
 .. mchoice:: 
     :answer_a:
     :answer_b:
@@ -13,6 +15,8 @@
     :feedback_a:
     :feedback_b:
     :feedback_c:
+
+    question
 
 .. mchoice:: 
     :answer_a:
@@ -24,6 +28,8 @@
     :feedback_b:
     :feedback_c:
     :feedback_d:
+
+    question
 
 .. raw:: html
 
