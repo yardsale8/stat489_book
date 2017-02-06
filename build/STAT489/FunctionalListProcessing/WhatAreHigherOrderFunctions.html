@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6. Functional List Processing &mdash; Runestone Interactive Overview</title>
+    <title>6.2. What are Higher Order Functions? &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,8 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="next" title="6.1. Three General Tasks" href="ThreeGeneralTasks.html" />
-    <link rel="prev" title="5.4. Exercises" href="../ReadingDataFromFiles/Exercises.html" />
+    <link rel="up" title="6. Functional List Processing" href="toctree.html" />
+    <link rel="next" title="6.3. Other Examples of Higher Order Functions" href="OtherExamplesOfHigherOrderFunctions.html" />
+    <link rel="prev" title="6.1. Three General Tasks" href="ThreeGeneralTasks.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -247,7 +248,7 @@
             <li><a href='/runestone/static/overview/instructor.html'>Help for Instructors</a></li>
             <li class="divider"></li>
             <li><a href='http://runestoneinteractive.org'>About Runestone</a></li>
-            <li><a href='/runestone/default/reportabug?course=STAT489&page=toctree'>Report A Problem</a></li>
+            <li><a href='/runestone/default/reportabug?course=STAT489&page=WhatAreHigherOrderFunctions'>Report A Problem</a></li>
           </ul>
         </li>
         <!-- end help menu dropdown -->
@@ -262,7 +263,7 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6. Functional List Processing</a></li>
+<li><a class="reference internal" href="#">6.2. What are Higher Order Functions?</a></li>
 </ul>
 </ul>
 </li>
@@ -270,14 +271,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 5.4. Exercises" data-toggle="tooltip">
-    <a href="../ReadingDataFromFiles/Exercises.html" >
+  <li id="relations-prev" title="Previous Chapter - 6.1. Three General Tasks" data-toggle="tooltip">
+    <a href="ThreeGeneralTasks.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 6.1. Three General Tasks' data-toggle="tooltip" >
-    <a href="ThreeGeneralTasks.html" >
+  <li id="relations-next" title='Next Chapter - 6.3. Other Examples of Higher Order Functions' data-toggle="tooltip" >
+    <a href="OtherExamplesOfHigherOrderFunctions.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -307,41 +308,53 @@
 
 <div class="container" id="main-content">
   
-  <div class="section" id="functional-list-processing">
-<h1>6. Functional List Processing<a class="headerlink" href="#functional-list-processing" title="Permalink to this headline">¶</a></h1>
-<p>In this chapter, we will take a look at the functional approach to processing
-sequences of data.  We start by definition three general types of sequence
-processing tasks. Then we look at the Python function in more depth, followed by
-defining data structures and functions recursively.  Next, tail recursion is
-used to improve some recursive tasks using an accumulator.  Finally, we compare
-solutions based on list comprehensions to those that use recursion.</p>
-<div class="toctree-wrapper compound" id="id1">
-<p class="caption"><span class="caption-text">Functional List Processing</span><a class="headerlink" href="#id1" title="Permalink to this toctree">¶</a></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="ThreeGeneralTasks.html">6.1. Three General Tasks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="WhatAreHigherOrderFunctions.html">6.2. What are Higher Order Functions?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="OtherExamplesOfHigherOrderFunctions.html">6.3. Other Examples of Higher Order Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MoreAboutPythonFunctions.html">6.4. More Details About Python Functions</a></li>
-</ul>
+  <div class="section" id="what-are-higher-order-functions">
+<h1>6.2. What are Higher Order Functions?<a class="headerlink" href="#what-are-higher-order-functions" title="Permalink to this headline">¶</a></h1>
+<p>A <strong>higher-order</strong> function is a function that takes a function as an
+argument and/or returns a function.  One of the first higher-order functions
+presented in this text was the <code class="docutils literal"><span class="pre">make_apply_tax</span></code> function which returned a
+specialized version of <code class="docutils literal"><span class="pre">apply_tax</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">make_apply_tax</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">rate</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">cost</span><span class="p">:</span> <span class="n">rate</span><span class="o">*</span><span class="n">cost</span>
+
+<span class="gp">In [2]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="n">make_apply_tax</span><span class="p">(</span><span class="mf">1.065</span><span class="p">)</span>
+
+<span class="gp">In [3]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">5.05</span><span class="p">)</span>
+<span class="gh">Out[3]: </span><span class="go">5.3782499999999995</span>
+</pre></div>
 </div>
+<p>The functions <code class="docutils literal"><span class="pre">map</span></code>, <code class="docutils literal"><span class="pre">filter</span></code> and <code class="docutils literal"><span class="pre">reduce</span></code> are examples of higher order
+functions, as they take functions as arguments.  Another example of a built-in
+Python function that is higher-order is the <code class="docutils literal"><span class="pre">max</span></code> function, as it can take a
+<code class="docutils literal"><span class="pre">key</span></code> function as an argument (as illustrated in the last chapter).</p>
+<p>Using higher-order functions allows us to generalize higher level patterns.  For
+example, we can replace many of the <code class="docutils literal"><span class="pre">for</span></code> loops found in imperative Python
+code with some combination of <code class="docutils literal"><span class="pre">map</span></code>, <code class="docutils literal"><span class="pre">filter</span></code> and <code class="docutils literal"><span class="pre">reduce</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The exercises at the end of this chapter allow you to practice this higher
+level thinking, as we to return to the exercises from Chapter 4, but this
+time use <code class="docutils literal"><span class="pre">map</span></code>, <code class="docutils literal"><span class="pre">filter</span></code> and <code class="docutils literal"><span class="pre">reduce</span></code> to solve each problem.</p>
+</div>
+<p>The next section covers some of the other higher level abstractions that an be
+achieved using higher-order functions.</p>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 5.4. Exercises' data-toggle="tooltip">
-    <a href="../ReadingDataFromFiles/Exercises.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 6.1. Three General Tasks' data-toggle="tooltip">
+    <a href="ThreeGeneralTasks.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="../ReadingDataFromFiles/Exercises.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="ThreeGeneralTasks.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 6.1. Three General Tasks' data-toggle="tooltip" >
-    <a href="ThreeGeneralTasks.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 6.3. Other Examples of Higher Order Functions' data-toggle="tooltip" >
+    <a href="OtherExamplesOfHigherOrderFunctions.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="ThreeGeneralTasks.html" >Next Section - 6.1. Three General Tasks</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="OtherExamplesOfHigherOrderFunctions.html" >Next Section - 6.3. Other Examples of Higher Order Functions</a>
 
 <script type="text/javascript">
 
