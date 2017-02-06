@@ -13,6 +13,8 @@ solutions based on list comprehensions to those that use recursion.
     :maxdepth: 1
 
     ThreeGeneralTasks.rst
+    WhatAreHigherOrderFunctions.rst
+    OtherExamplesOfHigherOrderFunctions.rst
     MoreAboutPythonFunctions.rst
     RecursiveDataDefinitions.rst
     RecursiveListProcessing.rst
