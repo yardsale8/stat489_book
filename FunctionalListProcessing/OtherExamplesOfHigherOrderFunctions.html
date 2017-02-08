@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.3. Other Examples of Higher Order Functions &mdash; Runestone Interactive Overview</title>
+    <title>6.4. Other Examples of Higher Order Functions &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="6. Functional List Processing" href="toctree.html" />
-    <link rel="next" title="6.4. More Details About Python Functions" href="MoreAboutPythonFunctions.html" />
-    <link rel="prev" title="6.2. What are Higher Order Functions?" href="WhatAreHigherOrderFunctions.html" />
+    <link rel="next" title="&lt;no title&gt;" href="RecursiveDataDefinitions.html" />
+    <link rel="prev" title="6.3. What are Higher Order Functions?" href="WhatAreHigherOrderFunctions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,13 +263,13 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6.3. Other Examples of Higher Order Functions</a><ul>
-<li><a class="reference internal" href="#composition">6.3.1. Composition</a></li>
-<li><a class="reference internal" href="#partial-functions">6.3.2. Partial Functions</a></li>
-<li><a class="reference internal" href="#decorator-functions">6.3.3. Decorator Functions</a></li>
-<li><a class="reference internal" href="#currying">6.3.4. Currying</a></li>
-<li><a class="reference internal" href="#other-useful-curried-functions-from-toolz">6.3.5. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code></a></li>
-<li><a class="reference internal" href="#memiozation">6.3.6. Memiozation</a></li>
+<li><a class="reference internal" href="#">6.4. Other Examples of Higher Order Functions</a><ul>
+<li><a class="reference internal" href="#composition">6.4.1. Composition</a></li>
+<li><a class="reference internal" href="#partial-functions">6.4.2. Partial Functions</a></li>
+<li><a class="reference internal" href="#decorator-functions">6.4.3. Decorator Functions</a></li>
+<li><a class="reference internal" href="#currying">6.4.4. Currying</a></li>
+<li><a class="reference internal" href="#other-useful-curried-functions-from-toolz">6.4.5. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code></a></li>
+<li><a class="reference internal" href="#memiozation">6.4.6. Memiozation</a></li>
 </ul>
 </li>
 </ul>
@@ -279,14 +279,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 6.2. What are Higher Order Functions?" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 6.3. What are Higher Order Functions?" data-toggle="tooltip">
     <a href="WhatAreHigherOrderFunctions.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 6.4. More Details About Python Functions' data-toggle="tooltip" >
-    <a href="MoreAboutPythonFunctions.html" >
+  <li id="relations-next" title='Next Chapter - &lt;no title&gt;' data-toggle="tooltip" >
+    <a href="RecursiveDataDefinitions.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -316,19 +316,8 @@
 
 <div class="container" id="main-content">
   
-  <blockquote>
-<div><blockquote>
-<div></div></blockquote>
-<p>Meyers, and Dario Mitchell.  Permission is granted to copy, distribute
-and/or modify this document under the terms of the GNU Free Documentation
-License, Version 1.3 or any later version published by the Free Software
-Foundation; with Invariant Sections being Forward, Prefaces, and
-Contributor List, no Front-Cover Texts, and no Back-Cover Texts.  A copy of
-the license is included in the section entitled &#8220;GNU Free Documentation
-License&#8221;.</p>
-</div></blockquote>
-<div class="section" id="other-examples-of-higher-order-functions">
-<h1>6.3. Other Examples of Higher Order Functions<a class="headerlink" href="#other-examples-of-higher-order-functions" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="other-examples-of-higher-order-functions">
+<h1>6.4. Other Examples of Higher Order Functions<a class="headerlink" href="#other-examples-of-higher-order-functions" title="Permalink to this headline">¶</a></h1>
 <p>In this section, we will implement some other common higher-order functions</p>
 <p>Many of these functions are implemented in the Python libraries <code class="docutils literal"><span class="pre">toolz</span></code> and
 <code class="docutils literal"><span class="pre">cytoolz</span></code> under the sub module titled <code class="docutils literal"><span class="pre">functoolz</span></code>.  These two modules have
@@ -350,7 +339,7 @@ below,</p>
 </div>
 </div>
 <div class="section" id="composition">
-<h2>6.3.1. Composition<a class="headerlink" href="#composition" title="Permalink to this headline">¶</a></h2>
+<h2>6.4.1. Composition<a class="headerlink" href="#composition" title="Permalink to this headline">¶</a></h2>
 <p>Consider the following example, which involves cleaning up a string by removing
 punctuation, whitespace and upper-case characters.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span><span class="p">,</span> <span class="n">whitespace</span>
@@ -432,7 +421,7 @@ as follows.</p>
 </div>
 <p>Now that we have recognized that this process is a reduction, we refactor the
 code accordingly.  In this case, it is again important to work through the
-reversed list to preserve the order of operation of functional coposition.</p>
+reversed list to preserve the order of operation of functional composition.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
 
 <span class="gp">In [20]: </span><span class="k">def</span> <span class="nf">my_compose</span><span class="p">(</span><span class="o">*</span><span class="n">funcs</span><span class="p">):</span>  <span class="c1">#*</span>
@@ -469,16 +458,16 @@ left-to-right.</p>
 <span class="gh">Out[25]: </span><span class="go">&#39;success is not final        failure is not fatal        it is the courage to continue that counts&#39;</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">pipe</span></code> function is designed both a sequence of unary functions.  What if
-we want to perform a similar, left-to-right sequence of calls, but with
-functions with arity greater than 1? Use <code class="docutils literal"><span class="pre">tread_first</span></code>!    The first argument
-of <code class="docutils literal"><span class="pre">thread_first</span></code> is the argument <code class="docutils literal"><span class="pre">val</span></code> that will be passed through a
-sequence of funcitons.  The remaining argument are the functions that will be
-allpied from left-to-right.  <code class="docutils literal"><span class="pre">thread_first</span></code> allows a function argument to be
-replaced with a tuple in the form of <code class="docutils literal"><span class="pre">(func,</span> <span class="pre">arg1,</span> <span class="pre">arg2,</span> <span class="pre">...,</span> <span class="pre">argn)</span></code>, and the
-subsequent function call will be of the form <code class="docutils literal"><span class="pre">func(val,</span> <span class="pre">arg1,</span> <span class="pre">arg2,</span> <span class="pre">...,</span>
-<span class="pre">argn)</span></code>.  Note that the <em>first</em> in <code class="docutils literal"><span class="pre">tread_first</span></code> indicated that the argument
-<code class="docutils literal"><span class="pre">val</span></code> will be the <em>first</em> argument in each call.</p>
+<p>The <code class="docutils literal"><span class="pre">pipe</span></code> function is designed for a sequence of unary (one argument)
+functions.  What if we want to perform a similar, left-to-right sequence of
+calls, but with functions with arity greater than 1? Use <code class="docutils literal"><span class="pre">tread_first</span></code>!    The
+first argument of <code class="docutils literal"><span class="pre">thread_first</span></code> is the argument <code class="docutils literal"><span class="pre">val</span></code> that will be passed
+through a sequence of functions.  The remaining argument are the functions that
+will be allied from left-to-right.  <code class="docutils literal"><span class="pre">thread_first</span></code> allows a function argument
+to be replaced with a tuple in the form of <code class="docutils literal"><span class="pre">(func,</span> <span class="pre">arg1,</span> <span class="pre">arg2,</span> <span class="pre">...,</span> <span class="pre">argn)</span></code>,
+and the subsequent function call will be of the form <code class="docutils literal"><span class="pre">func(val,</span> <span class="pre">arg1,</span> <span class="pre">arg2,</span>
+<span class="pre">...,</span> <span class="pre">argn)</span></code>.  Note that the <em>first</em> in <code class="docutils literal"><span class="pre">tread_first</span></code> indicated that the
+argument <code class="docutils literal"><span class="pre">val</span></code> will be the <em>first</em> argument in each call.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="nb">pow</span><span class="p">,</span> <span class="nb">abs</span><span class="p">,</span> <span class="n">sub</span>
 
 <span class="gp">In [27]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">thread_first</span>
@@ -505,12 +494,14 @@ functions <em>in the last argument</em>, use <code class="docutils literal"><spa
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You will implement your own versions of <code class="docutils literal"><span class="pre">pipe</span></code>, <code class="docutils literal"><span class="pre">thread_first</span></code> and
-<code class="docutils literal"><span class="pre">thread_last</span></code> in the exercises found at the end of the chapter.</p>
+<p class="last">We will show how to use curried functions with <code class="docutils literal"><span class="pre">pipe</span></code> in the coming
+sections.  Also, you will implement your own versions of <code class="docutils literal"><span class="pre">pipe</span></code>,
+<code class="docutils literal"><span class="pre">thread_first</span></code> and <code class="docutils literal"><span class="pre">thread_last</span></code> in the exercises found at the end of
+the chapter.</p>
 </div>
 </div>
 <div class="section" id="partial-functions">
-<h2>6.3.2. Partial Functions<a class="headerlink" href="#partial-functions" title="Permalink to this headline">¶</a></h2>
+<h2>6.4.2. Partial Functions<a class="headerlink" href="#partial-functions" title="Permalink to this headline">¶</a></h2>
 <p>In the second chapter, we illustrated how to use a function factory to
 generalize the <code class="docutils literal"><span class="pre">apply_tax</span></code> function.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="k">def</span> <span class="nf">make_apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">):</span>
@@ -617,13 +608,13 @@ having to type the alternative value of the keyword more than once.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Unfortunately some of the built-in python functions like <code class="docutils literal"><span class="pre">abs</span></code> do
+<p class="last">Unfortunately some of the built-in python functions like <code class="docutils literal"><span class="pre">reduce</span></code> do
 not treat optional parameters as keyword arguments and another approach will
 need to be used for these functions.</p>
 </div>
 </div>
 <div class="section" id="decorator-functions">
-<h2>6.3.3. Decorator Functions<a class="headerlink" href="#decorator-functions" title="Permalink to this headline">¶</a></h2>
+<h2>6.4.3. Decorator Functions<a class="headerlink" href="#decorator-functions" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">partial</span></code> is an example of a <strong>decorator function</strong>, which is a function that
 creates a <em>wrapper</em> around another function.  The outer function calls the
 original function and then changes or <em>decorates</em> the input and/or output.</p>
@@ -664,7 +655,7 @@ decorates the function <code class="docutils literal"><span class="pre">emph</sp
 need to use different name for the decorated function.</p>
 </div>
 <div class="section" id="currying">
-<h2>6.3.4. Currying<a class="headerlink" href="#currying" title="Permalink to this headline">¶</a></h2>
+<h2>6.4.4. Currying<a class="headerlink" href="#currying" title="Permalink to this headline">¶</a></h2>
 <p>Currying is another popular functional approach to partial application of
 functions.  Recall that the <strong>arity</strong> of a function is the number of arguments
 the function takes.  We can implement functions with arity higher than 1 using a
@@ -806,6 +797,7 @@ function.</p>
 
 <span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">h</span> <span class="o">=</span> <span class="n">flip</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
 
+ <span class="c1"># Note that is is the middle number/parameter that is changing</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">h</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="mi">231</span>
 
@@ -822,7 +814,7 @@ function.</p>
 </div>
 </div>
 <div class="section" id="other-useful-curried-functions-from-toolz">
-<h2>6.3.5. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code><a class="headerlink" href="#other-useful-curried-functions-from-toolz" title="Permalink to this headline">¶</a></h2>
+<h2>6.4.5. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code><a class="headerlink" href="#other-useful-curried-functions-from-toolz" title="Permalink to this headline">¶</a></h2>
 <p>Many of the functions from the <code class="docutils literal"><span class="pre">toolz</span></code> library have been designed with
 currying in mind.  Furthermore, curried versions of most functions can be
 imported from <code class="docutils literal"><span class="pre">toolz.curried</span></code>.</p>
@@ -830,9 +822,11 @@ imported from <code class="docutils literal"><span class="pre">toolz.curried</sp
 entries from a row of a table.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [68]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">get</span>
 
-<span class="gp">In [69]: </span><span class="n">table</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
-<span class="gp">   ....: </span>         <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
-<span class="gp">   ....: </span>         <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
+<span class="gp">In [69]: </span><span class="n">table</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">   ....: </span>         <span class="p">[</span><span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+<span class="gp">   ....: </span>         <span class="p">[</span><span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+<span class="gp">   ....: </span>         <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span>
+<span class="gp">   ....: </span>         <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">]]</span>
 <span class="gp">   ....: </span>
 
 <span class="gp">In [70]: </span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -841,7 +835,7 @@ entries from a row of a table.</p>
 <span class="gp">In [71]: </span><span class="n">col1</span> <span class="o">=</span> <span class="p">[</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">]</span>
 
 <span class="gp">In [72]: </span><span class="n">col1</span>
-<span class="gh">Out[72]: </span><span class="go">[3, 6, 9]</span>
+<span class="gh">Out[72]: </span><span class="go">[3, 6, 9, 12, 15]</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">get</span></code> also takes a list in the first position and in this case returns all of
@@ -849,14 +843,14 @@ the selected columns of the table.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="n">mixed_up</span> <span class="o">=</span> <span class="p">[</span><span class="n">get</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">]</span>
 
 <span class="gp">In [74]: </span><span class="n">mixed_up</span>
-<span class="gh">Out[74]: </span><span class="go">[(3, 1, 2), (6, 4, 5), (9, 7, 8)]</span>
+<span class="gh">Out[74]: </span><span class="go">[(3, 1, 2), (6, 4, 5), (9, 7, 8), (12, 10, 11), (15, 13, 14)]</span>
 </pre></div>
 </div>
 <p>Using the curried version of this function makes it easy to combine it with
 <code class="docutils literal"><span class="pre">map</span></code>.  The final result is the ability to quickly access a selected columns
 from a table.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [75]: </span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">table</span><span class="p">))</span>
-<span class="gh">Out[75]: </span><span class="go">[3, 6, 9]</span>
+<span class="gh">Out[75]: </span><span class="go">[3, 6, 9, 12, 15]</span>
 </pre></div>
 </div>
 <p>In the first line, we are passing the partial function <code class="docutils literal"><span class="pre">get(2)</span></code>, which will
@@ -864,16 +858,17 @@ select the third item when applied to a row.  Then <code class="docutils literal
 <code class="docutils literal"><span class="pre">get(2)</span></code> to each row in the matrix.  Similarly, we can make a partial
 application or <code class="docutils literal"><span class="pre">get</span></code> by passing in a list of indices.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">get</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">table</span><span class="p">))</span>
-<span class="gh">Out[76]: </span><span class="go">[(3, 1, 2), (6, 4, 5), (9, 7, 8)]</span>
+<span class="gh">Out[76]: </span><span class="go">[(3, 1, 2), (6, 4, 5), (9, 7, 8), (12, 10, 11), (15, 13, 14)]</span>
 </pre></div>
 </div>
 <p>This pattern has been abstracted in the <code class="docutils literal"><span class="pre">toolz</span></code> library in the form of
-<code class="docutils literal"><span class="pre">pluck</span></code>.  Similar to combining <code class="docutils literal"><span class="pre">map</span></code> with <code class="docutils literal"><span class="pre">get</span></code>, <code class="docutils literal"><span class="pre">pluck</span></code> is a lazy
+<code class="docutils literal"><span class="pre">pluck</span></code>, where <code class="docutils literal"><span class="pre">pluck(2,</span> <span class="pre">table)</span></code> is functionally equivalent to <code class="docutils literal"><span class="pre">map(get(2),</span>
+<span class="pre">table)</span></code>.  Similar to combining <code class="docutils literal"><span class="pre">map</span></code> with <code class="docutils literal"><span class="pre">get</span></code>, <code class="docutils literal"><span class="pre">pluck</span></code> is a lazy
 construct that needs to be forced to completion.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">pluck</span>
 
 <span class="gp">In [78]: </span><span class="nb">list</span><span class="p">(</span><span class="n">pluck</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">table</span><span class="p">))</span>
-<span class="gh">Out[78]: </span><span class="go">[(3, 1, 2), (6, 4, 5), (9, 7, 8)]</span>
+<span class="gh">Out[78]: </span><span class="go">[(3, 1, 2), (6, 4, 5), (9, 7, 8), (12, 10, 11), (15, 13, 14)]</span>
 </pre></div>
 </div>
 <p>The curried version of <code class="docutils literal"><span class="pre">pluck</span></code> can be used to create useful partial functions.</p>
@@ -882,13 +877,15 @@ construct that needs to be forced to completion.</p>
 <span class="gp">In [80]: </span><span class="n">output</span> <span class="o">=</span> <span class="n">mixup_table</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 
 <span class="gp">In [81]: </span><span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="gh">Out[81]: </span><span class="go">[(3, 1, 2), (6, 4, 5), (9, 7, 8)]</span>
+<span class="gh">Out[81]: </span><span class="go">[(3, 1, 2), (6, 4, 5), (9, 7, 8), (12, 10, 11), (15, 13, 14)]</span>
 </pre></div>
 </div>
 <p>Keep in mind that using <code class="docutils literal"><span class="pre">pipe</span></code> to combine actions on a list or table provides
-a readable description of a sequence of transformations.  Suppose that we have a
-table of hours worked for all employees over a period of weeks and we wish to
-quickly compute the number of hours worked by a particular employee, <code class="docutils literal"><span class="pre">Ann</span></code>.</p>
+a readable description of a sequence of transformations.  In particular, an
+application of <code class="docutils literal"><span class="pre">pipe</span></code> reads in the natural direction, left-to-right.  Suppose
+that we have a table of hours worked for all employees over a period of weeks
+and we wish to quickly compute the number of hours worked by a particular
+employee, <code class="docutils literal"><span class="pre">Ann</span></code>.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [82]: </span><span class="n">hours</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span>  <span class="s2">&quot;Week&quot;</span><span class="p">,</span> <span class="s2">&quot;Hours Worked&quot;</span><span class="p">],</span>
 <span class="gp">   ....: </span>         <span class="p">[</span><span class="s2">&quot;Ann&quot;</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>      <span class="mi">40</span><span class="p">],</span>
 <span class="gp">   ....: </span>         <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>      <span class="mi">55</span><span class="p">],</span>
@@ -946,7 +943,16 @@ variables using the <code class="docutils literal"><span class="pre">pipe</span>
 <span class="gh">Out[91]: </span><span class="go">115</span>
 </pre></div>
 </div>
-<p>This is one a useful when transitioning from writing imperative programs to
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Due to the fact that <code class="docutils literal"><span class="pre">reduce</span></code> does not treat the optional parameter
+<code class="docutils literal"><span class="pre">initial</span></code> as a keyword argument, we couldn&#8217;t use <code class="docutils literal"><span class="pre">partial</span></code> or currying to
+set this value, and were forced to wrap the function in a lambda expression to
+achieve this result.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This is a useful when transitioning from writing imperative programs to
 writing functional programs.  Anytime that you want to write code like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -955,11 +961,12 @@ writing functional programs.  Anytime that you want to write code like this:</p>
 </div>
 <p>transform this pattern using <code class="docutils literal"><span class="pre">pipe</span></code> and curried or partial functions, as
 follows.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipe</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>
+<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="n">pipe</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>
      <span class="n">f</span><span class="p">,</span>
      <span class="n">g</span><span class="p">,</span>
      <span class="n">h</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 <p>Another mind-bending use of the curried functions from <code class="docutils literal"><span class="pre">toolz</span></code> is the curried
 version of <code class="docutils literal"><span class="pre">curry</span></code>.  In addition to being used to creating curried functions
@@ -976,18 +983,18 @@ that will make a new table that contains only column 3.</p>
 <span class="gp">In [94]: </span><span class="n">get_col_3</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 
 <span class="gp">In [95]: </span><span class="nb">list</span><span class="p">(</span><span class="n">get_col_3</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
-<span class="gh">Out[95]: </span><span class="go">[3, 6, 9]</span>
+<span class="gh">Out[95]: </span><span class="go">[3, 6, 9, 12, 15]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="memiozation">
-<h2>6.3.6. Memiozation<a class="headerlink" href="#memiozation" title="Permalink to this headline">¶</a></h2>
+<h2>6.4.6. Memiozation<a class="headerlink" href="#memiozation" title="Permalink to this headline">¶</a></h2>
 <p>One of the problems with recursive functions, especially if they are not
 tail-recursive or have not been refactored to use an accumulator, is the number
 of replicated function calls that get made.  To see this, we create a decorator
 function that will use a global dictionary to track the number of calls for each
 unique argument.   We then apply this decorator function to a recursive function
-ther generates the nth <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number">fibonacci number</a>.</p>
+that generates the nth <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number">fibonacci number</a>.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [96]: </span><span class="n">call_dict</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="gp">In [97]: </span><span class="k">def</span> <span class="nf">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -1080,9 +1087,8 @@ immediately satisfied by the dictionary return.</p>
 <span class="ne">TypeError</span>: fib_with_call_dict() takes 1 positional argument but 3 were given
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">toolz/cytoolz</span></code> modules provide
-a <code class="docutils literal"><span class="pre">memoize</span></code> function that can be applied to a function or used as a
-dictionary.</p>
+<p>The <code class="docutils literal"><span class="pre">toolz/cytoolz</span></code> modules provide a <code class="docutils literal"><span class="pre">memoize</span></code> function that can be applied
+to a function or used as a dictionary.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [110]: </span><span class="kn">from</span> <span class="nn">toolz.functoolz</span> <span class="kn">import</span> <span class="n">memoize</span>
 
 <span class="go"># You definite don&#39;t want to call this without memoize</span>
@@ -1605,19 +1611,19 @@ declared using the <code class="docutils literal"><span class="pre">nonlocal</sp
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 6.2. What are Higher Order Functions?' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 6.3. What are Higher Order Functions?' data-toggle="tooltip">
     <a href="WhatAreHigherOrderFunctions.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="WhatAreHigherOrderFunctions.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 6.4. More Details About Python Functions' data-toggle="tooltip" >
-    <a href="MoreAboutPythonFunctions.html" >
+  <li id="relations-next" class="navLink" title='Next Section - &lt;no title&gt;' data-toggle="tooltip" >
+    <a href="RecursiveDataDefinitions.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="MoreAboutPythonFunctions.html" >Next Section - 6.4. More Details About Python Functions</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="RecursiveDataDefinitions.html" >Next Section - &lt;no title&gt;</a>
 
 <script type="text/javascript">
 
@@ -1635,7 +1641,7 @@ declared using the <code class="docutils literal"><span class="pre">nonlocal</sp
       
     </p>
     <p>
-        &copy; Copyright 2015 bn8210wy.
+        &copy; Copyright 2017 Todd Iverson.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
     </p>
   </div>

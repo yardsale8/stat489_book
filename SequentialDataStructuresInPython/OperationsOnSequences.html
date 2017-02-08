@@ -357,7 +357,7 @@ diagram.  The objects are different.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (chp09_concatid)</span> </p>
 </div>
 <script type="text/javascript">
-var chp09_concatid_trace = {"trace": [{"event": "step_line", "stdout": "", "globals": {}, "stack_to_render": [], "ordered_globals": [], "heap": {}, "line": 1, "func_name": "<module>"}, {"event": "step_line", "stdout": "", "globals": {"fruit": ["REF", 1]}, "stack_to_render": [], "ordered_globals": ["fruit"], "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"]}, "line": 2, "func_name": "<module>"}, {"event": "step_line", "stdout": "", "globals": {"numlist": ["REF", 2], "fruit": ["REF", 1]}, "stack_to_render": [], "ordered_globals": ["fruit", "numlist"], "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7]}, "line": 4, "func_name": "<module>"}, {"event": "step_line", "stdout": "", "globals": {"numlist": ["REF", 2], "newlist": ["REF", 3], "fruit": ["REF", 1]}, "stack_to_render": [], "ordered_globals": ["fruit", "numlist", "newlist"], "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7], "3": ["LIST", "apple", "orange", "banana", "cherry", 6, 7]}, "line": 6, "func_name": "<module>"}, {"event": "return", "stdout": "", "globals": {"numlist": ["REF", 2], "newlist": ["REF", 3], "zeros": ["REF", 4], "fruit": ["REF", 1]}, "stack_to_render": [], "ordered_globals": ["fruit", "numlist", "newlist", "zeros"], "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7], "3": ["LIST", "apple", "orange", "banana", "cherry", 6, 7], "4": ["LIST", 0, 0, 0, 0]}, "line": 6, "func_name": "<module>"}], "code": "fruit = [\"apple\", \"orange\", \"banana\", \"cherry\"]\nnumlist = [6, 7]\n\nnewlist = fruit + numlist\n\nzeros = [0] * 4"};
+var chp09_concatid_trace = {"code": "fruit = [\"apple\", \"orange\", \"banana\", \"cherry\"]\nnumlist = [6, 7]\n\nnewlist = fruit + numlist\n\nzeros = [0] * 4", "trace": [{"ordered_globals": [], "event": "step_line", "heap": {}, "line": 1, "stdout": "", "globals": {}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["fruit"], "event": "step_line", "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"]}, "line": 2, "stdout": "", "globals": {"fruit": ["REF", 1]}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["fruit", "numlist"], "event": "step_line", "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7]}, "line": 4, "stdout": "", "globals": {"numlist": ["REF", 2], "fruit": ["REF", 1]}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["fruit", "numlist", "newlist"], "event": "step_line", "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7], "3": ["LIST", "apple", "orange", "banana", "cherry", 6, 7]}, "line": 6, "stdout": "", "globals": {"numlist": ["REF", 2], "fruit": ["REF", 1], "newlist": ["REF", 3]}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["fruit", "numlist", "newlist", "zeros"], "event": "return", "heap": {"1": ["LIST", "apple", "orange", "banana", "cherry"], "2": ["LIST", 6, 7], "3": ["LIST", "apple", "orange", "banana", "cherry", 6, 7], "4": ["LIST", 0, 0, 0, 0]}, "line": 6, "stdout": "", "globals": {"zeros": ["REF", 4], "numlist": ["REF", 2], "fruit": ["REF", 1], "newlist": ["REF", 3]}, "func_name": "<module>", "stack_to_render": []}]};
 var chp09_concatid_vis;
 
 $(document).ready(function() {
@@ -405,7 +405,7 @@ memory).</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
 
 <span class="gp">In [7]: </span><span class="nb">id</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span>
-<span class="gh">Out[7]: </span><span class="go">4597541704</span>
+<span class="gh">Out[7]: </span><span class="go">4652558024</span>
 </pre></div>
 </div>
 <p><strong>Check your understanding</strong></p>
@@ -665,7 +665,7 @@ length of the list.</p>
       
     </p>
     <p>
-        &copy; Copyright 2015 bn8210wy.
+        &copy; Copyright 2017 Todd Iverson.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
     </p>
   </div>
