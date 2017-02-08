@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.1. Three General Tasks &mdash; Runestone Interactive Overview</title>
+    <title>6.2. Three General Tasks &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="6. Functional List Processing" href="toctree.html" />
-    <link rel="next" title="6.2. What are Higher Order Functions?" href="WhatAreHigherOrderFunctions.html" />
-    <link rel="prev" title="6. Functional List Processing" href="toctree.html" />
+    <link rel="next" title="6.3. What are Higher Order Functions?" href="WhatAreHigherOrderFunctions.html" />
+    <link rel="prev" title="6.1. More Details About Python Functions" href="MoreAboutPythonFunctions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,7 +263,7 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6.1. Three General Tasks</a></li>
+<li><a class="reference internal" href="#">6.2. Three General Tasks</a></li>
 </ul>
 </ul>
 </li>
@@ -271,13 +271,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 6. Functional List Processing" data-toggle="tooltip">
-    <a href="toctree.html" >
+  <li id="relations-prev" title="Previous Chapter - 6.1. More Details About Python Functions" data-toggle="tooltip">
+    <a href="MoreAboutPythonFunctions.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 6.2. What are Higher Order Functions?' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 6.3. What are Higher Order Functions?' data-toggle="tooltip" >
     <a href="WhatAreHigherOrderFunctions.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -309,7 +309,7 @@
 <div class="container" id="main-content">
   
   <div class="section" id="three-general-tasks">
-<h1>6.1. Three General Tasks<a class="headerlink" href="#three-general-tasks" title="Permalink to this headline">¶</a></h1>
+<h1>6.2. Three General Tasks<a class="headerlink" href="#three-general-tasks" title="Permalink to this headline">¶</a></h1>
 <p>When processing a sequence of data, problems can frequency be solved using a
 combination of three general operations: <em>map</em>, <em>filter</em> and <em>reduce</em>.  Many of
 the examples from Chapter 4 can be framed in this light.</p>
@@ -349,7 +349,7 @@ generalizes this process.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">out</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="gp">In [8]: </span><span class="n">out</span>
-<span class="gh">Out[8]: </span><span class="go">&lt;map at 0x106fe7dd8&gt;</span>
+<span class="gh">Out[8]: </span><span class="go">&lt;map at 0x1152107f0&gt;</span>
 
 <span class="gp">In [9]: </span><span class="nb">type</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 <span class="go">                             Out[9]: map</span>
@@ -358,7 +358,7 @@ generalizes this process.</p>
 <span class="go">                                         Out[10]: [0, 1, 4, 9, 16]</span>
 
 <span class="gp">In [11]: </span><span class="n">out</span>
-<span class="go">                                                                   Out[11]: &lt;map at 0x106fe7dd8&gt;</span>
+<span class="go">                                                                   Out[11]: &lt;map at 0x1152107f0&gt;</span>
 
 <span class="go"># out has been processed and is now empty</span>
 <span class="gp">In [12]: </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">out</span><span class="p">]</span>
@@ -415,7 +415,7 @@ object will be empty after being processed.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">out</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
 <span class="gp">In [22]: </span><span class="n">out</span>
-<span class="gh">Out[22]: </span><span class="go">&lt;filter at 0x107025ba8&gt;</span>
+<span class="gh">Out[22]: </span><span class="go">&lt;filter at 0x1152265c0&gt;</span>
 
 <span class="gp">In [23]: </span><span class="nb">type</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 <span class="go">                                 Out[23]: filter</span>
@@ -690,19 +690,19 @@ explore higher-order functions in the next section.</p>
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 6. Functional List Processing' data-toggle="tooltip">
-    <a href="toctree.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 6.1. More Details About Python Functions' data-toggle="tooltip">
+    <a href="MoreAboutPythonFunctions.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="toctree.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="MoreAboutPythonFunctions.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 6.2. What are Higher Order Functions?' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 6.3. What are Higher Order Functions?' data-toggle="tooltip" >
     <a href="WhatAreHigherOrderFunctions.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="WhatAreHigherOrderFunctions.html" >Next Section - 6.2. What are Higher Order Functions?</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="WhatAreHigherOrderFunctions.html" >Next Section - 6.3. What are Higher Order Functions?</a>
 
 <script type="text/javascript">
 
@@ -720,7 +720,7 @@ explore higher-order functions in the next section.</p>
       
     </p>
     <p>
-        &copy; Copyright 2015 bn8210wy.
+        &copy; Copyright 2017 Todd Iverson.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
     </p>
   </div>

@@ -47,8 +47,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'Runestone Interactive Overview'
-copyright = '2015 bn8210wy'
+project = 'Introduction to Functional Programming and Distributed Computing in Python'
+copyright = '2017 Todd Iverson'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

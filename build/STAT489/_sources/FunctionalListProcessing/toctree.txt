@@ -12,10 +12,10 @@ solutions based on list comprehensions to those that use recursion.
     :caption: Functional List Processing
     :maxdepth: 1
 
+    MoreAboutPythonFunctions.rst
     ThreeGeneralTasks.rst
     WhatAreHigherOrderFunctions.rst
     OtherExamplesOfHigherOrderFunctions.rst
-    MoreAboutPythonFunctions.rst
     RecursiveDataDefinitions.rst
     RecursiveListProcessing.rst
     TailRecursionAndAccumulators.rst

@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.4. More Details About Python Functions &mdash; Runestone Interactive Overview</title>
+    <title>6.1. More Details About Python Functions &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="6. Functional List Processing" href="toctree.html" />
-    <link rel="next" title="&lt;no title&gt;" href="RecursiveDataDefinitions.html" />
-    <link rel="prev" title="6.3. Other Examples of Higher Order Functions" href="OtherExamplesOfHigherOrderFunctions.html" />
+    <link rel="next" title="6.2. Three General Tasks" href="ThreeGeneralTasks.html" />
+    <link rel="prev" title="6. Functional List Processing" href="toctree.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,12 +263,12 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6.4. More Details About Python Functions</a><ul>
-<li><a class="reference internal" href="#fruitful-functions">6.4.1. Fruitful Functions</a></li>
-<li><a class="reference internal" href="#void-functions-and-side-effects">6.4.2. Void Functions and Side Effects</a></li>
-<li><a class="reference internal" href="#program-development">6.4.3. Program Development</a></li>
-<li><a class="reference internal" href="#variable-arity-functions">6.4.4. Variable Arity Functions</a></li>
-<li><a class="reference internal" href="#unpacking-arguments-and-keywords">6.4.5. Unpacking arguments and keywords</a></li>
+<li><a class="reference internal" href="#">6.1. More Details About Python Functions</a><ul>
+<li><a class="reference internal" href="#fruitful-functions">6.1.1. Fruitful Functions</a></li>
+<li><a class="reference internal" href="#void-functions-and-side-effects">6.1.2. Void Functions and Side Effects</a></li>
+<li><a class="reference internal" href="#program-development">6.1.3. Program Development</a></li>
+<li><a class="reference internal" href="#variable-arity-functions">6.1.4. Variable Arity Functions</a></li>
+<li><a class="reference internal" href="#unpacking-arguments-and-keywords">6.1.5. Unpacking arguments and keywords</a></li>
 </ul>
 </li>
 </ul>
@@ -278,14 +278,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 6.3. Other Examples of Higher Order Functions" data-toggle="tooltip">
-    <a href="OtherExamplesOfHigherOrderFunctions.html" >
+  <li id="relations-prev" title="Previous Chapter - 6. Functional List Processing" data-toggle="tooltip">
+    <a href="toctree.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - &lt;no title&gt;' data-toggle="tooltip" >
-    <a href="RecursiveDataDefinitions.html" >
+  <li id="relations-next" title='Next Chapter - 6.2. Three General Tasks' data-toggle="tooltip" >
+    <a href="ThreeGeneralTasks.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -316,7 +316,7 @@
 <div class="container" id="main-content">
   
   <div class="section" id="more-details-about-python-functions">
-<h1>6.4. More Details About Python Functions<a class="headerlink" href="#more-details-about-python-functions" title="Permalink to this headline">¶</a></h1>
+<h1>6.1. More Details About Python Functions<a class="headerlink" href="#more-details-about-python-functions" title="Permalink to this headline">¶</a></h1>
 <p>In this chapter, we will look at all of the features of Python functions,
 including the function definition statement, docstrings, optional parameters,
 variable number of arguments/keywords and argument/keyword unpacking.  In the
@@ -444,7 +444,7 @@ the halts the function and returns one or more values.</p>
 
             </ul>
             <div class="section" id="fruitful-functions">
-<h2>6.4.1. Fruitful Functions<a class="headerlink" href="#fruitful-functions" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.1. Fruitful Functions<a class="headerlink" href="#fruitful-functions" title="Permalink to this headline">¶</a></h2>
 <p>When writing functional programs, we focus on functions that return values,
 called <strong>fruitful functions</strong>.  In many other languages, a chunk that doesn&#8217;t
 return a value is called a <strong>procedure</strong>, which we will call <strong>non-fruitful</strong>.
@@ -514,7 +514,7 @@ control back to the place in the program where the function call was made.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare)</span> </p>
 </div>
 <script type="text/javascript">
-var ch04_clsquare_trace = {"trace": [{"event": "step_line", "stdout": "", "globals": {}, "stack_to_render": [], "ordered_globals": [], "heap": {}, "line": 1, "func_name": "<module>"}, {"event": "step_line", "stdout": "", "globals": {"square": ["REF", 1]}, "stack_to_render": [], "ordered_globals": ["square"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 5, "func_name": "<module>"}, {"event": "step_line", "stdout": "", "globals": {"square": ["REF", 1], "number": 10}, "stack_to_render": [], "ordered_globals": ["square", "number"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 6, "func_name": "<module>"}, {"event": "call", "stdout": "", "globals": {"square": ["REF", 1], "number": 10}, "stack_to_render": [{"frame_id": 1, "ordered_varnames": ["x"], "unique_hash": "square_f1", "is_parent": false, "is_highlighted": true, "encoded_locals": {"x": 10}, "parent_frame_id_list": [], "is_zombie": false, "func_name": "square"}], "ordered_globals": ["square", "number"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 1, "func_name": "square"}, {"event": "step_line", "stdout": "", "globals": {"square": ["REF", 1], "number": 10}, "stack_to_render": [{"frame_id": 1, "ordered_varnames": ["x"], "unique_hash": "square_f1", "is_parent": false, "is_highlighted": true, "encoded_locals": {"x": 10}, "parent_frame_id_list": [], "is_zombie": false, "func_name": "square"}], "ordered_globals": ["square", "number"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 2, "func_name": "square"}, {"event": "step_line", "stdout": "", "globals": {"square": ["REF", 1], "number": 10}, "stack_to_render": [{"frame_id": 1, "ordered_varnames": ["x", "y"], "unique_hash": "square_f1", "is_parent": false, "is_highlighted": true, "encoded_locals": {"y": 100, "x": 10}, "parent_frame_id_list": [], "is_zombie": false, "func_name": "square"}], "ordered_globals": ["square", "number"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3, "func_name": "square"}, {"event": "return", "stdout": "", "globals": {"square": ["REF", 1], "number": 10}, "stack_to_render": [{"frame_id": 1, "ordered_varnames": ["x", "y", "__return__"], "unique_hash": "square_f1", "is_parent": false, "is_highlighted": true, "encoded_locals": {"y": 100, "x": 10, "__return__": 100}, "parent_frame_id_list": [], "is_zombie": false, "func_name": "square"}], "ordered_globals": ["square", "number"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3, "func_name": "square"}, {"event": "step_line", "stdout": "", "globals": {"square": ["REF", 1], "number": 10, "result": 100}, "stack_to_render": [], "ordered_globals": ["square", "number", "result"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7, "func_name": "<module>"}, {"event": "return", "stdout": "", "globals": {"square": ["REF", 1], "number": 10, "result": 100}, "stack_to_render": [], "ordered_globals": ["square", "number", "result"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7, "func_name": "<module>"}], "code": "def square(x):\n    y = x * x\n    return y\n\nnumber = 10\nresult = square(number)\nresult"};
+var ch04_clsquare_trace = {"code": "def square(x):\n    y = x * x\n    return y\n\nnumber = 10\nresult = square(number)\nresult", "trace": [{"ordered_globals": [], "event": "step_line", "heap": {}, "line": 1, "stdout": "", "globals": {}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["square"], "event": "step_line", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 5, "stdout": "", "globals": {"square": ["REF", 1]}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["square", "number"], "event": "step_line", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 6, "stdout": "", "globals": {"square": ["REF", 1], "number": 10}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["square", "number"], "event": "call", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 1, "stdout": "", "globals": {"square": ["REF", 1], "number": 10}, "func_name": "square", "stack_to_render": [{"is_parent": false, "ordered_varnames": ["x"], "func_name": "square", "is_zombie": false, "is_highlighted": true, "frame_id": 1, "encoded_locals": {"x": 10}, "unique_hash": "square_f1", "parent_frame_id_list": []}]}, {"ordered_globals": ["square", "number"], "event": "step_line", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 2, "stdout": "", "globals": {"square": ["REF", 1], "number": 10}, "func_name": "square", "stack_to_render": [{"is_parent": false, "ordered_varnames": ["x"], "func_name": "square", "is_zombie": false, "is_highlighted": true, "frame_id": 1, "encoded_locals": {"x": 10}, "unique_hash": "square_f1", "parent_frame_id_list": []}]}, {"ordered_globals": ["square", "number"], "event": "step_line", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3, "stdout": "", "globals": {"square": ["REF", 1], "number": 10}, "func_name": "square", "stack_to_render": [{"is_parent": false, "ordered_varnames": ["x", "y"], "func_name": "square", "is_zombie": false, "is_highlighted": true, "frame_id": 1, "encoded_locals": {"y": 100, "x": 10}, "unique_hash": "square_f1", "parent_frame_id_list": []}]}, {"ordered_globals": ["square", "number"], "event": "return", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3, "stdout": "", "globals": {"square": ["REF", 1], "number": 10}, "func_name": "square", "stack_to_render": [{"is_parent": false, "ordered_varnames": ["x", "y", "__return__"], "func_name": "square", "is_zombie": false, "is_highlighted": true, "frame_id": 1, "encoded_locals": {"y": 100, "__return__": 100, "x": 10}, "unique_hash": "square_f1", "parent_frame_id_list": []}]}, {"ordered_globals": ["square", "number", "result"], "event": "step_line", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7, "stdout": "", "globals": {"result": 100, "square": ["REF", 1], "number": 10}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["square", "number", "result"], "event": "return", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7, "stdout": "", "globals": {"result": 100, "square": ["REF", 1], "number": 10}, "func_name": "<module>", "stack_to_render": []}]};
 var ch04_clsquare_vis;
 
 $(document).ready(function() {
@@ -584,7 +584,7 @@ variables listing.  Then look at what is printed when the function returns.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare_bad)</span> </p>
 </div>
 <script type="text/javascript">
-var ch04_clsquare_bad_trace = {"trace": [{"event": "step_line", "stdout": "", "globals": {}, "stack_to_render": [], "ordered_globals": [], "heap": {}, "line": 1, "func_name": "<module>"}, {"event": "step_line", "stdout": "", "globals": {"square": ["REF", 1]}, "stack_to_render": [], "ordered_globals": ["square"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 5, "func_name": "<module>"}, {"event": "step_line", "stdout": "", "globals": {"toSquare": 10, "square": ["REF", 1]}, "stack_to_render": [], "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 6, "func_name": "<module>"}, {"event": "call", "stdout": "", "globals": {"toSquare": 10, "square": ["REF", 1]}, "stack_to_render": [{"frame_id": 1, "ordered_varnames": ["x"], "unique_hash": "square_f1", "is_parent": false, "is_highlighted": true, "encoded_locals": {"x": 10}, "parent_frame_id_list": [], "is_zombie": false, "func_name": "square"}], "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 1, "func_name": "square"}, {"event": "step_line", "stdout": "", "globals": {"toSquare": 10, "square": ["REF", 1]}, "stack_to_render": [{"frame_id": 1, "ordered_varnames": ["x"], "unique_hash": "square_f1", "is_parent": false, "is_highlighted": true, "encoded_locals": {"x": 10}, "parent_frame_id_list": [], "is_zombie": false, "func_name": "square"}], "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 2, "func_name": "square"}, {"event": "step_line", "stdout": "", "globals": {"toSquare": 10, "square": ["REF", 1]}, "stack_to_render": [{"frame_id": 1, "ordered_varnames": ["x", "y"], "unique_hash": "square_f1", "is_parent": false, "is_highlighted": true, "encoded_locals": {"y": 100, "x": 10}, "parent_frame_id_list": [], "is_zombie": false, "func_name": "square"}], "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3, "func_name": "square"}, {"event": "return", "stdout": "100\n", "globals": {"toSquare": 10, "square": ["REF", 1]}, "stack_to_render": [{"frame_id": 1, "ordered_varnames": ["x", "y", "__return__"], "unique_hash": "square_f1", "is_parent": false, "is_highlighted": true, "encoded_locals": {"y": 100, "x": 10, "__return__": null}, "parent_frame_id_list": [], "is_zombie": false, "func_name": "square"}], "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3, "func_name": "square"}, {"event": "step_line", "stdout": "100\n", "globals": {"toSquare": 10, "square": ["REF", 1], "squareResult": null}, "stack_to_render": [], "ordered_globals": ["square", "toSquare", "squareResult"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7, "func_name": "<module>"}, {"event": "return", "stdout": "100\nThe result of  10  squared is  None\n", "globals": {"toSquare": 10, "square": ["REF", 1], "squareResult": null}, "stack_to_render": [], "ordered_globals": ["square", "toSquare", "squareResult"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7, "func_name": "<module>"}], "code": "def square(x):\n    y = x * x\n    print(y)   # Bad! should use return instead!\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)"};
+var ch04_clsquare_bad_trace = {"code": "def square(x):\n    y = x * x\n    print(y)   # Bad! should use return instead!\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)", "trace": [{"ordered_globals": [], "event": "step_line", "heap": {}, "line": 1, "stdout": "", "globals": {}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["square"], "event": "step_line", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 5, "stdout": "", "globals": {"square": ["REF", 1]}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["square", "toSquare"], "event": "step_line", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 6, "stdout": "", "globals": {"toSquare": 10, "square": ["REF", 1]}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["square", "toSquare"], "event": "call", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 1, "stdout": "", "globals": {"toSquare": 10, "square": ["REF", 1]}, "func_name": "square", "stack_to_render": [{"is_parent": false, "ordered_varnames": ["x"], "func_name": "square", "is_zombie": false, "is_highlighted": true, "frame_id": 1, "encoded_locals": {"x": 10}, "unique_hash": "square_f1", "parent_frame_id_list": []}]}, {"ordered_globals": ["square", "toSquare"], "event": "step_line", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 2, "stdout": "", "globals": {"toSquare": 10, "square": ["REF", 1]}, "func_name": "square", "stack_to_render": [{"is_parent": false, "ordered_varnames": ["x"], "func_name": "square", "is_zombie": false, "is_highlighted": true, "frame_id": 1, "encoded_locals": {"x": 10}, "unique_hash": "square_f1", "parent_frame_id_list": []}]}, {"ordered_globals": ["square", "toSquare"], "event": "step_line", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3, "stdout": "", "globals": {"toSquare": 10, "square": ["REF", 1]}, "func_name": "square", "stack_to_render": [{"is_parent": false, "ordered_varnames": ["x", "y"], "func_name": "square", "is_zombie": false, "is_highlighted": true, "frame_id": 1, "encoded_locals": {"y": 100, "x": 10}, "unique_hash": "square_f1", "parent_frame_id_list": []}]}, {"ordered_globals": ["square", "toSquare"], "event": "return", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 3, "stdout": "100\n", "globals": {"toSquare": 10, "square": ["REF", 1]}, "func_name": "square", "stack_to_render": [{"is_parent": false, "ordered_varnames": ["x", "y", "__return__"], "func_name": "square", "is_zombie": false, "is_highlighted": true, "frame_id": 1, "encoded_locals": {"y": 100, "__return__": null, "x": 10}, "unique_hash": "square_f1", "parent_frame_id_list": []}]}, {"ordered_globals": ["square", "toSquare", "squareResult"], "event": "step_line", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7, "stdout": "100\n", "globals": {"toSquare": 10, "square": ["REF", 1], "squareResult": null}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["square", "toSquare", "squareResult"], "event": "return", "heap": {"1": ["FUNCTION", "square(x)", null]}, "line": 7, "stdout": "100\nThe result of  10  squared is  None\n", "globals": {"toSquare": 10, "square": ["REF", 1], "squareResult": null}, "func_name": "<module>", "stack_to_render": []}]};
 var ch04_clsquare_bad_vis;
 
 $(document).ready(function() {
@@ -632,7 +632,7 @@ therefore the result printed in line 7 is incorrect.  Typically, functions will
 return values that can be printed or processed in some other way by the caller.</p>
 </div>
 <div class="section" id="void-functions-and-side-effects">
-<h2>6.4.2. Void Functions and Side Effects<a class="headerlink" href="#void-functions-and-side-effects" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.2. Void Functions and Side Effects<a class="headerlink" href="#void-functions-and-side-effects" title="Permalink to this headline">¶</a></h2>
 <p>Occasionally, we will also need to write non-fruitful functions, which are also
 sometimes referred to as <strong>procedures</strong> or <strong>void functions</strong>.  The figure below
 illustrates the black-box diagram of a void function.  These values, often
@@ -728,7 +728,7 @@ test, which is one of the reasons that we will keep them to a minimum.</li>
             </ul>
             </div>
 <div class="section" id="program-development">
-<h2>6.4.3. Program Development<a class="headerlink" href="#program-development" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.3. Program Development<a class="headerlink" href="#program-development" title="Permalink to this headline">¶</a></h2>
 <p>At this point, you should be able to look at complete functions and tell what
 they do. Also, if you have been doing the exercises, you have written some small
 functions from expressions and list comprehensions. As you write larger
@@ -925,7 +925,7 @@ then writing the function(s) needed to pass these tests.</p>
 </div>
 </div>
 <div class="section" id="variable-arity-functions">
-<h2>6.4.4. Variable Arity Functions<a class="headerlink" href="#variable-arity-functions" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.4. Variable Arity Functions<a class="headerlink" href="#variable-arity-functions" title="Permalink to this headline">¶</a></h2>
 <p>So far, our functions have had a fixed arity, a fixed number of inputs.  If we
 define the function <code class="docutils literal"><span class="pre">add</span></code> to take two inputs, calls to this function will work
 if and only if it is supplied two arguments.</p>
@@ -1020,7 +1020,7 @@ more additional parameters.</p>
 </div>
 </div>
 <div class="section" id="unpacking-arguments-and-keywords">
-<h2>6.4.5. Unpacking arguments and keywords<a class="headerlink" href="#unpacking-arguments-and-keywords" title="Permalink to this headline">¶</a></h2>
+<h2>6.1.5. Unpacking arguments and keywords<a class="headerlink" href="#unpacking-arguments-and-keywords" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">*args</span></code> notation also has a utility in a function call.  Applying the
 <code class="docutils literal"><span class="pre">*</span></code> operator to a list <strong>unpacks</strong> it, passing each entry in the sequence as a
 argument (separated by commas).  Thus, we think of <code class="docutils literal"><span class="pre">*[1,2,3]</span></code> as <code class="docutils literal"><span class="pre">1,2,3</span></code> and
@@ -1040,19 +1040,19 @@ to the list allows us to add up a list of undetermined length!</p>
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 6.3. Other Examples of Higher Order Functions' data-toggle="tooltip">
-    <a href="OtherExamplesOfHigherOrderFunctions.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 6. Functional List Processing' data-toggle="tooltip">
+    <a href="toctree.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="OtherExamplesOfHigherOrderFunctions.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="toctree.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - &lt;no title&gt;' data-toggle="tooltip" >
-    <a href="RecursiveDataDefinitions.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 6.2. Three General Tasks' data-toggle="tooltip" >
+    <a href="ThreeGeneralTasks.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="RecursiveDataDefinitions.html" >Next Section - &lt;no title&gt;</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="ThreeGeneralTasks.html" >Next Section - 6.2. Three General Tasks</a>
 
 <script type="text/javascript">
 
@@ -1070,7 +1070,7 @@ to the list allows us to add up a list of undetermined length!</p>
       
     </p>
     <p>
-        &copy; Copyright 2015 bn8210wy.
+        &copy; Copyright 2017 Todd Iverson.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
     </p>
   </div>

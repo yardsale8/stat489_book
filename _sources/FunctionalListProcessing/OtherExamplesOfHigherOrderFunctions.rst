@@ -1,4 +1,4 @@
-        ..  Copyright (C)  Brad Miller, David Ranum, Jeffrey Elkner, Peter Wentworth, Allen B. Downey, Chris
+..  Copyright (C)  Brad Miller, David Ranum, Jeffrey Elkner, Peter Wentworth, Allen B. Downey, Chris
     Meyers, and Dario Mitchell.  Permission is granted to copy, distribute
     and/or modify this document under the terms of the GNU Free Documentation
     License, Version 1.3 or any later version published by the Free Software
@@ -119,7 +119,7 @@ as follows.
 
 Now that we have recognized that this process is a reduction, we refactor the
 code accordingly.  In this case, it is again important to work through the
-reversed list to preserve the order of operation of functional coposition.
+reversed list to preserve the order of operation of functional composition.
 
 .. ipython:: python
 
@@ -154,16 +154,16 @@ left-to-right.
     from toolz import pipe
     pipe(s , fix_whitespace, make_lower_case, remove_punc)
 
-The ``pipe`` function is designed both a sequence of unary functions.  What if
-we want to perform a similar, left-to-right sequence of calls, but with
-functions with arity greater than 1? Use ``tread_first``!    The first argument
-of ``thread_first`` is the argument ``val`` that will be passed through a
-sequence of funcitons.  The remaining argument are the functions that will be
-allpied from left-to-right.  ``thread_first`` allows a function argument to be
-replaced with a tuple in the form of ``(func, arg1, arg2, ..., argn)``, and the
-subsequent function call will be of the form ``func(val, arg1, arg2, ...,
-argn)``.  Note that the *first* in ``tread_first`` indicated that the argument
-``val`` will be the *first* argument in each call.
+The ``pipe`` function is designed for a sequence of unary (one argument)
+functions.  What if we want to perform a similar, left-to-right sequence of
+calls, but with functions with arity greater than 1? Use ``tread_first``!    The
+first argument of ``thread_first`` is the argument ``val`` that will be passed
+through a sequence of functions.  The remaining argument are the functions that
+will be allied from left-to-right.  ``thread_first`` allows a function argument
+to be replaced with a tuple in the form of ``(func, arg1, arg2, ..., argn)``,
+and the subsequent function call will be of the form ``func(val, arg1, arg2,
+..., argn)``.  Note that the *first* in ``tread_first`` indicated that the
+argument ``val`` will be the *first* argument in each call.
 
 .. ipython:: python
 
@@ -190,8 +190,11 @@ functions *in the last argument*, use ``thread_last``.
 
 .. note::
 
-    You will implement your own versions of ``pipe``, ``thread_first`` and
-    ``thread_last`` in the exercises found at the end of the chapter.
+    We will show how to use curried functions with ``pipe`` in the coming
+    sections.  Also, you will implement your own versions of ``pipe``,
+    ``thread_first`` and ``thread_last`` in the exercises found at the end of
+    the chapter.  
+    
 Partial Functions 
 -----------------
 
@@ -493,6 +496,7 @@ function.
 
     In [4]: h = flip(f(1), 2)
 
+     # Note that is is the middle number/parameter that is changing
     In [5]: h(3)
     Out[5]: 231
 
@@ -521,9 +525,11 @@ entries from a row of a table.
 
     from toolz.curried import get
 
-    table = [[1,2,3], 
-             [4,5,6], 
-             [7,8,9]]
+    table = [[1,  2, 3], 
+             [4,  5, 6], 
+             [7,  8, 9],
+             [10, 11,12], 
+             [13, 14,15]]
     get(2, table[0])
     col1 = [get(2, row) for row in table]
     col1
@@ -554,7 +560,8 @@ application or ``get`` by passing in a list of indices.
     list(map(get([2,0,1]), table))
 
 This pattern has been abstracted in the ``toolz`` library in the form of
-``pluck``.  Similar to combining ``map`` with ``get``, ``pluck`` is a lazy
+``pluck``, where ``pluck(2, table)`` is functionally equivalent to ``map(get(2),
+table)``.  Similar to combining ``map`` with ``get``, ``pluck`` is a lazy
 construct that needs to be forced to completion.
 
 .. ipython:: python
@@ -572,9 +579,11 @@ The curried version of ``pluck`` can be used to create useful partial functions.
     list(output)
 
 Keep in mind that using ``pipe`` to combine actions on a list or table provides
-a readable description of a sequence of transformations.  Suppose that we have a
-table of hours worked for all employees over a period of weeks and we wish to
-quickly compute the number of hours worked by a particular employee, ``Ann``.
+a readable description of a sequence of transformations.  In particular, an
+application of ``pipe`` reads in the natural direction, left-to-right.  Suppose
+that we have a table of hours worked for all employees over a period of weeks
+and we wish to quickly compute the number of hours worked by a particular
+employee, ``Ann``.
 
 .. ipython:: python
 
@@ -631,24 +640,34 @@ variables using the ``pipe`` function along with curried versions of ``pluck``,
                      lambda table: reduce(lambda a, r: a + r[-1], table, 0))
     tot_hours
 
-This is one a useful when transitioning from writing imperative programs to
-writing functional programs.  Anytime that you want to write code like this:
+.. note::
 
-.. sourcecode:: python
-     
-    x = f(x)
-    x = g(x)
-    x = h(x)
+    Due to the fact that ``reduce`` does not treat the optional parameter
+    ``initial`` as a keyword argument, we couldn't use ``partial`` or currying to
+    set this value, and were forced to wrap the function in a lambda expression to
+    achieve this result.
 
-transform this pattern using ``pipe`` and curried or partial functions, as
-follows.
 
-.. sourcecode:: python
-     
-    pipe(x, 
-         f, 
-         g, 
-         h)
+.. note::
+
+    This is a useful when transitioning from writing imperative programs to
+    writing functional programs.  Anytime that you want to write code like this:
+
+    .. sourcecode:: python
+         
+        x = f(x)
+        x = g(x)
+        x = h(x)
+
+    transform this pattern using ``pipe`` and curried or partial functions, as
+    follows.
+
+    .. sourcecode:: python
+         
+        pipe(x, 
+             f, 
+             g, 
+             h)
 
 Another mind-bending use of the curried functions from ``toolz`` is the curried
 version of ``curry``.  In addition to being used to creating curried functions
@@ -677,7 +696,7 @@ tail-recursive or have not been refactored to use an accumulator, is the number
 of replicated function calls that get made.  To see this, we create a decorator
 function that will use a global dictionary to track the number of calls for each
 unique argument.   We then apply this decorator function to a recursive function
-ther generates the nth `fibonacci number
+that generates the nth `fibonacci number
 <https://en.wikipedia.org/wiki/Fibonacci_number>`_.
 
 .. ipython:: python
@@ -742,9 +761,8 @@ immediately satisfied by the dictionary return.
 
     fib_with_dict(12, 0, 0)
 
-The ``toolz/cytoolz`` modules provide
-a ``memoize`` function that can be applied to a function or used as a
-dictionary.
+The ``toolz/cytoolz`` modules provide a ``memoize`` function that can be applied
+to a function or used as a dictionary.
 
 .. ipython:: python
 
