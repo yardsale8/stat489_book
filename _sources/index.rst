@@ -69,9 +69,9 @@ Table of Contents
     ReadingDataFromFiles/toctree.rst
     FunctionalListProcessing/toctree.rst
     AssociativeDataStructures_DictionariesAndSets/toctree.rst
-    Recursion/toctree.rst
-    HigherOrderFunctions/toctree.rst
-    LazyEvaluationInPython/toctree.rst
+..     Recursion/toctree.rst
+..     HigherOrderFunctions/toctree.rst
+..     LazyEvaluationInPython/toctree.rst
 
 Labs
 ::::

@@ -81,10 +81,35 @@ appear in both tables will be dropped.
     inner_join = [ (nameH, ttl, hrs) for nameH, hrs in hours for nameT, ttl in titles if nameH == nameT]
     inner_join
 
-The left outer join of the tables will include all of the rows from the first
-list, as well as the values from the second table if present.  Here is the code
-for performing a left outer join using a list comprehension.  We do this by
-combining the inner join with the rows that only appear in the left table.
+The key to joining the rows on common names is the use of the ``nameH ==
+nameT``, which guarantees that only combinations of rows where the names match
+will be processes.  
+
+**Check your understanding**
+
+
+.. mchoice:: join_1
+    :answer_a: [(10, 'zero'), (11, 'one')]
+    :answer_b: [(10, 'zero'), (10, 'one'), (11, 'zero'), (11, 'one')]
+    :answer_c: [(10, 0), (11, 1)]
+    :correct: a
+    :feedback_a: This join will keep the second entries of the tuple when the first entries match.
+    :feedback_b: This join will keep the second entries of the tuple, but only  when the first entries match.
+    :feedback_c: Note that we are keeping j and w, the second entry in the respective tuples.
+
+    Determine the table that will result from the following join.
+
+    .. sourcecode:: python
+
+        t1 = [(0, 10), (1, 11)]
+        t2 = [(0, "zero"), (1, "one")]
+        [(j, w) for i, j in t1 for n, w in t2 if n == i]
+
+The left outer join of the tables will include all of the
+rows from the first list, as well as the values from the second table if
+present.  Here is the code for performing a left outer join using a list
+comprehension.  We do this by combining the inner join with the rows that only
+appear in the left table.
 
 .. ipython:: python
 
@@ -103,6 +128,15 @@ combining the inner join with the rows that only appear in the left table.
     left_only_rows = [(name, None, hrs) for name, hrs in hours if name not in right_names]
     left_join = inner_join + left_only_rows
     left_join
+
+To get the rows that are exclusive to the left table, we need to identify rows
+with names that are only in the left-hand table.  This is facilitated by
+creating the list of names for both lists, namely ``left_names`` and
+``right_names``, and then filtering to check that ``name not in right_names`` in
+the construction of ``left_only_rows``.  As these rows are not in the right
+table, and thus lack a job title, we use ``None`` to represent a missing value.
+Finally, the ``left_only_rows`` are added to the ``inner_join`` rows to
+construct the ``left_join``.
 
 You may have noticed that this approach required us to iterate through each
 table a number of times.  This is not the most efficient implementation, and a

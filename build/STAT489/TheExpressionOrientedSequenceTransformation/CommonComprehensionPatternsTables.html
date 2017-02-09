@@ -382,10 +382,32 @@ appear in both tables will be dropped.</p>
 <span class="gh">Out[10]: </span><span class="go">[(&#39;Alice&#39;, &#39;Manager&#39;, 43), (&#39;Bob&#39;, &#39;Assistant&#39;, 37)]</span>
 </pre></div>
 </div>
-<p>The left outer join of the tables will include all of the rows from the first
-list, as well as the values from the second table if present.  Here is the code
-for performing a left outer join using a list comprehension.  We do this by
-combining the inner join with the rows that only appear in the left table.</p>
+<p>The key to joining the rows on common names is the use of the <code class="docutils literal"><span class="pre">nameH</span> <span class="pre">==</span>
+<span class="pre">nameT</span></code>, which guarantees that only combinations of rows where the names match
+will be processes.</p>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="join_1">
+            <p>rec-5-63: Determine the table that will result from the following join.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)]</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;zero&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;one&quot;</span><span class="p">)]</span>
+<span class="p">[(</span><span class="n">j</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">t1</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">t2</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+
+            <li data-component="answer" data-correct id="join_1_opt_a">(A) [(10, 'zero'), (11, 'one')]</li><li data-component="feedback" id="join_1_opt_a">This join will keep the second entries of the tuple when the first entries match.</li>
+            
+            <li data-component="answer"  id="join_1_opt_b">(B) [(10, 'zero'), (10, 'one'), (11, 'zero'), (11, 'one')]</li><li data-component="feedback" id="join_1_opt_b">This join will keep the second entries of the tuple, but only  when the first entries match.</li>
+            
+            <li data-component="answer"  id="join_1_opt_c">(C) [(10, 0), (11, 1)]</li><li data-component="feedback" id="join_1_opt_c">Note that we are keeping j and w, the second entry in the respective tuples.</li>
+            
+
+            </ul>
+            <p>The left outer join of the tables will include all of the
+rows from the first list, as well as the values from the second table if
+present.  Here is the code for performing a left outer join using a list
+comprehension.  We do this by combining the inner join with the rows that only
+appear in the left table.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">hours</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">43</span><span class="p">],</span>
 <span class="gp">   ....: </span>           <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">37</span><span class="p">],</span>
 <span class="gp">   ....: </span>           <span class="p">[</span><span class="s2">&quot;Fred&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">]]</span>
@@ -410,6 +432,14 @@ combining the inner join with the rows that only appear in the left table.</p>
 <span class="gh">Out[18]: </span><span class="go">[(&#39;Alice&#39;, &#39;Manager&#39;, 43), (&#39;Bob&#39;, &#39;Assistant&#39;, 37), (&#39;Fred&#39;, None, 15)]</span>
 </pre></div>
 </div>
+<p>To get the rows that are exclusive to the left table, we need to identify rows
+with names that are only in the left-hand table.  This is facilitated by
+creating the list of names for both lists, namely <code class="docutils literal"><span class="pre">left_names</span></code> and
+<code class="docutils literal"><span class="pre">right_names</span></code>, and then filtering to check that <code class="docutils literal"><span class="pre">name</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">right_names</span></code> in
+the construction of <code class="docutils literal"><span class="pre">left_only_rows</span></code>.  As these rows are not in the right
+table, and thus lack a job title, we use <code class="docutils literal"><span class="pre">None</span></code> to represent a missing value.
+Finally, the <code class="docutils literal"><span class="pre">left_only_rows</span></code> are added to the <code class="docutils literal"><span class="pre">inner_join</span></code> rows to
+construct the <code class="docutils literal"><span class="pre">left_join</span></code>.</p>
 <p>You may have noticed that this approach required us to iterate through each
 table a number of times.  This is not the most efficient implementation, and a
 solution that uses a relational database should be more efficient and used to

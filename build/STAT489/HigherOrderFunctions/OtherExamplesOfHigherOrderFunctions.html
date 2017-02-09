@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.3. Other Examples of Higher Order Functions &mdash; Runestone Interactive Overview</title>
+    <title>Other Examples of Higher Order Functions &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,6 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="9. Higher Order Functions" href="toctree.html" />
-    <link rel="next" title="10. Lazy Evaluation in Python" href="../LazyEvaluationInPython/toctree.html" />
-    <link rel="prev" title="9.2. Abstraction Iteration and Recursion With Functions" href="AbstractionIterationAndRecursionWithFunctions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,12 +260,12 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">9.3. Other Examples of Higher Order Functions</a><ul>
-<li><a class="reference internal" href="#partial-functions">9.3.1. Partial Functions</a></li>
-<li><a class="reference internal" href="#decorator-functions">9.3.2. Decorator Functions</a></li>
-<li><a class="reference internal" href="#currying">9.3.3. Currying</a></li>
-<li><a class="reference internal" href="#memiozation">9.3.4. Memiozation</a></li>
-<li><a class="reference internal" href="#composition">9.3.5. Composition</a></li>
+<li><a class="reference internal" href="#">Other Examples of Higher Order Functions</a><ul>
+<li><a class="reference internal" href="#partial-functions">Partial Functions</a></li>
+<li><a class="reference internal" href="#decorator-functions">Decorator Functions</a></li>
+<li><a class="reference internal" href="#currying">Currying</a></li>
+<li><a class="reference internal" href="#memiozation">Memiozation</a></li>
+<li><a class="reference internal" href="#composition">Composition</a></li>
 </ul>
 </li>
 </ul>
@@ -278,18 +275,6 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 9.2. Abstraction Iteration and Recursion With Functions" data-toggle="tooltip">
-    <a href="AbstractionIterationAndRecursionWithFunctions.html" >
-      <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
-    </a>
-  </li>
-  
-  <li id="relations-next" title='Next Chapter - 10. Lazy Evaluation in Python' data-toggle="tooltip" >
-    <a href="../LazyEvaluationInPython/toctree.html" >
-      <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
-    </a>
-  </li>
-  <li class="divider-vertical"></li>
 
 <script type="text/javascript">
   opts = {'placement':'bottom',
@@ -316,7 +301,7 @@
 <div class="container" id="main-content">
   
   <div class="section" id="other-examples-of-higher-order-functions">
-<h1>9.3. Other Examples of Higher Order Functions<a class="headerlink" href="#other-examples-of-higher-order-functions" title="Permalink to this headline">¶</a></h1>
+<h1>Other Examples of Higher Order Functions<a class="headerlink" href="#other-examples-of-higher-order-functions" title="Permalink to this headline">¶</a></h1>
 <p>In this section, we will implement some of the common higher-order functions</p>
 <p>that are common in functional programming.  All of these functions are
 implemented in the Python libraries <code class="docutils literal"><span class="pre">toolz</span></code> and <code class="docutils literal"><span class="pre">cytoolz</span></code> under the sub
@@ -338,7 +323,7 @@ below,</p>
 </div>
 </div>
 <div class="section" id="partial-functions">
-<h2>9.3.1. Partial Functions<a class="headerlink" href="#partial-functions" title="Permalink to this headline">¶</a></h2>
+<h2>Partial Functions<a class="headerlink" href="#partial-functions" title="Permalink to this headline">¶</a></h2>
 <p>In the second chapter, we illustrated how to use a function factory to
 generalize the <code class="docutils literal"><span class="pre">apply_tax</span></code> function.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">make_apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">):</span>
@@ -428,7 +413,7 @@ having to type the alternative value of the keyword more than once.</p>
 </div>
 </div>
 <div class="section" id="decorator-functions">
-<h2>9.3.2. Decorator Functions<a class="headerlink" href="#decorator-functions" title="Permalink to this headline">¶</a></h2>
+<h2>Decorator Functions<a class="headerlink" href="#decorator-functions" title="Permalink to this headline">¶</a></h2>
 <p>A decorator function is a function that creates a <em>wrapper</em> around another
 function.  The outer function calls the original function and then changes or
 <em>decorates</em> the input or output.</p>
@@ -469,7 +454,7 @@ the function definition, removing the need to use different name for the
 decorated function.</p>
 </div>
 <div class="section" id="currying">
-<h2>9.3.3. Currying<a class="headerlink" href="#currying" title="Permalink to this headline">¶</a></h2>
+<h2>Currying<a class="headerlink" href="#currying" title="Permalink to this headline">¶</a></h2>
 <p>Currying is another popular functional approach to partial application of
 functions.  The <strong>arity</strong> of a function is the number of arguments the function
 takes.  We can implement functions with arity higher than 1 using a using
@@ -623,7 +608,7 @@ function.</p>
 <p>You will implement your own version of <code class="docutils literal"><span class="pre">flip</span></code> in the exercises.</p>
 </div>
 <div class="section" id="memiozation">
-<h2>9.3.4. Memiozation<a class="headerlink" href="#memiozation" title="Permalink to this headline">¶</a></h2>
+<h2>Memiozation<a class="headerlink" href="#memiozation" title="Permalink to this headline">¶</a></h2>
 <p>One of the problems with recursive functions, especially if they are not
 tail-recursive or have not been refactored to use an accumulator, is the number
 of replicated function calls that get made.  To see this, we create a decorator
@@ -1243,7 +1228,7 @@ declared using the <code class="docutils literal"><span class="pre">nonlocal</sp
 </div>
 </div>
 <div class="section" id="composition">
-<h2>9.3.5. Composition<a class="headerlink" href="#composition" title="Permalink to this headline">¶</a></h2>
+<h2>Composition<a class="headerlink" href="#composition" title="Permalink to this headline">¶</a></h2>
 <p>Consider the following example, which involves cleaning up a string by removing
 punctuation, whitespace and upper-case characters.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [55]: </span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span><span class="p">,</span> <span class="n">whitespace</span>
@@ -1357,19 +1342,6 @@ which is shared under <a class="reference external" href="http://creativecommons
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 9.2. Abstraction Iteration and Recursion With Functions' data-toggle="tooltip">
-    <a href="AbstractionIterationAndRecursionWithFunctions.html" >
-      <i class='prevNav glyphicon glyphicon-chevron-left'></i>
-    </a>
-  </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="AbstractionIterationAndRecursionWithFunctions.html" ></a>
-  
-  <li id="relations-next" class="navLink" title='Next Section - 10. Lazy Evaluation in Python' data-toggle="tooltip" >
-    <a href="../LazyEvaluationInPython/toctree.html" >
-      <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
-    </a>
-  </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="../LazyEvaluationInPython/toctree.html" >Next Section - 10. Lazy Evaluation in Python</a>
 
 <script type="text/javascript">
 

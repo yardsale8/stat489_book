@@ -401,7 +401,7 @@ the entry for <code class="docutils literal"><span class="pre">pears</span></cod
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict4a)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict4a_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ninventory['pears'] = 0", "trace": [{"ordered_globals": [], "event": "step_line", "heap": {}, "line": 1, "stdout": "", "globals": {}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["inventory"], "event": "step_line", "heap": {"1": ["DICT", ["apples", 430], ["bananas", 312], ["pears", 217], ["oranges", 525]]}, "line": 3, "stdout": "", "globals": {"inventory": ["REF", 1]}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["inventory"], "event": "return", "heap": {"1": ["DICT", ["apples", 430], ["bananas", 312], ["pears", 0], ["oranges", 525]]}, "line": 3, "stdout": "", "globals": {"inventory": ["REF", 1]}, "func_name": "<module>", "stack_to_render": []}]};
+var ch12_dict4a_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\n\ninventory['pears'] = 0", "trace": [{"globals": {}, "stdout": "", "line": 1, "ordered_globals": [], "func_name": "<module>", "stack_to_render": [], "heap": {}, "event": "step_line"}, {"globals": {"inventory": ["REF", 1]}, "stdout": "", "line": 3, "ordered_globals": ["inventory"], "func_name": "<module>", "stack_to_render": [], "heap": {"1": ["DICT", ["pears", 217], ["apples", 430], ["bananas", 312], ["oranges", 525]]}, "event": "step_line"}, {"globals": {"inventory": ["REF", 1]}, "stdout": "", "line": 3, "ordered_globals": ["inventory"], "func_name": "<module>", "stack_to_render": [], "heap": {"1": ["DICT", ["pears", 0], ["apples", 430], ["bananas", 312], ["oranges", 525]]}, "event": "return"}]};
 var ch12_dict4a_vis;
 
 $(document).ready(function() {
@@ -447,7 +447,7 @@ $(window).resize(function() {
 <p class="cl_caption"><span class="cl_caption_text"> (ch12_dict5)</span> </p>
 </div>
 <script type="text/javascript">
-var ch12_dict5_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\ninventory['bananas'] = inventory['bananas'] + 200\n\n\nnumItems = len(inventory)", "trace": [{"ordered_globals": [], "event": "step_line", "heap": {}, "line": 1, "stdout": "", "globals": {}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["inventory"], "event": "step_line", "heap": {"1": ["DICT", ["apples", 430], ["bananas", 312], ["pears", 217], ["oranges", 525]]}, "line": 2, "stdout": "", "globals": {"inventory": ["REF", 1]}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["inventory"], "event": "step_line", "heap": {"1": ["DICT", ["apples", 430], ["bananas", 512], ["pears", 217], ["oranges", 525]]}, "line": 5, "stdout": "", "globals": {"inventory": ["REF", 1]}, "func_name": "<module>", "stack_to_render": []}, {"ordered_globals": ["inventory", "numItems"], "event": "return", "heap": {"1": ["DICT", ["apples", 430], ["bananas", 512], ["pears", 217], ["oranges", 525]]}, "line": 5, "stdout": "", "globals": {"inventory": ["REF", 1], "numItems": 4}, "func_name": "<module>", "stack_to_render": []}]};
+var ch12_dict5_trace = {"code": "inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}\ninventory['bananas'] = inventory['bananas'] + 200\n\n\nnumItems = len(inventory)", "trace": [{"globals": {}, "stdout": "", "line": 1, "ordered_globals": [], "func_name": "<module>", "stack_to_render": [], "heap": {}, "event": "step_line"}, {"globals": {"inventory": ["REF", 1]}, "stdout": "", "line": 2, "ordered_globals": ["inventory"], "func_name": "<module>", "stack_to_render": [], "heap": {"1": ["DICT", ["pears", 217], ["apples", 430], ["bananas", 312], ["oranges", 525]]}, "event": "step_line"}, {"globals": {"inventory": ["REF", 1]}, "stdout": "", "line": 5, "ordered_globals": ["inventory"], "func_name": "<module>", "stack_to_render": [], "heap": {"1": ["DICT", ["pears", 217], ["apples", 430], ["bananas", 512], ["oranges", 525]]}, "event": "step_line"}, {"globals": {"numItems": 4, "inventory": ["REF", 1]}, "stdout": "", "line": 5, "ordered_globals": ["inventory", "numItems"], "func_name": "<module>", "stack_to_render": [], "heap": {"1": ["DICT", ["pears", 217], ["apples", 430], ["bananas", 512], ["oranges", 525]]}, "event": "return"}]};
 var ch12_dict5_vis;
 
 $(document).ready(function() {
@@ -560,7 +560,7 @@ underlying keys.  An view is an example of an <strong>iterable</strong>.</p>
 <span class="gh">Out[7]: </span><span class="go">dict_keys</span>
 
 <span class="gp">In [8]: </span><span class="n">ks</span>
-<span class="go">                  Out[8]: dict_keys([&#39;apples&#39;, &#39;bananas&#39;, &#39;pears&#39;, &#39;oranges&#39;])</span>
+<span class="go">                  Out[8]: dict_keys([&#39;pears&#39;, &#39;apples&#39;, &#39;bananas&#39;, &#39;oranges&#39;])</span>
 </pre></div>
 </div>
 <p>We can turn the iterable item into an iterator using the <code class="docutils literal"><span class="pre">iter</span></code> function.  An
@@ -572,13 +572,13 @@ other using the <code class="docutils literal"><span class="pre">next</span></co
 <span class="gh">Out[10]: </span><span class="go">dict_keyiterator</span>
 
 <span class="gp">In [11]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
-<span class="go">                          Out[11]: &#39;apples&#39;</span>
+<span class="go">                          Out[11]: &#39;pears&#39;</span>
 
 <span class="gp">In [12]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
-<span class="go">                                            Out[12]: &#39;bananas&#39;</span>
+<span class="go">                                           Out[12]: &#39;apples&#39;</span>
 
 <span class="gp">In [13]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
-<span class="go">                                                               Out[13]: &#39;pears&#39;</span>
+<span class="go">                                                             Out[13]: &#39;bananas&#39;</span>
 
 <span class="gp">In [14]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
 <span class="go">                                                                                Out[14]: &#39;oranges&#39;</span>
@@ -612,15 +612,15 @@ list comprehension or by converting the view into a list.</p>
 <span class="gp">In [17]: </span><span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">akey</span> <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
 <span class="gp">In [18]: </span><span class="n">keys</span>
-<span class="gh">Out[18]: </span><span class="go">[&#39;apples&#39;, &#39;bananas&#39;, &#39;pears&#39;, &#39;oranges&#39;]</span>
+<span class="gh">Out[18]: </span><span class="go">[&#39;pears&#39;, &#39;apples&#39;, &#39;bananas&#39;, &#39;oranges&#39;]</span>
 
 <span class="gp">In [19]: </span><span class="n">ks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">inventory</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
 <span class="gp">In [20]: </span><span class="n">ks</span>
-<span class="gh">Out[20]: </span><span class="go">[&#39;apples&#39;, &#39;bananas&#39;, &#39;pears&#39;, &#39;oranges&#39;]</span>
+<span class="gh">Out[20]: </span><span class="go">[&#39;pears&#39;, &#39;apples&#39;, &#39;bananas&#39;, &#39;oranges&#39;]</span>
 
 <span class="gp">In [21]: </span><span class="p">[</span><span class="n">akey</span> <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">inventory</span><span class="p">]</span>
-<span class="go">                                                   Out[21]: [&#39;apples&#39;, &#39;bananas&#39;, &#39;pears&#39;, &#39;oranges&#39;]</span>
+<span class="go">                                                   Out[21]: [&#39;pears&#39;, &#39;apples&#39;, &#39;bananas&#39;, &#39;oranges&#39;]</span>
 </pre></div>
 </div>
 <p>As we saw earlier with strings and lists, dictionary methods use dot notation,
@@ -635,7 +635,7 @@ items are shown as tuples containing the key and the associated value.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">430</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span> <span class="s1">&#39;oranges&#39;</span><span class="p">:</span> <span class="mi">525</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">:</span> <span class="mi">217</span><span class="p">}</span>
 
 <span class="gp">In [23]: </span><span class="nb">list</span><span class="p">(</span><span class="n">inventory</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-<span class="gh">Out[23]: </span><span class="go">[430, 312, 217, 525]</span>
+<span class="gh">Out[23]: </span><span class="go">[217, 430, 312, 525]</span>
 
 <span class="gp">In [24]: </span><span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 </pre></div>
