@@ -481,7 +481,7 @@ Furthermore IPython ships with various *aliases* which emulate common UNIX
 command line tools such as ``ls`` to list files, ``cp`` to copy files and ``rm`` to
 remove files (a full list of aliases is shown when typing ``alias``).
 
-.. ipython:: python
+.. source:: python
 
     alias
 
@@ -492,10 +492,10 @@ remove files (a full list of aliases is shown when typing ``alias``).
 
     * A list of all available magic functions is shown when typing ``%magic``.
 
-.. ipython:: python
+.. sourcecode:: python
 
     %quickref
 
-.. ipython:: python
+.. sourcecode:: python
 
     %magic
