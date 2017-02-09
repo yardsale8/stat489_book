@@ -8,3 +8,273 @@
 
 Lazy Iteration
 ==============
+
+We have already seen some Python expressions that exhibit lazy evaluation,
+including ``range``, ``map`` and ``filter``. 
+
+.. ipython:: python
+
+    range(4)
+    map(lambda x: x**2, range(5))
+    filter(lambda x: x % 2 == 1, range(20))
+
+Each of these object will hold off evaluation as long as possible.  In this
+section, we will show you other methods for constructing your own lazy
+constructs and discuss the advantage of chaining together lazy expressions.
+
+Generator Expressions
+---------------------
+
+The core lazy type in Python is the *generator*.  The easiest way to construct a
+lazy expression is using the **generator expression**, which has the same syntax
+as a list comprehension, except that it is surrounded by parentheses. 
+
+.. figure:: Figures/generator_expression.png
+    :alt: The generator expression
+
+    ..
+
+    The syntax for the generator function is the same as that of a list
+    comprehension, except being delimited by parentheses.  The resulting object will
+    hold off computing each item until evaluation is forced.
+
+For a first example, let's write the generator expression of squaring all of the
+odd values in a sequence.
+
+.. ipython:: python
+
+    g = (item**2 for item in range(5) if item % 2 == 1)
+    g
+
+Notice that evaluating the generator doesn't produce the sequence.  We can force
+the evaluation of the next item in the sequence using the ``next`` function.
+
+.. ipython:: python
+
+    next(g)
+    next(g)
+    next(g)
+
+By design, the generator will throw an exception when it has completed the
+sequence, which can be caught by a ``try-except`` block to determine the end of
+the sequence.  In practice, this exception does not surface, as we process
+generators in loops, comprehensions, or other lazy constructs like ``map`` and
+``filter``.  Each of these techniques catches the termination exception behind
+the scenes so that our code can successfully complete.
+
+Note that a generator is a **single-use sequence** and must be reinitialized
+before attempting to iterate a second time.
+
+
+.. ipython:: python
+
+    g = (item**2 for item in range(5) if item % 2 == 1)
+    g
+    x = list(g)
+    x
+    y = list(g)
+    y
+    g = (item**2 for item in range(5) if item % 2 == 1)
+    z = list(g)
+    z
+
+.. note::
+
+    All of the tricks that you learned about list comprehensions will work with
+    generator expressions as well, be it nesting list comprehensions or including
+    multiple sequence expression.
+
+    .. ipython:: python
+
+        g = (i*j for i in range(5) for j in range(i,5))
+        g
+        list(g)
+
+    The only caveat is that next generators are **very lazy** and can be difficult
+    to force to completion.  In this next example, this is accomplished by
+    mapping the ``list`` conversion function unto each embedded lazy sequence.
+
+
+    .. ipython:: python
+
+        g = ((i*j for j in range(5)) for i in range(5))
+        table = list(g)
+        table
+        mapped_table = list(map(list, table))
+        mapped_table
+        L = [[i*j for j in range(5)] for i in range(5)]
+        L
+
+    **That answer is wrong! (or at least unexpected)**  In the last attempt, I
+    messed up by completing the outer generator without completing the inner
+    loops.  Therefore the value of ``i`` was stuck at the last generated value.
+    The correct way to resolve this nested structure is to process all the
+    sequences simulaneously as follows.
+
+    .. ipython:: python
+
+        g = ((i*j for j in range(5)) for i in range(5))
+        mapped_table = list(map(list, g))
+        mapped_table
+
+    **Main Takeaway:** Processing nested, single-use lazy structures can be
+    tricky and return unexpected results depending on the order of execution.
+
+Generator Functions
+-------------------
+
+A more robust method of creating generators is using the ``yield`` and/or
+``yield from`` statements in a function definition.  
+
+
+The ``yield`` statement
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``yield`` statement is used to yield the next value in the lazy sequence and
+tells Python that our function is really a generator.
+
+.. ipython:: python
+
+    def f(x):
+        """ a function """
+        return x**2
+
+    def g(x):
+        """ A generator """
+        yield x**2
+
+When we call a regular function like ``f``, the value is result is immediately
+returned.
+
+.. ipython:: python
+
+    type(f)
+    y = f(2)
+    y
+
+On the other hand, a call to a generator will yield a lazy generator object that
+requires a call to ``next`` before it will return a value.
+
+.. ipython:: python
+
+    type(g)
+    y = g(2)
+    y
+    next(y)
+
+Generators can include any number of ``yield`` statements and will halt
+execution at each statement, waiting for a request for the ``next`` value.
+
+.. ipython:: python
+
+    def many_yields(x):
+        """ a generator with multiple yield statements """
+        y = x**2
+        yield y
+        z = y + 2
+        yield z
+        yield "Awesome"
+
+.. ipython:: python
+
+    g = many_yields(2)
+    next(g)
+    next(g)
+    next(g)
+    next(g)
+
+Notice that the generator captures and maintains the start of the body inbetween
+calls to next.  For example, ``many_yields`` kept the value of ``y`` so that it
+could be later used to compute ``z``.  As with generator expressions, any
+``next`` calls beyond the last ``yield`` will throw an exception.
+
+Finally, note that we can use comprehensions (list or generator) to process a
+generator.  In this case, Python takes care of catching the ``StopIteration``
+exception.
+
+.. ipython:: python
+
+    [x for x in many_yields(2)]
+
+The ``yield from`` statement
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sometimes we want to yield values from some other sequence.  In this case, we
+can use the ``yield from`` statement, which automates the process of iterating
+through the sequence, yielding one item at a time in a lazy fashion.
+
+.. ipython:: python
+
+    def g(L):
+        yield from L
+
+.. ipython:: python
+
+    y = g([1,2,3])
+    y
+    type(y)
+    next(y)
+    next(y)
+    next(y)
+
+You can combine any combination of ``yield`` and ``yield from`` statements.
+
+.. ipython:: python
+
+    def g(L):
+        yield "Wait for it"
+        yield "Here it comes..."
+        yield "...any second now..."
+        yield from L
+        yield "So there you go"
+        yield "Enjoy!"
+
+.. ipython:: python
+
+    [x for x in g([1,2,3])]
+
+
+.. todo:: A multiple choice about way to force completion of a generator
+.. todo:: A few multiple choices questions guessing the output of various generators
+
+.. note::
+
+    Generator expressions also can used a ``return`` statement, but this
+    immediately throws a ``StopIteration`` exception.  The main purpose of this
+    statement in a generator is to control when a generated sequence halts.
+    We will show how this can be used to speed up a recursively defined
+    generator in the next section.
+
+Coroutines
+----------
+
+Generators are a form of one-way lazy evaluation. Once created they only return
+items and can no longer receive values.  Python has another lazy structure that
+can be used to pass values back and forth in a lazy way: a **coroutine**.
+
+The keyword ``yield`` is again used to create a coroutine, but this time using
+it in an assignment-like statement.  This assignment statement signifies both
+the yielding of the next value and acquisition of the next value.
+
+
+
+.. ipython:: python
+
+    def coroutine(s):
+        s = s.lower() 
+        s = yield s
+        s = s.lower() 
+        s = yield s
+        s = 3*s.upper() 
+        s = yield s
+
+As with generators, values are pulled from a coroutine using ``next``.  A
+coroutine comes with a method ``send`` that is used to pass it the next value.
+
+.. ipython:: python
+
+    co = coroutine("Hi ")
+    next(co)
+    co.send("there ")
+    co.send("Bob!")
+

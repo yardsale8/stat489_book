@@ -263,7 +263,16 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6.5. Lazy Iteration</a></li>
+<li><a class="reference internal" href="#">6.5. Lazy Iteration</a><ul>
+<li><a class="reference internal" href="#generator-expressions">6.5.1. Generator Expressions</a></li>
+<li><a class="reference internal" href="#generator-functions">6.5.2. Generator Functions</a><ul>
+<li><a class="reference internal" href="#the-yield-statement">6.5.2.1. The <code class="docutils literal"><span class="pre">yield</span></code> statement</a></li>
+<li><a class="reference internal" href="#the-yield-from-statement">6.5.2.2. The <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statement</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coroutines">6.5.3. Coroutines</a></li>
+</ul>
+</li>
 </ul>
 </ul>
 </li>
@@ -310,6 +319,343 @@
   
   <div class="section" id="lazy-iteration">
 <h1>6.5. Lazy Iteration<a class="headerlink" href="#lazy-iteration" title="Permalink to this headline">¶</a></h1>
+<p>We have already seen some Python expressions that exhibit lazy evaluation,
+including <code class="docutils literal"><span class="pre">range</span></code>, <code class="docutils literal"><span class="pre">map</span></code> and <code class="docutils literal"><span class="pre">filter</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gh">Out[1]: </span><span class="go">range(0, 4)</span>
+
+<span class="gp">In [2]: </span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">                    Out[2]: &lt;map at 0x10a84a898&gt;</span>
+
+<span class="gp">In [3]: </span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+<span class="go">                                                 Out[3]: &lt;filter at 0x10a84a940&gt;</span>
+</pre></div>
+</div>
+<p>Each of these object will hold off evaluation as long as possible.  In this
+section, we will show you other methods for constructing your own lazy
+constructs and discuss the advantage of chaining together lazy expressions.</p>
+<div class="section" id="generator-expressions">
+<h2>6.5.1. Generator Expressions<a class="headerlink" href="#generator-expressions" title="Permalink to this headline">¶</a></h2>
+<p>The core lazy type in Python is the <em>generator</em>.  The easiest way to construct a
+lazy expression is using the <strong>generator expression</strong>, which has the same syntax
+as a list comprehension, except that it is surrounded by parentheses.</p>
+<div class="figure">
+<img alt="The generator expression" src="../_images/generator_expression.png" />
+<div class="legend">
+The syntax for the generator function is the same as that of a list
+comprehension, except being delimited by parentheses.  The resulting object will
+hold off computing each item until evaluation is forced.</div>
+</div>
+<p>For a first example, let&#8217;s write the generator expression of squaring all of the
+odd values in a sequence.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">In [5]: </span><span class="n">g</span>
+<span class="gh">Out[5]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10a8455c8&gt;</span>
+</pre></div>
+</div>
+<p>Notice that evaluating the generator doesn&#8217;t produce the sequence.  We can force
+the evaluation of the next item in the sequence using the <code class="docutils literal"><span class="pre">next</span></code> function.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gh">Out[6]: </span><span class="go">1</span>
+
+<span class="gp">In [7]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">          Out[7]: 9</span>
+
+<span class="gp">In [8]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">                    ---------------------------------------------------------------------------</span>
+<span class="go">StopIteration                             Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-8-5f315c5de15b&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 next(g)</span>
+
+<span class="go">StopIteration: </span>
+</pre></div>
+</div>
+<p>By design, the generator will throw an exception when it has completed the
+sequence, which can be caught by a <code class="docutils literal"><span class="pre">try-except</span></code> block to determine the end of
+the sequence.  In practice, this exception does not surface, as we process
+generators in loops, comprehensions, or other lazy constructs like <code class="docutils literal"><span class="pre">map</span></code> and
+<code class="docutils literal"><span class="pre">filter</span></code>.  Each of these techniques catches the termination exception behind
+the scenes so that our code can successfully complete.</p>
+<p>Note that a generator is a <strong>single-use sequence</strong> and must be reinitialized
+before attempting to iterate a second time.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">In [10]: </span><span class="n">g</span>
+<span class="gh">Out[10]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10a845990&gt;</span>
+
+<span class="gp">In [11]: </span><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+<span class="gp">In [12]: </span><span class="n">x</span>
+<span class="gh">Out[12]: </span><span class="go">[1, 9]</span>
+
+<span class="gp">In [13]: </span><span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+<span class="gp">In [14]: </span><span class="n">y</span>
+<span class="gh">Out[14]: </span><span class="go">[]</span>
+
+<span class="gp">In [15]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">In [16]: </span><span class="n">z</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+<span class="gp">In [17]: </span><span class="n">z</span>
+<span class="gh">Out[17]: </span><span class="go">[1, 9]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>All of the tricks that you learned about list comprehensions will work with
+generator expressions as well, be it nesting list comprehensions or including
+multiple sequence expression.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="gp">In [19]: </span><span class="n">g</span>
+<span class="gh">Out[19]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10a947c50&gt;</span>
+
+<span class="gp">In [20]: </span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">                                                     Out[20]: [0, 0, 0, 0, 0, 1, 2, 3, 4, 4, 6, 8, 9, 12, 16]</span>
+</pre></div>
+</div>
+<p>The only caveat is that next generators are <strong>very lazy</strong> and can be difficult
+to force to completion.  In this next example, this is accomplished by
+mapping the <code class="docutils literal"><span class="pre">list</span></code> conversion function unto each embedded lazy sequence.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="gp">In [22]: </span><span class="n">table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+<span class="gp">In [23]: </span><span class="n">table</span>
+<span class="gh">Out[23]: </span><span class="go"></span>
+<span class="go">[&lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x107951a40&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10a947db0&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10a947b48&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10a947a40&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10a947e08&gt;]</span>
+
+<span class="gp">In [24]: </span><span class="n">mapped_table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">table</span><span class="p">))</span>
+
+<span class="gp">In [25]: </span><span class="n">mapped_table</span>
+<span class="gh">Out[25]: </span><span class="go"></span>
+<span class="go">[[0, 4, 8, 12, 16],</span>
+<span class="go"> [0, 4, 8, 12, 16],</span>
+<span class="go"> [0, 4, 8, 12, 16],</span>
+<span class="go"> [0, 4, 8, 12, 16],</span>
+<span class="go"> [0, 4, 8, 12, 16]]</span>
+
+<span class="gp">In [26]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+
+<span class="gp">In [27]: </span><span class="n">L</span>
+<span class="gh">Out[27]: </span><span class="go"></span>
+<span class="go">[[0, 0, 0, 0, 0],</span>
+<span class="go"> [0, 1, 2, 3, 4],</span>
+<span class="go"> [0, 2, 4, 6, 8],</span>
+<span class="go"> [0, 3, 6, 9, 12],</span>
+<span class="go"> [0, 4, 8, 12, 16]]</span>
+</pre></div>
+</div>
+<p><strong>That answer is wrong! (or at least unexpected)</strong>  In the last attempt, I
+messed up by completing the outer generator without completing the inner
+loops.  Therefore the value of <code class="docutils literal"><span class="pre">i</span></code> was stuck at the last generated value.
+The correct way to resolve this nested structure is to process all the
+sequences simulaneously as follows.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="gp">In [29]: </span><span class="n">mapped_table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span>
+
+<span class="gp">In [30]: </span><span class="n">mapped_table</span>
+<span class="gh">Out[30]: </span><span class="go"></span>
+<span class="go">[[0, 0, 0, 0, 0],</span>
+<span class="go"> [0, 1, 2, 3, 4],</span>
+<span class="go"> [0, 2, 4, 6, 8],</span>
+<span class="go"> [0, 3, 6, 9, 12],</span>
+<span class="go"> [0, 4, 8, 12, 16]]</span>
+</pre></div>
+</div>
+<p class="last"><strong>Main Takeaway:</strong> Processing nested, single-use lazy structures can be
+tricky and return unexpected results depending on the order of execution.</p>
+</div>
+</div>
+<div class="section" id="generator-functions">
+<h2>6.5.2. Generator Functions<a class="headerlink" href="#generator-functions" title="Permalink to this headline">¶</a></h2>
+<p>A more robust method of creating generators is using the <code class="docutils literal"><span class="pre">yield</span></code> and/or
+<code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statements in a function definition.</p>
+<div class="section" id="the-yield-statement">
+<h3>6.5.2.1. The <code class="docutils literal"><span class="pre">yield</span></code> statement<a class="headerlink" href="#the-yield-statement" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">yield</span></code> statement is used to yield the next value in the lazy sequence and
+tells Python that our function is really a generator.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="sd">&quot;&quot;&quot; a function &quot;&quot;&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [32]: </span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="sd">&quot;&quot;&quot; A generator &quot;&quot;&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<p>When we call a regular function like <code class="docutils literal"><span class="pre">f</span></code>, the value is result is immediately
+returned.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gh">Out[33]: </span><span class="go">function</span>
+
+<span class="gp">In [34]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [35]: </span><span class="n">y</span>
+<span class="gh">Out[35]: </span><span class="go">4</span>
+</pre></div>
+</div>
+<p>On the other hand, a call to a generator will yield a lazy generator object that
+requires a call to <code class="docutils literal"><span class="pre">next</span></code> before it will return a value.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="nb">type</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gh">Out[36]: </span><span class="go">function</span>
+
+<span class="gp">In [37]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [38]: </span><span class="n">y</span>
+<span class="gh">Out[38]: </span><span class="go">&lt;generator object g at 0x10a947f10&gt;</span>
+
+<span class="gp">In [39]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">                                             Out[39]: 4</span>
+</pre></div>
+</div>
+<p>Generators can include any number of <code class="docutils literal"><span class="pre">yield</span></code> statements and will halt
+execution at each statement, waiting for a request for the <code class="docutils literal"><span class="pre">next</span></code> value.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="k">def</span> <span class="nf">many_yields</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="sd">&quot;&quot;&quot; a generator with multiple yield statements &quot;&quot;&quot;</span>
+<span class="gp">   ....: </span>    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="n">y</span>
+<span class="gp">   ....: </span>    <span class="n">z</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="n">z</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;Awesome&quot;</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">g</span> <span class="o">=</span> <span class="n">many_yields</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [42]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gh">Out[42]: </span><span class="go">4</span>
+
+<span class="gp">In [43]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">           Out[43]: 6</span>
+
+<span class="gp">In [44]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">                      Out[44]: &#39;Awesome&#39;</span>
+
+<span class="gp">In [45]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">                                         ---------------------------------------------------------------------------</span>
+<span class="go">StopIteration                             Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-45-5f315c5de15b&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 next(g)</span>
+
+<span class="go">StopIteration: </span>
+</pre></div>
+</div>
+<p>Notice that the generator captures and maintains the start of the body inbetween
+calls to next.  For example, <code class="docutils literal"><span class="pre">many_yields</span></code> kept the value of <code class="docutils literal"><span class="pre">y</span></code> so that it
+could be later used to compute <code class="docutils literal"><span class="pre">z</span></code>.  As with generator expressions, any
+<code class="docutils literal"><span class="pre">next</span></code> calls beyond the last <code class="docutils literal"><span class="pre">yield</span></code> will throw an exception.</p>
+<p>Finally, note that we can use comprehensions (list or generator) to process a
+generator.  In this case, Python takes care of catching the <code class="docutils literal"><span class="pre">StopIteration</span></code>
+exception.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">many_yields</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+<span class="gh">Out[46]: </span><span class="go">[4, 6, &#39;Awesome&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-yield-from-statement">
+<h3>6.5.2.2. The <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statement<a class="headerlink" href="#the-yield-from-statement" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes we want to yield values from some other sequence.  In this case, we
+can use the <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statement, which automates the process of iterating
+through the sequence, yielding one item at a time in a lazy fashion.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [47]: </span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">yield from</span> <span class="n">L</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="gp">In [49]: </span><span class="n">y</span>
+<span class="gh">Out[49]: </span><span class="go">&lt;generator object g at 0x10a98f468&gt;</span>
+
+<span class="gp">In [50]: </span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">                                             Out[50]: generator</span>
+
+<span class="gp">In [51]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">                                                                Out[51]: 1</span>
+
+<span class="gp">In [52]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">                                                                           Out[52]: 2</span>
+
+<span class="gp">In [53]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">                                                                                      Out[53]: 3</span>
+</pre></div>
+</div>
+<p>You can combine any combination of <code class="docutils literal"><span class="pre">yield</span></code> and <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statements.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [54]: </span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;Wait for it&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;Here it comes...&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;...any second now...&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">yield from</span> <span class="n">L</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;So there you go&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;Enjoy!&quot;</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [55]: </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])]</span>
+<span class="gh">Out[55]: </span><span class="go"></span>
+<span class="go">[&#39;Wait for it&#39;,</span>
+<span class="go"> &#39;Here it comes...&#39;,</span>
+<span class="go"> &#39;...any second now...&#39;,</span>
+<span class="go"> 1,</span>
+<span class="go"> 2,</span>
+<span class="go"> 3,</span>
+<span class="go"> &#39;So there you go&#39;,</span>
+<span class="go"> &#39;Enjoy!&#39;]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Generator expressions also can used a <code class="docutils literal"><span class="pre">return</span></code> statement, but this
+immediately throws a <code class="docutils literal"><span class="pre">StopIteration</span></code> exception.  The main purpose of this
+statement in a generator is to control when a generated sequence halts.
+We will show how this can be used to speed up a recursively defined
+generator in the next section.</p>
+</div>
+</div>
+</div>
+<div class="section" id="coroutines">
+<h2>6.5.3. Coroutines<a class="headerlink" href="#coroutines" title="Permalink to this headline">¶</a></h2>
+<p>Generators are a form of one-way lazy evaluation. Once created they only return
+items and can no longer receive values.  Python has another lazy structure that
+can be used to pass values back and forth in a lazy way: a <strong>coroutine</strong>.</p>
+<p>The keyword <code class="docutils literal"><span class="pre">yield</span></code> is again used to create a coroutine, but this time using
+it in an assignment-like statement.  This assignment statement signifies both
+the yielding of the next value and acquisition of the next value.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">s</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">s</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">s</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<p>As with generators, values are pulled from a coroutine using <code class="docutils literal"><span class="pre">next</span></code>.  A
+coroutine comes with a method <code class="docutils literal"><span class="pre">send</span></code> that is used to pass it the next value.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">co</span> <span class="o">=</span> <span class="n">coroutine</span><span class="p">(</span><span class="s2">&quot;Hi &quot;</span><span class="p">)</span>
+
+<span class="gp">In [58]: </span><span class="nb">next</span><span class="p">(</span><span class="n">co</span><span class="p">)</span>
+<span class="gh">Out[58]: </span><span class="go">&#39;hi &#39;</span>
+
+<span class="gp">In [59]: </span><span class="n">co</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;there &quot;</span><span class="p">)</span>
+<span class="go">               Out[59]: &#39;there &#39;</span>
+
+<span class="gp">In [60]: </span><span class="n">co</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Bob!&quot;</span><span class="p">)</span>
+<span class="go">                                 Out[60]: &#39;BOB!BOB!BOB!&#39;</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
