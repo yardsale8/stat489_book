@@ -78,47 +78,109 @@ before attempting to iterate a second time.
     z = list(g)
     z
 
-.. note::
+The advantage of lazy sequence evaluation
+-----------------------------------------
 
-    All of the tricks that you learned about list comprehensions will work with
-    generator expressions as well, be it nesting list comprehensions or including
-    multiple sequence expression.
+The primary advantage of using generator expressions to process sequences comes
+from the fact that chaining together generators preserves the lazy evaluation.
+For example, suppose that we want to compute the distance to some point
+:math:`(a, b)` for a series of points.  One way to approach this problem is to
+attack it in a series of small operations.
 
-    .. ipython:: python
+.. ipython:: python
 
-        g = (i*j for i in range(5) for j in range(i,5))
-        g
-        list(g)
+    a, b = (3, 5)
+    points = ((i, j) for i, j  in [(0, 0), (1, 1), (2, 2)])
+    dist_along_axes = ((i - a, j - b) for i, j in points)
+    sum_sqr_dist = ( d1**2 + d2**2 for d1, d2 in dist_along_axes)
+    dist_to_ab = ( sqr_dist**(0.5) for sqr_dist in sum_sqr_dist)
 
-    The only caveat is that next generators are **very lazy** and can be difficult
-    to force to completion.  In this next example, this is accomplished by
-    mapping the ``list`` conversion function unto each embedded lazy sequence.
+    next(dist_to_ab)
+    next(dist_to_ab)
+    next(dist_to_ab)
+
+Under casual inspection, it will appear that we have iterated over the points 4
+times, one for each comprehension.  **The key feature to note is that each call
+to next gives the complete solution for that point without forcing the
+computation for the next point. This is true regardless of how many generators
+we chain together!** In reality these data are all processed
+exactly once, as each sequence is lazy and waits to complete each calculation
+until the last moment.  Consequently, the chain of generators will each compute
+the next value and pass it along in sequence.  This is a very powerful *and
+efficient* approach to composing operations on sequences.
+
+Contrast this with a solution that uses list comprehensions.  Each comprehension
+is *eager* to complete its operation and this will result in the sequence being
+iterated over once for each comprehension.
+
+.. ipython:: python
+
+    a, b = (3, 5)
+    points = [(i, j) for i, j  in [(0, 0), (1, 1), (2, 2)]]
+    points
+    dist_along_axes = [(i - a, j - b) for i, j in points]
+    dist_along_axes
+    sum_sqr_dist = [d1**2 + d2**2 for d1, d2 in dist_along_axes]
+    sum_sqr_dist
+    dist_to_ab = [sqr_dist**(0.5) for sqr_dist in sum_sqr_dist]
+    dist_to_ab
+
+In constrast to the solution that used generators, the last batch of code
+illustrates that each comprehension has completed it's computation before the
+next operation.  Consequently each point is visited 4 times, as opposed to once
+for the lazy approach.
+
+The main drawback of the eager approach is that it requires we keep the each
+list in memory, which is lead to a decline in performance as list get large.  In
+fact, "Big Data" problems typically involve more data than can be held in the
+memory of any one machine.  Using lazy evaluation gives the first solution to
+this problem by allowing use to process the data incrementally without ever
+needing all of it in memory at one time.
 
 
-    .. ipython:: python
+More Complicated Generator Expressions
+--------------------------------------
 
-        g = ((i*j for j in range(5)) for i in range(5))
-        table = list(g)
-        table
-        mapped_table = list(map(list, table))
-        mapped_table
-        L = [[i*j for j in range(5)] for i in range(5)]
-        L
+All of the tricks that you learned about list comprehensions will work with
+generator expressions as well, be it nesting list comprehensions or including
+multiple sequence expression.
 
-    **That answer is wrong! (or at least unexpected)**  In the last attempt, I
-    messed up by completing the outer generator without completing the inner
-    loops.  Therefore the value of ``i`` was stuck at the last generated value.
-    The correct way to resolve this nested structure is to process all the
-    sequences simulaneously as follows.
+.. ipython:: python
 
-    .. ipython:: python
+    g = (i*j for i in range(5) for j in range(i,5))
+    g
+    list(g)
 
-        g = ((i*j for j in range(5)) for i in range(5))
-        mapped_table = list(map(list, g))
-        mapped_table
+The only caveat is that next generators are **very lazy** and can be difficult
+to force to completion.  In this next example, this is accomplished by
+mapping the ``list`` conversion function unto each embedded lazy sequence.
 
-    **Main Takeaway:** Processing nested, single-use lazy structures can be
-    tricky and return unexpected results depending on the order of execution.
+
+.. ipython:: python
+
+    g = ((i*j for j in range(5)) for i in range(5))
+    table = list(g)
+    table
+    mapped_table = list(map(list, table))
+    mapped_table
+    L = [[i*j for j in range(5)] for i in range(5)]
+    L
+
+**That answer is wrong! (or at least unexpected)**  In the last attempt, I
+messed up by completing the outer generator without completing the inner
+loops.  Therefore the value of ``i`` was stuck at the last generated value.
+The correct way to resolve this nested structure is to process all the
+sequences simulaneously as follows.
+
+.. ipython:: python
+
+    g = ((i*j for j in range(5)) for i in range(5))
+    mapped_table = list(map(list, g))
+    mapped_table
+
+**Main Takeaway:** Processing nested, single-use lazy structures can be
+tricky and return unexpected results depending on the order of execution.
+
 
 Generator Functions
 -------------------

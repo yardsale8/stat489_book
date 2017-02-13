@@ -409,7 +409,8 @@ myTests().main()
     <ol start=4 class=arabic><li class="alert alert-warning">
 
     <div id='q7' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
-<p>Write a function that takes a string and mirrors its argument.</p>
+<p>Write a function that takes a string and mirrors its argument. For
+example the mirror of <code class="docutils literal"><span class="pre">&quot;good&quot;</span></code> is <code class="docutils literal"><span class="pre">&quot;gooddoog&quot;</span></code>.</p>
 
 <textarea data-component="activecode" id=ex_8_6 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true"  data-audio=''    data-gradebutton=true >
 mirror = lambda mystr: "abba" # your code here
@@ -772,7 +773,7 @@ multiplication table for whole numbers up to <span class="math">\(n\)</span>.</d
 </div><div data-component="tab" data-tabname="Answer" >
 
 <textarea data-component="activecode" id=q3_answer data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
-table = lambda n: [i*j for i in range(1,n+1) for j in range(1,n+1)]
+table = lambda n: [[i*j for i in range(1,n+1)] for j in range(1,n+1)]
 print(table(12))
 </textarea>
 </div>

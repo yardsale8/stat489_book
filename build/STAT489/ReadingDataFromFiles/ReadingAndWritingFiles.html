@@ -267,9 +267,13 @@
 <li><a class="reference internal" href="#working-with-data-files">5.1.1. Working with Data Files</a></li>
 <li><a class="reference internal" href="#finding-a-file-on-your-disk">5.1.2. Finding a File on your Disk</a></li>
 <li><a class="reference internal" href="#glossary">5.1.3. Glossary</a></li>
-<li><a class="reference internal" href="#reading-a-file">5.1.4. Reading a File</a></li>
-<li><a class="reference internal" href="#writing-text-files">5.1.5. Writing Text Files</a></li>
-<li><a class="reference internal" href="#alternative-file-reading-methods">5.1.6. Alternative File Reading Methods</a></li>
+<li><a class="reference internal" href="#reading-a-file-the-imperative-way">5.1.4. Reading a File the Imperative Way</a></li>
+<li><a class="reference internal" href="#using-context-managers-in-comprehensions">5.1.5. Using context managers in comprehensions</a></li>
+<li><a class="reference internal" href="#writing-text-files">5.1.6. Writing Text Files</a></li>
+<li><a class="reference internal" href="#comprehensions-and-side-effects">5.1.7. Comprehensions and Side Effects</a></li>
+<li><a class="reference internal" href="#maintaining-the-sequence-with-do">5.1.8. Maintaining the sequence with <code class="docutils literal"><span class="pre">do</span></code></a></li>
+<li><a class="reference internal" href="#abstracting-mapping-do-onto-a-sequence-with-side-effect">5.1.9. Abstracting mapping <code class="docutils literal"><span class="pre">do</span></code> onto a sequence with <code class="docutils literal"><span class="pre">side_effect</span></code></a></li>
+<li><a class="reference internal" href="#alternative-file-reading-methods">5.1.10. Alternative File Reading Methods</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#importing-csv-files">5.2. Importing csv files</a></li>
@@ -440,8 +444,8 @@ working directory of a program. An <em>relative file path</em> never starts
 with a <code class="docutils literal"><span class="pre">/</span></code>.</dd>
 </dl>
 </div>
-<div class="section" id="reading-a-file">
-<span id="index-0"></span><h2>5.1.4. Reading a File<a class="headerlink" href="#reading-a-file" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="reading-a-file-the-imperative-way">
+<span id="index-0"></span><h2>5.1.4. Reading a File the Imperative Way<a class="headerlink" href="#reading-a-file-the-imperative-way" title="Permalink to this headline">¶</a></h2>
 <p>As an example, suppose we have a text file called <code class="docutils literal"><span class="pre">qbdata.txt</span></code> that contains
 the following data representing statistics about NFL quarterbacks. Although it
 would be possible to consider entering this data by hand each time it is used,
@@ -497,8 +501,11 @@ use <code class="docutils literal"><span class="pre">fileref</span></code> will 
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-<p>The process of opening and closing a file should be accomplished using the
-<code class="docutils literal"><span class="pre">with</span></code> statement, as shown below.</p>
+<p>The process of opening and closing files is very important, as the operating
+system will lock write access to a file while it is open.  A long-running
+process that locks a file might cause problems for other processes that also
+need that file.  Consequently, the process of opening and closing a file should
+be accomplished using the <code class="docutils literal"><span class="pre">with</span></code> statement, as shown below.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="gp">   ...: </span>    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
 <span class="gp">   ...: </span>
@@ -512,15 +519,93 @@ use <code class="docutils literal"><span class="pre">fileref</span></code> will 
 <span class="go"> &#39;Philip Rivers QB SD    357 541 4710    30  13  66.0%   101.8\n&#39;]</span>
 </pre></div>
 </div>
+<p>Using the <code class="docutils literal"><span class="pre">with</span></code> statement when working with files in Python is considered
+a best-practice, as it guarantees that files are properly opened and closed
+at the right time.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Using the <code class="docutils literal"><span class="pre">with</span></code> statement when working with files in Python is considered
-a best-practice, as it guarentees that files are properly opened and closed
-at the right time.</p>
+<p>There are other uses for the with statement and it will work with any object
+that supports context management.  You can identify <em>context managers</em> by the
+presence of the <code class="docutils literal"><span class="pre">__enter__</span></code> and <code class="docutils literal"><span class="pre">__exit__</span></code> methods.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># open is a context manager, illustrated by the existence of __enter__ and</span>
+<span class="go"># __exit__</span>
+<span class="gp">In [3]: </span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.txt&#39;</span><span class="p">)</span>
+
+<span class="gp">In [4]: </span><span class="n">f</span><span class="o">.</span><span class="n">__enter__</span>
+<span class="gh">Out[4]: </span><span class="go">&lt;function TextIOWrapper.__enter__&gt;</span>
+
+<span class="gp">In [5]: </span><span class="n">f</span><span class="o">.</span><span class="n">__exit__</span>
+<span class="go">                                           Out[5]: &lt;function TextIOWrapper.__exit__&gt;</span>
+</pre></div>
+</div>
+<p class="last">The <code class="docutils literal"><span class="pre">with</span></code> statement assures that resources are properly managed by calling
+<code class="docutils literal"><span class="pre">__enter__</span></code> before, and <code class="docutils literal"><span class="pre">__exit__</span></code> after, executing the block.  In this case
+of using <code class="docutils literal"><span class="pre">open</span></code> to read or write to a file, the context manager assures that
+the files it opened and closed in a timely manner while hiding these details
+from the user.</p>
+</div>
+</div>
+<div class="section" id="using-context-managers-in-comprehensions">
+<h2>5.1.5. Using context managers in comprehensions<a class="headerlink" href="#using-context-managers-in-comprehensions" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">with</span></code> statement provides a useful abstraction for managing resources like
+file input/output in imperative code.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Proper imperative context management</span>
+<span class="gp">In [6]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">   ...: </span>    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [7]: </span><span class="n">lines</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[7]: </span><span class="go"></span>
+<span class="go">[&#39;Colt McCoy QB CLE  135 222 1576    6   9   60.8%   74.5\n&#39;,</span>
+<span class="go"> &#39;Josh Freeman QB TB 291 474 3451    25  6   61.4%   95.9\n&#39;,</span>
+<span class="go"> &#39;Michael Vick QB PHI    233 372 3018    21  6   62.6%   100.2\n&#39;,</span>
+<span class="go"> &#39;Matt Schaub QB HOU 365 574 4370    24  12  63.6%   92.0\n&#39;,</span>
+<span class="go"> &#39;Philip Rivers QB SD    357 541 4710    30  13  66.0%   101.8\n&#39;]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">more_itertools</span></code> module provides <code class="docutils literal"><span class="pre">with_iter</span></code>, which
+can be used to embed context managers in expressions as if they were any other
+iterable object.   Similar to the <code class="docutils literal"><span class="pre">with</span></code> statement, the <code class="docutils literal"><span class="pre">with_iter</span></code> will
+assure that a resource is managed correctly behind the scenes.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># Proper context management in an expression/comprehension</span>
+<span class="gp">In [8]: </span><span class="kn">from</span> <span class="nn">more_itertools</span> <span class="kn">import</span> <span class="n">with_iter</span>
+
+<span class="gp">In [9]: </span><span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">with_iter</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.txt&#39;</span><span class="p">))]</span>
+
+<span class="gp">In [10]: </span><span class="n">lines</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[10]: </span><span class="go"></span>
+<span class="go">[&#39;Colt McCoy QB CLE  135 222 1576    6   9   60.8%   74.5\n&#39;,</span>
+<span class="go"> &#39;Josh Freeman QB TB 291 474 3451    25  6   61.4%   95.9\n&#39;,</span>
+<span class="go"> &#39;Michael Vick QB PHI    233 372 3018    21  6   62.6%   100.2\n&#39;,</span>
+<span class="go"> &#39;Matt Schaub QB HOU 365 574 4370    24  12  63.6%   92.0\n&#39;,</span>
+<span class="go"> &#39;Philip Rivers QB SD    357 541 4710    30  13  66.0%   101.8\n&#39;]</span>
+</pre></div>
+</div>
+<p>Using <code class="docutils literal"><span class="pre">with_iter</span></code> with list comprehension will be our go-to method for reading
+files.  Next, we look at writing data out to files.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Here is a neat trick!  You can install packages using <code class="docutils literal"><span class="pre">pip</span></code> inside the python
+interpreter by importing the <code class="docutils literal"><span class="pre">pip</span></code> module and calling <code class="docutils literal"><span class="pre">pip</span></code> main.   The
+arguments for the call correspond to the command-line call.  For example, <code class="docutils literal"><span class="pre">pip</span>
+<span class="pre">install</span> <span class="pre">more-itertools</span></code> becomes <code class="docutils literal"><span class="pre">pip.main(['install','more-itertools'])</span></code>.
+Readers familiar with the R programming language will recognize the utility
+of this approach, which is analogous to <code class="docutils literal"><span class="pre">install.packages</span></code> in R.</p>
+<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Installing a package with pip.main</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">pip</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">pip</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="s1">&#39;more-itertools&#39;</span><span class="p">])</span>
+<span class="n">Collecting</span> <span class="n">more</span><span class="o">-</span><span class="n">itertools</span>
+  <span class="n">Using</span> <span class="n">cached</span> <span class="n">more_itertools</span><span class="o">-</span><span class="mf">2.5</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="nb">any</span><span class="o">.</span><span class="n">whl</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span> <span class="p">(</span><span class="n">use</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">to</span> <span class="n">upgrade</span><span class="p">):</span> <span class="n">six</span><span class="o">&lt;</span><span class="mf">2.0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">0</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">tiverson</span><span class="o">/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.5</span><span class="o">.</span><span class="mi">2</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">runestone</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">more</span><span class="o">-</span><span class="n">itertools</span><span class="p">)</span>
+<span class="n">Installing</span> <span class="n">collected</span> <span class="n">packages</span><span class="p">:</span> <span class="n">more</span><span class="o">-</span><span class="n">itertools</span>
+<span class="n">Successfully</span> <span class="n">installed</span> <span class="n">more</span><span class="o">-</span><span class="n">itertools</span><span class="o">-</span><span class="mf">2.5</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="writing-text-files">
-<h2>5.1.5. Writing Text Files<a class="headerlink" href="#writing-text-files" title="Permalink to this headline">¶</a></h2>
+<h2>5.1.6. Writing Text Files<a class="headerlink" href="#writing-text-files" title="Permalink to this headline">¶</a></h2>
 <p>One of the most commonly performed data processing tasks is to read data from a
 file, manipulate it in some way, and then write the resulting data out to a new
 data file to be used for other purposes later.  To accomplish this, the <code class="docutils literal"><span class="pre">open</span></code>
@@ -549,16 +634,16 @@ format to be different from what is available.</p>
 <p>To construct this file, we will approach the problem using a similar algorithm
 as above.  We start by reading the lines into a list called <code class="docutils literal"><span class="pre">lines</span></code>.  Then the
 lines are split into rows using whitespace.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
-<span class="gp">   ...: </span>     <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">infile</span><span class="p">]</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="kn">from</span> <span class="nn">more_itertools</span> <span class="kn">import</span> <span class="n">with_iter</span>
 
-<span class="gp">In [4]: </span><span class="n">split_line</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="gp">In [12]: </span><span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">with_iter</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.txt&#39;</span><span class="p">))]</span>
 
-<span class="gp">In [5]: </span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">split_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+<span class="gp">In [13]: </span><span class="n">split_line</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
-<span class="gp">In [6]: </span><span class="n">rows</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-<span class="gh">Out[6]: </span><span class="go"></span>
+<span class="gp">In [14]: </span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">split_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+
+<span class="gp">In [15]: </span><span class="n">rows</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gh">Out[15]: </span><span class="go"></span>
 <span class="go">[[&#39;Colt&#39;,</span>
 <span class="go">  &#39;McCoy&#39;,</span>
 <span class="go">  &#39;QB&#39;,</span>
@@ -588,14 +673,14 @@ names, in that order and separated by commas.  This is accomplished with two
 comprehensions, first transforming the rows (list of strings) into rows (list of
 strings) and then joining the rows (list of strings) into a string using the
 <code class="docutils literal"><span class="pre">join</span></code> method with a <code class="docutils literal"><span class="pre">,</span></code> as the &#8220;glue.&#8221;</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">names</span> <span class="o">=</span> <span class="p">[(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">names</span> <span class="o">=</span> <span class="p">[(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
 
-<span class="gp">In [8]: </span><span class="n">comma_separate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="gp">In [17]: </span><span class="n">comma_separate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
-<span class="gp">In [9]: </span><span class="n">new_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">comma_separate</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">In [18]: </span><span class="n">new_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">comma_separate</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
 
-<span class="gp">In [10]: </span><span class="n">new_lines</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
-<span class="gh">Out[10]: </span><span class="go">[&#39;McCoy,Colt&#39;, &#39;Freeman,Josh&#39;, &#39;Vick,Michael&#39;, &#39;Schaub,Matt&#39;, &#39;Rivers,Philip&#39;]</span>
+<span class="gp">In [19]: </span><span class="n">new_lines</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[19]: </span><span class="go">[&#39;McCoy,Colt&#39;, &#39;Freeman,Josh&#39;, &#39;Vick,Michael&#39;, &#39;Schaub,Matt&#39;, &#39;Rivers,Philip&#39;]</span>
 </pre></div>
 </div>
 <p>When we run this program, we see the lines of output on the screen.  Once we are
@@ -610,49 +695,22 @@ reinitialized as empty and you will lose any previous contents.</p>
 passing the file object in as a parameter.  By default, the <code class="docutils literal"><span class="pre">print</span></code> function
 will append a <code class="docutils literal"><span class="pre">\n</span></code> to each line.  See <code class="docutils literal"><span class="pre">help(print)</span></code> for more information
 about the optional <code class="docutils literal"><span class="pre">end</span></code> and <code class="docutils literal"><span class="pre">sep</span></code> arguments.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbnames.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbnames.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
 <span class="gp">   ....: </span>     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">new_lines</span><span class="p">:</span>
 <span class="gp">   ....: </span>          <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">outfile</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 </pre></div>
 </div>
-<p>The contents of the <code class="docutils literal"><span class="pre">qbnames.csv</span></code> file can be shown using the IPython <code class="docutils literal"><span class="pre">%cat</span></code>
-magic.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="o">%</span><span class="k">cat</span> qbnames.csv
+<p>The contents of the <code class="docutils literal"><span class="pre">qbnames.csv</span></code> file can be shown using the IPython <code class="docutils literal"><span class="pre">!</span></code>
+magic to make a system call (to bash).  In this case we pipe <code class="docutils literal"><span class="pre">cat</span> <span class="pre">filename</span></code>
+through the <code class="docutils literal"><span class="pre">head</span></code> function to limit the output to the first 5 lines (i.e.
+<code class="docutils literal"><span class="pre">-n</span> <span class="pre">5</span></code>).</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="o">!</span>cat qbnames.csv <span class="p">|</span> head -n <span class="m">5</span>
 <span class="go">McCoy,Colt</span>
 <span class="go">Freeman,Josh</span>
 <span class="go">Vick,Michael</span>
 <span class="go">Schaub,Matt</span>
 <span class="go">Rivers,Philip</span>
-<span class="go">Hasselbeck,Matt</span>
-<span class="go">Clausen,Jimmy</span>
-<span class="go">Flacco,Joe</span>
-<span class="go">Orton,Kyle</span>
-<span class="go">Campbell,Jason</span>
-<span class="go">Manning,Peyton</span>
-<span class="go">Brees,Drew</span>
-<span class="go">Ryan,Matt</span>
-<span class="go">Cassel,Matt</span>
-<span class="go">Sanchez,Mark</span>
-<span class="go">Favre,Brett</span>
-<span class="go">Garrard,David</span>
-<span class="go">Manning,Eli</span>
-<span class="go">Palmer,Carson</span>
-<span class="go">Smith,Alex</span>
-<span class="go">Henne,Chad</span>
-<span class="go">Romo,Tony</span>
-<span class="go">Cutler,Jay</span>
-<span class="go">Kitna,Jon</span>
-<span class="go">Brady,Tom</span>
-<span class="go">Roethlisberger,Ben</span>
-<span class="go">Collins,Kerry</span>
-<span class="go">Anderson,Derek</span>
-<span class="go">Fitzpatrick,Ryan</span>
-<span class="go">McNabb,Donovan</span>
-<span class="go">Kolb,Kevin</span>
-<span class="go">Rodgers,Aaron</span>
-<span class="go">Bradford,Sam</span>
-<span class="go">Hill,Shaun</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -661,8 +719,142 @@ magic.</p>
 with the file system a breeze.</p>
 </div>
 </div>
+<div class="section" id="comprehensions-and-side-effects">
+<h2>5.1.7. Comprehensions and Side Effects<a class="headerlink" href="#comprehensions-and-side-effects" title="Permalink to this headline">¶</a></h2>
+<p>Did you notice that the last example was one of the few times that a for loop
+was used in this book?  We could have accomplished the same outcome, writing the
+data to a file, using a comprehension.  Why not use this approach?</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While we can use <code class="docutils literal"><span class="pre">with_iter</span></code> to <em>read</em> files we don&#8217;t yet have the tools
+for managing an output file that doesn&#8217;t involve the <code class="docutils literal"><span class="pre">with</span></code> statement.
+We will revisit this topic in a few chapters once we have introduced
+decorator function.</p>
+</div>
+<p>Consider the following list comprehension, which mirrors the loop from the last
+problem.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbnames.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">outfile</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">new_lines</span><span class="p">]</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [23]: </span><span class="n">out</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="gh">Out[23]: </span><span class="go">[None, None, None, None, None, None, None, None, None, None]</span>
+
+<span class="gp">In [24]: </span><span class="o">!</span>cat qbnames.csv <span class="p">|</span> head -n <span class="m">5</span>
+<span class="go">                                                                      McCoy,Colt</span>
+<span class="go">Freeman,Josh</span>
+<span class="go">Vick,Michael</span>
+<span class="go">Schaub,Matt</span>
+<span class="go">Rivers,Philip</span>
+</pre></div>
+</div>
+<p>Recall that <code class="docutils literal"><span class="pre">print</span></code> is a void function which returns nothing, i.e. <code class="docutils literal"><span class="pre">None</span></code>.
+Consequently, the above expression produces a list of references to <code class="docutils literal"><span class="pre">None</span></code>,
+one for each line that was written to the file. This is <strong>meaningless data</strong>!
+The main theme of this text has been referentially transparent expressions, but
+this last expression is at odds with this theme.</p>
+<p>There are two alternatives to the last example that will at least return
+meaningful data.</p>
+</div>
+<div class="section" id="maintaining-the-sequence-with-do">
+<h2>5.1.8. Maintaining the sequence with <code class="docutils literal"><span class="pre">do</span></code><a class="headerlink" href="#maintaining-the-sequence-with-do" title="Permalink to this headline">¶</a></h2>
+<p>First, the <code class="docutils literal"><span class="pre">do</span></code> function from the <code class="docutils literal"><span class="pre">toolz.functoolz</span></code> module takes <code class="docutils literal"><span class="pre">func</span></code>
+and <code class="docutils literal"><span class="pre">x</span></code> as inputs, where <code class="docutils literal"><span class="pre">func</span></code> is a side-effecting function like <code class="docutils literal"><span class="pre">print</span></code>.
+Calling <code class="docutils literal"><span class="pre">do</span></code> will call <code class="docutils literal"><span class="pre">func</span></code> with the argument <code class="docutils literal"><span class="pre">x</span></code>, then return <code class="docutils literal"><span class="pre">x</span></code> (as
+opposed to the output of <code class="docutils literal"><span class="pre">func(x)</span></code>).  Using this function in a list
+comprehension will result in the output of the comprehension will result in the
+output of the comprehension to be the same as the original input and this output
+could then be used in later expression.  Note that <code class="docutils literal"><span class="pre">do</span></code> only works with unary
+functions, so we will need to create <code class="docutils literal"><span class="pre">print_to_file</span></code> to wrap the <code class="docutils literal"><span class="pre">print(line,</span>
+<span class="pre">file=outfile)</span></code> call.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="kn">from</span> <span class="nn">toolz.functoolz</span> <span class="kn">import</span> <span class="n">do</span>
+
+<span class="gp">In [26]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbnames.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="n">print_to_file</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">outfile</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">do</span><span class="p">(</span><span class="n">print_to_file</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">new_lines</span><span class="p">]</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [27]: </span><span class="n">out</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="gh">Out[27]: </span><span class="go"></span>
+<span class="go">[&#39;McCoy,Colt&#39;,</span>
+<span class="go"> &#39;Freeman,Josh&#39;,</span>
+<span class="go"> &#39;Vick,Michael&#39;,</span>
+<span class="go"> &#39;Schaub,Matt&#39;,</span>
+<span class="go"> &#39;Rivers,Philip&#39;,</span>
+<span class="go"> &#39;Hasselbeck,Matt&#39;,</span>
+<span class="go"> &#39;Clausen,Jimmy&#39;,</span>
+<span class="go"> &#39;Flacco,Joe&#39;,</span>
+<span class="go"> &#39;Orton,Kyle&#39;,</span>
+<span class="go"> &#39;Campbell,Jason&#39;]</span>
+
+<span class="gp">In [28]: </span><span class="o">!</span>cat qbnames.csv <span class="p">|</span> head -n <span class="m">5</span>
+<span class="go">                                                                                                                                                                                    McCoy,Colt</span>
+<span class="go">Freeman,Josh</span>
+<span class="go">Vick,Michael</span>
+<span class="go">Schaub,Matt</span>
+<span class="go">Rivers,Philip</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="abstracting-mapping-do-onto-a-sequence-with-side-effect">
+<h2>5.1.9. Abstracting mapping <code class="docutils literal"><span class="pre">do</span></code> onto a sequence with <code class="docutils literal"><span class="pre">side_effect</span></code><a class="headerlink" href="#abstracting-mapping-do-onto-a-sequence-with-side-effect" title="Permalink to this headline">¶</a></h2>
+<p>The pattern of applying <code class="docutils literal"><span class="pre">do</span></code> on a unary function inside a comprehension can be
+accomplished using the <code class="docutils literal"><span class="pre">side_effect</span></code> function from the <code class="docutils literal"><span class="pre">more_itertools</span></code>
+module, where <code class="docutils literal"><span class="pre">side_effect(print_to_file,</span> <span class="pre">seq)</span></code> is equivalent to the following
+comprehension.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">do</span><span class="p">(</span><span class="n">print_to_file</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>It is important to note that <code class="docutils literal"><span class="pre">side_effect</span></code>, is a lazy construct that must be
+forced to completion.  On way to accomplish this is to wrap the call in
+<code class="docutils literal"><span class="pre">list</span></code>, which will force completion and return the output.   This approach
+allows this expression to be embedded in other expressions that need this
+output.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="kn">from</span> <span class="nn">more_itertools</span> <span class="kn">import</span> <span class="n">side_effect</span>
+
+<span class="gp">In [30]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbnames.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="n">print_to_file</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">outfile</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="n">out</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">side_effect</span><span class="p">(</span><span class="n">print_to_file</span><span class="p">,</span> <span class="n">new_lines</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [31]: </span><span class="n">out</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[31]: </span><span class="go">[&#39;McCoy,Colt&#39;, &#39;Freeman,Josh&#39;, &#39;Vick,Michael&#39;, &#39;Schaub,Matt&#39;, &#39;Rivers,Philip&#39;]</span>
+
+<span class="gp">In [32]: </span><span class="o">!</span>cat qbnames.csv <span class="p">|</span> head -n <span class="m">5</span>
+<span class="go">                                                                                        McCoy,Colt</span>
+<span class="go">Freeman,Josh</span>
+<span class="go">Vick,Michael</span>
+<span class="go">Schaub,Matt</span>
+<span class="go">Rivers,Philip</span>
+</pre></div>
+</div>
+<p>If, on the other hand, we do not need the output of the <code class="docutils literal"><span class="pre">side_effect</span></code> call,
+the explicit method for throwing away this output is to use <code class="docutils literal"><span class="pre">consume</span></code> from
+<code class="docutils literal"><span class="pre">more_itertools</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="kn">from</span> <span class="nn">more_itertools</span> <span class="kn">import</span> <span class="n">side_effect</span><span class="p">,</span> <span class="n">consume</span>
+
+<span class="gp">In [34]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbnames.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="n">print_to_file</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">outfile</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="n">consume</span><span class="p">(</span><span class="n">side_effect</span><span class="p">(</span><span class="n">print_to_file</span><span class="p">,</span> <span class="n">new_lines</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [35]: </span><span class="o">!</span>cat qbnames.csv <span class="p">|</span> head -n <span class="m">5</span>
+<span class="go">McCoy,Colt</span>
+<span class="go">Freeman,Josh</span>
+<span class="go">Vick,Michael</span>
+<span class="go">Schaub,Matt</span>
+<span class="go">Rivers,Philip</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function explicitly tells the reader we are <strong>consuming a side-effect,</strong>
+which helps to avoid any confusion about using the output in another
+expression.</p>
+</div>
+</div>
 <div class="section" id="alternative-file-reading-methods">
-<h2>5.1.6. Alternative File Reading Methods<a class="headerlink" href="#alternative-file-reading-methods" title="Permalink to this headline">¶</a></h2>
+<h2>5.1.10. Alternative File Reading Methods<a class="headerlink" href="#alternative-file-reading-methods" title="Permalink to this headline">¶</a></h2>
 <p>Again, recall the contents of the qbdata.txt file.</p>
 <pre id="qbdata.txt">
 Colt McCoy QB CLE  135 222 1576    6   9   60.8%   74.5
@@ -712,15 +904,15 @@ the character immediately following the last character returned. In the case
 of <code class="docutils literal"><span class="pre">readline</span></code> this moves the marker to the first character of the next line
 in the file. In the case of <code class="docutils literal"><span class="pre">read</span></code> or <code class="docutils literal"><span class="pre">readlines</span></code> the marker is moved to
 the end of the file.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="k">with</span>  <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="k">with</span>  <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
 <span class="gp">   ....: </span>    <span class="n">linelist</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [14]: </span><span class="nb">len</span><span class="p">(</span><span class="n">linelist</span><span class="p">)</span>
-<span class="gh">Out[14]: </span><span class="go">34</span>
+<span class="gp">In [37]: </span><span class="nb">len</span><span class="p">(</span><span class="n">linelist</span><span class="p">)</span>
+<span class="gh">Out[37]: </span><span class="go">34</span>
 
-<span class="gp">In [15]: </span><span class="n">linelist</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-<span class="go">            Out[15]: </span>
+<span class="gp">In [38]: </span><span class="n">linelist</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="go">            Out[38]: </span>
 <span class="go">[&#39;Colt McCoy QB CLE  135 222 1576    6   9   60.8%   74.5\n&#39;,</span>
 <span class="go"> &#39;Josh Freeman QB TB 291 474 3451    25  6   61.4%   95.9\n&#39;,</span>
 <span class="go"> &#39;Michael Vick QB PHI    233 372 3018    21  6   62.6%   100.2\n&#39;,</span>
@@ -784,15 +976,15 @@ object as an argument, along with a number of optional arguments like
 information.</p>
 <p>Below, we import and use the <code class="docutils literal"><span class="pre">csv.reader</span></code> to read in <code class="docutils literal"><span class="pre">qbdata.txt</span></code>, using
 <code class="docutils literal"><span class="pre">delimiter='</span> <span class="pre">'</span></code> for this space separated file.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
 
-<span class="gp">In [17]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<span class="gp">In [40]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
 <span class="gp">   ....: </span>     <span class="n">infile_reader</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 <span class="gp">   ....: </span>     <span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">infile_reader</span><span class="p">]</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [18]: </span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-<span class="gh">Out[18]: </span><span class="go"></span>
+<span class="gp">In [41]: </span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gh">Out[41]: </span><span class="go"></span>
 <span class="go">[[&#39;Colt&#39;,</span>
 <span class="go">  &#39;McCoy&#39;,</span>
 <span class="go">  &#39;QB&#39;,</span>
@@ -841,67 +1033,38 @@ file is not a proper csv file.  In this case, reading the lines using the string
 <code class="docutils literal"><span class="pre">split</span></code> methods is preferrable.  A better way to split data with whitespace is
 to use a tab, which is represented as the special charater <code class="docutils literal"><span class="pre">\t</span></code>.</p>
 <p>Let&#8217;s create a tab separated version of qbdata, titled <code class="docutils literal"><span class="pre">qbdata.csv</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
 <span class="gp">   ....: </span>     <span class="n">lines</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [20]: </span><span class="n">split_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+<span class="gp">In [43]: </span><span class="n">split_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
 
-<span class="gp">In [21]: </span><span class="n">tab_sep_lines</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">split_lines</span><span class="p">]</span>
+<span class="gp">In [44]: </span><span class="n">tab_sep_lines</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">split_lines</span><span class="p">]</span>
 
-<span class="gp">In [22]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<span class="gp">In [45]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;qbdata.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
 <span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">tab_sep_lines</span><span class="p">:</span>
 <span class="gp">   ....: </span>          <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [23]: </span><span class="o">%</span><span class="k">cat</span> qbdata.csv
+<span class="gp">In [46]: </span><span class="o">!</span>cat qbdata.csv <span class="p">|</span> head -n <span class="m">5</span>
 <span class="go">Colt	McCoy	QB	CLE	135	222	1576	6	9	60.8%	74.5</span>
 <span class="go">Josh	Freeman	QB	TB	291	474	3451	25	6	61.4%	95.9</span>
 <span class="go">Michael	Vick	QB	PHI	233	372	3018	21	6	62.6%	100.2</span>
 <span class="go">Matt	Schaub	QB	HOU	365	574	4370	24	12	63.6%	92.0</span>
 <span class="go">Philip	Rivers	QB	SD	357	541	4710	30	13	66.0%	101.8</span>
-<span class="go">Matt	Hasselbeck	QB	SEA	266	444	3001	12	17	59.9%	73.2</span>
-<span class="go">Jimmy	Clausen	QB	CAR	157	299	1558	3	9	52.5%	58.4</span>
-<span class="go">Joe	Flacco	QB	BAL	306	489	3622	25	10	62.6%	93.6</span>
-<span class="go">Kyle	Orton	QB	DEN	293	498	3653	20	9	58.8%	87.5</span>
-<span class="go">Jason	Campbell	QB	OAK	194	329	2387	13	8	59.0%	84.5</span>
-<span class="go">Peyton	Manning	QB	IND	450	679	4700	33	17	66.3%	91.9</span>
-<span class="go">Drew	Brees	QB	NO	448	658	4620	33	22	68.1%	90.9</span>
-<span class="go">Matt	Ryan	QB	ATL	357	571	3705	28	9	62.5%	91.0</span>
-<span class="go">Matt	Cassel	QB	KC	262	450	3116	27	7	58.2%	93.0</span>
-<span class="go">Mark	Sanchez	QB	NYJ	278	507	3291	17	13	54.8%	75.3</span>
-<span class="go">Brett	Favre	QB	MIN	217	358	2509	11	19	60.6%	69.9</span>
-<span class="go">David	Garrard	QB	JAC	236	366	2734	23	15	64.5%	90.8</span>
-<span class="go">Eli	Manning	QB	NYG	339	539	4002	31	25	62.9%	85.3</span>
-<span class="go">Carson	Palmer	QB	CIN	362	586	3970	26	20	61.8%	82.4</span>
-<span class="go">Alex	Smith	QB	SF	204	342	2370	14	10	59.6%	82.1</span>
-<span class="go">Chad	Henne	QB	MIA	301	490	3301	15	19	61.4%	75.4</span>
-<span class="go">Tony	Romo	QB	DAL	148	213	1605	11	7	69.5%	94.9</span>
-<span class="go">Jay	Cutler	QB	CHI	261	432	3274	23	16	60.4%	86.3</span>
-<span class="go">Jon	Kitna	QB	DAL	209	318	2365	16	12	65.7%	88.9</span>
-<span class="go">Tom	Brady	QB	NE	324	492	3900	36	4	65.9%	111.0</span>
-<span class="go">Ben	Roethlisberger	QB	PIT	240	389	3200	17	5	61.7%	97.0</span>
-<span class="go">Kerry	Collins	QB	TEN	160	278	1823	14	8	57.6%	82.2</span>
-<span class="go">Derek	Anderson	QB	ARI	169	327	2065	7	10	51.7%	65.9</span>
-<span class="go">Ryan	Fitzpatrick	QB	BUF	255	441	3000	23	15	57.8%	81.8</span>
-<span class="go">Donovan	McNabb	QB	WAS	275	472	3377	14	15	58.3%	77.1</span>
-<span class="go">Kevin	Kolb	QB	PHI	115	189	1197	7	7	60.8%	76.1</span>
-<span class="go">Aaron	Rodgers	QB	GB	312	475	3922	28	11	65.7%	101.2</span>
-<span class="go">Sam	Bradford	QB	STL	354	590	3512	18	15	60.0%	76.5</span>
-<span class="go">Shaun	Hill	QB	DET	257	416	2686	16	12	61.8%	81.3</span>
 </pre></div>
 </div>
 <p>Now we read the tab separated file using the <code class="docutils literal"><span class="pre">csv.reader</span></code>, which result in a
 much cleaner representation of the data.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [47]: </span><span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
 
-<span class="gp">In [25]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<span class="gp">In [48]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbdata.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
 <span class="gp">   ....: </span>     <span class="n">infile_reader</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="gp">   ....: </span>     <span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">infile_reader</span><span class="p">]</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [26]: </span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-<span class="gh">Out[26]: </span><span class="go"></span>
+<span class="gp">In [49]: </span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gh">Out[49]: </span><span class="go"></span>
 <span class="go">[[&#39;Colt&#39;,</span>
 <span class="go">  &#39;McCoy&#39;,</span>
 <span class="go">  &#39;QB&#39;,</span>
@@ -928,13 +1091,13 @@ much cleaner representation of the data.</p>
 </div>
 <p>The <code class="docutils literal"><span class="pre">qbnames.csv</span></code> can also be read in, and in this case, we can skip the
 <code class="docutils literal"><span class="pre">delimiter</span></code> parameter since the default is a <code class="docutils literal"><span class="pre">,</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbnames.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;qbnames.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
 <span class="gp">   ....: </span>     <span class="n">infile_reader</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
 <span class="gp">   ....: </span>     <span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">infile_reader</span><span class="p">]</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [28]: </span><span class="n">table</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
-<span class="gh">Out[28]: </span><span class="go"></span>
+<span class="gp">In [51]: </span><span class="n">table</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gh">Out[51]: </span><span class="go"></span>
 <span class="go">[[&#39;McCoy&#39;, &#39;Colt&#39;],</span>
 <span class="go"> [&#39;Freeman&#39;, &#39;Josh&#39;],</span>
 <span class="go"> [&#39;Vick&#39;, &#39;Michael&#39;],</span>

@@ -130,8 +130,8 @@ Glossary
 
 
 
-Reading a File
---------------
+Reading a File the Imperative Way
+---------------------------------
 
 As an example, suppose we have a text file called ``qbdata.txt`` that contains
 the following data representing statistics about NFL quarterbacks. Although it
@@ -196,8 +196,11 @@ use ``fileref`` will result in an error.
             >>>fileref.close()
             >>>
 
-The process of opening and closing a file should be accomplished using the
-``with`` statement, as shown below.
+The process of opening and closing files is very important, as the operating
+system will lock write access to a file while it is open.  A long-running
+process that locks a file might cause problems for other processes that also
+need that file.  Consequently, the process of opening and closing a file should
+be accomplished using the ``with`` statement, as shown below.  
 
 .. ipython:: python
 
@@ -205,13 +208,81 @@ The process of opening and closing a file should be accomplished using the
         lines = [line for line in f]
     lines[:5]
 
-.. note:: 
+Using the ``with`` statement when working with files in Python is considered
+a best-practice, as it guarantees that files are properly opened and closed
+at the right time.
 
-    Using the ``with`` statement when working with files in Python is considered
-    a best-practice, as it guarentees that files are properly opened and closed
-    at the right time.
+.. note::
 
-Writing Text Files
+    There are other uses for the with statement and it will work with any object
+    that supports context management.  You can identify *context managers* by the
+    presence of the ``__enter__`` and ``__exit__`` methods.  
+
+    .. ipython:: python
+
+        # open is a context manager, illustrated by the existence of __enter__ and
+        # __exit__
+        f = open('qbdata.txt')
+        f.__enter__
+        f.__exit__
+
+    The ``with`` statement assures that resources are properly managed by calling
+    ``__enter__`` before, and ``__exit__`` after, executing the block.  In this case
+    of using ``open`` to read or write to a file, the context manager assures that
+    the files it opened and closed in a timely manner while hiding these details
+    from the user.
+
+Using context managers in comprehensions
+----------------------------------------
+
+The ``with`` statement provides a useful abstraction for managing resources like
+file input/output in imperative code.  
+
+.. ipython:: python
+
+    # Proper imperative context management
+    with open('qbdata.txt') as f:
+        lines = [line for line in f]
+    lines[:5]
+
+The ``more_itertools`` module provides ``with_iter``, which
+can be used to embed context managers in expressions as if they were any other
+iterable object.   Similar to the ``with`` statement, the ``with_iter`` will
+assure that a resource is managed correctly behind the scenes.
+
+.. ipython:: python
+
+    # Proper context management in an expression/comprehension
+    from more_itertools import with_iter
+    lines = [line for line in with_iter(open('qbdata.txt'))]
+    lines[:5]
+
+Using ``with_iter`` with list comprehension will be our go-to method for reading
+files.  Next, we look at writing data out to files.
+
+.. note::
+
+    Here is a neat trick!  You can install packages using ``pip`` inside the python
+    interpreter by importing the ``pip`` module and calling ``pip`` main.   The
+    arguments for the call correspond to the command-line call.  For example, ``pip
+    install more-itertools`` becomes ``pip.main(['install','more-itertools'])``.
+    Readers familiar with the R programming language will recognize the utility
+    of this approach, which is analogous to ``install.packages`` in R.
+
+    .. sourcecode:: python
+
+        # Installing a package with pip.main
+        In [11]: import pip
+
+        In [12]: pip.main(['install', 'more-itertools'])
+        Collecting more-itertools
+          Using cached more_itertools-2.5.0-py3-none-any.whl
+        Requirement already satisfied (use --upgrade to upgrade): six<2.0.0,>=1.0.0 in /Users/tiverson/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages (from more-itertools)
+        Installing collected packages: more-itertools
+        Successfully installed more-itertools-2.5.0
+
+
+Writing Text Files 
 ------------------
 
 One of the most commonly performed data processing tasks is to read data from a
@@ -248,8 +319,8 @@ lines are split into rows using whitespace.
 
 .. ipython:: python
 
-    with open("qbdata.txt", "r") as infile:
-         lines = [line for line in infile]
+    from more_itertools import with_iter
+    lines = [line for line in with_iter(open('qbdata.txt'))]
     split_line = lambda line: line.split()
     rows = [split_line(line) for line in lines]
     rows[:2]
@@ -288,17 +359,121 @@ about the optional ``end`` and ``sep`` arguments.
               print(line, file = outfile)
 
     
-The contents of the ``qbnames.csv`` file can be shown using the IPython ``%cat``
-magic.
+The contents of the ``qbnames.csv`` file can be shown using the IPython ``!``
+magic to make a system call (to bash).  In this case we pipe ``cat filename``
+through the ``head`` function to limit the output to the first 5 lines (i.e.
+``-n 5``).
 
 .. ipython:: python
 
-    %cat qbnames.csv
+    !cat qbnames.csv | head -n 5
 
 .. note::  
 
     IPython magic such as ``pwd``, ``ls``, and ``cat`` make working iteratively
     with the file system a breeze.
+
+Comprehensions and Side Effects
+-------------------------------
+
+Did you notice that the last example was one of the few times that a for loop
+was used in this book?  We could have accomplished the same outcome, writing the
+data to a file, using a comprehension.  Why not use this approach?
+
+.. note:: 
+
+    While we can use ``with_iter`` to *read* files we don't yet have the tools
+    for managing an output file that doesn't involve the ``with`` statement.
+    We will revisit this topic in a few chapters once we have introduced
+    decorator function.
+
+Consider the following list comprehension, which mirrors the loop from the last
+problem.
+
+.. ipython:: python
+
+    with open('qbnames.csv', 'w') as outfile:
+        out = [print(line, file = outfile) for line in new_lines]
+    out[:10]
+    !cat qbnames.csv | head -n 5
+
+Recall that ``print`` is a void function which returns nothing, i.e. ``None``.
+Consequently, the above expression produces a list of references to ``None``,
+one for each line that was written to the file. This is **meaningless data**!
+The main theme of this text has been referentially transparent expressions, but
+this last expression is at odds with this theme.  
+
+There are two alternatives to the last example that will at least return
+meaningful data.
+
+Maintaining the sequence with ``do``
+------------------------------------
+
+First, the ``do`` function from the ``toolz.functoolz`` module takes ``func``
+and ``x`` as inputs, where ``func`` is a side-effecting function like ``print``.
+Calling ``do`` will call ``func`` with the argument ``x``, then return ``x`` (as
+opposed to the output of ``func(x)``).  Using this function in a list
+comprehension will result in the output of the comprehension will result in the
+output of the comprehension to be the same as the original input and this output
+could then be used in later expression.  Note that ``do`` only works with unary
+functions, so we will need to create ``print_to_file`` to wrap the ``print(line,
+file=outfile)`` call.
+
+.. ipython:: python
+
+    from toolz.functoolz import do
+    with open('qbnames.csv', 'w') as outfile:
+        print_to_file = lambda line: print(line, file = outfile)
+        out = [do(print_to_file,line) for line in new_lines]
+    out[:10]
+    !cat qbnames.csv | head -n 5
+
+
+Abstracting mapping ``do`` onto a sequence with ``side_effect``
+---------------------------------------------------------------
+
+The pattern of applying ``do`` on a unary function inside a comprehension can be
+accomplished using the ``side_effect`` function from the ``more_itertools``
+module, where ``side_effect(print_to_file, seq)`` is equivalent to the following
+comprehension.  
+
+.. sourcecode:: python
+
+    [do(print_to_file, line) for line in seq]
+
+It is important to note that ``side_effect``, is a lazy construct that must be
+forced to completion.  On way to accomplish this is to wrap the call in
+``list``, which will force completion and return the output.   This approach
+allows this expression to be embedded in other expressions that need this
+output.
+
+.. ipython:: python
+
+    from more_itertools import side_effect
+    with open('qbnames.csv', 'w') as outfile:
+        print_to_file = lambda line: print(line, file = outfile)
+        out = list(side_effect(print_to_file, new_lines))
+    out[:5]
+    !cat qbnames.csv | head -n 5
+
+If, on the other hand, we do not need the output of the ``side_effect`` call,
+the explicit method for throwing away this output is to use ``consume`` from
+``more_itertools``.  
+
+.. ipython:: python
+
+    from more_itertools import side_effect, consume
+    with open('qbnames.csv', 'w') as outfile:
+        print_to_file = lambda line: print(line, file = outfile)
+        consume(side_effect(print_to_file, new_lines))
+    !cat qbnames.csv | head -n 5
+
+.. note::
+
+   This function explicitly tells the reader we are **consuming a side-effect,**
+   which helps to avoid any confusion about using the output in another
+   expression.
+
 
 Alternative File Reading Methods
 --------------------------------
@@ -433,7 +608,7 @@ Let's create a tab separated version of qbdata, titled ``qbdata.csv``.
     with open('qbdata.csv', 'w') as outfile:
         for line in tab_sep_lines:
               print(line, file=outfile)
-    %cat qbdata.csv
+    !cat qbdata.csv | head -n 5
 
 Now we read the tab separated file using the ``csv.reader``, which result in a
 much cleaner representation of the data.

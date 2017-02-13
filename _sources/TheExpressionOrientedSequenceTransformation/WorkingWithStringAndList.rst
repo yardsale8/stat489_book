@@ -332,9 +332,12 @@ Next, the text is split into a list of words and the statistic is computed.
 ..     You will need to download the ``opinion lexicon`` corpus the run this
 ..     example using ``nltk.download()`` from a Python console.
 .. 
+
 .. .. ipython:: python
-.. 
+..  
 ..      from nltk.sentiment.util  import demo_liu_hu_lexicon as lex
+..      from nltk.corpus import gutenberg
+..      emma = gutenberg.raw('austen-emma.txt')
 ..      sents = emma.split('.')
 ..      flatten = lambda table: [item for row in table for item in row]
 ..      sents = flatten([portion.split('?') for portion in sents])
@@ -343,7 +346,7 @@ Next, the text is split into a list of words and the statistic is computed.
 ..      mean = lambda L: sum(L)/len(L)
 ..      average_sentiment = mean([lex(sent) for sent in sents])
 ..      average_sentiment
-
+.. 
 
 .. note::
 
