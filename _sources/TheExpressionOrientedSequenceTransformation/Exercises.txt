@@ -111,7 +111,8 @@ Exercises
 
         .. tab:: Question
 
-           Write a function that takes a string and mirrors its argument.
+           Write a function that takes a string and mirrors its argument. For
+           example the mirror of ``"good"`` is ``"gooddoog"``.
 
            .. actex:: ex_8_6
               :nocodelens:
@@ -470,7 +471,7 @@ Exercises
 
             .. activecode:: q3_answer
                 
-                table = lambda n: [i*j for i in range(1,n+1) for j in range(1,n+1)]
+                table = lambda n: [[i*j for i in range(1,n+1)] for j in range(1,n+1)]
                 print(table(12))
 
 
