@@ -522,7 +522,8 @@ is_palindrome_alt = lambda s: all([i ==j for i, j in zip(s, reversed(s))])
     <div data-component="question" class="full-width container question" id="230" >
     <ol start=7 class=arabic><li class="alert alert-warning">
 
-    <p>Write a function that removes all occurrences of a string from another string.</p>
+    <p>Write a function that removes all occurrences of a string from another
+string.  Do not use the <code class="docutils literal"><span class="pre">remove</span></code> string method in your solution.</p>
 
 <textarea data-component="activecode" id=ex_8_11 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
 def remove_all(substr,theStr):
@@ -554,7 +555,7 @@ myTests().main()
     <ol start=8 class=arabic><li class="alert alert-warning">
 
     <p>Create a list containing 100 random integers between 0 and 1000 (use
-iteration, append, and the random module).  Write a function called
+iteration, a comprehension, and the random module).  Write a function called
 <code class="docutils literal"><span class="pre">average</span></code> that will take the list as a parameter and return the average.</p>
 
 <textarea data-component="activecode" id=ex_9_4 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
