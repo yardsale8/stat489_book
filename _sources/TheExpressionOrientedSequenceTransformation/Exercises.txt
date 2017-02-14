@@ -231,7 +231,8 @@ Exercises
 
 .. question:: 230 
    
-   Write a function that removes all occurrences of a string from another string.
+   Write a function that removes all occurrences of a string from another
+   string.  Do not use the ``remove`` string method in your solution.
 
    .. actex:: ex_8_11
 
@@ -267,7 +268,7 @@ Exercises
 .. question:: 265 
    
    Create a list containing 100 random integers between 0 and 1000 (use
-   iteration, append, and the random module).  Write a function called
+   iteration, a comprehension, and the random module).  Write a function called
    ``average`` that will take the list as a parameter and return the average.
 
    .. actex:: ex_9_4
