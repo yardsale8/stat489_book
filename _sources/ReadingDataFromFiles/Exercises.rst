@@ -124,3 +124,29 @@ Exercises
 
     Determine the time complexity of each of the functions the last question
     (read_csv, average_runs_year, average_runs_years).
+
+
+.. question:: files_ex_6
+
+    Download, unzip and extract the file titled **Salaries.csv** and
+    **AllstarFull.csv** from `seanlahman.com <http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip>`_
+    .
+
+    write a program that computes the average salary of all players in the all
+    star game in 2010.
+
+.. question:: files_ex_7
+
+    Download, unzip and extract the file titled **Salaries.csv** and
+    **Batting.csv**.  from `seanlahman.com <http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip>`_
+
+    Write a program that computes the salary of the player with the highest
+    batting average in the last 5 years. 
+
+.. question:: files_ex_8
+
+    Download, unzip and extract the file titled **Schools.csv** and
+    **BattingPost.csv**.  from `seanlahman.com <http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip>`_
+
+    Write a program that computes the total runs scored in the post season by
+    all players from Minnesota (all time). 
