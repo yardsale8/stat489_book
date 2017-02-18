@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>7.3. Checking and Comparing Membership with Sets &mdash; Runestone Interactive Overview</title>
+    <title>6.2. Sets &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="7. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
-    <link rel="next" title="7.4. Dictionary and Set Comprehensions" href="Comprehensions.html" />
-    <link rel="prev" title="7.1. Mapping One Value to Another with Dictionaries" href="Dictionaries.html" />
+    <link rel="up" title="6. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
+    <link rel="next" title="6.3. Dictionary and Set Comprehensions" href="Comprehensions.html" />
+    <link rel="prev" title="6.1. Dictionaries" href="Dictionaries.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,9 +263,11 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">7.3. Checking and Comparing Membership with Sets</a><ul>
-<li><a class="reference internal" href="#set-operations">7.3.1. Set Operations</a></li>
-<li><a class="reference internal" href="#set-methods">7.3.2. Set Methods</a></li>
+<li><a class="reference internal" href="#">6.2. Sets</a><ul>
+<li><a class="reference internal" href="#using-a-set-to-count-unique-values">6.2.1. Using a <code class="docutils literal"><span class="pre">set</span></code> to count unique values</a></li>
+<li><a class="reference internal" href="#comparing-membership-with-sets">6.2.2. Comparing Membership with Sets</a></li>
+<li><a class="reference internal" href="#set-operations">6.2.3. Set Operations</a></li>
+<li><a class="reference internal" href="#persistent-sets">6.2.4. Persistent Sets</a></li>
 </ul>
 </li>
 </ul>
@@ -275,13 +277,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 7.1. Mapping One Value to Another with Dictionaries" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 6.1. Dictionaries" data-toggle="tooltip">
     <a href="Dictionaries.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 7.4. Dictionary and Set Comprehensions' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 6.3. Dictionary and Set Comprehensions' data-toggle="tooltip" >
     <a href="Comprehensions.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -312,34 +314,399 @@
 
 <div class="container" id="main-content">
   
-  <div class="section" id="checking-and-comparing-membership-with-sets">
-<h1>7.3. Checking and Comparing Membership with Sets<a class="headerlink" href="#checking-and-comparing-membership-with-sets" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="set-operations">
-<h2>7.3.1. Set Operations<a class="headerlink" href="#set-operations" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+  <div class="section" id="sets">
+<h1>6.2. Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal"><span class="pre">set</span></code> is a useful associative Python data structure for collecting unique
+values and checking membership.  If you find yourself building a data structure
+that will only be used to check if items are <code class="docutils literal"><span class="pre">in</span></code> the group, the set is the
+correct data structure for the task. Sets are based on mathematical sets and
+come with methods for unions, intersections, etc.  Consequently, they are also
+useful for comparing the membership of two groups.</p>
+<div class="section" id="using-a-set-to-count-unique-values">
+<h2>6.2.1. Using a <code class="docutils literal"><span class="pre">set</span></code> to count unique values<a class="headerlink" href="#using-a-set-to-count-unique-values" title="Permalink to this headline">¶</a></h2>
+<p>Sets can be useful for determining the number of unique values in a collection.
+Suppose that we are interested in determining how many unique words there are in
+the Zen of Python</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">zen_no_punc</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="gp">   ...: </span><span class="s1">The Zen of Python by Tim Peters</span>
+<span class="gp">   ...: </span><span class="s1">Beautiful is better than ugly</span>
+<span class="gp">   ...: </span><span class="s1">Explicit is better than implicit</span>
+<span class="gp">   ...: </span><span class="s1">Simple is better than complex</span>
+<span class="gp">   ...: </span><span class="s1">Complex is better than complicated</span>
+<span class="gp">   ...: </span><span class="s1">Flat is better than nested</span>
+<span class="gp">   ...: </span><span class="s1">Sparse is better than dense</span>
+<span class="gp">   ...: </span><span class="s1">Readability counts</span>
+<span class="gp">   ...: </span><span class="s1">Special cases arent special enough to break the rules</span>
+<span class="gp">   ...: </span><span class="s1">Although practicality beats purity</span>
+<span class="gp">   ...: </span><span class="s1">Errors should never pass silently</span>
+<span class="gp">   ...: </span><span class="s1">Unless explicitly silenced</span>
+<span class="gp">   ...: </span><span class="s1">In the face of ambiguity refuse the temptation to guess</span>
+<span class="gp">   ...: </span><span class="s1">There should be one and preferably only one obvious way to do it</span>
+<span class="gp">   ...: </span><span class="s1">Although that way may not be obvious at first unless youre Dutch</span>
+<span class="gp">   ...: </span><span class="s1">Now is better than never</span>
+<span class="gp">   ...: </span><span class="s1">Although never is often better than right now</span>
+<span class="gp">   ...: </span><span class="s1">If the implementation is hard to explain its a bad idea</span>
+<span class="gp">   ...: </span><span class="s1">If the implementation is easy to explain it may be a good idea</span>
+<span class="gp">   ...: </span><span class="s1">Namespaces are one honking great idea  lets do more of those&#39;&#39;&#39;</span>
+<span class="gp">   ...: </span>
+</pre></div>
 </div>
-<div class="section" id="set-methods">
-<h2>7.3.2. Set Methods<a class="headerlink" href="#set-methods" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<p>The easiest way to construct a set is using the <code class="docutils literal"><span class="pre">set</span></code> conversion function on a
+list of values.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">words_zen</span> <span class="o">=</span> <span class="n">zen_no_punc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="gp">In [3]: </span><span class="n">unique_words_zen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">words_zen</span><span class="p">)</span>
+
+<span class="gp">In [4]: </span><span class="n">unique_words_zen</span>
+<span class="gh">Out[4]: </span><span class="go"></span>
+<span class="go">{&#39;a&#39;,</span>
+<span class="go"> &#39;although&#39;,</span>
+<span class="go"> &#39;ambiguity&#39;,</span>
+<span class="go"> &#39;and&#39;,</span>
+<span class="go"> &#39;are&#39;,</span>
+<span class="go"> &#39;arent&#39;,</span>
+<span class="go"> &#39;at&#39;,</span>
+<span class="go"> &#39;bad&#39;,</span>
+<span class="go"> &#39;be&#39;,</span>
+<span class="go"> &#39;beats&#39;,</span>
+<span class="go"> &#39;beautiful&#39;,</span>
+<span class="go"> &#39;better&#39;,</span>
+<span class="go"> &#39;break&#39;,</span>
+<span class="go"> &#39;by&#39;,</span>
+<span class="go"> &#39;cases&#39;,</span>
+<span class="go"> &#39;complex&#39;,</span>
+<span class="go"> &#39;complicated&#39;,</span>
+<span class="go"> &#39;counts&#39;,</span>
+<span class="go"> &#39;dense&#39;,</span>
+<span class="go"> &#39;do&#39;,</span>
+<span class="go"> &#39;dutch&#39;,</span>
+<span class="go"> &#39;easy&#39;,</span>
+<span class="go"> &#39;enough&#39;,</span>
+<span class="go"> &#39;errors&#39;,</span>
+<span class="go"> &#39;explain&#39;,</span>
+<span class="go"> &#39;explicit&#39;,</span>
+<span class="go"> &#39;explicitly&#39;,</span>
+<span class="go"> &#39;face&#39;,</span>
+<span class="go"> &#39;first&#39;,</span>
+<span class="go"> &#39;flat&#39;,</span>
+<span class="go"> &#39;good&#39;,</span>
+<span class="go"> &#39;great&#39;,</span>
+<span class="go"> &#39;guess&#39;,</span>
+<span class="go"> &#39;hard&#39;,</span>
+<span class="go"> &#39;honking&#39;,</span>
+<span class="go"> &#39;idea&#39;,</span>
+<span class="go"> &#39;if&#39;,</span>
+<span class="go"> &#39;implementation&#39;,</span>
+<span class="go"> &#39;implicit&#39;,</span>
+<span class="go"> &#39;in&#39;,</span>
+<span class="go"> &#39;is&#39;,</span>
+<span class="go"> &#39;it&#39;,</span>
+<span class="go"> &#39;its&#39;,</span>
+<span class="go"> &#39;lets&#39;,</span>
+<span class="go"> &#39;may&#39;,</span>
+<span class="go"> &#39;more&#39;,</span>
+<span class="go"> &#39;namespaces&#39;,</span>
+<span class="go"> &#39;nested&#39;,</span>
+<span class="go"> &#39;never&#39;,</span>
+<span class="go"> &#39;not&#39;,</span>
+<span class="go"> &#39;now&#39;,</span>
+<span class="go"> &#39;obvious&#39;,</span>
+<span class="go"> &#39;of&#39;,</span>
+<span class="go"> &#39;often&#39;,</span>
+<span class="go"> &#39;one&#39;,</span>
+<span class="go"> &#39;only&#39;,</span>
+<span class="go"> &#39;pass&#39;,</span>
+<span class="go"> &#39;peters&#39;,</span>
+<span class="go"> &#39;practicality&#39;,</span>
+<span class="go"> &#39;preferably&#39;,</span>
+<span class="go"> &#39;purity&#39;,</span>
+<span class="go"> &#39;python&#39;,</span>
+<span class="go"> &#39;readability&#39;,</span>
+<span class="go"> &#39;refuse&#39;,</span>
+<span class="go"> &#39;right&#39;,</span>
+<span class="go"> &#39;rules&#39;,</span>
+<span class="go"> &#39;should&#39;,</span>
+<span class="go"> &#39;silenced&#39;,</span>
+<span class="go"> &#39;silently&#39;,</span>
+<span class="go"> &#39;simple&#39;,</span>
+<span class="go"> &#39;sparse&#39;,</span>
+<span class="go"> &#39;special&#39;,</span>
+<span class="go"> &#39;temptation&#39;,</span>
+<span class="go"> &#39;than&#39;,</span>
+<span class="go"> &#39;that&#39;,</span>
+<span class="go"> &#39;the&#39;,</span>
+<span class="go"> &#39;there&#39;,</span>
+<span class="go"> &#39;those&#39;,</span>
+<span class="go"> &#39;tim&#39;,</span>
+<span class="go"> &#39;to&#39;,</span>
+<span class="go"> &#39;ugly&#39;,</span>
+<span class="go"> &#39;unless&#39;,</span>
+<span class="go"> &#39;way&#39;,</span>
+<span class="go"> &#39;youre&#39;,</span>
+<span class="go"> &#39;zen&#39;}</span>
+
+<span class="gp">In [5]: </span><span class="nb">len</span><span class="p">(</span><span class="n">unique_words_zen</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Out[5]: 85</span>
+</pre></div>
+</div>
+<p>We can now use <code class="docutils literal"><span class="pre">in</span></code> to determine if a given word is present in the set.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="s1">&#39;the&#39;</span> <span class="ow">in</span> <span class="n">unique_words_zen</span>
+<span class="gh">Out[6]: </span><span class="go">True</span>
+
+<span class="gp">In [7]: </span><span class="s1">&#39;mississippi&#39;</span> <span class="ow">in</span> <span class="n">unique_words_zen</span>
+<span class="go">             Out[7]: False</span>
+</pre></div>
+</div>
+<p>While this looks no different that performing the same operations on a list, set
+s have a much more efficient item look-up (as discussed in a later section).</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Similar to the requirement for dictionary keys, entries in a <code class="docutils literal"><span class="pre">set</span></code> must be
+immutable, hashable items.  If you need to make a set of lists or dictionaries,
+you will need to convert them to the immutable alternative from <code class="docutils literal"><span class="pre">pyrsistent</span></code>.</p>
+</div>
+</div>
+<div class="section" id="comparing-membership-with-sets">
+<h2>6.2.2. Comparing Membership with Sets<a class="headerlink" href="#comparing-membership-with-sets" title="Permalink to this headline">¶</a></h2>
+<p>As sets a modeled after sets from mathematics, they are also useful in comparing
+the membership of two groups.  To illustrate this process, we will create a set
+containing the unique words from the <a class="reference external" href="https://en.wikipedia.org/wiki/Gettysburg_Address">Gettysburg Address</a>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">gettysburg_address</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Fourscore and seven years ago our fathers</span>
+<span class="gp">   ...: </span><span class="s2">brought forth, on this continent, a new nation, conceived in liberty,</span>
+<span class="gp">   ...: </span><span class="s2">and dedicated to the proposition that all men are created equal. Now we</span>
+<span class="gp">   ...: </span><span class="s2">are engaged in a great civil war, testing whether that nation, or any</span>
+<span class="gp">   ...: </span><span class="s2">nation so conceived, and so dedicated, can long endure. We are met on a</span>
+<span class="gp">   ...: </span><span class="s2">great battle-field of that war. We have come to dedicate a portion of</span>
+<span class="gp">   ...: </span><span class="s2">that field, as a final resting-place for those who here gave their</span>
+<span class="gp">   ...: </span><span class="s2">lives, that that nation might live. It is altogether fitting and proper</span>
+<span class="gp">   ...: </span><span class="s2">that we should do this. But, in a larger sense, we cannot dedicate, we</span>
+<span class="gp">   ...: </span><span class="s2">cannot consecrate—we cannot hallow—this ground. The brave men, living</span>
+<span class="gp">   ...: </span><span class="s2">and dead, who struggled here, have consecrated it far above our poor</span>
+<span class="gp">   ...: </span><span class="s2">power to add or detract. The world will little note, nor long remember</span>
+<span class="gp">   ...: </span><span class="s2">what we say here, but it can never forget what they did here. It is for</span>
+<span class="gp">   ...: </span><span class="s2">us the living, rather, to be dedicated here to the unfinished work which</span>
+<span class="gp">   ...: </span><span class="s2">they who fought here have thus far so nobly advanced.  It is rather for</span>
+<span class="gp">   ...: </span><span class="s2">us to be here dedicated to the great task remaining before us—that from</span>
+<span class="gp">   ...: </span><span class="s2">these honored dead we take increased devotion to that cause for which</span>
+<span class="gp">   ...: </span><span class="s2">they here gave the last full measure of devotion—that we here highly</span>
+<span class="gp">   ...: </span><span class="s2">resolve that these dead shall not have died in vain—that this nation,</span>
+<span class="gp">   ...: </span><span class="s2">under God, shall have a new birth of freedom, and that government of the</span>
+<span class="gp">   ...: </span><span class="s2">people, by the people, for the people, shall not perish from the</span>
+<span class="gp">   ...: </span><span class="s2">earth.&quot;&quot;&quot;</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [9]: </span><span class="n">words_gettysburg</span> <span class="o">=</span> <span class="n">gettysburg_address</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="gp">In [10]: </span><span class="n">unique_words_getty</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">words_gettysburg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sets come with a number of useful methods that will be familiar to anyone that
+has worked with sets in mathematics.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="p">[</span><span class="n">attr</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">unique_words_zen</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)]</span>
+<span class="gh">Out[11]: </span><span class="go"></span>
+<span class="go">[&#39;add&#39;,</span>
+<span class="go"> &#39;clear&#39;,</span>
+<span class="go"> &#39;copy&#39;,</span>
+<span class="go"> &#39;difference&#39;,</span>
+<span class="go"> &#39;difference_update&#39;,</span>
+<span class="go"> &#39;discard&#39;,</span>
+<span class="go"> &#39;intersection&#39;,</span>
+<span class="go"> &#39;intersection_update&#39;,</span>
+<span class="go"> &#39;isdisjoint&#39;,</span>
+<span class="go"> &#39;issubset&#39;,</span>
+<span class="go"> &#39;issuperset&#39;,</span>
+<span class="go"> &#39;pop&#39;,</span>
+<span class="go"> &#39;remove&#39;,</span>
+<span class="go"> &#39;symmetric_difference&#39;,</span>
+<span class="go"> &#39;symmetric_difference_update&#39;,</span>
+<span class="go"> &#39;union&#39;,</span>
+<span class="go"> &#39;update&#39;]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">intersection</span></code> method of a set can be used to contruct another set that
+contains all elements the two sets have in common.   The <code class="docutils literal"><span class="pre">union</span></code> method can be
+used to create the set of words that are one or both original sets.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">in_common</span> <span class="o">=</span> <span class="n">unique_words_zen</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">unique_words_getty</span><span class="p">)</span>
+
+<span class="gp">In [13]: </span><span class="n">in_common</span>
+<span class="gh">Out[13]: </span><span class="go"></span>
+<span class="go">{&#39;a&#39;,</span>
+<span class="go"> &#39;and&#39;,</span>
+<span class="go"> &#39;are&#39;,</span>
+<span class="go"> &#39;be&#39;,</span>
+<span class="go"> &#39;by&#39;,</span>
+<span class="go"> &#39;do&#39;,</span>
+<span class="go"> &#39;great&#39;,</span>
+<span class="go"> &#39;in&#39;,</span>
+<span class="go"> &#39;is&#39;,</span>
+<span class="go"> &#39;it&#39;,</span>
+<span class="go"> &#39;never&#39;,</span>
+<span class="go"> &#39;not&#39;,</span>
+<span class="go"> &#39;now&#39;,</span>
+<span class="go"> &#39;of&#39;,</span>
+<span class="go"> &#39;should&#39;,</span>
+<span class="go"> &#39;that&#39;,</span>
+<span class="go"> &#39;the&#39;,</span>
+<span class="go"> &#39;those&#39;,</span>
+<span class="go"> &#39;to&#39;}</span>
+
+<span class="gp">In [14]: </span><span class="nb">len</span><span class="p">(</span><span class="n">in_common</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                  Out[14]: 19</span>
+
+<span class="gp">In [15]: </span><span class="n">union</span> <span class="o">=</span> <span class="n">unique_words_zen</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">unique_words_getty</span><span class="p">)</span>
+
+<span class="gp">In [16]: </span><span class="nb">len</span><span class="p">(</span><span class="n">union</span><span class="p">)</span>
+<span class="gh">Out[16]: </span><span class="go">218</span>
+</pre></div>
+</div>
+<p>Notice that each method is called on one set using the other set as an argument
+for the method.  This is the general pattern for using the <code class="docutils literal"><span class="pre">set</span></code> methods to
+compare sets</p>
+<p>We can check if one group is contained in another using <code class="docutils literal"><span class="pre">issubset</span></code> and
+<code class="docutils literal"><span class="pre">issuperset</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">in_common</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">unique_words_zen</span><span class="p">)</span>
+<span class="gh">Out[17]: </span><span class="go">True</span>
+
+<span class="gp">In [18]: </span><span class="n">union</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">in_common</span><span class="p">)</span>
+<span class="go">              Out[18]: True</span>
+</pre></div>
+</div>
+<p>Suppose that you want to get the words in one text but not the other.  This can
+be accomplished using the <code class="docutils literal"><span class="pre">difference</span></code> method.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">zen_only</span> <span class="o">=</span> <span class="n">unique_words_zen</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">unique_words_getty</span><span class="p">)</span>
+
+<span class="gp">In [20]: </span><span class="nb">len</span><span class="p">(</span><span class="n">unique_words_zen</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">zen_only</span><span class="p">)</span>
+<span class="gh">Out[20]: </span><span class="go">19</span>
+</pre></div>
+</div>
+<p>Similarly, the method `` symmetric_difference`` is used to find all words that
+are in one set but not both.  (This is equivalent to
+<code class="docutils literal"><span class="pre">union.difference(intersection)</span></code>)</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">sym_diff</span> <span class="o">=</span> <span class="n">unique_words_zen</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">unique_words_getty</span><span class="p">)</span>
+
+<span class="gp">In [22]: </span><span class="nb">len</span><span class="p">(</span><span class="n">sym_diff</span><span class="p">)</span>
+<span class="gh">Out[22]: </span><span class="go">199</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Sets also have methods for mutation, such as <code class="docutils literal"><span class="pre">add</span></code>, <code class="docutils literal"><span class="pre">pop</span></code>, <code class="docutils literal"><span class="pre">remove</span></code> and
+<code class="docutils literal"><span class="pre">difference_update</span></code> that are not covered here.</p>
+</div>
+</div>
+<div class="section" id="set-operations">
+<h2>6.2.3. Set Operations<a class="headerlink" href="#set-operations" title="Permalink to this headline">¶</a></h2>
+<p>Python sets can also be compared with a number of operations that are equivalent
+to the methods shown above.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="go"># issubset with &lt;=</span>
+<span class="gp">In [23]: </span><span class="n">in_common</span> <span class="o">&lt;=</span> <span class="n">unique_words_zen</span>
+<span class="gh">Out[23]: </span><span class="go">True</span>
+
+<span class="go"># issuperset with &gt;=</span>
+<span class="gp">In [24]: </span><span class="n">union</span> <span class="o">&gt;=</span> <span class="n">in_common</span>
+<span class="go">              Out[24]: True</span>
+
+<span class="go"># union with |</span>
+<span class="gp">In [25]: </span><span class="nb">len</span><span class="p">(</span><span class="n">unique_words_zen</span> <span class="o">|</span> <span class="n">unique_words_getty</span><span class="p">)</span>
+<span class="go">                            Out[25]: 218</span>
+
+<span class="go"># intersection with &amp;</span>
+<span class="gp">In [26]: </span><span class="nb">len</span><span class="p">(</span><span class="n">unique_words_zen</span> <span class="o">&amp;</span> <span class="n">unique_words_getty</span><span class="p">)</span>
+<span class="go">                                         Out[26]: 19</span>
+
+<span class="go"># difference with -</span>
+<span class="gp">In [27]: </span><span class="n">zen_only</span> <span class="o">=</span> <span class="n">unique_words_zen</span> <span class="o">-</span> <span class="n">unique_words_getty</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="persistent-sets">
+<h2>6.2.4. Persistent Sets<a class="headerlink" href="#persistent-sets" title="Permalink to this headline">¶</a></h2>
+<p>As with other Python data structures, the <code class="docutils literal"><span class="pre">pyrsistent</span></code> module provides an
+immutable and persistent implementation of a set.  This can be used to build up
+a set without mutation with efficient operations that return new sets.  In
+particular, we <code class="docutils literal"><span class="pre">add</span></code> and <code class="docutils literal"><span class="pre">remove</span></code> items from sets.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="kn">from</span> <span class="nn">pyrsistent</span> <span class="kn">import</span> <span class="n">s</span>
+
+<span class="gp">In [29]: </span><span class="n">s1</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="gp">In [30]: </span><span class="n">s1</span>
+<span class="gh">Out[30]: </span><span class="go">pset([1, 2, 3, 4])</span>
+
+<span class="gp">In [31]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="gp">In [32]: </span><span class="n">s1</span>
+<span class="gh">Out[32]: </span><span class="go">pset([1, 2, 3, 4])</span>
+
+<span class="gp">In [33]: </span><span class="n">s2</span>
+<span class="go">                            Out[33]: pset([0, 1, 2, 3, 4])</span>
+
+<span class="gp">In [34]: </span><span class="n">s1</span> <span class="ow">is</span> <span class="n">s2</span>
+<span class="go">                                                           Out[34]: False</span>
+
+<span class="gp">In [35]: </span><span class="n">s3</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="gp">In [36]: </span><span class="n">s2</span>
+<span class="gh">Out[36]: </span><span class="go">pset([0, 1, 2, 3, 4])</span>
+
+<span class="gp">In [37]: </span><span class="n">s3</span>
+<span class="go">                               Out[37]: pset([0, 1, 2, 3])</span>
+
+<span class="gp">In [38]: </span><span class="n">s2</span> <span class="ow">is</span> <span class="n">s3</span>
+<span class="go">                                                           Out[38]: False</span>
+</pre></div>
+</div>
+<p>These persistent sets come with all of the expected methods,</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">pset_methods</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">attr</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)])</span>
+
+<span class="gp">In [40]: </span><span class="n">python_set_methods</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">attr</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="nb">set</span><span class="p">([]))</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)])</span>
+
+<span class="go"># The intersection of python set methods and pset methods</span>
+<span class="gp">In [41]: </span><span class="n">pset_methods</span> <span class="o">&amp;</span> <span class="n">python_set_methods</span>
+<span class="gh">Out[41]: </span><span class="go"></span>
+<span class="go">{&#39;add&#39;,</span>
+<span class="go"> &#39;copy&#39;,</span>
+<span class="go"> &#39;difference&#39;,</span>
+<span class="go"> &#39;discard&#39;,</span>
+<span class="go"> &#39;intersection&#39;,</span>
+<span class="go"> &#39;isdisjoint&#39;,</span>
+<span class="go"> &#39;issubset&#39;,</span>
+<span class="go"> &#39;issuperset&#39;,</span>
+<span class="go"> &#39;remove&#39;,</span>
+<span class="go"> &#39;symmetric_difference&#39;,</span>
+<span class="go"> &#39;union&#39;,</span>
+<span class="go"> &#39;update&#39;}</span>
+</pre></div>
+</div>
+<p>and all of the operations that work on python sets also work on <code class="docutils literal"><span class="pre">Psets</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">s2</span> <span class="o">-</span> <span class="n">s1</span>
+<span class="gh">Out[42]: </span><span class="go">pset([0])</span>
+
+<span class="gp">In [43]: </span><span class="n">s3</span> <span class="o">&amp;</span> <span class="n">s1</span>
+<span class="go">                   Out[43]: pset([1, 2, 3])</span>
+
+<span class="gp">In [44]: </span><span class="n">s1</span> <span class="o">&lt;=</span> <span class="n">s2</span>
+<span class="go">                                            Out[44]: True</span>
+</pre></div>
+</div>
 </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 7.1. Mapping One Value to Another with Dictionaries' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 6.1. Dictionaries' data-toggle="tooltip">
     <a href="Dictionaries.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="Dictionaries.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 7.4. Dictionary and Set Comprehensions' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 6.3. Dictionary and Set Comprehensions' data-toggle="tooltip" >
     <a href="Comprehensions.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="Comprehensions.html" >Next Section - 7.4. Dictionary and Set Comprehensions</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="Comprehensions.html" >Next Section - 6.3. Dictionary and Set Comprehensions</a>
 
 <script type="text/javascript">
 

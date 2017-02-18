@@ -16,6 +16,7 @@ solutions based on list comprehensions to those that use recursion.
     ThreeGeneralTasks.rst
     WhatAreHigherOrderFunctions.rst
     OtherExamplesOfHigherOrderFunctions.rst
+    CommonPatternsForProcessingSequencesWithDictionaries.rst
     LazyIteration.rst
     RecursiveGeneratorFunctions.rst
     Exercises.rst

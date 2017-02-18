@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.4. Other Examples of Higher Order Functions &mdash; Runestone Interactive Overview</title>
+    <title>7.5. Other Examples of Higher Order Functions &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="6. Functional List Processing" href="toctree.html" />
-    <link rel="next" title="6.5. Lazy Iteration" href="LazyIteration.html" />
-    <link rel="prev" title="6.3. What are Higher Order Functions?" href="WhatAreHigherOrderFunctions.html" />
+    <link rel="up" title="7. Functional List Processing" href="toctree.html" />
+    <link rel="next" title="7.6. Common Patterns for Processing Sequences with Dictionaries" href="CommonPatternsForProcessingSequencesWithDictionaries.html" />
+    <link rel="prev" title="7.4. What are Higher Order Functions?" href="WhatAreHigherOrderFunctions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,13 +263,13 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6.4. Other Examples of Higher Order Functions</a><ul>
-<li><a class="reference internal" href="#composition">6.4.1. Composition</a></li>
-<li><a class="reference internal" href="#partial-functions">6.4.2. Partial Functions</a></li>
-<li><a class="reference internal" href="#decorator-functions">6.4.3. Decorator Functions</a></li>
-<li><a class="reference internal" href="#currying">6.4.4. Currying</a></li>
-<li><a class="reference internal" href="#other-useful-curried-functions-from-toolz">6.4.5. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code></a></li>
-<li><a class="reference internal" href="#memiozation">6.4.6. Memiozation</a></li>
+<li><a class="reference internal" href="#">7.5. Other Examples of Higher Order Functions</a><ul>
+<li><a class="reference internal" href="#composition">7.5.1. Composition</a></li>
+<li><a class="reference internal" href="#partial-functions">7.5.2. Partial Functions</a></li>
+<li><a class="reference internal" href="#decorator-functions">7.5.3. Decorator Functions</a></li>
+<li><a class="reference internal" href="#currying">7.5.4. Currying</a></li>
+<li><a class="reference internal" href="#other-useful-curried-functions-from-toolz">7.5.5. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code></a></li>
+<li><a class="reference internal" href="#memiozation">7.5.6. Memiozation</a></li>
 </ul>
 </li>
 </ul>
@@ -279,14 +279,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 6.3. What are Higher Order Functions?" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 7.4. What are Higher Order Functions?" data-toggle="tooltip">
     <a href="WhatAreHigherOrderFunctions.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 6.5. Lazy Iteration' data-toggle="tooltip" >
-    <a href="LazyIteration.html" >
+  <li id="relations-next" title='Next Chapter - 7.6. Common Patterns for Processing Sequences with Dictionaries' data-toggle="tooltip" >
+    <a href="CommonPatternsForProcessingSequencesWithDictionaries.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -317,7 +317,7 @@
 <div class="container" id="main-content">
   
   <div class="section" id="other-examples-of-higher-order-functions">
-<h1>6.4. Other Examples of Higher Order Functions<a class="headerlink" href="#other-examples-of-higher-order-functions" title="Permalink to this headline">¶</a></h1>
+<h1>7.5. Other Examples of Higher Order Functions<a class="headerlink" href="#other-examples-of-higher-order-functions" title="Permalink to this headline">¶</a></h1>
 <p>In this section, we will implement some other common higher-order functions</p>
 <p>Many of these functions are implemented in the Python libraries <code class="docutils literal"><span class="pre">toolz</span></code> and
 <code class="docutils literal"><span class="pre">cytoolz</span></code> under the sub module titled <code class="docutils literal"><span class="pre">functoolz</span></code>.  These two modules have
@@ -339,7 +339,7 @@ below,</p>
 </div>
 </div>
 <div class="section" id="composition">
-<h2>6.4.1. Composition<a class="headerlink" href="#composition" title="Permalink to this headline">¶</a></h2>
+<h2>7.5.1. Composition<a class="headerlink" href="#composition" title="Permalink to this headline">¶</a></h2>
 <p>Consider the following example, which involves cleaning up a string by removing
 punctuation, whitespace and upper-case characters.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span><span class="p">,</span> <span class="n">whitespace</span>
@@ -501,7 +501,7 @@ the chapter.</p>
 </div>
 </div>
 <div class="section" id="partial-functions">
-<h2>6.4.2. Partial Functions<a class="headerlink" href="#partial-functions" title="Permalink to this headline">¶</a></h2>
+<h2>7.5.2. Partial Functions<a class="headerlink" href="#partial-functions" title="Permalink to this headline">¶</a></h2>
 <p>In the second chapter, we illustrated how to use a function factory to
 generalize the <code class="docutils literal"><span class="pre">apply_tax</span></code> function.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="k">def</span> <span class="nf">make_apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">):</span>
@@ -614,7 +614,7 @@ need to be used for these functions.</p>
 </div>
 </div>
 <div class="section" id="decorator-functions">
-<h2>6.4.3. Decorator Functions<a class="headerlink" href="#decorator-functions" title="Permalink to this headline">¶</a></h2>
+<h2>7.5.3. Decorator Functions<a class="headerlink" href="#decorator-functions" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">partial</span></code> is an example of a <strong>decorator function</strong>, which is a function that
 creates a <em>wrapper</em> around another function.  The outer function calls the
 original function and then changes or <em>decorates</em> the input and/or output.</p>
@@ -655,7 +655,7 @@ decorates the function <code class="docutils literal"><span class="pre">emph</sp
 need to use different name for the decorated function.</p>
 </div>
 <div class="section" id="currying">
-<h2>6.4.4. Currying<a class="headerlink" href="#currying" title="Permalink to this headline">¶</a></h2>
+<h2>7.5.4. Currying<a class="headerlink" href="#currying" title="Permalink to this headline">¶</a></h2>
 <p>Currying is another popular functional approach to partial application of
 functions.  Recall that the <strong>arity</strong> of a function is the number of arguments
 the function takes.  We can implement functions with arity higher than 1 using a
@@ -814,7 +814,7 @@ function.</p>
 </div>
 </div>
 <div class="section" id="other-useful-curried-functions-from-toolz">
-<h2>6.4.5. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code><a class="headerlink" href="#other-useful-curried-functions-from-toolz" title="Permalink to this headline">¶</a></h2>
+<h2>7.5.5. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code><a class="headerlink" href="#other-useful-curried-functions-from-toolz" title="Permalink to this headline">¶</a></h2>
 <p>Many of the functions from the <code class="docutils literal"><span class="pre">toolz</span></code> library have been designed with
 currying in mind.  Furthermore, curried versions of most functions can be
 imported from <code class="docutils literal"><span class="pre">toolz.curried</span></code>.</p>
@@ -988,7 +988,7 @@ that will make a new table that contains only column 3.</p>
 </div>
 </div>
 <div class="section" id="memiozation">
-<h2>6.4.6. Memiozation<a class="headerlink" href="#memiozation" title="Permalink to this headline">¶</a></h2>
+<h2>7.5.6. Memiozation<a class="headerlink" href="#memiozation" title="Permalink to this headline">¶</a></h2>
 <p>One of the problems with recursive functions, especially if they are not
 tail-recursive or have not been refactored to use an accumulator, is the number
 of replicated function calls that get made.  To see this, we create a decorator
@@ -1611,19 +1611,19 @@ declared using the <code class="docutils literal"><span class="pre">nonlocal</sp
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 6.3. What are Higher Order Functions?' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 7.4. What are Higher Order Functions?' data-toggle="tooltip">
     <a href="WhatAreHigherOrderFunctions.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="WhatAreHigherOrderFunctions.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 6.5. Lazy Iteration' data-toggle="tooltip" >
-    <a href="LazyIteration.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 7.6. Common Patterns for Processing Sequences with Dictionaries' data-toggle="tooltip" >
+    <a href="CommonPatternsForProcessingSequencesWithDictionaries.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="LazyIteration.html" >Next Section - 6.5. Lazy Iteration</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="CommonPatternsForProcessingSequencesWithDictionaries.html" >Next Section - 7.6. Common Patterns for Processing Sequences with Dictionaries</a>
 
 <script type="text/javascript">
 

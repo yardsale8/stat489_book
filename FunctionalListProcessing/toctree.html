@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6. Functional List Processing &mdash; Runestone Interactive Overview</title>
+    <title>7. Functional List Processing &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,8 +101,8 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="next" title="6.1. More Details About Python Functions" href="MoreAboutPythonFunctions.html" />
-    <link rel="prev" title="5.4. Exercises" href="../ReadingDataFromFiles/Exercises.html" />
+    <link rel="next" title="7.1. More Details About Python Functions" href="MoreAboutPythonFunctions.html" />
+    <link rel="prev" title="6.4. Exercises" href="../ReadingDataFromFiles/Exercises.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -262,7 +262,7 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6. Functional List Processing</a></li>
+<li><a class="reference internal" href="#">7. Functional List Processing</a></li>
 </ul>
 </ul>
 </li>
@@ -270,13 +270,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 5.4. Exercises" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 6.4. Exercises" data-toggle="tooltip">
     <a href="../ReadingDataFromFiles/Exercises.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 6.1. More Details About Python Functions' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 7.1. More Details About Python Functions' data-toggle="tooltip" >
     <a href="MoreAboutPythonFunctions.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -308,7 +308,7 @@
 <div class="container" id="main-content">
   
   <div class="section" id="functional-list-processing">
-<h1>6. Functional List Processing<a class="headerlink" href="#functional-list-processing" title="Permalink to this headline">¶</a></h1>
+<h1>7. Functional List Processing<a class="headerlink" href="#functional-list-processing" title="Permalink to this headline">¶</a></h1>
 <p>In this chapter, we will take a look at the functional approach to processing
 sequences of data.  We start by definition three general types of sequence
 processing tasks. Then we look at the Python function in more depth, followed by
@@ -318,12 +318,14 @@ solutions based on list comprehensions to those that use recursion.</p>
 <div class="toctree-wrapper compound" id="id1">
 <p class="caption"><span class="caption-text">Functional List Processing</span><a class="headerlink" href="#id1" title="Permalink to this toctree">¶</a></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="MoreAboutPythonFunctions.html">6.1. More Details About Python Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ThreeGeneralTasks.html">6.2. Three General Tasks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="WhatAreHigherOrderFunctions.html">6.3. What are Higher Order Functions?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="OtherExamplesOfHigherOrderFunctions.html">6.4. Other Examples of Higher Order Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LazyIteration.html">6.5. Lazy Iteration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RecursiveGeneratorFunctions.html">6.6. Recursive Generator Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MoreAboutPythonFunctions.html">7.1. More Details About Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MoreAboutPythonFunctions.html#python-functional-parameters">7.2. Python Functional Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThreeGeneralTasks.html">7.3. Three General Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WhatAreHigherOrderFunctions.html">7.4. What are Higher Order Functions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OtherExamplesOfHigherOrderFunctions.html">7.5. Other Examples of Higher Order Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommonPatternsForProcessingSequencesWithDictionaries.html">7.6. Common Patterns for Processing Sequences with Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LazyIteration.html">7.7. Lazy Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RecursiveGeneratorFunctions.html">7.8. Recursive Generator Functions</a></li>
 </ul>
 </div>
 </div>
@@ -331,19 +333,19 @@ solutions based on list comprehensions to those that use recursion.</p>
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 5.4. Exercises' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 6.4. Exercises' data-toggle="tooltip">
     <a href="../ReadingDataFromFiles/Exercises.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="../ReadingDataFromFiles/Exercises.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 6.1. More Details About Python Functions' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 7.1. More Details About Python Functions' data-toggle="tooltip" >
     <a href="MoreAboutPythonFunctions.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="MoreAboutPythonFunctions.html" >Next Section - 6.1. More Details About Python Functions</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="MoreAboutPythonFunctions.html" >Next Section - 7.1. More Details About Python Functions</a>
 
 <script type="text/javascript">
 
