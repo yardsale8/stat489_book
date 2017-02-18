@@ -338,7 +338,7 @@ goals in functional programming, regarding side-effect are as follows.
    should perform one and only one abstract task.
 3. Refactor longer functions by identifying portions of the code that perform
    some task and putting this code in another function.
-2. Always be aware of side-effects and try to capture and contain side-effects
+4. Always be aware of side-effects and try to capture and contain side-effects
    in a small number of functions.  Side-effecting functions are much hard to
    test, which is one of the reasons that we will keep them to a minimum.
 
@@ -545,6 +545,18 @@ The key aspects of the process are:
     design**, in which you start by writing a test that needs to be passed and
     then writing the function(s) needed to pass these tests.
 
+Python Functional Parameters
+============================
+
+In this section, we will look at some alternative methods for defining
+functional parameters. These include assigning default parameters, using a
+variable number of arguments, and unpacking a list for use as arguments in a
+function call.
+
+Default Parameters
+------------------
+
+TODO
 
 Variable Arity Functions
 ------------------------

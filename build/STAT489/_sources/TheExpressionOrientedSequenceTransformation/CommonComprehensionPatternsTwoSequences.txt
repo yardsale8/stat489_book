@@ -130,7 +130,7 @@ asymptotically.  Unfortunately, :math:`O\left(\frac{n(n-1)}{2}\right)=O\left(\fr
     
 
 
-Sometimes it is easier to describe what your don't want
+Sometimes it is easier to describe what you don't want
 -------------------------------------------------------
 
 Suppose that we want to use list comprehensions to describe all the prime

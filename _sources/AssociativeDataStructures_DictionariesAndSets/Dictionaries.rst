@@ -7,8 +7,8 @@
     the license is included in the section entitled "GNU Free Documentation
     License".
 
-Mapping One Value to Another with Dictionaries
-==============================================
+Dictionaries
+============
 
 All of the compound data types we have studied in detail so far --- strings,
 lists, and tuples --- are sequential collections.  This means that the items in
@@ -21,8 +21,8 @@ with another, whereas the set associates a value with membership in some
 collection or group.  In this chapter, we will introduce these two data
 structures and discuss their application in data wrangling and analysis.
 
-Dictionaries
-============
+Mapping One Value to Another with Dictionaries
+----------------------------------------------
 
 The dictionary is a **mapping type**.  A map is an unordered, associative
 collection.  The association, or mapping, is from a **key**, which can be any
@@ -54,6 +54,43 @@ Here is how we use a key to look up the corresponding value.
 
 The key ``'two'`` yields the value ``'dos'``.
 
+You may recall that we introduced ``get`` function from the ``toolz`` module in
+the chapter on sequences.  A functional alternative to using the ``get``
+operator (``name[key]``) is applying the same ``get`` function to a dictionary.
+
+
+.. ipython:: python
+
+    from toolz import get
+
+    get('two', eng2sp)
+
+Using the ``get`` function has a couple of advantages.  First, we can use a
+common api for getting values from both sequences and lists.
+
+.. ipython:: python
+
+    L = [1,2,3]
+    get(1, L)
+    D = {1:"a", 2:"b"}
+    get(1, D)
+
+Second, ``get`` allows us to get the values for a number of keys simulaneously.
+
+.. ipython:: python
+
+    get([2,1], L)
+    get(['one', 'two'], eng2sp)
+
+Finally, we can assign an optional default value for keys that are not in the
+dictionary.
+
+.. ipython:: python
+
+    get(['one', 'two', 'four'], eng2sp, default=None)
+
+This flexibility makes ``get`` out go-to method for accessing data from a
+dictionary.
 
 .. note::
 
@@ -90,40 +127,108 @@ The key ``'two'`` yields the value ``'dos'``.
    
    .. sourcecode:: python
 
+     from toolz import get
      mydict = {"cat":12, "dog":6, "elephant":23}
-     print(mydict["dog"])
+     print(get("dog",mydict))
+
+Why Dictionary Keys Must Be Immutable
+-------------------------------------
+
+The dictionary uses the built-in function ``hash`` to quickly look-up the value
+for a given key (discussed in detail in :ref:`_dict_complexity`).  A requirement
+of this process is that all keys be unique.  
 
 
+.. ipython:: python
+
+    hash('a')
+    hash(1)
+    hash(2.5)
+    hash((1,2))
+
+If we allowed mutable object to be
+keys, how would we handle changes that confuse the ``hash`` function?  For
+example, if ``[1]`` was a key and this value was mutated by aappending anothe
+value, say ``2``, the new list ``[1, 2]`` would have a different hash value.
+This could lead to the value being lost or two values in the dictionary having
+the same hash.  Consequently, mutable items are not hashable, meaning that
+``hash`` will throw an exception when given a mutable object.
+
+.. ipython:: python
+
+    hash([1,2])
+    hash({1:'z'})
+
+For this reason, all keys in a dictionary much be *immutable object*.  Examples
+of eligable values are strings, number or tuples.  
+
+.. ipython:: python
+
+    d = {1:'int', 2.5:'float', 's':'string', (1,2):'tuple'} 
+    d
+
+Mutable objects, like lists and dictionaries, cannot be dictionary keys.
+
+.. ipython:: python
+
+    from toolz import assoc
+    assoc(d, [1, 2], 'list')
+    assoc(d, {'a':5}, 'list')
+
+Note that the error message is pointing out that a list and dictionary are not
+hashable (can't be converted to a number using ``hash``).  This is due to the
+fact that they are both mutable.
 
 Dictionary Operations
 ---------------------
 
 
-Dictionaries are mutable.  As we've seen before with lists, this means that
-the dictionary can be modified by referencing an association on the left hand
-side of the assignment statement.  In the previous example, instead of deleting
-the entry for ``pears``, we could have set the inventory to ``0``.
+Dictionaries are mutable. As mentioned earlier, the functional style of
+programming involves returning new copies of a data structure instead of
+mutating a data structure in place.  The easiest way to accomplish this is using
+two functions from the ``toolz.dicttoolz`` module, namely ``assoc`` and
+``dissoc``.
 
-.. codelens:: ch12_dict4a
+The function ``assoc`` is used to *associate* a value with a key, which can be a
+new key or updating the value of an existing key.  In the next example, we will
+update the value *associated* with ``'pears'`` and ``'peaches'`` to 0.
+We verify that the dictionary that is returned is not the same as the old
+dictionary.
+
+.. ipython:: python
     
+    from toolz.dicttoolz import assoc, dissoc
     inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
-    
-    inventory['pears'] = 0
+    new_inventory = assoc(inventory, 'pears', 0) 
+    new_inventory = assoc(new_inventory, 'peaches', 0) 
+    new_inventory
+    inventory is new_inventory
 
 Similarily, a new shipment of 200 bananas arriving could be handled like this.
 
-.. codelens:: ch12_dict5
+.. ipython:: python
 
     inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}    
-    inventory['bananas'] = inventory['bananas'] + 200
-
-
-    numItems = len(inventory)
+    updated_bananas = get('bananas',inventory) + 200
+    inventory = assoc(inventory, 'bananas', updated_bananas)
+    inventory
+    len(inventory)
 
 Notice that there are now 512 bananas---the dictionary has been modified.  Note
 also that the ``len`` function also works on dictionaries.  It returns the
 number of key-value pairs:
 
+The function ``dissoc`` is used to remove a key (and its value) from a
+dictionary.  As with ``assoc``, a new dictionary is returned.
+
+.. ipython:: python
+
+    inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}    
+    new_dict = dissoc(inventory, 'pears')
+    new_dict
+    inventory is new_dict
+
+.. todo:: Add something comparing the speeds of mutation, assoc, and assoc from cttoolz
 
 **Check your understanding**
 
@@ -144,8 +249,29 @@ number of key-value pairs:
    .. sourcecode:: python
 
      mydict = {"cat":12, "dog":6, "elephant":23}
-     mydict["mouse"] = mydict["cat"] + mydict["dog"]
-     print(mydict["mouse"])
+     mouse_val = sum(get(["cat", "dog"], mydict))
+     mydict = assoc(mydict, "mouse", mouse_val) 
+     print(get("mouse", mydict)
+
+.. mchoice:: test_question11_3_2
+   :answer_a: 2
+   :answer_b: 0.5
+   :answer_c: bear
+   :answer_d: Error, divide is not a valid operation on dictionaries.
+   :correct: a
+   :feedback_a: get returns the value associated with a given key so this divides 12 by 6.
+   :feedback_b: 12 is divided by 6, not the other way around.
+   :feedback_c: Take another look at the example for get above.  get returns the value associated with a given key.
+   :feedback_d: The integer division operator is being used on the values returned from the get method, not on the dictionary.
+   
+   
+   What is printed by the following statements?
+   
+   .. sourcecode:: python
+
+     mydict = {"cat":12, "dog":6, "elephant":23, "bear":20}
+     answer = get( "cat", mydict) // get("dog",mydict)
+     print(answer)
 
 Dictionary Methods
 ------------------
@@ -160,8 +286,6 @@ Method      Parameters          Description
 keys        none                Returns a view of the keys in the dictionary
 values      none                Returns a view of the values in the dictionary
 items       none                Returns a view of the key-value pairs in the dictionary
-get         key                 Returns the value associated with key; None otherwise
-get         key,alt             Returns the value associated with key; alt otherwise
 ==========  ==============      =======================================================
 
 The ``keys`` method returns what Python 3 calls a **view** over its
@@ -247,29 +371,11 @@ The ``in`` and ``not in`` operators can test if a key is in the dictionary:
     'apples' in inventory
     'cherries' in inventory
 
-    inventory['bananas'] if 'bananas' in inventory "We have no bananas"
+    'bananas'.upper()+3*'!' if 'bananas' in inventory else "We have no bananas"
      
 
 This operator can be very useful since looking up a non-existent key in a
 dictionary causes a runtime error.
-
-The ``get`` method allows us to access the value associated with a key, similar
-to the ``[ ]`` operator.  The important difference is that ``get`` will not
-cause a runtime error if the key is not present.  It will instead return None.
-There exists a variation of ``get`` that allows a second parameter that serves
-as an alternative return value in the case where the key is not present.  This
-can be seen in the final example below.  In this case, since "cherries" is not a
-key, return 0 (instead of None).
-
-.. ipython:: python
-    
-    inventory = {'apples': 430, 'bananas': 312, 'oranges': 525, 'pears': 217}
-    
-    inventory.get("apples")
-    inventory.get("cherries")
-    inventory.get("cherries", 0)
-
-
 
 **Check your understanding**
 
@@ -289,32 +395,14 @@ key, return 0 (instead of None).
    
    .. sourcecode:: python
 
+     from toolz import get
      mydict = {"cat":12, "dog":6, "elephant":23, "bear":20}
      keylist = list(mydict.keys())
      keylist.sort()
-     print(keylist[3])
+     print(get(3, keylist)
    
    
    
-.. mchoice:: test_question11_3_2
-   :answer_a: 2
-   :answer_b: 0.5
-   :answer_c: bear
-   :answer_d: Error, divide is not a valid operation on dictionaries.
-   :correct: a
-   :feedback_a: get returns the value associated with a given key so this divides 12 by 6.
-   :feedback_b: 12 is divided by 6, not the other way around.
-   :feedback_c: Take another look at the example for get above.  get returns the value associated with a given key.
-   :feedback_d: The integer division operator is being used on the values returned from the get method, not on the dictionary.
-   
-   
-   What is printed by the following statements?
-   
-   .. sourcecode:: python
-
-     mydict = {"cat":12, "dog":6, "elephant":23, "bear":20}
-     answer = mydict.get("cat") // mydict.get("dog")
-     print(answer)
 
    
    
@@ -366,61 +454,82 @@ key, return 0 (instead of None).
    
    .. sourcecode:: python
 
+      from toolz import get
       mydict = {"cat":12, "dog":6, "elephant":23, "bear":20}
-      total = sum([mydict[akey] for akey in mydict if len(akey) > 3])
+      total = sum([get(akey, mydict) for akey in mydict if len(akey) > 3])
       print(total)
    
 
-Aliasing and Copying
---------------------
+.. admonition:: Aliasing and Copying
 
-Because dictionaries are mutable, you need to be aware of aliasing (as we saw
-with lists).  Whenever two variables refer to the same dictionary object,
-changes to one affect the other.  For example, ``opposites`` is a dictionary
-that contains pairs of opposites.
+    Because dictionaries are mutable, you need to be aware of aliasing when
+    mutating values (as we saw with lists).  Whenever two variables refer to the
+    same dictionary object, changes to one affect the other.  For example,
+    ``opposites`` is a dictionary that contains pairs of opposites.
+
+    .. ipython:: python
+        
+        opposites = {'up': 'down', 'right': 'wrong', 'true': 'false'}
+        alias = opposites
+
+        alias is opposites
+
+        alias['right'] = 'left'
+        opposites['right']
+
+
+    As you can see from the ``is`` operator, ``alias`` and ``opposites`` refer to
+    the same object.  This illustrates another reason that we prefer to use
+    ``assoc`` and ``dissoc`` to update a dictionary: returning fresh copies of a
+    dictionary eliminates any problems cause by aliasing and mutation.
+
+    .. ipython:: python
+        
+        opposites = {'up': 'down', 'right': 'wrong', 'true': 'false'}
+        alias = opposites
+
+        alias is opposites
+
+        not_alias = assoc(alias, 'right', 'left')
+        not_alias is opposites
+        get('right', opposites)
+        get('right', alias)
+        get('right', not_alias)
+
+Immutable and Persistent Dictionaries
+-------------------------------------
+
+In the last section, the functions ``assoc`` and ``dissoc`` where used to create
+new copies of dictionaries with updated values.  We would expect that copying a
+dictionary would add some complexity to the process.  We will take a closer look
+at the relative efficiency of a number of approaches to building a dictionary in
+the next chapter, but in the mean time we note that the ``pyrsistent`` module
+contains a persistent dictionary/map that should reduce the penalty for copying
+the contents of a dictionary over and over.
 
 .. ipython:: python
-    
-    opposites = {'up': 'down', 'right': 'wrong', 'true': 'false'}
-    alias = opposites
 
-    alias is opposites
+    from pyrsistent import pmap
+    opposites = pmap({'up': 'down', 'right': 'wrong', 'true': 'false'})
+    type(opposites)
+    not_alias = assoc(alias, 'right', 'left')
+    not_alias
+    not_alias is opposites
+    get('up', not_alias)
+    also_not_alias = dissoc(not_alias, 'up')
+    also_not_alias
+    also_not_alias is not_alias
+    also_not_alias is alias
 
-    alias['right'] = 'left'
-    opposites['right']
+Notice that the same semantics that we use to work with dictionaries, i.e. using
+``assoc``, ``dissoc`` and ``get`` also work with a ``pmap``. 
 
+It should also be noted that, because all of the data types in ``pyrsistent``
+are immutable, these data structures can be used as keys in a dictionary!
 
-As you can see from the ``is`` operator, ``alias`` and ``opposites`` refer to
-the same object.
+.. ipython:: python
 
-If you want to modify a dictionary and keep a copy of the original, use the
-dictionary ``copy`` method.  Since *acopy* is a copy of the dictionary, changes
-to it will not effect the original.
-
-.. sourcecode:: python
-    
-    acopy = opposites.copy()
-    acopy['right'] = 'left'    # does not change opposites
-
-**Check your understanding**
-
-.. mchoice:: test_question11_4_1
-   :answer_a: 23
-   :answer_b: None
-   :answer_c: 999
-   :answer_d: Error, there are two different keys named elephant.
-   :correct: c
-   :feedback_a: mydict and yourdict are both names for the same dictionary.  
-   :feedback_b: The dictionary is mutable so changes can be made to the keys and values.
-   :feedback_c: Yes, since yourdict is an alias for mydict, the value for the key elephant has been changed.
-   :feedback_d: There is only one dictionary with only one key named elephant.  The dictionary has two different names, mydict and yourdict.
-   
-   What is printed by the following statements?
-   
-   .. sourcecode:: python
-
-     mydict = {"cat":12, "dog":6, "elephant":23, "bear":20}
-     yourdict = mydict
-     yourdict["elephant"] = 999
-     print(mydict["elephant"])
+    from pyrsistent import pmap, pvector
+    d = {pmap({'a':1}):'pmap', pvector([1,2]):'pvector'}
+    d
 

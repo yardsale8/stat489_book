@@ -9,7 +9,5 @@ Associative Data Structures - Dictionaries and Sets
     Dictionaries.rst
     Sets.rst
     Comprehensions.rst
-    Applications.rst
     ComputationalComplexity.rst
-    DictionariesAndFunctionCalls.rst
-    Summary.rst
+    Exercises.rst

@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.5. Lazy Iteration &mdash; Runestone Interactive Overview</title>
+    <title>7.7. Lazy Iteration &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="6. Functional List Processing" href="toctree.html" />
-    <link rel="next" title="6.6. Recursive Generator Functions" href="RecursiveGeneratorFunctions.html" />
-    <link rel="prev" title="6.4. Other Examples of Higher Order Functions" href="OtherExamplesOfHigherOrderFunctions.html" />
+    <link rel="up" title="7. Functional List Processing" href="toctree.html" />
+    <link rel="next" title="7.8. Recursive Generator Functions" href="RecursiveGeneratorFunctions.html" />
+    <link rel="prev" title="7.6. Common Patterns for Processing Sequences with Dictionaries" href="CommonPatternsForProcessingSequencesWithDictionaries.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,16 +263,16 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6.5. Lazy Iteration</a><ul>
-<li><a class="reference internal" href="#generator-expressions">6.5.1. Generator Expressions</a></li>
-<li><a class="reference internal" href="#the-advantage-of-lazy-sequence-evaluation">6.5.2. The advantage of lazy sequence evaluation</a></li>
-<li><a class="reference internal" href="#more-complicated-generator-expressions">6.5.3. More Complicated Generator Expressions</a></li>
-<li><a class="reference internal" href="#generator-functions">6.5.4. Generator Functions</a><ul>
-<li><a class="reference internal" href="#the-yield-statement">6.5.4.1. The <code class="docutils literal"><span class="pre">yield</span></code> statement</a></li>
-<li><a class="reference internal" href="#the-yield-from-statement">6.5.4.2. The <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statement</a></li>
+<li><a class="reference internal" href="#">7.7. Lazy Iteration</a><ul>
+<li><a class="reference internal" href="#generator-expressions">7.7.1. Generator Expressions</a></li>
+<li><a class="reference internal" href="#the-advantage-of-lazy-sequence-evaluation">7.7.2. The advantage of lazy sequence evaluation</a></li>
+<li><a class="reference internal" href="#more-complicated-generator-expressions">7.7.3. More Complicated Generator Expressions</a></li>
+<li><a class="reference internal" href="#generator-functions">7.7.4. Generator Functions</a><ul>
+<li><a class="reference internal" href="#the-yield-statement">7.7.4.1. The <code class="docutils literal"><span class="pre">yield</span></code> statement</a></li>
+<li><a class="reference internal" href="#the-yield-from-statement">7.7.4.2. The <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statement</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#coroutines">6.5.5. Coroutines</a></li>
+<li><a class="reference internal" href="#coroutines">7.7.5. Coroutines</a></li>
 </ul>
 </li>
 </ul>
@@ -282,13 +282,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 6.4. Other Examples of Higher Order Functions" data-toggle="tooltip">
-    <a href="OtherExamplesOfHigherOrderFunctions.html" >
+  <li id="relations-prev" title="Previous Chapter - 7.6. Common Patterns for Processing Sequences with Dictionaries" data-toggle="tooltip">
+    <a href="CommonPatternsForProcessingSequencesWithDictionaries.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 6.6. Recursive Generator Functions' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 7.8. Recursive Generator Functions' data-toggle="tooltip" >
     <a href="RecursiveGeneratorFunctions.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -320,24 +320,24 @@
 <div class="container" id="main-content">
   
   <div class="section" id="lazy-iteration">
-<h1>6.5. Lazy Iteration<a class="headerlink" href="#lazy-iteration" title="Permalink to this headline">¶</a></h1>
+<h1>7.7. Lazy Iteration<a class="headerlink" href="#lazy-iteration" title="Permalink to this headline">¶</a></h1>
 <p>We have already seen some Python expressions that exhibit lazy evaluation,
 including <code class="docutils literal"><span class="pre">range</span></code>, <code class="docutils literal"><span class="pre">map</span></code> and <code class="docutils literal"><span class="pre">filter</span></code>.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gh">Out[1]: </span><span class="go">range(0, 4)</span>
 
 <span class="gp">In [2]: </span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-<span class="go">                    Out[2]: &lt;map at 0x10f0847f0&gt;</span>
+<span class="go">                    Out[2]: &lt;map at 0x10fa2e6a0&gt;</span>
 
 <span class="gp">In [3]: </span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
-<span class="go">                                                 Out[3]: &lt;filter at 0x10f084080&gt;</span>
+<span class="go">                                                 Out[3]: &lt;filter at 0x10c0e8dd8&gt;</span>
 </pre></div>
 </div>
 <p>Each of these object will hold off evaluation as long as possible.  In this
 section, we will show you other methods for constructing your own lazy
 constructs and discuss the advantage of chaining together lazy expressions.</p>
 <div class="section" id="generator-expressions">
-<h2>6.5.1. Generator Expressions<a class="headerlink" href="#generator-expressions" title="Permalink to this headline">¶</a></h2>
+<h2>7.7.1. Generator Expressions<a class="headerlink" href="#generator-expressions" title="Permalink to this headline">¶</a></h2>
 <p>The core lazy type in Python is the <em>generator</em>.  The easiest way to construct a
 lazy expression is using the <strong>generator expression</strong>, which has the same syntax
 as a list comprehension, except that it is surrounded by parentheses.</p>
@@ -353,7 +353,7 @@ odd values in a sequence.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [5]: </span><span class="n">g</span>
-<span class="gh">Out[5]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10f0c1830&gt;</span>
+<span class="gh">Out[5]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10fb9cca8&gt;</span>
 </pre></div>
 </div>
 <p>Notice that evaluating the generator doesn&#8217;t produce the sequence.  We can force
@@ -384,7 +384,7 @@ before attempting to iterate a second time.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [10]: </span><span class="n">g</span>
-<span class="gh">Out[10]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10c105200&gt;</span>
+<span class="gh">Out[10]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10faa06d0&gt;</span>
 
 <span class="gp">In [11]: </span><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 
@@ -406,7 +406,7 @@ before attempting to iterate a second time.</p>
 </div>
 </div>
 <div class="section" id="the-advantage-of-lazy-sequence-evaluation">
-<h2>6.5.2. The advantage of lazy sequence evaluation<a class="headerlink" href="#the-advantage-of-lazy-sequence-evaluation" title="Permalink to this headline">¶</a></h2>
+<h2>7.7.2. The advantage of lazy sequence evaluation<a class="headerlink" href="#the-advantage-of-lazy-sequence-evaluation" title="Permalink to this headline">¶</a></h2>
 <p>The primary advantage of using generator expressions to process sequences comes
 from the fact that chaining together generators preserves the lazy evaluation.
 For example, suppose that we want to compute the distance to some point
@@ -479,14 +479,14 @@ this problem by allowing use to process the data incrementally without ever
 needing all of it in memory at one time.</p>
 </div>
 <div class="section" id="more-complicated-generator-expressions">
-<h2>6.5.3. More Complicated Generator Expressions<a class="headerlink" href="#more-complicated-generator-expressions" title="Permalink to this headline">¶</a></h2>
+<h2>7.7.3. More Complicated Generator Expressions<a class="headerlink" href="#more-complicated-generator-expressions" title="Permalink to this headline">¶</a></h2>
 <p>All of the tricks that you learned about list comprehensions will work with
 generator expressions as well, be it nesting list comprehensions or including
 multiple sequence expression.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="gp">In [36]: </span><span class="n">g</span>
-<span class="gh">Out[36]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10f0c1a98&gt;</span>
+<span class="gh">Out[36]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10f7eb468&gt;</span>
 
 <span class="gp">In [37]: </span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">                                                     Out[37]: [0, 0, 0, 0, 0, 1, 2, 3, 4, 4, 6, 8, 9, 12, 16]</span>
@@ -501,11 +501,11 @@ mapping the <code class="docutils literal"><span class="pre">list</span></code> 
 
 <span class="gp">In [40]: </span><span class="n">table</span>
 <span class="gh">Out[40]: </span><span class="go"></span>
-<span class="go">[&lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10ef3bf10&gt;,</span>
-<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10f0c1570&gt;,</span>
-<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10f0c1c50&gt;,</span>
-<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10f0c1eb8&gt;,</span>
-<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10f0c14c0&gt;]</span>
+<span class="go">[&lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10fb3dba0&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10fb3dc50&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10fb3db48&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10fb3d518&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10fb3d410&gt;]</span>
 
 <span class="gp">In [41]: </span><span class="n">mapped_table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">table</span><span class="p">))</span>
 
@@ -550,11 +550,11 @@ sequences simulaneously as follows.</p>
 tricky and return unexpected results depending on the order of execution.</p>
 </div>
 <div class="section" id="generator-functions">
-<h2>6.5.4. Generator Functions<a class="headerlink" href="#generator-functions" title="Permalink to this headline">¶</a></h2>
+<h2>7.7.4. Generator Functions<a class="headerlink" href="#generator-functions" title="Permalink to this headline">¶</a></h2>
 <p>A more robust method of creating generators is using the <code class="docutils literal"><span class="pre">yield</span></code> and/or
 <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statements in a function definition.</p>
 <div class="section" id="the-yield-statement">
-<h3>6.5.4.1. The <code class="docutils literal"><span class="pre">yield</span></code> statement<a class="headerlink" href="#the-yield-statement" title="Permalink to this headline">¶</a></h3>
+<h3>7.7.4.1. The <code class="docutils literal"><span class="pre">yield</span></code> statement<a class="headerlink" href="#the-yield-statement" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal"><span class="pre">yield</span></code> statement is used to yield the next value in the lazy sequence and
 tells Python that our function is really a generator.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -587,7 +587,7 @@ requires a call to <code class="docutils literal"><span class="pre">next</span><
 <span class="gp">In [54]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="gp">In [55]: </span><span class="n">y</span>
-<span class="gh">Out[55]: </span><span class="go">&lt;generator object g at 0x10f0c1b48&gt;</span>
+<span class="gh">Out[55]: </span><span class="go">&lt;generator object g at 0x10f8a03b8&gt;</span>
 
 <span class="gp">In [56]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="go">                                             Out[56]: 4</span>
@@ -638,7 +638,7 @@ exception.</p>
 </div>
 </div>
 <div class="section" id="the-yield-from-statement">
-<h3>6.5.4.2. The <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statement<a class="headerlink" href="#the-yield-from-statement" title="Permalink to this headline">¶</a></h3>
+<h3>7.7.4.2. The <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statement<a class="headerlink" href="#the-yield-from-statement" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes we want to yield values from some other sequence.  In this case, we
 can use the <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statement, which automates the process of iterating
 through the sequence, yielding one item at a time in a lazy fashion.</p>
@@ -650,7 +650,7 @@ through the sequence, yielding one item at a time in a lazy fashion.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [65]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 
 <span class="gp">In [66]: </span><span class="n">y</span>
-<span class="gh">Out[66]: </span><span class="go">&lt;generator object g at 0x10f0fa150&gt;</span>
+<span class="gh">Out[66]: </span><span class="go">&lt;generator object g at 0x10faa0d00&gt;</span>
 
 <span class="gp">In [67]: </span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="go">                                             Out[67]: generator</span>
@@ -699,7 +699,7 @@ generator in the next section.</p>
 </div>
 </div>
 <div class="section" id="coroutines">
-<h2>6.5.5. Coroutines<a class="headerlink" href="#coroutines" title="Permalink to this headline">¶</a></h2>
+<h2>7.7.5. Coroutines<a class="headerlink" href="#coroutines" title="Permalink to this headline">¶</a></h2>
 <p>Generators are a form of one-way lazy evaluation. Once created they only return
 items and can no longer receive values.  Python has another lazy structure that
 can be used to pass values back and forth in a lazy way: a <strong>coroutine</strong>.</p>
@@ -736,19 +736,19 @@ coroutine comes with a method <code class="docutils literal"><span class="pre">s
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 6.4. Other Examples of Higher Order Functions' data-toggle="tooltip">
-    <a href="OtherExamplesOfHigherOrderFunctions.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 7.6. Common Patterns for Processing Sequences with Dictionaries' data-toggle="tooltip">
+    <a href="CommonPatternsForProcessingSequencesWithDictionaries.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="OtherExamplesOfHigherOrderFunctions.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="CommonPatternsForProcessingSequencesWithDictionaries.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 6.6. Recursive Generator Functions' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 7.8. Recursive Generator Functions' data-toggle="tooltip" >
     <a href="RecursiveGeneratorFunctions.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="RecursiveGeneratorFunctions.html" >Next Section - 6.6. Recursive Generator Functions</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="RecursiveGeneratorFunctions.html" >Next Section - 7.8. Recursive Generator Functions</a>
 
 <script type="text/javascript">
 

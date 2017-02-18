@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>7.6. Computational Complexity &mdash; Runestone Interactive Overview</title>
+    <title>6.4. Computational Complexity &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="7. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
-    <link rel="next" title="7.7. Dictionaries and Function Calls" href="DictionariesAndFunctionCalls.html" />
-    <link rel="prev" title="7.5. Applications of Dictionaries and Sets" href="Applications.html" />
+    <link rel="up" title="6. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
+    <link rel="next" title="6.5. Exercises" href="Exercises.html" />
+    <link rel="prev" title="6.3. Dictionary and Set Comprehensions" href="Comprehensions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,12 +263,7 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">7.6. Computational Complexity</a><ul>
-<li><a class="reference internal" href="#the-computational-complexity-of-accessing-a-value">7.6.1. The Computational Complexity of Accessing a Value</a></li>
-<li><a class="reference internal" href="#comparing-dictionary-lookup-to-list-find">7.6.2. Comparing Dictionary Lookup to List <cite>find</cite></a></li>
-<li><a class="reference internal" href="#comparing-dictionary-lookup-to-list-indexing">7.6.3. Comparing Dictionary Lookup to List Indexing</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">6.4. Computational Complexity</a></li>
 </ul>
 </ul>
 </li>
@@ -276,14 +271,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 7.5. Applications of Dictionaries and Sets" data-toggle="tooltip">
-    <a href="Applications.html" >
+  <li id="relations-prev" title="Previous Chapter - 6.3. Dictionary and Set Comprehensions" data-toggle="tooltip">
+    <a href="Comprehensions.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 7.7. Dictionaries and Function Calls' data-toggle="tooltip" >
-    <a href="DictionariesAndFunctionCalls.html" >
+  <li id="relations-next" title='Next Chapter - 6.5. Exercises' data-toggle="tooltip" >
+    <a href="Exercises.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -314,37 +309,142 @@
 <div class="container" id="main-content">
   
   <div class="section" id="computational-complexity">
-<h1>7.6. Computational Complexity<a class="headerlink" href="#computational-complexity" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="the-computational-complexity-of-accessing-a-value">
-<h2>7.6.1. The Computational Complexity of Accessing a Value<a class="headerlink" href="#the-computational-complexity-of-accessing-a-value" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<h1>6.4. Computational Complexity<a class="headerlink" href="#computational-complexity" title="Permalink to this headline">¶</a></h1>
+<p>Dictionaries are designed to efficiently look up the value for a given key.
+This is accomplished by storing the data in a sorted, balanced binary tree.
+First, the <code class="docutils literal"><span class="pre">hash</span></code> value of a key is determined using the <code class="docutils literal"><span class="pre">hash</span></code> function.
+This function assigns a unique integer to each key and is used to sort the keys.
+The keys are then stored in the tree using a clever sorting scheme.</p>
+<p>To mock up this process, let&#8217;s start with some keys and values that we want to
+store for fast look-up.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">]</span>
+
+<span class="gp">In [2]: </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</pre></div>
 </div>
-<div class="section" id="comparing-dictionary-lookup-to-list-find">
-<h2>7.6.2. Comparing Dictionary Lookup to List <cite>find</cite><a class="headerlink" href="#comparing-dictionary-lookup-to-list-find" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<p>Next, we find the associated hash values.  We want to associate these three
+values (hash, key, value), which is easy to do with <code class="docutils literal"><span class="pre">zip</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">key_hashes</span> <span class="o">=</span> <span class="p">[</span><span class="nb">hash</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
+
+<span class="gp">In [4]: </span><span class="n">key_hashes</span>
+<span class="gh">Out[4]: </span><span class="go"></span>
+<span class="go">[-8660787661029198084,</span>
+<span class="go"> 2812223855912570350,</span>
+<span class="go"> 6178014525531841099,</span>
+<span class="go"> -8153572840312992588,</span>
+<span class="go"> 5250639702666709886,</span>
+<span class="go"> 6313987628407863997,</span>
+<span class="go"> -5178196229341398776]</span>
+
+<span class="gp">In [5]: </span><span class="n">triples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">key_hashes</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
+
+<span class="gp">In [6]: </span><span class="n">triples</span>
+<span class="gh">Out[6]: </span><span class="go"></span>
+<span class="go">[(-8660787661029198084, &#39;a&#39;, 1),</span>
+<span class="go"> (2812223855912570350, &#39;b&#39;, 2),</span>
+<span class="go"> (6178014525531841099, &#39;c&#39;, 3),</span>
+<span class="go"> (-8153572840312992588, &#39;d&#39;, 4),</span>
+<span class="go"> (5250639702666709886, &#39;e&#39;, 5),</span>
+<span class="go"> (6313987628407863997, &#39;m&#39;, 6),</span>
+<span class="go"> (-5178196229341398776, &#39;n&#39;, 7)]</span>
+</pre></div>
 </div>
-<div class="section" id="comparing-dictionary-lookup-to-list-indexing">
-<h2>7.6.3. Comparing Dictionary Lookup to List Indexing<a class="headerlink" href="#comparing-dictionary-lookup-to-list-indexing" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<p>Before we can efficiently put these value in a search tree, we must sort these
+<code class="docutils literal"><span class="pre">triples</span></code> by the hash values.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
+
+<span class="gp">In [8]: </span><span class="n">get_hash</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">triple</span><span class="p">:</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">triple</span><span class="p">)</span>
+
+<span class="gp">In [9]: </span><span class="n">sorted_triples</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">triples</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">get_hash</span><span class="p">)</span>
+
+<span class="gp">In [10]: </span><span class="n">sorted_triples</span>
+<span class="gh">Out[10]: </span><span class="go"></span>
+<span class="go">[(-8660787661029198084, &#39;a&#39;, 1),</span>
+<span class="go"> (-8153572840312992588, &#39;d&#39;, 4),</span>
+<span class="go"> (-5178196229341398776, &#39;n&#39;, 7),</span>
+<span class="go"> (2812223855912570350, &#39;b&#39;, 2),</span>
+<span class="go"> (5250639702666709886, &#39;e&#39;, 5),</span>
+<span class="go"> (6178014525531841099, &#39;c&#39;, 3),</span>
+<span class="go"> (6313987628407863997, &#39;m&#39;, 6)]</span>
+</pre></div>
+</div>
+<p>Now we place the triples in a search tree with the following strategy:</p>
+<ul class="simple">
+<li>All triples below and to the left the current node have a smaller hash than
+the current node.</li>
+<li>All triples below and to the right the current node have a larger hash than
+the current node.</li>
+</ul>
+<p>The following figure illustrates the tree for this example (with the has values
+shortened to save space).</p>
+<div class="figure">
+<img alt="Binary Search Tree" src="../_images/binary_search_tree.png" />
+<div class="legend">
+This diagram illustrates a balanced binary search tree based on the hash value
+of a key.  The tree has the property that, for every node, all nodes below and to
+the left have smaller hash values and all nodes below and to the right have
+larger hash values.  Note that the depth of a balanced binary search tree with
+<span class="math">\(n\)</span> nodes will be approximately <span class="math">\(\log_2(n)\)</span>.</div>
+</div>
+<p>If, after constructing the tree, we needed to look up the value for <code class="docutils literal"><span class="pre">'b'</span></code>.  We
+would first compute the hash value for <code class="docutils literal"><span class="pre">'b'</span></code> and then start our search at the
+top of the tree.  The hash value for <code class="docutils literal"><span class="pre">'b'</span></code> is larger than that of <code class="docutils literal"><span class="pre">'c''</span></code>, so
+we proceed down the tree to the right.  Next, the hash value of <code class="docutils literal"><span class="pre">'b'</span></code> is
+compared to that of <code class="docutils literal"><span class="pre">'m'</span></code>.  This time the has value of <code class="docutils literal"><span class="pre">'b'</span></code> is smaller, so
+we head down the tree to the left.  Finally, we compare the hash value of
+<code class="docutils literal"><span class="pre">'b'</span></code> to the hash value of the current node and find that it is the same.
+Consequently, the value on this node, 2, is returned.  This search process is
+illustrated in the next figure.</p>
+<div class="figure">
+<img alt="Searching for 'b'" src="../_images/search_1.png" />
+<div class="legend">
+When searching the tree, the hash value of <code class="docutils literal"><span class="pre">'b'</span></code> is compared to the hash
+value of each node, starting at the top of the tree.  In this case, our hash
+value is larger than the first (head right), smaller than the second (head
+left) and the same as the third (return the value).</div>
+</div>
+<p>Another example of a search, this time for <code class="docutils literal"><span class="pre">'n'</span></code> is pictured below.  This time
+the hash value was smaller than the top node (head left) and the same as the
+second node (return the value).</p>
+<div class="figure">
+<img alt="Searching for 'b'" src="../_images/search_2.png" />
+<div class="legend">
+This diagram illustrates the search for <code class="docutils literal"><span class="pre">'n'</span></code>.  In this case, the
+hash value of <code class="docutils literal"><span class="pre">'n'</span></code> is smaller than that of <code class="docutils literal"><span class="pre">'c'</span></code> (head left) and the
+same as the hash on the second node.  Consequently the the value of the
+second node, 7, is returned.</div>
+</div>
+<p>Because the tree depth for a balanced tree is approximately <span class="math">\(\log_2(n)\)</span>
+for a tree containing <span class="math">\(n\)</span> values, the time complexity of looking up values
+in a dictionary has time complexity of <span class="math">\(O(\log_2(n)\)</span>.  The time complexity
+of checking for the presence of a key in a dictionary or an item in a set is
+also <span class="math">\(O(\log_2(n)\)</span>.</p>
+<p>If you compare these complexities to that of a look-up for a list or tuple,
+which was <span class="math">\(O(n)\)</span>, we see that look-ups are much more efficient for sets
+and dictionaries!</p>
+<div class="admonition-the-correct-data-structure-for-look-ups-and-checking-membership admonition">
+<p class="first admonition-title">The Correct Data Structure for Look-Ups and Checking Membership</p>
+<p class="last">You should always use a dictionary to map keys to values and
+a set to check if a value is <code class="docutils literal"><span class="pre">in</span></code> some group or collection.</p>
 </div>
 </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 7.5. Applications of Dictionaries and Sets' data-toggle="tooltip">
-    <a href="Applications.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 6.3. Dictionary and Set Comprehensions' data-toggle="tooltip">
+    <a href="Comprehensions.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="Applications.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="Comprehensions.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 7.7. Dictionaries and Function Calls' data-toggle="tooltip" >
-    <a href="DictionariesAndFunctionCalls.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 6.5. Exercises' data-toggle="tooltip" >
+    <a href="Exercises.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="DictionariesAndFunctionCalls.html" >Next Section - 7.7. Dictionaries and Function Calls</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="Exercises.html" >Next Section - 6.5. Exercises</a>
 
 <script type="text/javascript">
 

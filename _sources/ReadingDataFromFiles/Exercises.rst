@@ -70,7 +70,7 @@ Exercises
 
 
             Using the text file ``studentdata.txt`` (shown in exercise 1) write
-            a program that creates a new data table that contains the students
+            a program that creates a new data table that contains the students'
             names along with the minimum and maximum score for each student.
 
 
@@ -132,7 +132,7 @@ Exercises
     **AllstarFull.csv** from `seanlahman.com <http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip>`_
     .
 
-    write a program that computes the average salary of all players in the all
+    Write a program that computes the average salary of all players in the all
     star game in 2010.
 
 .. question:: files_ex_7

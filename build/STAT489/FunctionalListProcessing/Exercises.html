@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="6. Functional List Processing" href="toctree.html" />
-    <link rel="next" title="7. Associative Data Structures - Dictionaries and Sets" href="../AssociativeDataStructures_DictionariesAndSets/toctree.html" />
-    <link rel="prev" title="6.6. Recursive Generator Functions" href="RecursiveGeneratorFunctions.html" />
+    <link rel="up" title="7. Functional List Processing" href="toctree.html" />
+    <link rel="next" title="Lab 1 - Closures and Scope" href="../Labs/ClosuresAndScope.html" />
+    <link rel="prev" title="7.8. Recursive Generator Functions" href="RecursiveGeneratorFunctions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -270,14 +270,14 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 6.6. Recursive Generator Functions" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 7.8. Recursive Generator Functions" data-toggle="tooltip">
     <a href="RecursiveGeneratorFunctions.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 7. Associative Data Structures - Dictionaries and Sets' data-toggle="tooltip" >
-    <a href="../AssociativeDataStructures_DictionariesAndSets/toctree.html" >
+  <li id="relations-next" title='Next Chapter - Lab 1 - Closures and Scope' data-toggle="tooltip" >
+    <a href="../Labs/ClosuresAndScope.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -308,22 +308,536 @@
 <div class="container" id="main-content">
   
   
+    <div data-component="question" class="full-width container question" id="dict_ex_1" >
+    <ol start=5 class=arabic><li class="alert alert-warning">
+
+    <div id='q1' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
+<p>Write a program that allows the user to enter a string.  It then prints a
+table of the letters of the alphabet in alphabetical order which occur in
+the string together with the number of times each letter occurs. Case should
+be ignored. A sample run of the program might look this this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Please enter a sentence: ThiS is String with Upper and lower case Letters.
+a  2
+c  1
+d  1
+e  5
+g  1
+h  2
+i  4
+l  2
+n  2
+o  1
+p  2
+r  4
+s  5
+t  5
+u  1
+w  2
+$
+</pre></div>
+</div>
+
+<textarea data-component="activecode" id=ex_11_01 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
+
+
+</textarea>
+</div><div data-component="tab" data-tabname="Answer" >
+
+<textarea data-component="activecode" id=q1_answer data-lang="python"    data-timelimit=25000  data-codelens="true" data-audio=''     >
+x = input("Enter a sentence")
+
+x = x.lower()   # convert to all lowercase
+
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+letter_count = {} # empty dictionary
+for char in x:
+    if char in alphabet: # ignore any punctuation, numbers, etc
+        if char in letter_count:
+            letter_count[char] = letter_count[char] + 1
+        else:
+            letter_count[char] = 1
+
+keys = letter_count.keys()
+keys.sort()
+for char in keys:
+    print(char, letter_count[char])
+</textarea>
+</div><div data-component="tab" data-tabname="Discussion" >
+<script type="text/javascript">
+    function disqus_de4f21e35d3a41a4a3ac4ac888f78d1a_disqus(source) { 
+        if (window.DISQUS) {
+
+            $('#disqus_thread').insertAfter(source); //put the DIV for the Disqus box after the link
+
+            //if Disqus exists, call it's reset method with new parameters
+            DISQUS.reset({
+                reload: true,
+                config: function () {
+                    this.page.identifier = 'disqus_de4f21e35d3a41a4a3ac4ac888f78d1a_' + eBookConfig.course;
+                    this.page.url = 'http://disqus_de4f21e35d3a41a4a3ac4ac888f78d1a_'+eBookConfig.course+'.interactivepython.com/#!';
+                }
+            });
+
+        } else {
+            //insert a wrapper in HTML after the relevant "show comments" link
+            $('<div id="disqus_thread"></div>').insertAfter(source);
+
+            // set Disqus required vars
+            disqus_shortname = 'interactivepython';    
+            disqus_identifier = 'disqus_de4f21e35d3a41a4a3ac4ac888f78d1a_' + eBookConfig.course;
+            disqus_url = 'http://disqus_de4f21e35d3a41a4a3ac4ac888f78d1a_'+eBookConfig.course+'.interactivepython.com/#!';
+
+            //append the Disqus embed script to HTML
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            $('head').append(dsq);
+
+        }
+    }
+</script>
+
+<a href="#disqus_thread" class='disqus_thread_link' data-disqus-identifier="disqus_de4f21e35d3a41a4a3ac4ac888f78d1a" onclick="disqus_de4f21e35d3a41a4a3ac4ac888f78d1a_disqus(this);">Show Comments</a>
+<script type='text/javascript'>
+    $("a[data-disqus-identifier='disqus_de4f21e35d3a41a4a3ac4ac888f78d1a']").attr('data-disqus-identifier', 'disqus_de4f21e35d3a41a4a3ac4ac888f78d1a_' + eBookConfig.course);
+</script>
+</div>
+    </div>
+
+
+    </li></ol>
+    </div>
+    
+    <div data-component="question" class="full-width container question" id="dict_ex_3" >
+    <ol start=6 class=arabic><li class="alert alert-warning">
+
+    <div id='q3' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
+<p>Write a program called <code class="docutils literal"><span class="pre">alice_words.py</span></code> that creates a text file named
+<code class="docutils literal"><span class="pre">alice_words.txt</span></code> containing an alphabetical listing of all the words, and the
+number of times each occurs, in the text version of <cite>Alice&#8217;s Adventures in Wonderland</cite>.
+(You can obtain a free plain text version of the book, along with many others, from
+<a class="reference external" href="http://www.gutenberg.org">http://www.gutenberg.org</a>.) The first 10 lines of your output file should look
+something like this</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Word</th>
+<th class="head">Count</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>a</td>
+<td>631</td>
+</tr>
+<tr class="row-odd"><td>a-piece</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>abide</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>able</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>about</td>
+<td>94</td>
+</tr>
+<tr class="row-odd"><td>above</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>absence</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>absurd</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>How many times does the word, <code class="docutils literal"><span class="pre">alice</span></code>, occur in the book?  If you are writing this
+in the activecode window simply print out the results rather than write them to a file.</p>
+
+<textarea data-component="activecode" id=ex_11_02 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
+
+
+</textarea>
+</div><div data-component="tab" data-tabname="Answer" >
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;alice.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+
+        <span class="c1"># remove punctuation</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># ignore case</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="c1"># ignore numbers</span>
+        <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">count</span><span class="p">:</span>
+                <span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">keys</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">keys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="c1"># save the word count analysis to a file</span>
+<span class="n">out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;alice_words.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">word</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]))</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;The word &#39;alice&#39; appears &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">[</span><span class="s1">&#39;alice&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; times in the book.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div data-component="tab" data-tabname="Discussion" >
+<script type="text/javascript">
+    function disqus_4f2d7860fc3143339c9c6a533c07b62d_disqus(source) { 
+        if (window.DISQUS) {
+
+            $('#disqus_thread').insertAfter(source); //put the DIV for the Disqus box after the link
+
+            //if Disqus exists, call it's reset method with new parameters
+            DISQUS.reset({
+                reload: true,
+                config: function () {
+                    this.page.identifier = 'disqus_4f2d7860fc3143339c9c6a533c07b62d_' + eBookConfig.course;
+                    this.page.url = 'http://disqus_4f2d7860fc3143339c9c6a533c07b62d_'+eBookConfig.course+'.interactivepython.com/#!';
+                }
+            });
+
+        } else {
+            //insert a wrapper in HTML after the relevant "show comments" link
+            $('<div id="disqus_thread"></div>').insertAfter(source);
+
+            // set Disqus required vars
+            disqus_shortname = 'interactivepython';    
+            disqus_identifier = 'disqus_4f2d7860fc3143339c9c6a533c07b62d_' + eBookConfig.course;
+            disqus_url = 'http://disqus_4f2d7860fc3143339c9c6a533c07b62d_'+eBookConfig.course+'.interactivepython.com/#!';
+
+            //append the Disqus embed script to HTML
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            $('head').append(dsq);
+
+        }
+    }
+</script>
+
+<a href="#disqus_thread" class='disqus_thread_link' data-disqus-identifier="disqus_4f2d7860fc3143339c9c6a533c07b62d" onclick="disqus_4f2d7860fc3143339c9c6a533c07b62d_disqus(this);">Show Comments</a>
+<script type='text/javascript'>
+    $("a[data-disqus-identifier='disqus_4f2d7860fc3143339c9c6a533c07b62d']").attr('data-disqus-identifier', 'disqus_4f2d7860fc3143339c9c6a533c07b62d_' + eBookConfig.course);
+</script>
+</div>
+    </div>
+
+
+    </li></ol>
+    </div>
+    
+    <div data-component="question" class="full-width container question" id="dict_ex_3" >
+    <ol start=7 class=arabic><li class="alert alert-warning">
+
+    <div id='q3' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
+<p>Write a program called <code class="docutils literal"><span class="pre">alice_words.py</span></code> that creates a text file named
+<code class="docutils literal"><span class="pre">alice_words.txt</span></code> containing an alphabetical listing of all the words, and the
+number of times each occurs, in the text version of <cite>Alice&#8217;s Adventures in Wonderland</cite>.
+(You can obtain a free plain text version of the book, along with many others, from
+<a class="reference external" href="http://www.gutenberg.org">http://www.gutenberg.org</a>.) The first 10 lines of your output file should look
+something like this</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Word</th>
+<th class="head">Count</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>a</td>
+<td>631</td>
+</tr>
+<tr class="row-odd"><td>a-piece</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>abide</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>able</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>about</td>
+<td>94</td>
+</tr>
+<tr class="row-odd"><td>above</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>absence</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>absurd</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>How many times does the word, <code class="docutils literal"><span class="pre">alice</span></code>, occur in the book?  If you are writing this
+in the activecode window simply print out the results rather than write them to a file.</p>
+
+<textarea data-component="activecode" id=ex_11_02 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
+
+
+</textarea>
+</div><div data-component="tab" data-tabname="Answer" >
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;alice.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+
+        <span class="c1"># remove punctuation</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># ignore case</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="c1"># ignore numbers</span>
+        <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">count</span><span class="p">:</span>
+                <span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">keys</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">keys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="c1"># save the word count analysis to a file</span>
+<span class="n">out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;alice_words.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">word</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]))</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;The word &#39;alice&#39; appears &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">[</span><span class="s1">&#39;alice&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; times in the book.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div data-component="tab" data-tabname="Discussion" >
+<script type="text/javascript">
+    function disqus_4f2d7860fc3143339c9c6a533c07b62d_disqus(source) { 
+        if (window.DISQUS) {
+
+            $('#disqus_thread').insertAfter(source); //put the DIV for the Disqus box after the link
+
+            //if Disqus exists, call it's reset method with new parameters
+            DISQUS.reset({
+                reload: true,
+                config: function () {
+                    this.page.identifier = 'disqus_4f2d7860fc3143339c9c6a533c07b62d_' + eBookConfig.course;
+                    this.page.url = 'http://disqus_4f2d7860fc3143339c9c6a533c07b62d_'+eBookConfig.course+'.interactivepython.com/#!';
+                }
+            });
+
+        } else {
+            //insert a wrapper in HTML after the relevant "show comments" link
+            $('<div id="disqus_thread"></div>').insertAfter(source);
+
+            // set Disqus required vars
+            disqus_shortname = 'interactivepython';    
+            disqus_identifier = 'disqus_4f2d7860fc3143339c9c6a533c07b62d_' + eBookConfig.course;
+            disqus_url = 'http://disqus_4f2d7860fc3143339c9c6a533c07b62d_'+eBookConfig.course+'.interactivepython.com/#!';
+
+            //append the Disqus embed script to HTML
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            $('head').append(dsq);
+
+        }
+    }
+</script>
+
+<a href="#disqus_thread" class='disqus_thread_link' data-disqus-identifier="disqus_4f2d7860fc3143339c9c6a533c07b62d" onclick="disqus_4f2d7860fc3143339c9c6a533c07b62d_disqus(this);">Show Comments</a>
+<script type='text/javascript'>
+    $("a[data-disqus-identifier='disqus_4f2d7860fc3143339c9c6a533c07b62d']").attr('data-disqus-identifier', 'disqus_4f2d7860fc3143339c9c6a533c07b62d_' + eBookConfig.course);
+</script>
+</div>
+    </div>
+
+
+    </li></ol>
+    </div>
+    
+    <div data-component="question" class="full-width container question" id="dict_ex_3" >
+    <ol start=8 class=arabic><li class="alert alert-warning">
+
+    <div id='q3' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
+<p>Write a program called <code class="docutils literal"><span class="pre">alice_words.py</span></code> that creates a text file named
+<code class="docutils literal"><span class="pre">alice_words.txt</span></code> containing an alphabetical listing of all the words, and the
+number of times each occurs, in the text version of <cite>Alice&#8217;s Adventures in Wonderland</cite>.
+(You can obtain a free plain text version of the book, along with many others, from
+<a class="reference external" href="http://www.gutenberg.org">http://www.gutenberg.org</a>.) The first 10 lines of your output file should look
+something like this</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Word</th>
+<th class="head">Count</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>a</td>
+<td>631</td>
+</tr>
+<tr class="row-odd"><td>a-piece</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>abide</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>able</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>about</td>
+<td>94</td>
+</tr>
+<tr class="row-odd"><td>above</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>absence</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>absurd</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>How many times does the word, <code class="docutils literal"><span class="pre">alice</span></code>, occur in the book?  If you are writing this
+in the activecode window simply print out the results rather than write them to a file.</p>
+
+<textarea data-component="activecode" id=ex_11_02 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
+
+
+</textarea>
+</div><div data-component="tab" data-tabname="Answer" >
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;alice.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+
+        <span class="c1"># remove punctuation</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># ignore case</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="c1"># ignore numbers</span>
+        <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">count</span><span class="p">:</span>
+                <span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">keys</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">keys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="c1"># save the word count analysis to a file</span>
+<span class="n">out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;alice_words.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">word</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">[</span><span class="n">word</span><span class="p">]))</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;The word &#39;alice&#39; appears &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">[</span><span class="s1">&#39;alice&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; times in the book.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div data-component="tab" data-tabname="Discussion" >
+<script type="text/javascript">
+    function disqus_4f2d7860fc3143339c9c6a533c07b62d_disqus(source) { 
+        if (window.DISQUS) {
+
+            $('#disqus_thread').insertAfter(source); //put the DIV for the Disqus box after the link
+
+            //if Disqus exists, call it's reset method with new parameters
+            DISQUS.reset({
+                reload: true,
+                config: function () {
+                    this.page.identifier = 'disqus_4f2d7860fc3143339c9c6a533c07b62d_' + eBookConfig.course;
+                    this.page.url = 'http://disqus_4f2d7860fc3143339c9c6a533c07b62d_'+eBookConfig.course+'.interactivepython.com/#!';
+                }
+            });
+
+        } else {
+            //insert a wrapper in HTML after the relevant "show comments" link
+            $('<div id="disqus_thread"></div>').insertAfter(source);
+
+            // set Disqus required vars
+            disqus_shortname = 'interactivepython';    
+            disqus_identifier = 'disqus_4f2d7860fc3143339c9c6a533c07b62d_' + eBookConfig.course;
+            disqus_url = 'http://disqus_4f2d7860fc3143339c9c6a533c07b62d_'+eBookConfig.course+'.interactivepython.com/#!';
+
+            //append the Disqus embed script to HTML
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            $('head').append(dsq);
+
+        }
+    }
+</script>
+
+<a href="#disqus_thread" class='disqus_thread_link' data-disqus-identifier="disqus_4f2d7860fc3143339c9c6a533c07b62d" onclick="disqus_4f2d7860fc3143339c9c6a533c07b62d_disqus(this);">Show Comments</a>
+<script type='text/javascript'>
+    $("a[data-disqus-identifier='disqus_4f2d7860fc3143339c9c6a533c07b62d']").attr('data-disqus-identifier', 'disqus_4f2d7860fc3143339c9c6a533c07b62d_' + eBookConfig.course);
+</script>
+</div>
+    </div>
+
+
+    </li></ol>
+    </div>
+    
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 6.6. Recursive Generator Functions' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 7.8. Recursive Generator Functions' data-toggle="tooltip">
     <a href="RecursiveGeneratorFunctions.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="RecursiveGeneratorFunctions.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 7. Associative Data Structures - Dictionaries and Sets' data-toggle="tooltip" >
-    <a href="../AssociativeDataStructures_DictionariesAndSets/toctree.html" >
+  <li id="relations-next" class="navLink" title='Next Section - Lab 1 - Closures and Scope' data-toggle="tooltip" >
+    <a href="../Labs/ClosuresAndScope.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="../AssociativeDataStructures_DictionariesAndSets/toctree.html" >Next Section - 7. Associative Data Structures - Dictionaries and Sets</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="../Labs/ClosuresAndScope.html" >Next Section - Lab 1 - Closures and Scope</a>
 
 <script type="text/javascript">
 
