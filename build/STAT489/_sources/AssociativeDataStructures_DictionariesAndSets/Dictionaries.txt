@@ -66,7 +66,7 @@ operator (``name[key]``) is applying the same ``get`` function to a dictionary.
     get('two', eng2sp)
 
 Using the ``get`` function has a couple of advantages.  First, we can use a
-common api for getting values from both sequences and lists.
+common API for getting values from both sequences and lists.
 
 .. ipython:: python
 
@@ -75,7 +75,7 @@ common api for getting values from both sequences and lists.
     D = {1:"a", 2:"b"}
     get(1, D)
 
-Second, ``get`` allows us to get the values for a number of keys simulaneously.
+Second, ``get`` allows us to get the values for a number of keys simultaneously.
 
 .. ipython:: python
 
@@ -115,15 +115,15 @@ dictionary.
    :answer_a: 12
    :answer_b: 6
    :answer_c: 23
-   :answer_d: Error, you cannot use the index operator with a dictionary.
+   :answer_d: error, you cannot use the index operator with a dictionary.
    :correct: b
    :feedback_a: 12 is associated with the key cat.
-   :feedback_b: Yes, 6 is associated with the key dog.
+   :feedback_b: yes, 6 is associated with the key dog.
    :feedback_c: 23 is associated with the key elephant.
-   :feedback_d: The [ ] operator, when used with a dictionary, will look up a value based on its key.
+   :feedback_d: the [ ] operator, when used with a dictionary, will look up a value based on its key.
    
    
-   What is printed by the following statements?
+   what is printed by the following statements?
    
    .. sourcecode:: python
 
@@ -131,8 +131,8 @@ dictionary.
      mydict = {"cat":12, "dog":6, "elephant":23}
      print(get("dog",mydict))
 
-Why Dictionary Keys Must Be Immutable
--------------------------------------
+Dictionary Keys Must Be Immutable
+---------------------------------
 
 The dictionary uses the built-in function ``hash`` to quickly look-up the value
 for a given key (discussed in detail in :ref:`_dict_complexity`).  A requirement
@@ -146,13 +146,13 @@ of this process is that all keys be unique.
     hash(2.5)
     hash((1,2))
 
-If we allowed mutable object to be
-keys, how would we handle changes that confuse the ``hash`` function?  For
-example, if ``[1]`` was a key and this value was mutated by aappending anothe
-value, say ``2``, the new list ``[1, 2]`` would have a different hash value.
-This could lead to the value being lost or two values in the dictionary having
-the same hash.  Consequently, mutable items are not hashable, meaning that
-``hash`` will throw an exception when given a mutable object.
+If we allowed mutable object to be keys, how would we handle changes that
+confuse the ``hash`` function?  For example, if ``[1]`` was a key and this value
+was mutated by appending another value, say ``2``, the new list ``[1, 2]`` would
+have a different hash value.  This could lead to the value being lost or two
+values in the dictionary having the same hash.  Consequently, mutable items are
+not hashable, meaning that ``hash`` will throw an exception when given a mutable
+object.
 
 .. ipython:: python
 
@@ -160,7 +160,7 @@ the same hash.  Consequently, mutable items are not hashable, meaning that
     hash({1:'z'})
 
 For this reason, all keys in a dictionary much be *immutable object*.  Examples
-of eligable values are strings, number or tuples.  
+of eligible values are strings, number or tuples.  
 
 .. ipython:: python
 
@@ -179,8 +179,22 @@ Note that the error message is pointing out that a list and dictionary are not
 hashable (can't be converted to a number using ``hash``).  This is due to the
 fact that they are both mutable.
 
-Dictionary Operations
----------------------
+**Check your understanding**
+
+.. mchoice:: immutable_keys_1
+    :answer_a: assoc({}, (1, 2), 0)
+    :answer_b: assoc({}, [1, 2], 0)
+    :answer_c: assoc({}, {1:"one"}, 0)
+    :correct: a
+    :feedback_a: Tuples are immutable and work as dictionary keys.
+    :feedback_b: Lists are mutable and cannot be used as a dictionary key.  This call will cause an exception.
+    :feedback_c: Dictionaries are mutable and cannot be used as a dictionary key.  This line will cause an exception.
+
+    Which of the following calls to assoc WILL NOT cause an exception?
+
+
+``assoc`` and ``disoc``
+-----------------------
 
 
 Dictionaries are mutable. As mentioned earlier, the functional style of
@@ -204,7 +218,7 @@ dictionary.
     new_inventory
     inventory is new_inventory
 
-Similarily, a new shipment of 200 bananas arriving could be handled like this.
+Similarly, a new shipment of 200 bananas arriving could be handled like this.
 
 .. ipython:: python
 

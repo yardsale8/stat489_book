@@ -17,7 +17,7 @@ The dictionary comprehension uses the following syntax.
 Notice that the dictionary comprehension is similar to a list
 comprehension in that it has a ``for`` sequence expression and an optional
 ``if`` filter.  This comprehension is delimited by braces (``{}``) and
-distiguished by the ``KEY:VAL`` key-value pair in the operation expression.
+distinguished by the ``KEY:VAL`` key-value pair in the operation expression.
 
 For example, we could construct a dictionary that maps integers to their square
 root as follows.
@@ -39,7 +39,7 @@ The Set Comprehension
 ---------------------
 
 The set comprehension looks very similar to a dictionary comprehension, but is
-distiguished by only having a value in the operation expression.
+distinguished by only having a value in the operation expression.
 
 .. sourcecode:: python
 
@@ -48,9 +48,77 @@ distiguished by only having a value in the operation expression.
 This comprehension is useful for creating a set of unique values from some
 sequence of values.
 
+**Check your understanding**
+
 .. ipython:: python
 
     from random import randint
     die_rolls = lambda n: [randint(1,6) for i in range(n)]
     unique_rolls = {roll for roll in die_rolls(5)}
     unique_rolls
+
+.. mchoice:: identify_dictionary_comprehension_1
+    :answer_a: Set comprehension
+    :answer_b: List comprehension
+    :answer_c: Dictionary comprehension
+    :correct: c
+    :feedback_a: A set comprehension needs one value in the operation expression, not a key-value pair.
+    :feedback_b: A list comprehension is delimited by brackets ('[',']') not braces ('{', '}').
+    :feedback_c: The dictionary comprehension can be identified by the surrounding braces and the key-value pair in the operation expression.
+
+    Which type of comprehension is given below?
+
+    .. sourcecode:: python
+
+        {w:i for i, w in enumerate(words)}
+
+
+.. mchoice:: identify_set_comprehension_1
+    :answer_a: Set comprehension
+    :answer_b: List comprehension
+    :answer_c: Dictionary comprehension
+    :correct: a
+    :feedback_a: The set comprehension can be identified by the surrounding braces and single expression in the operation expression.
+    :feedback_b: The dictionary comprehension needs a key-value pair in the operation expression.
+    :feedback_c: A list comprehension is delimited by brackets ('[',']') not braces ('{', '}').
+
+    Which type of comprehension is given below?
+
+    .. sourcecode:: python
+
+        {w for i, w in enumerate(words)}
+
+.. mchoice:: set_comp_count_1
+    :answer_a: 5
+    :answer_b: 6
+    :answer_c: 9
+    :correct: a
+    :feedback_a: The word "fear" will only be counted once and all words containing a 't' will be excluded.
+    :feedback_b: The word "fear" will only be counted once.  A value is either in a set or not in a set, there is no repetition of values.
+    :feedback_c: All words containing a 't' will be excluded.
+
+
+    What value will the following code return?
+
+    .. sourcecode:: python
+
+        fear = "the only thing we have to fear is fear itself" 
+        len({w for w in fear.split() if 't' not in w}) 
+
+.. mchoice:: dict_comp_1
+    :answer_a: 4
+    :answer_b: 8
+    :answer_c: Error: You can't have an expression in the value position of the key-value pair.
+    :correct: b
+    :feedback_a: This dictionary maps each word to twice the length of the word.
+    :feedback_b: This dictionary maps each word to twice the length of the word.
+    :feedback_c: Any expression can be used in the value position.  Expressions can also be used in the key position, but they must evaluate to an immutable hashable object.
+
+     
+    What value will the following code return?
+
+    .. sourcecode:: python
+
+        fear = "the only thing we have to fear is fear itself" 
+        d = {w:2*len(w) for w in fear.split()}
+        get('fear', d)
