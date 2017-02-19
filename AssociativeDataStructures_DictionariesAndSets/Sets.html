@@ -457,8 +457,8 @@ list of values.</p>
 <span class="go">             Out[7]: False</span>
 </pre></div>
 </div>
-<p>While this looks no different that performing the same operations on a list, set
-s have a much more efficient item look-up (as discussed in a later section).</p>
+<p>While this looks no different that performing the same operations on a list,
+sets have a much more efficient item look-up (as discussed in a later section).</p>
 <div class="admonition caution">
 <p class="first admonition-title">Caution</p>
 <p class="last">Similar to the requirement for dictionary keys, entries in a <code class="docutils literal"><span class="pre">set</span></code> must be
@@ -523,7 +523,7 @@ has worked with sets in mathematics.</p>
 <span class="go"> &#39;update&#39;]</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">intersection</span></code> method of a set can be used to contruct another set that
+<p>The <code class="docutils literal"><span class="pre">intersection</span></code> method of a set can be used to construct another set that
 contains all elements the two sets have in common.   The <code class="docutils literal"><span class="pre">union</span></code> method can be
 used to create the set of words that are one or both original sets.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">in_common</span> <span class="o">=</span> <span class="n">unique_words_zen</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">unique_words_getty</span><span class="p">)</span>
@@ -593,7 +593,61 @@ are in one set but not both.  (This is equivalent to
 <p class="last">Sets also have methods for mutation, such as <code class="docutils literal"><span class="pre">add</span></code>, <code class="docutils literal"><span class="pre">pop</span></code>, <code class="docutils literal"><span class="pre">remove</span></code> and
 <code class="docutils literal"><span class="pre">difference_update</span></code> that are not covered here.</p>
 </div>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="set_count_1">
+            <p>rec-5-130: What value will the following code return?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fear</span> <span class="o">=</span> <span class="s2">&quot;the only thing we have to fear is fear itself&quot;</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">fear</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">])</span>
+</pre></div>
 </div>
+
+            <li data-component="answer" data-correct id="set_count_1_opt_a">(A) 9</li><li data-component="feedback" id="set_count_1_opt_a">The word "fear" will only be counted once.</li>
+            
+            <li data-component="answer"  id="set_count_1_opt_b">(B) 10</li><li data-component="feedback" id="set_count_1_opt_b">The word "fear" will only be counted once.  A value is either in a set or not in a set, there is no repetition of values.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="set_intersection_1">
+            <p>rec-5-131: What value will the following code return?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fear</span> <span class="o">=</span> <span class="s2">&quot;the only thing we have to fear is fear itself&quot;</span>
+<span class="n">fear_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">fear</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+<span class="n">success</span> <span class="o">=</span> <span class="s2">&quot;success consists of going from failure to failure without loss of enthusiasm&quot;</span>
+<span class="n">success_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">success</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">success_words</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">fear_words</span><span class="p">))</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="set_intersection_1_opt_a">(A) 22</li><li data-component="feedback" id="set_intersection_1_opt_a">The intersection would represent the words that are in common.  This answer gives total number of words including repeats ('fear', 'of', 'failure').</li>
+            
+            <li data-component="answer"  id="set_intersection_1_opt_b">(B) 19</li><li data-component="feedback" id="set_intersection_1_opt_b">The intersection would represent the words that are in common.  This answer gives total number of unique words in the union of the sets.</li>
+            
+            <li data-component="answer" data-correct id="set_intersection_1_opt_c">(C) 0</li><li data-component="feedback" id="set_intersection_1_opt_c">These two quotes (by FDR and Winsten Churchhill, respectively) have no words in common.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="set_union_1">
+            <p>rec-5-132: What value will the following code return?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fear</span> <span class="o">=</span> <span class="s2">&quot;the only thing we have to fear is fear itself&quot;</span>
+<span class="n">fear_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">fear</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+<span class="n">success</span> <span class="o">=</span> <span class="s2">&quot;success consists of going from failure to failure without loss of enthusiasm&quot;</span>
+<span class="n">success_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">success</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">success_words</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">fear_words</span><span class="p">))</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="set_union_1_opt_a">(A) 22</li><li data-component="feedback" id="set_union_1_opt_a">The union would represent the words unique words in the combined strings.  This answer gives total number of words including repeats ('fear', 'of', 'failure').</li>
+            
+            <li data-component="answer" data-correct id="set_union_1_opt_b">(B) 19</li><li data-component="feedback" id="set_union_1_opt_b">This answer gives total number of unique words in the union of the sets.</li>
+            
+            <li data-component="answer"  id="set_union_1_opt_c">(C) 0</li><li data-component="feedback" id="set_union_1_opt_c">The union would represent the words unique words in the combined strings.  This answer given the size of the intersection, as these two quotes (by FDR and Winsten Churchhill, respectively) have no words in common.</li>
+            
+
+            </ul>
+            </div>
 <div class="section" id="set-operations">
 <h2>6.2.3. Set Operations<a class="headerlink" href="#set-operations" title="Permalink to this headline">¶</a></h2>
 <p>Python sets can also be compared with a number of operations that are equivalent

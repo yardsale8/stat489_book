@@ -265,8 +265,8 @@
   <ul class="dropdown-menu localtoc"><ul>
 <li><a class="reference internal" href="#">6.1. Dictionaries</a><ul>
 <li><a class="reference internal" href="#mapping-one-value-to-another-with-dictionaries">6.1.1. Mapping One Value to Another with Dictionaries</a></li>
-<li><a class="reference internal" href="#why-dictionary-keys-must-be-immutable">6.1.2. Why Dictionary Keys Must Be Immutable</a></li>
-<li><a class="reference internal" href="#dictionary-operations">6.1.3. Dictionary Operations</a></li>
+<li><a class="reference internal" href="#dictionary-keys-must-be-immutable">6.1.2. Dictionary Keys Must Be Immutable</a></li>
+<li><a class="reference internal" href="#assoc-and-disoc">6.1.3. <code class="docutils literal"><span class="pre">assoc</span></code> and <code class="docutils literal"><span class="pre">disoc</span></code></a></li>
 <li><a class="reference internal" href="#dictionary-methods">6.1.4. Dictionary Methods</a></li>
 <li><a class="reference internal" href="#immutable-and-persistent-dictionaries">6.1.5. Immutable and Persistent Dictionaries</a></li>
 </ul>
@@ -362,7 +362,7 @@ operator (<code class="docutils literal"><span class="pre">name[key]</span></cod
 </pre></div>
 </div>
 <p>Using the <code class="docutils literal"><span class="pre">get</span></code> function has a couple of advantages.  First, we can use a
-common api for getting values from both sequences and lists.</p>
+common API for getting values from both sequences and lists.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
 
 <span class="gp">In [8]: </span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
@@ -374,7 +374,7 @@ common api for getting values from both sequences and lists.</p>
 <span class="gh">Out[10]: </span><span class="go">&#39;a&#39;</span>
 </pre></div>
 </div>
-<p>Second, <code class="docutils literal"><span class="pre">get</span></code> allows us to get the values for a number of keys simulaneously.</p>
+<p>Second, <code class="docutils literal"><span class="pre">get</span></code> allows us to get the values for a number of keys simultaneously.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">get</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">L</span><span class="p">)</span>
 <span class="gh">Out[11]: </span><span class="go">(3, 2)</span>
 
@@ -402,7 +402,7 @@ dictionary.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_1_1">
-            Q-1: A dictionary is an unordered collection of key-value pairs.
+            rec-5-112: A dictionary is an unordered collection of key-value pairs.
             <li data-component="answer"  id="test_question11_1_1_opt_a">(A) False</li><li data-component="feedback" id="test_question11_1_1_opt_a">Dictionaries associate keys with values but there is no assumed order for the entries.</li>
             
             <li data-component="answer" data-correct id="test_question11_1_1_opt_b">(B) True</li><li data-component="feedback" id="test_question11_1_1_opt_b">Yes, dictionaries are associative collections meaning that they store key-value pairs.</li>
@@ -411,7 +411,7 @@ dictionary.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_1_2">
-            <p>Q-2: What is printed by the following statements?</p>
+            <p>rec-5-113: what is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
 <span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span><span class="p">,</span><span class="n">mydict</span><span class="p">))</span>
@@ -420,40 +420,40 @@ dictionary.</p>
 
             <li data-component="answer"  id="test_question11_1_2_opt_a">(A) 12</li><li data-component="feedback" id="test_question11_1_2_opt_a">12 is associated with the key cat.</li>
             
-            <li data-component="answer" data-correct id="test_question11_1_2_opt_b">(B) 6</li><li data-component="feedback" id="test_question11_1_2_opt_b">Yes, 6 is associated with the key dog.</li>
+            <li data-component="answer" data-correct id="test_question11_1_2_opt_b">(B) 6</li><li data-component="feedback" id="test_question11_1_2_opt_b">yes, 6 is associated with the key dog.</li>
             
             <li data-component="answer"  id="test_question11_1_2_opt_c">(C) 23</li><li data-component="feedback" id="test_question11_1_2_opt_c">23 is associated with the key elephant.</li>
             
-            <li data-component="answer"  id="test_question11_1_2_opt_d">(D) Error, you cannot use the index operator with a dictionary.</li><li data-component="feedback" id="test_question11_1_2_opt_d">The [ ] operator, when used with a dictionary, will look up a value based on its key.</li>
+            <li data-component="answer"  id="test_question11_1_2_opt_d">(D) error, you cannot use the index operator with a dictionary.</li><li data-component="feedback" id="test_question11_1_2_opt_d">the [ ] operator, when used with a dictionary, will look up a value based on its key.</li>
             
 
             </ul>
             </div>
-<div class="section" id="why-dictionary-keys-must-be-immutable">
-<h2>6.1.2. Why Dictionary Keys Must Be Immutable<a class="headerlink" href="#why-dictionary-keys-must-be-immutable" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dictionary-keys-must-be-immutable">
+<h2>6.1.2. Dictionary Keys Must Be Immutable<a class="headerlink" href="#dictionary-keys-must-be-immutable" title="Permalink to this headline">¶</a></h2>
 <p>The dictionary uses the built-in function <code class="docutils literal"><span class="pre">hash</span></code> to quickly look-up the value
 for a given key (discussed in detail in <span class="xref std std-ref">_dict_complexity</span>).  A requirement
 of this process is that all keys be unique.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="nb">hash</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
-<span class="gh">Out[14]: </span><span class="go">-8660787661029198084</span>
+<span class="gh">Out[14]: </span><span class="go">2286944035737377387</span>
 
 <span class="gp">In [15]: </span><span class="nb">hash</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">                              Out[15]: 1</span>
+<span class="go">                             Out[15]: 1</span>
 
 <span class="gp">In [16]: </span><span class="nb">hash</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
-<span class="go">                                         Out[16]: 1152921504606846978</span>
+<span class="go">                                        Out[16]: 1152921504606846978</span>
 
 <span class="gp">In [17]: </span><span class="nb">hash</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-<span class="go">                                                                      Out[17]: 3713081631934410656</span>
+<span class="go">                                                                     Out[17]: 3713081631934410656</span>
 </pre></div>
 </div>
-<p>If we allowed mutable object to be
-keys, how would we handle changes that confuse the <code class="docutils literal"><span class="pre">hash</span></code> function?  For
-example, if <code class="docutils literal"><span class="pre">[1]</span></code> was a key and this value was mutated by aappending anothe
-value, say <code class="docutils literal"><span class="pre">2</span></code>, the new list <code class="docutils literal"><span class="pre">[1,</span> <span class="pre">2]</span></code> would have a different hash value.
-This could lead to the value being lost or two values in the dictionary having
-the same hash.  Consequently, mutable items are not hashable, meaning that
-<code class="docutils literal"><span class="pre">hash</span></code> will throw an exception when given a mutable object.</p>
+<p>If we allowed mutable object to be keys, how would we handle changes that
+confuse the <code class="docutils literal"><span class="pre">hash</span></code> function?  For example, if <code class="docutils literal"><span class="pre">[1]</span></code> was a key and this value
+was mutated by appending another value, say <code class="docutils literal"><span class="pre">2</span></code>, the new list <code class="docutils literal"><span class="pre">[1,</span> <span class="pre">2]</span></code> would
+have a different hash value.  This could lead to the value being lost or two
+values in the dictionary having the same hash.  Consequently, mutable items are
+not hashable, meaning that <code class="docutils literal"><span class="pre">hash</span></code> will throw an exception when given a mutable
+object.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="nb">hash</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
@@ -472,7 +472,7 @@ the same hash.  Consequently, mutable items are not hashable, meaning that
 </pre></div>
 </div>
 <p>For this reason, all keys in a dictionary much be <em>immutable object</em>.  Examples
-of eligable values are strings, number or tuples.</p>
+of eligible values are strings, number or tuples.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">:</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span><span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span><span class="s1">&#39;tuple&#39;</span><span class="p">}</span>
 
 <span class="gp">In [21]: </span><span class="n">d</span>
@@ -516,9 +516,21 @@ of eligable values are strings, number or tuples.</p>
 <p>Note that the error message is pointing out that a list and dictionary are not
 hashable (can&#8217;t be converted to a number using <code class="docutils literal"><span class="pre">hash</span></code>).  This is due to the
 fact that they are both mutable.</p>
-</div>
-<div class="section" id="dictionary-operations">
-<h2>6.1.3. Dictionary Operations<a class="headerlink" href="#dictionary-operations" title="Permalink to this headline">¶</a></h2>
+<p><strong>Check your understanding</strong></p>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="immutable_keys_1">
+            rec-5-114: Which of the following calls to assoc WILL NOT cause an exception?
+            <li data-component="answer" data-correct id="immutable_keys_1_opt_a">(A) assoc({}, (1, 2), 0)</li><li data-component="feedback" id="immutable_keys_1_opt_a">Tuples are immutable and work as dictionary keys.</li>
+            
+            <li data-component="answer"  id="immutable_keys_1_opt_b">(B) assoc({}, [1, 2], 0)</li><li data-component="feedback" id="immutable_keys_1_opt_b">Lists are mutable and cannot be used as a dictionary key.  This call will cause an exception.</li>
+            
+            <li data-component="answer"  id="immutable_keys_1_opt_c">(C) assoc({}, {1:"one"}, 0)</li><li data-component="feedback" id="immutable_keys_1_opt_c">Dictionaries are mutable and cannot be used as a dictionary key.  This line will cause an exception.</li>
+            
+
+            </ul>
+            </div>
+<div class="section" id="assoc-and-disoc">
+<h2>6.1.3. <code class="docutils literal"><span class="pre">assoc</span></code> and <code class="docutils literal"><span class="pre">disoc</span></code><a class="headerlink" href="#assoc-and-disoc" title="Permalink to this headline">¶</a></h2>
 <p>Dictionaries are mutable. As mentioned earlier, the functional style of
 programming involves returning new copies of a data structure instead of
 mutating a data structure in place.  The easiest way to accomplish this is using
@@ -544,7 +556,7 @@ dictionary.</p>
 <span class="go">                                                                                   Out[30]: False</span>
 </pre></div>
 </div>
-<p>Similarily, a new shipment of 200 bananas arriving could be handled like this.</p>
+<p>Similarly, a new shipment of 200 bananas arriving could be handled like this.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">430</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span> <span class="s1">&#39;oranges&#39;</span><span class="p">:</span> <span class="mi">525</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">:</span> <span class="mi">217</span><span class="p">}</span>
 
 <span class="gp">In [32]: </span><span class="n">updated_bananas</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="s1">&#39;bananas&#39;</span><span class="p">,</span><span class="n">inventory</span><span class="p">)</span> <span class="o">+</span> <span class="mi">200</span>
@@ -577,7 +589,7 @@ dictionary.  As with <code class="docutils literal"><span class="pre">assoc</spa
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_2_1">
-            <p>Q-3: What is printed by the following statements?</p>
+            <p>rec-5-115: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">}</span>
 <span class="n">mouse_val</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">get</span><span class="p">([</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">],</span> <span class="n">mydict</span><span class="p">))</span>
 <span class="n">mydict</span> <span class="o">=</span> <span class="n">assoc</span><span class="p">(</span><span class="n">mydict</span><span class="p">,</span> <span class="s2">&quot;mouse&quot;</span><span class="p">,</span> <span class="n">mouse_val</span><span class="p">)</span>
@@ -597,7 +609,7 @@ dictionary.  As with <code class="docutils literal"><span class="pre">assoc</spa
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_2">
-            <p>Q-4: What is printed by the following statements?</p>
+            <p>rec-5-116: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">answer</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="n">mydict</span><span class="p">)</span> <span class="o">//</span> <span class="n">get</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span><span class="p">,</span><span class="n">mydict</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
@@ -657,7 +669,7 @@ underlying keys.  An view is an example of an <strong>iterable</strong>.</p>
 <span class="gh">Out[42]: </span><span class="go">dict_keys</span>
 
 <span class="gp">In [43]: </span><span class="n">ks</span>
-<span class="go">                   Out[43]: dict_keys([&#39;apples&#39;, &#39;bananas&#39;, &#39;oranges&#39;, &#39;pears&#39;])</span>
+<span class="go">                   Out[43]: dict_keys([&#39;bananas&#39;, &#39;oranges&#39;, &#39;apples&#39;, &#39;pears&#39;])</span>
 </pre></div>
 </div>
 <p>We can turn the iterable item into an iterator using the <code class="docutils literal"><span class="pre">iter</span></code> function.  An
@@ -669,13 +681,13 @@ other using the <code class="docutils literal"><span class="pre">next</span></co
 <span class="gh">Out[45]: </span><span class="go">dict_keyiterator</span>
 
 <span class="gp">In [46]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
-<span class="go">                          Out[46]: &#39;apples&#39;</span>
+<span class="go">                          Out[46]: &#39;bananas&#39;</span>
 
 <span class="gp">In [47]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
-<span class="go">                                            Out[47]: &#39;bananas&#39;</span>
+<span class="go">                                             Out[47]: &#39;oranges&#39;</span>
 
 <span class="gp">In [48]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
-<span class="go">                                                               Out[48]: &#39;oranges&#39;</span>
+<span class="go">                                                                Out[48]: &#39;apples&#39;</span>
 
 <span class="gp">In [49]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
 <span class="go">                                                                                  Out[49]: &#39;pears&#39;</span>
@@ -709,15 +721,15 @@ list comprehension or by converting the view into a list.</p>
 <span class="gp">In [52]: </span><span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">akey</span> <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
 <span class="gp">In [53]: </span><span class="n">keys</span>
-<span class="gh">Out[53]: </span><span class="go">[&#39;apples&#39;, &#39;bananas&#39;, &#39;oranges&#39;, &#39;pears&#39;]</span>
+<span class="gh">Out[53]: </span><span class="go">[&#39;bananas&#39;, &#39;oranges&#39;, &#39;apples&#39;, &#39;pears&#39;]</span>
 
 <span class="gp">In [54]: </span><span class="n">ks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">inventory</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
 <span class="gp">In [55]: </span><span class="n">ks</span>
-<span class="gh">Out[55]: </span><span class="go">[&#39;apples&#39;, &#39;bananas&#39;, &#39;oranges&#39;, &#39;pears&#39;]</span>
+<span class="gh">Out[55]: </span><span class="go">[&#39;bananas&#39;, &#39;oranges&#39;, &#39;apples&#39;, &#39;pears&#39;]</span>
 
 <span class="gp">In [56]: </span><span class="p">[</span><span class="n">akey</span> <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">inventory</span><span class="p">]</span>
-<span class="go">                                                   Out[56]: [&#39;apples&#39;, &#39;bananas&#39;, &#39;oranges&#39;, &#39;pears&#39;]</span>
+<span class="go">                                                   Out[56]: [&#39;bananas&#39;, &#39;oranges&#39;, &#39;apples&#39;, &#39;pears&#39;]</span>
 </pre></div>
 </div>
 <p>As we saw earlier with strings and lists, dictionary methods use dot notation,
@@ -732,7 +744,7 @@ items are shown as tuples containing the key and the associated value.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">430</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span> <span class="s1">&#39;oranges&#39;</span><span class="p">:</span> <span class="mi">525</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">:</span> <span class="mi">217</span><span class="p">}</span>
 
 <span class="gp">In [58]: </span><span class="nb">list</span><span class="p">(</span><span class="n">inventory</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-<span class="gh">Out[58]: </span><span class="go">[430, 312, 525, 217]</span>
+<span class="gh">Out[58]: </span><span class="go">[312, 525, 430, 217]</span>
 
 <span class="gp">In [59]: </span><span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 </pre></div>
@@ -757,7 +769,7 @@ dictionary causes a runtime error.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_1">
-            <p>Q-5: What is printed by the following statements?</p>
+            <p>rec-5-117: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
 <span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">keylist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mydict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -778,7 +790,7 @@ dictionary causes a runtime error.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_3">
-            <p>Q-6: What is printed by the following statements?</p>
+            <p>rec-5-118: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;dog&quot;</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">)</span>
 </pre></div>
@@ -792,7 +804,7 @@ dictionary causes a runtime error.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_4">
-            <p>Q-7: What is printed by the following statements?</p>
+            <p>rec-5-119: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="mi">23</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">)</span>
 </pre></div>
@@ -806,7 +818,7 @@ dictionary causes a runtime error.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="test_question11_3_5">
-            <p>Q-8: What is printed by the following statements?</p>
+            <p>rec-5-120: What is printed by the following statements?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
 <span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;elephant&quot;</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">get</span><span class="p">(</span><span class="n">akey</span><span class="p">,</span> <span class="n">mydict</span><span class="p">)</span> <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">mydict</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">akey</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">])</span>

@@ -56,8 +56,8 @@ We can now use ``in`` to determine if a given word is present in the set.
     'the' in unique_words_zen
     'mississippi' in unique_words_zen
 
-While this looks no different that performing the same operations on a list, set
-s have a much more efficient item look-up (as discussed in a later section).
+While this looks no different that performing the same operations on a list,
+sets have a much more efficient item look-up (as discussed in a later section).
 
 .. caution:: 
 
@@ -107,7 +107,7 @@ has worked with sets in mathematics.
 
     [attr for attr in dir(unique_words_zen) if not attr.startswith('__')]
 
-The ``intersection`` method of a set can be used to contruct another set that
+The ``intersection`` method of a set can be used to construct another set that
 contains all elements the two sets have in common.   The ``union`` method can be
 used to create the set of words that are one or both original sets.
 
@@ -153,6 +153,64 @@ are in one set but not both.  (This is equivalent to
     Sets also have methods for mutation, such as ``add``, ``pop``, ``remove`` and
     ``difference_update`` that are not covered here.
 
+**Check your understanding**
+
+
+.. mchoice:: set_count_1
+    :answer_a: 9
+    :answer_b: 10
+    :correct: a
+    :feedback_a: The word "fear" will only be counted once.
+    :feedback_b: The word "fear" will only be counted once.  A value is either in a set or not in a set, there is no repetition of values.
+
+    What value will the following code return?
+
+    .. sourcecode:: python
+
+        fear = "the only thing we have to fear is fear itself" 
+        words = fear.split()
+        len(set([w for w in words]) 
+
+.. mchoice:: set_intersection_1
+    :answer_a: 22
+    :answer_b: 19
+    :answer_c: 0
+    :correct: c
+    :feedback_a: The intersection would represent the words that are in common.  This answer gives total number of words including repeats ('fear', 'of', 'failure').
+    :feedback_b: The intersection would represent the words that are in common.  This answer gives total number of unique words in the union of the sets.
+    :feedback_c: These two quotes (by FDR and Winsten Churchhill, respectively) have no words in common.
+
+     
+    What value will the following code return?
+
+    .. sourcecode:: python
+
+        fear = "the only thing we have to fear is fear itself" 
+        fear_words = set([w for w in fear.split()])
+        success = "success consists of going from failure to failure without loss of enthusiasm"
+        success_words = set([w for w in success.split()])
+        len(success_words.intersection(fear_words))
+
+.. mchoice:: set_union_1
+    :answer_a: 22
+    :answer_b: 19
+    :answer_c: 0
+    :correct: b
+    :feedback_a: The union would represent the words unique words in the combined strings.  This answer gives total number of words including repeats ('fear', 'of', 'failure').
+    :feedback_b: This answer gives total number of unique words in the union of the sets.
+    :feedback_c: The union would represent the words unique words in the combined strings.  This answer given the size of the intersection, as these two quotes (by FDR and Winsten Churchhill, respectively) have no words in common.
+
+     
+    What value will the following code return?
+
+    .. sourcecode:: python
+
+        fear = "the only thing we have to fear is fear itself" 
+        fear_words = set([w for w in fear.split()])
+        success = "success consists of going from failure to failure without loss of enthusiasm"
+        success_words = set([w for w in success.split()])
+        len(success_words.union(fear_words))
+
 Set Operations
 --------------
 
@@ -160,6 +218,7 @@ Python sets can also be compared with a number of operations that are equivalent
 to the methods shown above.
 
 .. ipython:: python
+
 
     # issubset with <=
     in_common <= unique_words_zen

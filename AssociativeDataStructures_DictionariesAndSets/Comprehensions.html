@@ -326,7 +326,7 @@ sets using comprehensions.</p>
 <p>Notice that the dictionary comprehension is similar to a list
 comprehension in that it has a <code class="docutils literal"><span class="pre">for</span></code> sequence expression and an optional
 <code class="docutils literal"><span class="pre">if</span></code> filter.  This comprehension is delimited by braces (<code class="docutils literal"><span class="pre">{}</span></code>) and
-distiguished by the <code class="docutils literal"><span class="pre">KEY:VAL</span></code> key-value pair in the operation expression.</p>
+distinguished by the <code class="docutils literal"><span class="pre">KEY:VAL</span></code> key-value pair in the operation expression.</p>
 <p>For example, we could construct a dictionary that maps integers to their square
 root as follows.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">sqrts</span> <span class="o">=</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)}</span>
@@ -346,12 +346,13 @@ allowing the values to be looked up quickly without recomputing values.</p>
 <div class="section" id="the-set-comprehension">
 <h2>6.3.2. The Set Comprehension<a class="headerlink" href="#the-set-comprehension" title="Permalink to this headline">¶</a></h2>
 <p>The set comprehension looks very similar to a dictionary comprehension, but is
-distiguished by only having a value in the operation expression.</p>
+distinguished by only having a value in the operation expression.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">set_comp</span> <span class="o">=</span> <span class="p">{</span><span class="n">VAL</span> <span class="k">for</span> <span class="n">VAR</span> <span class="ow">in</span> <span class="n">SEQ</span> <span class="k">if</span> <span class="n">COND</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>This comprehension is useful for creating a set of unique values from some
 sequence of values.</p>
+<p><strong>Check your understanding</strong></p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 
 <span class="gp">In [4]: </span><span class="n">die_rolls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
@@ -362,7 +363,70 @@ sequence of values.</p>
 <span class="gh">Out[6]: </span><span class="go">{1, 3, 4, 5}</span>
 </pre></div>
 </div>
+
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="identify_dictionary_comprehension_1">
+            <p>rec-5-133: Which type of comprehension is given below?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">w</span><span class="p">:</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">)}</span>
+</pre></div>
 </div>
+
+            <li data-component="answer"  id="identify_dictionary_comprehension_1_opt_a">(A) Set comprehension</li><li data-component="feedback" id="identify_dictionary_comprehension_1_opt_a">A set comprehension needs one value in the operation expression, not a key-value pair.</li>
+            
+            <li data-component="answer"  id="identify_dictionary_comprehension_1_opt_b">(B) List comprehension</li><li data-component="feedback" id="identify_dictionary_comprehension_1_opt_b">A list comprehension is delimited by brackets ('[',']') not braces ('{', '}').</li>
+            
+            <li data-component="answer" data-correct id="identify_dictionary_comprehension_1_opt_c">(C) Dictionary comprehension</li><li data-component="feedback" id="identify_dictionary_comprehension_1_opt_c">The dictionary comprehension can be identified by the surrounding braces and the key-value pair in the operation expression.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="identify_set_comprehension_1">
+            <p>rec-5-134: Which type of comprehension is given below?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">w</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">)}</span>
+</pre></div>
+</div>
+
+            <li data-component="answer" data-correct id="identify_set_comprehension_1_opt_a">(A) Set comprehension</li><li data-component="feedback" id="identify_set_comprehension_1_opt_a">The set comprehension can be identified by the surrounding braces and single expression in the operation expression.</li>
+            
+            <li data-component="answer"  id="identify_set_comprehension_1_opt_b">(B) List comprehension</li><li data-component="feedback" id="identify_set_comprehension_1_opt_b">The dictionary comprehension needs a key-value pair in the operation expression.</li>
+            
+            <li data-component="answer"  id="identify_set_comprehension_1_opt_c">(C) Dictionary comprehension</li><li data-component="feedback" id="identify_set_comprehension_1_opt_c">A list comprehension is delimited by brackets ('[',']') not braces ('{', '}').</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="set_comp_count_1">
+            <p>rec-5-135: What value will the following code return?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fear</span> <span class="o">=</span> <span class="s2">&quot;the only thing we have to fear is fear itself&quot;</span>
+<span class="nb">len</span><span class="p">({</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">fear</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;t&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w</span><span class="p">})</span>
+</pre></div>
+</div>
+
+            <li data-component="answer" data-correct id="set_comp_count_1_opt_a">(A) 5</li><li data-component="feedback" id="set_comp_count_1_opt_a">The word "fear" will only be counted once and all words containing a 't' will be excluded.</li>
+            
+            <li data-component="answer"  id="set_comp_count_1_opt_b">(B) 6</li><li data-component="feedback" id="set_comp_count_1_opt_b">The word "fear" will only be counted once.  A value is either in a set or not in a set, there is no repetition of values.</li>
+            
+            <li data-component="answer"  id="set_comp_count_1_opt_c">(C) 9</li><li data-component="feedback" id="set_comp_count_1_opt_c">All words containing a 't' will be excluded.</li>
+            
+
+            </ul>
+            
+            <ul data-component="multiplechoice" data-multipleanswers="false"  id="dict_comp_1">
+            <p>rec-5-136: What value will the following code return?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fear</span> <span class="o">=</span> <span class="s2">&quot;the only thing we have to fear is fear itself&quot;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">w</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">fear</span><span class="o">.</span><span class="n">split</span><span class="p">()}</span>
+<span class="n">get</span><span class="p">(</span><span class="s1">&#39;fear&#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+
+            <li data-component="answer"  id="dict_comp_1_opt_a">(A) 4</li><li data-component="feedback" id="dict_comp_1_opt_a">This dictionary maps each word to twice the length of the word.</li>
+            
+            <li data-component="answer" data-correct id="dict_comp_1_opt_b">(B) 8</li><li data-component="feedback" id="dict_comp_1_opt_b">This dictionary maps each word to twice the length of the word.</li>
+            
+            <li data-component="answer"  id="dict_comp_1_opt_c">(C) Error: You can't have an expression in the value position of the key-value pair.</li><li data-component="feedback" id="dict_comp_1_opt_c">Any expression can be used in the value position.  Expressions can also be used in the key position, but they must evaluate to an immutable hashable object.</li>
+            
+
+            </ul>
+            </div>
 </div>
 
 

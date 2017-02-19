@@ -11,7 +11,7 @@ Exercises
 ---------
 
 
-.. question:: dict_ex_2
+.. question:: dict_ex_1
 
    Give the Python interpreter's response to each of the following from a
    continuous interpreter session:
@@ -19,13 +19,14 @@ Exercises
    a.
       .. sourcecode:: python
 
+          >>> from toolz import get, assoc
           >>> d = {'apples': 15, 'bananas': 35, 'grapes': 12}
-          >>> d['banana']
+          >>> get(d, 'banana')
 
    b.
       .. sourcecode:: python
 
-          >>> d['oranges'] = 20
+          >>> d = assoc(d, 'oranges', 20)
           >>> len(d)
 
    c.
@@ -36,196 +37,124 @@ Exercises
    d.
       .. sourcecode:: python
 
-          >>> d['pears']
+          >>> get(d, 'pears')
 
    e.
       .. sourcecode:: python
 
-          >>> d.get('pears', 0)
+          >>> get(d, 'pears', 0)
 
    f.
       .. sourcecode:: python
 
-          >>> fruits = d.keys()
-          >>> fruits.sort()
-          >>> print(fruits)
+          >>> fruits = sorted(list(d.keys()))
+          >>> fruits
 
    g.
       .. sourcecode:: python
 
-          >>> del d['apples']
+          >>> d = dissoc(d, 'apples')
           >>> 'apples' in d
 
 
-   Be sure you understand why you get each result. Then apply what you
-   have learned to fill in the body of the function below:
 
-   .. activecode:: q2_dict_answer
 
-       def add_fruit(inventory, fruit, quantity=0):
-            pass
-
-       # make these tests work...
-       # new_inventory = {}
-       # add_fruit(new_inventory, 'strawberries', 10)
-       # test('strawberries' in new_inventory, True)
-       # test(new_inventory['strawberries'], 10)
-       # add_fruit(new_inventory, 'strawberries', 25)
-       # test(new_inventory['strawberries'] , 35)
-
-.. todo:: Make the next problem about mapping words to their last position in the text using enumerate and a dictionary comprehension
-
-.. question:: dict_ex_3
+.. question:: dict_ex_2
 
    .. tabbed:: q3
 
         .. tab:: Question
 
-           Write a program called ``alice_words.py`` that creates a text file named
-           ``alice_words.txt`` containing an alphabetical listing of all the words, and the
-           number of times each occurs, in the text version of `Alice's Adventures in Wonderland`.
-           (You can obtain a free plain text version of the book, along with many others, from
-           http://www.gutenberg.org.) The first 10 lines of your output file should look
-           something like this
-
-            =========== ===========
-            Word              Count
-            =========== ===========
-            a                 631
-            a-piece           1
-            abide             1
-            able              1
-            about             94
-            above             3
-            absence           1
-            absurd            2
-            =========== ===========
-
-           How many times does the word, ``alice``, occur in the book?  If you are writing this
-           in the activecode window simply print out the results rather than write them to a file.
+           Write a function takes a body of text as input and returns a
+           dictionary that maps each unique word in the text to its last
+           position in the text, where the position is the based on word order.
+           Apply this function to the text version of `Alice's Adventures in
+           Wonderland`.  (You can obtain a free plain text version of the book,
+           along with many others, from http://www.gutenberg.org.)            
+           
+           What is the last position of the word, ``alice``, occur in the book?
 
            .. actex:: ex_11_02
 
         .. tab:: Answer
 
-            .. sourcecode:: python
+            .. ipython:: python
 
-                f = open('alice.txt', 'r')
+                # be sure to clean up the string first 
+                # (lowercase and no punctuation).
+                s = "the only thing we have to fear is fear itself"
+                words = s.split()
 
-                count = {}
+                # You should compose this function with your functions for
+                # cleaning the text
+                position_to_end = lambda words: {word: index 
+                                                 for index, word in enumerate(words)}
 
-                for line in f:
-                    for word in line.split():
+                position_to_end(words)
 
-                        # remove punctuation
-                        word = word.replace('_', '').replace('"', '').replace(',', '').replace('.', '')
-                        word = word.replace('-', '').replace('?', '').replace('!', '').replace("'", "")
-                        word = word.replace('(', '').replace(')', '').replace(':', '').replace('[', '')
-                        word = word.replace(']', '').replace(';', '')
+.. question:: dict_ex_3
 
-                        # ignore case
-                        word = word.lower()
+       Refer to the last problem. This time write a function that maps each
+       unique word in the text to its first position in the text.  Apply
+       this function to the text version of `Alice's Adventures in Wonderland`.
+       Your solution should use a dictinary comprehension along with
+       ``enumerate``.
+       
+       What is the first position of the word, ``alice``, occur in the book?
 
-                        # ignore numbers
-                        if word.isalpha():
-                            if word in count:
-                                count[word] = count[word] + 1
-                            else:
-                                count[word] = 1
-
-                keys = count.keys()
-                keys.sort()
-
-                # save the word count analysis to a file
-                out = open('alice_words.txt', 'w')
-
-                for word in keys:
-                    out.write(word + " " + str(count[word]))
-                    out.write('\n')
-
-                print("The word 'alice' appears " + str(count['alice']) + " times in the book.")
-
-        .. tab:: Discussion
-
-            .. disqus::
-                :shortname: interactivepython
-                :identifier: disqus_4f2d7860fc3143339c9c6a533c07b62d
-
-
-.. todo:: How many unique words
 .. question:: dict_ex_4
 
-   What is the longest word in Alice in Wonderland? How many characters does it have?
+       Refer to the last two problems.  This time we will map each unique word
+       to a tuple that givens the line number and word position on the line for
+       the first occurance of a word. For example ``(3,5)`` means that the
+       corresponding word is first occurs as the 5th word on line 3. Write a
+       function that creates this dictionary.  Apply this function to the text
+       version of `Alice's Adventures in Wonderland`.         
 
-.. todo:: As add a probem counting the words that emma and sense have in common.
+       **Hint:** You will need to apply the dictinary comprehension trick from
+       problem 2 twice, once for lines and again for words.
 
-
+       Find the line-word pair for ``alice``.
 
 .. question:: dict_ex_5
 
-   .. tabbed:: q5
-
-        .. tab:: Question
-
-            Here's a table of English to Pirate translations
-
-            ==========  ==============
-            English     Pirate
-            ==========  ==============
-            sir	        matey
-            hotel	    fleabag inn
-            student	    swabbie
-            boy	        matey
-            madam	    proud beauty
-            professor	foul blaggart
-            restaurant	galley
-            your	    yer
-            excuse	    arr
-            students	swabbies
-            are	        be
-            lawyer	    foul blaggart
-            the	        th'
-            restroom	head
-            my	        me
-            hello	    avast
-            is	        be
-            man	        matey
-            ==========  ==============
-
-            Write a program that asks the user for a sentence in English and then translates that
-            sentence to Pirate.
-
-            .. actex:: ex_11_04
+   Write a function that uses a set comprehension to determine how many unique
+   words are in the body of a text.  
+   
+   Apply this function to  `Alice's Adventures in Wonderland`.
 
 
-        .. tab:: Answer
-
-            .. activecode:: ch11_q5_answer
-
-                pirate = {}
-                pirate['sir'] = 'matey'
-                pirate['hotel'] = 'fleabag inn'
-                pirate['student'] = 'swabbie'
-                pirate['boy'] = 'matey'
-                pirate['restaurant'] = 'galley'
-                # and so on
-
-                sentence = input("Please enter a sentence in English")
-
-                psentence = []
-                words = sentence.split()
-                for aword in words:
-                    if aword in pirate:
-                        psentence.append(pirate[aword])
-                    else:
-                        psentence.append(aword)
-
-                print(" ".join(psentence))
+.. question:: dict_ex_6
 
 
-        .. tab:: Discussion
+    Here's a table of English to Pirate translations
 
-            .. disqus::
-                :shortname: interactivepython
-                :identifier: disqus_dd296be40c8643999060129b6d8dc7ae
+    ==========  ==============
+    English     Pirate
+    ==========  ==============
+    sir	        matey
+    hotel	    fleabag inn
+    student	    swabbie
+    boy	        matey
+    madam	    proud beauty
+    professor	foul blaggart
+    restaurant	galley
+    your	    yer
+    excuse	    arr
+    students	swabbies
+    are	        be
+    lawyer	    foul blaggart
+    the	        th'
+    restroom	head
+    my	        me
+    hello	    avast
+    is	        be
+    man	        matey
+    ==========  ==============
+
+    Write a function that takes a sentence in English as input and
+    returns the sentence translated to Pirate.
+
+    .. actex:: ex_11_04
+
 
