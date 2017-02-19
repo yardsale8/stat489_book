@@ -158,3 +158,22 @@ Exercises
     .. actex:: ex_11_04
 
 
+.. question:: dict_ex_7
+
+    Consider the following set of key's.
+
+    .. sourcecode:: python
+
+        keys = [1, 'a', 2.5]
+
+    Use the hash function to determine the hash value for each key then construct a
+    diagram of a balanced binary search tree based on these hash values.
+    Submit a pdf of your image.
+
+
+.. question:: dict_ex_8
+
+    Determine the computational complexity of associating a new value to a key that
+    already exists in a dictionary.  You can assume that the dictionary always
+    consists of a perfectly balanced binary tree (which is not true in practice).
+

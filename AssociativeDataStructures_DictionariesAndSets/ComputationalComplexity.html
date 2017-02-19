@@ -328,25 +328,25 @@ values (hash, key, value), which is easy to do with <code class="docutils litera
 
 <span class="gp">In [4]: </span><span class="n">key_hashes</span>
 <span class="gh">Out[4]: </span><span class="go"></span>
-<span class="go">[-8660787661029198084,</span>
-<span class="go"> 2812223855912570350,</span>
-<span class="go"> 6178014525531841099,</span>
-<span class="go"> -8153572840312992588,</span>
-<span class="go"> 5250639702666709886,</span>
-<span class="go"> 6313987628407863997,</span>
-<span class="go"> -5178196229341398776]</span>
+<span class="go">[6566498737178858000,</span>
+<span class="go"> 8529686781093766427,</span>
+<span class="go"> 3846036206135091972,</span>
+<span class="go"> -6309856547922047459,</span>
+<span class="go"> 4749164757703172930,</span>
+<span class="go"> 59884704915261666,</span>
+<span class="go"> 8023738209949483422]</span>
 
 <span class="gp">In [5]: </span><span class="n">triples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">key_hashes</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
 
 <span class="gp">In [6]: </span><span class="n">triples</span>
 <span class="gh">Out[6]: </span><span class="go"></span>
-<span class="go">[(-8660787661029198084, &#39;a&#39;, 1),</span>
-<span class="go"> (2812223855912570350, &#39;b&#39;, 2),</span>
-<span class="go"> (6178014525531841099, &#39;c&#39;, 3),</span>
-<span class="go"> (-8153572840312992588, &#39;d&#39;, 4),</span>
-<span class="go"> (5250639702666709886, &#39;e&#39;, 5),</span>
-<span class="go"> (6313987628407863997, &#39;m&#39;, 6),</span>
-<span class="go"> (-5178196229341398776, &#39;n&#39;, 7)]</span>
+<span class="go">[(6566498737178858000, &#39;a&#39;, 1),</span>
+<span class="go"> (8529686781093766427, &#39;b&#39;, 2),</span>
+<span class="go"> (3846036206135091972, &#39;c&#39;, 3),</span>
+<span class="go"> (-6309856547922047459, &#39;d&#39;, 4),</span>
+<span class="go"> (4749164757703172930, &#39;e&#39;, 5),</span>
+<span class="go"> (59884704915261666, &#39;m&#39;, 6),</span>
+<span class="go"> (8023738209949483422, &#39;n&#39;, 7)]</span>
 </pre></div>
 </div>
 <p>Before we can efficiently put these value in a search tree, we must sort these
@@ -359,13 +359,13 @@ values (hash, key, value), which is easy to do with <code class="docutils litera
 
 <span class="gp">In [10]: </span><span class="n">sorted_triples</span>
 <span class="gh">Out[10]: </span><span class="go"></span>
-<span class="go">[(-8660787661029198084, &#39;a&#39;, 1),</span>
-<span class="go"> (-8153572840312992588, &#39;d&#39;, 4),</span>
-<span class="go"> (-5178196229341398776, &#39;n&#39;, 7),</span>
-<span class="go"> (2812223855912570350, &#39;b&#39;, 2),</span>
-<span class="go"> (5250639702666709886, &#39;e&#39;, 5),</span>
-<span class="go"> (6178014525531841099, &#39;c&#39;, 3),</span>
-<span class="go"> (6313987628407863997, &#39;m&#39;, 6)]</span>
+<span class="go">[(-6309856547922047459, &#39;d&#39;, 4),</span>
+<span class="go"> (59884704915261666, &#39;m&#39;, 6),</span>
+<span class="go"> (3846036206135091972, &#39;c&#39;, 3),</span>
+<span class="go"> (4749164757703172930, &#39;e&#39;, 5),</span>
+<span class="go"> (6566498737178858000, &#39;a&#39;, 1),</span>
+<span class="go"> (8023738209949483422, &#39;n&#39;, 7),</span>
+<span class="go"> (8529686781093766427, &#39;b&#39;, 2)]</span>
 </pre></div>
 </div>
 <p>Now we place the triples in a search tree with the following strategy:</p>
