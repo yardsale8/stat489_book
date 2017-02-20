@@ -493,9 +493,8 @@ Exercises
 .. question:: 486 
 
    Use list comprehensions to filter the hours table to include only managers.
-   In SQL this would be performed using SELECT and WHERE.  **Hint:** ``zip`` is
-   useful here!
-
+   In SQL this would be performed using SELECT and WHERE.  **Hint:** Start by
+   creating a list of the names of all managers.
    .. actex:: select-where
 
         hours = [["Alice", 43],
