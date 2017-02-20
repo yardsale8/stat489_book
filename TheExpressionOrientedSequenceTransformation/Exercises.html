@@ -805,17 +805,19 @@ right number of spaces.</p>
     <ol start=19 class=arabic><li class="alert alert-warning">
 
     <p>Use list comprehensions to filter the hours table to include only managers.
-In SQL this would be performed using SELECT and WHERE.  <strong>Hint:</strong> <code class="docutils literal"><span class="pre">zip</span></code> is
-useful here!</p>
-
-<textarea data-component="activecode" id=select-where data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
-hours = [["Alice", 43],
-           ["Bob", 37],
-           ["Fred", 15]]
-titles = [["Alice", "Manager"],
-          ["Betty", "Consultant"],
-          ["Bob", "Assistant"]]
-</textarea>
+In SQL this would be performed using SELECT and WHERE.  <strong>Hint:</strong> Start by
+creating a list of the names of all managers.
+.. actex:: select-where</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>hours = [[&#8220;Alice&#8221;, 43],</dt>
+<dd>[&#8220;Bob&#8221;, 37],
+[&#8220;Fred&#8221;, 15]]</dd>
+<dt>titles = [[&#8220;Alice&#8221;, &#8220;Manager&#8221;],</dt>
+<dd>[&#8220;Betty&#8221;, &#8220;Consultant&#8221;],
+[&#8220;Bob&#8221;, &#8220;Assistant&#8221;]]</dd>
+</dl>
+</div></blockquote>
 
     </li></ol>
     </div>
