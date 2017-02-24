@@ -410,14 +410,17 @@ need to use the following function in your program.</p>
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li>Write a function that takes a year and table of batting data as input and returns the average number
-of runs scored in that year.  Call this function <strong>average_runs_year</strong>.</li>
-<li>Write a function takes a list of years and a table of batting data and returns of list of values, each
-Call this function <strong>average_runs_years</strong>.
-corresponding the the average number of runs for that year.</li>
-<li>Write a program that includes the above functions and reads <strong>Batting.csv</strong> and compute the average number of
-runs for the following years: 1900, 1910, ..., 2000, 2010.  Assume that
-the Batting.csv file is the same directory as your program.</li>
+<li>Write a function that takes a year and table of batting data as input
+and returns the average number of runs scored in that year.  Call
+this function <strong>average_runs_year</strong>.</li>
+<li>Write a function takes a list of years and a table of batting data and
+returns of list of tuples of the form <cite>(year, averages_runs)</cite>.  Call
+this function <strong>average_runs_years</strong> Use a list comprehension
+and the function from the last step.</li>
+<li>Write a program that includes the above functions and reads
+<strong>Batting.csv</strong> and compute the average number of runs for the
+following years: 1900, 1910, ..., 2000, 2010.  Assume that the
+Batting.csv file is the same directory as your program.</li>
 </ol>
 
     </li></ol>
@@ -457,7 +460,7 @@ batting average in the last 5 years.</p>
     <div data-component="question" class="full-width container question" id="files_ex_8" >
     <ol start=8 class=arabic><li class="alert alert-warning">
 
-    <p>Download, unzip and extract the file titled <strong>Schools.csv</strong> and
+    <p>Download, unzip and extract the file titled <strong>Master.csv</strong> and
 <strong>BattingPost.csv</strong>.  from <a class="reference external" href="http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip">seanlahman.com</a></p>
 <p>Write a program that computes the total runs scored in the post season by
 all players from Minnesota (all time).</p>

@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.5. Exercises &mdash; Runestone Interactive Overview</title>
+    <title>6.6. Exercises &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -103,7 +103,7 @@
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="6. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
     <link rel="next" title="7. Functional List Processing" href="../FunctionalListProcessing/toctree.html" />
-    <link rel="prev" title="6.4. Computational Complexity" href="ComputationalComplexity.html" />
+    <link rel="prev" title="6.5. Working with Nested Data Structures" href="WorkingWithNestedDataStructures.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,7 +263,7 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6.5. Exercises</a></li>
+<li><a class="reference internal" href="#">6.6. Exercises</a></li>
 </ul>
 </ul>
 </li>
@@ -271,8 +271,8 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 6.4. Computational Complexity" data-toggle="tooltip">
-    <a href="ComputationalComplexity.html" >
+  <li id="relations-prev" title="Previous Chapter - 6.5. Working with Nested Data Structures" data-toggle="tooltip">
+    <a href="WorkingWithNestedDataStructures.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -309,7 +309,7 @@
 <div class="container" id="main-content">
   
   <div class="section" id="exercises">
-<h1>6.5. Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
+<h1>6.6. Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
 
     <div data-component="question" class="full-width container question" id="dict_ex_1" >
     <ol start=1 class=arabic><li class="alert alert-warning">
@@ -317,9 +317,9 @@
     <p>Give the Python interpreter&#8217;s response to each of the following from a
 continuous interpreter session:</p>
 <ol class="loweralpha">
-<li><div class="first highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">assoc</span>
+<li><div class="first highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">assoc</span><span class="p">,</span> <span class="n">dissoc</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="s1">&#39;grapes&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -332,11 +332,11 @@ continuous interpreter session:</p>
 </pre></div>
 </div>
 </li>
-<li><div class="first highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">)</span>
+<li><div class="first highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pears&#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><div class="first highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<li><div class="first highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pears&#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -547,17 +547,64 @@ already exists in a dictionary.  You can assume that the dictionary always
 consists of a perfectly balanced binary tree (which is not true in practice).
     </li></ol>
     </div>
+    
+    <div data-component="question" class="full-width container question" id="dict_ex_9" >
+    <ol start=9 class=arabic><li class="alert alert-warning">
+
+    <div id='q3' data-component="tabbedStuff" ><div data-component="tab" data-tabname="Question" >
+<p>Consider the JSON examples given on <a class="reference external" href="http://json.org/example.html">json.org</a>.  Read the JSON data from the first
+example (starts with &#8220;glossary&#8221; key) into python and use a call to
+<code class="docutils literal"><span class="pre">get_in</span></code> to extract the string &#8220;XML&#8221; from this data structure.</p>
+
+<textarea data-component="activecode" id=ex_11_02 data-lang="python"  data-hidecode="true"  data-timelimit=25000 data-coach="true" data-codelens="true" data-audio=''    data-gradebutton=true >
+
+
+</textarea>
+</div><div data-component="tab" data-tabname="Answer" >
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">&lt;paste JSON here&gt;</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get_in</span>
+<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">loads</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">get_in</span><span class="p">([</span><span class="s2">&quot;glossary&quot;</span><span class="p">,</span> <span class="s2">&quot;GlossDiv&quot;</span><span class="p">,</span> <span class="s2">&quot;GlossEntry&quot;</span><span class="p">,</span> <span class="s2">&quot;GlossDef&quot;</span><span class="p">,</span> <span class="s2">&quot;GlossSeeAlso&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+    </div>
+
+
+    </li></ol>
+    </div>
+    
+    <div data-component="question" class="full-width container question" id="dict_ex_10" >
+    <ol start=10 class=arabic><li class="alert alert-warning">
+
+    Consider the JSON examples given on <a class="reference external" href="http://json.org/example.html">json.org</a>.  Read the JSON data from the third example
+(starts with &#8220;menu&#8221; key) into python and use a call to <code class="docutils literal"><span class="pre">get_in</span></code> to
+extract the string &#8220;CloseDoc()&#8221; from this data structure.
+    </li></ol>
+    </div>
+    
+    <div data-component="question" class="full-width container question" id="dict_ex_11" >
+    <ol start=11 class=arabic><li class="alert alert-warning">
+
+    Consider the JSON examples given on <a class="reference external" href="http://json.org/example.html">json.org</a>.  Read the JSON data from the fourth example
+(starts with &#8220;web-app&#8221; key) into python and use a call to <code class="docutils literal"><span class="pre">get_in</span></code> to
+extract the string &#8220;toolstemplates/&#8221; from this data structure.
+    </li></ol>
+    </div>
     </div>
 
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 6.4. Computational Complexity' data-toggle="tooltip">
-    <a href="ComputationalComplexity.html" >
+  <li id="relations-prev" class="navLink" title='Previous Section - 6.5. Working with Nested Data Structures' data-toggle="tooltip">
+    <a href="WorkingWithNestedDataStructures.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
-  <a class="navLinkBg" id="navLinkBgLeft"  href="ComputationalComplexity.html" ></a>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="WorkingWithNestedDataStructures.html" ></a>
   
   <li id="relations-next" class="navLink" title='Next Section - 7. Functional List Processing' data-toggle="tooltip" >
     <a href="../FunctionalListProcessing/toctree.html" >

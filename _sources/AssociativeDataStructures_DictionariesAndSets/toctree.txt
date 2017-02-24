@@ -10,4 +10,5 @@ Associative Data Structures - Dictionaries and Sets
     Sets.rst
     Comprehensions.rst
     ComputationalComplexity.rst
+    WorkingWithNestedDataStructures.rst
     Exercises.rst

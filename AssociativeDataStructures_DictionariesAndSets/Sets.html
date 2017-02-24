@@ -468,7 +468,7 @@ you will need to convert them to the immutable alternative from <code class="doc
 </div>
 <div class="section" id="comparing-membership-with-sets">
 <h2>6.2.2. Comparing Membership with Sets<a class="headerlink" href="#comparing-membership-with-sets" title="Permalink to this headline">¶</a></h2>
-<p>As sets a modeled after sets from mathematics, they are also useful in comparing
+<p>As sets are modeled after sets from mathematics, they are also useful in comparing
 the membership of two groups.  To illustrate this process, we will create a set
 containing the unique words from the <a class="reference external" href="https://en.wikipedia.org/wiki/Gettysburg_Address">Gettysburg Address</a>.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">gettysburg_address</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Fourscore and seven years ago our fathers</span>
@@ -525,7 +525,7 @@ has worked with sets in mathematics.</p>
 </div>
 <p>The <code class="docutils literal"><span class="pre">intersection</span></code> method of a set can be used to construct another set that
 contains all elements the two sets have in common.   The <code class="docutils literal"><span class="pre">union</span></code> method can be
-used to create the set of words that are one or both original sets.</p>
+used to create the set of words that are in one or both original sets.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">in_common</span> <span class="o">=</span> <span class="n">unique_words_zen</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">unique_words_getty</span><span class="p">)</span>
 
 <span class="gp">In [13]: </span><span class="n">in_common</span>
@@ -596,7 +596,7 @@ are in one set but not both.  (This is equivalent to
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="set_count_1">
-            <p>Q-14: What value will the following code return?</p>
+            <p>rec-5-108: What value will the following code return?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fear</span> <span class="o">=</span> <span class="s2">&quot;the only thing we have to fear is fear itself&quot;</span>
 <span class="n">words</span> <span class="o">=</span> <span class="n">fear</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">])</span>
@@ -611,7 +611,7 @@ are in one set but not both.  (This is equivalent to
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="set_intersection_1">
-            <p>Q-15: What value will the following code return?</p>
+            <p>rec-5-109: What value will the following code return?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fear</span> <span class="o">=</span> <span class="s2">&quot;the only thing we have to fear is fear itself&quot;</span>
 <span class="n">fear_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">fear</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
 <span class="n">success</span> <span class="o">=</span> <span class="s2">&quot;success consists of going from failure to failure without loss of enthusiasm&quot;</span>
@@ -624,13 +624,13 @@ are in one set but not both.  (This is equivalent to
             
             <li data-component="answer"  id="set_intersection_1_opt_b">(B) 19</li><li data-component="feedback" id="set_intersection_1_opt_b">The intersection would represent the words that are in common.  This answer gives total number of unique words in the union of the sets.</li>
             
-            <li data-component="answer" data-correct id="set_intersection_1_opt_c">(C) 0</li><li data-component="feedback" id="set_intersection_1_opt_c">These two quotes (by FDR and Winsten Churchhill, respectively) have no words in common.</li>
+            <li data-component="answer" data-correct id="set_intersection_1_opt_c">(C) 1</li><li data-component="feedback" id="set_intersection_1_opt_c">These two quotes (by FDR and Winsten Churchhill, respectively) have 1 word in common ('to').</li>
             
 
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="set_union_1">
-            <p>Q-16: What value will the following code return?</p>
+            <p>rec-5-110: What value will the following code return?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fear</span> <span class="o">=</span> <span class="s2">&quot;the only thing we have to fear is fear itself&quot;</span>
 <span class="n">fear_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">fear</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
 <span class="n">success</span> <span class="o">=</span> <span class="s2">&quot;success consists of going from failure to failure without loss of enthusiasm&quot;</span>
