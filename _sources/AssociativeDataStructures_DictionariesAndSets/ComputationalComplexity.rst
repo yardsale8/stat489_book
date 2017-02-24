@@ -100,7 +100,7 @@ second node (return the value).
 
 Because the tree depth for a balanced tree is approximately :math:`\log_2(n)`
 for a tree containing :math:`n` values, the time complexity of looking up values
-in a dictionary has time complexity of :math:`O(\log_2(n)`.  The time complexity
+in a dictionary has time complexity of :math:`O(\log_2(n))`.  The time complexity
 of checking for the presence of a key in a dictionary or an item in a set is
 also :math:`O(\log_2(n)`.  
 

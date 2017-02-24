@@ -15,11 +15,11 @@ lists, and tuples --- are sequential collections.  This means that the items in
 the collection are ordered from left to right and they use integers as indices
 to access the values they contain.
 
-**Dictionaries** and **Sets** are a different kinds of collections. They are
-Python's built-in associative data types.  The dictionary associates one value
-with another, whereas the set associates a value with membership in some
-collection or group.  In this chapter, we will introduce these two data
-structures and discuss their application in data wrangling and analysis.
+**Dictionaries** and **Sets** are Python's two built-in associative data types.
+The dictionary associates one value with another, whereas the set associates a
+value with membership in some collection or group.  In this chapter, we will
+introduce these two data structures and discuss their application in data
+wrangling and analysis.
 
 Mapping One Value to Another with Dictionaries
 ----------------------------------------------
@@ -89,7 +89,7 @@ dictionary.
 
     get(['one', 'two', 'four'], eng2sp, default=None)
 
-This flexibility makes ``get`` out go-to method for accessing data from a
+This flexibility makes ``get`` our go-to method for accessing data from a
 dictionary.
 
 .. note::
@@ -339,7 +339,7 @@ list comprehension, Python hides the detail of making the iterator, using
 .. note:: 
 
      It is important to note that there is no guarentee the order of the keys
-     will be returned!  Dictionaries are unorder sets.  If order is important
+     will be returned!  Dictionaries are unordered sets.  If order is important
      either sort or use a sequence data structure.
 
 We can use the iterator to iterate through the keys using a
@@ -413,7 +413,7 @@ dictionary causes a runtime error.
      mydict = {"cat":12, "dog":6, "elephant":23, "bear":20}
      keylist = list(mydict.keys())
      keylist.sort()
-     print(get(3, keylist)
+     print(get(3, keylist))
    
    
    

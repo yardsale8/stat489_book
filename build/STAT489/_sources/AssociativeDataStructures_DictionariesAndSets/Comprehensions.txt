@@ -130,3 +130,112 @@ sequence of values.
         fear = "the only thing we have to fear is fear itself" 
         d = {w:2*len(w) for w in fear.split()}
         get('fear', d)
+
+Merging Dictionaries
+--------------------
+
+One application of set and dictionary comprehensions is the process of merging
+two dictionaries.  Let's create a function that called ``merge`` that takes two
+dictionaries ``d1`` and ``d2`` as arguments and returns a new dictionary that
+merges the values from both.  As it is possible that both dictionaries contain
+the same keys, we will use the following rules to deal with these *key
+collisions*.
+
+1. Use the key-value pair from ``d2``, if present.
+2. Use the key-value pair from ``d1`` for all ``key not in d2``. 
+
+To make this process easier, we construct a helper function for selecting the
+value from the correct dictionary.
+
+.. ipython:: python
+
+    from toolz import get
+    get_value = lambda key, d1, d2: get(key, d2) if key in d2 else get(key, d1)
+    d1, d2 = {'a':1, 'b':2}, {'a':10, 'c':12}
+    assert get_value('a', d1, d2) == get('a', d2)
+    assert get_value('b', d1, d2) == get('b', d1)
+
+Note that we use two ``assert`` statements to determine if our helper function
+is pulling values from the correct dictionary.  The fact that nothing happened
+when we ran these lines indicates that the assertions held.
+
+.. note:: 
+
+    An assert statement will do nothing when the condition is true, but
+    will throw an exception if it fails.  This is a useful technique for testing
+    functions, which will be discussed on more detail in a future chapter.
+
+The second helper function will take the two dictionaries as arguments and
+return a set of the combined keys.
+
+.. ipython:: python
+
+    all_keys = lambda d1, d2: set(d1.keys()) | set(d2.keys())
+    assert all_keys(d1, d2) == set(['a', 'b', 'c'])
+
+Now we can used a dictionary comprehension to construct the merged dictionaries.
+
+.. ipython:: python
+
+    my_merge = lambda d1, d2: {key:get_value(key, d1, d2) for key in all_keys(d1, d2)}
+    my_merge(d1, d2)
+
+In a pattern that should have become familiar, the ``toolz`` package already
+provides and implementation of ``merge`` that behaves in the same way.
+
+.. ipython:: python
+
+    from toolz import merge
+    merge(d1, d2)
+
+The levels of abstraction for a dictionary
+------------------------------------------
+
+The reader should take a moment to consider the *levels of abstraction* for a
+dictionary.
+
+.. admonition:: The levels of abstraction for a dictionary
+
+    A dictionary consists of keys and values.
+
+.. figure:: Figures/dict_levels.png
+    :alt: The levels of abstraction for a dictionary
+
+    ..
+
+    A dictionary consists of keys and values.
+
+
+Our rule for writing clean code is to write functions that only work at one
+level of abstraction.  If we are going to adhere to this rule when working with
+dictionaries, we should write functions for working with the keys and values,
+and then apply these functions to the dictionary or dictionaries.  
+
+
+.. admonition:: Writing clean code for dictionaries
+
+    When processing dictionaries, do the following to ensure clean code:
+
+    1. Write a function or functions to process keys.
+    2. Write a function or functions to process the values.
+    3. Write a function that uses a comprehension and the functions from **1** and
+       **2** to process the dictionary.
+
+The last example illustrated this pattern by first constructing functions that
+worked on keys (made the collection of all keys) and values (pulled the value
+from the correct dictionary).  These functions were then applied to the
+dictionaries using a comprehension.
+
+.. figure:: Figures/dict_levels_example.png
+    :alt: my_merge example of level of abstraction for a dictionary
+
+    ..
+
+    In the my_merge example, two functions were written to process the keys and
+    values and then these functions were used in a comprehension to merge the
+    dictionaries.
+
+.. note:: 
+
+    We will develop a generalization of ``merge`` called ``merge_with`` when
+    developing higher-order functions for dictionaries.

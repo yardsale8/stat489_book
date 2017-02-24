@@ -266,6 +266,8 @@
 <li><a class="reference internal" href="#">6.3. Dictionary and Set Comprehensions</a><ul>
 <li><a class="reference internal" href="#the-dictionary-comprehension">6.3.1. The Dictionary Comprehension</a></li>
 <li><a class="reference internal" href="#the-set-comprehension">6.3.2. The Set Comprehension</a></li>
+<li><a class="reference internal" href="#merging-dictionaries">6.3.3. Merging Dictionaries</a></li>
+<li><a class="reference internal" href="#the-levels-of-abstraction-for-a-dictionary">6.3.4. The levels of abstraction for a dictionary</a></li>
 </ul>
 </li>
 </ul>
@@ -365,7 +367,7 @@ sequence of values.</p>
 </div>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="identify_dictionary_comprehension_1">
-            <p>Q-1: Which type of comprehension is given below?</p>
+            <p>rec-5-95: Which type of comprehension is given below?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">w</span><span class="p">:</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">)}</span>
 </pre></div>
 </div>
@@ -380,7 +382,7 @@ sequence of values.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="identify_set_comprehension_1">
-            <p>Q-2: Which type of comprehension is given below?</p>
+            <p>rec-5-96: Which type of comprehension is given below?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">w</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">)}</span>
 </pre></div>
 </div>
@@ -395,7 +397,7 @@ sequence of values.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="set_comp_count_1">
-            <p>Q-3: What value will the following code return?</p>
+            <p>rec-5-97: What value will the following code return?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fear</span> <span class="o">=</span> <span class="s2">&quot;the only thing we have to fear is fear itself&quot;</span>
 <span class="nb">len</span><span class="p">({</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">fear</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="s1">&#39;t&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w</span><span class="p">})</span>
 </pre></div>
@@ -411,7 +413,7 @@ sequence of values.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="dict_comp_1">
-            <p>Q-4: What value will the following code return?</p>
+            <p>rec-5-98: What value will the following code return?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fear</span> <span class="o">=</span> <span class="s2">&quot;the only thing we have to fear is fear itself&quot;</span>
 <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">w</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">fear</span><span class="o">.</span><span class="n">split</span><span class="p">()}</span>
 <span class="n">get</span><span class="p">(</span><span class="s1">&#39;fear&#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
@@ -427,6 +429,107 @@ sequence of values.</p>
 
             </ul>
             </div>
+<div class="section" id="merging-dictionaries">
+<h2>6.3.3. Merging Dictionaries<a class="headerlink" href="#merging-dictionaries" title="Permalink to this headline">¶</a></h2>
+<p>One application of set and dictionary comprehensions is the process of merging
+two dictionaries.  Let&#8217;s create a function that called <code class="docutils literal"><span class="pre">merge</span></code> that takes two
+dictionaries <code class="docutils literal"><span class="pre">d1</span></code> and <code class="docutils literal"><span class="pre">d2</span></code> as arguments and returns a new dictionary that
+merges the values from both.  As it is possible that both dictionaries contain
+the same keys, we will use the following rules to deal with these <em>key
+collisions</em>.</p>
+<ol class="arabic simple">
+<li>Use the key-value pair from <code class="docutils literal"><span class="pre">d2</span></code>, if present.</li>
+<li>Use the key-value pair from <code class="docutils literal"><span class="pre">d1</span></code> for all <code class="docutils literal"><span class="pre">key</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">d2</span></code>.</li>
+</ol>
+<p>To make this process easier, we construct a helper function for selecting the
+value from the correct dictionary.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
+
+<span class="gp">In [8]: </span><span class="n">get_value</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">:</span> <span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d2</span> <span class="k">else</span> <span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">d1</span><span class="p">)</span>
+
+<span class="gp">In [9]: </span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">}</span>
+
+<span class="gp">In [10]: </span><span class="k">assert</span> <span class="n">get_value</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span> <span class="o">==</span> <span class="n">get</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+
+<span class="gp">In [11]: </span><span class="k">assert</span> <span class="n">get_value</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span> <span class="o">==</span> <span class="n">get</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">d1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that we use two <code class="docutils literal"><span class="pre">assert</span></code> statements to determine if our helper function
+is pulling values from the correct dictionary.  The fact that nothing happened
+when we ran these lines indicates that the assertions held.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">An assert statement will do nothing when the condition is true, but
+will throw an exception if it fails.  This is a useful technique for testing
+functions, which will be discussed on more detail in a future chapter.</p>
+</div>
+<p>The second helper function will take the two dictionaries as arguments and
+return a set of the combined keys.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">all_keys</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="n">d1</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">d2</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="gp">In [13]: </span><span class="k">assert</span> <span class="n">all_keys</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Now we can used a dictionary comprehension to construct the merged dictionaries.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">my_merge</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">:</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span><span class="n">get_value</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">all_keys</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)}</span>
+
+<span class="gp">In [15]: </span><span class="n">my_merge</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+<span class="gh">Out[15]: </span><span class="go">{&#39;a&#39;: 10, &#39;b&#39;: 2, &#39;c&#39;: 12}</span>
+</pre></div>
+</div>
+<p>In a pattern that should have become familiar, the <code class="docutils literal"><span class="pre">toolz</span></code> package already
+provides and implementation of <code class="docutils literal"><span class="pre">merge</span></code> that behaves in the same way.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">merge</span>
+
+<span class="gp">In [17]: </span><span class="n">merge</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+<span class="gh">Out[17]: </span><span class="go">{&#39;a&#39;: 10, &#39;b&#39;: 2, &#39;c&#39;: 12}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-levels-of-abstraction-for-a-dictionary">
+<h2>6.3.4. The levels of abstraction for a dictionary<a class="headerlink" href="#the-levels-of-abstraction-for-a-dictionary" title="Permalink to this headline">¶</a></h2>
+<p>The reader should take a moment to consider the <em>levels of abstraction</em> for a
+dictionary.</p>
+<div class="admonition-the-levels-of-abstraction-for-a-dictionary admonition">
+<p class="first admonition-title">The levels of abstraction for a dictionary</p>
+<p class="last">A dictionary consists of keys and values.</p>
+</div>
+<div class="figure">
+<img alt="The levels of abstraction for a dictionary" src="../_images/dict_levels.png" />
+<div class="legend">
+A dictionary consists of keys and values.</div>
+</div>
+<p>Our rule for writing clean code is to write functions that only work at one
+level of abstraction.  If we are going to adhere to this rule when working with
+dictionaries, we should write functions for working with the keys and values,
+and then apply these functions to the dictionary or dictionaries.</p>
+<div class="admonition-writing-clean-code-for-dictionaries admonition">
+<p class="first admonition-title">Writing clean code for dictionaries</p>
+<p>When processing dictionaries, do the following to ensure clean code:</p>
+<ol class="last arabic simple">
+<li>Write a function or functions to process keys.</li>
+<li>Write a function or functions to process the values.</li>
+<li>Write a function that uses a comprehension and the functions from <strong>1</strong> and
+<strong>2</strong> to process the dictionary.</li>
+</ol>
+</div>
+<p>The last example illustrated this pattern by first constructing functions that
+worked on keys (made the collection of all keys) and values (pulled the value
+from the correct dictionary).  These functions were then applied to the
+dictionaries using a comprehension.</p>
+<div class="figure">
+<img alt="my_merge example of level of abstraction for a dictionary" src="../_images/dict_levels_example.png" />
+<div class="legend">
+In the my_merge example, two functions were written to process the keys and
+values and then these functions were used in a comprehension to merge the
+dictionaries.</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We will develop a generalization of <code class="docutils literal"><span class="pre">merge</span></code> called <code class="docutils literal"><span class="pre">merge_with</span></code> when
+developing higher-order functions for dictionaries.</p>
+</div>
+</div>
 </div>
 
 

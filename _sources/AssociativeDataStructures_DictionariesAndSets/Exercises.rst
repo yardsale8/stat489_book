@@ -19,9 +19,9 @@ Exercises
    a.
       .. sourcecode:: python
 
-          >>> from toolz import get, assoc
+          >>> from toolz import get, assoc, dissoc
           >>> d = {'apples': 15, 'bananas': 35, 'grapes': 12}
-          >>> get(d, 'banana')
+          >>> get('banana',d) 
 
    b.
       .. sourcecode:: python
@@ -37,12 +37,12 @@ Exercises
    d.
       .. sourcecode:: python
 
-          >>> get(d, 'pears')
+          >>> get('pears', d)
 
    e.
       .. sourcecode:: python
 
-          >>> get(d, 'pears', 0)
+          >>> get('pears', d, 0)
 
    f.
       .. sourcecode:: python
@@ -105,13 +105,13 @@ Exercises
 .. question:: dict_ex_4
 
        Refer to the last two problems.  This time we will map each unique word
-       to a tuple that givens the line number and word position on the line for
+       to a tuple that gives the line number and word position on the line for
        the first occurance of a word. For example ``(3,5)`` means that the
        corresponding word is first occurs as the 5th word on line 3. Write a
        function that creates this dictionary.  Apply this function to the text
        version of `Alice's Adventures in Wonderland`.         
 
-       **Hint:** You will need to apply the dictinary comprehension trick from
+       **Hint:** You will need to apply the dictionary comprehension trick from
        problem 2 twice, once for lines and again for words.
 
        Find the line-word pair for ``alice``.
@@ -160,7 +160,7 @@ Exercises
 
 .. question:: dict_ex_7
 
-    Consider the following set of key's.
+    Consider the following set of keys.
 
     .. sourcecode:: python
 
@@ -177,3 +177,42 @@ Exercises
     already exists in a dictionary.  You can assume that the dictionary always
     consists of a perfectly balanced binary tree (which is not true in practice).
 
+.. question:: dict_ex_9
+
+   .. tabbed:: q3
+
+        .. tab:: Question
+
+           Consider the JSON examples given on `json.org
+           <http://json.org/example.html>`_.  Read the JSON data from the first
+           example (starts with "glossary" key) into python and use a call to
+           ``get_in`` to extract the string "XML" from this data structure.
+
+           .. actex:: ex_11_02
+
+        .. tab:: Answer
+
+            .. sourcecode:: python
+
+                s = '''
+                <paste JSON here>
+                '''
+                from toolz import get_in
+                from json import loads
+                data = loads(s)
+                get_in(["glossary", "GlossDiv", "GlossEntry", "GlossDef", "GlossSeeAlso", 2], data)
+
+
+.. question:: dict_ex_10
+
+   Consider the JSON examples given on `json.org
+   <http://json.org/example.html>`_.  Read the JSON data from the third example
+   (starts with "menu" key) into python and use a call to ``get_in`` to
+   extract the string "CloseDoc()" from this data structure.
+
+.. question:: dict_ex_11
+
+   Consider the JSON examples given on `json.org
+   <http://json.org/example.html>`_.  Read the JSON data from the fourth example
+   (starts with "web-app" key) into python and use a call to ``get_in`` to
+   extract the string "toolstemplates/" from this data structure.

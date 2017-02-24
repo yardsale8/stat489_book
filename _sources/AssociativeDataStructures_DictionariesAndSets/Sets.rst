@@ -68,7 +68,7 @@ sets have a much more efficient item look-up (as discussed in a later section).
 Comparing Membership with Sets
 ------------------------------
 
-As sets a modeled after sets from mathematics, they are also useful in comparing
+As sets are modeled after sets from mathematics, they are also useful in comparing
 the membership of two groups.  To illustrate this process, we will create a set
 containing the unique words from the `Gettysburg Address
 <https://en.wikipedia.org/wiki/Gettysburg_Address>`_.
@@ -109,7 +109,7 @@ has worked with sets in mathematics.
 
 The ``intersection`` method of a set can be used to construct another set that
 contains all elements the two sets have in common.   The ``union`` method can be
-used to create the set of words that are one or both original sets.
+used to create the set of words that are in one or both original sets.
 
 .. ipython:: python
 
@@ -174,11 +174,11 @@ are in one set but not both.  (This is equivalent to
 .. mchoice:: set_intersection_1
     :answer_a: 22
     :answer_b: 19
-    :answer_c: 0
+    :answer_c: 1
     :correct: c
     :feedback_a: The intersection would represent the words that are in common.  This answer gives total number of words including repeats ('fear', 'of', 'failure').
     :feedback_b: The intersection would represent the words that are in common.  This answer gives total number of unique words in the union of the sets.
-    :feedback_c: These two quotes (by FDR and Winsten Churchhill, respectively) have no words in common.
+    :feedback_c: These two quotes (by FDR and Winsten Churchhill, respectively) have 1 word in common ('to').
 
      
     What value will the following code return?

@@ -111,14 +111,17 @@ Exercises
                 table = [row for row in reader]
             return table
 
-    1.  Write a function that takes a year and table of batting data as input and returns the average number
-        of runs scored in that year.  Call this function **average_runs_year**.
-    2.  Write a function takes a list of years and a table of batting data and returns of list of values, each
-        Call this function **average_runs_years**.
-        corresponding the the average number of runs for that year.  
-    3.  Write a program that includes the above functions and reads **Batting.csv** and compute the average number of
-        runs for the following years: 1900, 1910, ..., 2000, 2010.  Assume that
-        the Batting.csv file is the same directory as your program.
+    1.  Write a function that takes a year and table of batting data as input
+        and returns the average number of runs scored in that year.  Call
+        this function **average_runs_year**.
+    2.  Write a function takes a list of years and a table of batting data and
+        returns of list of tuples of the form `(year, averages_runs)`.  Call
+        this function **average_runs_years** Use a list comprehension
+        and the function from the last step.
+    3.  Write a program that includes the above functions and reads
+        **Batting.csv** and compute the average number of runs for the
+        following years: 1900, 1910, ..., 2000, 2010.  Assume that the
+        Batting.csv file is the same directory as your program.
 
 .. question:: files_ex_5
 
@@ -145,7 +148,7 @@ Exercises
 
 .. question:: files_ex_8
 
-    Download, unzip and extract the file titled **Schools.csv** and
+    Download, unzip and extract the file titled **Master.csv** and
     **BattingPost.csv**.  from `seanlahman.com <http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip>`_
 
     Write a program that computes the total runs scored in the post season by
