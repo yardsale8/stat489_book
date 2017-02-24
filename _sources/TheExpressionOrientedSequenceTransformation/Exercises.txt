@@ -17,7 +17,9 @@ Exercises
    
    In Robert McCloskey's book *Make Way for Ducklings*, the names of the
    ducklings are Jack, Kack, Lack, Mack, Nack, Ouack, Pack, and Quack.  This
-   loop tries to output these names in order.
+   loop tries to output these names in order. Save your answer in a variable
+   named ``words`` and make sure that this value doesn't get overwritten later in
+   your program.
 
    .. sourcecode:: python
 
@@ -80,7 +82,7 @@ Exercises
 
 .. question:: 80 
    
-   Write a function that reverses its string argument.
+   Write a function named ``reverse_str`` that reverses its string argument.
 
    .. actex:: ex_8_5
       :nocodelens:
@@ -149,12 +151,13 @@ Exercises
 
 .. question:: 148 
    
-   Write a function that removes all occurrences of a given letter from a string.
+   Write a function named ``remove_char`` that removes all occurrences of a
+   given letter from a string.  Do not use the ``replace`` string method.
 
    .. actex:: ex_8_7
       :nocodelens:
 
-      remove_letter = lambda theLetter, theString: "stuff" # your code here
+      remove_char = lambda theLetter, theString: "stuff" # your code here
 
       ====
 
@@ -164,9 +167,9 @@ Exercises
       class myTests(TestCaseGui):
 
         def testOne(self):
-            self.assertEqual(remove_letter("a","apple"),"pple","Tested remove_letter on inputs of 'a' and 'apple'")
-            self.assertEqual(remove_letter("a","banana"),"bnn","Tested remove_letter on inputs of 'a' and 'banana'")
-            self.assertEqual(remove_letter("z","banana"),"banana","Tested remove_letter on inputs of 'z' and 'banana'")
+            self.assertEqual(remove_char("a","apple"),"pple","Tested remove_char on inputs of 'a' and 'apple'")
+            self.assertEqual(remove_char("a","banana"),"bnn","Tested remove_char on inputs of 'a' and 'banana'")
+            self.assertEqual(remove_char("z","banana"),"banana","Tested remove_char on inputs of 'z' and 'banana'")
 
 
 
@@ -236,10 +239,7 @@ Exercises
 
    .. actex:: ex_8_11
 
-      def remove_all(substr,theStr):
-          # your code here
-
-
+      remove_substring = lambda substr,s: 'code here'
 
       ====
 
@@ -248,10 +248,10 @@ Exercises
       class myTests(TestCaseGui):
 
         def testOne(self):
-            self.assertEqual(remove_all("an","banana"),"ba","Tested remove_all on inputs of 'an' and 'banana'")
-            self.assertEqual(remove_all("cyc","bicycle"),"bile","Tested remove_all on inputs of 'cyc' and 'bicycle'")
-            self.assertEqual(remove_all("iss","Mississippi"),"Mippi","Tested remove_all on inputs of 'iss' and 'Mississippi'")
-            self.assertEqual(remove_all("eggs","bicycle"),"bicycle","Tested remove_all on inputs of 'eggs' and 'bicycle'")
+            self.assertEqual(remove_substring("an","banana"),"ba","Tested remove_all on inputs of 'an' and 'banana'")
+            self.assertEqual(remove_substring("cyc","bicycle"),"bile","Tested remove_all on inputs of 'cyc' and 'bicycle'")
+            self.assertEqual(remove_substring("iss","Mississippi"),"Mippi","Tested remove_all on inputs of 'iss' and 'Mississippi'")
+            self.assertEqual(remove_substring("eggs","bicycle"),"bicycle","Tested remove_all on inputs of 'eggs' and 'bicycle'")
 
 
 
@@ -301,7 +301,7 @@ Exercises
 
 .. question:: 299 
    
-   Write a function that computes the mean of ``n`` randomly selected values
+   Write a function called ``mean_normal(n, m, sd)`` that computes the mean of ``n`` randomly selected values
    taken from a normal distribution with mean ``m`` and standard deviation
    ``sd``.
 
@@ -379,11 +379,11 @@ Exercises
 
 .. question:: 377 
 
-   Sum up all the even numbers in a list.
+   Write a function called ``sum_even`` that sums up all the even numbers in a list.
 
    .. actex:: ex_9_7
 
-      sumEven = lambda lst: 42 # your code here
+      sum_even = lambda lst: 42 # your code here
 
       ====
       from unittest.gui import TestCaseGui
@@ -391,10 +391,10 @@ Exercises
       class myTests(TestCaseGui):
 
           def testOne(self):
-              self.assertEqual(sumEven([1,3,5,7,9]),0,"Tested sumEven on input [1,3,5,7,9]")
-              self.assertEqual(sumEven([-1,-2,-3,-4,-5]),-6,"Tested sumEven on input [-1,-2,-3,-4,-5]")
-              self.assertEqual(sumEven([2,4,6,7,9]),12,"Tested sumEven on input [2,4,6,7,9]")
-              self.assertEqual(sumEven([0,1,12,33]),12,"Tested sumEven on input [0,1,12,33]")
+              self.assertEqual(sum_even([1,3,5,7,9]),0,"Tested sum_even on input [1,3,5,7,9]")
+              self.assertEqual(sum_even([-1,-2,-3,-4,-5]),-6,"Tested sum_even on input [-1,-2,-3,-4,-5]")
+              self.assertEqual(sum_even([2,4,6,7,9]),12,"Tested sum_even on input [2,4,6,7,9]")
+              self.assertEqual(sum_even([0,1,12,33]),12,"Tested sum_even on input [0,1,12,33]")
 
       myTests().main()
 
@@ -444,15 +444,23 @@ Exercises
 
 .. question:: 442 
 
-   Count how many words in a list have length 5.
+   Write a function called ``num_greater_5`` that counts how many words in a list have length 5.
 
    .. actex:: ex_9_9
 
-      countWords = lambda lst: 23 # your code here
+      num_greater_5 = lambda lst: 23 # your code here
 
 .. question:: emma
 
-   Count how many words in Emma have length of at least 5.
+   Use the function from the last problem to count how many words in Emma have
+   length of at least 5.  Save your result in a variable named
+   ``num_words_emma``.
+
+   **Note:** You should clean up such that
+
+   1. Hyphenated words count as separate words.
+   2. The words contracted with an apostrophe count as two words.
+
 
 .. all_combos
 
