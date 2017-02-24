@@ -102,7 +102,7 @@
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
     <link rel="up" title="6. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
-    <link rel="next" title="6.5. Exercises" href="Exercises.html" />
+    <link rel="next" title="6.5. Working with Nested Data Structures" href="WorkingWithNestedDataStructures.html" />
     <link rel="prev" title="6.3. Dictionary and Set Comprehensions" href="Comprehensions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -277,8 +277,8 @@
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 6.5. Exercises' data-toggle="tooltip" >
-    <a href="Exercises.html" >
+  <li id="relations-next" title='Next Chapter - 6.5. Working with Nested Data Structures' data-toggle="tooltip" >
+    <a href="WorkingWithNestedDataStructures.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
   </li>
@@ -328,25 +328,25 @@ values (hash, key, value), which is easy to do with <code class="docutils litera
 
 <span class="gp">In [4]: </span><span class="n">key_hashes</span>
 <span class="gh">Out[4]: </span><span class="go"></span>
-<span class="go">[-900429559131430765,</span>
-<span class="go"> -711290366503655194,</span>
-<span class="go"> 5806262869679273071,</span>
-<span class="go"> 1259718528705525711,</span>
-<span class="go"> 5716819606207688059,</span>
-<span class="go"> -1972393359941226600,</span>
-<span class="go"> -4134114636277464775]</span>
+<span class="go">[4400724194978799068,</span>
+<span class="go"> 4444750314811143740,</span>
+<span class="go"> 7255718515267025354,</span>
+<span class="go"> -5559985474210632715,</span>
+<span class="go"> -433385403764021933,</span>
+<span class="go"> 20922756739155185,</span>
+<span class="go"> -1149408179821379336]</span>
 
 <span class="gp">In [5]: </span><span class="n">triples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">key_hashes</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
 
 <span class="gp">In [6]: </span><span class="n">triples</span>
 <span class="gh">Out[6]: </span><span class="go"></span>
-<span class="go">[(-900429559131430765, &#39;a&#39;, 1),</span>
-<span class="go"> (-711290366503655194, &#39;b&#39;, 2),</span>
-<span class="go"> (5806262869679273071, &#39;c&#39;, 3),</span>
-<span class="go"> (1259718528705525711, &#39;d&#39;, 4),</span>
-<span class="go"> (5716819606207688059, &#39;e&#39;, 5),</span>
-<span class="go"> (-1972393359941226600, &#39;m&#39;, 6),</span>
-<span class="go"> (-4134114636277464775, &#39;n&#39;, 7)]</span>
+<span class="go">[(4400724194978799068, &#39;a&#39;, 1),</span>
+<span class="go"> (4444750314811143740, &#39;b&#39;, 2),</span>
+<span class="go"> (7255718515267025354, &#39;c&#39;, 3),</span>
+<span class="go"> (-5559985474210632715, &#39;d&#39;, 4),</span>
+<span class="go"> (-433385403764021933, &#39;e&#39;, 5),</span>
+<span class="go"> (20922756739155185, &#39;m&#39;, 6),</span>
+<span class="go"> (-1149408179821379336, &#39;n&#39;, 7)]</span>
 </pre></div>
 </div>
 <p>Before we can efficiently put these value in a search tree, we must sort these
@@ -359,13 +359,13 @@ values (hash, key, value), which is easy to do with <code class="docutils litera
 
 <span class="gp">In [10]: </span><span class="n">sorted_triples</span>
 <span class="gh">Out[10]: </span><span class="go"></span>
-<span class="go">[(-4134114636277464775, &#39;n&#39;, 7),</span>
-<span class="go"> (-1972393359941226600, &#39;m&#39;, 6),</span>
-<span class="go"> (-900429559131430765, &#39;a&#39;, 1),</span>
-<span class="go"> (-711290366503655194, &#39;b&#39;, 2),</span>
-<span class="go"> (1259718528705525711, &#39;d&#39;, 4),</span>
-<span class="go"> (5716819606207688059, &#39;e&#39;, 5),</span>
-<span class="go"> (5806262869679273071, &#39;c&#39;, 3)]</span>
+<span class="go">[(-5559985474210632715, &#39;d&#39;, 4),</span>
+<span class="go"> (-1149408179821379336, &#39;n&#39;, 7),</span>
+<span class="go"> (-433385403764021933, &#39;e&#39;, 5),</span>
+<span class="go"> (20922756739155185, &#39;m&#39;, 6),</span>
+<span class="go"> (4400724194978799068, &#39;a&#39;, 1),</span>
+<span class="go"> (4444750314811143740, &#39;b&#39;, 2),</span>
+<span class="go"> (7255718515267025354, &#39;c&#39;, 3)]</span>
 </pre></div>
 </div>
 <p>Now we place the triples in a search tree with the following strategy:</p>
@@ -416,7 +416,7 @@ second node, 7, is returned.</div>
 </div>
 <p>Because the tree depth for a balanced tree is approximately <span class="math">\(\log_2(n)\)</span>
 for a tree containing <span class="math">\(n\)</span> values, the time complexity of looking up values
-in a dictionary has time complexity of <span class="math">\(O(\log_2(n)\)</span>.  The time complexity
+in a dictionary has time complexity of <span class="math">\(O(\log_2(n))\)</span>.  The time complexity
 of checking for the presence of a key in a dictionary or an item in a set is
 also <span class="math">\(O(\log_2(n)\)</span>.</p>
 <p>If you compare these complexities to that of a look-up for a list or tuple,
@@ -439,12 +439,12 @@ a set to check if a value is <code class="docutils literal"><span class="pre">in
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="Comprehensions.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 6.5. Exercises' data-toggle="tooltip" >
-    <a href="Exercises.html" >
+  <li id="relations-next" class="navLink" title='Next Section - 6.5. Working with Nested Data Structures' data-toggle="tooltip" >
+    <a href="WorkingWithNestedDataStructures.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="Exercises.html" >Next Section - 6.5. Exercises</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="WorkingWithNestedDataStructures.html" >Next Section - 6.5. Working with Nested Data Structures</a>
 
 <script type="text/javascript">
 
