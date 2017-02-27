@@ -429,9 +429,9 @@ this method by calling the ``help`` function on the method name.
    :answer_b: False
    :correct: a
    :feedback_a: In this chapter you saw one named alex and one named tess, but any legal variable name is allowed.
-   :feedback_b: A variable, including one referring to a Turtle object, can have whatever name you choose as long as it follows the naming conventions from Chapter 2.
+   :feedback_b: A variable, including one referring to a Turtle object, can have whatever name you choose as long as it follows the naming conventions from Chapter 1.
 
-   True or False: A Turtle object can have any name that follows the naming rules from Chapter 2.
+   True or False: A Turtle object can have any name that follows the naming rules from Chapter 1.
 
 .. mchoice:: test_question3_1_4
    :answer_a: <img src="../_static/test1Alt1.png" alt="right turn of 90 degrees before drawing, draw a line 150 pixels long, turn left 90, and draw a line 75 pixels long">

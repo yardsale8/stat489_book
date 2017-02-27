@@ -143,8 +143,8 @@ Exercises
     Download, unzip and extract the file titled **Salaries.csv** and
     **Batting.csv**.  from `seanlahman.com <http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip>`_
 
-    Write a program that computes the salary of the player with the highest
-    batting average in the last 5 years. 
+    Write a program that computes the current salary of the player with the
+    highest batting average in the last 5 years. 
 
 .. question:: files_ex_8
 

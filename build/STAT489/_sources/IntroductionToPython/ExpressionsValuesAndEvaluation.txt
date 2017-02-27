@@ -38,7 +38,7 @@ At this point, you may be wondering why there is so much focus on expressions.
 Expressions are the building blocks for functional programs and using the right
 expressions can lead to programs that are easier to understand.  In particular,
 part of a program is **referentially transparent** if it can be replaced with
-it's value without changing the meaning of the progra, making it easier to
+it's value without changing the meaning of the program, making it easier to
 understand.  Expressions constructed out of lambda expressions, conditional
 expressions and operations will be *referentially transparent*.  
 

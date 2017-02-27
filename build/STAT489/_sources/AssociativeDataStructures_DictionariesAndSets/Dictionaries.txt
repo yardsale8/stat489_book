@@ -303,7 +303,7 @@ items       none                Returns a view of the key-value pairs in the dic
 ==========  ==============      =======================================================
 
 The ``keys`` method returns what Python 3 calls a **view** over its
-underlying keys.  An view is an example of an **iterable**. 
+underlying keys.  A view is an example of an **iterable**. 
 
 .. ipython:: python
     

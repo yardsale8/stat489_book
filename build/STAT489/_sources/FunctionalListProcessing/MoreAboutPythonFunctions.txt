@@ -556,7 +556,51 @@ function call.
 Default Parameters
 ------------------
 
-TODO
+In an earlier chapter, we contended with the problem of creating a general
+``apply_tax`` function.  One solution was to have the tax rate as a parameter.
+
+.. ipython:: python
+
+    def apply_tax (rate, cost): 
+        return round(rate*cost, 2)
+
+    apply_tax(1.065, 4.99)
+
+It was noted that having to input the same tax rate can be annoying, but also
+violated the DRY principle.  Our first solution to this problem was to use a
+function factory and a closure to create specific implementations of
+``apply_tax``.
+
+.. ipython:: python
+
+    def make_apply_tax(rate): 
+        def apply_tax(cost): 
+            return round(rate*cost, 2)
+        return apply_tax
+
+    apply_tax = make_apply_tax(1.065)
+    apply_tax(4.99)
+
+The standard "Pythonic" solution to this problem is to use a default parameter
+for the tax rate.  The default value is selected to be some convenient and
+typical value and the user can either use this default or provide their own.
+
+.. ipython:: python
+
+    def apply_tax(cost, rate=1.065):
+         return round(rate*cost, 2)
+
+    apply_tax(4.99)
+    apply_tax(4.99, 1.07)
+    apply_tax(4.99, rate=1.07)
+
+Note that we can give an altercate value for the default value positionally (by
+adding a second parameter) or by explicitly assigning a value to the parameter
+(``rate=1.07``).
+
+.. note::
+
+Default parameters must follow all regular (positional) parameters.
 
 Variable Arity Functions
 ------------------------
@@ -619,8 +663,53 @@ more additional parameters.
 
 .. note:: 
 
-    The varaible args must follow the positional arguments.
+    The variable args must follow the positional arguments.
 
+Keyword Arguments
+-----------------
+
+Just as using ``*args`` allows construction of functions with any number of
+arguments, we can use the ``**kwargs`` to provide any number of *keyword
+arguments*. **Keyword arguments**, like default parameters, are used to define
+values by name as opposed to position.
+
+To define a function that accepts keyword arguments, we add the special
+``**kwargs`` parameter to the end of the parameter list.
+
+.. ipython:: python
+
+    def f(**kwargs): #**
+        print('The keywords and values are', kwargs)
+
+When calling such a function, we provide the keyword arguments by *unpacking* a
+dictionary of keywords and the corresponding values.
+
+.. ipython:: python
+
+    f(x = 2, y = 3)
+
+Notice that all of the keyword arguments are returned in a dictionary named
+``kwargs``.  The keys of this dictionary are the strings for each keyword and
+the value are the corresponding argument values.
+
+
+Let's return to the ``apply_tax`` example.  Another solution to the problem is
+to define the function to allow for keyword arguments, then check these
+arguments for the ``'rate'`` keyword.
+
+.. ipython:: python
+
+    from toolz import get
+    def apply_tax(cost, **kwargs): #**
+        if 'rate' in kwargs:
+            rate = get('rate', kwargs)
+        else:
+            rate = 1.065
+        return round(rate*cost, 2)
+
+    apply_tax(4.99)
+    apply_tax(4.99, rate = 1.07)
+        
 Unpacking arguments and keywords
 --------------------------------
 
@@ -639,4 +728,24 @@ general functions.  Here we have a function that will work on any number of
 arguments, as well as on unpacked lists.   In particular, applying this function
 to the list allows us to add up a list of undetermined length!
 
+Unpacking dictionaries with the ``**`` operator is similar to unpacking lists
+with ``*`` operator.  In this case, we think of ``**{'x':5, 'y':2}`` as
+returning ``x=5, y=2``.
 
+Here is an example of using keyword unpacking with the ``apply_tax`` function
+that accepts keyword arguments.
+
+.. ipython:: python
+
+    from toolz import get
+    def apply_tax(cost, **kwargs): #**
+        if 'rate' in kwargs:
+            rate = get('rate', kwargs)
+        else:
+            rate = 1.065
+        return round(rate*cost, 2)
+
+    apply_tax(4.99, **{'rate':1.07})
+        
+.. todo:: Add some multiple choice problem related to types of parameters (positional, default, varargs, kwargs)
+.. todo:: Add multiple choice problems that require the student to parse various combinations of parameters.
