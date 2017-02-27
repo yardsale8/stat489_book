@@ -272,7 +272,8 @@
 <li><a class="reference internal" href="#python-functional-parameters">7.2. Python Functional Parameters</a><ul>
 <li><a class="reference internal" href="#default-parameters">7.2.1. Default Parameters</a></li>
 <li><a class="reference internal" href="#variable-arity-functions">7.2.2. Variable Arity Functions</a></li>
-<li><a class="reference internal" href="#unpacking-arguments-and-keywords">7.2.3. Unpacking arguments and keywords</a></li>
+<li><a class="reference internal" href="#keyword-arguments">7.2.3. Keyword Arguments</a></li>
+<li><a class="reference internal" href="#unpacking-arguments-and-keywords">7.2.4. Unpacking arguments and keywords</a></li>
 </ul>
 </li>
 </ul>
@@ -518,7 +519,7 @@ control back to the place in the program where the function call was made.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare)</span> </p>
 </div>
 <script type="text/javascript">
-var ch04_clsquare_trace = {"trace": [{"globals": {}, "func_name": "<module>", "ordered_globals": [], "stack_to_render": [], "heap": {}, "event": "step_line", "stdout": "", "line": 1}, {"globals": {"square": ["REF", 1]}, "func_name": "<module>", "ordered_globals": ["square"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "step_line", "stdout": "", "line": 5}, {"globals": {"number": 10, "square": ["REF", 1]}, "func_name": "<module>", "ordered_globals": ["square", "number"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "step_line", "stdout": "", "line": 6}, {"globals": {"number": 10, "square": ["REF", 1]}, "func_name": "square", "ordered_globals": ["square", "number"], "stack_to_render": [{"ordered_varnames": ["x"], "is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "func_name": "square", "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"x": 10}, "is_highlighted": true}], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "call", "stdout": "", "line": 1}, {"globals": {"number": 10, "square": ["REF", 1]}, "func_name": "square", "ordered_globals": ["square", "number"], "stack_to_render": [{"ordered_varnames": ["x"], "is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "func_name": "square", "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"x": 10}, "is_highlighted": true}], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "step_line", "stdout": "", "line": 2}, {"globals": {"number": 10, "square": ["REF", 1]}, "func_name": "square", "ordered_globals": ["square", "number"], "stack_to_render": [{"ordered_varnames": ["x", "y"], "is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "func_name": "square", "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"x": 10, "y": 100}, "is_highlighted": true}], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "step_line", "stdout": "", "line": 3}, {"globals": {"number": 10, "square": ["REF", 1]}, "func_name": "square", "ordered_globals": ["square", "number"], "stack_to_render": [{"ordered_varnames": ["x", "y", "__return__"], "is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "func_name": "square", "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"__return__": 100, "x": 10, "y": 100}, "is_highlighted": true}], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "return", "stdout": "", "line": 3}, {"globals": {"number": 10, "square": ["REF", 1], "result": 100}, "func_name": "<module>", "ordered_globals": ["square", "number", "result"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "step_line", "stdout": "", "line": 7}, {"globals": {"number": 10, "square": ["REF", 1], "result": 100}, "func_name": "<module>", "ordered_globals": ["square", "number", "result"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "return", "stdout": "", "line": 7}], "code": "def square(x):\n    y = x * x\n    return y\n\nnumber = 10\nresult = square(number)\nresult"};
+var ch04_clsquare_trace = {"trace": [{"stack_to_render": [], "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "globals": {}, "stdout": "", "event": "step_line"}, {"stack_to_render": [], "ordered_globals": ["square"], "line": 5, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"square": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [], "ordered_globals": ["square", "number"], "line": 6, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "square": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [{"is_parent": false, "unique_hash": "square_f1", "encoded_locals": {"x": 10}, "frame_id": 1, "is_zombie": false, "ordered_varnames": ["x"], "func_name": "square", "parent_frame_id_list": [], "is_highlighted": true}], "ordered_globals": ["square", "number"], "line": 1, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "square": ["REF", 1]}, "stdout": "", "event": "call"}, {"stack_to_render": [{"is_parent": false, "unique_hash": "square_f1", "encoded_locals": {"x": 10}, "frame_id": 1, "is_zombie": false, "ordered_varnames": ["x"], "func_name": "square", "parent_frame_id_list": [], "is_highlighted": true}], "ordered_globals": ["square", "number"], "line": 2, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "square": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [{"is_parent": false, "unique_hash": "square_f1", "encoded_locals": {"y": 100, "x": 10}, "frame_id": 1, "is_zombie": false, "ordered_varnames": ["x", "y"], "func_name": "square", "parent_frame_id_list": [], "is_highlighted": true}], "ordered_globals": ["square", "number"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "square": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [{"is_parent": false, "unique_hash": "square_f1", "encoded_locals": {"y": 100, "__return__": 100, "x": 10}, "frame_id": 1, "is_zombie": false, "ordered_varnames": ["x", "y", "__return__"], "func_name": "square", "parent_frame_id_list": [], "is_highlighted": true}], "ordered_globals": ["square", "number"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "square": ["REF", 1]}, "stdout": "", "event": "return"}, {"stack_to_render": [], "ordered_globals": ["square", "number", "result"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "result": 100, "square": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [], "ordered_globals": ["square", "number", "result"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "result": 100, "square": ["REF", 1]}, "stdout": "", "event": "return"}], "code": "def square(x):\n    y = x * x\n    return y\n\nnumber = 10\nresult = square(number)\nresult"};
 var ch04_clsquare_vis;
 
 $(document).ready(function() {
@@ -588,7 +589,7 @@ variables listing.  Then look at what is printed when the function returns.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare_bad)</span> </p>
 </div>
 <script type="text/javascript">
-var ch04_clsquare_bad_trace = {"trace": [{"globals": {}, "func_name": "<module>", "ordered_globals": [], "stack_to_render": [], "heap": {}, "event": "step_line", "stdout": "", "line": 1}, {"globals": {"square": ["REF", 1]}, "func_name": "<module>", "ordered_globals": ["square"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "step_line", "stdout": "", "line": 5}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "func_name": "<module>", "ordered_globals": ["square", "toSquare"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "step_line", "stdout": "", "line": 6}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "func_name": "square", "ordered_globals": ["square", "toSquare"], "stack_to_render": [{"ordered_varnames": ["x"], "is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "func_name": "square", "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"x": 10}, "is_highlighted": true}], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "call", "stdout": "", "line": 1}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "func_name": "square", "ordered_globals": ["square", "toSquare"], "stack_to_render": [{"ordered_varnames": ["x"], "is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "func_name": "square", "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"x": 10}, "is_highlighted": true}], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "step_line", "stdout": "", "line": 2}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "func_name": "square", "ordered_globals": ["square", "toSquare"], "stack_to_render": [{"ordered_varnames": ["x", "y"], "is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "func_name": "square", "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"x": 10, "y": 100}, "is_highlighted": true}], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "step_line", "stdout": "", "line": 3}, {"globals": {"toSquare": 10, "square": ["REF", 1]}, "func_name": "square", "ordered_globals": ["square", "toSquare"], "stack_to_render": [{"ordered_varnames": ["x", "y", "__return__"], "is_zombie": false, "unique_hash": "square_f1", "is_parent": false, "func_name": "square", "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"__return__": null, "x": 10, "y": 100}, "is_highlighted": true}], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "return", "stdout": "100\n", "line": 3}, {"globals": {"squareResult": null, "toSquare": 10, "square": ["REF", 1]}, "func_name": "<module>", "ordered_globals": ["square", "toSquare", "squareResult"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "step_line", "stdout": "100\n", "line": 7}, {"globals": {"squareResult": null, "toSquare": 10, "square": ["REF", 1]}, "func_name": "<module>", "ordered_globals": ["square", "toSquare", "squareResult"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "square(x)", null]}, "event": "return", "stdout": "100\nThe result of  10  squared is  None\n", "line": 7}], "code": "def square(x):\n    y = x * x\n    print(y)   # Bad! should use return instead!\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)"};
+var ch04_clsquare_bad_trace = {"trace": [{"stack_to_render": [], "ordered_globals": [], "line": 1, "func_name": "<module>", "heap": {}, "globals": {}, "stdout": "", "event": "step_line"}, {"stack_to_render": [], "ordered_globals": ["square"], "line": 5, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"square": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [], "ordered_globals": ["square", "toSquare"], "line": 6, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "square": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [{"is_parent": false, "unique_hash": "square_f1", "encoded_locals": {"x": 10}, "frame_id": 1, "is_zombie": false, "ordered_varnames": ["x"], "func_name": "square", "parent_frame_id_list": [], "is_highlighted": true}], "ordered_globals": ["square", "toSquare"], "line": 1, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "square": ["REF", 1]}, "stdout": "", "event": "call"}, {"stack_to_render": [{"is_parent": false, "unique_hash": "square_f1", "encoded_locals": {"x": 10}, "frame_id": 1, "is_zombie": false, "ordered_varnames": ["x"], "func_name": "square", "parent_frame_id_list": [], "is_highlighted": true}], "ordered_globals": ["square", "toSquare"], "line": 2, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "square": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [{"is_parent": false, "unique_hash": "square_f1", "encoded_locals": {"y": 100, "x": 10}, "frame_id": 1, "is_zombie": false, "ordered_varnames": ["x", "y"], "func_name": "square", "parent_frame_id_list": [], "is_highlighted": true}], "ordered_globals": ["square", "toSquare"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "square": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [{"is_parent": false, "unique_hash": "square_f1", "encoded_locals": {"y": 100, "__return__": null, "x": 10}, "frame_id": 1, "is_zombie": false, "ordered_varnames": ["x", "y", "__return__"], "func_name": "square", "parent_frame_id_list": [], "is_highlighted": true}], "ordered_globals": ["square", "toSquare"], "line": 3, "func_name": "square", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "square": ["REF", 1]}, "stdout": "100\n", "event": "return"}, {"stack_to_render": [], "ordered_globals": ["square", "toSquare", "squareResult"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"squareResult": null, "toSquare": 10, "square": ["REF", 1]}, "stdout": "100\n", "event": "step_line"}, {"stack_to_render": [], "ordered_globals": ["square", "toSquare", "squareResult"], "line": 7, "func_name": "<module>", "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"squareResult": null, "toSquare": 10, "square": ["REF", 1]}, "stdout": "100\nThe result of  10  squared is  None\n", "event": "return"}], "code": "def square(x):\n    y = x * x\n    print(y)   # Bad! should use return instead!\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)"};
 var ch04_clsquare_bad_vis;
 
 $(document).ready(function() {
@@ -935,30 +936,76 @@ variable number of arguments, and unpacking a list for use as arguments in a
 function call.</p>
 <div class="section" id="default-parameters">
 <h2>7.2.1. Default Parameters<a class="headerlink" href="#default-parameters" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<p>In an earlier chapter, we contended with the problem of creating a general
+<code class="docutils literal"><span class="pre">apply_tax</span></code> function.  One solution was to have the tax rate as a parameter.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="k">def</span> <span class="nf">apply_tax</span> <span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">cost</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [17]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">1.065</span><span class="p">,</span> <span class="mf">4.99</span><span class="p">)</span>
+<span class="gh">Out[17]: </span><span class="go">5.31</span>
+</pre></div>
+</div>
+<p>It was noted that having to input the same tax rate can be annoying, but also
+violated the DRY principle.  Our first solution to this problem was to use a
+function factory and a closure to create specific implementations of
+<code class="docutils literal"><span class="pre">apply_tax</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="k">def</span> <span class="nf">make_apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">):</span>
+<span class="gp">   ....: </span>        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">apply_tax</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [19]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="n">make_apply_tax</span><span class="p">(</span><span class="mf">1.065</span><span class="p">)</span>
+
+<span class="gp">In [20]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">)</span>
+<span class="gh">Out[20]: </span><span class="go">5.31</span>
+</pre></div>
+</div>
+<p>The standard &#8220;Pythonic&#8221; solution to this problem is to use a default parameter
+for the tax rate.  The default value is selected to be some convenient and
+typical value and the user can either use this default or provide their own.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">1.065</span><span class="p">):</span>
+<span class="gp">   ....: </span>     <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [22]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">)</span>
+<span class="gh">Out[22]: </span><span class="go">5.31</span>
+
+<span class="gp">In [23]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="mf">1.07</span><span class="p">)</span>
+<span class="go">              Out[23]: 5.34</span>
+
+<span class="gp">In [24]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">1.07</span><span class="p">)</span>
+<span class="go">                            Out[24]: 5.34</span>
+</pre></div>
+</div>
+<p>Note that we can give an altercate value for the default value positionally (by
+adding a second parameter) or by explicitly assigning a value to the parameter
+(<code class="docutils literal"><span class="pre">rate=1.07</span></code>).</p>
+<p>Default parameters must follow all regular (positional) parameters.</p>
 </div>
 <div class="section" id="variable-arity-functions">
 <h2>7.2.2. Variable Arity Functions<a class="headerlink" href="#variable-arity-functions" title="Permalink to this headline">¶</a></h2>
 <p>So far, our functions have had a fixed arity, a fixed number of inputs.  If we
 define the function <code class="docutils literal"><span class="pre">add</span></code> to take two inputs, calls to this function will work
 if and only if it is supplied two arguments.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 
-<span class="gp">In [17]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="gh">Out[17]: </span><span class="go">3</span>
+<span class="gp">In [26]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[26]: </span><span class="go">3</span>
 
-<span class="gp">In [18]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">In [27]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">           ---------------------------------------------------------------------------</span>
 <span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-18-1315ff1935d2&gt; in &lt;module&gt;()</span>
+<span class="go">&lt;ipython-input-27-1315ff1935d2&gt; in &lt;module&gt;()</span>
 <span class="go">----&gt; 1 add(1,2,3)</span>
 
 <span class="go">TypeError: &lt;lambda&gt;() takes 2 positional arguments but 3 were given</span>
 
-<span class="gp">In [19]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [28]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
 <span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-19-916e497b8c78&gt; in &lt;module&gt;()</span>
+<span class="go">&lt;ipython-input-28-916e497b8c78&gt; in &lt;module&gt;()</span>
 <span class="go">----&gt; 1 add(1)</span>
 
 <span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;y&#39;</span>
@@ -966,10 +1013,10 @@ if and only if it is supplied two arguments.</p>
 </div>
 <p>Here is an interesting fact about the <code class="docutils literal"><span class="pre">print</span></code> functions, it can take a
 variable number of inputs.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
 <span class="go">A</span>
 
-<span class="gp">In [21]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">In [30]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">  1 2 3</span>
 </pre></div>
 </div>
@@ -980,48 +1027,48 @@ Python will except any number of arguments and give them to us in a tuple named
 stored in a tuple named <code class="docutils literal"><span class="pre">args</span></code>.  In the case of the <code class="docutils literal"><span class="pre">add</span></code> function, we can
 simply apply the <code class="docutils literal"><span class="pre">sum</span></code> function to this tuple to get the sum of all the
 numbers.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="c1">#*</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="c1">#*</span>
 
-<span class="gp">In [23]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gh">Out[23]: </span><span class="go">1</span>
+<span class="gp">In [32]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[32]: </span><span class="go">1</span>
 
-<span class="gp">In [24]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">           Out[24]: 6</span>
+<span class="gp">In [33]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">           Out[33]: 6</span>
 
-<span class="gp">In [25]: </span><span class="n">add</span><span class="p">()</span>
-<span class="go">                      Out[25]: 0</span>
+<span class="gp">In [34]: </span><span class="n">add</span><span class="p">()</span>
+<span class="go">                      Out[34]: 0</span>
 </pre></div>
 </div>
 <p>While it is traditional to use <code class="docutils literal"><span class="pre">args</span></code> for a variable number of arguments, you
 can use a different name if your like.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">bobs</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">bobs</span><span class="p">)</span> <span class="c1">#*</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">bobs</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">bobs</span><span class="p">)</span> <span class="c1">#*</span>
 
-<span class="gp">In [27]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gh">Out[27]: </span><span class="go">1</span>
+<span class="gp">In [36]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[36]: </span><span class="go">1</span>
 
-<span class="gp">In [28]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">           Out[28]: 6</span>
+<span class="gp">In [37]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">           Out[37]: 6</span>
 
-<span class="gp">In [29]: </span><span class="n">add</span><span class="p">()</span>
-<span class="go">                      Out[29]: 0</span>
+<span class="gp">In [38]: </span><span class="n">add</span><span class="p">()</span>
+<span class="go">                      Out[38]: 0</span>
 </pre></div>
 </div>
 <p>We can combine a variable number of arguments with regular parameters, for
 example, if we wanted to design <code class="docutils literal"><span class="pre">add</span></code> to take <em>one or more parameters</em>, you
 would start with the required one parameter, then add the <code class="docutils literal"><span class="pre">*args</span></code> for zero or
 more additional parameters.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">first</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">first</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="c1">#*</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">first</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">first</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="c1">#*</span>
 
-<span class="gp">In [31]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gh">Out[31]: </span><span class="go">1</span>
+<span class="gp">In [40]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[40]: </span><span class="go">1</span>
 
-<span class="gp">In [32]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">           Out[32]: 6</span>
+<span class="gp">In [41]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">           Out[41]: 6</span>
 
-<span class="gp">In [33]: </span><span class="n">add</span><span class="p">()</span>
+<span class="gp">In [42]: </span><span class="n">add</span><span class="p">()</span>
 <span class="go">                      ---------------------------------------------------------------------------</span>
 <span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-33-09e9fb56b0a4&gt; in &lt;module&gt;()</span>
+<span class="go">&lt;ipython-input-42-09e9fb56b0a4&gt; in &lt;module&gt;()</span>
 <span class="go">----&gt; 1 add()</span>
 
 <span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;first&#39;</span>
@@ -1029,17 +1076,60 @@ more additional parameters.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The varaible args must follow the positional arguments.</p>
+<p class="last">The variable args must follow the positional arguments.</p>
+</div>
+</div>
+<div class="section" id="keyword-arguments">
+<h2>7.2.3. Keyword Arguments<a class="headerlink" href="#keyword-arguments" title="Permalink to this headline">¶</a></h2>
+<p>Just as using <code class="docutils literal"><span class="pre">*args</span></code> allows construction of functions with any number of
+arguments, we can use the <code class="docutils literal"><span class="pre">**kwargs</span></code> to provide any number of <em>keyword
+arguments</em>. <strong>Keyword arguments</strong>, like default parameters, are used to define
+values by name as opposed to position.</p>
+<p>To define a function that accepts keyword arguments, we add the special
+<code class="docutils literal"><span class="pre">**kwargs</span></code> parameter to the end of the parameter list.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [43]: </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1">#**</span>
+<span class="gp">   ....: </span>    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;The keywords and values are&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<p>When calling such a function, we provide the keyword arguments by <em>unpacking</em> a
+dictionary of keywords and the corresponding values.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">The keywords and values are {&#39;y&#39;: 3, &#39;x&#39;: 2}</span>
+</pre></div>
+</div>
+<p>Notice that all of the keyword arguments are returned in a dictionary named
+<code class="docutils literal"><span class="pre">kwargs</span></code>.  The keys of this dictionary are the strings for each keyword and
+the value are the corresponding argument values.</p>
+<p>Let&#8217;s return to the <code class="docutils literal"><span class="pre">apply_tax</span></code> example.  Another solution to the problem is
+to define the function to allow for keyword arguments, then check these
+arguments for the <code class="docutils literal"><span class="pre">'rate'</span></code> keyword.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
+
+<span class="gp">In [46]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1">#**</span>
+<span class="gp">   ....: </span>    <span class="k">if</span> <span class="s1">&#39;rate&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="mf">1.065</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [47]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">)</span>
+<span class="gh">Out[47]: </span><span class="go">5.31</span>
+
+<span class="gp">In [48]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="n">rate</span> <span class="o">=</span> <span class="mf">1.07</span><span class="p">)</span>
+<span class="go">              Out[48]: 5.34</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="unpacking-arguments-and-keywords">
-<h2>7.2.3. Unpacking arguments and keywords<a class="headerlink" href="#unpacking-arguments-and-keywords" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.4. Unpacking arguments and keywords<a class="headerlink" href="#unpacking-arguments-and-keywords" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">*args</span></code> notation also has a utility in a function call.  Applying the
 <code class="docutils literal"><span class="pre">*</span></code> operator to a list <strong>unpacks</strong> it, passing each entry in the sequence as a
 argument (separated by commas).  Thus, we think of <code class="docutils literal"><span class="pre">*[1,2,3]</span></code> as <code class="docutils literal"><span class="pre">1,2,3</span></code> and
 <code class="docutils literal"><span class="pre">add(*[1,2,3])</span></code> as <code class="docutils literal"><span class="pre">add(1,2,3)</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1">#*</span>
-<span class="gh">Out[34]: </span><span class="go">6</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1">#*</span>
+<span class="gh">Out[49]: </span><span class="go">6</span>
 </pre></div>
 </div>
 <p>As we can see with the <code class="docutils literal"><span class="pre">add</span></code> function defined above, combining a variable
@@ -1047,6 +1137,25 @@ number of parameters with the unpacking operator allows us to write and use very
 general functions.  Here we have a function that will work on any number of
 arguments, as well as on unpacked lists.   In particular, applying this function
 to the list allows us to add up a list of undetermined length!</p>
+<p>Unpacking dictionaries with the <code class="docutils literal"><span class="pre">**</span></code> operator is similar to unpacking lists
+with <code class="docutils literal"><span class="pre">*</span></code> operator.  In this case, we think of <code class="docutils literal"><span class="pre">**{'x':5,</span> <span class="pre">'y':2}</span></code> as
+returning <code class="docutils literal"><span class="pre">x=5,</span> <span class="pre">y=2</span></code>.</p>
+<p>Here is an example of using keyword unpacking with the <code class="docutils literal"><span class="pre">apply_tax</span></code> function
+that accepts keyword arguments.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
+
+<span class="gp">In [51]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1">#**</span>
+<span class="gp">   ....: </span>    <span class="k">if</span> <span class="s1">&#39;rate&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="mf">1.065</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [52]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;rate&#39;</span><span class="p">:</span><span class="mf">1.07</span><span class="p">})</span>
+<span class="gh">Out[52]: </span><span class="go">5.34</span>
+</pre></div>
+</div>
 </div>
 </div>
 

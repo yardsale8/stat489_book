@@ -682,13 +682,13 @@ magic after abstracting each approach with a lambda expression.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="n">with_zero_one</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span><span class="o">/</span><span class="n">N</span>
 
 <span class="gp">In [77]: </span><span class="o">%</span><span class="k">timeit</span> with_zero_one(10000)
-<span class="go">10 loops, best of 3: 42.5 ms per loop</span>
+<span class="go">10 loops, best of 3: 37.5 ms per loop</span>
 </pre></div>
 </div>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [78]: </span><span class="n">with_len</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sum_rolls</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">])</span><span class="o">/</span><span class="n">N</span>
 
 <span class="gp">In [79]: </span><span class="o">%</span><span class="k">timeit</span> with_len(10000)
-<span class="go">10 loops, best of 3: 39.3 ms per loop</span>
+<span class="go">10 loops, best of 3: 37.1 ms per loop</span>
 </pre></div>
 </div>
 <p>It is not surprising that these methods have nearly the same efficiency, as they
