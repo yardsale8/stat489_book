@@ -45,7 +45,9 @@ Exercises
                 :nocodelens:
 
                 with open("studentdata.txt", "r") as f:
-                    new_data = [items[0] for aline in f if len(items[1:]) > 6]
+                     lines = [line for lines in f]
+                words = [line.split() for line in lines]
+                new_data = [row[0] for row in words if len(row[1:]) > 6]
                 new_data
 
 
