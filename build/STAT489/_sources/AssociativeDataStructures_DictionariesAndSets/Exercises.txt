@@ -21,7 +21,7 @@ Exercises
 
           >>> from toolz import get, assoc, dissoc
           >>> d = {'apples': 15, 'bananas': 35, 'grapes': 12}
-          >>> get('banana',d) 
+          >>> get('bananas',d) 
 
    b.
       .. sourcecode:: python
