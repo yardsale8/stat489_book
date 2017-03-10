@@ -18,7 +18,5 @@ solutions based on list comprehensions to those that use recursion.
     OtherExamplesOfHigherOrderFunctions.rst
     CommonPatternsForProcessingSequencesWithDictionaries.rst
     LazyIteration.rst
-    RecursiveGeneratorFunctions.rst
     Exercises.rst
 
-.. todo:: something about iteration tools from itertools and itertoolz

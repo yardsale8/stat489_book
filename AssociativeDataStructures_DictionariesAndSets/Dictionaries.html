@@ -435,7 +435,7 @@ dictionary.</p>
 for a given key (discussed in detail in <span class="xref std std-ref">_dict_complexity</span>).  A requirement
 of this process is that all keys be unique.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="nb">hash</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
-<span class="gh">Out[14]: </span><span class="go">-7985929474680564062</span>
+<span class="gh">Out[14]: </span><span class="go">-3703966477389092400</span>
 
 <span class="gp">In [15]: </span><span class="nb">hash</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">                              Out[15]: 1</span>
@@ -488,7 +488,7 @@ of eligible values are strings, number or tuples.</p>
 <span class="nn">&lt;ipython-input-23-4cf2bde721f7&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">assoc</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;list&#39;</span><span class="p">)</span>
 
-<span class="nn">/Users/bn8210wy/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/dicttoolz.py</span> in <span class="ni">assoc</span><span class="nt">(d, key, value, factory)</span>
+<span class="nn">/Users/tiverson/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/dicttoolz.py</span> in <span class="ni">assoc</span><span class="nt">(d, key, value, factory)</span>
 <span class="g g-Whitespace">    </span><span class="mi">193</span>     <span class="s2">&quot;&quot;&quot;</span>
 <span class="g g-Whitespace">    </span><span class="mi">194</span><span class="s2">     d2 = factory()</span>
 <span class="ne">--&gt; </span><span class="mi">195</span><span class="s2">     d2[key] = value</span>
@@ -503,7 +503,7 @@ of eligible values are strings, number or tuples.</p>
 <span class="go">&lt;ipython-input-24-c797888df932&gt; in &lt;module&gt;()</span>
 <span class="go">----&gt; 1 assoc(d, {&#39;a&#39;:5}, &#39;list&#39;)</span>
 
-<span class="go">/Users/bn8210wy/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/dicttoolz.py in assoc(d, key, value, factory)</span>
+<span class="go">/Users/tiverson/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/dicttoolz.py in assoc(d, key, value, factory)</span>
 <span class="go">    193     &quot;&quot;&quot;</span>
 <span class="go">    194     d2 = factory()</span>
 <span class="go">--&gt; 195     d2[key] = value</span>
@@ -669,7 +669,7 @@ underlying keys.  A view is an example of an <strong>iterable</strong>.</p>
 <span class="gh">Out[42]: </span><span class="go">dict_keys</span>
 
 <span class="gp">In [43]: </span><span class="n">ks</span>
-<span class="go">                   Out[43]: dict_keys([&#39;apples&#39;, &#39;oranges&#39;, &#39;bananas&#39;, &#39;pears&#39;])</span>
+<span class="go">                   Out[43]: dict_keys([&#39;bananas&#39;, &#39;oranges&#39;, &#39;apples&#39;, &#39;pears&#39;])</span>
 </pre></div>
 </div>
 <p>We can turn the iterable item into an iterator using the <code class="docutils literal"><span class="pre">iter</span></code> function.  An
@@ -681,13 +681,13 @@ other using the <code class="docutils literal"><span class="pre">next</span></co
 <span class="gh">Out[45]: </span><span class="go">dict_keyiterator</span>
 
 <span class="gp">In [46]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
-<span class="go">                          Out[46]: &#39;apples&#39;</span>
+<span class="go">                          Out[46]: &#39;bananas&#39;</span>
 
 <span class="gp">In [47]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
-<span class="go">                                            Out[47]: &#39;oranges&#39;</span>
+<span class="go">                                             Out[47]: &#39;oranges&#39;</span>
 
 <span class="gp">In [48]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
-<span class="go">                                                               Out[48]: &#39;bananas&#39;</span>
+<span class="go">                                                                Out[48]: &#39;apples&#39;</span>
 
 <span class="gp">In [49]: </span><span class="nb">next</span><span class="p">(</span><span class="n">iter_ks</span><span class="p">)</span>
 <span class="go">                                                                                  Out[49]: &#39;pears&#39;</span>
@@ -721,15 +721,15 @@ list comprehension or by converting the view into a list.</p>
 <span class="gp">In [52]: </span><span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">akey</span> <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
 <span class="gp">In [53]: </span><span class="n">keys</span>
-<span class="gh">Out[53]: </span><span class="go">[&#39;apples&#39;, &#39;oranges&#39;, &#39;bananas&#39;, &#39;pears&#39;]</span>
+<span class="gh">Out[53]: </span><span class="go">[&#39;bananas&#39;, &#39;oranges&#39;, &#39;apples&#39;, &#39;pears&#39;]</span>
 
 <span class="gp">In [54]: </span><span class="n">ks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">inventory</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
 <span class="gp">In [55]: </span><span class="n">ks</span>
-<span class="gh">Out[55]: </span><span class="go">[&#39;apples&#39;, &#39;oranges&#39;, &#39;bananas&#39;, &#39;pears&#39;]</span>
+<span class="gh">Out[55]: </span><span class="go">[&#39;bananas&#39;, &#39;oranges&#39;, &#39;apples&#39;, &#39;pears&#39;]</span>
 
 <span class="gp">In [56]: </span><span class="p">[</span><span class="n">akey</span> <span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="n">inventory</span><span class="p">]</span>
-<span class="go">                                                   Out[56]: [&#39;apples&#39;, &#39;oranges&#39;, &#39;bananas&#39;, &#39;pears&#39;]</span>
+<span class="go">                                                   Out[56]: [&#39;bananas&#39;, &#39;oranges&#39;, &#39;apples&#39;, &#39;pears&#39;]</span>
 </pre></div>
 </div>
 <p>As we saw earlier with strings and lists, dictionary methods use dot notation,
@@ -744,7 +744,7 @@ items are shown as tuples containing the key and the associated value.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">430</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span> <span class="s1">&#39;oranges&#39;</span><span class="p">:</span> <span class="mi">525</span><span class="p">,</span> <span class="s1">&#39;pears&#39;</span><span class="p">:</span> <span class="mi">217</span><span class="p">}</span>
 
 <span class="gp">In [58]: </span><span class="nb">list</span><span class="p">(</span><span class="n">inventory</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-<span class="gh">Out[58]: </span><span class="go">[430, 525, 312, 217]</span>
+<span class="gh">Out[58]: </span><span class="go">[312, 525, 430, 217]</span>
 
 <span class="gp">In [59]: </span><span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
 </pre></div>
@@ -931,7 +931,7 @@ are immutable, these data structures can be used as keys in a dictionary!</p>
 <span class="gp">In [89]: </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">pmap</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}):</span><span class="s1">&#39;pmap&#39;</span><span class="p">,</span> <span class="n">pvector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]):</span><span class="s1">&#39;pvector&#39;</span><span class="p">}</span>
 
 <span class="gp">In [90]: </span><span class="n">d</span>
-<span class="gh">Out[90]: </span><span class="go">{pmap({&#39;a&#39;: 1}): &#39;pmap&#39;, pvector([1, 2]): &#39;pvector&#39;}</span>
+<span class="gh">Out[90]: </span><span class="go">{pvector([1, 2]): &#39;pvector&#39;, pmap({&#39;a&#39;: 1}): &#39;pmap&#39;}</span>
 </pre></div>
 </div>
 </div>

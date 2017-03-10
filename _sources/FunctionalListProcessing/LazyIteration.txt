@@ -78,6 +78,26 @@ before attempting to iterate a second time.
     z = list(g)
     z
 
+.. TODO:: Add an example of computing the mean of a lazy sequence.  We must keep a count and sum simultaneously.  Start with an imperative solution, then combine the information into a tuple accumulator.  
+We wish to compute the average quiz score. To do this we will ``map`` in to all
+of the values using ``valmap``.  Then we need to ``reduce`` the scores to the
+average.  While this could be done with ``reduce``, it is cleaner to define a
+``mean`` function using ``sum`` and ``len``.  Unfortunately, this approach to
+computing the mean doesn't work with lazy contructs like ``map``, meaning we
+either need to cast all of the maps to lists or use ``reduce`` to count the
+number of elements.  We choose to latter option.
+
+.. ipython:: python
+
+    from functools import reduce
+    from toolz import valmap
+    from toolz.curried import map
+    sum_count = lambda L: reduce(lambda a, i: (get(0, a) + i, get(1, a) + 1), L, (0, 0))
+    div_sum_count = lambda tup: get(0, tup)/get(1, tup)
+    mean = lambda L: compose(div_sum_count,sum_count)(L)
+    scores = valmap(map(int), scores)
+    scores = valmap(mean, scores)
+    scores
 The advantage of lazy sequence evaluation
 -----------------------------------------
 
