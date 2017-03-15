@@ -530,6 +530,85 @@ Exercises
         following years: 1900, 1910, ..., 2000, 2010.  Assume that the
         Batting.csv file is the same directory as your program.
 
+.. question:: complement
+
+    The ``toolz`` library includes a function called ``complement``, which takes a
+    Boolean function as input and returns a Boolean function that is the logical
+    opposite.  
+    
+    For example, ``complement(is_odd)`` would be equivalent to
+    ``is_even`` and ``complement(less_than_5)`` would be equivalent to
+    ``at_least_5``.  
+
+    .. ipython:: python
+
+        from toolz import complement
+        is_odd = lambda n: n % 2 == 1
+        is_odd(5)
+        is_odd(4)
+        is_even = complement(is_odd)
+        is_even(5)
+        is_even(4)
+
+    .. ipython:: python
+
+        less_than_5 = lambda n: n < 5
+        less_than_5(2)
+        less_than_5(22)
+        at_least_5 = complement(less_than_5)
+        at_least_5(2)
+        at_least_5(22)
+    
+    Implement your own version of this function named
+    ``my_complement``.
+
+
+.. question:: do
+
+    The ``toolz`` library includes a function called ``do`` that is useful when
+    performing side effects.  We saw ``do`` in action in Chapter 5 when printing a
+    sequence out to a file.  The function ``do(func, x)`` takes a (likely
+    side-effecting) function ``func`` and a value ``x`` as inputs.  First, ``func``
+    is called with ``x`` as an argument then the original ``x`` is returned.  Note
+    that the any value returned by ``func(x)`` is discarded.  
+
+    For example, we can use ``do`` to say hello to a given value (with print)
+    and then return that value.
+
+    .. ipython:: python
+
+        from toolz import do
+        say_hello = lambda x: print("Hello", x)
+        do(say_hello, 4)
+        list(map(lambda x: do(say_hello, x), [1,2,3]))
+    
+    
+    Implement a version of
+    this function named ``my_do``.
+
+
+.. question:: juxt
+
+    The ``toolz`` library includes a function called ``juxt`` that takes a
+    sequence of functions that returns a function.  The new function will apply
+    each of the original functions to any input and return a tuple containing
+    the results.  
+    
+    For example, suppose that we want to make a function that (a)
+    adds 1, (b) doubles and (c) squares any input.  This is accomplished using
+    ``juxt`` as follows.
+
+    .. ipython:: python
+
+        from toolz import juxt
+        f = juxt(lambda i: i + 1,
+                 lambda i: 2*i,
+                 lambda i: i**2)
+        f(3)
+        assert f(5) == (5 + 1, 2*5, 5**2)
+
+    Implement a version of this function named ``my_juxt``.
+
 .. question:: pipe
 
     Write and implementation of ``pipe`` called ``my_pipe`` that takes an expression
