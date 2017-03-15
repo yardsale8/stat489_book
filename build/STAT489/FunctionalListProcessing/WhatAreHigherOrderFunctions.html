@@ -316,10 +316,9 @@ presented in this text was the <code class="docutils literal"><span class="pre">
 specialized version of <code class="docutils literal"><span class="pre">apply_tax</span></code>.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">make_apply_tax</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">rate</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">cost</span><span class="p">:</span> <span class="n">rate</span><span class="o">*</span><span class="n">cost</span>
 
-<span class="gp">In [2]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="n">make_apply_tax</span><span class="p">(</span><span class="mf">1.065</span><span class="p">)</span>
+<span class="gp">In [1]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="n">make_apply_tax</span><span class="p">(</span><span class="mf">1.065</span><span class="p">)</span>
 
-<span class="gp">In [3]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">5.05</span><span class="p">)</span>
-<span class="gh">Out[3]: </span><span class="go">5.3782499999999995</span>
+<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">5.05</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The functions <code class="docutils literal"><span class="pre">map</span></code>, <code class="docutils literal"><span class="pre">filter</span></code> and <code class="docutils literal"><span class="pre">reduce</span></code> are examples of higher order

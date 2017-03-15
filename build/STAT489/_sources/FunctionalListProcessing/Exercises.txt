@@ -36,6 +36,88 @@ Exercises
 
     .. actex:: ex_8_2
 
+.. tables
+
+.. question:: 486 
+
+   Use map and filter to filter the hours table to include only managers.
+   In SQL this would be performed using SELECT and WHERE.  **Hint:** Start by
+   creating a list of the names of all managers.
+   
+   .. sourcecode:: python
+
+        hours = [["Alice", 43],
+                   ["Bob", 37],
+                   ["Fred", 15]]
+        titles = [["Alice", "Manager"],
+                  ["Betty", "Consultant"],
+                  ["Bob", "Assistant"]]
+.. tables
+
+.. question:: 502 
+
+   Use map, len, and filter to decide if the following tables contain a manager
+   that worked at least 40 hours.
+
+   .. sourcecode:: python
+
+        hours = [["Alice", 43],
+                   ["Bob", 37],
+                   ["Fred", 15]]
+        titles = [["Alice", "Manager"],
+                  ["Betty", "Consultant"],
+                  ["Bob", "Assistant"]]
+
+
+.. question:: 531
+
+   Use some combination of map and filter to create a sequence of
+   functions that combine to average two matrices.  A complete solution will
+   provide functions for each level of abstraction. 
+
+   .. actex:: average-matrices
+       
+        M1 = [[1, 2], [3, 4]]
+        M2 = [[5, 6], [7, 8]]
+
+.. all_combos
+
+.. question:: 452
+
+    .. tabbed:: q3
+
+        .. tab:: Question
+
+           Create a function that takes a value `n` as input and constructs a
+           multiplication table for whole numbers up to :math:`n`.
+           Use some combination of map, filter and reduce to solve this problem.
+
+
+           .. actex:: ex_8_3
+
+
+        .. tab:: Answer
+
+            .. ipython:: python
+                
+                row = lambda j, n: list(map(lambda i: j*i, range(1, n+1)))
+                table = lambda n: list(map(lambda j: row(j, n), range(1, n+1)))
+                table(12)
+
+
+.. all_combos
+
+.. question:: 474 
+   
+   Print out a neatly formatted multiplication table, up to 12 x 12.  You should
+   do this by constructing a string.  For full credit, each column should be
+   right-justified and your solution should include only ``map`` and helper
+   functions. (You are allowed to use the strings ``join`` and ``rjust`` methods
+   in your helper functions) **Hint:** Write a lambda function pads a number with the right
+   number of spaces.  Use some combination of map, filter and reduce to solve
+   this problem.
+
+
 
 .. basic
 
@@ -116,19 +198,25 @@ Exercises
 
       myTests().main()
 
+.. question:: 119
+
+    Write a function called ``str_join`` that takes two arguments ``s`` (a
+    string) and ``L`` (a list of strings) and returns the equivalent of
+    ``s.join(L)``.  Use reduce to solve this problem without using the string
+    ``join`` method.
 
 .. basic strings
 
 .. question:: 176
 
-    .. tabbed:: q9
+    .. tabbed:: 176
 
         .. tab:: Question
 
-           Write a function that recognizes palindromes. Use reduce to solve
-           thie problem.  **Hint:** Use reversed and zip.
+            Write a function that recognizes palindromes. Use reduce to solve
+            thie problem.  **Hint:** Use reversed and zip.
 
-           .. actex:: ex_8_8
+            .. actex:: ex_8_8
               :nocodelens:
 
               is_palindrome lambda myStr: False # your code here
@@ -152,50 +240,57 @@ Exercises
 
               myTests().main()
 
-
         .. tab:: Answer
 
-            .. activecode:: q9_answer
-                :nocodelens:
+            .. ipython:: python
                 
                 from functools import reduce
-                is_palindrome lambda mystr: reduce(lambda acc, tup: acc and tup[0] == tup[1], zip(mystr,reversed(mystr)), Trus)
+                is_palindrome = lambda mystr: reduce(lambda acc, tup: acc and tup[0] == tup[1], zip(mystr,reversed(mystr)), True)
                 is_palindrome('abba')
 
 
+
+.. question:: 170
+
+    Write a function called ``has_vowel`` that takes a string as input and returns
+    ``True`` of the string contains a vowel (``'aeiou'`` ignore ``'y'``) and ``False``
+    otherwise.  Use ``reduce`` to perform this task.
 
 
 .. reducing built-ins
 
 .. question:: 275 
 
-   .. tabbed:: q5
+    .. tabbed:: 275
 
         .. tab:: Question
 
-           Write a Python function that takes ``n`` and ``m`` as input and
-           returns the maximum value of a the list of ``n`` random integers
-           between 0 and ``m``.  (Note:.  there is a builtin function named
-           ``max``.)
+            Write a Python function that takes ``n`` and ``m`` as input and
+            returns the maximum value of a the list of ``n`` random integers
+            between 0 and ``m``.  (Note:.  there is a builtin function named
+            ``max``.)
 
-           Use map to generating the random sequence and reduce to find the max.
+            Use map to generating the random sequence and reduce to find the max.
 
-           .. actex:: ex_9_5
-
+            .. actex:: ex_9_5
 
         .. tab:: Answer
 
             .. ipython:: python
 
                 from random import randint
-                from functools import randint
+                from functools import reduce
                 from itertools import repeat
 
 
-                rand_seq = lambda n, m: map(randint, zip(repeat(0, n), repeat(m, n))
+                rand_seq = lambda n, m: map(randint, repeat(0, n), repeat(m, n))
                 update_max = lambda cur_max, item: item if item > cur_max else cur_max
-                rand_max = lambda n, m: reduce(update_max, rand_seq(m, m))
+                rand_max = lambda n, m: reduce(update_max, rand_seq(n, m))
                 rand_max(10,5)
+
+
+
+
 
 
 .. reducing built-ins
@@ -273,7 +368,7 @@ Exercises
 
                 import random
 
-                countOdd = lambda lst: reduce(lambda a, i: a + i, filter(n % 2 == 1, lst))
+                countOdd = lambda lst: reduce(lambda a, i: a + 1, filter(lambda n: n % 2 == 1, lst))
 
                 # make a random list to test the function
                 lst = [random.randint(0, 1000) for i in range(100)]
@@ -344,9 +439,9 @@ Exercises
 
                 sumNegatives = lambda lst: reduce(add, filter(lambda n: n < 0, lst))
 
-                lst = [random.randint(0, 1000) for i in range(100)]
+                lst = [random.randint(-1000, 1000) for i in range(100)]
 
-                sumNegative(lst)
+                sumNegatives(lst)
 
 
 .. reducing built-ins working with strings
@@ -361,85 +456,123 @@ Exercises
       num_greater_5 = lambda lst: 23 # your code here
 
 
-.. all_combos
+   .. actex:: ex_8_4
 
-.. question:: 452
+.. question:: files_ex_3_2
 
-    .. tabbed:: q3
+   .. tabbed:: q3
 
         .. tab:: Question
 
-           Create a function that takes a value `n` as input and constructs a
-           multiplication table for whole numbers up to :math:`n`.
-           Use some combination of map, filter and reduce to solve this problem.
+
+            The following sample file called ``studentdata.txt`` contains one
+            line for each student in an imaginary class.  The student's name is
+            the first thing on each line, followed by some exam scores.  The
+            number of scores might be different for each student.
+
+            .. datafile:: studentdata.txt
+
+                joe 10 15 20 30 40
+                bill 23 16 19 22
+                sue 8 22 17 14 32 17 24 21 2 9 11 17
+                grace 12 28 21 45 26 10
+                john 14 32 25 16 89
+
+            Using the text file ``studentdata.txt`` (shown in above) write
+            a program that creates a new data table that contains the students'
+            names along with the minimum and maximum score for each student.
+
+            Complete this exercise using ``map``, ``filter`` and/or reduce.
+            **Note:** For full credit you will need to also implement ``max``
+            and ``min`` using ``reduce``.
 
 
-           .. actex:: ex_8_3
+
+            .. actex:: ex_6_3
+               :nocodelens:
+               :available_files: studentdata.txt
 
 
         .. tab:: Answer
 
-            .. ipython:: python
-                
-                row = lambda j, n: map(lambda i: j*i, range(1, n+1))
-                table = lambda n: map(lambda j: row(j, n), range(1, n+1))
-                table(12)
+            .. activecode:: ch_files_q3answer
+                :nocodelens:
+
+                # Convert the following solution to one that uses map, filter and/or reduce
+                # For this exercise,
+                with open("studentdata.txt", "r") as f:
+                    table = [line.split() for line in f]
+                process_row = lambda row: (row[0], max(row), min(row))
+                new_table = [process_row(row) for row in table]
+                new_table
+
+.. question:: files_ex_4_2
+
+    `SeanLahman.com
+    <http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip>`_
+    provides a database of baseball statistics.  Download, unzip and extract the
+    file titled **Batting.csv**.
+
+    Write each of the following functions and apply them to the related task.
+    Write all of your functions and expressions only using funcitonal tools like
+    ``with_iter``, ``map``, ``filter``, ``reduce``, ``compose`` and/or ``pipe``.
 
 
-.. all_combos
+    1.  Write a function that takes a year and table of batting data as input
+        and returns the average number of runs scored in that year.  Call
+        this function **average_runs_year**.
+    2.  Write a function takes a list of years and a table of batting data and
+        returns of list of tuples of the form `(year, averages_runs)`.  Call
+        this function **average_runs_years** Use a list comprehension
+        and the function from the last step.
+    3.  Write a program that includes the above functions and reads
+        **Batting.csv** and compute the average number of runs for the
+        following years: 1900, 1910, ..., 2000, 2010.  Assume that the
+        Batting.csv file is the same directory as your program.
 
-.. question:: 474 
-   
-   Print out a neatly formatted multiplication table, up to 12 x 12.  You should
-   do this by constructing a string.  For full credit, each column should be
-   right-justified and your solution should include only comprehensions and
-   lambda functions. **Hint:** Write a lambda function pads a number with the
-   right number of spaces.
-   Use some combination of map, filter and reduce to solve this problem.
+.. question:: pipe
 
-   .. actex:: ex_8_4
+    Write and implementation of ``pipe`` called ``my_pipe`` that takes an expression
+    ``x`` as the first argument and a sequence of functions ``f1``, ``f2``, ... as
+    the remaining arguments and applies each function to the result of ``x``, from
+    left to right.   Your function should pass the following assertions.
 
-.. tables
+    .. sourcecode::
 
-.. question:: 486 
+        assert my_pipe(5, str, lambda s: s + '!') == '5!'
+        assert my_pipe([1,2,3], lambda L: map(lambda x: x**2, L), sum) == 14
 
-   Use list comprehensions to filter the hours table to include only managers.
-   In SQL this would be performed using SELECT and WHERE.  **Hint:** Start by
-   creating a list of the names of all managers.
-   Use some combination of map, filter and reduce to solve this problem.
-   .. actex:: select-where
+.. question:: thread_first
 
-        hours = [["Alice", 43],
-                   ["Bob", 37],
-                   ["Fred", 15]]
-        titles = [["Alice", "Manager"],
-                  ["Betty", "Consultant"],
-                  ["Bob", "Assistant"]]
-.. tables
+    Implement a version of ``thread_first`` called ``my_thread_first`` that
+    threads a value through the first argument of each of a list of functions.
+    If any of the functions take more than one argument, these arguments can be
+    given along with the function in a tuple.  For example, ``my_thread_first(5,
+    f, g)`` should be equivalent to ``g(f(5))`` and ``my_thread_first(5, (add,
+    1), (pow, 2))`` expands to ``pow(add(5,1), 2)``.  Note that each expression
+    goes in the first argument of the next function call.
 
-.. question:: 502 
+.. question:: files_ex_6_2
 
-   Use list comprehensions to decide if the following tables contain a manager
-   that worked at least 40 hours.
-   Use some combination of map, filter and reduce to solve this problem.
+    Download, unzip and extract the file titled **Salaries.csv** and
+    **AllstarFull.csv** from `seanlahman.com <http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip>`_
+    .
 
-   .. actex:: select-where
-
-        hours = [["Alice", 43],
-                   ["Bob", 37],
-                   ["Fred", 15]]
-        titles = [["Alice", "Manager"],
-                  ["Betty", "Consultant"],
-                  ["Bob", "Assistant"]]
+    Write a program that computes the average salary of all players in the all
+    star game in for each year between 2000 and 2010.  Write all of your
+    functions and expressions only using funcitonal tools like ``with_iter``,
+    ``map``, ``filter``, ``reduce``, ``compose`` and/or ``pipe``.  **Hint:** You
+    will want to use ``groupby`` in your solution.
 
 
-.. question:: 531
+.. question:: files_ex_8_2
 
-    Use some combination of map, filter and reduce to create a sequence of
-    functions that combine to average two matrices.  A complete solution will
-    provide functions for each level of abstraction. 
+    Download, unzip and extract the file titled **Master.csv** and
+    **BattingPost.csv**.  from `seanlahman.com <http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip>`_
 
-   .. actex:: average-matrices
-       
-        M1 = [[1, 2], [3, 4]]
-        M2 = [[5, 6], [7, 8]]
+    Write a program that computes the total runs scored in the post season by
+    all players from from each state (all time). Write all of your
+    functions and expressions only using funcitonal tools like ``with_iter``,
+    ``map``, ``filter``, ``reduce``, ``compose`` and/or ``pipe``.  **Hint:** You
+    will want to use ``groupby`` in your solution.
+

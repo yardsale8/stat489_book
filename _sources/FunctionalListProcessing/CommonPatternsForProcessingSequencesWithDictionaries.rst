@@ -10,19 +10,21 @@ Common Patterns for Processing Sequences with Dictionaries
 ==========================================================
 
 In this section, we will illustrate a number of common patterns for processing
-lists using dictionaries.  These patterns include counting frequencies and counting
-frequencies by some key function.  In each case, we will start by looking at the
-imperative solution, then move on to the recursive solution and finally use a
-pre-existing function from ``toolz``.
+lists using dictionaries.  These patterns include counting frequencies, counting
+frequencies by some key function and grouping data by some key or key function.
+In each case, we will start by looking at the imperative solution, then move on
+to building a high-level abstraction and finally use a pre-existing function from
+``toolz``.
 
 Maps and filters for dictionaries
 ---------------------------------
 
 The ``toolz`` module contains maps and filters for dictionary keys, values, and
-items.  In the same way the we can chain map, filter and reduce together to
-solve most list processing problems, ``keymap``, ``keyfilter``, ``valmap``,
+items.  In the same way that we can chain map, filter and reduce together to
+solve most list processing problems; ``keymap``, ``keyfilter``, ``valmap``,
 ``valfilter``, ``itemfilter`` and ``itemmap`` can be useful when processing
-dictionaries.
+dictionaries.  We will illustrate with by redoing two exercises from an earlier
+homework.
 
 Example 1 - average quiz scores
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -32,6 +34,8 @@ chapter (**Chapter 5 Exercise 2**).  In this example, we have a number of quiz
 scores stored in a file.  Each line of the file contains the students name
 followed by each quiz score.  
 
+We start by splitting the lines.
+
 .. ipython:: python
 
     file_str = '''joe 10 15 20 30 40
@@ -40,12 +44,26 @@ followed by each quiz score.
     grace 12 28 21 45 26 10
     john 14 32 25 16 89'''
     lines = file_str.split('\n')
-    words = map(lambda line: line.split(), lines)
-    words = list(words)
+    lines
+Next we split each line into list of words.  Earlier this would have been
+accomplished using a list comprehension as follows.
+
+.. ipython:: python
+
+    words =  [line.split() for line in  lines]
+    words
+
+but now we recognize this as a map, and perform the same task using a map.
+
+.. ipython:: python
+
+    words = list(map(lambda line: line.split(), lines))
     words
 
 We start by forming a dictionary with key's equal to the names (i.e. ``first``
-of each row) and value containing all the ``rest`` of the line. 
+of each row) and value containing all the ``rest`` of the line.  Since the
+``drop`` function is lazy, we will compose it with ``list`` to force completion
+for this small example.
 
 .. ipython:: python
 
@@ -54,21 +72,65 @@ of each row) and value containing all the ``rest`` of the line.
     scores = {first(line):rest(line) for line in words}
     scores
 
-We wish to compute the average quiz score. To do this we will ``map`` in to all
-of the values using ``valmap``.  Then we need to ``reduce`` the scores to the
-average.  While this could be done with ``reduce``, it is cleaner to define a
-``mean`` function using ``sum`` and ``len``.  Unfortunately, this approach to
-computing the mean doesn't work with lazy constructs like ``map``, meaning we
-either need to cast all of the maps to lists or use ``reduce`` to count the
-number of elements.  We choose to former option, since this is a small example
-and casing to a list isn't that much of a burden.
+We wish to compute the average quiz score. Consider the levels of abstraction
+for this problem.
+
+.. figure:: Figures/scores_levels.png
+    :alt: Levels of abstraction for the quiz score dictionary.
+
+    ..
+
+    The score dictionary consists of keys (strings) and values (lists of words).
+
+If we are to obey the clean code rules for writing and composing function, we
+should write functions at each level of abstraction, that is functions that
+
+1. **Level 1** Process score
+2. **Level 2** Process lists of scores
+3. **Level 3** Process a dictionary of name-list pairs
+
+**Level 1 Functions: What is it that we want to do to each word?**  
+
+We need to turn them into integers, which is accomplished with ``int``.
+
+**Level 2 Functions: What do we need to do to the list of words?**
+
+1. Turn each score into an integer. ``map(int)``
+2. Turn this lazy map into a list ``list``
+3. Compute the mean of the list of integers ``mean = lambda L: sum(L)/len(L)``
+
+Notice that each of the functions acts on a list, i.e. the right level of
+abstraction.  We will combine these using composition, which is illustrated
+below.
+
+.. figure:: Figures/score_list_compose.png
+    :alt: The composition of quiz score list functions.
+
+    ..
+
+    To process each value (quiz score list), we apply ``compose(mean, list, map(int))``.  Recall that functional composition is applied from right to left, with ``map(int)`` first converting each string to an int, then ``list`` converts the lazy map to a list, and finally ``mean`` computes the average of the list.
+
+**Level 3 Functions: What do we want do to the keys/values for the dictionary?**
+
+In this case, we need to apply the function from the last level of abstraction
+to each of the values in the dictionary.  
+
+To do this we do this using ``valmap``, which applies a function to each value
+in the dictionary.  There is no need to change the keys.
+
+.. figure:: Figures/score_valmap.png
+    :alt: Using valmap to processes each value in the scores dictionary.
+
+    ..
+
+    By applying valmap, we apply the function from the last level of abstraction to each of the values in the scores dictionary.
 
 .. ipython:: python
 
     from toolz import valmap
     from toolz.curried import map
     mean = lambda L: sum(L)/len(L)
-    scores = valmap(compose( mean, list, map(int)), scores)
+    scores = valmap(compose(mean, list, map(int)), scores)
     scores
 
 In this example, we show an important technique for applying maps.  When we want
@@ -302,15 +364,15 @@ expression line by line.
 
 The first line, ``pipe(scores,`` tells us that we are going to pipe or push the
 scores through a sequence of functions (from left-to-right or top-to-bottom).
-The first function, ``lvalfilter(lambda L: len(L) >= 6),`` is a curried function
+The first function, ``valfilter(lambda L: len(L) >= 6),`` is a curried function
 (``valfilter`` takes two arguments, we have provided one) that only keep items
 that have at least 6 values.  The final function is more complicated and will
 need a bit more work to interpret.
 
 The final function is a ``valmap`` that will apply two functions to all of the
 elements of each value in score.  It is important to remember that the composed
-function operates on values that are themselves lists.  Conseuently, the
-functions applied to the values will also be list-processing funcitons like
+function operates on values that are themselves lists.  Consequently, the
+functions applied to the values will also be list-processing functions like
 ``map``.  Since this is a composition, the functions are applied from
 right-to-left. The first action turns each element of the value list into an
 integer using the curried ``map(int)`` and then converted to a list with
@@ -537,8 +599,9 @@ initial value as show above.
 
 .. ipython:: python
 
-    update_count = lambda word, counts: get(word, counts, 0) + 1
-    update_dict = lambda wd, cnts: assoc(cnts, wd, update_count(wd, cnts))
+    from functools import reduce
+    update_count = lambda counts, word: get(word, counts, 0) + 1
+    update_dict = lambda cnts, wd: assoc(cnts, wd, update_count(cnts, wd))
     reduce(update_dict, words, {})
 Like most common functional patterns, there are probably already solutions
 available in some Python module.  In this case, the ``toolz`` package has a
@@ -629,11 +692,11 @@ curried function.
 
 .. ipython:: python
 
-    @curry
-    def update_dict(key, cnts, wd):
+    def make_update_dict(key):
         update_count = lambda length, counts: get(length, counts, 0) + 1
-        return assoc(cnts, key(wd), update_count(key(wd), cnts))
-    countby = lambda key, lst: reduce(update_dict(key), lst, 0)
+        return lambda cnts, wd: assoc(cnts, key(wd), update_count(key(wd), cnts))
+
+    countby = lambda key, lst: reduce(make_update_dict(key), lst, 0)
     countby(len, words)
 
 Now that we understand the ``countby`` pattern, there is no reason to have to
