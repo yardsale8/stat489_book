@@ -697,7 +697,7 @@ myTests().main()
 <span class="gp">In [21]: </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
 
 <span class="gp">In [22]: </span><span class="n">countOdd</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
-<span class="gh">Out[22]: </span><span class="go">194</span>
+<span class="gh">Out[22]: </span><span class="go">649</span>
 </pre></div>
 </div>
 </div>
@@ -766,7 +766,7 @@ myTests().main()
 <span class="gp">In [26]: </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
 
 <span class="gp">In [27]: </span><span class="n">sumNegatives</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
-<span class="gh">Out[27]: </span><span class="go">-24819</span>
+<span class="gh">Out[27]: </span><span class="go">-25403</span>
 </pre></div>
 </div>
 </div>
@@ -865,8 +865,119 @@ Batting.csv file is the same directory as your program.</li>
     </li></ol>
     </div>
     
-    <div data-component="question" class="full-width container question" id="pipe" >
+    <div data-component="question" class="full-width container question" id="complement" >
     <ol start=21 class=arabic><li class="alert alert-warning">
+
+    <p>The <code class="docutils literal"><span class="pre">toolz</span></code> library includes a function called <code class="docutils literal"><span class="pre">complement</span></code>, which takes a
+Boolean function as input and returns a Boolean function that is the logical
+opposite.</p>
+<p>For example, <code class="docutils literal"><span class="pre">complement(is_odd)</span></code> would be equivalent to
+<code class="docutils literal"><span class="pre">is_even</span></code> and <code class="docutils literal"><span class="pre">complement(less_than_5)</span></code> would be equivalent to
+<code class="docutils literal"><span class="pre">at_least_5</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">complement</span>
+
+<span class="gp">In [29]: </span><span class="n">is_odd</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
+
+<span class="gp">In [30]: </span><span class="n">is_odd</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gh">Out[30]: </span><span class="go">True</span>
+
+<span class="gp">In [31]: </span><span class="n">is_odd</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">              Out[31]: False</span>
+
+<span class="gp">In [32]: </span><span class="n">is_even</span> <span class="o">=</span> <span class="n">complement</span><span class="p">(</span><span class="n">is_odd</span><span class="p">)</span>
+
+<span class="gp">In [33]: </span><span class="n">is_even</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gh">Out[33]: </span><span class="go">False</span>
+
+<span class="gp">In [34]: </span><span class="n">is_even</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">               Out[34]: True</span>
+</pre></div>
+</div>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">less_than_5</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">5</span>
+
+<span class="gp">In [36]: </span><span class="n">less_than_5</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[36]: </span><span class="go">True</span>
+
+<span class="gp">In [37]: </span><span class="n">less_than_5</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span>
+<span class="go">              Out[37]: False</span>
+
+<span class="gp">In [38]: </span><span class="n">at_least_5</span> <span class="o">=</span> <span class="n">complement</span><span class="p">(</span><span class="n">less_than_5</span><span class="p">)</span>
+
+<span class="gp">In [39]: </span><span class="n">at_least_5</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[39]: </span><span class="go">False</span>
+
+<span class="gp">In [40]: </span><span class="n">at_least_5</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span>
+<span class="go">               Out[40]: True</span>
+</pre></div>
+</div>
+<p>Implement your own version of this function named
+<code class="docutils literal"><span class="pre">my_complement</span></code>.</p>
+
+    </li></ol>
+    </div>
+    
+    <div data-component="question" class="full-width container question" id="do" >
+    <ol start=22 class=arabic><li class="alert alert-warning">
+
+    <p>The <code class="docutils literal"><span class="pre">toolz</span></code> library includes a function called <code class="docutils literal"><span class="pre">do</span></code> that is useful when
+performing side effects.  We saw <code class="docutils literal"><span class="pre">do</span></code> in action in Chapter 5 when printing a
+sequence out to a file.  The function <code class="docutils literal"><span class="pre">do(func,</span> <span class="pre">x)</span></code> takes a (likely
+side-effecting) function <code class="docutils literal"><span class="pre">func</span></code> and a value <code class="docutils literal"><span class="pre">x</span></code> as inputs.  First, <code class="docutils literal"><span class="pre">func</span></code>
+is called with <code class="docutils literal"><span class="pre">x</span></code> as an argument then the original <code class="docutils literal"><span class="pre">x</span></code> is returned.  Note
+that the any value returned by <code class="docutils literal"><span class="pre">func(x)</span></code> is discarded.</p>
+<p>For example, we can use <code class="docutils literal"><span class="pre">do</span></code> to say hello to a given value (with print)
+and then return that value.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">do</span>
+
+<span class="gp">In [42]: </span><span class="n">say_hello</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="gp">In [43]: </span><span class="n">do</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">Hello 4</span>
+<span class="gh">Out[43]: </span><span class="go">4</span>
+
+<span class="gp">In [44]: </span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">do</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+<span class="go">                   Hello 1</span>
+<span class="go">Hello 2</span>
+<span class="go">Hello 3</span>
+<span class="gh">Out[44]: </span><span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+<p>Implement a version of
+this function named <code class="docutils literal"><span class="pre">my_do</span></code>.</p>
+
+    </li></ol>
+    </div>
+    
+    <div data-component="question" class="full-width container question" id="juxt" >
+    <ol start=23 class=arabic><li class="alert alert-warning">
+
+    <p>The <code class="docutils literal"><span class="pre">toolz</span></code> library includes a function called <code class="docutils literal"><span class="pre">juxt</span></code> that takes a
+sequence of functions that returns a function.  The new function will apply
+each of the original functions to any input and return a tuple containing
+the results.</p>
+<p>For example, suppose that we want to make a function that (a)
+adds 1, (b) doubles and (c) squares any input.  This is accomplished using
+<code class="docutils literal"><span class="pre">juxt</span></code> as follows.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">juxt</span>
+
+<span class="gp">In [46]: </span><span class="n">f</span> <span class="o">=</span> <span class="n">juxt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">   ....: </span>         <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">,</span>
+<span class="gp">   ....: </span>         <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [47]: </span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gh">Out[47]: </span><span class="go">(4, 6, 9)</span>
+
+<span class="gp">In [48]: </span><span class="k">assert</span> <span class="n">f</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Implement a version of this function named <code class="docutils literal"><span class="pre">my_juxt</span></code>.</p>
+
+    </li></ol>
+    </div>
+    
+    <div data-component="question" class="full-width container question" id="pipe" >
+    <ol start=24 class=arabic><li class="alert alert-warning">
 
     Write and implementation of <code class="docutils literal"><span class="pre">pipe</span></code> called <code class="docutils literal"><span class="pre">my_pipe</span></code> that takes an expression
 <code class="docutils literal"><span class="pre">x</span></code> as the first argument and a sequence of functions <code class="docutils literal"><span class="pre">f1</span></code>, <code class="docutils literal"><span class="pre">f2</span></code>, ... as
@@ -876,7 +987,7 @@ left to right.   Your function should pass the following assertions.
     </div>
     
     <div data-component="question" class="full-width container question" id="thread_first" >
-    <ol start=22 class=arabic><li class="alert alert-warning">
+    <ol start=25 class=arabic><li class="alert alert-warning">
 
     Implement a version of <code class="docutils literal"><span class="pre">thread_first</span></code> called <code class="docutils literal"><span class="pre">my_thread_first</span></code> that
 threads a value through the first argument of each of a list of functions.
@@ -889,7 +1000,7 @@ goes in the first argument of the next function call.
     </div>
     
     <div data-component="question" class="full-width container question" id="files_ex_6_2" >
-    <ol start=23 class=arabic><li class="alert alert-warning">
+    <ol start=26 class=arabic><li class="alert alert-warning">
 
     <p>Download, unzip and extract the file titled <strong>Salaries.csv</strong> and
 <strong>AllstarFull.csv</strong> from <a class="reference external" href="http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip">seanlahman.com</a>
@@ -904,7 +1015,7 @@ will want to use <code class="docutils literal"><span class="pre">groupby</span>
     </div>
     
     <div data-component="question" class="full-width container question" id="files_ex_8_2" >
-    <ol start=24 class=arabic><li class="alert alert-warning">
+    <ol start=27 class=arabic><li class="alert alert-warning">
 
     <p>Download, unzip and extract the file titled <strong>Master.csv</strong> and
 <strong>BattingPost.csv</strong>.  from <a class="reference external" href="http://seanlahman.com/files/database/baseballdatabank-master_2016-03-02.zip">seanlahman.com</a></p>

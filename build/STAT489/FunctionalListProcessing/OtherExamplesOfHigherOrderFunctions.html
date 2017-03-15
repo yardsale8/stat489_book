@@ -265,11 +265,12 @@
   <ul class="dropdown-menu localtoc"><ul>
 <li><a class="reference internal" href="#">7.5. Other Examples of Higher Order Functions</a><ul>
 <li><a class="reference internal" href="#composition">7.5.1. Composition</a></li>
-<li><a class="reference internal" href="#partial-functions">7.5.2. Partial Functions</a></li>
-<li><a class="reference internal" href="#decorator-functions">7.5.3. Decorator Functions</a></li>
-<li><a class="reference internal" href="#currying">7.5.4. Currying</a></li>
-<li><a class="reference internal" href="#other-useful-curried-functions-from-toolz">7.5.5. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code></a></li>
-<li><a class="reference internal" href="#memiozation">7.5.6. Memiozation</a></li>
+<li><a class="reference internal" href="#other-types-of-composition">7.5.2. Other types of composition</a></li>
+<li><a class="reference internal" href="#partial-functions">7.5.3. Partial Functions</a></li>
+<li><a class="reference internal" href="#decorator-functions">7.5.4. Decorator Functions</a></li>
+<li><a class="reference internal" href="#currying">7.5.5. Currying</a></li>
+<li><a class="reference internal" href="#other-useful-curried-functions-from-toolz">7.5.6. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code></a></li>
+<li><a class="reference internal" href="#memiozation-optional">7.5.7. Memiozation (Optional)</a></li>
 </ul>
 </li>
 </ul>
@@ -448,6 +449,15 @@ an implementation called <code class="docutils literal"><span class="pre">compos
 <span class="gh">Out[23]: </span><span class="go">&#39;success is not final        failure is not fatal        it is the courage to continue that counts&#39;</span>
 </pre></div>
 </div>
+<div class="figure">
+<img alt="Composing text cleaning functions." src="../_images/compose.png" />
+<div class="legend">
+A composition of functions is itself a function that applies each argument from
+right to left.</div>
+</div>
+</div>
+<div class="section" id="other-types-of-composition">
+<h2>7.5.2. Other types of composition<a class="headerlink" href="#other-types-of-composition" title="Permalink to this headline">¶</a></h2>
 <p>One must always remember that <code class="docutils literal"><span class="pre">compose</span></code> passes the input through the functions
 from right-to-left.  Another composition function included in <code class="docutils literal"><span class="pre">toolz</span></code>,  <code class="docutils literal"><span class="pre">pipe</span></code>,
 can be used to push an argument through any number of unary functions from
@@ -457,6 +467,14 @@ left-to-right.</p>
 <span class="gp">In [25]: </span><span class="n">pipe</span><span class="p">(</span><span class="n">s</span> <span class="p">,</span> <span class="n">fix_whitespace</span><span class="p">,</span> <span class="n">make_lower_case</span><span class="p">,</span> <span class="n">remove_punc</span><span class="p">)</span>
 <span class="gh">Out[25]: </span><span class="go">&#39;success is not final        failure is not fatal        it is the courage to continue that counts&#39;</span>
 </pre></div>
+</div>
+<div class="figure">
+<img alt="Piping data through text cleaning transformations." src="../_images/pipe.png" />
+<div class="legend">
+When piping data (first arguments) through a series of transformation functions
+(remaining arguments), the data is <em>piped</em> through each transformation from left
+to right with each subsequent transformation getting the result of the last
+transformation as input.</div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">pipe</span></code> function is designed for a sequence of unary (one argument)
 functions.  What if we want to perform a similar, left-to-right sequence of
@@ -501,7 +519,7 @@ the chapter.</p>
 </div>
 </div>
 <div class="section" id="partial-functions">
-<h2>7.5.2. Partial Functions<a class="headerlink" href="#partial-functions" title="Permalink to this headline">¶</a></h2>
+<h2>7.5.3. Partial Functions<a class="headerlink" href="#partial-functions" title="Permalink to this headline">¶</a></h2>
 <p>In the second chapter, we illustrated how to use a function factory to
 generalize the <code class="docutils literal"><span class="pre">apply_tax</span></code> function.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="k">def</span> <span class="nf">make_apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">):</span>
@@ -614,7 +632,7 @@ need to be used for these functions.</p>
 </div>
 </div>
 <div class="section" id="decorator-functions">
-<h2>7.5.3. Decorator Functions<a class="headerlink" href="#decorator-functions" title="Permalink to this headline">¶</a></h2>
+<h2>7.5.4. Decorator Functions<a class="headerlink" href="#decorator-functions" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">partial</span></code> is an example of a <strong>decorator function</strong>, which is a function that
 creates a <em>wrapper</em> around another function.  The outer function calls the
 original function and then changes or <em>decorates</em> the input and/or output.</p>
@@ -655,11 +673,11 @@ decorates the function <code class="docutils literal"><span class="pre">emph</sp
 need to use different name for the decorated function.</p>
 </div>
 <div class="section" id="currying">
-<h2>7.5.4. Currying<a class="headerlink" href="#currying" title="Permalink to this headline">¶</a></h2>
+<h2>7.5.5. Currying<a class="headerlink" href="#currying" title="Permalink to this headline">¶</a></h2>
 <p>Currying is another popular functional approach to partial application of
 functions.  Recall that the <strong>arity</strong> of a function is the number of arguments
 the function takes.  We can implement functions with arity higher than 1 using a
-using single-arith functions with technique called called <strong>currying</strong>, which is
+single-arith functions with technique called called <strong>currying</strong>, which is
 illustrated below.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="n">curried_pow</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span>
 
@@ -814,7 +832,7 @@ function.</p>
 </div>
 </div>
 <div class="section" id="other-useful-curried-functions-from-toolz">
-<h2>7.5.5. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code><a class="headerlink" href="#other-useful-curried-functions-from-toolz" title="Permalink to this headline">¶</a></h2>
+<h2>7.5.6. Other useful curried functions from <code class="docutils literal"><span class="pre">toolz</span></code><a class="headerlink" href="#other-useful-curried-functions-from-toolz" title="Permalink to this headline">¶</a></h2>
 <p>Many of the functions from the <code class="docutils literal"><span class="pre">toolz</span></code> library have been designed with
 currying in mind.  Furthermore, curried versions of most functions can be
 imported from <code class="docutils literal"><span class="pre">toolz.curried</span></code>.</p>
@@ -987,8 +1005,8 @@ that will make a new table that contains only column 3.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="memiozation">
-<h2>7.5.6. Memiozation<a class="headerlink" href="#memiozation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="memiozation-optional">
+<h2>7.5.7. Memiozation (Optional)<a class="headerlink" href="#memiozation-optional" title="Permalink to this headline">¶</a></h2>
 <p>One of the problems with recursive functions, especially if they are not
 tail-recursive or have not been refactored to use an accumulator, is the number
 of replicated function calls that get made.  To see this, we create a decorator

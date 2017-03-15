@@ -144,6 +144,17 @@ an implementation called ``compose``.
             make_lower_case, 
             fix_whitespace)(s)
 
+.. figure:: Figures/compose.png
+    :alt: Composing text cleaning functions.
+
+    ..
+
+    A composition of functions is itself a function that applies each argument from
+    right to left.
+
+Other types of composition
+--------------------------
+
 One must always remember that ``compose`` passes the input through the functions
 from right-to-left.  Another composition function included in ``toolz``,  ``pipe``,
 can be used to push an argument through any number of unary functions from
@@ -153,6 +164,16 @@ left-to-right.
 
     from toolz import pipe
     pipe(s , fix_whitespace, make_lower_case, remove_punc)
+
+.. figure:: Figures/pipe.png
+    :alt: Piping data through text cleaning transformations.
+
+    ..
+
+    When piping data (first arguments) through a series of transformation functions
+    (remaining arguments), the data is *piped* through each transformation from left
+    to right with each subsequent transformation getting the result of the last
+    transformation as input.
 
 The ``pipe`` function is designed for a sequence of unary (one argument)
 functions.  What if we want to perform a similar, left-to-right sequence of
@@ -355,7 +376,7 @@ Currying
 Currying is another popular functional approach to partial application of
 functions.  Recall that the **arity** of a function is the number of arguments
 the function takes.  We can implement functions with arity higher than 1 using a
-using single-arith functions with technique called called **currying**, which is
+single-arith functions with technique called called **currying**, which is
 illustrated below.
 
 .. ipython:: python
@@ -688,8 +709,8 @@ that will make a new table that contains only column 3.
     list(get_col_3(table))
 
 
-Memiozation
------------
+Memiozation (Optional)
+----------------------
 
 One of the problems with recursive functions, especially if they are not
 tail-recursive or have not been refactored to use an accumulator, is the number
@@ -816,35 +837,8 @@ declared using the ``nonlocal`` statement in the inner function.
     fib(12)
     call_dict
 
-.. .. admonition:: See also
-.. 
-..      An exercise at the end of the chapter involves creating a ``left_comp`` composition
-..      operator that applies the functions from left to right, which is similar to
-..      `Clojures -> thread-first macro.
-..      <https://clojuredocs.org/clojure.core/-%3E>`_
-.. 
-.. .. note:: 
-.. 
-..     For a better approach to cleaning up Twitter data, see `Marco
-..     Bonzanini's blog
-..     <https://marcobonzanini.com/2015/03/09/mining-twitter-data-with-python-part-2/>`_,
-..     which is shared under `Creative Commons Attribution 4.0 International License. <http://creativecommons.org/licenses/by/4.0/>`_.
-
-.. todo:: design ``juxt`` see https://clojuredocs.org/clojure.core/juxt
-.. todo:: design complement see http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/complement
-.. todo:: design ``curry`` 
-.. todo:: include discussion on toolz and cytoolz, including performance and a discussion on cython(?)
 .. todo:  Implement all of the following (possibly in the exercises)
-..   H complement(func) 	Convert a predicate function to its logical complement.
-..   I compose(*funcs) 	Compose functions to operate in series. DONE
-..   I curry(*args, **kwargs) 	Curry a callable function
-..   H do(func, x) 	Runs func on x, returns x
 ..   T excepts(exc, func[, handler]) 	A wrapper around a function to catch exceptions and dispatch to a handler.
 ..   H flip 	Call the function call with the arguments flipped
 ..   H identity(x) 	Identity function.
-..   H juxt(*funcs) 	Creates a function that calls several functions with the same arguments
-..   T memoize 	Cache a function’s result for speedy future evaluation
-..   T pipe(data, *funcs) 	Pipe a value through a sequence of functions
-..   T thread_first(val, *forms) 	Thread value through a sequence of functions/forms
-..   H thread_last(val, *forms) 	Thread value through a sequence of functions/forms
 .. todo:: Other ideas: reducers and transducers from clojure.

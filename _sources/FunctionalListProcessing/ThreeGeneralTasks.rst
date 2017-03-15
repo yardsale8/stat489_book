@@ -476,3 +476,58 @@ accumulator pattern again!)
 ``map``, ``filter`` and ``reduce`` all take functions as arguments.
 Consequently, these function are considered *higher order functions*.  We will
 explore higher-order functions in the next section.
+
+**Check your understanding**
+
+
+.. mchoice:: reduce_initial_value
+    :answer_a: [2, 3, 4]
+    :answer_b: 6
+    :answer_c: 8
+    :answer_d: 11
+    :correct: c
+    :feedback_a: You are thinking of map, not reduce.  Reduce takes an initial value and updates this value based on each input.
+    :feedback_b: You forgot about the initial value, which in this case was 5.  This reduce will start with the accumulator set to 5, then add 1 to the most current subtotal for each value .
+    :feedback_c: This reduce will start with the accumulator set to 5, then add 1 to the most current subtotal for each value.
+    :feedback_d: We are adding 1, NOT the value, to the accumulator.
+
+    What will be returned by the following call to ``reduce``?
+
+    .. sourcecode:: python
+
+        reduce(lambda a, i: a + i, [1,2,3], 5)
+
+.. mchoice:: reduce_add_strings
+    :answer_a: '6'
+    :answer_b: '123'
+    :answer_c: 6
+    :answer_d: '321'
+    :correct: b
+    :feedback_a: Adding strings concatenates them!  You need to glue the strings together.
+    :feedback_b: When an initial value isn't provided, reduce will use the first value as the initial value.  This reduce will start with the accumulator set to '1', then add each string to the right side of most current accumulator.
+    :feedback_c: Adding strings concatenates them!  You need to glue the strings together.
+    :feedback_d: In this case the item is added to the right of the accumulator, so the strings will accumulate from left to right.
+
+
+    What will be returned by the following call to ``reduce``?
+
+    .. sourcecode:: python
+
+        reduce(lambda a, i: a + i, ['1','2','3'])
+
+.. mchoice:: reduce_add_strings_2
+    :answer_a: '6'
+    :answer_b: '123'
+    :answer_c: 6
+    :answer_d: '321'
+    :correct: d
+    :feedback_a: Adding strings concatenates them!  You need to glue the strings together.
+    :feedback_b: In this case the item is added to the left of the accumulator, so the strings will accumulate from right to left .
+    :feedback_c: Adding strings concatenates them!  You need to glue the strings together.
+    :feedback_d: When an initial value isn't provided, reduce will use the first value as the initial value.  This reduce will start with the accumulator set to '1', then add each string to the left side of most current accumulator.
+
+    What will be returned by the following call to ``reduce``?
+
+    .. sourcecode:: python
+
+        reduce(lambda a, i: i + a, ['1','2','3'])
