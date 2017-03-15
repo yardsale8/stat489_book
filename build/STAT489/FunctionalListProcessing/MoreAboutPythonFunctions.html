@@ -471,11 +471,12 @@ number.  Here is the black-box diagram with the Python code following.</p>
 <span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">y</span>
 <span class="gp">   ...: </span>
 
-<span class="gp">In [1]: </span><span class="n">number</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">In [2]: </span><span class="n">number</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="gp">In [1]: </span><span class="n">result</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+<span class="gp">In [3]: </span><span class="n">result</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">result</span>
+<span class="gp">In [4]: </span><span class="n">result</span>
+<span class="gh">Out[4]: </span><span class="go">100</span>
 </pre></div>
 </div>
 <p>The <strong>return</strong> statement is followed by an expression which is evaluated.  Its
@@ -518,7 +519,7 @@ control back to the place in the program where the function call was made.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare)</span> </p>
 </div>
 <script type="text/javascript">
-var ch04_clsquare_trace = {"code": "def square(x):\n    y = x * x\n    return y\n\nnumber = 10\nresult = square(number)\nresult", "trace": [{"line": 1, "ordered_globals": [], "heap": {}, "globals": {}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 5, "ordered_globals": ["square"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"square": ["REF", 1]}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 6, "ordered_globals": ["square", "number"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 1, "ordered_globals": ["square", "number"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "square", "event": "call", "stack_to_render": [{"unique_hash": "square_f1", "is_zombie": false, "is_highlighted": true, "encoded_locals": {"x": 10}, "frame_id": 1, "is_parent": false, "func_name": "square", "ordered_varnames": ["x"], "parent_frame_id_list": []}]}, {"line": 2, "ordered_globals": ["square", "number"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "square", "event": "step_line", "stack_to_render": [{"unique_hash": "square_f1", "is_zombie": false, "is_highlighted": true, "encoded_locals": {"x": 10}, "frame_id": 1, "is_parent": false, "func_name": "square", "ordered_varnames": ["x"], "parent_frame_id_list": []}]}, {"line": 3, "ordered_globals": ["square", "number"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "square", "event": "step_line", "stack_to_render": [{"unique_hash": "square_f1", "is_zombie": false, "is_highlighted": true, "encoded_locals": {"y": 100, "x": 10}, "frame_id": 1, "is_parent": false, "func_name": "square", "ordered_varnames": ["x", "y"], "parent_frame_id_list": []}]}, {"line": 3, "ordered_globals": ["square", "number"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"number": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "square", "event": "return", "stack_to_render": [{"unique_hash": "square_f1", "is_zombie": false, "is_highlighted": true, "encoded_locals": {"y": 100, "__return__": 100, "x": 10}, "frame_id": 1, "is_parent": false, "func_name": "square", "ordered_varnames": ["x", "y", "__return__"], "parent_frame_id_list": []}]}, {"line": 7, "ordered_globals": ["square", "number", "result"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"result": 100, "number": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 7, "ordered_globals": ["square", "number", "result"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"result": 100, "number": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "<module>", "event": "return", "stack_to_render": []}]};
+var ch04_clsquare_trace = {"trace": [{"heap": {}, "ordered_globals": [], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 1, "globals": {}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square"], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 5, "globals": {"square": ["REF", 1]}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "number"], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 6, "globals": {"square": ["REF", 1], "number": 10}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "number"], "stdout": "", "event": "call", "func_name": "square", "stack_to_render": [{"encoded_locals": {"x": 10}, "is_zombie": false, "func_name": "square", "is_highlighted": true, "frame_id": 1, "ordered_varnames": ["x"], "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": []}], "line": 1, "globals": {"square": ["REF", 1], "number": 10}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "number"], "stdout": "", "event": "step_line", "func_name": "square", "stack_to_render": [{"encoded_locals": {"x": 10}, "is_zombie": false, "func_name": "square", "is_highlighted": true, "frame_id": 1, "ordered_varnames": ["x"], "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": []}], "line": 2, "globals": {"square": ["REF", 1], "number": 10}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "number"], "stdout": "", "event": "step_line", "func_name": "square", "stack_to_render": [{"encoded_locals": {"x": 10, "y": 100}, "is_zombie": false, "func_name": "square", "is_highlighted": true, "frame_id": 1, "ordered_varnames": ["x", "y"], "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": []}], "line": 3, "globals": {"square": ["REF", 1], "number": 10}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "number"], "stdout": "", "event": "return", "func_name": "square", "stack_to_render": [{"encoded_locals": {"__return__": 100, "x": 10, "y": 100}, "is_zombie": false, "func_name": "square", "is_highlighted": true, "frame_id": 1, "ordered_varnames": ["x", "y", "__return__"], "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": []}], "line": 3, "globals": {"square": ["REF", 1], "number": 10}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "number", "result"], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 7, "globals": {"square": ["REF", 1], "number": 10, "result": 100}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "number", "result"], "stdout": "", "event": "return", "func_name": "<module>", "stack_to_render": [], "line": 7, "globals": {"square": ["REF", 1], "number": 10, "result": 100}}], "code": "def square(x):\n    y = x * x\n    return y\n\nnumber = 10\nresult = square(number)\nresult"};
 var ch04_clsquare_vis;
 
 $(document).ready(function() {
@@ -588,7 +589,7 @@ variables listing.  Then look at what is printed when the function returns.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch04_clsquare_bad)</span> </p>
 </div>
 <script type="text/javascript">
-var ch04_clsquare_bad_trace = {"code": "def square(x):\n    y = x * x\n    print(y)   # Bad! should use return instead!\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)", "trace": [{"line": 1, "ordered_globals": [], "heap": {}, "globals": {}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 5, "ordered_globals": ["square"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"square": ["REF", 1]}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 6, "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 1, "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "square", "event": "call", "stack_to_render": [{"unique_hash": "square_f1", "is_zombie": false, "is_highlighted": true, "encoded_locals": {"x": 10}, "frame_id": 1, "is_parent": false, "func_name": "square", "ordered_varnames": ["x"], "parent_frame_id_list": []}]}, {"line": 2, "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "square", "event": "step_line", "stack_to_render": [{"unique_hash": "square_f1", "is_zombie": false, "is_highlighted": true, "encoded_locals": {"x": 10}, "frame_id": 1, "is_parent": false, "func_name": "square", "ordered_varnames": ["x"], "parent_frame_id_list": []}]}, {"line": 3, "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "square": ["REF", 1]}, "stdout": "", "func_name": "square", "event": "step_line", "stack_to_render": [{"unique_hash": "square_f1", "is_zombie": false, "is_highlighted": true, "encoded_locals": {"y": 100, "x": 10}, "frame_id": 1, "is_parent": false, "func_name": "square", "ordered_varnames": ["x", "y"], "parent_frame_id_list": []}]}, {"line": 3, "ordered_globals": ["square", "toSquare"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "square": ["REF", 1]}, "stdout": "100\n", "func_name": "square", "event": "return", "stack_to_render": [{"unique_hash": "square_f1", "is_zombie": false, "is_highlighted": true, "encoded_locals": {"y": 100, "__return__": null, "x": 10}, "frame_id": 1, "is_parent": false, "func_name": "square", "ordered_varnames": ["x", "y", "__return__"], "parent_frame_id_list": []}]}, {"line": 7, "ordered_globals": ["square", "toSquare", "squareResult"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "squareResult": null, "square": ["REF", 1]}, "stdout": "100\n", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 7, "ordered_globals": ["square", "toSquare", "squareResult"], "heap": {"1": ["FUNCTION", "square(x)", null]}, "globals": {"toSquare": 10, "squareResult": null, "square": ["REF", 1]}, "stdout": "100\nThe result of  10  squared is  None\n", "func_name": "<module>", "event": "return", "stack_to_render": []}]};
+var ch04_clsquare_bad_trace = {"trace": [{"heap": {}, "ordered_globals": [], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 1, "globals": {}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square"], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 5, "globals": {"square": ["REF", 1]}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "toSquare"], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 6, "globals": {"square": ["REF", 1], "toSquare": 10}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "toSquare"], "stdout": "", "event": "call", "func_name": "square", "stack_to_render": [{"encoded_locals": {"x": 10}, "is_zombie": false, "func_name": "square", "is_highlighted": true, "frame_id": 1, "ordered_varnames": ["x"], "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": []}], "line": 1, "globals": {"square": ["REF", 1], "toSquare": 10}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "toSquare"], "stdout": "", "event": "step_line", "func_name": "square", "stack_to_render": [{"encoded_locals": {"x": 10}, "is_zombie": false, "func_name": "square", "is_highlighted": true, "frame_id": 1, "ordered_varnames": ["x"], "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": []}], "line": 2, "globals": {"square": ["REF", 1], "toSquare": 10}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "toSquare"], "stdout": "", "event": "step_line", "func_name": "square", "stack_to_render": [{"encoded_locals": {"x": 10, "y": 100}, "is_zombie": false, "func_name": "square", "is_highlighted": true, "frame_id": 1, "ordered_varnames": ["x", "y"], "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": []}], "line": 3, "globals": {"square": ["REF", 1], "toSquare": 10}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "toSquare"], "stdout": "100\n", "event": "return", "func_name": "square", "stack_to_render": [{"encoded_locals": {"__return__": null, "x": 10, "y": 100}, "is_zombie": false, "func_name": "square", "is_highlighted": true, "frame_id": 1, "ordered_varnames": ["x", "y", "__return__"], "unique_hash": "square_f1", "is_parent": false, "parent_frame_id_list": []}], "line": 3, "globals": {"square": ["REF", 1], "toSquare": 10}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "toSquare", "squareResult"], "stdout": "100\n", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 7, "globals": {"square": ["REF", 1], "toSquare": 10, "squareResult": null}}, {"heap": {"1": ["FUNCTION", "square(x)", null]}, "ordered_globals": ["square", "toSquare", "squareResult"], "stdout": "100\nThe result of  10  squared is  None\n", "event": "return", "func_name": "<module>", "stack_to_render": [], "line": 7, "globals": {"square": ["REF", 1], "toSquare": 10, "squareResult": null}}], "code": "def square(x):\n    y = x * x\n    print(y)   # Bad! should use return instead!\n\ntoSquare = 10\nsquareResult = square(toSquare)\nprint(\"The result of \", toSquare, \" squared is \", squareResult)"};
 var ch04_clsquare_bad_vis;
 
 $(document).ready(function() {
@@ -750,7 +751,7 @@ Python. In other words, what are the inputs (parameters) and what is the output
 <p>In this case, the two points are the inputs, which we can represent using four
 parameters. The return value is the distance, which is a floating-point value.</p>
 <p>Already we can write an outline of the function that captures our thinking so far.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
 <span class="gp">   ...: </span>    <span class="k">return</span> <span class="mf">0.0</span>
 <span class="gp">   ...: </span>
 </pre></div>
@@ -760,15 +761,31 @@ returns zero. But it is syntactically correct, and it will run, which means
 that we can test it before we make it more complicated.</p>
 <p>To test the new function, we create a test function.  We will use the convention
 of naming a test function by prepending <code class="docutils literal"><span class="pre">test_</span></code> to the name of the function.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
 <span class="gp">   ...: </span>    <span class="k">return</span> <span class="mf">0.0</span>
 <span class="gp">   ...: </span>
 
-<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
+<span class="gp">In [7]: </span><span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
 <span class="gp">   ...: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
 <span class="gp">   ...: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 <span class="gp">   ...: </span><span class="n">test_distance</span><span class="p">()</span>
 <span class="gp">   ...: </span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-7-833cb8c97e77&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">test_distance</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="nn">&lt;ipython-input-7-833cb8c97e77&gt;</span> in <span class="ni">test_distance</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">test_distance</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="ne">AssertionError</span>: 
 </pre></div>
 </div>
 <p>Inside the test function, <code class="docutils literal"><span class="pre">assert</span></code> statements are used to test the function
@@ -776,9 +793,15 @@ for various hand computed cases.  In this example, we use the Pythagorean triple
 (<span class="math">\(3^2+4^2=5^2\)</span>) and also assert that the distance from a point and itself
 is 0.  An assert statement will be invisible if the expression evaluates to True
 but throw and exception if it fails.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">assert</span> <span class="s2">&quot;a&quot;</span> <span class="o">==</span> <span class="s2">&quot;a&quot;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="k">assert</span> <span class="s2">&quot;a&quot;</span> <span class="o">==</span> <span class="s2">&quot;a&quot;</span>
 
-<span class="gp">In [1]: </span><span class="k">assert</span> <span class="s2">&quot;a&quot;</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span>
+<span class="gp">In [9]: </span><span class="k">assert</span> <span class="s2">&quot;a&quot;</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-9-adfa1494f295&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">assert</span> <span class="s2">&quot;a&quot;</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span>
+
+<span class="ne">AssertionError</span>: 
 </pre></div>
 </div>
 <p>For now, we follow the test function definition with a call to the test
@@ -797,51 +820,83 @@ the last line we added.</p>
 <p>A logical first step in the computation is to find the differences
 x<sub>2</sub>- x<sub>1</sub> and y<sub>2</sub>- y<sub>1</sub>.  We will store
 those values in temporary variables named <code class="docutils literal"><span class="pre">dx</span></code> and <code class="docutils literal"><span class="pre">dy</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
-<span class="gp">   ...: </span>    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
-<span class="gp">   ...: </span>    <span class="k">return</span> <span class="mf">0.0</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+<span class="gp">   ....: </span>    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="mf">0.0</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
-<span class="gp">   ...: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
-<span class="gp">   ...: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-<span class="gp">   ...: </span><span class="n">test_distance</span><span class="p">()</span>
-<span class="gp">   ...: </span>
+<span class="gp">In [11]: </span><span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
+<span class="gp">   ....: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="gp">   ....: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="gp">   ....: </span><span class="n">test_distance</span><span class="p">()</span>
+<span class="gp">   ....: </span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-11-833cb8c97e77&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">test_distance</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="nn">&lt;ipython-input-11-833cb8c97e77&gt;</span> in <span class="ni">test_distance</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">test_distance</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="ne">AssertionError</span>: 
 </pre></div>
 </div>
 <p>Next we compute the sum of squares of <code class="docutils literal"><span class="pre">dx</span></code> and <code class="docutils literal"><span class="pre">dy</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
-<span class="gp">   ...: </span>    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
-<span class="gp">   ...: </span>    <span class="n">dsquared</span> <span class="o">=</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span><span class="o">**</span><span class="mi">2</span>
-<span class="gp">   ...: </span>    <span class="k">return</span> <span class="mf">0.0</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+<span class="gp">   ....: </span>    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+<span class="gp">   ....: </span>    <span class="n">dsquared</span> <span class="o">=</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="mf">0.0</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
-<span class="gp">   ...: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
-<span class="gp">   ...: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-<span class="gp">   ...: </span><span class="n">test_distance</span><span class="p">()</span>
-<span class="gp">   ...: </span>
+<span class="gp">In [13]: </span><span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
+<span class="gp">   ....: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="gp">   ....: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="gp">   ....: </span><span class="n">test_distance</span><span class="p">()</span>
+<span class="gp">   ....: </span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-13-833cb8c97e77&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">test_distance</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="nn">&lt;ipython-input-13-833cb8c97e77&gt;</span> in <span class="ni">test_distance</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">test_distance</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="ne">AssertionError</span>: 
 </pre></div>
 </div>
 <p>Again, we could run the program at this stage and check the value of <code class="docutils literal"><span class="pre">dsquared</span></code> (which
 should be 25).</p>
 <p>Finally, using the fractional exponent <code class="docutils literal"><span class="pre">0.5</span></code> to find the square root,
 we compute and return the result.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
-<span class="gp">   ...: </span>    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
-<span class="gp">   ...: </span>    <span class="n">dsquared</span> <span class="o">=</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span><span class="o">**</span><span class="mi">2</span>
-<span class="gp">   ...: </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">dsquared</span><span class="o">**</span><span class="mf">0.5</span>
-<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">result</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+<span class="gp">   ....: </span>    <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+<span class="gp">   ....: </span>    <span class="n">dsquared</span> <span class="o">=</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">   ....: </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">dsquared</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">result</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
-<span class="gp">   ...: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
-<span class="gp">   ...: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-<span class="gp">   ...: </span><span class="n">test_distance</span><span class="p">()</span>
-<span class="gp">   ...: </span>
+<span class="gp">In [15]: </span><span class="k">def</span> <span class="nf">test_distance</span><span class="p">():</span>
+<span class="gp">   ....: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="gp">   ....: </span>    <span class="k">assert</span> <span class="n">distance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="gp">   ....: </span><span class="n">test_distance</span><span class="p">()</span>
+<span class="gp">   ....: </span>
 </pre></div>
 </div>
 <p>If that works correctly, you are done. When using <code class="docutils literal"><span class="pre">assert</span></code> statements, silence
@@ -883,40 +938,45 @@ function call.</p>
 <h2>7.2.1. Default Parameters<a class="headerlink" href="#default-parameters" title="Permalink to this headline">¶</a></h2>
 <p>In an earlier chapter, we contended with the problem of creating a general
 <code class="docutils literal"><span class="pre">apply_tax</span></code> function.  One solution was to have the tax rate as a parameter.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">apply_tax</span> <span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">cost</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="k">def</span> <span class="nf">apply_tax</span> <span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">cost</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">1.065</span><span class="p">,</span> <span class="mf">4.99</span><span class="p">)</span>
+<span class="gp">In [17]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">1.065</span><span class="p">,</span> <span class="mf">4.99</span><span class="p">)</span>
+<span class="gh">Out[17]: </span><span class="go">5.31</span>
 </pre></div>
 </div>
 <p>It was noted that having to input the same tax rate can be annoying, but also
 violated the DRY principle.  Our first solution to this problem was to use a
 function factory and a closure to create specific implementations of
 <code class="docutils literal"><span class="pre">apply_tax</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">make_apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">):</span>
-<span class="gp">   ...: </span>        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">apply_tax</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="k">def</span> <span class="nf">make_apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">):</span>
+<span class="gp">   ....: </span>        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">apply_tax</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [1]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="n">make_apply_tax</span><span class="p">(</span><span class="mf">1.065</span><span class="p">)</span>
+<span class="gp">In [19]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="n">make_apply_tax</span><span class="p">(</span><span class="mf">1.065</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">)</span>
+<span class="gp">In [20]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">)</span>
+<span class="gh">Out[20]: </span><span class="go">5.31</span>
 </pre></div>
 </div>
 <p>The standard &#8220;Pythonic&#8221; solution to this problem is to use a default parameter
 for the tax rate.  The default value is selected to be some convenient and
 typical value and the user can either use this default or provide their own.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">1.065</span><span class="p">):</span>
-<span class="gp">   ...: </span>     <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">1.065</span><span class="p">):</span>
+<span class="gp">   ....: </span>     <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">)</span>
+<span class="gp">In [22]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">)</span>
+<span class="gh">Out[22]: </span><span class="go">5.31</span>
 
-<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="mf">1.07</span><span class="p">)</span>
+<span class="gp">In [23]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="mf">1.07</span><span class="p">)</span>
+<span class="go">              Out[23]: 5.34</span>
 
-<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">1.07</span><span class="p">)</span>
+<span class="gp">In [24]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">1.07</span><span class="p">)</span>
+<span class="go">                            Out[24]: 5.34</span>
 </pre></div>
 </div>
 <p>Note that we can give an altercate value for the default value positionally (by
@@ -929,20 +989,35 @@ adding a second parameter) or by explicitly assigning a value to the parameter
 <p>So far, our functions have had a fixed arity, a fixed number of inputs.  If we
 define the function <code class="docutils literal"><span class="pre">add</span></code> to take two inputs, calls to this function will work
 if and only if it is supplied two arguments.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">In [26]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[26]: </span><span class="go">3</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">In [27]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">           ---------------------------------------------------------------------------</span>
+<span class="go">TypeError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-27-1315ff1935d2&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 add(1,2,3)</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">TypeError: &lt;lambda&gt;() takes 2 positional arguments but 3 were given</span>
+
+<span class="gp">In [28]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ---------------------------------------------------------------------------</span>
+<span class="go">TypeError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-28-916e497b8c78&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 add(1)</span>
+
+<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;y&#39;</span>
 </pre></div>
 </div>
 <p>Here is an interesting fact about the <code class="docutils literal"><span class="pre">print</span></code> functions, it can take a
 variable number of inputs.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="go">A</span>
 
-<span class="gp">In [1]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">In [30]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">  1 2 3</span>
 </pre></div>
 </div>
 <p>How does that work?  It turns out that we can design similar functions using the
@@ -952,37 +1027,51 @@ Python will except any number of arguments and give them to us in a tuple named
 stored in a tuple named <code class="docutils literal"><span class="pre">args</span></code>.  In the case of the <code class="docutils literal"><span class="pre">add</span></code> function, we can
 simply apply the <code class="docutils literal"><span class="pre">sum</span></code> function to this tuple to get the sum of all the
 numbers.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="c1">#*</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="c1">#*</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [32]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[32]: </span><span class="go">1</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">In [33]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">           Out[33]: 6</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">()</span>
+<span class="gp">In [34]: </span><span class="n">add</span><span class="p">()</span>
+<span class="go">                      Out[34]: 0</span>
 </pre></div>
 </div>
 <p>While it is traditional to use <code class="docutils literal"><span class="pre">args</span></code> for a variable number of arguments, you
 can use a different name if your like.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">bobs</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">bobs</span><span class="p">)</span> <span class="c1">#*</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">bobs</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">bobs</span><span class="p">)</span> <span class="c1">#*</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [36]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[36]: </span><span class="go">1</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">In [37]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">           Out[37]: 6</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">()</span>
+<span class="gp">In [38]: </span><span class="n">add</span><span class="p">()</span>
+<span class="go">                      Out[38]: 0</span>
 </pre></div>
 </div>
 <p>We can combine a variable number of arguments with regular parameters, for
 example, if we wanted to design <code class="docutils literal"><span class="pre">add</span></code> to take <em>one or more parameters</em>, you
 would start with the required one parameter, then add the <code class="docutils literal"><span class="pre">*args</span></code> for zero or
 more additional parameters.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">first</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">first</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="c1">#*</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">first</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">first</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="c1">#*</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [40]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[40]: </span><span class="go">1</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">In [41]: </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">           Out[41]: 6</span>
 
-<span class="gp">In [1]: </span><span class="n">add</span><span class="p">()</span>
+<span class="gp">In [42]: </span><span class="n">add</span><span class="p">()</span>
+<span class="go">                      ---------------------------------------------------------------------------</span>
+<span class="go">TypeError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-42-09e9fb56b0a4&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 add()</span>
+
+<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;first&#39;</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -998,14 +1087,15 @@ arguments</em>. <strong>Keyword arguments</strong>, like default parameters, are
 values by name as opposed to position.</p>
 <p>To define a function that accepts keyword arguments, we add the special
 <code class="docutils literal"><span class="pre">**kwargs</span></code> parameter to the end of the parameter list.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1">#**</span>
-<span class="gp">   ...: </span>    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;The keywords and values are&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [43]: </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1">#**</span>
+<span class="gp">   ....: </span>    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;The keywords and values are&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">   ....: </span>
 </pre></div>
 </div>
 <p>When calling such a function, we provide the keyword arguments by <em>unpacking</em> a
 dictionary of keywords and the corresponding values.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">The keywords and values are {&#39;x&#39;: 2, &#39;y&#39;: 3}</span>
 </pre></div>
 </div>
 <p>Notice that all of the keyword arguments are returned in a dictionary named
@@ -1014,19 +1104,21 @@ the value are the corresponding argument values.</p>
 <p>Let&#8217;s return to the <code class="docutils literal"><span class="pre">apply_tax</span></code> example.  Another solution to the problem is
 to define the function to allow for keyword arguments, then check these
 arguments for the <code class="docutils literal"><span class="pre">'rate'</span></code> keyword.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
 
-<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1">#**</span>
-<span class="gp">   ...: </span>    <span class="k">if</span> <span class="s1">&#39;rate&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-<span class="gp">   ...: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="gp">   ...: </span>    <span class="k">else</span><span class="p">:</span>
-<span class="gp">   ...: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="mf">1.065</span>
-<span class="gp">   ...: </span>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">   ...: </span>
+<span class="gp">In [46]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1">#**</span>
+<span class="gp">   ....: </span>    <span class="k">if</span> <span class="s1">&#39;rate&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="mf">1.065</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">)</span>
+<span class="gp">In [47]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">)</span>
+<span class="gh">Out[47]: </span><span class="go">5.31</span>
 
-<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="n">rate</span> <span class="o">=</span> <span class="mf">1.07</span><span class="p">)</span>
+<span class="gp">In [48]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="n">rate</span> <span class="o">=</span> <span class="mf">1.07</span><span class="p">)</span>
+<span class="go">              Out[48]: 5.34</span>
 </pre></div>
 </div>
 </div>
@@ -1036,7 +1128,8 @@ arguments for the <code class="docutils literal"><span class="pre">'rate'</span>
 <code class="docutils literal"><span class="pre">*</span></code> operator to a list <strong>unpacks</strong> it, passing each entry in the sequence as a
 argument (separated by commas).  Thus, we think of <code class="docutils literal"><span class="pre">*[1,2,3]</span></code> as <code class="docutils literal"><span class="pre">1,2,3</span></code> and
 <code class="docutils literal"><span class="pre">add(*[1,2,3])</span></code> as <code class="docutils literal"><span class="pre">add(1,2,3)</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1">#*</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1">#*</span>
+<span class="gh">Out[49]: </span><span class="go">6</span>
 </pre></div>
 </div>
 <p>As we can see with the <code class="docutils literal"><span class="pre">add</span></code> function defined above, combining a variable
@@ -1049,17 +1142,18 @@ with <code class="docutils literal"><span class="pre">*</span></code> operator. 
 returning <code class="docutils literal"><span class="pre">x=5,</span> <span class="pre">y=2</span></code>.</p>
 <p>Here is an example of using keyword unpacking with the <code class="docutils literal"><span class="pre">apply_tax</span></code> function
 that accepts keyword arguments.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
 
-<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1">#**</span>
-<span class="gp">   ...: </span>    <span class="k">if</span> <span class="s1">&#39;rate&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-<span class="gp">   ...: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="gp">   ...: </span>    <span class="k">else</span><span class="p">:</span>
-<span class="gp">   ...: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="mf">1.065</span>
-<span class="gp">   ...: </span>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">   ...: </span>
+<span class="gp">In [51]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1">#**</span>
+<span class="gp">   ....: </span>    <span class="k">if</span> <span class="s1">&#39;rate&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">   ....: </span>        <span class="n">rate</span> <span class="o">=</span> <span class="mf">1.065</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="n">cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;rate&#39;</span><span class="p">:</span><span class="mf">1.07</span><span class="p">})</span>
+<span class="gp">In [52]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.99</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;rate&#39;</span><span class="p">:</span><span class="mf">1.07</span><span class="p">})</span>
+<span class="gh">Out[52]: </span><span class="go">5.34</span>
 </pre></div>
 </div>
 </div>

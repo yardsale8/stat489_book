@@ -6,6 +6,9 @@ When processing a sequence of data, problems can frequency be solved using a
 combination of three general operations: *map*, *filter* and *reduce*.  Many of
 the examples from Chapter 4 can be framed in this light.
 
+Map
+---
+
 A **map** is the operation of applying or *mapping* a function to each element
 of a list.  An example would be squaring all the elements in a list.
 
@@ -24,6 +27,14 @@ the following form shown below for some function ``f``.
 .. sourcecode:: python
 
     mapped_L = [f(x) for x in L]
+
+.. figure:: Figures/map_sqr_list.png
+    :alt: Mapping the sqr function onto a list.
+
+    ..
+
+    The function ``map`` applies ``sqr`` (first argument) to each element of the list (second argument).
+
 
 Since this is a common functional pattern, we should construct a general
 abstraction.  For this expression, we would want to be able to change the
@@ -60,6 +71,62 @@ evaluation using the ``list`` conversion function or another list comprehension.
 to process a map a second time, it will need to be re-initialized as shown
 above.
 
+**Check your understanding**
+
+
+.. mchoice:: map_1
+    :answer_a: A lazy object
+    :answer_b: [True, False, False]
+    :answer_c: ['a']
+    :answer_d: Error, you can't use a function as an argument for another function.
+    :correct: a
+    :feedback_a: The built-in map function is lazy and will return a generator object unless completion is forced by list/comprehension/reduce
+    :feedback_b: The built-in map function is lazy and will return a generator object unless completion is forced by list/comprehension/reduce
+    :feedback_c: The built-in map function is lazy and will return a generator object unless completion is forced by list/comprehension/reduce
+    :feedback_d: Functions are "first class citizens" in Python, meaning they can be used in the same way as any other piece of data
+
+    What will out evaluate to for the following code?
+
+    .. sourcecode:: python
+
+        has_vowel = lambda L: any([True for ch in L if ch.lower() in 'aeiou'])
+        out = map(has_vowel, ['a', 'b', 'c'])
+
+.. mchoice:: map_2
+    :answer_a: A lazy object
+    :answer_b: [True, False, False]
+    :answer_c: ['a']
+    :answer_d: Error, you can't use a function as an argument for another function.
+    :correct: b
+    :feedback_a: Applying the list conversion function to map will force completion of the lazy generator object returned by map.
+    :feedback_b: Map will apply has_vowel to each letter in the list, keeping the resulting Boolean value.
+    :feedback_c: This would be the result of filter.  Map will apply has_vowel to each letter in the list, keeping the resulting Boolean value.
+    :feedback_d: Functions are "first class citizens" in Python, meaning they can be used in the same way as any other piece of data
+
+    What will out evaluate to for the following code?
+
+    .. sourcecode:: python
+
+        has_vowel = lambda L: any([True for ch in L if ch.lower() in 'aeiou'])
+        out = list(map(has_vowel, ['a', 'b', 'c']))
+
+.. mchoice:: map_3
+    :answer_a: lambda L: any(map(lambda ch: ch.lower() in 'aeiou', L))
+    :answer_b: lambda L: all(map(lambda ch: ch.lower() in 'aeiou', L))
+    :correct: a
+    :feedback_a: Map will check if each character is a vowel and any will return True if there is at least on vowel in the list.
+    :feedback_b: Map will check if each character is a vowel but all would only return True if ALL of the characters in the list are vowels.
+
+    Which of the following functions can be used to replace has_vowel?
+
+    .. sourcecode:: python
+
+        has_vowel = lambda L: any([True for ch in L if ch.lower() in 'aeiou'])
+
+
+Filter
+------
+
 A **filter** is the operation of *filtering* the list to only include values
 that fit some condition.  For example, we would filter out all of the odd number
 from a list of numbers.
@@ -82,6 +149,14 @@ follows.
 
     filtered_L = [x for x in L if predicate(x)]
 
+.. figure:: Figures/filter_odd_list.png
+    :alt: Filter a list on odd values.
+
+    ..
+
+    When applying ``filter`` with ``is_odd`` (first argument) to the list
+    ``[1,2,3,4,5]`` (second argument), all of the values where ``is_odd``
+    returns ``True`` are retained.
 
 As with ``map``, we can easily create an abstraction of this pattern.  In this
 case, we want to be able to change the predicate function as well as the list
@@ -113,6 +188,49 @@ object will be empty after being processed.
     ``filter``, but there is a very good reason for this feature.   We will
     discuss this advantage in an upcoming section on lazy evaluation in Python.
 
+
+**Check your understanding**
+
+
+.. mchoice:: filter_1
+    :answer_a: A lazy object
+    :answer_b: [True, False, False]
+    :answer_c: ['a']
+    :answer_d: Error, you can't use a function as an argument for another function.
+    :correct: a
+    :feedback_a: The built-in filter function is lazy and will return a generator object unless completion is forced by list/comprehension/reduce
+    :feedback_b: The built-in filter function is lazy and will return a generator object unless completion is forced by list/comprehension/reduce
+    :feedback_c: The built-in filter function is lazy and will return a generator object unless completion is forced by list/comprehension/reduce
+    :feedback_d: Functions are "first class citizens" in Python, meaning they can be used in the same way as any other piece of data
+
+    What will out evaluate to for the following code?
+
+    .. sourcecode:: python
+
+        has_vowel = lambda L: any([True for ch in L if ch.lower() in 'aeiou'])
+        out = filter(has_vowel, ['a', 'b', 'c'])
+
+.. mchoice:: filter_2
+    :answer_a: A lazy object
+    :answer_b: [True, False, False]
+    :answer_c: ['a']
+    :answer_d: Error, you can't use a function as an argument for another function.
+    :correct: c
+    :feedback_a: Applying the list conversion function to map will force completion of the lazy generator object returned by map.
+    :feedback_b: This would be the result of map.  Filter will only keep values for which has_vowel is True.
+    :feedback_c: Filter will only keep values for which has_vowel is True.
+    :feedback_d: Functions are "first class citizens" in Python, meaning they can be used in the same way as any other piece of data
+
+    What will out evaluate to for the following code?
+
+    .. sourcecode:: python
+
+        has_vowel = lambda L: any([True for ch in L if ch.lower() in 'aeiou'])
+        out = list(filter(has_vowel, ['a', 'b', 'c']))
+
+
+Reduce
+------
 
 The third general operation performed on lists is a reduction, which **reduces**
 a list to a value.  Simple reductions can be performed using a list
@@ -346,6 +464,14 @@ processed (from left to right).
 With some practice, you will be able to think about reducing a list to a value
 using this high level abstraction (and will (almost) never need to write the
 accumulator pattern again!)
+
+.. figure:: Figures/reduce_ss_list.png
+    :alt: Reducing a list by adding the square of items to the accumulator.
+
+    ..
+
+    When using ``reduce`` with this update function, the square of each item gets
+    added onto the accumulator ``acc``.
 
 ``map``, ``filter`` and ``reduce`` all take functions as arguments.
 Consequently, these function are considered *higher order functions*.  We will

@@ -332,10 +332,13 @@ because they are enclosed in quotation marks.</p>
 <p>If you are not sure what class a value falls into, Python has a function called
 <strong>type</strong> which can tell you.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="gh">Out[1]: </span><span class="go">str</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="gp">In [2]: </span><span class="nb">type</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="go">            Out[2]: int</span>
 
-<span class="gp">In [1]: </span><span class="s2">&quot;Hello, World&quot;</span>
+<span class="gp">In [3]: </span><span class="s2">&quot;Hello, World&quot;</span>
+<span class="go">                        Out[3]: &#39;Hello, World&#39;</span>
 </pre></div>
 </div>
 <p>Not surprisingly, strings belong to the class <strong>str</strong> and integers belong to the
@@ -345,26 +348,33 @@ called <strong>float</strong>, because these numbers are represented in a format
 <em>floating-point</em>.  At this stage, you can treat the words <em>class</em> and <em>type</em>
 interchangeably.  We&#8217;ll come back to a deeper understanding of what a class
 is in later chapters.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="mf">3.2</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="nb">type</span><span class="p">(</span><span class="mf">3.2</span><span class="p">)</span>
+<span class="gh">Out[4]: </span><span class="go">float</span>
 </pre></div>
 </div>
 <p>What about values like <code class="docutils literal"><span class="pre">&quot;17&quot;</span></code> and <code class="docutils literal"><span class="pre">&quot;3.2&quot;</span></code>? They look like numbers, but they
 are in quotation marks like strings.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;17&quot;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;17&quot;</span><span class="p">)</span>
+<span class="gh">Out[5]: </span><span class="go">str</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;3.2&quot;</span><span class="p">)</span>
+<span class="gp">In [6]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;3.2&quot;</span><span class="p">)</span>
+<span class="go">            Out[6]: str</span>
 </pre></div>
 </div>
 <p>They&#8217;re strings!</p>
 <p>Strings in Python can be enclosed in either single quotes (<code class="docutils literal"><span class="pre">'</span></code>) or double
 quotes (<code class="docutils literal"><span class="pre">&quot;</span></code>), or three of each (<code class="docutils literal"><span class="pre">'''</span></code> or <code class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></code>)</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;This is a string.&#39;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;This is a string.&#39;</span><span class="p">)</span>
+<span class="gh">Out[7]: </span><span class="go">str</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;And so is this.&quot;</span><span class="p">)</span>
+<span class="gp">In [8]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;And so is this.&quot;</span><span class="p">)</span>
+<span class="go">            Out[8]: str</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;and this.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="gp">In [9]: </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;and this.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="go">                        Out[9]: str</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;and even this...&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="gp">In [10]: </span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;and even this...&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="go">                                    Out[10]: str</span>
 </pre></div>
 </div>
 <p>Double quoted strings can contain single quotes inside them, as in <code class="docutils literal"><span class="pre">&quot;Bruce's</span>
@@ -372,23 +382,29 @@ quotes (<code class="docutils literal"><span class="pre">&quot;</span></code>), 
 <code class="docutils literal"><span class="pre">'The</span> <span class="pre">knights</span> <span class="pre">who</span> <span class="pre">say</span> <span class="pre">&quot;Ni!&quot;'</span></code>.
 Strings enclosed with three occurrences of either quote symbol are called
 triple quoted strings.  They can contain either single or double quotes:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="sd">&#39;&#39;&#39;&quot;Oh no&quot;, she exclaimed, &quot;Ben&#39;s bike is broken!&quot;&#39;&#39;&#39;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="sd">&#39;&#39;&#39;&quot;Oh no&quot;, she exclaimed, &quot;Ben&#39;s bike is broken!&quot;&#39;&#39;&#39;</span>
+<span class="gh">Out[11]: </span><span class="go">&#39;&quot;Oh no&quot;, she exclaimed, &quot;Ben\&#39;s bike is broken!&quot;&#39;</span>
 </pre></div>
 </div>
 <p>Triple quoted strings can even span multiple lines:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;This message will</span>
-<span class="gp">   ...: </span><span class="s2">span several</span>
-<span class="gp">   ...: </span><span class="s2">lines.&quot;&quot;&quot;</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;This message will</span>
+<span class="gp">   ....: </span><span class="s2">span several</span>
+<span class="gp">   ....: </span><span class="s2">lines.&quot;&quot;&quot;</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [1]: </span><span class="n">message</span>
+<span class="gp">In [13]: </span><span class="n">message</span>
+<span class="gh">Out[13]: </span><span class="go">&#39;This message will\nspan several\nlines.&#39;</span>
 
-<span class="gp">In [1]: </span><span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="gp">In [14]: </span><span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="go">                                                   This message will</span>
+<span class="go">span several</span>
+<span class="go">lines.</span>
 
-<span class="gp">In [1]: </span><span class="sd">&quot;&quot;&quot;This message will span</span>
-<span class="gp">   ...: </span><span class="sd">several lines</span>
-<span class="gp">   ...: </span><span class="sd">of the text.&quot;&quot;&quot;</span>
-<span class="gp">   ...: </span>
+<span class="gp">In [15]: </span><span class="sd">&quot;&quot;&quot;This message will span</span>
+<span class="gp">   ....: </span><span class="sd">several lines</span>
+<span class="gp">   ....: </span><span class="sd">of the text.&quot;&quot;&quot;</span>
+<span class="gp">   ....: </span>
+<span class="go">                                                                                         Out[15]: &#39;This message will span\nseveral lines\nof the text.&#39;</span>
 </pre></div>
 </div>
 <p>Python doesn&#8217;t care whether you use single or double quotes or the
@@ -402,9 +418,11 @@ represented by the special character <code class="docutils literal"><span class=
 multiline string is printed with the <code class="docutils literal"><span class="pre">print</span></code> function, the new lines are
 rendered as new lines.</p>
 </div>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="s1">&#39;This is a string.&#39;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="s1">&#39;This is a string.&#39;</span>
+<span class="gh">Out[16]: </span><span class="go">&#39;This is a string.&#39;</span>
 
-<span class="gp">In [1]: </span><span class="sd">&quot;&quot;&quot;And so is this.&quot;&quot;&quot;</span>
+<span class="gp">In [17]: </span><span class="sd">&quot;&quot;&quot;And so is this.&quot;&quot;&quot;</span>
+<span class="go">                             Out[17]: &#39;And so is this.&#39;</span>
 </pre></div>
 </div>
 <p>So the Python language designers usually chose to surround their strings by
@@ -448,31 +466,49 @@ respectively.  We call these <strong>type conversion</strong> functions.</p>
 into an int. For floating point numbers, it <em>discards</em> the decimal portion of
 the number - a process we call <em>truncation towards zero</em> on the number line.
 Let us see this in action:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="mf">3.14</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="mf">3.14</span>
+<span class="gh">Out[18]: </span><span class="go">3.14</span>
 
-<span class="gp">In [1]: </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="gp">In [19]: </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="go">              Out[19]: 3</span>
 
-<span class="gp">In [1]: </span><span class="mf">3.9999</span>
+<span class="gp">In [20]: </span><span class="mf">3.9999</span>
+<span class="go">                         Out[20]: 3.9999</span>
 
-<span class="gp">In [1]: </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.9999</span><span class="p">)</span>       <span class="c1"># This doesn&#39;t round to the closest int</span>
+<span class="gp">In [21]: </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.9999</span><span class="p">)</span>       <span class="c1"># This doesn&#39;t round to the closest int</span>
+<span class="go">                                         Out[21]: 3</span>
 
-<span class="gp">In [1]: </span><span class="mf">3.0</span>
+<span class="gp">In [22]: </span><span class="mf">3.0</span>
+<span class="go">                                                    Out[22]: 3.0</span>
 
-<span class="gp">In [1]: </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="gp">In [23]: </span><span class="nb">int</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="go">                                                                 Out[23]: 3</span>
 
-<span class="gp">In [1]: </span><span class="o">-</span><span class="mf">3.999</span>
+<span class="gp">In [24]: </span><span class="o">-</span><span class="mf">3.999</span>
+<span class="go">                                                                            Out[24]: -3.999</span>
 
-<span class="gp">In [1]: </span><span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mf">3.999</span><span class="p">)</span>        <span class="c1"># Note that the result is closer to zero</span>
+<span class="gp">In [25]: </span><span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mf">3.999</span><span class="p">)</span>        <span class="c1"># Note that the result is closer to zero</span>
+<span class="go">                                                                                            Out[25]: -3</span>
 
-<span class="gp">In [1]: </span><span class="s2">&quot;2345&quot;</span>
+<span class="gp">In [26]: </span><span class="s2">&quot;2345&quot;</span>
+<span class="go">                                                                                                        Out[26]: &#39;2345&#39;</span>
 
-<span class="gp">In [1]: </span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;2345&quot;</span><span class="p">)</span>        <span class="c1"># parse a string to produce an int</span>
+<span class="gp">In [27]: </span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;2345&quot;</span><span class="p">)</span>        <span class="c1"># parse a string to produce an int</span>
+<span class="go">                                                                                                                        Out[27]: 2345</span>
 
-<span class="gp">In [1]: </span><span class="mi">17</span>
+<span class="gp">In [28]: </span><span class="mi">17</span>
+<span class="go">                                                                                                                                      Out[28]: 17</span>
 
-<span class="gp">In [1]: </span><span class="nb">int</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>                <span class="c1"># int even works on integer</span>
+<span class="gp">In [29]: </span><span class="nb">int</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>                <span class="c1"># int even works on integer</span>
+<span class="go">                                                                                                                                                  Out[29]: 17</span>
 
-<span class="gp">In [1]: </span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;23bottles&quot;</span><span class="p">)</span>
+<span class="gp">In [30]: </span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;23bottles&quot;</span><span class="p">)</span>
+<span class="go">                                                                                                                                                              ---------------------------------------------------------------------------</span>
+<span class="go">ValueError                                Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-30-f9490e7a2c12&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 int(&quot;23bottles&quot;)</span>
+
+<span class="go">ValueError: invalid literal for int() with base 10: &#39;23bottles&#39;</span>
 </pre></div>
 </div>
 <p>The last case shows that a string has to be a syntactically legal number,
@@ -480,18 +516,23 @@ otherwise you&#8217;ll get one of those pesky runtime errors.  Modify the exampl
 <code class="docutils literal"><span class="pre">bottles</span></code> and rerun the program.  You should see the integer <code class="docutils literal"><span class="pre">23</span></code>.</p>
 <p>The type converter <code class="docutils literal"><span class="pre">float</span></code> can turn an integer, a float, or a syntactically
 legal string into a float.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">)</span>
+<span class="gh">Out[31]: </span><span class="go">123.45</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">))</span>
+<span class="gp">In [32]: </span><span class="nb">type</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;123.45&quot;</span><span class="p">))</span>
+<span class="go">                Out[32]: float</span>
 </pre></div>
 </div>
 <p>The type converter <code class="docutils literal"><span class="pre">str</span></code> turns its argument into a string.  Remember that when we print a string, the
 quotes are removed.  However, if we print the type, we can see that it is definitely <cite>str</cite>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">str</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="nb">str</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="gh">Out[33]: </span><span class="go">&#39;17&#39;</span>
 
-<span class="gp">In [1]: </span><span class="nb">str</span><span class="p">(</span><span class="mf">123.45</span><span class="p">)</span>
+<span class="gp">In [34]: </span><span class="nb">str</span><span class="p">(</span><span class="mf">123.45</span><span class="p">)</span>
+<span class="go">              Out[34]: &#39;123.45&#39;</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mf">123.45</span><span class="p">))</span>
+<span class="gp">In [35]: </span><span class="nb">type</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mf">123.45</span><span class="p">))</span>
+<span class="go">                                Out[35]: str</span>
 </pre></div>
 </div>
 <p><strong>Check your understanding</strong></p>
@@ -518,11 +559,11 @@ quotes are removed.  However, if we print the type, we can see that it is defini
 <p>One of the most powerful features of a programming language is the ability to
 manipulate <strong>variables</strong>. A variable is a name that refers to a value.</p>
 <p><strong>Assignment statements</strong> create new variables and also give them values to refer to.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s up, Doc?&quot;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s up, Doc?&quot;</span>
 
-<span class="gp">In [1]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="gp">In [37]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
 
-<span class="gp">In [1]: </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="gp">In [38]: </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
 </pre></div>
 </div>
 <p>This example makes three assignments. The first assigns the string value
@@ -533,7 +574,11 @@ integer <code class="docutils literal"><span class="pre">17</span></code> to <co
 <code class="docutils literal"><span class="pre">==</span></code> token).  The assignment statement links a <em>name</em>, on the left hand
 side of the operator, with a <em>value</em>, on the right hand side.  This is why you
 will get an error if you enter:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="mi">17</span> <span class="o">=</span> <span class="n">n</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="mi">17</span> <span class="o">=</span> <span class="n">n</span>
+<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-39-e0d672332486&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
+<span class="g g-Whitespace">    </span><span class="mi">17</span> <span class="o">=</span> <span class="n">n</span>
+          <span class="o">^</span>
+<span class="ne">SyntaxError</span>: can&#39;t assign to literal
 </pre></div>
 </div>
 <div class="admonition tip">
@@ -550,17 +595,20 @@ This diagram shows the result of executing the assignment statements shown above
 <p>If you ask Python to evaluate a variable, it will produce the value
 that is currently linked to the variable.  In other words, evaluating a variable will give you the value that is referred to
 by the variable.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s up, Doc?&quot;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s up, Doc?&quot;</span>
 
-<span class="gp">In [1]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="gp">In [41]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
 
-<span class="gp">In [1]: </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="gp">In [42]: </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
 
-<span class="gp">In [1]: </span><span class="n">message</span>
+<span class="gp">In [43]: </span><span class="n">message</span>
+<span class="gh">Out[43]: </span><span class="go">&quot;What&#39;s up, Doc?&quot;</span>
 
-<span class="gp">In [1]: </span><span class="n">n</span>
+<span class="gp">In [44]: </span><span class="n">n</span>
+<span class="go">                           Out[44]: 17</span>
 
-<span class="gp">In [1]: </span><span class="n">pi</span>
+<span class="gp">In [45]: </span><span class="n">pi</span>
+<span class="go">                                       Out[45]: 3.14159</span>
 </pre></div>
 </div>
 <p>In each case the result is the value of the variable.
@@ -571,7 +619,7 @@ To see this in even more detail, we can run the program using codelens.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch02_9_codelens)</span> </p>
 </div>
 <script type="text/javascript">
-var ch02_9_codelens_trace = {"code": "message = \"What's up, Doc?\"\nn = 17\npi = 3.14159\n\nprint(message)\nprint(n)\nprint(pi)", "trace": [{"line": 1, "ordered_globals": [], "heap": {}, "globals": {}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 2, "ordered_globals": ["message"], "heap": {}, "globals": {"message": "What's up, Doc?"}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 3, "ordered_globals": ["message", "n"], "heap": {}, "globals": {"n": 17, "message": "What's up, Doc?"}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 5, "ordered_globals": ["message", "n", "pi"], "heap": {}, "globals": {"n": 17, "pi": 3.1416, "message": "What's up, Doc?"}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 6, "ordered_globals": ["message", "n", "pi"], "heap": {}, "globals": {"n": 17, "pi": 3.1416, "message": "What's up, Doc?"}, "stdout": "What's up, Doc?\n", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 7, "ordered_globals": ["message", "n", "pi"], "heap": {}, "globals": {"n": 17, "pi": 3.1416, "message": "What's up, Doc?"}, "stdout": "What's up, Doc?\n17\n", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 7, "ordered_globals": ["message", "n", "pi"], "heap": {}, "globals": {"n": 17, "pi": 3.1416, "message": "What's up, Doc?"}, "stdout": "What's up, Doc?\n17\n3.14159\n", "func_name": "<module>", "event": "return", "stack_to_render": []}]};
+var ch02_9_codelens_trace = {"trace": [{"heap": {}, "ordered_globals": [], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 1, "globals": {}}, {"heap": {}, "ordered_globals": ["message"], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 2, "globals": {"message": "What's up, Doc?"}}, {"heap": {}, "ordered_globals": ["message", "n"], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 3, "globals": {"message": "What's up, Doc?", "n": 17}}, {"heap": {}, "ordered_globals": ["message", "n", "pi"], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 5, "globals": {"message": "What's up, Doc?", "n": 17, "pi": 3.1416}}, {"heap": {}, "ordered_globals": ["message", "n", "pi"], "stdout": "What's up, Doc?\n", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 6, "globals": {"message": "What's up, Doc?", "n": 17, "pi": 3.1416}}, {"heap": {}, "ordered_globals": ["message", "n", "pi"], "stdout": "What's up, Doc?\n17\n", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 7, "globals": {"message": "What's up, Doc?", "n": 17, "pi": 3.1416}}, {"heap": {}, "ordered_globals": ["message", "n", "pi"], "stdout": "What's up, Doc?\n17\n3.14159\n", "event": "return", "func_name": "<module>", "stack_to_render": [], "line": 7, "globals": {"message": "What's up, Doc?", "n": 17, "pi": 3.1416}}], "code": "message = \"What's up, Doc?\"\nn = 17\npi = 3.14159\n\nprint(message)\nprint(n)\nprint(pi)"};
 var ch02_9_codelens_vis;
 
 $(document).ready(function() {
@@ -615,17 +663,20 @@ the variables and the values they reference as those references are
 created.</p>
 <p>Variables also have
 types; again, we can ask the interpreter what they are.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s up, Doc?&quot;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s up, Doc?&quot;</span>
 
-<span class="gp">In [1]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="gp">In [47]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">17</span>
 
-<span class="gp">In [1]: </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="gp">In [48]: </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="gp">In [49]: </span><span class="nb">type</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="gh">Out[49]: </span><span class="go">str</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">In [50]: </span><span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">             Out[50]: int</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="gp">In [51]: </span><span class="nb">type</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="go">                          Out[51]: float</span>
 </pre></div>
 </div>
 <p>The type of a variable is the type of the object it currently refers to.</p>
@@ -648,7 +699,7 @@ assignment we even give it a value that is of a different type.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (ch02_11)</span> </p>
 </div>
 <script type="text/javascript">
-var ch02_11_trace = {"code": "day = \"Thursday\"\nprint(day)\nday = \"Friday\"\nprint(day)\nday = 21\nprint(day)", "trace": [{"line": 1, "ordered_globals": [], "heap": {}, "globals": {}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 2, "ordered_globals": ["day"], "heap": {}, "globals": {"day": "Thursday"}, "stdout": "", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 3, "ordered_globals": ["day"], "heap": {}, "globals": {"day": "Thursday"}, "stdout": "Thursday\n", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 4, "ordered_globals": ["day"], "heap": {}, "globals": {"day": "Friday"}, "stdout": "Thursday\n", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 5, "ordered_globals": ["day"], "heap": {}, "globals": {"day": "Friday"}, "stdout": "Thursday\nFriday\n", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 6, "ordered_globals": ["day"], "heap": {}, "globals": {"day": 21}, "stdout": "Thursday\nFriday\n", "func_name": "<module>", "event": "step_line", "stack_to_render": []}, {"line": 6, "ordered_globals": ["day"], "heap": {}, "globals": {"day": 21}, "stdout": "Thursday\nFriday\n21\n", "func_name": "<module>", "event": "return", "stack_to_render": []}]};
+var ch02_11_trace = {"trace": [{"heap": {}, "ordered_globals": [], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 1, "globals": {}}, {"heap": {}, "ordered_globals": ["day"], "stdout": "", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 2, "globals": {"day": "Thursday"}}, {"heap": {}, "ordered_globals": ["day"], "stdout": "Thursday\n", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 3, "globals": {"day": "Thursday"}}, {"heap": {}, "ordered_globals": ["day"], "stdout": "Thursday\n", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 4, "globals": {"day": "Friday"}}, {"heap": {}, "ordered_globals": ["day"], "stdout": "Thursday\nFriday\n", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 5, "globals": {"day": "Friday"}}, {"heap": {}, "ordered_globals": ["day"], "stdout": "Thursday\nFriday\n", "event": "step_line", "func_name": "<module>", "stack_to_render": [], "line": 6, "globals": {"day": 21}}, {"heap": {}, "ordered_globals": ["day"], "stdout": "Thursday\nFriday\n21\n", "event": "return", "func_name": "<module>", "stack_to_render": [], "line": 6, "globals": {"day": 21}}], "code": "day = \"Thursday\"\nprint(day)\nday = \"Friday\"\nprint(day)\nday = 21\nprint(day)"};
 var ch02_11_vis;
 
 $(document).ready(function() {

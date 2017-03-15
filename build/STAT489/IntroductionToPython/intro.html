@@ -548,7 +548,7 @@ Optimization, regression, interpolation, etc <a class="reference external" href=
 <p>and many more packages not documented in the scipy lectures.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="gp">In [1]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">In [2]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -605,14 +605,20 @@ highlight some useful features of the IPython console.</p>
 </div>
 <p>IPython includes some useful shortcuts for getting documentation and help.  We
 can use the <strong>?</strong>  and <strong>??</strong> operators after an object:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span>print<span class="o">?</span>
-<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-1-73e2b8291f03&gt;&quot;</span><span class="gt">, line </span><span class="mi">2</span>
-    <span class="n">update_max</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cur_max</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span> <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;</span> <span class="n">cur_max</span> <span class="k">else</span> <span class="n">cur_max</span>
-             <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span>print<span class="o">?</span>
+<span class="go">Docstring:</span>
+<span class="go">print(value, ..., sep=&#39; &#39;, end=&#39;\n&#39;, file=sys.stdout, flush=False)</span>
+
+<span class="go">Prints the values to a stream, or to sys.stdout by default.</span>
+<span class="go">Optional keyword arguments:</span>
+<span class="go">file:  a file-like object (stream); defaults to the current sys.stdout.</span>
+<span class="go">sep:   string inserted between values, default a space.</span>
+<span class="go">end:   string appended after the last value, default a newline.</span>
+<span class="go">flush: whether to forcibly flush the stream.</span>
+<span class="go">Type:      builtin_function_or_method</span>
 </pre></div>
 </div>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span>print<span class="o">??</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span>print<span class="o">??</span>
 <span class="go">Type: builtin_function_or_method</span>
 </pre></div>
 </div>
