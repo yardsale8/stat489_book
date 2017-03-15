@@ -324,10 +324,13 @@
 <p>We have already seen some Python expressions that exhibit lazy evaluation,
 including <code class="docutils literal"><span class="pre">range</span></code>, <code class="docutils literal"><span class="pre">map</span></code> and <code class="docutils literal"><span class="pre">filter</span></code>.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gh">Out[1]: </span><span class="go">range(0, 4)</span>
 
-<span class="gp">In [1]: </span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">In [2]: </span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">                    Out[2]: &lt;map at 0x113b1fdd8&gt;</span>
 
-<span class="gp">In [1]: </span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+<span class="gp">In [3]: </span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+<span class="go">                                                 Out[3]: &lt;filter at 0x113b1ff98&gt;</span>
 </pre></div>
 </div>
 <p>Each of these object will hold off evaluation as long as possible.  In this
@@ -347,18 +350,27 @@ hold off computing each item until evaluation is forced.</div>
 </div>
 <p>For a first example, let&#8217;s write the generator expression of squaring all of the
 odd values in a sequence.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">g</span>
+<span class="gp">In [5]: </span><span class="n">g</span>
+<span class="gh">Out[5]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x113a302b0&gt;</span>
 </pre></div>
 </div>
 <p>Notice that evaluating the generator doesn&#8217;t produce the sequence.  We can force
 the evaluation of the next item in the sequence using the <code class="docutils literal"><span class="pre">next</span></code> function.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gh">Out[6]: </span><span class="go">1</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [7]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">          Out[7]: 9</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [8]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">                    ---------------------------------------------------------------------------</span>
+<span class="go">StopIteration                             Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-8-5f315c5de15b&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 next(g)</span>
+
+<span class="go">StopIteration: </span>
 </pre></div>
 </div>
 <p>By design, the generator will throw an exception when it has completed the
@@ -369,23 +381,27 @@ generators in loops, comprehensions, or other lazy constructs like <code class="
 the scenes so that our code can successfully complete.</p>
 <p>Note that a generator is a <strong>single-use sequence</strong> and must be reinitialized
 before attempting to iterate a second time.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">g</span>
+<span class="gp">In [10]: </span><span class="n">g</span>
+<span class="gh">Out[10]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x113a4dca8&gt;</span>
 
-<span class="gp">In [1]: </span><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [11]: </span><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">x</span>
+<span class="gp">In [12]: </span><span class="n">x</span>
+<span class="gh">Out[12]: </span><span class="go">[1, 9]</span>
 
-<span class="gp">In [1]: </span><span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [13]: </span><span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">y</span>
+<span class="gp">In [14]: </span><span class="n">y</span>
+<span class="gh">Out[14]: </span><span class="go">[]</span>
 
-<span class="gp">In [1]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [15]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">z</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [16]: </span><span class="n">z</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">z</span>
+<span class="gp">In [17]: </span><span class="n">z</span>
+<span class="gh">Out[17]: </span><span class="go">[1, 9]</span>
 </pre></div>
 </div>
 <p>We wish to compute the average quiz score. To do this we will <code class="docutils literal"><span class="pre">map</span></code> in to all
@@ -395,23 +411,24 @@ average.  While this could be done with <code class="docutils literal"><span cla
 computing the mean doesn&#8217;t work with lazy contructs like <code class="docutils literal"><span class="pre">map</span></code>, meaning we
 either need to cast all of the maps to lists or use <code class="docutils literal"><span class="pre">reduce</span></code> to count the
 number of elements.  We choose to latter option.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
 
-<span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">valmap</span>
+<span class="gp">In [19]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">valmap</span>
 
-<span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="nb">map</span>
+<span class="gp">In [20]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="nb">map</span>
 
-<span class="gp">In [1]: </span><span class="n">sum_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="gp">In [21]: </span><span class="n">sum_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 
-<span class="gp">In [1]: </span><span class="n">div_sum_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tup</span><span class="p">)</span><span class="o">/</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">tup</span><span class="p">)</span>
+<span class="gp">In [22]: </span><span class="n">div_sum_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tup</span><span class="p">)</span><span class="o">/</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">tup</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="n">compose</span><span class="p">(</span><span class="n">div_sum_count</span><span class="p">,</span><span class="n">sum_count</span><span class="p">)(</span><span class="n">L</span><span class="p">)</span>
+<span class="gp">In [23]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="n">compose</span><span class="p">(</span><span class="n">div_sum_count</span><span class="p">,</span><span class="n">sum_count</span><span class="p">)(</span><span class="n">L</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">scores</span> <span class="o">=</span> <span class="n">valmap</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="n">scores</span><span class="p">)</span>
+<span class="gp">In [24]: </span><span class="n">scores</span> <span class="o">=</span> <span class="n">valmap</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="n">scores</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">scores</span> <span class="o">=</span> <span class="n">valmap</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
+<span class="gp">In [25]: </span><span class="n">scores</span> <span class="o">=</span> <span class="n">valmap</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">scores</span>
+<span class="gp">In [26]: </span><span class="n">scores</span>
+<span class="gh">Out[26]: </span><span class="go">{&#39;grace&#39;: 23.666666666666668, &#39;sue&#39;: 16.166666666666668}</span>
 </pre></div>
 </div>
 </div>
@@ -422,21 +439,24 @@ from the fact that chaining together generators preserves the lazy evaluation.
 For example, suppose that we want to compute the distance to some point
 <span class="math">\((a, b)\)</span> for a series of points.  One way to approach this problem is to
 attack it in a series of small operations.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">points</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>  <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+<span class="gp">In [28]: </span><span class="n">points</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>  <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
 
-<span class="gp">In [1]: </span><span class="n">dist_along_axes</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">points</span><span class="p">)</span>
+<span class="gp">In [29]: </span><span class="n">dist_along_axes</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">points</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">sum_sqr_dist</span> <span class="o">=</span> <span class="p">(</span> <span class="n">d1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">d2</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">in</span> <span class="n">dist_along_axes</span><span class="p">)</span>
+<span class="gp">In [30]: </span><span class="n">sum_sqr_dist</span> <span class="o">=</span> <span class="p">(</span> <span class="n">d1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">d2</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">in</span> <span class="n">dist_along_axes</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">dist_to_ab</span> <span class="o">=</span> <span class="p">(</span> <span class="n">sqr_dist</span><span class="o">**</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">sqr_dist</span> <span class="ow">in</span> <span class="n">sum_sqr_dist</span><span class="p">)</span>
+<span class="gp">In [31]: </span><span class="n">dist_to_ab</span> <span class="o">=</span> <span class="p">(</span> <span class="n">sqr_dist</span><span class="o">**</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">sqr_dist</span> <span class="ow">in</span> <span class="n">sum_sqr_dist</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">dist_to_ab</span><span class="p">)</span>
+<span class="gp">In [32]: </span><span class="nb">next</span><span class="p">(</span><span class="n">dist_to_ab</span><span class="p">)</span>
+<span class="gh">Out[32]: </span><span class="go">5.830951894845301</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">dist_to_ab</span><span class="p">)</span>
+<span class="gp">In [33]: </span><span class="nb">next</span><span class="p">(</span><span class="n">dist_to_ab</span><span class="p">)</span>
+<span class="go">                           Out[33]: 4.47213595499958</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">dist_to_ab</span><span class="p">)</span>
+<span class="gp">In [34]: </span><span class="nb">next</span><span class="p">(</span><span class="n">dist_to_ab</span><span class="p">)</span>
+<span class="go">                                                     Out[34]: 3.1622776601683795</span>
 </pre></div>
 </div>
 <p>Under casual inspection, it will appear that we have iterated over the points 4
@@ -451,23 +471,27 @@ efficient</em> approach to composing operations on sequences.</p>
 <p>Contrast this with a solution that uses list comprehensions.  Each comprehension
 is <em>eager</em> to complete its operation and this will result in the sequence being
 iterated over once for each comprehension.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>  <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]]</span>
+<span class="gp">In [36]: </span><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>  <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]]</span>
 
-<span class="gp">In [1]: </span><span class="n">points</span>
+<span class="gp">In [37]: </span><span class="n">points</span>
+<span class="gh">Out[37]: </span><span class="go">[(0, 0), (1, 1), (2, 2)]</span>
 
-<span class="gp">In [1]: </span><span class="n">dist_along_axes</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">points</span><span class="p">]</span>
+<span class="gp">In [38]: </span><span class="n">dist_along_axes</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">points</span><span class="p">]</span>
 
-<span class="gp">In [1]: </span><span class="n">dist_along_axes</span>
+<span class="gp">In [39]: </span><span class="n">dist_along_axes</span>
+<span class="gh">Out[39]: </span><span class="go">[(-3, -5), (-2, -4), (-1, -3)]</span>
 
-<span class="gp">In [1]: </span><span class="n">sum_sqr_dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">d1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">d2</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">in</span> <span class="n">dist_along_axes</span><span class="p">]</span>
+<span class="gp">In [40]: </span><span class="n">sum_sqr_dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">d1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">d2</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">in</span> <span class="n">dist_along_axes</span><span class="p">]</span>
 
-<span class="gp">In [1]: </span><span class="n">sum_sqr_dist</span>
+<span class="gp">In [41]: </span><span class="n">sum_sqr_dist</span>
+<span class="gh">Out[41]: </span><span class="go">[34, 20, 10]</span>
 
-<span class="gp">In [1]: </span><span class="n">dist_to_ab</span> <span class="o">=</span> <span class="p">[</span><span class="n">sqr_dist</span><span class="o">**</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">sqr_dist</span> <span class="ow">in</span> <span class="n">sum_sqr_dist</span><span class="p">]</span>
+<span class="gp">In [42]: </span><span class="n">dist_to_ab</span> <span class="o">=</span> <span class="p">[</span><span class="n">sqr_dist</span><span class="o">**</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">sqr_dist</span> <span class="ow">in</span> <span class="n">sum_sqr_dist</span><span class="p">]</span>
 
-<span class="gp">In [1]: </span><span class="n">dist_to_ab</span>
+<span class="gp">In [43]: </span><span class="n">dist_to_ab</span>
+<span class="gh">Out[43]: </span><span class="go">[5.830951894845301, 4.47213595499958, 3.1622776601683795]</span>
 </pre></div>
 </div>
 <p>In constrast to the solution that used generators, the last batch of code
@@ -486,29 +510,49 @@ needing all of it in memory at one time.</p>
 <p>All of the tricks that you learned about list comprehensions will work with
 generator expressions as well, be it nesting list comprehensions or including
 multiple sequence expression.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="gp">In [1]: </span><span class="n">g</span>
+<span class="gp">In [45]: </span><span class="n">g</span>
+<span class="gh">Out[45]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x113991830&gt;</span>
 
-<span class="gp">In [1]: </span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [46]: </span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">                                                     Out[46]: [0, 0, 0, 0, 0, 1, 2, 3, 4, 4, 6, 8, 9, 12, 16]</span>
 </pre></div>
 </div>
 <p>The only caveat is that next generators are <strong>very lazy</strong> and can be difficult
 to force to completion.  In this next example, this is accomplished by
 mapping the <code class="docutils literal"><span class="pre">list</span></code> conversion function unto each embedded lazy sequence.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [47]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="gp">In [1]: </span><span class="n">table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [48]: </span><span class="n">table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">table</span>
+<span class="gp">In [49]: </span><span class="n">table</span>
+<span class="gh">Out[49]: </span><span class="go"></span>
+<span class="go">[&lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x113a86258&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x113a86678&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x113a86af0&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x11377bdb0&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x11377bba0&gt;]</span>
 
-<span class="gp">In [1]: </span><span class="n">mapped_table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">table</span><span class="p">))</span>
+<span class="gp">In [50]: </span><span class="n">mapped_table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">table</span><span class="p">))</span>
 
-<span class="gp">In [1]: </span><span class="n">mapped_table</span>
+<span class="gp">In [51]: </span><span class="n">mapped_table</span>
+<span class="gh">Out[51]: </span><span class="go"></span>
+<span class="go">[[0, 4, 8, 12, 16],</span>
+<span class="go"> [0, 4, 8, 12, 16],</span>
+<span class="go"> [0, 4, 8, 12, 16],</span>
+<span class="go"> [0, 4, 8, 12, 16],</span>
+<span class="go"> [0, 4, 8, 12, 16]]</span>
 
-<span class="gp">In [1]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="gp">In [52]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
 
-<span class="gp">In [1]: </span><span class="n">L</span>
+<span class="gp">In [53]: </span><span class="n">L</span>
+<span class="gh">Out[53]: </span><span class="go"></span>
+<span class="go">[[0, 0, 0, 0, 0],</span>
+<span class="go"> [0, 1, 2, 3, 4],</span>
+<span class="go"> [0, 2, 4, 6, 8],</span>
+<span class="go"> [0, 3, 6, 9, 12],</span>
+<span class="go"> [0, 4, 8, 12, 16]]</span>
 </pre></div>
 </div>
 <p><strong>That answer is wrong! (or at least unexpected)</strong>  In the last attempt, I
@@ -516,11 +560,17 @@ messed up by completing the outer generator without completing the inner
 loops.  Therefore the value of <code class="docutils literal"><span class="pre">i</span></code> was stuck at the last generated value.
 The correct way to resolve this nested structure is to process all the
 sequences simulaneously as follows.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [54]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">((</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="gp">In [1]: </span><span class="n">mapped_table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span>
+<span class="gp">In [55]: </span><span class="n">mapped_table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span>
 
-<span class="gp">In [1]: </span><span class="n">mapped_table</span>
+<span class="gp">In [56]: </span><span class="n">mapped_table</span>
+<span class="gh">Out[56]: </span><span class="go"></span>
+<span class="go">[[0, 0, 0, 0, 0],</span>
+<span class="go"> [0, 1, 2, 3, 4],</span>
+<span class="go"> [0, 2, 4, 6, 8],</span>
+<span class="go"> [0, 3, 6, 9, 12],</span>
+<span class="go"> [0, 4, 8, 12, 16]]</span>
 </pre></div>
 </div>
 <p><strong>Main Takeaway:</strong> Processing nested, single-use lazy structures can be
@@ -534,58 +584,72 @@ tricky and return unexpected results depending on the order of execution.</p>
 <h3>7.7.4.1. The <code class="docutils literal"><span class="pre">yield</span></code> statement<a class="headerlink" href="#the-yield-statement" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal"><span class="pre">yield</span></code> statement is used to yield the next value in the lazy sequence and
 tells Python that our function is really a generator.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="sd">&quot;&quot;&quot; a function &quot;&quot;&quot;</span>
-<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="sd">&quot;&quot;&quot; a function &quot;&quot;&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="sd">&quot;&quot;&quot; A generator &quot;&quot;&quot;</span>
-<span class="gp">   ...: </span>    <span class="k">yield</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-<span class="gp">   ...: </span>
+<span class="gp">In [58]: </span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="sd">&quot;&quot;&quot; A generator &quot;&quot;&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">   ....: </span>
 </pre></div>
 </div>
 <p>When we call a regular function like <code class="docutils literal"><span class="pre">f</span></code>, the value is result is immediately
 returned.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gh">Out[59]: </span><span class="go">function</span>
 
-<span class="gp">In [1]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">In [60]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">y</span>
+<span class="gp">In [61]: </span><span class="n">y</span>
+<span class="gh">Out[61]: </span><span class="go">4</span>
 </pre></div>
 </div>
 <p>On the other hand, a call to a generator will yield a lazy generator object that
 requires a call to <code class="docutils literal"><span class="pre">next</span></code> before it will return a value.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="nb">type</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gh">Out[62]: </span><span class="go">function</span>
 
-<span class="gp">In [1]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">In [63]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="n">y</span>
+<span class="gp">In [64]: </span><span class="n">y</span>
+<span class="gh">Out[64]: </span><span class="go">&lt;generator object g at 0x11377be08&gt;</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">In [65]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">                                             Out[65]: 4</span>
 </pre></div>
 </div>
 <p>Generators can include any number of <code class="docutils literal"><span class="pre">yield</span></code> statements and will halt
 execution at each statement, waiting for a request for the <code class="docutils literal"><span class="pre">next</span></code> value.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">many_yields</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="sd">&quot;&quot;&quot; a generator with multiple yield statements &quot;&quot;&quot;</span>
-<span class="gp">   ...: </span>    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-<span class="gp">   ...: </span>    <span class="k">yield</span> <span class="n">y</span>
-<span class="gp">   ...: </span>    <span class="n">z</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">2</span>
-<span class="gp">   ...: </span>    <span class="k">yield</span> <span class="n">z</span>
-<span class="gp">   ...: </span>    <span class="k">yield</span> <span class="s2">&quot;Awesome&quot;</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="k">def</span> <span class="nf">many_yields</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="sd">&quot;&quot;&quot; a generator with multiple yield statements &quot;&quot;&quot;</span>
+<span class="gp">   ....: </span>    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="n">y</span>
+<span class="gp">   ....: </span>    <span class="n">z</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="n">z</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;Awesome&quot;</span>
+<span class="gp">   ....: </span>
 </pre></div>
 </div>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">g</span> <span class="o">=</span> <span class="n">many_yields</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [67]: </span><span class="n">g</span> <span class="o">=</span> <span class="n">many_yields</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [68]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gh">Out[68]: </span><span class="go">4</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [69]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">           Out[69]: 6</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [70]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">                      Out[70]: &#39;Awesome&#39;</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">In [71]: </span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">                                         ---------------------------------------------------------------------------</span>
+<span class="go">StopIteration                             Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-71-5f315c5de15b&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 next(g)</span>
+
+<span class="go">StopIteration: </span>
 </pre></div>
 </div>
 <p>Notice that the generator captures and maintains the start of the body inbetween
@@ -595,7 +659,8 @@ could be later used to compute <code class="docutils literal"><span class="pre">
 <p>Finally, note that we can use comprehensions (list or generator) to process a
 generator.  In this case, Python takes care of catching the <code class="docutils literal"><span class="pre">StopIteration</span></code>
 exception.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">many_yields</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [72]: </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">many_yields</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+<span class="gh">Out[72]: </span><span class="go">[4, 6, &#39;Awesome&#39;]</span>
 </pre></div>
 </div>
 </div>
@@ -604,36 +669,50 @@ exception.</p>
 <p>Sometimes we want to yield values from some other sequence.  In this case, we
 can use the <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statement, which automates the process of iterating
 through the sequence, yielding one item at a time in a lazy fashion.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="k">yield from</span> <span class="n">L</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">yield from</span> <span class="n">L</span>
+<span class="gp">   ....: </span>
 </pre></div>
 </div>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [74]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 
-<span class="gp">In [1]: </span><span class="n">y</span>
+<span class="gp">In [75]: </span><span class="n">y</span>
+<span class="gh">Out[75]: </span><span class="go">&lt;generator object g at 0x110a17830&gt;</span>
 
-<span class="gp">In [1]: </span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">In [76]: </span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">                                             Out[76]: generator</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">In [77]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">                                                                Out[77]: 1</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">In [78]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">                                                                           Out[78]: 2</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">In [79]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">                                                                                      Out[79]: 3</span>
 </pre></div>
 </div>
 <p>You can combine any combination of <code class="docutils literal"><span class="pre">yield</span></code> and <code class="docutils literal"><span class="pre">yield</span> <span class="pre">from</span></code> statements.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="k">yield</span> <span class="s2">&quot;Wait for it&quot;</span>
-<span class="gp">   ...: </span>    <span class="k">yield</span> <span class="s2">&quot;Here it comes...&quot;</span>
-<span class="gp">   ...: </span>    <span class="k">yield</span> <span class="s2">&quot;...any second now...&quot;</span>
-<span class="gp">   ...: </span>    <span class="k">yield from</span> <span class="n">L</span>
-<span class="gp">   ...: </span>    <span class="k">yield</span> <span class="s2">&quot;So there you go&quot;</span>
-<span class="gp">   ...: </span>    <span class="k">yield</span> <span class="s2">&quot;Enjoy!&quot;</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [80]: </span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;Wait for it&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;Here it comes...&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;...any second now...&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">yield from</span> <span class="n">L</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;So there you go&quot;</span>
+<span class="gp">   ....: </span>    <span class="k">yield</span> <span class="s2">&quot;Enjoy!&quot;</span>
+<span class="gp">   ....: </span>
 </pre></div>
 </div>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [81]: </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])]</span>
+<span class="gh">Out[81]: </span><span class="go"></span>
+<span class="go">[&#39;Wait for it&#39;,</span>
+<span class="go"> &#39;Here it comes...&#39;,</span>
+<span class="go"> &#39;...any second now...&#39;,</span>
+<span class="go"> 1,</span>
+<span class="go"> 2,</span>
+<span class="go"> 3,</span>
+<span class="go"> &#39;So there you go&#39;,</span>
+<span class="go"> &#39;Enjoy!&#39;]</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -654,25 +733,28 @@ can be used to pass values back and forth in a lazy way: a <strong>coroutine</st
 <p>The keyword <code class="docutils literal"><span class="pre">yield</span></code> is again used to create a coroutine, but this time using
 it in an assignment-like statement.  This assignment statement signifies both
 the yielding of the next value and acquisition of the next value.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="gp">   ...: </span>    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="gp">   ...: </span>    <span class="n">s</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">s</span>
-<span class="gp">   ...: </span>    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="gp">   ...: </span>    <span class="n">s</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">s</span>
-<span class="gp">   ...: </span>    <span class="n">s</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="gp">   ...: </span>    <span class="n">s</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">s</span>
-<span class="gp">   ...: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [82]: </span><span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">s</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">s</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="gp">   ....: </span>    <span class="n">s</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">s</span>
+<span class="gp">   ....: </span>
 </pre></div>
 </div>
 <p>As with generators, values are pulled from a coroutine using <code class="docutils literal"><span class="pre">next</span></code>.  A
 coroutine comes with a method <code class="docutils literal"><span class="pre">send</span></code> that is used to pass it the next value.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">co</span> <span class="o">=</span> <span class="n">coroutine</span><span class="p">(</span><span class="s2">&quot;Hi &quot;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [83]: </span><span class="n">co</span> <span class="o">=</span> <span class="n">coroutine</span><span class="p">(</span><span class="s2">&quot;Hi &quot;</span><span class="p">)</span>
 
-<span class="gp">In [1]: </span><span class="nb">next</span><span class="p">(</span><span class="n">co</span><span class="p">)</span>
+<span class="gp">In [84]: </span><span class="nb">next</span><span class="p">(</span><span class="n">co</span><span class="p">)</span>
+<span class="gh">Out[84]: </span><span class="go">&#39;hi &#39;</span>
 
-<span class="gp">In [1]: </span><span class="n">co</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;there &quot;</span><span class="p">)</span>
+<span class="gp">In [85]: </span><span class="n">co</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;there &quot;</span><span class="p">)</span>
+<span class="go">               Out[85]: &#39;there &#39;</span>
 
-<span class="gp">In [1]: </span><span class="n">co</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Bob!&quot;</span><span class="p">)</span>
+<span class="gp">In [86]: </span><span class="n">co</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Bob!&quot;</span><span class="p">)</span>
+<span class="go">                                 Out[86]: &#39;BOB!BOB!BOB!&#39;</span>
 </pre></div>
 </div>
 </div>
