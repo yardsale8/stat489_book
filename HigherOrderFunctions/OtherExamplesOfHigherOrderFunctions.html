@@ -332,41 +332,36 @@ generalize the <code class="docutils literal"><span class="pre">apply_tax</span>
 <span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">apply_tax</span>
 <span class="gp">   ...: </span>
 
-<span class="gp">In [2]: </span><span class="n">rate</span> <span class="o">=</span> <span class="mf">1.065</span>
+<span class="gp">In [1]: </span><span class="n">rate</span> <span class="o">=</span> <span class="mf">1.065</span>
 
-<span class="gp">In [3]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="n">make_apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">)</span>
+<span class="gp">In [1]: </span><span class="n">apply_tax</span> <span class="o">=</span> <span class="n">make_apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">)</span>
 
-<span class="gp">In [4]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gh">Out[4]: </span><span class="go">1.065</span>
+<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [5]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.55</span><span class="p">)</span>
-<span class="go">              Out[5]: 4.84575</span>
+<span class="gp">In [1]: </span><span class="n">apply_tax</span><span class="p">(</span><span class="mf">4.55</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>A simpler approach to this problem would be to define <code class="docutils literal"><span class="pre">apply_tax</span></code> as a two
 parameter function, but this would require us to input the tax rate each time
 with make a function call (repeated code).</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">cost</span><span class="p">):</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">cost</span><span class="p">):</span>
 <span class="gp">   ...: </span>     <span class="k">return</span> <span class="n">rate</span><span class="o">*</span><span class="n">cost</span>
 <span class="gp">   ...: </span><span class="n">rate</span> <span class="o">=</span> <span class="mf">1.065</span>
 <span class="gp">   ...: </span><span class="n">apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">   ...: </span><span class="n">apply_tax</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="mf">4.55</span><span class="p">)</span>
 <span class="gp">   ...: </span>
-<span class="gh">Out[6]: </span><span class="go">4.84575</span>
 </pre></div>
 </div>
 <p>This apply tax function is definitely easier to understand compared to
 <code class="docutils literal"><span class="pre">make_apply_tax</span></code>.  The traditional method for removing this unneeded
 replication of one or more arguments is the use of a partial function.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
-<span class="gp">In [8]: </span><span class="n">my_apply_tax</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">apply_tax</span><span class="p">,</span> <span class="mf">1.065</span><span class="p">)</span>
+<span class="gp">In [1]: </span><span class="n">my_apply_tax</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">apply_tax</span><span class="p">,</span> <span class="mf">1.065</span><span class="p">)</span>
 
-<span class="gp">In [9]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gh">Out[9]: </span><span class="go">1.065</span>
+<span class="gp">In [1]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [10]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mf">4.55</span><span class="p">)</span>
-<span class="go">              Out[10]: 4.84575</span>
+<span class="gp">In [1]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mf">4.55</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This solution provides the best of both worlds.  First, we don&#8217;t need to use the
@@ -378,37 +373,33 @@ call is making a new function with <code class="docutils literal"><span class="p
 parameter as the only remaining formal parameter.</p>
 <p><code class="docutils literal"><span class="pre">partial</span></code> makes it easy to fill in the left-most formal parameters, but what
 if we had ordered the parameters in reverse?</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="k">def</span> <span class="nf">apply_tax_reverse</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">rate</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">rate</span><span class="o">*</span><span class="n">cost</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">apply_tax_reverse</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">rate</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">rate</span><span class="o">*</span><span class="n">cost</span>
+<span class="gp">   ...: </span>
 </pre></div>
 </div>
 <p>Using <code class="docutils literal"><span class="pre">partial</span></code> here requires us to wrap our function in a <code class="docutils literal"><span class="pre">lambda</span></code> that
 reverses the order of the arguments.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">my_apply_tax</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rate</span><span class="p">,</span> <span class="n">cost</span><span class="p">:</span> <span class="n">apply_tax_reverse</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">rate</span><span class="p">),</span> <span class="mf">1.065</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">my_apply_tax</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rate</span><span class="p">,</span> <span class="n">cost</span><span class="p">:</span> <span class="n">apply_tax_reverse</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">rate</span><span class="p">),</span> <span class="mf">1.065</span><span class="p">)</span>
 
-<span class="gp">In [13]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gh">Out[13]: </span><span class="go">1.065</span>
+<span class="gp">In [1]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [14]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mf">4.55</span><span class="p">)</span>
-<span class="go">               Out[14]: 4.84575</span>
+<span class="gp">In [1]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mf">4.55</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Another useful approach is the application of a default parameter.  Then we can
 use keyword expansion along with <code class="docutils literal"><span class="pre">partial</span></code> to create a specialized version of
 our function with a different default value.  Again, <code class="docutils literal"><span class="pre">partial</span></code> saves us from
 having to type the alternative value of the keyword more than once.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="k">def</span> <span class="nf">apply_tax_default</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">1.05</span><span class="p">):</span>
-<span class="gp">   ....: </span>     <span class="k">return</span> <span class="n">rate</span><span class="o">*</span><span class="n">cost</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">apply_tax_default</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">1.05</span><span class="p">):</span>
+<span class="gp">   ...: </span>     <span class="k">return</span> <span class="n">rate</span><span class="o">*</span><span class="n">cost</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [16]: </span><span class="n">my_apply_tax</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">apply_tax_default</span><span class="p">,</span> <span class="o">**</span> <span class="p">{</span><span class="s2">&quot;rate&quot;</span><span class="p">:</span><span class="mf">1.065</span><span class="p">})</span>
+<span class="gp">In [1]: </span><span class="n">my_apply_tax</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">apply_tax_default</span><span class="p">,</span> <span class="o">**</span> <span class="p">{</span><span class="s2">&quot;rate&quot;</span><span class="p">:</span><span class="mf">1.065</span><span class="p">})</span>
 
-<span class="gp">In [17]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gh">Out[17]: </span><span class="go">1.065</span>
+<span class="gp">In [1]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [18]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mf">4.55</span><span class="p">)</span>
-<span class="go">               Out[18]: 4.84575</span>
+<span class="gp">In [1]: </span><span class="n">my_apply_tax</span><span class="p">(</span><span class="mf">4.55</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -420,20 +411,19 @@ function.  The outer function calls the original function and then changes or
 <p>For example, when processing text, it is often useful to switch all the text to
 lower case.  We will create a decorator function that can be used to wrap any
 function that returns a string and insure that the output is lower case.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="k">def</span> <span class="nf">lower_out</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="k">def</span> <span class="nf">decorated_func</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="gp">   ....: </span>        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">decorated_func</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">lower_out</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">def</span> <span class="nf">decorated_func</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="gp">   ...: </span>        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">decorated_func</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [20]: </span><span class="k">def</span> <span class="nf">emph</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="s2">&quot;**{0}**&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">emph</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="s2">&quot;**{0}**&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [21]: </span><span class="n">decorated_emph</span> <span class="o">=</span> <span class="n">lower_out</span><span class="p">(</span><span class="n">emph</span><span class="p">)</span>
+<span class="gp">In [1]: </span><span class="n">decorated_emph</span> <span class="o">=</span> <span class="n">lower_out</span><span class="p">(</span><span class="n">emph</span><span class="p">)</span>
 
-<span class="gp">In [22]: </span><span class="n">decorated_emph</span><span class="p">(</span><span class="s2">&quot;HI&quot;</span><span class="p">)</span>
-<span class="gh">Out[22]: </span><span class="go">&#39;**hi**&#39;</span>
+<span class="gp">In [1]: </span><span class="n">decorated_emph</span><span class="p">(</span><span class="s2">&quot;HI&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This example should make it clear that the decorator function is a higher-order
@@ -460,10 +450,9 @@ functions.  The <strong>arity</strong> of a function is the number of arguments 
 takes.  We can implement functions with arity higher than 1 using a using
 single-arith functions with technique called called <strong>currying</strong>, which is
 illustrated below.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">curried_pow</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">curried_pow</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span>
 
-<span class="gp">In [24]: </span><span class="n">curried_pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">)</span>
-<span class="gh">Out[24]: </span><span class="go">8</span>
+<span class="gp">In [1]: </span><span class="n">curried_pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In Python, this approach results in replacing the commons between arguments with
@@ -475,13 +464,11 @@ basic design feature and using this approach in these language is
 syntactically cleaner.</p>
 </div>
 <p>The advantage to this approach is we get partial application for free.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">exp2</span> <span class="o">=</span> <span class="n">curried_pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">exp2</span> <span class="o">=</span> <span class="n">curried_pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="gp">In [26]: </span><span class="n">exp2</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gh">Out[26]: </span><span class="go">2</span>
+<span class="gp">In [1]: </span><span class="n">exp2</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [27]: </span><span class="n">exp2</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">           Out[27]: 8</span>
+<span class="gp">In [1]: </span><span class="n">exp2</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>A better approach to currying in Python is the use of a decorator.  The
@@ -570,15 +557,13 @@ Be sure to use the <code class="docutils literal"><span class="pre">toolz</span>
 <p>What if you wanted to to supply the first and third argument for an arity 3
 curryied function?  In this case, we can make use of the <code class="docutils literal"><span class="pre">flip</span></code> function from
 <code class="docutils literal"><span class="pre">toolz</span></code>.  This function calls a function with the arguments flipped.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="kn">from</span> <span class="nn">toolz.functoolz</span> <span class="kn">import</span> <span class="n">flip</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">toolz.functoolz</span> <span class="kn">import</span> <span class="n">flip</span>
 
-<span class="gp">In [29]: </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="nb">pow</span>
+<span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="nb">pow</span>
 
-<span class="gp">In [30]: </span><span class="n">flip</span><span class="p">(</span><span class="nb">pow</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gh">Out[30]: </span><span class="go">9.0</span>
+<span class="gp">In [1]: </span><span class="n">flip</span><span class="p">(</span><span class="nb">pow</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
-<span class="gp">In [31]: </span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">             Out[31]: 8.0</span>
+<span class="gp">In [1]: </span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">flip</span></code> works well with a curried function, as a flip will give access to the
@@ -615,36 +600,20 @@ of replicated function calls that get made.  To see this, we create a decorator
 function that will use a global dictionary to track the number of calls for each
 unique argument.   We then apply this decorator function to a recursive function
 ther generates the nth <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number">fibonacci number</a>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">call_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">call_dict</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="gp">In [33]: </span><span class="k">def</span> <span class="nf">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="n">call_dict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">call_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="n">call_dict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">call_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [34]: </span><span class="n">fib_with_call_dict</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<span class="gh">Out[34]: </span><span class="go">144</span>
+<span class="gp">In [1]: </span><span class="n">fib_with_call_dict</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="gp">In [35]: </span><span class="n">call_dict</span>
-<span class="go">             Out[35]: </span>
-<span class="go">{0: 89,</span>
-<span class="go"> 1: 144,</span>
-<span class="go"> 2: 89,</span>
-<span class="go"> 3: 55,</span>
-<span class="go"> 4: 34,</span>
-<span class="go"> 5: 21,</span>
-<span class="go"> 6: 13,</span>
-<span class="go"> 7: 8,</span>
-<span class="go"> 8: 5,</span>
-<span class="go"> 9: 3,</span>
-<span class="go"> 10: 2,</span>
-<span class="go"> 11: 1,</span>
-<span class="go"> 12: 1}</span>
+<span class="gp">In [1]: </span><span class="n">call_dict</span>
 
-<span class="gp">In [36]: </span><span class="n">total_calls_to_fib</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span> <span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">call_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="gp">In [1]: </span><span class="n">total_calls_to_fib</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span> <span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">call_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
-<span class="gp">In [37]: </span><span class="n">total_calls_to_fib</span>
-<span class="gh">Out[37]: </span><span class="go">465</span>
+<span class="gp">In [1]: </span><span class="n">total_calls_to_fib</span>
 </pre></div>
 </div>
 <p>We see that, even for a small value of <code class="docutils literal"><span class="pre">n</span></code>, we get a larger number of calls
@@ -655,538 +624,58 @@ that includes a reference to a dictionary.  When ever we know the return value
 for a specific argument, we will save it in our dictionary.  Furthermore, we
 will query the dictionary each time our function is called, and we will
 immediately return the solution if saved in the dictionary.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="k">def</span> <span class="nf">make_fib_with_dict</span><span class="p">():</span>
-<span class="gp">   ....: </span>    <span class="n">return_dict</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="gp">   ....: </span>    <span class="k">def</span> <span class="nf">fib_with_dict</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="gp">   ....: </span>        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">return_dict</span><span class="p">:</span>
-<span class="gp">   ....: </span>            <span class="k">return</span> <span class="n">return_dict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-<span class="gp">   ....: </span>        <span class="k">else</span><span class="p">:</span>
-<span class="gp">   ....: </span>            <span class="n">return_dict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span>  <span class="n">output</span> <span class="o">=</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">   ....: </span>            <span class="k">return</span> <span class="n">output</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">fib_with_dict</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">make_fib_with_dict</span><span class="p">():</span>
+<span class="gp">   ...: </span>    <span class="n">return_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">   ...: </span>    <span class="k">def</span> <span class="nf">fib_with_dict</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">   ...: </span>        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">return_dict</span><span class="p">:</span>
+<span class="gp">   ...: </span>            <span class="k">return</span> <span class="n">return_dict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="gp">   ...: </span>        <span class="k">else</span><span class="p">:</span>
+<span class="gp">   ...: </span>            <span class="n">return_dict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span>  <span class="n">output</span> <span class="o">=</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ...: </span>            <span class="k">return</span> <span class="n">output</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">fib_with_dict</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [39]: </span><span class="n">fib_with_dict</span> <span class="o">=</span> <span class="n">make_fib_with_dict</span><span class="p">()</span>
+<span class="gp">In [1]: </span><span class="n">fib_with_dict</span> <span class="o">=</span> <span class="n">make_fib_with_dict</span><span class="p">()</span>
 
-<span class="gp">In [40]: </span><span class="n">fib_with_dict</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<span class="gh">Out[40]: </span><span class="go">144</span>
+<span class="gp">In [1]: </span><span class="n">fib_with_dict</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Let&#8217;s add some tooling to this function to track the number of calls that are
 immediately satisfied by the dictionary return.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">dict_calls</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">dict_calls</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="gp">In [42]: </span><span class="n">recursive_calls</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">In [1]: </span><span class="n">recursive_calls</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="gp">In [43]: </span><span class="k">def</span> <span class="nf">make_fib_with_dict</span><span class="p">():</span>
-<span class="gp">   ....: </span>    <span class="n">return_dict</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="gp">   ....: </span>    <span class="k">def</span> <span class="nf">fib_with_dict</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span><span class="p">):</span>
-<span class="gp">   ....: </span>        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">return_dict</span><span class="p">:</span>
-<span class="gp">   ....: </span>            <span class="k">return</span> <span class="n">return_dict</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">dict_calls</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rec_calls</span>
-<span class="gp">   ....: </span>        <span class="k">else</span><span class="p">:</span>
-<span class="gp">   ....: </span>            <span class="n">output</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span><span class="p">),</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span><span class="p">))]</span>
-<span class="gp">   ....: </span>            <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">fib_with_dict</span>
-<span class="gp">   ....: </span>
+<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">make_fib_with_dict</span><span class="p">():</span>
+<span class="gp">   ...: </span>    <span class="n">return_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">   ...: </span>    <span class="k">def</span> <span class="nf">fib_with_dict</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span><span class="p">):</span>
+<span class="gp">   ...: </span>        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">return_dict</span><span class="p">:</span>
+<span class="gp">   ...: </span>            <span class="k">return</span> <span class="n">return_dict</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">dict_calls</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rec_calls</span>
+<span class="gp">   ...: </span>        <span class="k">else</span><span class="p">:</span>
+<span class="gp">   ...: </span>            <span class="n">output</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span><span class="p">),</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span><span class="p">))]</span>
+<span class="gp">   ...: </span>            <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">fib_with_dict</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [44]: </span><span class="n">fib_with_dict</span> <span class="o">=</span> <span class="n">make_fib_with_dict</span><span class="p">()</span>
+<span class="gp">In [1]: </span><span class="n">fib_with_dict</span> <span class="o">=</span> <span class="n">make_fib_with_dict</span><span class="p">()</span>
 
-<span class="gp">In [45]: </span><span class="n">fib_with_dict</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-45-d8e40bb07861&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fib_with_dict</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-<span class="nn">&lt;ipython-input-43-73d87a41c928&gt;</span> in <span class="ni">fib_with_dict</span><span class="nt">(n, dict_calls, rec_calls)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>             <span class="k">return</span> <span class="n">return_dict</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">dict_calls</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rec_calls</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">----&gt; </span><span class="mi">7</span>             <span class="n">output</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span><span class="p">),</span> <span class="n">fib_with_call_dict</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span><span class="p">))]</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">dict_calls</span><span class="p">,</span> <span class="n">rec_calls</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="k">return</span> <span class="n">fib_with_dict</span>
-
-<span class="ne">TypeError</span>: fib_with_call_dict() takes 1 positional argument but 3 were given
+<span class="gp">In [1]: </span><span class="n">fib_with_dict</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">toolz/cytoolz</span></code> modules provide
 a <code class="docutils literal"><span class="pre">memoize</span></code> function that can be applied to a function or used as a
 dictionary.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="kn">from</span> <span class="nn">toolz.functoolz</span> <span class="kn">import</span> <span class="n">memoize</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">toolz.functoolz</span> <span class="kn">import</span> <span class="n">memoize</span>
 
 <span class="go"># You definite don&#39;t want to call this without memoize</span>
-<span class="gp">In [47]: </span><span class="k">def</span> <span class="nf">fib_print</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Computing fib({0})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib_print</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_print</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">fib_print</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Computing fib({0})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib_print</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_print</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [48]: </span><span class="n">mem_fib</span> <span class="o">=</span> <span class="n">memoize</span><span class="p">(</span><span class="n">fib_print</span><span class="p">)</span>
+<span class="gp">In [1]: </span><span class="n">mem_fib</span> <span class="o">=</span> <span class="n">memoize</span><span class="p">(</span><span class="n">fib_print</span><span class="p">)</span>
 
-<span class="gp">In [49]: </span><span class="n">mem_fib</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<span class="go">Computing fib(12)</span>
-<span class="go">Computing fib(11)</span>
-<span class="go">Computing fib(10)</span>
-<span class="go">Computing fib(9)</span>
-<span class="go">Computing fib(8)</span>
-<span class="go">Computing fib(7)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(7)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(8)</span>
-<span class="go">Computing fib(7)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(9)</span>
-<span class="go">Computing fib(8)</span>
-<span class="go">Computing fib(7)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(7)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(10)</span>
-<span class="go">Computing fib(9)</span>
-<span class="go">Computing fib(8)</span>
-<span class="go">Computing fib(7)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(7)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(8)</span>
-<span class="go">Computing fib(7)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(6)</span>
-<span class="go">Computing fib(5)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(4)</span>
-<span class="go">Computing fib(3)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(2)</span>
-<span class="go">Computing fib(1)</span>
-<span class="go">Computing fib(0)</span>
-<span class="gh">Out[49]: </span><span class="go">144</span>
+<span class="gp">In [1]: </span><span class="n">mem_fib</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Note that <code class="docutils literal"><span class="pre">memoize</span></code> also works as a decorator.</p>
@@ -1199,31 +688,29 @@ dictionary.</p>
 immediately return a value that was previously calculated.  Since we need to
 mutate the dictionary, it will be defined as an external local variable and
 declared using the <code class="docutils literal"><span class="pre">nonlocal</span></code> statement in the inner function.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="k">def</span> <span class="nf">memioze</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="n">return_values</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="gp">   ....: </span>    <span class="k">def</span> <span class="nf">dec_func</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="gp">   ....: </span>        <span class="n">nonlocal</span> <span class="n">return_values</span>
-<span class="gp">   ....: </span>        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">return_values</span><span class="p">:</span>
-<span class="gp">   ....: </span>            <span class="k">return</span> <span class="n">return_values</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-<span class="gp">   ....: </span>        <span class="k">else</span><span class="p">:</span>
-<span class="gp">   ....: </span>            <span class="n">output</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="gp">   ....: </span>            <span class="n">return_values</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span>
-<span class="gp">   ....: </span>            <span class="k">return</span> <span class="n">output</span>
-<span class="gp">   ....: </span>        <span class="n">return_values</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">dec_func</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">memioze</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="n">return_values</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">   ...: </span>    <span class="k">def</span> <span class="nf">dec_func</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">   ...: </span>        <span class="n">nonlocal</span> <span class="n">return_values</span>
+<span class="gp">   ...: </span>        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">return_values</span><span class="p">:</span>
+<span class="gp">   ...: </span>            <span class="k">return</span> <span class="n">return_values</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="gp">   ...: </span>        <span class="k">else</span><span class="p">:</span>
+<span class="gp">   ...: </span>            <span class="n">output</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">   ...: </span>            <span class="n">return_values</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span>
+<span class="gp">   ...: </span>            <span class="k">return</span> <span class="n">output</span>
+<span class="gp">   ...: </span>        <span class="n">return_values</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">dec_func</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [51]: </span><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [52]: </span><span class="n">call_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">In [1]: </span><span class="n">call_dict</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="gp">In [53]: </span><span class="n">fib</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<span class="gh">Out[53]: </span><span class="go">144</span>
+<span class="gp">In [1]: </span><span class="n">fib</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="gp">In [54]: </span><span class="n">call_dict</span>
-<span class="go">             Out[54]: {}</span>
+<span class="gp">In [1]: </span><span class="n">call_dict</span>
 </pre></div>
 </div>
 </div>
@@ -1231,46 +718,43 @@ declared using the <code class="docutils literal"><span class="pre">nonlocal</sp
 <h2>Composition<a class="headerlink" href="#composition" title="Permalink to this headline">¶</a></h2>
 <p>Consider the following example, which involves cleaning up a string by removing
 punctuation, whitespace and upper-case characters.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [55]: </span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span><span class="p">,</span> <span class="n">whitespace</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span><span class="p">,</span> <span class="n">whitespace</span>
 
-<span class="gp">In [56]: </span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;Success is not final,</span>
-<span class="gp">   ....: </span><span class="s1">       failure is not fatal:</span>
-<span class="gp">   ....: </span><span class="s1">       it is the courage to continue that counts.&#39;&#39;&#39;</span>
-<span class="gp">   ....: </span>
+<span class="gp">In [1]: </span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;Success is not final,</span>
+<span class="gp">   ...: </span><span class="s1">       failure is not fatal:</span>
+<span class="gp">   ...: </span><span class="s1">       it is the courage to continue that counts.&#39;&#39;&#39;</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [57]: </span><span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
+<span class="gp">In [1]: </span><span class="n">remove_punc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">])</span>
 
-<span class="gp">In [58]: </span><span class="n">make_lower_case</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gp">In [1]: </span><span class="n">make_lower_case</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-<span class="gp">In [59]: </span><span class="n">fix_whitespace</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">whitespace</span> <span class="k">else</span> <span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
+<span class="gp">In [1]: </span><span class="n">fix_whitespace</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">whitespace</span> <span class="k">else</span> <span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
 
-<span class="gp">In [60]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">In [1]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
-<span class="gp">In [61]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">make_lower_case</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">In [1]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">make_lower_case</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
-<span class="gp">In [62]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">fix_whitespace</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">In [1]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">fix_whitespace</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
-<span class="gp">In [63]: </span><span class="n">s</span>
-<span class="gh">Out[63]: </span><span class="go">&#39;success is not final        failure is not fatal        it is the courage to continue that counts&#39;</span>
+<span class="gp">In [1]: </span><span class="n">s</span>
 </pre></div>
 </div>
 <p>In this imperative example, we are mutating the value stored as <code class="docutils literal"><span class="pre">s</span></code> by
 applying one function after the other.  We could have composed these three calls
 into one call, as follows.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [64]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">make_lower_case</span><span class="p">(</span><span class="n">fix_whitespace</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">make_lower_case</span><span class="p">(</span><span class="n">fix_whitespace</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
 
-<span class="gp">In [65]: </span><span class="n">s</span>
-<span class="gh">Out[65]: </span><span class="go">&#39;success is not final        failure is not fatal        it is the courage to continue that counts&#39;</span>
+<span class="gp">In [1]: </span><span class="n">s</span>
 </pre></div>
 </div>
 <p>What if we want to reuse this code.  Of course, we could use a function to make
 this expression reusable.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">clean_up</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">make_lower_case</span><span class="p">(</span><span class="n">fix_whitespace</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">clean_up</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">make_lower_case</span><span class="p">(</span><span class="n">fix_whitespace</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
 
-<span class="gp">In [67]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">clean_up</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">In [1]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">clean_up</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
-<span class="gp">In [68]: </span><span class="n">s</span>
-<span class="gh">Out[68]: </span><span class="go">&#39;success is not final        failure is not fatal        it is the courage to continue that counts&#39;</span>
+<span class="gp">In [1]: </span><span class="n">s</span>
 </pre></div>
 </div>
 <p>Function composition is so common that it will be useful to abstract the process
@@ -1280,19 +764,18 @@ solution to the problem.  We can use a for loop to cycle through the functions
 and an accumulator to keep track of the latest value of the output.  Also note
 that we need to apply the right-most function first, so we will used
 <code class="docutils literal"><span class="pre">reversed</span></code> to iterate through the list back to front.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [69]: </span><span class="k">def</span> <span class="nf">compose_imperative</span><span class="p">(</span><span class="n">funcs</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="k">def</span> <span class="nf">new_func</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
-<span class="gp">   ....: </span>        <span class="n">output</span> <span class="o">=</span> <span class="n">item</span>
-<span class="gp">   ....: </span>        <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">funcs</span><span class="p">):</span>
-<span class="gp">   ....: </span>            <span class="n">output</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="gp">   ....: </span>        <span class="k">return</span> <span class="n">output</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">new_func</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">compose_imperative</span><span class="p">(</span><span class="n">funcs</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">def</span> <span class="nf">new_func</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+<span class="gp">   ...: </span>        <span class="n">output</span> <span class="o">=</span> <span class="n">item</span>
+<span class="gp">   ...: </span>        <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">funcs</span><span class="p">):</span>
+<span class="gp">   ...: </span>            <span class="n">output</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="gp">   ...: </span>        <span class="k">return</span> <span class="n">output</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">new_func</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [70]: </span><span class="n">clean_up</span> <span class="o">=</span> <span class="n">compose_imperative</span><span class="p">([</span><span class="n">remove_punc</span><span class="p">,</span> <span class="n">make_lower_case</span><span class="p">,</span> <span class="n">fix_whitespace</span><span class="p">])</span>
+<span class="gp">In [1]: </span><span class="n">clean_up</span> <span class="o">=</span> <span class="n">compose_imperative</span><span class="p">([</span><span class="n">remove_punc</span><span class="p">,</span> <span class="n">make_lower_case</span><span class="p">,</span> <span class="n">fix_whitespace</span><span class="p">])</span>
 
-<span class="gp">In [71]: </span><span class="n">clean_up</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="gh">Out[71]: </span><span class="go">&#39;success is not final        failure is not fatal        it is the courage to continue that counts&#39;</span>
+<span class="gp">In [1]: </span><span class="n">clean_up</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The fact that we are using the accumulator pattern indicates that this operation
@@ -1300,11 +783,10 @@ is a reduction.  Creating this function adheres to the DRY principle, as we
 won&#8217;t need to explicitly compose functions over and over in our code.  In fact,
 we don&#8217;t even need to give this new function a name, but can call it anonymously
 as follows.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [72]: </span><span class="n">compose_imperative</span><span class="p">([</span><span class="n">remove_punc</span><span class="p">,</span>
-<span class="gp">   ....: </span>                    <span class="n">make_lower_case</span><span class="p">,</span>
-<span class="gp">   ....: </span>                    <span class="n">fix_whitespace</span><span class="p">])(</span><span class="n">s</span><span class="p">)</span>
-<span class="gp">   ....: </span>
-<span class="gh">Out[72]: </span><span class="go">&#39;success is not final        failure is not fatal        it is the courage to continue that counts&#39;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">compose_imperative</span><span class="p">([</span><span class="n">remove_punc</span><span class="p">,</span>
+<span class="gp">   ...: </span>                    <span class="n">make_lower_case</span><span class="p">,</span>
+<span class="gp">   ...: </span>                    <span class="n">fix_whitespace</span><span class="p">])(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">   ...: </span>
 </pre></div>
 </div>
 <p>Now that we have recognized that this process is a reduction, we refactor the
@@ -1312,16 +794,15 @@ code accordingly.</p>
 <p>We can clean up <code class="docutils literal"><span class="pre">my_compose</span></code> by using the <code class="docutils literal"><span class="pre">*</span></code> operator instead of requiring
 the user input a list.  This way the <code class="docutils literal"><span class="pre">my_compose</span></code> function will work with any
 number of functions, which will be entered as regular arguments.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
 
-<span class="gp">In [74]: </span><span class="k">def</span> <span class="nf">my_compose</span><span class="p">(</span><span class="o">*</span><span class="n">funcs</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="k">def</span> <span class="nf">new_func</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
-<span class="gp">   ....: </span>        <span class="k">return</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">next_func</span><span class="p">:</span> <span class="n">next_func</span><span class="p">(</span><span class="n">acc</span><span class="p">),</span> <span class="n">funcs</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">new_func</span>
-<span class="gp">   ....: </span>
+<span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">my_compose</span><span class="p">(</span><span class="o">*</span><span class="n">funcs</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">def</span> <span class="nf">new_func</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+<span class="gp">   ...: </span>        <span class="k">return</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">next_func</span><span class="p">:</span> <span class="n">next_func</span><span class="p">(</span><span class="n">acc</span><span class="p">),</span> <span class="n">funcs</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">new_func</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [75]: </span><span class="n">my_compose</span><span class="p">(</span><span class="n">remove_punc</span><span class="p">,</span> <span class="n">make_lower_case</span><span class="p">,</span> <span class="n">fix_whitespace</span><span class="p">)(</span><span class="n">s</span><span class="p">)</span>
-<span class="gh">Out[75]: </span><span class="go">&#39;success is not final        failure is not fatal        it is the courage to continue that counts&#39;</span>
+<span class="gp">In [1]: </span><span class="n">my_compose</span><span class="p">(</span><span class="n">remove_punc</span><span class="p">,</span> <span class="n">make_lower_case</span><span class="p">,</span> <span class="n">fix_whitespace</span><span class="p">)(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition-see-also admonition">
