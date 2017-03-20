@@ -489,7 +489,7 @@ inner list values.  For illustration, we will work on <code class="docutils lite
 <span class="gp">In [21]: </span><span class="n">sue_scores</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">sue_scores</span><span class="p">)</span>
 
 <span class="gp">In [22]: </span><span class="n">sue_scores</span>
-<span class="gh">Out[22]: </span><span class="go">&lt;map at 0x108e60be0&gt;</span>
+<span class="gh">Out[22]: </span><span class="go">&lt;map at 0x10dc48f28&gt;</span>
 </pre></div>
 </div>
 <p>Remember that <code class="docutils literal"><span class="pre">map(int)</span></code> is the curried partial function that is equivalent to
@@ -1268,14 +1268,14 @@ curried function.</p>
 <span class="ne">----&gt; </span><span class="mi">3</span>     <span class="k">return</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wd</span><span class="p">:</span> <span class="n">assoc</span><span class="p">(</span><span class="n">cnts</span><span class="p">,</span> <span class="n">key</span><span class="p">(</span><span class="n">wd</span><span class="p">),</span> <span class="n">update_count</span><span class="p">(</span><span class="n">key</span><span class="p">(</span><span class="n">wd</span><span class="p">),</span> <span class="n">cnts</span><span class="p">))</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> 
 
-<span class="nn">/Users/tiverson/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/dicttoolz.py</span> in <span class="ni">assoc</span><span class="nt">(d, key, value, factory)</span>
+<span class="nn">/Users/bn8210wy/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/dicttoolz.py</span> in <span class="ni">assoc</span><span class="nt">(d, key, value, factory)</span>
 <span class="g g-Whitespace">    </span><span class="mi">194</span>     <span class="n">d2</span> <span class="o">=</span> <span class="n">factory</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">195</span>     <span class="n">d2</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 <span class="ne">--&gt; </span><span class="mi">196</span>     <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">factory</span><span class="o">=</span><span class="n">factory</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">197</span> 
 <span class="g g-Whitespace">    </span><span class="mi">198</span> 
 
-<span class="nn">/Users/tiverson/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/dicttoolz.py</span> in <span class="ni">merge</span><span class="nt">(*dicts, **kwargs)</span>
+<span class="nn">/Users/bn8210wy/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/dicttoolz.py</span> in <span class="ni">merge</span><span class="nt">(*dicts, **kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="n">rv</span> <span class="o">=</span> <span class="n">factory</span><span class="p">()</span>
 <span class="g g-Whitespace">     </span><span class="mi">38</span>     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dicts</span><span class="p">:</span>
 <span class="ne">---&gt; </span><span class="mi">39</span>         <span class="n">rv</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>

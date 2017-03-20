@@ -485,11 +485,11 @@ explore higher-order functions in the next section.
     :answer_b: 6
     :answer_c: 8
     :answer_d: 11
-    :correct: c
+    :correct: d
     :feedback_a: You are thinking of map, not reduce.  Reduce takes an initial value and updates this value based on each input.
     :feedback_b: You forgot about the initial value, which in this case was 5.  This reduce will start with the accumulator set to 5, then add 1 to the most current subtotal for each value .
-    :feedback_c: This reduce will start with the accumulator set to 5, then add 1 to the most current subtotal for each value.
-    :feedback_d: We are adding 1, NOT the value, to the accumulator.
+    :feedback_c: We are not adding 1, but the value, to the accumulator.
+    :feedback_d: This reduce will start with the accumulator set to 5, then add each value to the most current subtotal for each value.
 
     What will be returned by the following call to ``reduce``?
 
