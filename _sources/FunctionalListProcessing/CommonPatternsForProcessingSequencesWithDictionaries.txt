@@ -352,7 +352,6 @@ list are converted to lists.
 
     from toolz import pipe
     from toolz.curried import valmap, valfilter
-    mean = lambda L: sum(L)/len(L)
     scores = pipe(scores, 
                   valfilter(lambda L: len(L) >= 6), 
                   valmap(compose(list, 
@@ -473,7 +472,6 @@ integer using the curried ``map(int)`` and then converted to a list with
 
        .. ipython:: python
 
-           mean = lambda L: sum(L)/len(L)
            scores = pipe(scores, 
                          valfilter(lambda L: len(L) >= 6), 
                          valmap(compose(list, 
@@ -486,7 +484,6 @@ integer using the curried ``map(int)`` and then converted to a list with
 
        .. ipython:: python
 
-           mean = lambda L: sum(L)/len(L)
            at_least_six_items = lambda L: len(L) >= 6
            map_int_and_make_list = compose(list, map(int))
            scores = pipe(scores, 

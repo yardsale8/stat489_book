@@ -44,11 +44,12 @@ of which have the same pattern:
    the header line.
 
 In functional programs the body of a function will mostly consist of assignment
-statements and possible an ``if-elif-else`` or ``try-except`` block.  As we have
-seen, most iteration can be handled by a list comprehension and we in this
-chapter we will an additional alternative for loops in the form of recursion.  
-The most important part of a **fruitful** function is the ``return`` statement
-the halts the function and returns one or more values.
+statements and possibly an ``if-elif-else`` or ``try-except`` block.  As we have
+seen, most iteration can be handled by a list comprehension and in this chapter
+we will develop additional alternatives for loops in the form of higher order
+functions like ``map``, ``filter`` and ``reduce``.  The most important part of a
+**fruitful** function is the ``return`` statement the halts the function and
+returns one or more values.
 
 
 
@@ -212,7 +213,7 @@ built-in functions and lambda expressions.
 Notice something important here. The name of the variable we pass as an argument
 --- ``number`` --- has nothing to do with the name of the formal parameter ---
 ``x``.  It is as if  ``x = toSquare`` is executed when ``square`` is called.  It
-doesn't matter what the value was named in the caller. In ``square``, it's name
+doesn't matter what the value was named in the caller. In ``square``, its name
 is ``x``.  You can see this very clearly in codelens, where the global variables
 and the local variables for the square function are in separate boxes.
 
@@ -325,7 +326,7 @@ Here is a program containing a function to capture this idea.  Give it a try.
 
 Everything that this function does is a side-effect.  The import statement adds
 the turtle library to the main name space (a side-effect).  The function
-definition save the associated function value to the main namespace (a
+definition saves the associated function value to the main namespace (a
 side-effect).  The ``turtle.Screen`` call makes an external screen for turtles
 (a side-effect)... etc.  All programs need some part of their code to be
 side-effecting, if nothing else we need to read data in and output results.  The
@@ -594,7 +595,7 @@ typical value and the user can either use this default or provide their own.
     apply_tax(4.99, 1.07)
     apply_tax(4.99, rate=1.07)
 
-Note that we can give an altercate value for the default value positionally (by
+Note that we can give an alternate value for the default value positionally (by
 adding a second parameter) or by explicitly assigning a value to the parameter
 (``rate=1.07``).
 
@@ -626,7 +627,7 @@ variable number of inputs.
 
 How does that work?  It turns out that we can design similar functions using the
 variable arguments in our definition.  When we use ``*args`` as a parameter,
-Python will except any number of arguments and give them to us in a tuple named
+Python will accept any number of arguments and give them to us in a tuple named
 ``args``. You should think of ``*args`` to represent *zero or more arguments*
 stored in a tuple named ``args``.  In the case of the ``add`` function, we can
 simply apply the ``sum`` function to this tuple to get the sum of all the

@@ -143,7 +143,7 @@ our programming environment, often called an Integrated Development Environment
 
    The name(s) for the IPython tools are currently in transition.  Ipython was
    originally written with Python as the sole focus, but it was quickly
-   recognized that this framework works well with many language.  Recently,
+   recognized that this framework works well with many languages.  Recently,
    IPython was split into two parts, Jupyter and Ipython proper.  Project
    Jupyter includes all of the machinery that is used to make shells and
    notebooks, allowing easy creation of tools in other language.  Ipython

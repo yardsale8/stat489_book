@@ -1,4 +1,5 @@
 ..  Copyright (C)  Todd Iverson.  Permission is granted to copy, distribute
+
     and/or modify this document under the terms of the GNU Free Documentation
     License, Version 1.3 or any later version published by the Free Software
     Foundation; with Invariant Sections being Forward, Prefaces, and
@@ -102,7 +103,7 @@ Because the tree depth for a balanced tree is approximately :math:`\log_2(n)`
 for a tree containing :math:`n` values, the time complexity of looking up values
 in a dictionary has time complexity of :math:`O(\log_2(n))`.  The time complexity
 of checking for the presence of a key in a dictionary or an item in a set is
-also :math:`O(\log_2(n)`.  
+also :math:`O(\log_2(n))`.  
 
 If you compare these complexities to that of a look-up for a list or tuple,
 which was :math:`O(n)`, we see that look-ups are much more efficient for sets

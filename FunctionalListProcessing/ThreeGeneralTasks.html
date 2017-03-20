@@ -361,7 +361,7 @@ generalizes this process.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">out</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="gp">In [8]: </span><span class="n">out</span>
-<span class="gh">Out[8]: </span><span class="go">&lt;map at 0x10bd9b9b0&gt;</span>
+<span class="gh">Out[8]: </span><span class="go">&lt;map at 0x10b3a4c88&gt;</span>
 
 <span class="gp">In [9]: </span><span class="nb">type</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 <span class="go">                             Out[9]: map</span>
@@ -370,7 +370,7 @@ generalizes this process.</p>
 <span class="go">                                         Out[10]: [0, 1, 4, 9, 16]</span>
 
 <span class="gp">In [11]: </span><span class="n">out</span>
-<span class="go">                                                                   Out[11]: &lt;map at 0x10bd9b9b0&gt;</span>
+<span class="go">                                                                   Out[11]: &lt;map at 0x10b3a4c88&gt;</span>
 
 <span class="go"># out has been processed and is now empty</span>
 <span class="gp">In [12]: </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">out</span><span class="p">]</span>
@@ -391,7 +391,7 @@ above.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="map_1">
-            <p>rec-5-87: What will out evaluate to for the following code?</p>
+            <p>exceptions-4-8: What will out evaluate to for the following code?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">has_vowel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">])</span>
 <span class="n">out</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">has_vowel</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
 </pre></div>
@@ -409,7 +409,7 @@ above.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="map_2">
-            <p>rec-5-88: What will out evaluate to for the following code?</p>
+            <p>exceptions-4-9: What will out evaluate to for the following code?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">has_vowel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">])</span>
 <span class="n">out</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">has_vowel</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]))</span>
 </pre></div>
@@ -427,7 +427,7 @@ above.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="map_3">
-            <p>rec-5-89: Which of the following functions can be used to replace has_vowel?</p>
+            <p>exceptions-4-10: Which of the following functions can be used to replace has_vowel?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">has_vowel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -487,7 +487,7 @@ object will be empty after being processed.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">out</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
 <span class="gp">In [22]: </span><span class="n">out</span>
-<span class="gh">Out[22]: </span><span class="go">&lt;filter at 0x10bdc8128&gt;</span>
+<span class="gh">Out[22]: </span><span class="go">&lt;filter at 0x10b3cfef0&gt;</span>
 
 <span class="gp">In [23]: </span><span class="nb">type</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 <span class="go">                                 Out[23]: filter</span>
@@ -505,7 +505,7 @@ discuss this advantage in an upcoming section on lazy evaluation in Python.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="filter_1">
-            <p>rec-5-90: What will out evaluate to for the following code?</p>
+            <p>exceptions-4-11: What will out evaluate to for the following code?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">has_vowel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">])</span>
 <span class="n">out</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="n">has_vowel</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
 </pre></div>
@@ -523,7 +523,7 @@ discuss this advantage in an upcoming section on lazy evaluation in Python.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="filter_2">
-            <p>rec-5-91: What will out evaluate to for the following code?</p>
+            <p>exceptions-4-12: What will out evaluate to for the following code?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">has_vowel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">])</span>
 <span class="n">out</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">has_vowel</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]))</span>
 </pre></div>
@@ -806,7 +806,7 @@ explore higher-order functions in the next section.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="reduce_initial_value">
-            <p>rec-5-92: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
+            <p>exceptions-4-13: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -823,7 +823,7 @@ explore higher-order functions in the next section.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="reduce_add_strings">
-            <p>rec-5-93: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
+            <p>exceptions-4-14: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -840,7 +840,7 @@ explore higher-order functions in the next section.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="reduce_add_strings_2">
-            <p>rec-5-94: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
+            <p>exceptions-4-15: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">])</span>
 </pre></div>
 </div>

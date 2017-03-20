@@ -327,10 +327,10 @@ including <code class="docutils literal"><span class="pre">range</span></code>, 
 <span class="gh">Out[1]: </span><span class="go">range(0, 4)</span>
 
 <span class="gp">In [2]: </span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-<span class="go">                    Out[2]: &lt;map at 0x113b1fdd8&gt;</span>
+<span class="go">                    Out[2]: &lt;map at 0x10b300668&gt;</span>
 
 <span class="gp">In [3]: </span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
-<span class="go">                                                 Out[3]: &lt;filter at 0x113b1ff98&gt;</span>
+<span class="go">                                                 Out[3]: &lt;filter at 0x10b300400&gt;</span>
 </pre></div>
 </div>
 <p>Each of these object will hold off evaluation as long as possible.  In this
@@ -353,7 +353,7 @@ odd values in a sequence.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [5]: </span><span class="n">g</span>
-<span class="gh">Out[5]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x113a302b0&gt;</span>
+<span class="gh">Out[5]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10b2640f8&gt;</span>
 </pre></div>
 </div>
 <p>Notice that evaluating the generator doesn&#8217;t produce the sequence.  We can force
@@ -384,7 +384,7 @@ before attempting to iterate a second time.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [10]: </span><span class="n">g</span>
-<span class="gh">Out[10]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x113a4dca8&gt;</span>
+<span class="gh">Out[10]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10b24ce60&gt;</span>
 
 <span class="gp">In [11]: </span><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 
@@ -463,14 +463,15 @@ attack it in a series of small operations.</p>
 times, one for each comprehension.  <strong>The key feature to note is that each call
 to next gives the complete solution for that point without forcing the
 computation for the next point. This is true regardless of how many generators
-we chain together!</strong> In reality these data are all processed
-exactly once, as each sequence is lazy and waits to complete each calculation
-until the last moment.  Consequently, the chain of generators will each compute
-the next value and pass it along in sequence.  This is a very powerful <em>and
-efficient</em> approach to composing operations on sequences.</p>
+we chain together!</strong> In reality each point is completely processed at once, as
+each sequence is lazy and waits to complete each calculation until the last
+moment.  Consequently, the chain of generators will each compute the next value
+and pass it along in sequence.  This is a very powerful <em>and efficient</em> approach
+to composing operations on sequences, because we only need to hold one point in
+memory at a time.</p>
 <p>Contrast this with a solution that uses list comprehensions.  Each comprehension
-is <em>eager</em> to complete its operation and this will result in the sequence being
-iterated over once for each comprehension.</p>
+is <em>eager</em> to complete its operation and this will result in the entire sequence
+being processed before we can start computation on the next sequence.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
 <span class="gp">In [36]: </span><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>  <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]]</span>
@@ -496,14 +497,12 @@ iterated over once for each comprehension.</p>
 </div>
 <p>In constrast to the solution that used generators, the last batch of code
 illustrates that each comprehension has completed it&#8217;s computation before the
-next operation.  Consequently each point is visited 4 times, as opposed to once
-for the lazy approach.</p>
-<p>The main drawback of the eager approach is that it requires we keep the each
-list in memory, which is lead to a decline in performance as list get large.  In
-fact, &#8220;Big Data&#8221; problems typically involve more data than can be held in the
-memory of any one machine.  Using lazy evaluation gives the first solution to
-this problem by allowing use to process the data incrementally without ever
-needing all of it in memory at one time.</p>
+next operation.  Consequently each sequence must be held in memory
+simultaneously.  If the data is very large, this can lead to problems with
+memory usage and disk access.  In fact, &#8220;Big Data&#8221; problems typically involve
+more data than can be held in the memory of any one machine.  Using lazy
+evaluation gives our first solution to this problem by allowing us to process
+the data incrementally without ever needing all of it in memory at one time.</p>
 </div>
 <div class="section" id="more-complicated-generator-expressions">
 <h2>7.7.3. More Complicated Generator Expressions<a class="headerlink" href="#more-complicated-generator-expressions" title="Permalink to this headline">¶</a></h2>
@@ -513,7 +512,7 @@ multiple sequence expression.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="gp">In [45]: </span><span class="n">g</span>
-<span class="gh">Out[45]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x113991830&gt;</span>
+<span class="gh">Out[45]: </span><span class="go">&lt;generator object &lt;genexpr&gt; at 0x10b26e410&gt;</span>
 
 <span class="gp">In [46]: </span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">                                                     Out[46]: [0, 0, 0, 0, 0, 1, 2, 3, 4, 4, 6, 8, 9, 12, 16]</span>
@@ -528,11 +527,11 @@ mapping the <code class="docutils literal"><span class="pre">list</span></code> 
 
 <span class="gp">In [49]: </span><span class="n">table</span>
 <span class="gh">Out[49]: </span><span class="go"></span>
-<span class="go">[&lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x113a86258&gt;,</span>
-<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x113a86678&gt;,</span>
-<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x113a86af0&gt;,</span>
-<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x11377bdb0&gt;,</span>
-<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x11377bba0&gt;]</span>
+<span class="go">[&lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10af82410&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10aed17d8&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10aed1888&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10aed1830&gt;,</span>
+<span class="go"> &lt;generator object &lt;genexpr&gt;.&lt;genexpr&gt; at 0x10aed1ca8&gt;]</span>
 
 <span class="gp">In [50]: </span><span class="n">mapped_table</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">table</span><span class="p">))</span>
 
@@ -614,7 +613,7 @@ requires a call to <code class="docutils literal"><span class="pre">next</span><
 <span class="gp">In [63]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="gp">In [64]: </span><span class="n">y</span>
-<span class="gh">Out[64]: </span><span class="go">&lt;generator object g at 0x11377be08&gt;</span>
+<span class="gh">Out[64]: </span><span class="go">&lt;generator object g at 0x10aed1468&gt;</span>
 
 <span class="gp">In [65]: </span><span class="nb">next</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="go">                                             Out[65]: 4</span>
@@ -677,7 +676,7 @@ through the sequence, yielding one item at a time in a lazy fashion.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [74]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 
 <span class="gp">In [75]: </span><span class="n">y</span>
-<span class="gh">Out[75]: </span><span class="go">&lt;generator object g at 0x110a17830&gt;</span>
+<span class="gh">Out[75]: </span><span class="go">&lt;generator object g at 0x10b0309e8&gt;</span>
 
 <span class="gp">In [76]: </span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="go">                                             Out[76]: generator</span>
@@ -719,9 +718,7 @@ through the sequence, yielding one item at a time in a lazy fashion.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">Generator expressions also can used a <code class="docutils literal"><span class="pre">return</span></code> statement, but this
 immediately throws a <code class="docutils literal"><span class="pre">StopIteration</span></code> exception.  The main purpose of this
-statement in a generator is to control when a generated sequence halts.
-We will show how this can be used to speed up a recursively defined
-generator in the next section.</p>
+statement in a generator is to control when a generated sequence halts.</p>
 </div>
 </div>
 </div>
