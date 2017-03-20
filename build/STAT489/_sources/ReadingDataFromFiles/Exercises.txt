@@ -89,7 +89,8 @@ Exercises
 
                 with open("studentdata.txt", "r") as f:
                     table = [line.split() for line in f]
-                process_row = lambda row: (row[0], max(row), min(row))
+                convert_scores = lambda row: [int(num) for num in row[1:]]
+                process_row = lambda row: (row[0], max(convert_scores(row)), min(convert_scores(row)))
                 new_table = [process_row(row) for row in table]
                 new_table
 

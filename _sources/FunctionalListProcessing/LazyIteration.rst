@@ -78,7 +78,6 @@ before attempting to iterate a second time.
     z = list(g)
     z
 
-.. TODO:: Add an example of computing the mean of a lazy sequence.  We must keep a count and sum simultaneously.  Start with an imperative solution, then combine the information into a tuple accumulator.  
 We wish to compute the average quiz score. To do this we will ``map`` in to all
 of the values using ``valmap``.  Then we need to ``reduce`` the scores to the
 average.  While this could be done with ``reduce``, it is cleaner to define a
@@ -98,6 +97,7 @@ number of elements.  We choose to latter option.
     scores = valmap(map(int), scores)
     scores = valmap(mean, scores)
     scores
+
 The advantage of lazy sequence evaluation
 -----------------------------------------
 
@@ -123,15 +123,18 @@ Under casual inspection, it will appear that we have iterated over the points 4
 times, one for each comprehension.  **The key feature to note is that each call
 to next gives the complete solution for that point without forcing the
 computation for the next point. This is true regardless of how many generators
-we chain together!** In reality these data are all processed
-exactly once, as each sequence is lazy and waits to complete each calculation
-until the last moment.  Consequently, the chain of generators will each compute
-the next value and pass it along in sequence.  This is a very powerful *and
-efficient* approach to composing operations on sequences.
+we chain together!** In reality each point is completely processed at once, as
+each sequence is lazy and waits to complete each calculation until the last
+moment.  Consequently, the chain of generators will each compute the next value
+and pass it along in sequence.  This is a very powerful *and efficient* approach
+to composing operations on sequences, because we only need to hold one point in
+memory at a time.
+
+.. todo:: Add the image for eager evaluation
 
 Contrast this with a solution that uses list comprehensions.  Each comprehension
-is *eager* to complete its operation and this will result in the sequence being
-iterated over once for each comprehension.
+is *eager* to complete its operation and this will result in the entire sequence
+being processed before we can start computation on the next sequence.
 
 .. ipython:: python
 
@@ -145,17 +148,16 @@ iterated over once for each comprehension.
     dist_to_ab = [sqr_dist**(0.5) for sqr_dist in sum_sqr_dist]
     dist_to_ab
 
+.. todo:: Add an image for lazy evaluation
+
 In constrast to the solution that used generators, the last batch of code
 illustrates that each comprehension has completed it's computation before the
-next operation.  Consequently each point is visited 4 times, as opposed to once
-for the lazy approach.
-
-The main drawback of the eager approach is that it requires we keep the each
-list in memory, which is lead to a decline in performance as list get large.  In
-fact, "Big Data" problems typically involve more data than can be held in the
-memory of any one machine.  Using lazy evaluation gives the first solution to
-this problem by allowing use to process the data incrementally without ever
-needing all of it in memory at one time.
+next operation.  Consequently each sequence must be held in memory
+simultaneously.  If the data is very large, this can lead to problems with
+memory usage and disk access.  In fact, "Big Data" problems typically involve
+more data than can be held in the memory of any one machine.  Using lazy
+evaluation gives our first solution to this problem by allowing us to process
+the data incrementally without ever needing all of it in memory at one time.
 
 
 More Complicated Generator Expressions
@@ -324,8 +326,6 @@ You can combine any combination of ``yield`` and ``yield from`` statements.
     Generator expressions also can used a ``return`` statement, but this
     immediately throws a ``StopIteration`` exception.  The main purpose of this
     statement in a generator is to control when a generated sequence halts.
-    We will show how this can be used to speed up a recursively defined
-    generator in the next section.
 
 Coroutines
 ----------
@@ -360,3 +360,8 @@ coroutine comes with a method ``send`` that is used to pass it the next value.
     co.send("there ")
     co.send("Bob!")
 
+.. todo:: Add a section on processing large data sets
+
+.. todo:: Add a section on reduceby
+
+.. todo:: Add a section on join
