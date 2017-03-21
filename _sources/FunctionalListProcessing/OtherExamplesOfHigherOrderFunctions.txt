@@ -16,7 +16,7 @@ In this section, we will implement some other common higher-order functions
 Many of these functions are implemented in the Python libraries ``toolz`` and
 ``cytoolz`` under the sub module titled ``functoolz``.  These two modules have
 exactly the same functionality, but the ``cytoolz`` functions are implemented
-with in ``cython``, which means that you get better performance.  Unfortunately,
+within ``cython``, which means that you get better performance.  Unfortunately,
 you need a ``C`` compiler to install ``cytoolz``, but ``toolz`` also has decent
 performance approximately equal in performance to similar tools from the
 standard library.
@@ -69,7 +69,7 @@ into one call, as follows.
     s = remove_punc(make_lower_case(fix_whitespace(s)))
     s
 
-What if we want to reuse this code.  Of course, we could use a function to make
+What if we want to reuse this code?  Of course, we could use a function to make
 this expression reusable.
 
 .. ipython:: python
@@ -194,7 +194,7 @@ argument ``val`` will be the *first* argument in each call.
     thread_first(5, (add, 2), (pow, 2), (sub, 6))
 
     # The above is equivalent to
-    sub(pow(add(5, 2), 2), 5)
+    sub(pow(add(5, 2), 2), 6)
 
 If, on the other hand, you wish to a pass a value ``val`` through a sequence of
 functions *in the last argument*, use ``thread_last``.
@@ -266,7 +266,7 @@ factory and the unneeded replication of a second parameter.  First, we don't
 need to use the more complex nested functions; but we can still save the
 replication of the ``rate`` parameter in each function call.
 
-So what is happening here.   Clearly ``partial`` is a higher-order function (it
+So what is happening here?   Clearly ``partial`` is a higher-order function (it
 returns another function).  One way to think about this: a call to a ``partial``
 function calls ``apply_tax`` with ``rate`` fixed at 1.065, leaving the ``cost``
 parameter as the only remaining formal parameter.
@@ -330,7 +330,7 @@ original function and then changes or *decorates* the input and/or output.
 
 For example, when processing text, it is often useful to switch all the text to
 lower case.  We will create a decorator function that can be used to wrap any
-function that returns a string and insure that the output is lower case.
+function that returns a string and ensure that the output is lower case.
 
 .. ipython:: python
 
@@ -376,7 +376,7 @@ Currying
 Currying is another popular functional approach to partial application of
 functions.  Recall that the **arity** of a function is the number of arguments
 the function takes.  We can implement functions with arity higher than 1 using a
-single-arith functions with technique called called **currying**, which is
+single-arith functions with technique called **currying**, which is
 illustrated below.
 
 .. ipython:: python
@@ -539,7 +539,7 @@ Many of the functions from the ``toolz`` library have been designed with
 currying in mind.  Furthermore, curried versions of most functions can be
 imported from ``toolz.curried``.
 
-One example such a function is ``get``, which can be used to get one more more
+One example of such a function is ``get``, which can be used to get one more more
 entries from a row of a table.
 
 .. ipython:: python
@@ -564,7 +564,7 @@ the selected columns of the table.
     mixed_up
 
 Using the curried version of this function makes it easy to combine it with
-``map``.  The final result is the ability to quickly access a selected columns
+``map``.  The final result is the ability to quickly access selected columns
 from a table.
 
 .. ipython:: python
@@ -671,7 +671,7 @@ variables using the ``pipe`` function along with curried versions of ``pluck``,
 
 .. note::
 
-    This is a useful when transitioning from writing imperative programs to
+    This is useful when transitioning from writing imperative programs to
     writing functional programs.  Anytime that you want to write code like this:
 
     .. sourcecode:: python
@@ -691,8 +691,8 @@ variables using the ``pipe`` function along with curried versions of ``pluck``,
              h)
 
 Another mind-bending use of the curried functions from ``toolz`` is the curried
-version of ``curry``.  In addition to being used to creating curried functions
-as a when applied as a decorator, the curried ``curry`` can be applied to other
+version of ``curry``.  In addition to being used to create curried functions
+as when applied as a decorator, the curried ``curry`` can be applied to other
 functions.  The end result is the ability to create a curried version of a
 previously defined function, even the built-in Python functions.
 
@@ -734,10 +734,10 @@ that generates the nth `fibonacci number
     total_calls_to_fib
 
 We see that, even for a small value of ``n``, we get a larger number of calls
-for each of the number less than ``n``.  One solution to this problem is
+for each of the numbers less than ``n``.  One solution to this problem is
 **memiozation**, which involves decorating our function and using a dictionary
 to remember the output of previous calls.  First, we will implement a closure
-that includes a reference to a dictionary.  When ever we know the return value
+that includes a reference to a dictionary.  Whenever we know the return value
 for a specific argument, we will save it in our dictionary.  Furthermore, we
 will query the dictionary each time our function is called, and we will
 immediately return the solution if saved in the dictionary.

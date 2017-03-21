@@ -323,7 +323,7 @@
 <p>Many of these functions are implemented in the Python libraries <code class="docutils literal"><span class="pre">toolz</span></code> and
 <code class="docutils literal"><span class="pre">cytoolz</span></code> under the sub module titled <code class="docutils literal"><span class="pre">functoolz</span></code>.  These two modules have
 exactly the same functionality, but the <code class="docutils literal"><span class="pre">cytoolz</span></code> functions are implemented
-with in <code class="docutils literal"><span class="pre">cython</span></code>, which means that you get better performance.  Unfortunately,
+within <code class="docutils literal"><span class="pre">cython</span></code>, which means that you get better performance.  Unfortunately,
 you need a <code class="docutils literal"><span class="pre">C</span></code> compiler to install <code class="docutils literal"><span class="pre">cytoolz</span></code>, but <code class="docutils literal"><span class="pre">toolz</span></code> also has decent
 performance approximately equal in performance to similar tools from the
 standard library.</p>
@@ -375,7 +375,7 @@ into one call, as follows.</p>
 <span class="gh">Out[11]: </span><span class="go">&#39;success is not final        failure is not fatal        it is the courage to continue that counts&#39;</span>
 </pre></div>
 </div>
-<p>What if we want to reuse this code.  Of course, we could use a function to make
+<p>What if we want to reuse this code?  Of course, we could use a function to make
 this expression reusable.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">clean_up</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">remove_punc</span><span class="p">(</span><span class="n">make_lower_case</span><span class="p">(</span><span class="n">fix_whitespace</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
 
@@ -494,8 +494,8 @@ argument <code class="docutils literal"><span class="pre">val</span></code> will
 <span class="gh">Out[28]: </span><span class="go">43</span>
 
 <span class="go"># The above is equivalent to</span>
-<span class="gp">In [29]: </span><span class="n">sub</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
-<span class="go">            Out[29]: 44</span>
+<span class="gp">In [29]: </span><span class="n">sub</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">            Out[29]: 43</span>
 </pre></div>
 </div>
 <p>If, on the other hand, you wish to a pass a value <code class="docutils literal"><span class="pre">val</span></code> through a sequence of
@@ -572,7 +572,7 @@ some of the arguments of this base function.  We can use <code class="docutils l
 factory and the unneeded replication of a second parameter.  First, we don&#8217;t
 need to use the more complex nested functions; but we can still save the
 replication of the <code class="docutils literal"><span class="pre">rate</span></code> parameter in each function call.</p>
-<p>So what is happening here.   Clearly <code class="docutils literal"><span class="pre">partial</span></code> is a higher-order function (it
+<p>So what is happening here?   Clearly <code class="docutils literal"><span class="pre">partial</span></code> is a higher-order function (it
 returns another function).  One way to think about this: a call to a <code class="docutils literal"><span class="pre">partial</span></code>
 function calls <code class="docutils literal"><span class="pre">apply_tax</span></code> with <code class="docutils literal"><span class="pre">rate</span></code> fixed at 1.065, leaving the <code class="docutils literal"><span class="pre">cost</span></code>
 parameter as the only remaining formal parameter.</p>
@@ -638,7 +638,7 @@ creates a <em>wrapper</em> around another function.  The outer function calls th
 original function and then changes or <em>decorates</em> the input and/or output.</p>
 <p>For example, when processing text, it is often useful to switch all the text to
 lower case.  We will create a decorator function that can be used to wrap any
-function that returns a string and insure that the output is lower case.</p>
+function that returns a string and ensure that the output is lower case.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [55]: </span><span class="k">def</span> <span class="nf">lower_out</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
 <span class="gp">   ....: </span>    <span class="k">def</span> <span class="nf">decorated_func</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="gp">   ....: </span>        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -677,7 +677,7 @@ need to use different name for the decorated function.</p>
 <p>Currying is another popular functional approach to partial application of
 functions.  Recall that the <strong>arity</strong> of a function is the number of arguments
 the function takes.  We can implement functions with arity higher than 1 using a
-single-arith functions with technique called called <strong>currying</strong>, which is
+single-arith functions with technique called <strong>currying</strong>, which is
 illustrated below.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="n">curried_pow</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span>
 
@@ -836,7 +836,7 @@ function.</p>
 <p>Many of the functions from the <code class="docutils literal"><span class="pre">toolz</span></code> library have been designed with
 currying in mind.  Furthermore, curried versions of most functions can be
 imported from <code class="docutils literal"><span class="pre">toolz.curried</span></code>.</p>
-<p>One example such a function is <code class="docutils literal"><span class="pre">get</span></code>, which can be used to get one more more
+<p>One example of such a function is <code class="docutils literal"><span class="pre">get</span></code>, which can be used to get one more more
 entries from a row of a table.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [68]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">get</span>
 
@@ -865,7 +865,7 @@ the selected columns of the table.</p>
 </pre></div>
 </div>
 <p>Using the curried version of this function makes it easy to combine it with
-<code class="docutils literal"><span class="pre">map</span></code>.  The final result is the ability to quickly access a selected columns
+<code class="docutils literal"><span class="pre">map</span></code>.  The final result is the ability to quickly access selected columns
 from a table.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [75]: </span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">table</span><span class="p">))</span>
 <span class="gh">Out[75]: </span><span class="go">[3, 6, 9, 12, 15]</span>
@@ -970,7 +970,7 @@ achieve this result.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This is a useful when transitioning from writing imperative programs to
+<p>This is useful when transitioning from writing imperative programs to
 writing functional programs.  Anytime that you want to write code like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -987,8 +987,8 @@ follows.</p>
 </div>
 </div>
 <p>Another mind-bending use of the curried functions from <code class="docutils literal"><span class="pre">toolz</span></code> is the curried
-version of <code class="docutils literal"><span class="pre">curry</span></code>.  In addition to being used to creating curried functions
-as a when applied as a decorator, the curried <code class="docutils literal"><span class="pre">curry</span></code> can be applied to other
+version of <code class="docutils literal"><span class="pre">curry</span></code>.  In addition to being used to create curried functions
+as when applied as a decorator, the curried <code class="docutils literal"><span class="pre">curry</span></code> can be applied to other
 functions.  The end result is the ability to create a curried version of a
 previously defined function, even the built-in Python functions.</p>
 <p>We will illustrate by continuing the example using <code class="docutils literal"><span class="pre">map</span></code> and <code class="docutils literal"><span class="pre">get(2)</span></code>.
@@ -1046,10 +1046,10 @@ that generates the nth <a class="reference external" href="https://en.wikipedia.
 </pre></div>
 </div>
 <p>We see that, even for a small value of <code class="docutils literal"><span class="pre">n</span></code>, we get a larger number of calls
-for each of the number less than <code class="docutils literal"><span class="pre">n</span></code>.  One solution to this problem is
+for each of the numbers less than <code class="docutils literal"><span class="pre">n</span></code>.  One solution to this problem is
 <strong>memiozation</strong>, which involves decorating our function and using a dictionary
 to remember the output of previous calls.  First, we will implement a closure
-that includes a reference to a dictionary.  When ever we know the return value
+that includes a reference to a dictionary.  Whenever we know the return value
 for a specific argument, we will save it in our dictionary.  Furthermore, we
 will query the dictionary each time our function is called, and we will
 immediately return the solution if saved in the dictionary.</p>
