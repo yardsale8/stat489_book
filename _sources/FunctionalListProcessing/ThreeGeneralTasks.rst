@@ -167,7 +167,7 @@ being processed.
     my_filter = lambda pred, L: [x for x in L if pred(x)]
     my_filter(lambda x: x % 2 == 1, range(1,6))
 
-``my_filter`` will iterated though all of the elements of the second argument
+``my_filter`` will iterate though all of the elements of the second argument
 ``range(1,6)``, applying ``lambda x: x % 2 == 1`` and only keeping the values
 which return true.  Python also comes with a built-in, lazy implementation of
 ``filter``.  As with ``map``, we need to force completion of this process using

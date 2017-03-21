@@ -253,7 +253,7 @@ Exercises
 .. question:: 170
 
     Write a function called ``has_vowel`` that takes a string as input and returns
-    ``True`` of the string contains a vowel (``'aeiou'`` ignore ``'y'``) and ``False``
+    ``True`` if the string contains a vowel (``'aeiou'`` ignore ``'y'``) and ``False``
     otherwise.  Use ``reduce`` to perform this task.
 
 
