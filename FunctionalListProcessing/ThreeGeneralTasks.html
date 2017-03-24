@@ -267,6 +267,7 @@
 <li><a class="reference internal" href="#map">7.3.1. Map</a></li>
 <li><a class="reference internal" href="#filter">7.3.2. Filter</a></li>
 <li><a class="reference internal" href="#reduce">7.3.3. Reduce</a></li>
+<li><a class="reference internal" href="#simultaneous-reductions">7.3.4. Simultaneous Reductions</a></li>
 </ul>
 </li>
 </ul>
@@ -361,7 +362,7 @@ generalizes this process.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">out</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="gp">In [8]: </span><span class="n">out</span>
-<span class="gh">Out[8]: </span><span class="go">&lt;map at 0x10f35f1d0&gt;</span>
+<span class="gh">Out[8]: </span><span class="go">&lt;map at 0x113d8de10&gt;</span>
 
 <span class="gp">In [9]: </span><span class="nb">type</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 <span class="go">                             Out[9]: map</span>
@@ -370,7 +371,7 @@ generalizes this process.</p>
 <span class="go">                                         Out[10]: [0, 1, 4, 9, 16]</span>
 
 <span class="gp">In [11]: </span><span class="n">out</span>
-<span class="go">                                                                   Out[11]: &lt;map at 0x10f35f1d0&gt;</span>
+<span class="go">                                                                   Out[11]: &lt;map at 0x113d8de10&gt;</span>
 
 <span class="go"># out has been processed and is now empty</span>
 <span class="gp">In [12]: </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">out</span><span class="p">]</span>
@@ -391,7 +392,7 @@ above.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="map_1">
-            <p>rec-5-67: What will out evaluate to for the following code?</p>
+            <p>rec-5-203: What will out evaluate to for the following code?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">has_vowel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">])</span>
 <span class="n">out</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">has_vowel</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
 </pre></div>
@@ -409,7 +410,7 @@ above.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="map_2">
-            <p>rec-5-68: What will out evaluate to for the following code?</p>
+            <p>rec-5-204: What will out evaluate to for the following code?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">has_vowel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">])</span>
 <span class="n">out</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">has_vowel</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]))</span>
 </pre></div>
@@ -427,7 +428,7 @@ above.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="map_3">
-            <p>rec-5-69: Which of the following functions can be used to replace has_vowel?</p>
+            <p>rec-5-205: Which of the following functions can be used to replace has_vowel?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">has_vowel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -487,7 +488,7 @@ object will be empty after being processed.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">out</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
 <span class="gp">In [22]: </span><span class="n">out</span>
-<span class="gh">Out[22]: </span><span class="go">&lt;filter at 0x10f390ef0&gt;</span>
+<span class="gh">Out[22]: </span><span class="go">&lt;filter at 0x115ebd400&gt;</span>
 
 <span class="gp">In [23]: </span><span class="nb">type</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 <span class="go">                                 Out[23]: filter</span>
@@ -505,7 +506,7 @@ discuss this advantage in an upcoming section on lazy evaluation in Python.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="filter_1">
-            <p>rec-5-70: What will out evaluate to for the following code?</p>
+            <p>rec-5-206: What will out evaluate to for the following code?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">has_vowel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">])</span>
 <span class="n">out</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="n">has_vowel</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
 </pre></div>
@@ -523,7 +524,7 @@ discuss this advantage in an upcoming section on lazy evaluation in Python.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="filter_2">
-            <p>rec-5-71: What will out evaluate to for the following code?</p>
+            <p>rec-5-207: What will out evaluate to for the following code?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">has_vowel</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">any</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">L</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="s1">&#39;aeiou&#39;</span><span class="p">])</span>
 <span class="n">out</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">has_vowel</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]))</span>
 </pre></div>
@@ -806,7 +807,7 @@ explore higher-order functions in the next section.</p>
 <p><strong>Check your understanding</strong></p>
 
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="reduce_initial_value">
-            <p>rec-5-72: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
+            <p>rec-5-208: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -823,7 +824,7 @@ explore higher-order functions in the next section.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="reduce_add_strings">
-            <p>rec-5-73: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
+            <p>rec-5-209: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -840,7 +841,7 @@ explore higher-order functions in the next section.</p>
             </ul>
             
             <ul data-component="multiplechoice" data-multipleanswers="false"  id="reduce_add_strings_2">
-            <p>rec-5-74: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
+            <p>rec-5-210: What will be returned by the following call to <code class="docutils literal"><span class="pre">reduce</span></code>?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -856,6 +857,83 @@ explore higher-order functions in the next section.</p>
 
             </ul>
             </div>
+<div class="section" id="simultaneous-reductions">
+<h2>7.3.4. Simultaneous Reductions<a class="headerlink" href="#simultaneous-reductions" title="Permalink to this headline">¶</a></h2>
+<p>When computing the average of a sequence, we have been using the following
+definition of <code class="docutils literal"><span class="pre">mean</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [83]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Unfortunately, this definition does not work with lazy sequences like those
+created by <code class="docutils literal"><span class="pre">map</span></code> and <code class="docutils literal"><span class="pre">filter</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [84]: </span><span class="n">mean</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">]))</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-84-645e397552f2&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">mean</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">]))</span>
+
+<span class="nn">&lt;ipython-input-83-696eef189864&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(L)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: object of type &#39;map&#39; has no len()
+</pre></div>
+</div>
+<p>The problem is that a lazy sequence has no idea how long it is and in fact it
+may represent an infinite sequence.  A naive attempt to solve this problem might
+attempt to replace <code class="docutils literal"><span class="pre">len</span></code> with the corresponding reduction, but this is still
+problematic.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [85]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+
+<span class="gp">In [86]: </span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span>
+
+<span class="gp">In [87]: </span><span class="n">count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="gp">In [88]: </span><span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">reduce</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="gp">In [89]: </span><span class="n">mean</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">]))</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-89-645e397552f2&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">mean</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">]))</span>
+
+<span class="nn">&lt;ipython-input-88-a3b42564febf&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(L)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">mean</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="nb">reduce</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="ne">ZeroDivisionError</span>: division by zero
+</pre></div>
+</div>
+<p>Again, the issue stems from the fact that the sequence returned by <code class="docutils literal"><span class="pre">map</span></code> is
+lazy, but this time we run into the fact that we can only process this lazy
+stream once.  After the sequence passes through <code class="docutils literal"><span class="pre">sum</span></code> it is empty, so the
+reduce returns 0.   Luckily in this case we get an exception, if we hadn&#8217;t tried
+to divide by 0, we may have missed this subtle bug!</p>
+<p>The solution to this issue involves computing <em>both</em> the total and count in one
+pass (i.e. in one reduce).  This is accomplished by keeping both accumulators in
+a tuple and updating both values at each step.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [90]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span>
+
+<span class="gp">In [91]: </span><span class="n">sum_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="gp">In [92]: </span><span class="n">sum_count</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">]))</span>
+<span class="gh">Out[92]: </span><span class="go">(6, 3)</span>
+</pre></div>
+</div>
+<p>We then compose this function with a function that process the tuple of
+statistics by dividing the total by the count.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [93]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">compose</span><span class="p">,</span> <span class="n">do</span>
+
+<span class="gp">In [94]: </span><span class="n">div_sum_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tup</span><span class="p">)</span><span class="o">/</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">tup</span><span class="p">)</span>
+
+<span class="gp">In [95]: </span><span class="n">mean</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">div_sum_count</span><span class="p">,</span><span class="k">lambda</span> <span class="n">seq</span><span class="p">:</span> <span class="n">do</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">sum_count</span><span class="p">(</span><span class="n">seq</span><span class="p">)))</span>
+
+<span class="gp">In [96]: </span><span class="n">mean</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">]))</span>
+<span class="go">(6, 3)</span>
+<span class="gh">Out[96]: </span><span class="go">2.0</span>
+</pre></div>
+</div>
+<p>We now have a more general definition of <code class="docutils literal"><span class="pre">mean</span></code>, one that can process both
+lists and lazy streams of data.</p>
+</div>
 </div>
 
 
