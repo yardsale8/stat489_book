@@ -531,3 +531,62 @@ explore higher-order functions in the next section.
     .. sourcecode:: python
 
         reduce(lambda a, i: i + a, ['1','2','3'])
+
+Simultaneous Reductions
+-----------------------
+
+When computing the average of a sequence, we have been using the following
+definition of ``mean``.
+
+.. ipython:: python
+
+    mean = lambda L: sum(L)/len(L)
+
+Unfortunately, this definition does not work with lazy sequences like those
+created by ``map`` and ``filter``.
+
+.. ipython:: python
+
+    mean(map(int, ['1','2','3']))
+
+The problem is that a lazy sequence has no idea how long it is and in fact it
+may represent an infinite sequence.  A naive attempt to solve this problem might
+attempt to replace ``len`` with the corresponding reduction, but this is still
+problematic.
+
+.. ipython:: python
+
+    from functools import reduce
+    from operator import add
+    count = lambda a, i: a + 1
+    mean = lambda L: sum(L)/reduce(count, L, 0)
+    mean(map(int, ['1','2','3']))
+
+Again, the issue stems from the fact that the sequence returned by ``map`` is
+lazy, but this time we run into the fact that we can only process this lazy
+stream once.  After the sequence passes through ``sum`` it is empty, so the
+reduce returns 0.   Luckily in this case we get an exception, if we hadn't tried
+to divide by 0, we may have missed this subtle bug!
+
+The solution to this issue involves computing *both* the total and count in one
+pass (i.e. in one reduce).  This is accomplished by keeping both accumulators in
+a tuple and updating both values at each step.
+
+.. ipython:: python
+
+    from toolz import get
+    sum_count = lambda L: reduce(lambda a, i: (get(0, a) + i, get(1, a) + 1), L, (0, 0))
+    sum_count(map(int, ['1','2','3']))
+
+We then compose this function with a function that process the tuple of
+statistics by dividing the total by the count.
+
+.. ipython:: python
+
+    from toolz import compose, do
+    div_sum_count = lambda tup: get(0, tup)/get(1, tup)
+    mean = compose(div_sum_count,lambda seq: do(print, sum_count(seq)))
+    mean(map(int, ['1', '2', '3']))
+
+We now have a more general definition of ``mean``, one that can process both
+lists and lazy streams of data.

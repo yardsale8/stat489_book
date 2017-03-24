@@ -78,6 +78,48 @@ before attempting to iterate a second time.
     z = list(g)
     z
 
+Consequently, we need to process that sequences in one pass.  In particular, if
+we want to reduce the sequence to a number of statistics, we will need to
+compute all these statistics simultaneously.  
+
+To illustrate processing a lazy sequence in we will return to the quiz score
+example from previous chapters.  Recall that we have information on students
+quiz scores stored in a flat file, with each line containing the students name
+followed by the quiz scores.  Recall that our task is to return each students
+name and average quiz score.
+
+To lazily read a file in line by line, we use ``with_iter`` from the
+``more_itertools`` library. This sequence will give us each line of the file,
+one at a time without having to keep them all in memory at once.
+
+.. ipython:: python
+
+    file_iter = with_iter(open('studentdata.csv'))
+
+Now we need to pass this lazy sequence through another generator expression to
+split each line into words.  As seen in a previous section, this can be
+accomplished using ``map``.
+
+.. ipython:: python
+
+    words = map(lambda line: line.split(), file_iter)
+
+In our last attempt at this probem, we used a dictionary to hold the information
+for each student.  This required use to hold all the information in memory at
+the same time, which was fine for this small example.  To illustrate performing
+this task in a lazy manner, we will need to compute all of the statistics on
+each line as it passes through the stream.  This will be accomplished using
+reduce to compute three pieces of information simultaneously: the students name,
+the students total, and the students number of quizzes.
+
+
+.. ipython:: python
+
+    from toolz.curried import first, drop, compose
+    rest = compose(list, drop(1))
+    scores = {first(line):rest(line) for line in words}
+    scores
+
 We wish to compute the average quiz score. To do this we will ``map`` in to all
 of the values using ``valmap``.  Then we need to ``reduce`` the scores to the
 average.  While this could be done with ``reduce``, it is cleaner to define a
@@ -89,13 +131,35 @@ number of elements.  We choose to latter option.
 .. ipython:: python
 
     from functools import reduce
-    from toolz import valmap
+    from toolz import valmap, compose
     from toolz.curried import map
     sum_count = lambda L: reduce(lambda a, i: (get(0, a) + i, get(1, a) + 1), L, (0, 0))
     div_sum_count = lambda tup: get(0, tup)/get(1, tup)
-    mean = lambda L: compose(div_sum_count,sum_count)(L)
+    mean = compose(div_sum_count,sum_count)
     scores = valmap(map(int), scores)
     scores = valmap(mean, scores)
+    scores
+
+
+Did you notice the ``pipe`` pattern in the two lines that start with ``scores
+=``?  Let's clean up this part of the code with ``pipe``.
+
+.. ipython:: python
+
+    from toolz import pipe
+    from toolz.curried import valmap
+    scores = pipe(scores, valmap(map(int)), valmap(mean))
+    scores
+
+As we have seen with a sequence of maps, we can compose a sequence of value maps
+into one value map with composed inner functions.  Keep in mind that ``compose``
+applies functions from right to left, so we will need to reverse the order.
+
+.. ipython:: python
+
+    from toolz import pipe
+    from toolz.curried import valmap
+    scores = pipe(scores, valmap(compose(mean, map(int))))
     scores
 
 The advantage of lazy sequence evaluation
