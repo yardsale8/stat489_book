@@ -446,7 +446,7 @@ and see the changes to the list elements.</p>
 <p class="cl_caption"><span class="cl_caption_text"> (item_assign)</span> </p>
 </div>
 <script type="text/javascript">
-var item_assign_trace = {"code": "fruit = [\"banana\", \"apple\", \"cherry\"]\n\nfruit[0] = \"pear\"\nfruit[-1] = \"orange\"", "trace": [{"line": 1, "stdout": "", "func_name": "<module>", "stack_to_render": [], "globals": {}, "event": "step_line", "heap": {}, "ordered_globals": []}, {"line": 3, "stdout": "", "func_name": "<module>", "stack_to_render": [], "globals": {"fruit": ["REF", 1]}, "event": "step_line", "heap": {"1": ["LIST", "banana", "apple", "cherry"]}, "ordered_globals": ["fruit"]}, {"line": 4, "stdout": "", "func_name": "<module>", "stack_to_render": [], "globals": {"fruit": ["REF", 1]}, "event": "step_line", "heap": {"1": ["LIST", "pear", "apple", "cherry"]}, "ordered_globals": ["fruit"]}, {"line": 4, "stdout": "", "func_name": "<module>", "stack_to_render": [], "globals": {"fruit": ["REF", 1]}, "event": "return", "heap": {"1": ["LIST", "pear", "apple", "orange"]}, "ordered_globals": ["fruit"]}]};
+var item_assign_trace = {"code": "fruit = [\"banana\", \"apple\", \"cherry\"]\n\nfruit[0] = \"pear\"\nfruit[-1] = \"orange\"", "trace": [{"globals": {}, "heap": {}, "event": "step_line", "line": 1, "ordered_globals": [], "stack_to_render": [], "stdout": "", "func_name": "<module>"}, {"globals": {"fruit": ["REF", 1]}, "heap": {"1": ["LIST", "banana", "apple", "cherry"]}, "event": "step_line", "line": 3, "ordered_globals": ["fruit"], "stack_to_render": [], "stdout": "", "func_name": "<module>"}, {"globals": {"fruit": ["REF", 1]}, "heap": {"1": ["LIST", "pear", "apple", "cherry"]}, "event": "step_line", "line": 4, "ordered_globals": ["fruit"], "stack_to_render": [], "stdout": "", "func_name": "<module>"}, {"globals": {"fruit": ["REF", 1]}, "heap": {"1": ["LIST", "pear", "apple", "orange"]}, "event": "return", "line": 4, "ordered_globals": ["fruit"], "stack_to_render": [], "stdout": "", "func_name": "<module>"}]};
 var item_assign_vis;
 
 $(document).ready(function() {
@@ -624,15 +624,15 @@ slicing <code class="docutils literal"><span class="pre">pvectors</span></code>.
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">15</span><span class="p">))</span>
 
 <span class="gp">In [39]: </span><span class="o">%</span><span class="k">timeit</span> L[:]
-<span class="go">The slowest run took 6.42 times longer than the fastest. This could mean that an intermediate result is being cached.</span>
-<span class="go">10000000 loops, best of 3: 179 ns per loop</span>
+<span class="go">The slowest run took 7.89 times longer than the fastest. This could mean that an intermediate result is being cached.</span>
+<span class="go">10000000 loops, best of 3: 155 ns per loop</span>
 </pre></div>
 </div>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">V</span> <span class="o">=</span> <span class="n">pvector</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">15</span><span class="p">))</span>
 
 <span class="gp">In [41]: </span><span class="o">%</span><span class="k">timeit</span> V[:]
-<span class="go">The slowest run took 15.12 times longer than the fastest. This could mean that an intermediate result is being cached.</span>
-<span class="go">10000000 loops, best of 3: 85.2 ns per loop</span>
+<span class="go">The slowest run took 14.41 times longer than the fastest. This could mean that an intermediate result is being cached.</span>
+<span class="go">10000000 loops, best of 3: 78.7 ns per loop</span>
 </pre></div>
 </div>
 <p>Other efficient features of the <code class="docutils literal"><span class="pre">pvector</span></code> include using <code class="docutils literal"><span class="pre">append</span></code> to add to

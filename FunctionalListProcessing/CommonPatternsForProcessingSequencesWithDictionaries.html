@@ -273,7 +273,8 @@
 <li><a class="reference internal" href="#the-imperative-approach-to-counting-frequences">7.6.3. The Imperative Approach to Counting Frequences</a></li>
 <li><a class="reference internal" href="#counting-frequencies-using-a-key-function">7.6.4. Counting Frequencies Using a Key Function</a></li>
 <li><a class="reference internal" href="#grouping-values-with-groupby">7.6.5. Grouping values with <code class="docutils literal"><span class="pre">groupby</span></code></a></li>
-<li><a class="reference internal" href="#the-recursive-approach-to-counting-frequencies-optional">7.6.6. The Recursive Approach to Counting Frequencies (Optional)</a></li>
+<li><a class="reference internal" href="#grouping-and-reducing-with-reduceby">7.6.6. Grouping and Reducing with <code class="docutils literal"><span class="pre">reduceby</span></code></a></li>
+<li><a class="reference internal" href="#the-recursive-approach-to-counting-frequencies-optional">7.6.7. The Recursive Approach to Counting Frequencies (Optional)</a></li>
 </ul>
 </li>
 </ul>
@@ -489,7 +490,7 @@ inner list values.  For illustration, we will work on <code class="docutils lite
 <span class="gp">In [21]: </span><span class="n">sue_scores</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">sue_scores</span><span class="p">)</span>
 
 <span class="gp">In [22]: </span><span class="n">sue_scores</span>
-<span class="gh">Out[22]: </span><span class="go">&lt;map at 0x10dc48f28&gt;</span>
+<span class="gh">Out[22]: </span><span class="go">&lt;map at 0x1114257f0&gt;</span>
 </pre></div>
 </div>
 <p>Remember that <code class="docutils literal"><span class="pre">map(int)</span></code> is the curried partial function that is equivalent to
@@ -1246,54 +1247,40 @@ anticipation of a more general pattern, we will pass the length function to
 function means that we will also make this a parameter in the reduce helper function
 so that it can be passed along from call to call.  This is accomplished using a
 curried function.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [88]: </span><span class="k">def</span> <span class="nf">make_update_dict</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="n">update_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">length</span><span class="p">,</span> <span class="n">counts</span><span class="p">:</span> <span class="n">get</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wd</span><span class="p">:</span> <span class="n">assoc</span><span class="p">(</span><span class="n">cnts</span><span class="p">,</span> <span class="n">key</span><span class="p">(</span><span class="n">wd</span><span class="p">),</span> <span class="n">update_count</span><span class="p">(</span><span class="n">key</span><span class="p">(</span><span class="n">wd</span><span class="p">),</span> <span class="n">cnts</span><span class="p">))</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [88]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">curry</span>
 
-<span class="gp">In [89]: </span><span class="n">countby</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">make_update_dict</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">lst</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">In [89]: </span><span class="n">update_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">length</span><span class="p">,</span> <span class="n">counts</span><span class="p">:</span> <span class="n">get</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="gp">In [90]: </span><span class="n">countby</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-90-baaff18a9647&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">countby</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+<span class="gp">In [90]: </span><span class="n">update_dict</span> <span class="o">=</span> <span class="n">curry</span><span class="p">(</span><span class="k">lambda</span> <span class="n">key</span><span class="p">,</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wd</span><span class="p">:</span> <span class="n">assoc</span><span class="p">(</span><span class="n">cnts</span><span class="p">,</span> <span class="n">key</span><span class="p">(</span><span class="n">wd</span><span class="p">),</span> <span class="n">update_count</span><span class="p">(</span><span class="n">key</span><span class="p">(</span><span class="n">wd</span><span class="p">),</span> <span class="n">cnts</span><span class="p">)))</span>
 
-<span class="nn">&lt;ipython-input-89-01c85b80c529&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(key, lst)</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">countby</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">make_update_dict</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">lst</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">In [91]: </span><span class="n">countby</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">update_dict</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">lst</span><span class="p">,</span> <span class="p">{})</span>
 
-<span class="nn">&lt;ipython-input-88-aacb57d7cf77&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(cnts, wd)</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">make_update_dict</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">update_count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">length</span><span class="p">,</span> <span class="n">counts</span><span class="p">:</span> <span class="n">get</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="k">return</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wd</span><span class="p">:</span> <span class="n">assoc</span><span class="p">(</span><span class="n">cnts</span><span class="p">,</span> <span class="n">key</span><span class="p">(</span><span class="n">wd</span><span class="p">),</span> <span class="n">update_count</span><span class="p">(</span><span class="n">key</span><span class="p">(</span><span class="n">wd</span><span class="p">),</span> <span class="n">cnts</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-
-<span class="nn">/Users/bn8210wy/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/dicttoolz.py</span> in <span class="ni">assoc</span><span class="nt">(d, key, value, factory)</span>
-<span class="g g-Whitespace">    </span><span class="mi">194</span>     <span class="n">d2</span> <span class="o">=</span> <span class="n">factory</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">195</span>     <span class="n">d2</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-<span class="ne">--&gt; </span><span class="mi">196</span>     <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">factory</span><span class="o">=</span><span class="n">factory</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">197</span> 
-<span class="g g-Whitespace">    </span><span class="mi">198</span> 
-
-<span class="nn">/Users/bn8210wy/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/dicttoolz.py</span> in <span class="ni">merge</span><span class="nt">(*dicts, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="n">rv</span> <span class="o">=</span> <span class="n">factory</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span>     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dicts</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">39</span>         <span class="n">rv</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="k">return</span> <span class="n">rv</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span> 
-
-<span class="ne">TypeError</span>: &#39;int&#39; object is not iterable
+<span class="gp">In [92]: </span><span class="n">countby</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+<span class="gh">Out[92]: </span><span class="go"></span>
+<span class="go">{1: 2,</span>
+<span class="go"> 2: 30,</span>
+<span class="go"> 3: 22,</span>
+<span class="go"> 4: 22,</span>
+<span class="go"> 5: 18,</span>
+<span class="go"> 6: 22,</span>
+<span class="go"> 7: 9,</span>
+<span class="go"> 8: 7,</span>
+<span class="go"> 9: 2,</span>
+<span class="go"> 10: 4,</span>
+<span class="go"> 11: 2,</span>
+<span class="go"> 12: 1,</span>
+<span class="go"> 14: 2}</span>
 </pre></div>
 </div>
 <p>Now that we understand the <code class="docutils literal"><span class="pre">countby</span></code> pattern, there is no reason to have to
 implement it again, and in fact, this function is also available in the
 <code class="docutils literal"><span class="pre">toolz</span></code> module.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [91]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">countby</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [93]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">countby</span>
 
-<span class="gp">In [92]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">zen_no_punc</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="gp">In [94]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">zen_no_punc</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
-<span class="gp">In [93]: </span><span class="n">countby</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
-<span class="gh">Out[93]: </span><span class="go"></span>
+<span class="gp">In [95]: </span><span class="n">countby</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+<span class="gh">Out[95]: </span><span class="go"></span>
 <span class="go">{1: 2,</span>
 <span class="go"> 2: 30,</span>
 <span class="go"> 3: 22,</span>
@@ -1312,12 +1299,12 @@ implement it again, and in fact, this function is also available in the
 <p>One final note about <code class="docutils literal"><span class="pre">countby</span></code>.  To see that <code class="docutils literal"><span class="pre">countby</span></code> is generalization of
 <code class="docutils literal"><span class="pre">frequencies</span></code>, we note that using the <code class="docutils literal"><span class="pre">identity</span></code> function with <code class="docutils literal"><span class="pre">countby</span></code>
 is equivalent to <code class="docutils literal"><span class="pre">frequencies</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [94]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">countby</span><span class="p">,</span> <span class="n">identity</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [96]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">countby</span><span class="p">,</span> <span class="n">identity</span>
 
-<span class="gp">In [95]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">zen_no_punc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="gp">In [97]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">zen_no_punc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
-<span class="gp">In [96]: </span><span class="n">countby</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
-<span class="gh">Out[96]: </span><span class="go"></span>
+<span class="gp">In [98]: </span><span class="n">countby</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+<span class="gh">Out[98]: </span><span class="go"></span>
 <span class="go">{&#39;a&#39;: 2,</span>
 <span class="go"> &#39;although&#39;: 3,</span>
 <span class="go"> &#39;ambiguity&#39;: 1,</span>
@@ -1418,13 +1405,13 @@ default value of a empty list.  These values (lists) are updated by appending
 the current value.  To keep the values immutable and the appends efficient, we
 will use a persistent vector in place of a list.
 In this example, we will keep <em>group</em> the hours <em>by</em> title.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [97]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">drop</span><span class="p">,</span> <span class="n">assoc</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [99]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">drop</span><span class="p">,</span> <span class="n">assoc</span>
 
-<span class="gp">In [98]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="gp">In [100]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
-<span class="gp">In [99]: </span><span class="kn">from</span> <span class="nn">pyrsistent</span> <span class="kn">import</span> <span class="n">pvector</span>
+<span class="gp">In [101]: </span><span class="kn">from</span> <span class="nn">pyrsistent</span> <span class="kn">import</span> <span class="n">pvector</span>
 
-<span class="gp">In [100]: </span><span class="n">hours</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;hours&#39;</span><span class="p">,</span> <span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">],</span>
+<span class="gp">In [102]: </span><span class="n">hours</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;hours&#39;</span><span class="p">,</span> <span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">],</span>
 <span class="gp">   .....: </span>        <span class="p">[</span><span class="s1">&#39;Ann&#39;</span><span class="p">,</span>   <span class="s1">&#39;42&#39;</span><span class="p">,</span>    <span class="s1">&#39;37.5&#39;</span><span class="p">,</span> <span class="s1">&#39;manager&#39;</span><span class="p">],</span>
 <span class="gp">   .....: </span>        <span class="p">[</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span>   <span class="s1">&#39;55&#39;</span><span class="p">,</span>    <span class="s1">&#39;7.5&#39;</span> <span class="p">,</span> <span class="s1">&#39;assembly&#39;</span><span class="p">],</span>
 <span class="gp">   .....: </span>        <span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;12&#39;</span><span class="p">,</span>    <span class="s1">&#39;225&#39;</span> <span class="p">,</span> <span class="s1">&#39;consultant&#39;</span><span class="p">],</span>
@@ -1437,17 +1424,17 @@ In this example, we will keep <em>group</em> the hours <em>by</em> title.</p>
 <span class="gp">   .....: </span>
 </pre></div>
 </div>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [101]: </span><span class="n">get_group_by_key</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">get</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">pvector</span><span class="p">([]))</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [103]: </span><span class="n">get_group_by_key</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">get</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">pvector</span><span class="p">([]))</span>
 
-<span class="gp">In [102]: </span><span class="n">get_key</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">In [104]: </span><span class="n">get_key</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
-<span class="gp">In [103]: </span><span class="n">get_hours</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [105]: </span><span class="n">get_hours</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [104]: </span><span class="n">rest</span> <span class="o">=</span> <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [106]: </span><span class="n">rest</span> <span class="o">=</span> <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [105]: </span><span class="n">groups</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">In [107]: </span><span class="n">groups</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="gp">In [106]: </span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rest</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>
+<span class="gp">In [108]: </span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rest</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>
 <span class="gp">   .....: </span>    <span class="n">key</span> <span class="o">=</span> <span class="n">get_key</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 <span class="gp">   .....: </span>    <span class="n">current_group</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">pvector</span><span class="p">([]))</span>
 <span class="gp">   .....: </span>    <span class="n">current_hours</span> <span class="o">=</span> <span class="n">get_hours</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
@@ -1455,8 +1442,8 @@ In this example, we will keep <em>group</em> the hours <em>by</em> title.</p>
 <span class="gp">   .....: </span>    <span class="n">groups</span> <span class="o">=</span> <span class="n">assoc</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">new_group</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 
-<span class="gp">In [107]: </span><span class="n">groups</span>
-<span class="gh">Out[107]: </span><span class="go"></span>
+<span class="gp">In [109]: </span><span class="n">groups</span>
+<span class="gh">Out[109]: </span><span class="go"></span>
 <span class="go">{&#39;assembly&#39;: pvector([&#39;55&#39;, &#39;51&#39;, &#39;45&#39;]),</span>
 <span class="go"> &#39;consultant&#39;: pvector([&#39;12&#39;, &#39;14&#39;, &#39;17&#39;]),</span>
 <span class="go"> &#39;manager&#39;: pvector([&#39;42&#39;, &#39;44&#39;, &#39;52&#39;])}</span>
@@ -1464,7 +1451,7 @@ In this example, we will keep <em>group</em> the hours <em>by</em> title.</p>
 </div>
 <p>We recognize this as the accumulator pattern, but to make the update a little
 more clear, we will refactor the loop as follows.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [108]: </span><span class="k">def</span> <span class="nf">update_groups</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [110]: </span><span class="k">def</span> <span class="nf">update_groups</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
 <span class="gp">   .....: </span>    <span class="sd">&#39;&#39;&#39; helper functions to update the groups&#39;&#39;&#39;</span>
 <span class="gp">   .....: </span>    <span class="n">get_key</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">   .....: </span>    <span class="n">get_hours</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -1477,24 +1464,24 @@ more clear, we will refactor the loop as follows.</p>
 </pre></div>
 </div>
 <p>Then the loop for updating the groups becomes</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [109]: </span><span class="n">groups</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [111]: </span><span class="n">groups</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="gp">In [110]: </span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">hours</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+<span class="gp">In [112]: </span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">hours</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
 <span class="gp">   .....: </span>    <span class="n">groups</span> <span class="o">=</span> <span class="n">update_groups</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 
-<span class="gp">In [111]: </span><span class="n">groups</span>
-<span class="gh">Out[111]: </span><span class="go"></span>
+<span class="gp">In [113]: </span><span class="n">groups</span>
+<span class="gh">Out[113]: </span><span class="go"></span>
 <span class="go">{&#39;assembly&#39;: pvector([&#39;55&#39;, &#39;51&#39;, &#39;45&#39;]),</span>
 <span class="go"> &#39;consultant&#39;: pvector([&#39;12&#39;, &#39;14&#39;, &#39;17&#39;]),</span>
 <span class="go"> &#39;manager&#39;: pvector([&#39;42&#39;, &#39;44&#39;, &#39;52&#39;])}</span>
 </pre></div>
 </div>
 <p>and the relationship to <code class="docutils literal"><span class="pre">reduce</span></code> becomes clear.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [112]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [114]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
 
-<span class="gp">In [113]: </span><span class="nb">reduce</span><span class="p">(</span><span class="n">update_groups</span><span class="p">,</span> <span class="n">rest</span><span class="p">(</span><span class="n">hours</span><span class="p">),</span> <span class="p">{})</span>
-<span class="gh">Out[113]: </span><span class="go"></span>
+<span class="gp">In [115]: </span><span class="nb">reduce</span><span class="p">(</span><span class="n">update_groups</span><span class="p">,</span> <span class="n">rest</span><span class="p">(</span><span class="n">hours</span><span class="p">),</span> <span class="p">{})</span>
+<span class="gh">Out[115]: </span><span class="go"></span>
 <span class="go">{&#39;assembly&#39;: pvector([&#39;55&#39;, &#39;51&#39;, &#39;45&#39;]),</span>
 <span class="go"> &#39;consultant&#39;: pvector([&#39;12&#39;, &#39;14&#39;, &#39;17&#39;]),</span>
 <span class="go"> &#39;manager&#39;: pvector([&#39;42&#39;, &#39;44&#39;, &#39;52&#39;])}</span>
@@ -1505,9 +1492,9 @@ like <code class="docutils literal"><span class="pre">get_key</span></code> in t
 <code class="docutils literal"><span class="pre">groupby</span></code>, as we are <em>grouping</em> the elements of the sequence <em>by</em> some key.
 Here is the implementation based on reduce.  Also, this instance will add the
 whole element of the sequence to the group.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [114]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [116]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
 
-<span class="gp">In [115]: </span><span class="k">def</span> <span class="nf">groupby</span><span class="p">(</span><span class="n">key_func</span><span class="p">,</span> <span class="n">seq</span><span class="p">):</span>
+<span class="gp">In [117]: </span><span class="k">def</span> <span class="nf">groupby</span><span class="p">(</span><span class="n">key_func</span><span class="p">,</span> <span class="n">seq</span><span class="p">):</span>
 <span class="gp">   .....: </span>    <span class="sd">&#39;&#39;&#39; Group all items in seq by the value of the key_function&#39;&#39;&#39;</span>
 <span class="gp">   .....: </span>    <span class="k">def</span> <span class="nf">update_groups</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
 <span class="gp">   .....: </span>        <span class="sd">&#39;&#39;&#39; helper functions to update the groups&#39;&#39;&#39;</span>
@@ -1518,15 +1505,15 @@ whole element of the sequence to the group.</p>
 <span class="gp">   .....: </span>    <span class="k">return</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">update_groups</span><span class="p">,</span> <span class="n">rest</span><span class="p">(</span><span class="n">hours</span><span class="p">),</span> <span class="p">{})</span>
 <span class="gp">   .....: </span>
 
-<span class="gp">In [116]: </span><span class="n">groupby</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">hours</span><span class="p">)</span>
-<span class="gh">Out[116]: </span><span class="go">{&#39;17&#39;: pvector([[&#39;Ann&#39;, &#39;42&#39;, &#39;37.5&#39;, &#39;manager&#39;], [&#39;Bob&#39;, &#39;55&#39;, &#39;7.5&#39;, &#39;assembly&#39;], [&#39;Alice&#39;, &#39;12&#39;, &#39;225&#39;, &#39;consultant&#39;], [&#39;Ann&#39;, &#39;44&#39;, &#39;37.5&#39;, &#39;manager&#39;], [&#39;Bob&#39;, &#39;51&#39;, &#39;7.5&#39;, &#39;assembly&#39;], [&#39;Alice&#39;, &#39;14&#39;, &#39;225&#39;, &#39;consultant&#39;], [&#39;Ann&#39;, &#39;52&#39;, &#39;37.5&#39;, &#39;manager&#39;], [&#39;Bob&#39;, &#39;45&#39;, &#39;8.5&#39;, &#39;assembly&#39;], [&#39;Alice&#39;, &#39;17&#39;, &#39;225&#39;, &#39;consultant&#39;]])}</span>
+<span class="gp">In [118]: </span><span class="n">groupby</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">hours</span><span class="p">)</span>
+<span class="gh">Out[118]: </span><span class="go">{&#39;17&#39;: pvector([[&#39;Ann&#39;, &#39;42&#39;, &#39;37.5&#39;, &#39;manager&#39;], [&#39;Bob&#39;, &#39;55&#39;, &#39;7.5&#39;, &#39;assembly&#39;], [&#39;Alice&#39;, &#39;12&#39;, &#39;225&#39;, &#39;consultant&#39;], [&#39;Ann&#39;, &#39;44&#39;, &#39;37.5&#39;, &#39;manager&#39;], [&#39;Bob&#39;, &#39;51&#39;, &#39;7.5&#39;, &#39;assembly&#39;], [&#39;Alice&#39;, &#39;14&#39;, &#39;225&#39;, &#39;consultant&#39;], [&#39;Ann&#39;, &#39;52&#39;, &#39;37.5&#39;, &#39;manager&#39;], [&#39;Bob&#39;, &#39;45&#39;, &#39;8.5&#39;, &#39;assembly&#39;], [&#39;Alice&#39;, &#39;17&#39;, &#39;225&#39;, &#39;consultant&#39;]])}</span>
 </pre></div>
 </div>
 <p>As you might expect, <code class="docutils literal"><span class="pre">groupby</span></code> is provided by the <code class="docutils literal"><span class="pre">toolz</span></code> library.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [117]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">groupby</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [119]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">groupby</span>
 
-<span class="gp">In [118]: </span><span class="n">groupby</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">hours</span><span class="p">)</span>
-<span class="gh">Out[118]: </span><span class="go"></span>
+<span class="gp">In [120]: </span><span class="n">groupby</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">hours</span><span class="p">)</span>
+<span class="gh">Out[120]: </span><span class="go"></span>
 <span class="go">{&#39;assembly&#39;: [[&#39;Bob&#39;, &#39;55&#39;, &#39;7.5&#39;, &#39;assembly&#39;],</span>
 <span class="go">  [&#39;Bob&#39;, &#39;51&#39;, &#39;7.5&#39;, &#39;assembly&#39;],</span>
 <span class="go">  [&#39;Bob&#39;, &#39;45&#39;, &#39;8.5&#39;, &#39;assembly&#39;]],</span>
@@ -1543,36 +1530,69 @@ whole element of the sequence to the group.</p>
 values using <code class="docutils literal"><span class="pre">valmap</span></code> and <code class="docutils literal"><span class="pre">reduce</span></code>.  For example, let&#8217;s compute the total
 pay (sum of hours*rate) for each group.  We start by creating a function for
 turning a value into the pay.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [119]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">pipe</span><span class="p">,</span> <span class="n">valmap</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [121]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">pipe</span><span class="p">,</span> <span class="n">valmap</span>
 
-<span class="gp">In [120]: </span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">mul</span>
+<span class="gp">In [122]: </span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">mul</span>
 
-<span class="gp">In [121]: </span><span class="n">groups</span> <span class="o">=</span> <span class="n">groupby</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">hours</span><span class="p">)</span>
+<span class="gp">In [123]: </span><span class="n">groups</span> <span class="o">=</span> <span class="n">groupby</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">hours</span><span class="p">)</span>
 
-<span class="gp">In [122]: </span><span class="n">get_pay</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">mul</span><span class="p">(</span><span class="o">*</span><span class="n">pipe</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">get</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">)))</span>
+<span class="gp">In [124]: </span><span class="n">get_pay</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">mul</span><span class="p">(</span><span class="o">*</span><span class="n">pipe</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">get</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">)))</span> <span class="c1">#*</span>
 
-<span class="gp">In [123]: </span><span class="n">get_pay</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">hours</span><span class="p">))</span>
-<span class="gh">Out[123]: </span><span class="go">1575.0</span>
+<span class="gp">In [125]: </span><span class="n">get_pay</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">hours</span><span class="p">))</span>
+<span class="gh">Out[125]: </span><span class="go">1575.0</span>
 </pre></div>
 </div>
 <p>We could do this with <code class="docutils literal"><span class="pre">reduce</span></code>, but in this case we can use a map to pull out
 the pay, turn these strings into integers, and finally use <code class="docutils literal"><span class="pre">sum</span></code>.  In the
 process, we will practice our use of higher-order functions.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [124]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">compose</span><span class="p">,</span> <span class="n">valmap</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [126]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">compose</span><span class="p">,</span> <span class="n">valmap</span>
 
-<span class="gp">In [125]: </span><span class="n">groups</span> <span class="o">=</span> <span class="n">groupby</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">rest</span><span class="p">(</span><span class="n">hours</span><span class="p">))</span>
+<span class="gp">In [127]: </span><span class="n">get_title</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
-<span class="gp">In [126]: </span><span class="n">pay_by_title</span> <span class="o">=</span> <span class="n">valmap</span><span class="p">(</span><span class="n">compose</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="n">get_pay</span><span class="p">)),</span> <span class="n">groups</span><span class="p">)</span>
+<span class="gp">In [128]: </span><span class="n">groups</span> <span class="o">=</span> <span class="n">groupby</span><span class="p">(</span><span class="n">get_title</span><span class="p">,</span> <span class="n">rest</span><span class="p">(</span><span class="n">hours</span><span class="p">))</span>
 
-<span class="gp">In [127]: </span><span class="n">pay_by_title</span>
-<span class="gh">Out[127]: </span><span class="go">{&#39;assembly&#39;: 1177.5, &#39;consultant&#39;: 9675.0, &#39;manager&#39;: 5175.0}</span>
+<span class="gp">In [129]: </span><span class="n">total_pay</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="n">get_pay</span><span class="p">))</span>
+
+<span class="gp">In [130]: </span><span class="n">pay_by_title</span> <span class="o">=</span> <span class="n">valmap</span><span class="p">(</span><span class="n">total_pay</span><span class="p">,</span> <span class="n">groups</span><span class="p">)</span>
+
+<span class="gp">In [131]: </span><span class="n">pay_by_title</span>
+<span class="gh">Out[131]: </span><span class="go">{&#39;assembly&#39;: 1177.5, &#39;consultant&#39;: 9675.0, &#39;manager&#39;: 5175.0}</span>
 </pre></div>
 </div>
 <p>We will provide an abstraction called <code class="docutils literal"><span class="pre">reduceby</span></code> that combines <code class="docutils literal"><span class="pre">groupby</span></code> and
 <code class="docutils literal"><span class="pre">reduce</span></code> in the upcoming section on lazy evaluation.</p>
 </div>
+<div class="section" id="grouping-and-reducing-with-reduceby">
+<h2>7.6.6. Grouping and Reducing with <code class="docutils literal"><span class="pre">reduceby</span></code><a class="headerlink" href="#grouping-and-reducing-with-reduceby" title="Permalink to this headline">¶</a></h2>
+<p>The last example illustrated a common pattern.  First, we grouped the data using
+<code class="docutils literal"><span class="pre">groupby</span></code> with the key function <code class="docutils literal"><span class="pre">get(3)</span></code>, then we reduced each value using
+<code class="docutils literal"><span class="pre">valmap</span></code> with the reduction given by <code class="docutils literal"><span class="pre">total_pay</span></code>.</p>
+<p>This common pattern can has been abstracted in the <code class="docutils literal"><span class="pre">toolz</span></code> library with
+<code class="docutils literal"><span class="pre">reduceby</span></code>.  <code class="docutils literal"><span class="pre">reduceby</span></code> takes three arguments, a key_function, a reduction
+function, and a sequence; and returns the dictionary with keys determined by the
+key function and values determined by the reduction function.  Like <code class="docutils literal"><span class="pre">reduce</span></code>,
+there is an optional parameter for the initial value of the accumulator.</p>
+<p>For example, we can solve the last problem in one step using <code class="docutils literal"><span class="pre">reduceby</span></code> with
+two helper functions.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [132]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">reduceby</span>
+
+<span class="gp">In [133]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">compose</span><span class="p">,</span> <span class="n">valmap</span>
+
+<span class="gp">In [134]: </span><span class="n">get_title</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="gp">In [135]: </span><span class="n">update_total_pay</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">get_pay</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="gp">In [136]: </span><span class="n">pay_by_title</span> <span class="o">=</span> <span class="n">reduceby</span><span class="p">(</span><span class="n">get_title</span><span class="p">,</span> <span class="n">update_total_pay</span><span class="p">,</span> <span class="n">rest</span><span class="p">(</span><span class="n">hours</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="gp">In [137]: </span><span class="n">pay_by_title</span>
+<span class="gh">Out[137]: </span><span class="go">{&#39;assembly&#39;: 1177.5, &#39;consultant&#39;: 9675.0, &#39;manager&#39;: 5175.0}</span>
+</pre></div>
+</div>
+<p>It should be noted that <code class="docutils literal"><span class="pre">reduceby</span></code> works with lazy streams of data, a concept
+that will be explored in more detail in an upcoming section.</p>
+</div>
 <div class="section" id="the-recursive-approach-to-counting-frequencies-optional">
-<h2>7.6.6. The Recursive Approach to Counting Frequencies (Optional)<a class="headerlink" href="#the-recursive-approach-to-counting-frequencies-optional" title="Permalink to this headline">¶</a></h2>
+<h2>7.6.7. The Recursive Approach to Counting Frequencies (Optional)<a class="headerlink" href="#the-recursive-approach-to-counting-frequencies-optional" title="Permalink to this headline">¶</a></h2>
 <p>Recursion is one of the building blocks of functional programming.  A
 <strong>recursive</strong> function is a function that calls itself and <strong>recursion</strong> refers
 to using recursive functions to solve a problem.</p>
@@ -1582,17 +1602,17 @@ recursive context, a list is either <code class="docutils literal"><span class="
 <span class="pre">rest(list)</span></code>, where <code class="docutils literal"><span class="pre">first(list)</span></code> is the next entry in the list and
 <code class="docutils literal"><span class="pre">rest(list)</span></code> is the remainder of the list.  We could define <code class="docutils literal"><span class="pre">first</span></code> and
 <code class="docutils literal"><span class="pre">rest</span></code> on Python lists as follows.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [128]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [138]: </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 
-<span class="gp">In [129]: </span><span class="n">first</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">In [139]: </span><span class="n">first</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="gp">In [130]: </span><span class="n">rest</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="gp">In [140]: </span><span class="n">rest</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
-<span class="gp">In [131]: </span><span class="n">first</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-<span class="gh">Out[131]: </span><span class="go">1</span>
+<span class="gp">In [141]: </span><span class="n">first</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="gh">Out[141]: </span><span class="go">1</span>
 
-<span class="gp">In [132]: </span><span class="n">rest</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-<span class="go">            Out[132]: [2, 3, 4]</span>
+<span class="gp">In [142]: </span><span class="n">rest</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="go">            Out[142]: [2, 3, 4]</span>
 </pre></div>
 </div>
 <p>As noted in a previous chapter, slicing all but the first element of a list is
@@ -1602,23 +1622,23 @@ operation to apply once for each item in a list (The overall complexity would be
 for a more efficient approach to processing list in this way.  A <code class="docutils literal"><span class="pre">plist</span></code> comes
 with methods for <code class="docutils literal"><span class="pre">first</span></code> and <code class="docutils literal"><span class="pre">rest</span></code>.  The time complexity for both the <code class="docutils literal"><span class="pre">first</span></code>
 and <code class="docutils literal"><span class="pre">rest</span></code> methods of a <code class="docutils literal"><span class="pre">Plist</span></code> is constant time, i.e. <span class="math">\(O(1)\)</span>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [133]: </span><span class="kn">from</span> <span class="nn">pyrsistent</span> <span class="kn">import</span> <span class="n">plist</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [143]: </span><span class="kn">from</span> <span class="nn">pyrsistent</span> <span class="kn">import</span> <span class="n">plist</span>
 
-<span class="gp">In [134]: </span><span class="n">L</span> <span class="o">=</span> <span class="n">plist</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="gp">In [144]: </span><span class="n">L</span> <span class="o">=</span> <span class="n">plist</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 
-<span class="gp">In [135]: </span><span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-<span class="gh">Out[135]: </span><span class="go">pyrsistent._plist.PList</span>
+<span class="gp">In [145]: </span><span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="gh">Out[145]: </span><span class="go">pyrsistent._plist.PList</span>
 
-<span class="gp">In [136]: </span><span class="n">L</span><span class="o">.</span><span class="n">first</span>
-<span class="go">                                  Out[136]: 1</span>
+<span class="gp">In [146]: </span><span class="n">L</span><span class="o">.</span><span class="n">first</span>
+<span class="go">                                  Out[146]: 1</span>
 
-<span class="gp">In [137]: </span><span class="n">L2</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">rest</span>
+<span class="gp">In [147]: </span><span class="n">L2</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">rest</span>
 
-<span class="gp">In [138]: </span><span class="n">L2</span>
-<span class="gh">Out[138]: </span><span class="go">plist([2, 3, 4])</span>
+<span class="gp">In [148]: </span><span class="n">L2</span>
+<span class="gh">Out[148]: </span><span class="go">plist([2, 3, 4])</span>
 
-<span class="gp">In [139]: </span><span class="n">L</span> <span class="ow">is</span> <span class="n">L2</span>
-<span class="go">                           Out[139]: False</span>
+<span class="gp">In [149]: </span><span class="n">L</span> <span class="ow">is</span> <span class="n">L2</span>
+<span class="go">                           Out[149]: False</span>
 </pre></div>
 </div>
 <p>Note that <code class="docutils literal"><span class="pre">L.rest</span></code> does not mutate <code class="docutils literal"><span class="pre">L</span></code>, but returns a reference to a new
@@ -1626,29 +1646,29 @@ and <code class="docutils literal"><span class="pre">rest</span></code> methods 
 <p>There are two more function that are useful when processing list in a recursive
 fashion.  First, we need a function to check if a list is empty, which will will
 call <code class="docutils literal"><span class="pre">is_empty</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [140]: </span><span class="n">is_empty</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [150]: </span><span class="n">is_empty</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">L</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 
-<span class="gp">In [141]: </span><span class="n">is_empty</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-<span class="gh">Out[141]: </span><span class="go">False</span>
+<span class="gp">In [151]: </span><span class="n">is_empty</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="gh">Out[151]: </span><span class="go">False</span>
 
-<span class="gp">In [142]: </span><span class="n">is_empty</span><span class="p">(</span><span class="n">plist</span><span class="p">([]))</span>
-<span class="go">                Out[142]: True</span>
+<span class="gp">In [152]: </span><span class="n">is_empty</span><span class="p">(</span><span class="n">plist</span><span class="p">([]))</span>
+<span class="go">                Out[152]: True</span>
 </pre></div>
 </div>
 <p>Second, we introduce a function called <code class="docutils literal"><span class="pre">cons</span></code> to add a new
 value to the beginning of a <code class="docutils literal"><span class="pre">Plist</span></code>.  Luckily, the <code class="docutils literal"><span class="pre">Plist</span></code> data structure
 comes with a <code class="docutils literal"><span class="pre">cons</span></code> method.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [143]: </span><span class="kn">from</span> <span class="nn">pyrsistent</span> <span class="kn">import</span> <span class="n">plist</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [153]: </span><span class="kn">from</span> <span class="nn">pyrsistent</span> <span class="kn">import</span> <span class="n">plist</span>
 
-<span class="gp">In [144]: </span><span class="n">L</span> <span class="o">=</span> <span class="n">plist</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="gp">In [154]: </span><span class="n">L</span> <span class="o">=</span> <span class="n">plist</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 
-<span class="gp">In [145]: </span><span class="n">L2</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">cons</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">In [155]: </span><span class="n">L2</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">cons</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="gp">In [146]: </span><span class="n">L2</span>
-<span class="gh">Out[146]: </span><span class="go">plist([0, 1, 2, 3, 4])</span>
+<span class="gp">In [156]: </span><span class="n">L2</span>
+<span class="gh">Out[156]: </span><span class="go">plist([0, 1, 2, 3, 4])</span>
 
-<span class="gp">In [147]: </span><span class="n">L</span> <span class="ow">is</span> <span class="n">L2</span>
-<span class="go">                                 Out[147]: False</span>
+<span class="gp">In [157]: </span><span class="n">L</span> <span class="ow">is</span> <span class="n">L2</span>
+<span class="go">                                 Out[157]: False</span>
 </pre></div>
 </div>
 <p>Let&#8217;s work on a recursive solution.  Before we write the recursive solution,
@@ -1663,82 +1683,46 @@ toward the base case of an empty list.  Proper application of the second law
 will assure that out recursive function will terminate.</p>
 </div>
 <p>Let&#8217;s step though processing our text to get a feel for how recursion will work.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [148]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">assoc</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [158]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">assoc</span>
 
-<span class="gp">In [149]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">plist</span><span class="p">(</span><span class="n">zen_no_punc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="gp">In [159]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">plist</span><span class="p">(</span><span class="n">zen_no_punc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 
-<span class="gp">In [150]: </span><span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">In [160]: </span><span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="gp">In [151]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-151-e3a426c3d599&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
+<span class="gp">In [161]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
-<span class="ne">TypeError</span>: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;
+<span class="gp">In [162]: </span><span class="n">counts</span>
+<span class="gh">Out[162]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
 
-<span class="gp">In [152]: </span><span class="n">counts</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Out[152]: {}</span>
+<span class="gp">In [163]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span>
 
-<span class="gp">In [153]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span>
+<span class="gp">In [164]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
-<span class="gp">In [154]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-154-e3a426c3d599&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
+<span class="gp">In [165]: </span><span class="n">counts</span>
+<span class="gh">Out[165]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
 
-<span class="ne">TypeError</span>: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;
+<span class="gp">In [166]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span>
 
-<span class="gp">In [155]: </span><span class="n">counts</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Out[155]: {}</span>
+<span class="gp">In [167]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
-<span class="gp">In [156]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span>
+<span class="gp">In [168]: </span><span class="n">counts</span>
+<span class="gh">Out[168]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
 
-<span class="gp">In [157]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-157-e3a426c3d599&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;
-
-<span class="gp">In [158]: </span><span class="n">counts</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Out[158]: {}</span>
-
-<span class="gp">In [159]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span>
+<span class="gp">In [169]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span>
 </pre></div>
 </div>
 <p>Let&#8217;s compose these expression using substitution, Specifically, we will embed
 the <code class="docutils literal"><span class="pre">word</span> <span class="pre">=</span> <span class="pre">word.rest</span></code> in the line involving <code class="docutils literal"><span class="pre">assoc</span></code>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [160]: </span><span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [170]: </span><span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="gp">In [161]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-161-e3a426c3d599&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
+<span class="gp">In [171]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
-<span class="ne">TypeError</span>: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;
+<span class="gp">In [172]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
-<span class="gp">In [162]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ---------------------------------------------------------------------------</span>
-<span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-162-25ee05094f78&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 counts = update_dict(words.rest.first, counts)</span>
+<span class="gp">In [173]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
-<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;</span>
-
-<span class="gp">In [163]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
-<span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-163-73c638f924ab&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 counts = update_dict(words.rest.rest.first, counts)</span>
-
-<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;</span>
-
-<span class="gp">In [164]: </span><span class="n">counts</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Out[164]: {}</span>
+<span class="gp">In [174]: </span><span class="n">counts</span>
+<span class="gh">Out[174]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
 </pre></div>
 </div>
 <p>A pattern emerges.  Each <code class="docutils literal"><span class="pre">assoc</span></code> operation is called the <code class="docutils literal"><span class="pre">rest</span></code> of the last
@@ -1747,149 +1731,50 @@ list.  This will continue until the list is empty.  If we tried to call
 for the first law of recursion: We should check <code class="docutils literal"><span class="pre">is_empty</span></code> to make sure the
 recursion terminates correctly.   Let&#8217;s add a conditional statement to the last
 example to be sure that we return counts once we have emptied the list.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [165]: </span><span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [175]: </span><span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="gp">In [166]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-166-237b159372b3&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
+<span class="gp">In [176]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
-<span class="ne">TypeError</span>: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;
+<span class="gp">In [177]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
-<span class="gp">In [167]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ---------------------------------------------------------------------------</span>
-<span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-167-bd1b17c88144&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 counts = counts if is_empty(words.rest) else update_dict(words.rest.first, counts)</span>
+<span class="gp">In [178]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
-<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;</span>
-
-<span class="gp">In [168]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ---------------------------------------------------------------------------</span>
-<span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-168-e8640766c2a1&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 counts = counts if is_empty(words.rest.rest) else update_dict(words.rest.rest.first, counts)</span>
-
-<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;</span>
-
-<span class="gp">In [169]: </span><span class="n">counts</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Out[169]: {}</span>
+<span class="gp">In [179]: </span><span class="n">counts</span>
+<span class="gh">Out[179]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
 </pre></div>
 </div>
 <p>These expressions are getting a little complicated and very repetitive.  Let&#8217;s
 package the core logic in a lambda expression to clean things up.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [170]: </span><span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [180]: </span><span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="gp">In [171]: </span><span class="n">next_cnts</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wds</span><span class="p">:</span> <span class="n">cnts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">wds</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">cnts</span><span class="p">)</span>
+<span class="gp">In [181]: </span><span class="n">next_cnts</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wds</span><span class="p">:</span> <span class="n">cnts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">wds</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">cnts</span><span class="p">)</span>
 
-<span class="gp">In [172]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-172-cfbe0b566c32&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+<span class="gp">In [182]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
 
-<span class="nn">&lt;ipython-input-171-a40489caf3a2&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(cnts, wds)</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">next_cnts</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wds</span><span class="p">:</span> <span class="n">cnts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">wds</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">cnts</span><span class="p">)</span>
+<span class="gp">In [183]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
 
-<span class="ne">TypeError</span>: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;
-
-<span class="gp">In [173]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ---------------------------------------------------------------------------</span>
-<span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-173-fb4dc9bd911b&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 counts = next_cnts(counts, words.rest)</span>
-
-<span class="go">&lt;ipython-input-171-a40489caf3a2&gt; in &lt;lambda&gt;(cnts, wds)</span>
-<span class="go">----&gt; 1 next_cnts = lambda cnts, wds: cnts if is_empty(wds) else update_dict(wds.first, cnts)</span>
-
-<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;</span>
-
-<span class="gp">In [174]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ---------------------------------------------------------------------------</span>
-<span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-174-272ac93a8a1e&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 counts = next_cnts(counts, words.rest.rest)</span>
-
-<span class="go">&lt;ipython-input-171-a40489caf3a2&gt; in &lt;lambda&gt;(cnts, wds)</span>
-<span class="go">----&gt; 1 next_cnts = lambda cnts, wds: cnts if is_empty(wds) else update_dict(wds.first, cnts)</span>
-
-<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;</span>
+<span class="gp">In [184]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We are almost there!  Again we will compose the expressions, this time using
 substitution on <code class="docutils literal"><span class="pre">count</span></code>.  To make this clear, we will work through each
 substitution one by one.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [175]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">({},</span> <span class="n">words</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-175-f06efe03a2cf&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">({},</span> <span class="n">words</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [185]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">({},</span> <span class="n">words</span><span class="p">)</span>
 
-<span class="nn">&lt;ipython-input-171-a40489caf3a2&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(cnts, wds)</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">next_cnts</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wds</span><span class="p">:</span> <span class="n">cnts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">wds</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">cnts</span><span class="p">)</span>
+<span class="gp">In [186]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
 
-<span class="ne">TypeError</span>: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;
-
-<span class="gp">In [176]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ---------------------------------------------------------------------------</span>
-<span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-176-fb4dc9bd911b&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 counts = next_cnts(counts, words.rest)</span>
-
-<span class="go">&lt;ipython-input-171-a40489caf3a2&gt; in &lt;lambda&gt;(cnts, wds)</span>
-<span class="go">----&gt; 1 next_cnts = lambda cnts, wds: cnts if is_empty(wds) else update_dict(wds.first, cnts)</span>
-
-<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;</span>
-
-<span class="gp">In [177]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ---------------------------------------------------------------------------</span>
-<span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-177-272ac93a8a1e&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 counts = next_cnts(counts, words.rest.rest)</span>
-
-<span class="go">&lt;ipython-input-171-a40489caf3a2&gt; in &lt;lambda&gt;(cnts, wds)</span>
-<span class="go">----&gt; 1 next_cnts = lambda cnts, wds: cnts if is_empty(wds) else update_dict(wds.first, cnts)</span>
-
-<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;</span>
+<span class="gp">In [187]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [178]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">({},</span> <span class="n">words</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-178-9e468367d5e6&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">({},</span> <span class="n">words</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [188]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">({},</span> <span class="n">words</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
 
-<span class="nn">&lt;ipython-input-171-a40489caf3a2&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(cnts, wds)</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">next_cnts</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wds</span><span class="p">:</span> <span class="n">cnts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">wds</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">cnts</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;
-
-<span class="gp">In [179]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ---------------------------------------------------------------------------</span>
-<span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-179-272ac93a8a1e&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 counts = next_cnts(counts, words.rest.rest)</span>
-
-<span class="go">&lt;ipython-input-171-a40489caf3a2&gt; in &lt;lambda&gt;(cnts, wds)</span>
-<span class="go">----&gt; 1 next_cnts = lambda cnts, wds: cnts if is_empty(wds) else update_dict(wds.first, cnts)</span>
-
-<span class="go">TypeError: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;</span>
+<span class="gp">In [189]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [180]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">({},</span> <span class="n">words</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-180-391f81f57752&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">({},</span> <span class="n">words</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [190]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">({},</span> <span class="n">words</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
 
-<span class="nn">&lt;ipython-input-171-a40489caf3a2&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(cnts, wds)</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">next_cnts</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wds</span><span class="p">:</span> <span class="n">cnts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">wds</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">cnts</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;
-
-<span class="gp">In [181]: </span><span class="n">counts</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Out[181]: {}</span>
+<span class="gp">In [191]: </span><span class="n">counts</span>
+<span class="gh">Out[191]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
 </pre></div>
 </div>
 <p>So what we want to do is repeatedly call <code class="docutils literal"><span class="pre">next_cnts</span></code> on the output of the
@@ -1903,20 +1788,12 @@ calling this function over and over until completion.  Note that each call to
 <code class="docutils literal"><span class="pre">count_words</span></code> needs the updated dictionary (using word.first which can now be
 discarded) and the rest of the words.  Also recall that we start the process
 with an empty dictionary.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [182]: </span><span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [192]: </span><span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="gp">In [183]: </span><span class="n">count_words</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wds</span><span class="p">:</span> <span class="n">cnts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span> <span class="k">else</span> <span class="n">count_words</span><span class="p">(</span><span class="n">update_dict</span><span class="p">(</span><span class="n">wds</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">cnts</span><span class="p">),</span> <span class="n">wds</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
+<span class="gp">In [193]: </span><span class="n">count_words</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wds</span><span class="p">:</span> <span class="n">cnts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span> <span class="k">else</span> <span class="n">count_words</span><span class="p">(</span><span class="n">update_dict</span><span class="p">(</span><span class="n">wds</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">cnts</span><span class="p">),</span> <span class="n">wds</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
 
-<span class="gp">In [184]: </span><span class="n">count_words</span><span class="p">({},</span> <span class="n">words</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-184-f2782239c01f&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">count_words</span><span class="p">({},</span> <span class="n">words</span><span class="p">)</span>
-
-<span class="nn">&lt;ipython-input-183-1ac22e32980f&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(cnts, wds)</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">count_words</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wds</span><span class="p">:</span> <span class="n">cnts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span> <span class="k">else</span> <span class="n">count_words</span><span class="p">(</span><span class="n">update_dict</span><span class="p">(</span><span class="n">wds</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">cnts</span><span class="p">),</span> <span class="n">wds</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: &lt;lambda&gt;() missing 1 required positional argument: &#39;cnts&#39;
+<span class="gp">In [194]: </span><span class="n">count_words</span><span class="p">({},</span> <span class="n">words</span><span class="p">)</span>
+<span class="gh">Out[194]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
 </pre></div>
 </div>
 <p>This function illustrates the pattern for recursion with an accumulator, which
