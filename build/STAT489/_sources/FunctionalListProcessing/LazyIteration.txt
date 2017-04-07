@@ -18,8 +18,46 @@ including ``range``, ``map`` and ``filter``.
     map(lambda x: x**2, range(5))
     filter(lambda x: x % 2 == 1, range(20))
 
-Each of these object will hold off evaluation as long as possible.  In this
-section, we will show you other methods for constructing your own lazy
+Each of these objects will hold off evaluation as long as possible, only working
+with the top most element of a sequence at anyone time.  Furthermore,
+compositions of lazy sequences are lazy.
+
+.. ipython:: python
+
+    from toolz import pipe
+    from toolz.curried import map, filter
+    seq = pipe(range(4),
+               map(lambda x: x**2),
+               filter(lambda x: x % 2 == 1))
+    seq
+
+Composing lazy operations can allow us to work with very large (even infinite)
+data structures without taxing system memory.  Provided we don't include any
+eager evaluation, we are only limited by processing time.
+
+As you may have already discovered, lazy sequences can be tricky to work with.
+First, they can't be manipulated in the same ways as a list or tuple.
+For example, we can't get elements or use the ``len`` function on a ``map``.
+
+.. ipython:: python
+
+    m = map(lambda x: x**2, range(5))
+    m[1]
+
+.. ipython:: python
+
+    m = map(lambda x: x**2, range(5))
+    len(m)
+
+Each of these restrictions arises from the fact that we have no idea of how long
+a lazy structure is and determining its length would get in the way of the
+primary advantage of a lazy structure: **they don't need to be held in memory.**
+The primary purpose of a lazy sequence is to reduce memory usage and for this
+reason they are never held in memory all at once and can only processed once.
+Consequently, there is no way to determine the length of the sequence or get the
+157th item without losing some or all of the sequence.
+
+In this section, we will show you other methods for constructing your own lazy
 constructs and discuss the advantage of chaining together lazy expressions.
 
 Generator Expressions
@@ -78,90 +116,93 @@ before attempting to iterate a second time.
     z = list(g)
     z
 
-Consequently, we need to process that sequences in one pass.  In particular, if
+Consequently, we need to process sequences in one pass.  In particular, if
 we want to reduce the sequence to a number of statistics, we will need to
-compute all these statistics simultaneously.  
+compute all these statistics simultaneously.  (See the section on simultaneous
+reduction for more details.)
 
-To illustrate processing a lazy sequence in we will return to the quiz score
-example from previous chapters.  Recall that we have information on students
-quiz scores stored in a flat file, with each line containing the students name
-followed by the quiz scores.  Recall that our task is to return each students
-name and average quiz score.
-
-To lazily read a file in line by line, we use ``with_iter`` from the
-``more_itertools`` library. This sequence will give us each line of the file,
-one at a time without having to keep them all in memory at once.
-
-.. ipython:: python
-
-    file_iter = with_iter(open('studentdata.csv'))
-
-Now we need to pass this lazy sequence through another generator expression to
-split each line into words.  As seen in a previous section, this can be
-accomplished using ``map``.
-
-.. ipython:: python
-
-    words = map(lambda line: line.split(), file_iter)
-
-In our last attempt at this probem, we used a dictionary to hold the information
-for each student.  This required use to hold all the information in memory at
-the same time, which was fine for this small example.  To illustrate performing
-this task in a lazy manner, we will need to compute all of the statistics on
-each line as it passes through the stream.  This will be accomplished using
-reduce to compute three pieces of information simultaneously: the students name,
-the students total, and the students number of quizzes.
-
-
-.. ipython:: python
-
-    from toolz.curried import first, drop, compose
-    rest = compose(list, drop(1))
-    scores = {first(line):rest(line) for line in words}
-    scores
-
-We wish to compute the average quiz score. To do this we will ``map`` in to all
-of the values using ``valmap``.  Then we need to ``reduce`` the scores to the
-average.  While this could be done with ``reduce``, it is cleaner to define a
-``mean`` function using ``sum`` and ``len``.  Unfortunately, this approach to
-computing the mean doesn't work with lazy contructs like ``map``, meaning we
-either need to cast all of the maps to lists or use ``reduce`` to count the
-number of elements.  We choose to latter option.
-
-.. ipython:: python
-
-    from functools import reduce
-    from toolz import valmap, compose
-    from toolz.curried import map
-    sum_count = lambda L: reduce(lambda a, i: (get(0, a) + i, get(1, a) + 1), L, (0, 0))
-    div_sum_count = lambda tup: get(0, tup)/get(1, tup)
-    mean = compose(div_sum_count,sum_count)
-    scores = valmap(map(int), scores)
-    scores = valmap(mean, scores)
-    scores
-
-
-Did you notice the ``pipe`` pattern in the two lines that start with ``scores
-=``?  Let's clean up this part of the code with ``pipe``.
-
-.. ipython:: python
-
-    from toolz import pipe
-    from toolz.curried import valmap
-    scores = pipe(scores, valmap(map(int)), valmap(mean))
-    scores
-
-As we have seen with a sequence of maps, we can compose a sequence of value maps
-into one value map with composed inner functions.  Keep in mind that ``compose``
-applies functions from right to left, so we will need to reverse the order.
-
-.. ipython:: python
-
-    from toolz import pipe
-    from toolz.curried import valmap
-    scores = pipe(scores, valmap(compose(mean, map(int))))
-    scores
-
+.. To illustrate processing a lazy sequence in we will return to the quiz score
+.. example from previous chapters.  Recall that we have information on students
+.. quiz scores stored in a flat file, with each line containing the students name
+.. followed by the quiz scores.  Recall that our task is to return each students
+.. name and average quiz score.
+.. 
+.. To lazily read a file in line by line, we use ``with_iter`` from the
+.. ``more_itertools`` library. This sequence will give us each line of the file,
+.. one at a time without having to keep them all in memory at once.
+.. 
+.. .. ipython:: python
+.. 
+..     from more_itertools import with_iter
+..     file_iter = with_iter(open('studentdata.csv'))
+.. 
+.. Now we need to pass this lazy sequence through another lazy expression to
+.. split each line into words.  As seen in a previous section, this can be
+.. accomplished using ``map``.
+.. 
+.. .. ipython:: python
+.. 
+..     words = map(lambda line: line.split(), file_iter)
+.. 
+.. In our last solution to this problem, we used a dictionary to hold the information
+.. for each student.  This required us to hold all the information in memory at
+.. the same time, which was fine for this small example.  To illustrate performing
+.. this task in a lazy manner, we will need to compute all of the statistics on
+.. each line as it passes through the stream.  This will be accomplished using
+.. reduce to compute three pieces of information simultaneously: the students name,
+.. the students total, and the students number of quizzes.
+.. 
+.. 
+.. .. ipython:: python
+.. 
+..     from toolz import compose, groupby
+..     from toolz.curried import first, drop
+..     rest = compose(list, drop(1))
+..     scores = {first(line):rest(line) for line in words}
+..     scores
+.. 
+.. We wish to compute the average quiz score. To do this we will ``map`` in to all
+.. of the values using ``valmap``.  Then we need to ``reduce`` the scores to the
+.. average.  While this could be done with ``reduce``, it is cleaner to define a
+.. ``mean`` function using ``sum`` and ``len``.  Unfortunately, this approach to
+.. computing the mean doesn't work with lazy constructs like ``map``, meaning we
+.. either need to cast all of the maps to lists or use ``reduce`` to count the
+.. number of elements.  We choose to latter option.
+.. 
+.. .. ipython:: python
+.. 
+..     from functools import reduce
+..     from toolz import valmap, compose
+..     from toolz.curried import map
+..     sum_count = lambda L: reduce(lambda a, i: (get(0, a) + i, get(1, a) + 1), L, (0, 0))
+..     div_sum_count = lambda tup: get(0, tup)/get(1, tup)
+..     mean = compose(div_sum_count,sum_count)
+..     scores = valmap(map(int), scores)
+..     scores = valmap(mean, scores)
+..     scores
+.. 
+.. 
+.. Did you notice the ``pipe`` pattern in the two lines that start with ``scores
+.. =``?  Let's clean up this part of the code with ``pipe``.
+.. 
+.. .. ipython:: python
+.. 
+..     from toolz import pipe
+..     from toolz.curried import valmap
+..     scores = pipe(scores, valmap(map(int)), valmap(mean))
+..     scores
+.. 
+.. As we have seen with a sequence of maps, we can compose a sequence of value maps
+.. into one value map with composed inner functions.  Keep in mind that ``compose``
+.. applies functions from right to left, so we will need to reverse the order.
+.. 
+.. .. ipython:: python
+.. 
+..     from toolz import pipe
+..     from toolz.curried import valmap
+..     scores = pipe(scores, valmap(compose(mean, map(int))))
+..     scores
+.. 
 The advantage of lazy sequence evaluation
 -----------------------------------------
 
@@ -174,7 +215,7 @@ attack it in a series of small operations.
 .. ipython:: python
 
     a, b = (3, 5)
-    points = ((i, j) for i, j  in [(0, 0), (1, 1), (2, 2)])
+    points = zip(range(2),range(2))
     dist_along_axes = ((i - a, j - b) for i, j in points)
     sum_sqr_dist = ( d1**2 + d2**2 for d1, d2 in dist_along_axes)
     dist_to_ab = ( sqr_dist**(0.5) for sqr_dist in sum_sqr_dist)
@@ -190,15 +231,17 @@ computation for the next point. This is true regardless of how many generators
 we chain together!** In reality each point is completely processed at once, as
 each sequence is lazy and waits to complete each calculation until the last
 moment.  Consequently, the chain of generators will each compute the next value
-and pass it along in sequence.  This is a very powerful *and efficient* approach
-to composing operations on sequences, because we only need to hold one point in
-memory at a time.
+and pass it along in sequence.  This is a very powerful *and memory efficient*
+approach to composing operations on sequences, because we only need to hold one
+point in memory at a time.
 
 .. todo:: Add the image for eager evaluation
 
 Contrast this with a solution that uses list comprehensions.  Each comprehension
 is *eager* to complete its operation and this will result in the entire sequence
-being processed before we can start computation on the next sequence.
+being processed and held in memory before we can start computation on the next
+sequence.  Furthermore, we will need to keep the most recently processed list in
+memory until the next step in the chain is complete.
 
 .. ipython:: python
 
@@ -214,7 +257,7 @@ being processed before we can start computation on the next sequence.
 
 .. todo:: Add an image for lazy evaluation
 
-In constrast to the solution that used generators, the last batch of code
+In contrast to the solution that used generators, the last batch of code
 illustrates that each comprehension has completed it's computation before the
 next operation.  Consequently each sequence must be held in memory
 simultaneously.  If the data is very large, this can lead to problems with
@@ -237,7 +280,7 @@ multiple sequence expression.
     g
     list(g)
 
-The only caveat is that next generators are **very lazy** and can be difficult
+The only caveat is that nested generators are **very lazy** and can be difficult
 to force to completion.  In this next example, this is accomplished by
 mapping the ``list`` conversion function unto each embedded lazy sequence.
 
@@ -256,7 +299,7 @@ mapping the ``list`` conversion function unto each embedded lazy sequence.
 messed up by completing the outer generator without completing the inner
 loops.  Therefore the value of ``i`` was stuck at the last generated value.
 The correct way to resolve this nested structure is to process all the
-sequences simulaneously as follows.
+sequences simultaneously as follows.
 
 .. ipython:: python
 
@@ -331,7 +374,7 @@ execution at each statement, waiting for a request for the ``next`` value.
     next(g)
     next(g)
 
-Notice that the generator captures and maintains the start of the body inbetween
+Notice that the generator captures and maintains the start of the body in between
 calls to next.  For example, ``many_yields`` kept the value of ``y`` so that it
 could be later used to compute ``z``.  As with generator expressions, any
 ``next`` calls beyond the last ``yield`` will throw an exception.

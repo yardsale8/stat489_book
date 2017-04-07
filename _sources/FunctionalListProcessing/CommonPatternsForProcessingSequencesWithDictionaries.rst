@@ -689,11 +689,11 @@ curried function.
 
 .. ipython:: python
 
-    def make_update_dict(key):
-        update_count = lambda length, counts: get(length, counts, 0) + 1
-        return lambda cnts, wd: assoc(cnts, key(wd), update_count(key(wd), cnts))
+    from toolz.curried import curry
+    update_count = lambda length, counts: get(length, counts, 0) + 1
+    update_dict = curry(lambda key, cnts, wd: assoc(cnts, key(wd), update_count(key(wd), cnts)))
 
-    countby = lambda key, lst: reduce(make_update_dict(key), lst, 0)
+    countby = lambda key, lst: reduce(update_dict(key), lst, {})
     countby(len, words)
 
 Now that we understand the ``countby`` pattern, there is no reason to have to
@@ -834,7 +834,7 @@ turning a value into the pay.
     from toolz.curried import get, pipe, valmap
     from operator import mul
     groups = groupby(get(3), hours)
-    get_pay = lambda r: mul(*pipe(r, get([1,2]), map(float)))
+    get_pay = lambda r: mul(*pipe(r, get([1,2]), map(float))) #*
     get_pay(get(1, hours))
                        
 
@@ -845,12 +845,43 @@ process, we will practice our use of higher-order functions.
 .. ipython:: python
 
     from toolz.curried import get, compose, valmap
-    groups = groupby(get(3), rest(hours))
-    pay_by_title = valmap(compose(sum, map(get_pay)), groups)
+    get_title = get(3)
+    groups = groupby(get_title, rest(hours))
+    total_pay = compose(sum, map(get_pay))
+    pay_by_title = valmap(total_pay, groups)
     pay_by_title
 
 We will provide an abstraction called ``reduceby`` that combines ``groupby`` and
 ``reduce`` in the upcoming section on lazy evaluation.
+
+
+Grouping and Reducing with ``reduceby``
+---------------------------------------
+
+The last example illustrated a common pattern.  First, we grouped the data using
+``groupby`` with the key function ``get(3)``, then we reduced each value using
+``valmap`` with the reduction given by ``total_pay``.  
+
+This common pattern can has been abstracted in the ``toolz`` library with
+``reduceby``.  ``reduceby`` takes three arguments, a key_function, a reduction
+function, and a sequence; and returns the dictionary with keys determined by the
+key function and values determined by the reduction function.  Like ``reduce``,
+there is an optional parameter for the initial value of the accumulator.
+
+For example, we can solve the last problem in one step using ``reduceby`` with
+two helper functions.
+
+.. ipython:: python
+
+    from toolz import reduceby
+    from toolz.curried import get, compose, valmap
+    get_title = get(3)
+    update_total_pay = lambda a, i: a + get_pay(i)
+    pay_by_title = reduceby(get_title, update_total_pay, rest(hours), 0)
+    pay_by_title
+
+It should be noted that ``reduceby`` works with lazy streams of data, a concept
+that will be explored in more detail in an upcoming section.
 
 The Recursive Approach to Counting Frequencies (Optional)
 ---------------------------------------------------------

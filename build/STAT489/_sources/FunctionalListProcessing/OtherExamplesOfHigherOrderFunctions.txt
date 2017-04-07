@@ -708,9 +708,113 @@ that will make a new table that contains only column 3.
     get_col_3 = map(get(2))
     list(get_col_3(table))
 
+A functional approach to table joins
+------------------------------------
+
+In an earlier section, we illustrated how to use list comprehensions for various
+table joining operations (inner-join, left-outer-join, etc.)  We can use the
+higher-order function from the ``toolz`` library to abstract these patterns, but
+first we need to refactor the original solution using helper functions.
+Consider the original solution given below.  
+
+
+.. ipython:: python
+
+    hours = [["Alice", 43],
+               ["Bob", 37],
+               ["Fred", 15]]
+    titles = [["Alice", "Manager"],
+              ["Betty", "Consultant"],
+              ["Bob", "Assistant"]]
+
+    raw_inner_join = [(left_row, right_row) 
+                      for left_row in hours 
+                      for right_row in titles 
+                      if left_row[0] == right_row[0]]
+    raw_inner_join
+
+To compare the rows, we needed to unpack the right key elements. Let's refactor
+these operation into key functions that are used to compare the two rows (left
+and right key functions).  In this example, the rows are matched based on the name (``get(0)`` for both).
+
+.. ipython:: python
+
+    left_key = get(0)
+    right_key = get(0)
+
+    inner_join = [(lrow, rrow) 
+                  for lrow in hours for rrow in titles 
+                  if left_key(lrow) == right_key(rrow)]
+    inner_join
+
+The ``toolz`` function ``join`` abstracts this pattern and can be used to hide
+the details of a join.  The function ``join`` takes the left key function, left
+sequence, right key function, and right sequence; in that order.  It returns a
+table of rows joined in a tuple.
+
+
+.. ipython:: python
+
+    from toolz import join
+    left_key = get(0)
+    right_key = get(0)
+
+    inner_join = join(left_key, hours, right_key, titles)
+    inner_join
+
+Notice that join returns a lazy sequence.  This can be useful for joining tables
+when one of the tables is very large.  More details will be given in a later
+section.
+
+.. ipython:: python
+
+    list(inner_join)
+
+.. note::
+
+    The ``join`` function returns a tuple of rows.  Frequently we would follow up
+    with a ``map`` that cleans up each row into the desired form.
+
+``join`` can also be used for outer joins by changing the default value of the
+parameters ``left_default`` and/or ``right_default`` to ``None``.
+
+Consider a left-out-join.  In this case we always want to keep the left row,
+even when there is no corresponding right-hand row. Those we replace the missing
+right-hand row with ``None`` by default by setting ``right_default=None``
+
+.. ipython:: python
+
+    left_outer_join = join(left_key, hours, 
+                           right_key, titles, 
+                           right_default=None)
+    list(left_outer_join)
+
+Notice that we use ``right_default=None`` to get a *left* outer join.
+Similarly, we achieve a right-outer-join by setting ``left_default=None``.
+
+.. ipython:: python
+
+    right_outer_join = join(left_key, hours, 
+                           right_key, titles, 
+                           left_default=None)
+    list(right_outer_join)
+
+A full outer join is constructed by setting both defaults to ``None``.
+
+.. ipython:: python
+
+    outer_join = join(left_key, hours, 
+                           right_key, titles, 
+                           left_default=None,
+                           right_default=None)
+    list(outer_join)
+
 
 Memiozation (Optional)
 ----------------------
+Second, we need sequence helper functions that
+determine which values should be kept from the respective rows (left and right
+sequence functions).
 
 One of the problems with recursive functions, especially if they are not
 tail-recursive or have not been refactored to use an accumulator, is the number
