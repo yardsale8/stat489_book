@@ -448,7 +448,7 @@ Exercises
 
 .. question:: 442 
 
-   Write a function called ``num_greater_5`` that counts how many words in a list have length 5.
+   Write a function called ``num_greater_5`` that counts how many words in a list have a more than than 5 characters.
    Use some combination of map, filter and reduce to solve this problem.
 
    .. actex:: ex_9_9
