@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.4. Computational Complexity &mdash; Runestone Interactive Overview</title>
+    <title>5.4. Computational Complexity &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="6. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
-    <link rel="next" title="6.5. Working with Nested Data Structures" href="WorkingWithNestedDataStructures.html" />
-    <link rel="prev" title="6.3. Dictionary and Set Comprehensions" href="Comprehensions.html" />
+    <link rel="up" title="5. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
+    <link rel="next" title="5.5. Working with Nested Data Structures" href="WorkingWithNestedDataStructures.html" />
+    <link rel="prev" title="5.3. Dictionary and Set Comprehensions" href="Comprehensions.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,7 +263,7 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6.4. Computational Complexity</a></li>
+<li><a class="reference internal" href="#">5.4. Computational Complexity</a></li>
 </ul>
 </ul>
 </li>
@@ -271,13 +271,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 6.3. Dictionary and Set Comprehensions" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 5.3. Dictionary and Set Comprehensions" data-toggle="tooltip">
     <a href="Comprehensions.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 6.5. Working with Nested Data Structures' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 5.5. Working with Nested Data Structures' data-toggle="tooltip" >
     <a href="WorkingWithNestedDataStructures.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -309,7 +309,7 @@
 <div class="container" id="main-content">
   
   <div class="section" id="computational-complexity">
-<h1>6.4. Computational Complexity<a class="headerlink" href="#computational-complexity" title="Permalink to this headline">¶</a></h1>
+<h1>5.4. Computational Complexity<a class="headerlink" href="#computational-complexity" title="Permalink to this headline">¶</a></h1>
 <p>Dictionaries are designed to efficiently look up the value for a given key.
 This is accomplished by storing the data in a sorted, balanced binary tree.
 First, the <code class="docutils literal"><span class="pre">hash</span></code> value of a key is determined using the <code class="docutils literal"><span class="pre">hash</span></code> function.
@@ -328,25 +328,25 @@ values (hash, key, value), which is easy to do with <code class="docutils litera
 
 <span class="gp">In [4]: </span><span class="n">key_hashes</span>
 <span class="gh">Out[4]: </span><span class="go"></span>
-<span class="go">[410863187701777137,</span>
-<span class="go"> -7965386901733191011,</span>
-<span class="go"> 8427527608860148361,</span>
-<span class="go"> 4951603339810150948,</span>
-<span class="go"> -4706960455290717456,</span>
-<span class="go"> 5873318965530151547,</span>
-<span class="go"> 3430337040093244967]</span>
+<span class="go">[-2755768832532532667,</span>
+<span class="go"> -2733652328786143893,</span>
+<span class="go"> -7361821637513938770,</span>
+<span class="go"> -3819602847015949274,</span>
+<span class="go"> -6904592001573243786,</span>
+<span class="go"> 2612521463512525672,</span>
+<span class="go"> 3255573614260948802]</span>
 
 <span class="gp">In [5]: </span><span class="n">triples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">key_hashes</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
 
 <span class="gp">In [6]: </span><span class="n">triples</span>
 <span class="gh">Out[6]: </span><span class="go"></span>
-<span class="go">[(410863187701777137, &#39;a&#39;, 1),</span>
-<span class="go"> (-7965386901733191011, &#39;b&#39;, 2),</span>
-<span class="go"> (8427527608860148361, &#39;c&#39;, 3),</span>
-<span class="go"> (4951603339810150948, &#39;d&#39;, 4),</span>
-<span class="go"> (-4706960455290717456, &#39;e&#39;, 5),</span>
-<span class="go"> (5873318965530151547, &#39;m&#39;, 6),</span>
-<span class="go"> (3430337040093244967, &#39;n&#39;, 7)]</span>
+<span class="go">[(-2755768832532532667, &#39;a&#39;, 1),</span>
+<span class="go"> (-2733652328786143893, &#39;b&#39;, 2),</span>
+<span class="go"> (-7361821637513938770, &#39;c&#39;, 3),</span>
+<span class="go"> (-3819602847015949274, &#39;d&#39;, 4),</span>
+<span class="go"> (-6904592001573243786, &#39;e&#39;, 5),</span>
+<span class="go"> (2612521463512525672, &#39;m&#39;, 6),</span>
+<span class="go"> (3255573614260948802, &#39;n&#39;, 7)]</span>
 </pre></div>
 </div>
 <p>Before we can efficiently put these value in a search tree, we must sort these
@@ -359,13 +359,13 @@ values (hash, key, value), which is easy to do with <code class="docutils litera
 
 <span class="gp">In [10]: </span><span class="n">sorted_triples</span>
 <span class="gh">Out[10]: </span><span class="go"></span>
-<span class="go">[(-7965386901733191011, &#39;b&#39;, 2),</span>
-<span class="go"> (-4706960455290717456, &#39;e&#39;, 5),</span>
-<span class="go"> (410863187701777137, &#39;a&#39;, 1),</span>
-<span class="go"> (3430337040093244967, &#39;n&#39;, 7),</span>
-<span class="go"> (4951603339810150948, &#39;d&#39;, 4),</span>
-<span class="go"> (5873318965530151547, &#39;m&#39;, 6),</span>
-<span class="go"> (8427527608860148361, &#39;c&#39;, 3)]</span>
+<span class="go">[(-7361821637513938770, &#39;c&#39;, 3),</span>
+<span class="go"> (-6904592001573243786, &#39;e&#39;, 5),</span>
+<span class="go"> (-3819602847015949274, &#39;d&#39;, 4),</span>
+<span class="go"> (-2755768832532532667, &#39;a&#39;, 1),</span>
+<span class="go"> (-2733652328786143893, &#39;b&#39;, 2),</span>
+<span class="go"> (2612521463512525672, &#39;m&#39;, 6),</span>
+<span class="go"> (3255573614260948802, &#39;n&#39;, 7)]</span>
 </pre></div>
 </div>
 <p>Now we place the triples in a search tree with the following strategy:</p>
@@ -432,19 +432,19 @@ a set to check if a value is <code class="docutils literal"><span class="pre">in
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 6.3. Dictionary and Set Comprehensions' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 5.3. Dictionary and Set Comprehensions' data-toggle="tooltip">
     <a href="Comprehensions.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="Comprehensions.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 6.5. Working with Nested Data Structures' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 5.5. Working with Nested Data Structures' data-toggle="tooltip" >
     <a href="WorkingWithNestedDataStructures.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="WorkingWithNestedDataStructures.html" >Next Section - 6.5. Working with Nested Data Structures</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="WorkingWithNestedDataStructures.html" >Next Section - 5.5. Working with Nested Data Structures</a>
 
 <script type="text/javascript">
 

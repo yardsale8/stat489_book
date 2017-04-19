@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.3. Dictionary and Set Comprehensions &mdash; Runestone Interactive Overview</title>
+    <title>5.3. Dictionary and Set Comprehensions &mdash; Runestone Interactive Overview</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -101,9 +101,9 @@
     <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
     <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
     <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
-    <link rel="up" title="6. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
-    <link rel="next" title="6.4. Computational Complexity" href="ComputationalComplexity.html" />
-    <link rel="prev" title="6.2. Sets" href="Sets.html" />
+    <link rel="up" title="5. Associative Data Structures - Dictionaries and Sets" href="toctree.html" />
+    <link rel="next" title="5.4. Computational Complexity" href="ComputationalComplexity.html" />
+    <link rel="prev" title="5.2. Sets" href="Sets.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -263,11 +263,11 @@
           <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">6.3. Dictionary and Set Comprehensions</a><ul>
-<li><a class="reference internal" href="#the-dictionary-comprehension">6.3.1. The Dictionary Comprehension</a></li>
-<li><a class="reference internal" href="#the-set-comprehension">6.3.2. The Set Comprehension</a></li>
-<li><a class="reference internal" href="#merging-dictionaries">6.3.3. Merging Dictionaries</a></li>
-<li><a class="reference internal" href="#the-levels-of-abstraction-for-a-dictionary">6.3.4. The levels of abstraction for a dictionary</a></li>
+<li><a class="reference internal" href="#">5.3. Dictionary and Set Comprehensions</a><ul>
+<li><a class="reference internal" href="#the-dictionary-comprehension">5.3.1. The Dictionary Comprehension</a></li>
+<li><a class="reference internal" href="#the-set-comprehension">5.3.2. The Set Comprehension</a></li>
+<li><a class="reference internal" href="#merging-dictionaries">5.3.3. Merging Dictionaries</a></li>
+<li><a class="reference internal" href="#the-levels-of-abstraction-for-a-dictionary">5.3.4. The levels of abstraction for a dictionary</a></li>
 </ul>
 </li>
 </ul>
@@ -277,13 +277,13 @@
         
         
           
-  <li id="relations-prev" title="Previous Chapter - 6.2. Sets" data-toggle="tooltip">
+  <li id="relations-prev" title="Previous Chapter - 5.2. Sets" data-toggle="tooltip">
     <a href="Sets.html" >
       <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
     </a>
   </li>
   
-  <li id="relations-next" title='Next Chapter - 6.4. Computational Complexity' data-toggle="tooltip" >
+  <li id="relations-next" title='Next Chapter - 5.4. Computational Complexity' data-toggle="tooltip" >
     <a href="ComputationalComplexity.html" >
       <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
     </a>
@@ -315,12 +315,12 @@
 <div class="container" id="main-content">
   
   <div class="section" id="dictionary-and-set-comprehensions">
-<h1>6.3. Dictionary and Set Comprehensions<a class="headerlink" href="#dictionary-and-set-comprehensions" title="Permalink to this headline">¶</a></h1>
+<h1>5.3. Dictionary and Set Comprehensions<a class="headerlink" href="#dictionary-and-set-comprehensions" title="Permalink to this headline">¶</a></h1>
 <p>We have seen how list comprehensions can used to describe and construct lists
 with an expression.  Python has similar syntax for constructing dictionaries and
 sets using comprehensions.</p>
 <div class="section" id="the-dictionary-comprehension">
-<h2>6.3.1. The Dictionary Comprehension<a class="headerlink" href="#the-dictionary-comprehension" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.1. The Dictionary Comprehension<a class="headerlink" href="#the-dictionary-comprehension" title="Permalink to this headline">¶</a></h2>
 <p>The dictionary comprehension uses the following syntax.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">dict_comp</span> <span class="o">=</span> <span class="p">{</span><span class="n">KEY</span><span class="p">:</span><span class="n">VAL</span> <span class="k">for</span> <span class="n">VAR</span> <span class="ow">in</span> <span class="n">SEQ</span> <span class="k">if</span> <span class="n">COND</span><span class="p">}</span>
 </pre></div>
@@ -346,7 +346,7 @@ allowing the values to be looked up quickly without recomputing values.</p>
 </div>
 </div>
 <div class="section" id="the-set-comprehension">
-<h2>6.3.2. The Set Comprehension<a class="headerlink" href="#the-set-comprehension" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.2. The Set Comprehension<a class="headerlink" href="#the-set-comprehension" title="Permalink to this headline">¶</a></h2>
 <p>The set comprehension looks very similar to a dictionary comprehension, but is
 distinguished by only having a value in the operation expression.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">set_comp</span> <span class="o">=</span> <span class="p">{</span><span class="n">VAL</span> <span class="k">for</span> <span class="n">VAR</span> <span class="ow">in</span> <span class="n">SEQ</span> <span class="k">if</span> <span class="n">COND</span><span class="p">}</span>
@@ -430,7 +430,7 @@ sequence of values.</p>
             </ul>
             </div>
 <div class="section" id="merging-dictionaries">
-<h2>6.3.3. Merging Dictionaries<a class="headerlink" href="#merging-dictionaries" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.3. Merging Dictionaries<a class="headerlink" href="#merging-dictionaries" title="Permalink to this headline">¶</a></h2>
 <p>One application of set and dictionary comprehensions is the process of merging
 two dictionaries.  Let&#8217;s create a function that called <code class="docutils literal"><span class="pre">merge</span></code> that takes two
 dictionaries <code class="docutils literal"><span class="pre">d1</span></code> and <code class="docutils literal"><span class="pre">d2</span></code> as arguments and returns a new dictionary that
@@ -487,7 +487,7 @@ provides and implementation of <code class="docutils literal"><span class="pre">
 </div>
 </div>
 <div class="section" id="the-levels-of-abstraction-for-a-dictionary">
-<h2>6.3.4. The levels of abstraction for a dictionary<a class="headerlink" href="#the-levels-of-abstraction-for-a-dictionary" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.4. The levels of abstraction for a dictionary<a class="headerlink" href="#the-levels-of-abstraction-for-a-dictionary" title="Permalink to this headline">¶</a></h2>
 <p>The reader should take a moment to consider the <em>levels of abstraction</em> for a
 dictionary.</p>
 <div class="admonition-the-levels-of-abstraction-for-a-dictionary admonition">
@@ -535,19 +535,19 @@ developing higher-order functions for dictionaries.</p>
 
   
       
-  <li id="relations-prev" class="navLink" title='Previous Section - 6.2. Sets' data-toggle="tooltip">
+  <li id="relations-prev" class="navLink" title='Previous Section - 5.2. Sets' data-toggle="tooltip">
     <a href="Sets.html" >
       <i class='prevNav glyphicon glyphicon-chevron-left'></i>
     </a>
   </li>
   <a class="navLinkBg" id="navLinkBgLeft"  href="Sets.html" ></a>
   
-  <li id="relations-next" class="navLink" title='Next Section - 6.4. Computational Complexity' data-toggle="tooltip" >
+  <li id="relations-next" class="navLink" title='Next Section - 5.4. Computational Complexity' data-toggle="tooltip" >
     <a href="ComputationalComplexity.html" >
       <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
     </a>
   </li>
-  <a class="navLinkBg navLink" id="navLinkBgRight" href="ComputationalComplexity.html" >Next Section - 6.4. Computational Complexity</a>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="ComputationalComplexity.html" >Next Section - 5.4. Computational Complexity</a>
 
 <script type="text/javascript">
 

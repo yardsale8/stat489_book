@@ -18,5 +18,6 @@ solutions based on list comprehensions to those that use recursion.
     OtherExamplesOfHigherOrderFunctions.rst
     CommonPatternsForProcessingSequencesWithDictionaries.rst
     LazyIteration.rst
+    WorkingWithLargeFiles.rst
     Exercises.rst
 

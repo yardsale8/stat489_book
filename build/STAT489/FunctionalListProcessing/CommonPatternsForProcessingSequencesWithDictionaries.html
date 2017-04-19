@@ -490,7 +490,7 @@ inner list values.  For illustration, we will work on <code class="docutils lite
 <span class="gp">In [21]: </span><span class="n">sue_scores</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">sue_scores</span><span class="p">)</span>
 
 <span class="gp">In [22]: </span><span class="n">sue_scores</span>
-<span class="gh">Out[22]: </span><span class="go">&lt;map at 0x1114257f0&gt;</span>
+<span class="gh">Out[22]: </span><span class="go">&lt;map at 0x10a83fb38&gt;</span>
 </pre></div>
 </div>
 <p>Remember that <code class="docutils literal"><span class="pre">map(int)</span></code> is the curried partial function that is equivalent to
@@ -1692,21 +1692,21 @@ will assure that out recursive function will terminate.</p>
 <span class="gp">In [161]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
 <span class="gp">In [162]: </span><span class="n">counts</span>
-<span class="gh">Out[162]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
+<span class="gh">Out[162]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x10a8f2510&gt;</span>
 
 <span class="gp">In [163]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span>
 
 <span class="gp">In [164]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
 <span class="gp">In [165]: </span><span class="n">counts</span>
-<span class="gh">Out[165]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
+<span class="gh">Out[165]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x10a8f2510&gt;</span>
 
 <span class="gp">In [166]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span>
 
 <span class="gp">In [167]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
 <span class="gp">In [168]: </span><span class="n">counts</span>
-<span class="gh">Out[168]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
+<span class="gh">Out[168]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x10a8f2510&gt;</span>
 
 <span class="gp">In [169]: </span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span>
 </pre></div>
@@ -1722,7 +1722,7 @@ the <code class="docutils literal"><span class="pre">word</span> <span class="pr
 <span class="gp">In [173]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
 <span class="gp">In [174]: </span><span class="n">counts</span>
-<span class="gh">Out[174]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
+<span class="gh">Out[174]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x10a8f2510&gt;</span>
 </pre></div>
 </div>
 <p>A pattern emerges.  Each <code class="docutils literal"><span class="pre">assoc</span></code> operation is called the <code class="docutils literal"><span class="pre">rest</span></code> of the last
@@ -1740,7 +1740,7 @@ example to be sure that we return counts once we have emptied the list.</p>
 <span class="gp">In [178]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span> <span class="k">else</span> <span class="n">update_dict</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
 
 <span class="gp">In [179]: </span><span class="n">counts</span>
-<span class="gh">Out[179]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
+<span class="gh">Out[179]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x10a8f2510&gt;</span>
 </pre></div>
 </div>
 <p>These expressions are getting a little complicated and very repetitive.  Let&#8217;s
@@ -1774,7 +1774,7 @@ substitution one by one.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [190]: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">(</span><span class="n">next_cnts</span><span class="p">({},</span> <span class="n">words</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="p">),</span> <span class="n">words</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
 
 <span class="gp">In [191]: </span><span class="n">counts</span>
-<span class="gh">Out[191]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
+<span class="gh">Out[191]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x10a8f2510&gt;</span>
 </pre></div>
 </div>
 <p>So what we want to do is repeatedly call <code class="docutils literal"><span class="pre">next_cnts</span></code> on the output of the
@@ -1793,7 +1793,7 @@ with an empty dictionary.</p>
 <span class="gp">In [193]: </span><span class="n">count_words</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnts</span><span class="p">,</span> <span class="n">wds</span><span class="p">:</span> <span class="n">cnts</span> <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">wds</span><span class="p">)</span> <span class="k">else</span> <span class="n">count_words</span><span class="p">(</span><span class="n">update_dict</span><span class="p">(</span><span class="n">wds</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">cnts</span><span class="p">),</span> <span class="n">wds</span><span class="o">.</span><span class="n">rest</span><span class="p">)</span>
 
 <span class="gp">In [194]: </span><span class="n">count_words</span><span class="p">({},</span> <span class="n">words</span><span class="p">)</span>
-<span class="gh">Out[194]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x11159e950&gt;</span>
+<span class="gh">Out[194]: </span><span class="go">&lt;function &lt;lambda&gt; at 0x10a8f2510&gt;</span>
 </pre></div>
 </div>
 <p>This function illustrates the pattern for recursion with an accumulator, which

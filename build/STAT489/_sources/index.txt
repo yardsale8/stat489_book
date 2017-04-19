@@ -66,12 +66,9 @@ Table of Contents
     IntroductionToPython/toctree2.rst
     SequentialDataStructuresInPython/toctree.rst
     TheExpressionOrientedSequenceTransformation/toctree.rst
-    ReadingDataFromFiles/toctree.rst
     AssociativeDataStructures_DictionariesAndSets/toctree.rst
+    ReadingDataFromFiles/toctree.rst
     FunctionalListProcessing/toctree.rst
-..     Recursion/toctree.rst
-..     HigherOrderFunctions/toctree.rst
-..     LazyEvaluationInPython/toctree.rst
 
 Labs
 ::::

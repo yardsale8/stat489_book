@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7.8. Working with Large Files &mdash; Runestone Interactive Overview</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/activecode.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/clickable.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pytutor.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/modal-basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/datafile.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/dragndrop.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fitb.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/livecode.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/parsons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/lib/prettify.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/poll.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/tabbedstuff.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/video.css" type="text/css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootswatch/2.3.1/""/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jquery-ui-1.10.3.custom.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/user-highlights.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/runestone-custom-sphinx-bootstrap.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/runestonebase.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jquery.highlight.js"></script>
+    <script type="text/javascript" src="../_static/bookfuncs.js"></script>
+    <script type="text/javascript" src="../_static/codemirror.js"></script>
+    <script type="text/javascript" src="../_static/xml.js"></script>
+    <script type="text/javascript" src="../_static/css.js"></script>
+    <script type="text/javascript" src="../_static/htmlmixed.js"></script>
+    <script type="text/javascript" src="../_static/python.js"></script>
+    <script type="text/javascript" src="../_static/javascript.js"></script>
+    <script type="text/javascript" src="../_static/activecode.js"></script>
+    <script type="text/javascript" src="../_static/skulpt.min.js"></script>
+    <script type="text/javascript" src="../_static/skulpt-stdlib.js"></script>
+    <script type="text/javascript" src="../_static/clike.js"></script>
+    <script type="text/javascript" src="../_static/timed_activecode.js"></script>
+    <script type="text/javascript" src="../_static/animationbase.js"></script>
+    <script type="text/javascript" src="../_static/mchoice.js"></script>
+    <script type="text/javascript" src="../_static/timedmc.js"></script>
+    <script type="text/javascript" src="../_static/timed.js"></script>
+    <script type="text/javascript" src="../_static/clickable.js"></script>
+    <script type="text/javascript" src="../_static/timedclickable.js"></script>
+    <script type="text/javascript" src="../_static/d3.v2.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery.ba-bbq.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery.jsPlumb-1.3.10-all-min.js"></script>
+    <script type="text/javascript" src="../_static/pytutor.js"></script>
+    <script type="text/javascript" src="../_static/codelens.js"></script>
+    <script type="text/javascript" src="../_static/skulpt.min.js"></script>
+    <script type="text/javascript" src="../_static/skulpt-stdlib.js"></script>
+    <script type="text/javascript" src="../_static/datafile.js"></script>
+    <script type="text/javascript" src="../_static/dragndrop.js"></script>
+    <script type="text/javascript" src="../_static/timeddnd.js"></script>
+    <script type="text/javascript" src="../_static/fitb.js"></script>
+    <script type="text/javascript" src="../_static/timedfitb.js"></script>
+    <script type="text/javascript" src="../_static/livecode.js"></script>
+    <script type="text/javascript" src="../_static/clike.js"></script>
+    <script type="text/javascript" src="../_static/lib/prettify.js"></script>
+    <script type="text/javascript" src="../_static/lib/hammer.min.js"></script>
+    <script type="text/javascript" src="../_static/parsons.js"></script>
+    <script type="text/javascript" src="../_static/timedparsons.js"></script>
+    <script type="text/javascript" src="../_static/poll.js"></script>
+    <script type="text/javascript" src="../_static/reveal.js"></script>
+    <script type="text/javascript" src="../_static/shortanswer.js"></script>
+    <script type="text/javascript" src="../_static/timed_shortanswer.js"></script>
+    <script type="text/javascript" src="../_static/tabbedstuff.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/waypoints.min.js"></script>
+    <script type="text/javascript" src="../_static/rangy-core.js"></script>
+    <script type="text/javascript" src="../_static/rangy-textrange.js"></script>
+    <script type="text/javascript" src="../_static/rangy-cssclassapplier.js"></script>
+    <script type="text/javascript" src="../_static/user-highlights.js"></script>
+    <script type="text/javascript" src="../_static/jquery.idle-timer.js"></script>
+    <script type="text/javascript" src="../_static/processing-1.4.1.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
+    <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="top" title="Runestone Interactive Overview" href="../index.html" />
+    <link rel="up" title="7. Functional List Processing" href="toctree.html" />
+    <link rel="next" title="7.9. Exercises" href="Exercises.html" />
+    <link rel="prev" title="7.7. Lazy Iteration" href="LazyIteration.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<link rel="shortcut icon" href="/runestone/static/favicon.ico" type="image/ico" />
+
+<script type="text/javascript">
+  eBookConfig = {};
+  eBookConfig.host = 'http://127.0.0.1:8000' ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:8000';
+  eBookConfig.app = eBookConfig.host+'/runestone';
+  eBookConfig.ajaxURL = eBookConfig.app+'/ajax/';
+  eBookConfig.course = 'STAT489';
+  eBookConfig.logLevel = 0;
+  eBookConfig.loginRequired = false;
+  eBookConfig.build_info = "unknown";
+  eBookConfig.isLoggedIn = false;
+  eBookConfig.useRunestoneServices = false;
+  eBookConfig.python3 = true;
+  eBookConfig.basecourse = 'STAT489';
+</script>
+
+<div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&status=0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+  </head>
+  <body role="document">
+
+
+<!-- Begin navbar -->
+<div id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+  <div class="container">
+
+    <div class="navbar-header">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button type='button' class='navbar-toggle' data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <div>
+        <a class="brand-logo" style='background: transparent url("../_static/img/logo_small.png") no-repeat 0px 0px;' href="/runestone/default/user/login">&nbsp; </a>
+        <a class="navbar-brand" href="../index.html">STAT489</a>
+      </div>
+    </div>
+
+    <div class="navbar-collapse collapse navbar-ex1-collapse">
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="divider-vertical"></li>
+
+        <!-- social media dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-share-alt" style="opacity: 0.9"></i>
+          </a>
+          <ul class="dropdown-menu social-menu">
+              <li>
+                <div>
+                  <b>Runestone in social media:</b>
+                </div>
+                <a href="https://twitter.com/iRunestone" class="twitter-follow-button" data-show-count="true">Follow @iRunestone</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                <div class="fb-like" data-href="https://www.facebook.com/RunestoneInteractive" data-send="false" data-layout="button_count" data-width="300" data-show-faces="false" data-font="arial"></div>
+              </li>
+
+              <li class="divider"></li>
+              <li>
+                <div>
+                  <b>Help support us:</b>
+                </div>
+                <div>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_s-xclick">
+                  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHNwYJKoZIhvcNAQcEoIIHKDCCByQCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAcrkqh1hn3lYqIpfXxNqe1T82EhXzCJGy1yMAmklpyZshyMkfDGe1Bhx+iwyGeoYRTTyphFmP+9M3NyO0+Q5XdHxgZPx/zYjjBxlZHgEV6jhE8bN2fHkkPf0VHfz0a0QQylQOPlKiOTZV7B37Jpk6yM47oVZ1tG/KNm0NkfmB76DELMAkGBSsOAwIaBQAwgbQGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIi0GmFfOlcjuAgZBbYOo9UO+CpMQa+PYqwsUmUnJvXIImeMeNI3KVTUx5Cfk9gNMo3WzPeiB5IqZo9nRAQ0mf1qL2ecLeB5tidM+lgBUhOxfj3/FecpnVFa0263gp4g+PLw8jzhvVRdUon1K3SeO1Rzh23fIRKwnrD6btt73uwtj0sl3tGd8qz+6GIcwPDdRk9VcUffiBJT/ZagKgggOHMIIDgzCCAuygAwIBAgIBADANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wHhcNMDQwMjEzMTAxMzE1WhcNMzUwMjEzMTAxMzE1WjCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMFHTt38RMxLXJyO2SmS+Ndl72T7oKJ4u4uw+6awntALWh03PewmIJuzbALScsTS4sZoS1fKciBGoh11gIfHzylvkdNe/hJl66/RGqrj5rFb08sAABNTzDTiqqNpJeBsYs/c2aiGozptX2RlnBktH+SUNpAajW724Nv2Wvhif6sFAgMBAAGjge4wgeswHQYDVR0OBBYEFJaffLvGbxe9WT9S1wob7BDWZJRrMIG7BgNVHSMEgbMwgbCAFJaffLvGbxe9WT9S1wob7BDWZJRroYGUpIGRMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbYIBADAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAIFfOlaagFrl71+jq6OKidbWFSE+Q4FqROvdgIONth+8kSK//Y/4ihuE4Ymvzn5ceE3S/iBSQQMjyvb+s2TWbQYDwcp129OPIbD9epdr4tJOUNiSojw7BHwYRiPh58S1xGlFgHFXwrEBb3dgNbMUa+u4qectsMAXpVHnD9wIyfmHMYIBmjCCAZYCAQEwgZQwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tAgEAMAkGBSsOAwIaBQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xMzExMDMxMzQxMzFaMCMGCSqGSIb3DQEJBDEWBBRDJF8w+zsMr7FSk+pwinB5f5D4rzANBgkqhkiG9w0BAQEFAASBgHw1LMHpkpaqHIvDGdFE0eG+2mZlmMnUeDCBhQlbc7QMzFQYKTV94NfaebBO4PmNdADe1rq4WidSRZZbE7CzkX9IGENYnBTWY0hb2l0lGdGrJdGeWyV3ekg9WVaFMMumrekds96h3Cx7dGz2kWDzIai2iEXE/qoE+xpkyXAYZNV3-----END PKCS7-----
+                  ">
+                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                  </form>
+
+                </div>
+              </li>
+          </ul>
+        </li>
+        <!-- end social media dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        <!-- search dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-search" style='opacity:0.9;'></i>
+          </a>
+          <ul class='dropdown-menu'>
+            
+                <li><a href='../index.html'>Table of Contents</a></li>
+            
+            <li><a href='/runestone/static/STAT489/genindex.html'>Book Index</a></li>
+            <li class="divider"></li>
+            <li id="scratch_ac_link"><a href="javascript:ACFactory.toggleScratchActivecode()">Scratch ActiveCode</a></li>
+            <li class="divider"></li>
+            <li style="width: 240px;">
+              <form class="navbar-search" style="margin:10px;" action="../search.html" method="get">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="q" placeholder="Search this book" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" style="margin:0;" type="submit">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                  </span>
+                </div><!-- /input-group -->
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+            </li>
+          </ul>
+        </li>
+        <!-- end search dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        
+        <li class="divider-vertical"></li>
+
+        <!-- help menu dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-question-sign" style="opacity:0.9;"></i>
+          </a>
+          <ul class="dropdown-menu user-menu">
+            <li><a href='/runestone/static/STAT489/navhelp.html'>Navigation Help</a></li>
+            <li><a href='/runestone/static/overview/instructor.html'>Help for Instructors</a></li>
+            <li class="divider"></li>
+            <li><a href='http://runestoneinteractive.org'>About Runestone</a></li>
+            <li><a href='/runestone/default/reportabug?course=STAT489&page=WorkingWithLargeFiles'>Report A Problem</a></li>
+          </ul>
+        </li>
+        <!-- end help menu dropdown -->
+
+        <li class="divider-vertical"></li>
+
+      </ul>
+
+      <ul class="nav navbar-nav">
+        <li class="divider-vertical"></li>
+        <!--
+          <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><ul>
+<li><a class="reference internal" href="#">7.8. Working with Large Files</a><ul>
+<li><a class="reference internal" href="#processing-a-single-large-file">7.8.1. Processing a single large file</a><ul>
+<li><a class="reference internal" href="#example-processing-united-states-census-data">7.8.1.1. Example - Processing United States Census data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#processing-a-number-of-large-files">7.8.2. Processing a number of large files</a></li>
+<li><a class="reference internal" href="#reducing-and-joining-large-files">7.8.3. Reducing and joining large files</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+          <li class="divider-vertical"></li>
+        
+        
+          
+  <li id="relations-prev" title="Previous Chapter - 7.7. Lazy Iteration" data-toggle="tooltip">
+    <a href="LazyIteration.html" >
+      <i class='glyphicon glyphicon-backward' style='opacity:0.9;'></i>
+    </a>
+  </li>
+  
+  <li id="relations-next" title='Next Chapter - 7.9. Exercises' data-toggle="tooltip" >
+    <a href="Exercises.html" >
+      <i class='glyphicon glyphicon-forward' style='opacity:0.9;'></i>
+    </a>
+  </li>
+  <li class="divider-vertical"></li>
+
+<script type="text/javascript">
+  opts = {'placement':'bottom',
+          'selector': '',
+          'delay': { show: 100, hide: 50}
+         };
+
+  $('#relations-prev').tooltip(opts);
+  $('#relations-next').tooltip(opts);
+</script>
+        -->
+        
+          <li></li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container" id="continue-reading"></div>
+
+<div class="container" id="main-content">
+  
+  <div class="section" id="working-with-large-files">
+<h1>7.8. Working with Large Files<a class="headerlink" href="#working-with-large-files" title="Permalink to this headline">¶</a></h1>
+<p>Lazy sequences are useful in processing large files.  In this section, we will
+explore the process of working with very large files.  This might involve
+processing one large files or a number of large files.  First, we illustrate
+processing a single large file as a lazy sequence.  Then we adapt this approach
+to allow the processing of any number of files as a lazy stream.  Finally, we
+look at more complicated lazy operations like <code class="docutils literal"><span class="pre">reduceby</span></code> and <code class="docutils literal"><span class="pre">join</span></code>.</p>
+<div class="section" id="processing-a-single-large-file">
+<h2>7.8.1. Processing a single large file<a class="headerlink" href="#processing-a-single-large-file" title="Permalink to this headline">¶</a></h2>
+<p>When processing a large file, it is important to keep the entire streaming
+process lazy.  We will do this by sticking to the following rules.</p>
+<div class="admonition-how-to-stream-a-large-file admonition">
+<p class="first admonition-title">How to stream a large file</p>
+<ol class="last arabic">
+<li><p class="first">Start with process with <code class="docutils literal"><span class="pre">with_iter</span></code>, which is a lazy sequence of lines from
+the file.</p>
+</li>
+<li><p class="first">Pipe this sequence through a series of lazy constructs like <code class="docutils literal"><span class="pre">map</span></code>,
+<code class="docutils literal"><span class="pre">filter</span></code>, <code class="docutils literal"><span class="pre">drop</span></code>, <code class="docutils literal"><span class="pre">take</span></code>, etc.</p>
+</li>
+<li><p class="first">Use <code class="docutils literal"><span class="pre">side_effect</span></code> with chucks and <code class="docutils literal"><span class="pre">print</span></code> to keep track of your progress.</p>
+</li>
+<li><p class="first">If we need to write the results to a file, we do the following</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Embed the whole pipe in a <code class="docutils literal"><span class="pre">with</span></code> statement.</li>
+<li>Use <code class="docutils literal"><span class="pre">side_effect</span></code> to print the sequence while maintaining the laziness of
+the process.</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">Consume the sequence in the proper way.  Make sure that you don&#8217;t keep too
+much information in memory.  For example, comsuming the process with <code class="docutils literal"><span class="pre">list</span></code>
+could be a bad idea for a very large stream.  Here are a couple of possible
+alternatives.</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Use <code class="docutils literal"><span class="pre">consume</span></code> to eat the whole sequence, one item at a time.  This is the
+typical end of the pipe when writing the results to disk.</li>
+<li>Use <code class="docutils literal"><span class="pre">reduce</span></code> or <code class="docutils literal"><span class="pre">reduceby</span></code> to aggregate the data to a managable size.
+Many times a collection of statistics will be much smaller in size than
+the original file.</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="example-processing-united-states-census-data">
+<h3>7.8.1.1. Example - Processing United States Census data<a class="headerlink" href="#example-processing-united-states-census-data" title="Permalink to this headline">¶</a></h3>
+<p>As an example of processing a large file, suppose that we want to compute
+statistics based off the <a class="reference external" href="https://www.census.gov/programs-surveys/acs/data/pums.html">2011-2015 ACS 5-years PUMS</a>.  This file is
+fairly large, weighing in at just under 5GB.  Let&#8217;s start use a lazy pipe to
+count the number of rows.  First, we import all of the tools that we will need
+in this and the next example.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">more_itertools</span> <span class="kn">import</span> <span class="n">with_iter</span><span class="p">,</span> <span class="n">consume</span><span class="p">,</span> <span class="n">side_effect</span>
+
+<span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
+
+<span class="gp">In [3]: </span><span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">compose</span><span class="p">,</span> <span class="n">pipe</span><span class="p">,</span> <span class="n">first</span>
+
+<span class="gp">In [4]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">take</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">pluck</span><span class="p">,</span> <span class="n">drop</span><span class="p">,</span> <span class="n">reduceby</span><span class="p">,</span> <span class="n">valmap</span><span class="p">,</span> <span class="n">curry</span>
+
+<span class="gp">In [5]: </span><span class="kn">from</span> <span class="nn">toolz.curried</span> <span class="kn">import</span> <span class="n">reduceby</span><span class="p">,</span> <span class="n">valmap</span><span class="p">,</span> <span class="n">curry</span>
+
+<span class="gp">In [6]: </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+
+<span class="gp">In [7]: </span><span class="n">read_csv</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">with_iter</span><span class="p">,</span> <span class="nb">open</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Counting is a reduction, so we will create a helper function, a reduction, and
+then stream the file through the reduction.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cur_count</span><span class="p">,</span> <span class="n">next_row</span><span class="p">:</span> <span class="n">cur_count</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">count_rows</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">seq</span><span class="p">:</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/Users/bn8210wy/Desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+   <span class="o">...</span><span class="p">:</span>      <span class="n">read_csv</span><span class="p">,</span>
+   <span class="o">...</span><span class="p">:</span>      <span class="n">count_rows</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="mi">4639126</span>
+</pre></div>
+</div>
+<p>This file represents a sample of the entire census and consequently, we need to
+use person weights (PWGTP) if we want to make a good estimate for the whole
+United States population.  For example, suppose that we want to compute the
+average interest, dividends, and net rental income in the past 12 months (INTP)
+grouped by place of birth (POBP05). Since we want to focus on people that were
+born in the United States or its territories, so we must apply a filter to keep
+values of POBP05 between 1 and 56.</p>
+<p>The formula for computing the average using the weights is given by</p>
+<div class="math">
+\[average = \frac{\sum_{i=1}^{N} PWGTP_i*INTP_I}{\sum_{i=1}^{N} PWGTP_i}\]</div>
+<p>We start by inspecting the table header to determine the index of each of these
+columns.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">rows_to_keep</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PWGTP&#39;</span><span class="p">,</span> <span class="s1">&#39;INTP&#39;</span><span class="p">,</span> <span class="s1">&#39;POBP05&#39;</span><span class="p">]</span>
+
+<span class="gp">In [9]: </span><span class="n">keep_row</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">tup</span><span class="p">)</span> <span class="ow">in</span> <span class="n">rows_to_keep</span>
+
+<span class="gp">In [10]: </span><span class="n">header</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/Users/bn8210wy/Desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>               <span class="n">read_csv</span><span class="p">,</span>
+<span class="gp">   ....: </span>               <span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">   ....: </span>               <span class="nb">list</span><span class="p">,</span>
+<span class="gp">   ....: </span>               <span class="n">first</span><span class="p">,</span>
+<span class="gp">   ....: </span>               <span class="nb">enumerate</span><span class="p">,</span>
+<span class="gp">   ....: </span>               <span class="nb">filter</span><span class="p">(</span><span class="n">keep_row</span><span class="p">),</span>
+<span class="gp">   ....: </span>               <span class="nb">list</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [11]: </span><span class="n">header</span>
+<span class="gh">Out[11]: </span><span class="go">[(7, &#39;PWGTP&#39;), (33, &#39;INTP&#39;), (112, &#39;POBP05&#39;)]</span>
+</pre></div>
+</div>
+<p>When processing a very large file, one valuable technique is preprocessing a
+small portion of the file to test our code.  Let&#8217;s use <code class="docutils literal"><span class="pre">take</span></code> to read in 20
+rows, keeping only those columns of interest.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/Users/bn8210wy/Desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">read_csv</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">take</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="c1"># Temparary - remove after preprocessing</span>
+<span class="gp">   ....: </span>      <span class="n">pluck</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">112</span><span class="p">]),</span> <span class="c1"># Abstraction for map(get(indexs))</span>
+<span class="gp">   ....: </span>      <span class="nb">list</span><span class="p">)</span> <span class="c1"># Temparary - remove after preprocessing</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[12]: </span><span class="go"></span>
+<span class="go">[(&#39;PWGTP&#39;, &#39;INTP&#39;, &#39;POBP05&#39;),</span>
+<span class="go"> (&#39;00012&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00004&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00006&#39;, &#39;020000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00006&#39;, &#39;002000&#39;, &#39;013&#39;),</span>
+<span class="go"> (&#39;00007&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00004&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00020&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00014&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00031&#39;, &#39;000000&#39;, &#39;028&#39;),</span>
+<span class="go"> (&#39;00069&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00043&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00054&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00110&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00029&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00017&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00035&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00020&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00015&#39;, &#39;000000&#39;, &#39;034&#39;),</span>
+<span class="go"> (&#39;00015&#39;, &#39;000000&#39;, &#39;001&#39;)]</span>
+</pre></div>
+</div>
+<p>So far, we have been using the pattern <code class="docutils literal"><span class="pre">map(get([7,</span> <span class="pre">33,</span> <span class="pre">112]))</span></code> to pull out
+specific rows.  There is a better lazy abstraction of this pattern called
+<code class="docutils literal"><span class="pre">pluck</span></code> available in <code class="docutils literal"><span class="pre">toolz</span></code>, which we can use to refactor that last batch
+of code as follows.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/Users/bn8210wy/Desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">read_csv</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">take</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="c1"># Temparary - remove after preprocessing</span>
+<span class="gp">   ....: </span>      <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># Drop the header</span>
+<span class="gp">   ....: </span>      <span class="nb">map</span><span class="p">(</span><span class="n">get</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">112</span><span class="p">])),</span>
+<span class="gp">   ....: </span>      <span class="nb">list</span><span class="p">)</span> <span class="c1"># Temparary - remove after preprocessing</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[13]: </span><span class="go"></span>
+<span class="go">[(&#39;00012&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00004&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00006&#39;, &#39;020000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00006&#39;, &#39;002000&#39;, &#39;013&#39;),</span>
+<span class="go"> (&#39;00007&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00004&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00020&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00014&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00031&#39;, &#39;000000&#39;, &#39;028&#39;),</span>
+<span class="go"> (&#39;00069&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00043&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00054&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00110&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00029&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00017&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00035&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00020&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00015&#39;, &#39;000000&#39;, &#39;034&#39;),</span>
+<span class="go"> (&#39;00015&#39;, &#39;000000&#39;, &#39;001&#39;)]</span>
+</pre></div>
+</div>
+<p>Now we will filter out the POB05 labels for the United States and its
+territories (1-56).</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">is_US</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="mi">56</span>
+
+<span class="gp">In [15]: </span><span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/Users/bn8210wy/Desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">read_csv</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">take</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="c1"># Temparary - remove after preprocessing</span>
+<span class="gp">   ....: </span>      <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># Drop the header</span>
+<span class="gp">   ....: </span>      <span class="n">pluck</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">112</span><span class="p">]),</span>
+<span class="gp">   ....: </span>      <span class="nb">filter</span><span class="p">(</span><span class="n">is_US</span><span class="p">),</span>
+<span class="gp">   ....: </span>      <span class="nb">list</span><span class="p">)</span> <span class="c1"># Temparary - remove after preprocessing</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[15]: </span><span class="go"></span>
+<span class="go">[(&#39;00012&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00004&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00006&#39;, &#39;020000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00006&#39;, &#39;002000&#39;, &#39;013&#39;),</span>
+<span class="go"> (&#39;00007&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00004&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00020&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00014&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00031&#39;, &#39;000000&#39;, &#39;028&#39;),</span>
+<span class="go"> (&#39;00069&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00043&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00054&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00110&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00029&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00017&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00035&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00020&#39;, &#39;000000&#39;, &#39;001&#39;),</span>
+<span class="go"> (&#39;00015&#39;, &#39;000000&#39;, &#39;034&#39;),</span>
+<span class="go"> (&#39;00015&#39;, &#39;000000&#39;, &#39;001&#39;)]</span>
+</pre></div>
+</div>
+<p>Before we group the data by the state identifier, let&#8217;s convert all three
+columns to integers.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">convert_row</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+<span class="gp">In [17]: </span><span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/Users/bn8210wy/Desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">read_csv</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">take</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="c1"># Temparary - remove after preprocessing</span>
+<span class="gp">   ....: </span>      <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># Drop the header</span>
+<span class="gp">   ....: </span>      <span class="n">pluck</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">112</span><span class="p">]),</span>
+<span class="gp">   ....: </span>      <span class="nb">filter</span><span class="p">(</span><span class="n">is_US</span><span class="p">),</span>
+<span class="gp">   ....: </span>      <span class="nb">map</span><span class="p">(</span><span class="n">convert_row</span><span class="p">),</span>
+<span class="gp">   ....: </span>      <span class="nb">list</span><span class="p">)</span> <span class="c1"># Temparary - remove after preprocessing</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[17]: </span><span class="go"></span>
+<span class="go">[(12, 0, 1),</span>
+<span class="go"> (4, 0, 1),</span>
+<span class="go"> (6, 20000, 1),</span>
+<span class="go"> (6, 2000, 13),</span>
+<span class="go"> (7, 0, 1),</span>
+<span class="go"> (4, 0, 1),</span>
+<span class="go"> (20, 0, 1),</span>
+<span class="go"> (14, 0, 1),</span>
+<span class="go"> (31, 0, 28),</span>
+<span class="go"> (69, 0, 1),</span>
+<span class="go"> (43, 0, 1),</span>
+<span class="go"> (54, 0, 1),</span>
+<span class="go"> (110, 0, 1),</span>
+<span class="go"> (29, 0, 1),</span>
+<span class="go"> (17, 0, 1),</span>
+<span class="go"> (35, 0, 1),</span>
+<span class="go"> (20, 0, 1),</span>
+<span class="go"> (15, 0, 34),</span>
+<span class="go"> (15, 0, 1)]</span>
+</pre></div>
+</div>
+<p>The task, compute the mean value per state, is an example of <code class="docutils literal"><span class="pre">reduceby</span></code>.  To
+use this pattern, we need to write a key function that classifies each row and
+an update function used to reduce each group to a statistic.  Because we need
+both the numerator and denominator, we will need to use a reduction that keeps
+track of both statistics simultaneously.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">convert_row</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+<span class="gp">In [19]: </span><span class="n">group_by_state</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [20]: </span><span class="n">weighted_sum_update</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="p">(</span><span class="n">acc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span><span class="o">*</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="p">),</span>
+<span class="gp">   ....: </span>                                        <span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [21]: </span><span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/users/bn8210wy/desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">read_csv</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">take</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="c1"># temparary - remove after preprocessing</span>
+<span class="gp">   ....: </span>      <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># drop the header</span>
+<span class="gp">   ....: </span>      <span class="n">pluck</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">112</span><span class="p">]),</span>
+<span class="gp">   ....: </span>      <span class="nb">filter</span><span class="p">(</span><span class="n">is_US</span><span class="p">),</span>
+<span class="gp">   ....: </span>      <span class="nb">map</span><span class="p">(</span><span class="n">convert_row</span><span class="p">),</span>
+<span class="gp">   ....: </span>      <span class="n">reduceby</span><span class="p">(</span><span class="n">group_by_state</span><span class="p">,</span> <span class="n">weighted_sum_update</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)))</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[21]: </span><span class="go">{1: (120000, 459), 13: (12000, 6), 28: (0, 31), 34: (0, 15)}</span>
+</pre></div>
+</div>
+<p>Now we need to divide the numerators and denominators for each state, which is
+accomplished with <code class="docutils literal"><span class="pre">valmap</span></code>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">convert_row</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+<span class="gp">In [23]: </span><span class="n">group_by_state</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [24]: </span><span class="n">weighted_sum_update</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="p">(</span><span class="n">acc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span><span class="o">*</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="p">),</span>
+<span class="gp">   ....: </span>                                        <span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [25]: </span><span class="n">divide</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">In [26]: </span><span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/users/bn8210wy/desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">read_csv</span><span class="p">,</span>
+<span class="gp">   ....: </span>      <span class="n">take</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="c1"># temparary - remove after preprocessing</span>
+<span class="gp">   ....: </span>      <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># drop the header</span>
+<span class="gp">   ....: </span>      <span class="n">pluck</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">112</span><span class="p">]),</span>
+<span class="gp">   ....: </span>      <span class="nb">filter</span><span class="p">(</span><span class="n">is_US</span><span class="p">),</span>
+<span class="gp">   ....: </span>      <span class="nb">map</span><span class="p">(</span><span class="n">convert_row</span><span class="p">),</span>
+<span class="gp">   ....: </span>      <span class="n">reduceby</span><span class="p">(</span><span class="n">group_by_state</span><span class="p">,</span> <span class="n">weighted_sum_update</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span>
+<span class="gp">   ....: </span>      <span class="n">valmap</span><span class="p">(</span><span class="n">divide</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[26]: </span><span class="go">{1: 261.437908496732, 13: 2000.0, 28: 0.0, 34: 0.0}</span>
+</pre></div>
+</div>
+<p>Now that we have prototyped the process on a small number of nodes, it is time
+to remove the guards (<code class="docutils literal"><span class="pre">take(20)</span></code>) and let the process go on the whole file.
+We save the result of this computation (a dictionary with one pair per state)
+for later processing.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">convert_row</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+<span class="gp">In [28]: </span><span class="n">group_by_state</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [29]: </span><span class="n">weighted_sum_update</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="p">(</span><span class="n">acc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span><span class="o">*</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="p">),</span>
+<span class="gp">   ....: </span>                                        <span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [30]: </span><span class="n">divide</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">In [31]: </span><span class="n">state_means</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/users/bn8210wy/desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>                   <span class="n">read_csv</span><span class="p">,</span>
+<span class="gp">   ....: </span>                   <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># drop the header</span>
+<span class="gp">   ....: </span>                   <span class="nb">filter</span><span class="p">(</span><span class="n">is_US</span><span class="p">),</span>
+<span class="gp">   ....: </span>                   <span class="n">pluck</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">112</span><span class="p">]),</span>
+<span class="gp">   ....: </span>                   <span class="nb">map</span><span class="p">(</span><span class="n">convert_row</span><span class="p">),</span>
+<span class="gp">   ....: </span>                   <span class="n">reduceby</span><span class="p">(</span><span class="n">group_by_state</span><span class="p">,</span> <span class="n">weighted_sum_update</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span>
+<span class="gp">   ....: </span>                   <span class="n">valmap</span><span class="p">(</span><span class="n">divide</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-31-b8c818f2c7e2&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>                    <span class="nb">map</span><span class="p">(</span><span class="n">convert_row</span><span class="p">),</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>                    <span class="n">reduceby</span><span class="p">(</span><span class="n">group_by_state</span><span class="p">,</span> <span class="n">weighted_sum_update</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>                    <span class="n">valmap</span><span class="p">(</span><span class="n">divide</span><span class="p">))</span>
+
+<span class="nn">/Users/bn8210wy/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/functoolz.py</span> in <span class="ni">pipe</span><span class="nt">(data, *funcs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">550</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">551</span><span class="s2">     for func in funcs:</span>
+<span class="ne">--&gt; </span><span class="mi">552</span><span class="s2">         data = func(data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">553</span><span class="s2">     return data</span>
+<span class="g g-Whitespace">    </span><span class="mi">554</span><span class="s2"> </span>
+
+<span class="nn">/Users/bn8210wy/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/functoolz.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">281</span><span class="s2">     def __call__(self, *args, **kwargs):</span>
+<span class="g g-Whitespace">    </span><span class="mi">282</span><span class="s2">         try:</span>
+<span class="ne">--&gt; </span><span class="mi">283</span><span class="s2">             return self._partial(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">284</span><span class="s2">         except TypeError as exc:</span>
+<span class="g g-Whitespace">    </span><span class="mi">285</span><span class="s2">             if self._should_curry(args, kwargs, exc):</span>
+
+<span class="nn">/Users/bn8210wy/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/itertoolz.py</span> in <span class="ni">reduceby</span><span class="nt">(key, binop, seq, init)</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span><span class="s2">         key = getter(key)</span>
+<span class="g g-Whitespace">    </span><span class="mi">610</span><span class="s2">     d = {}</span>
+<span class="ne">--&gt; </span><span class="mi">611</span><span class="s2">     for item in seq:</span>
+<span class="g g-Whitespace">    </span><span class="mi">612</span><span class="s2">         k = key(item)</span>
+<span class="g g-Whitespace">    </span><span class="mi">613</span><span class="s2">         if k not in d:</span>
+
+<span class="nn">/Users/bn8210wy/.pyenv/versions/3.5.2/envs/runestone/lib/python3.5/site-packages/toolz/functoolz.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">466</span><span class="s2">         ret = self.first(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">467</span><span class="s2">         for f in self.funcs:</span>
+<span class="ne">--&gt; </span><span class="mi">468</span><span class="s2">             ret = f(ret)</span>
+<span class="g g-Whitespace">    </span><span class="mi">469</span><span class="s2">         return ret</span>
+<span class="g g-Whitespace">    </span><span class="mi">470</span><span class="s2"> </span>
+
+<span class="ne">ValueError</span>: invalid literal for int() with base 10: &#39;&#39;
+</pre></div>
+</div>
+<p>What happened above is a common occurance.  I thought the code was working, but
+there is a case in the larger file that I didn&#8217;t see or consider: missing data.
+We have to make a decision on how to deal with these cases.  Our options are (1)
+use a default value of 0 when missing data or (2) filter out these cases.  Both
+solutions have their drawbacks.  In this case, I will simply filter out all rows
+that are missing one of the three entries.</p>
+<p>Since we are back to prototyping a solution, this time to fix a bug, we
+reintroduce <code class="docutils literal"><span class="pre">take</span></code> to make the testing fast.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">convert_row</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+<span class="gp">In [33]: </span><span class="n">group_by_state</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [34]: </span><span class="n">weighted_sum_update</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="p">(</span><span class="n">acc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span><span class="o">*</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="p">),</span>
+<span class="gp">   ....: </span>                                        <span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [35]: </span><span class="n">divide</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">In [36]: </span><span class="n">is_not_empty</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span>
+
+<span class="gp">In [37]: </span><span class="n">non_empty_row</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="nb">all</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="n">is_not_empty</span><span class="p">))</span>
+
+<span class="gp">In [38]: </span><span class="n">state_means</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/users/bn8210wy/desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>                   <span class="n">read_csv</span><span class="p">,</span>
+<span class="gp">   ....: </span>                   <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># drop the header</span>
+<span class="gp">   ....: </span>                   <span class="n">take</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span> <span class="c1"># temparary for prototyping</span>
+<span class="gp">   ....: </span>                   <span class="n">pluck</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">112</span><span class="p">]),</span>
+<span class="gp">   ....: </span>                   <span class="nb">filter</span><span class="p">(</span><span class="n">is_US</span><span class="p">),</span>
+<span class="gp">   ....: </span>                   <span class="nb">filter</span><span class="p">(</span><span class="n">non_empty_row</span><span class="p">),</span>
+<span class="gp">   ....: </span>                   <span class="nb">map</span><span class="p">(</span><span class="n">convert_row</span><span class="p">),</span>
+<span class="gp">   ....: </span>                   <span class="n">reduceby</span><span class="p">(</span><span class="n">group_by_state</span><span class="p">,</span> <span class="n">weighted_sum_update</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span>
+<span class="gp">   ....: </span>                   <span class="n">valmap</span><span class="p">(</span><span class="n">divide</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [39]: </span><span class="nb">list</span><span class="p">(</span><span class="n">state_means</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="gh">Out[39]: </span><span class="go"></span>
+<span class="go">[(1, 802.0135422729918),</span>
+<span class="go"> (2, 77.96610169491525),</span>
+<span class="go"> (4, 0.0),</span>
+<span class="go"> (5, 2055.7834101382487),</span>
+<span class="go"> (6, 1985.8930276981853),</span>
+<span class="go"> (8, 3.696098562628337),</span>
+<span class="go"> (9, 494.94163424124514),</span>
+<span class="go"> (10, 0.0),</span>
+<span class="go"> (11, 527.4725274725274),</span>
+<span class="go"> (12, 489.65094943460633)]</span>
+</pre></div>
+</div>
+<p>A process like this can take a long time to complete.  To help track progress,
+we will use <code class="docutils literal"><span class="pre">side_effect</span></code> from the <code class="docutils literal"><span class="pre">more_itertools</span></code> library to print a
+message every 1,000,000 rows.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="kn">from</span> <span class="nn">more_itertools</span> <span class="kn">import</span> <span class="n">side_effect</span>
+
+<span class="gp">In [41]: </span><span class="n">side_effect</span> <span class="o">=</span> <span class="n">curry</span><span class="p">(</span><span class="n">side_effect</span><span class="p">)</span>
+
+<span class="gp">In [42]: </span><span class="n">print_progress</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Processing another 1,000,000 rows&quot;</span><span class="p">)</span>
+
+<span class="go">#</span>
+<span class="go">## Main processing stream</span>
+<span class="go">#</span>
+<span class="gp">In [43]: </span><span class="n">state_means</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/users/bn8210wy/desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>                   <span class="n">read_csv</span><span class="p">,</span>
+<span class="gp">   ....: </span>                   <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># drop the header</span>
+<span class="gp">   ....: </span>                   <span class="n">take</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span> <span class="c1"># temparary for prototyping</span>
+<span class="gp">   ....: </span>                   <span class="n">side_effect</span><span class="p">(</span><span class="n">print_progress</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000000</span><span class="p">),</span>
+<span class="gp">   ....: </span>                   <span class="n">pluck</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">112</span><span class="p">]),</span>
+<span class="gp">   ....: </span>                   <span class="nb">filter</span><span class="p">(</span><span class="n">is_US</span><span class="p">),</span>
+<span class="gp">   ....: </span>                   <span class="nb">filter</span><span class="p">(</span><span class="n">non_empty_row</span><span class="p">),</span>
+<span class="gp">   ....: </span>                   <span class="nb">map</span><span class="p">(</span><span class="n">convert_row</span><span class="p">),</span>
+<span class="gp">   ....: </span>                   <span class="n">reduceby</span><span class="p">(</span><span class="n">group_by_state</span><span class="p">,</span> <span class="n">weighted_sum_update</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span>
+<span class="gp">   ....: </span>                   <span class="n">valmap</span><span class="p">(</span><span class="n">divide</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+<span class="go">Processing another 1,000,000 rows</span>
+</pre></div>
+</div>
+<p>Before processing the whole file, we should reexamine the process and make sure
+that all of the parts that are streaming the files are lazy.  In this case, the
+top 6 lines represent lazy sequences and the first item that will accumulate
+data in memory will be <code class="docutils literal"><span class="pre">reduceby</span></code>.  Luckily, we are only keeping a couple of
+number per state, so this shouldn&#8217;t be a problem with memory.  If we were
+accumulating more information than memory would allow, we would need to look to
+another solution.  Since we have confirmed that this process is safe, let&#8217;s
+remove the guard and process the whole file.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">44</span><span class="p">]:</span> <span class="n">state_means</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">(</span><span class="s1">&#39;/users/bn8210wy/desktop/census/2011_2015/ss15pusa.csv&#39;</span><span class="p">,</span>
+   <span class="o">....</span><span class="p">:</span>                    <span class="n">read_csv</span><span class="p">,</span>
+   <span class="o">....</span><span class="p">:</span>                    <span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># drop the header</span>
+   <span class="o">....</span><span class="p">:</span>                    <span class="n">side_effect</span><span class="p">(</span><span class="n">print_progress</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000000</span><span class="p">),</span>
+   <span class="o">....</span><span class="p">:</span>                    <span class="n">pluck</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">112</span><span class="p">]),</span>
+   <span class="o">....</span><span class="p">:</span>                    <span class="nb">filter</span><span class="p">(</span><span class="n">is_US</span><span class="p">),</span>
+   <span class="o">....</span><span class="p">:</span>                    <span class="nb">filter</span><span class="p">(</span><span class="n">non_empty_row</span><span class="p">),</span>
+   <span class="o">....</span><span class="p">:</span>                    <span class="nb">map</span><span class="p">(</span><span class="n">convert_row</span><span class="p">),</span>
+   <span class="o">....</span><span class="p">:</span>                    <span class="n">reduceby</span><span class="p">(</span><span class="n">group_by_state</span><span class="p">,</span> <span class="n">weighted_sum_update</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span>
+   <span class="o">....</span><span class="p">:</span>                    <span class="n">valmap</span><span class="p">(</span><span class="n">divide</span><span class="p">))</span>
+   <span class="o">....</span><span class="p">:</span>
+<span class="n">Processing</span> <span class="n">another</span> <span class="mi">1</span><span class="p">,</span><span class="mo">000</span><span class="p">,</span><span class="mo">000</span> <span class="n">rows</span>
+<span class="n">Processing</span> <span class="n">another</span> <span class="mi">1</span><span class="p">,</span><span class="mo">000</span><span class="p">,</span><span class="mo">000</span> <span class="n">rows</span>
+<span class="n">Processing</span> <span class="n">another</span> <span class="mi">1</span><span class="p">,</span><span class="mo">000</span><span class="p">,</span><span class="mo">000</span> <span class="n">rows</span>
+<span class="n">Processing</span> <span class="n">another</span> <span class="mi">1</span><span class="p">,</span><span class="mo">000</span><span class="p">,</span><span class="mo">000</span> <span class="n">rows</span>
+<span class="n">Processing</span> <span class="n">another</span> <span class="mi">1</span><span class="p">,</span><span class="mo">000</span><span class="p">,</span><span class="mo">000</span> <span class="n">rows</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">45</span><span class="p">]:</span> <span class="n">state_means</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">45</span><span class="p">]:</span>
+<span class="p">{</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span> <span class="mf">2046.2699365722697</span><span class="p">,</span>
+ <span class="mi">1</span><span class="p">:</span> <span class="mf">999.9947105822915</span><span class="p">,</span>
+ <span class="mi">2</span><span class="p">:</span> <span class="mf">1005.0048362739664</span><span class="p">,</span>
+ <span class="mi">4</span><span class="p">:</span> <span class="mf">726.756242052686</span><span class="p">,</span>
+ <span class="mi">5</span><span class="p">:</span> <span class="mf">1009.466231775314</span><span class="p">,</span>
+ <span class="mi">6</span><span class="p">:</span> <span class="mf">1558.4499375623134</span><span class="p">,</span>
+ <span class="mi">8</span><span class="p">:</span> <span class="mf">1552.1935989799554</span><span class="p">,</span>
+ <span class="mi">9</span><span class="p">:</span> <span class="mf">1789.1496099356484</span><span class="p">,</span>
+ <span class="mi">10</span><span class="p">:</span> <span class="mf">899.4040456732163</span><span class="p">,</span>
+ <span class="mi">11</span><span class="p">:</span> <span class="mf">2079.9369871958665</span><span class="p">,</span>
+ <span class="mi">12</span><span class="p">:</span> <span class="mf">838.0531860436864</span><span class="p">,</span>
+ <span class="mi">13</span><span class="p">:</span> <span class="mf">951.6220401800159</span><span class="p">,</span>
+ <span class="mi">15</span><span class="p">:</span> <span class="mf">1625.5767279905683</span><span class="p">,</span>
+ <span class="mi">16</span><span class="p">:</span> <span class="mf">2832.0063575622594</span><span class="p">,</span>
+ <span class="mi">17</span><span class="p">:</span> <span class="mf">3858.14536902721</span><span class="p">,</span>
+ <span class="mi">18</span><span class="p">:</span> <span class="mf">2790.0015546250092</span><span class="p">,</span>
+ <span class="mi">19</span><span class="p">:</span> <span class="mf">3448.747840879351</span><span class="p">,</span>
+ <span class="mi">20</span><span class="p">:</span> <span class="mf">2956.399048848033</span><span class="p">,</span>
+ <span class="mi">21</span><span class="p">:</span> <span class="mf">3252.290016740979</span><span class="p">,</span>
+ <span class="mi">22</span><span class="p">:</span> <span class="mf">1535.0876356557521</span><span class="p">,</span>
+ <span class="mi">23</span><span class="p">:</span> <span class="mf">1757.8102677368959</span><span class="p">,</span>
+ <span class="mi">24</span><span class="p">:</span> <span class="mf">2239.297897364191</span><span class="p">,</span>
+ <span class="mi">25</span><span class="p">:</span> <span class="mf">3124.465451212315</span><span class="p">,</span>
+ <span class="mi">26</span><span class="p">:</span> <span class="mf">2960.5169941729014</span><span class="p">,</span>
+ <span class="mi">27</span><span class="p">:</span> <span class="mf">3628.6608676898745</span><span class="p">,</span>
+ <span class="mi">28</span><span class="p">:</span> <span class="mf">1870.5233594943845</span><span class="p">,</span>
+ <span class="mi">29</span><span class="p">:</span> <span class="mf">3238.267152158706</span><span class="p">,</span>
+ <span class="mi">30</span><span class="p">:</span> <span class="mf">2588.821377840909</span><span class="p">,</span>
+ <span class="mi">31</span><span class="p">:</span> <span class="mf">3129.632818078311</span><span class="p">,</span>
+ <span class="mi">32</span><span class="p">:</span> <span class="mf">1472.4052393272962</span><span class="p">,</span>
+ <span class="mi">33</span><span class="p">:</span> <span class="mf">3214.308993515647</span><span class="p">,</span>
+ <span class="mi">34</span><span class="p">:</span> <span class="mf">3439.9406829790187</span><span class="p">,</span>
+ <span class="mi">35</span><span class="p">:</span> <span class="mf">1304.4119480317108</span><span class="p">,</span>
+ <span class="mi">36</span><span class="p">:</span> <span class="mf">4411.493735561985</span><span class="p">,</span>
+ <span class="mi">37</span><span class="p">:</span> <span class="mf">1673.9786311982366</span><span class="p">,</span>
+ <span class="mi">38</span><span class="p">:</span> <span class="mf">3999.247241640697</span><span class="p">,</span>
+ <span class="mi">39</span><span class="p">:</span> <span class="mf">3203.140221656785</span><span class="p">,</span>
+ <span class="mi">40</span><span class="p">:</span> <span class="mf">2484.5488916707764</span><span class="p">,</span>
+ <span class="mi">41</span><span class="p">:</span> <span class="mf">2206.3035717426096</span><span class="p">,</span>
+ <span class="mi">42</span><span class="p">:</span> <span class="mf">3680.1409606887096</span><span class="p">,</span>
+ <span class="mi">44</span><span class="p">:</span> <span class="mf">1798.405566658829</span><span class="p">,</span>
+ <span class="mi">45</span><span class="p">:</span> <span class="mf">1492.2188974478797</span><span class="p">,</span>
+ <span class="mi">46</span><span class="p">:</span> <span class="mf">2788.7323254961084</span><span class="p">,</span>
+ <span class="mi">47</span><span class="p">:</span> <span class="mf">1963.930496697591</span><span class="p">,</span>
+ <span class="mi">48</span><span class="p">:</span> <span class="mf">2079.411455332534</span><span class="p">,</span>
+ <span class="mi">49</span><span class="p">:</span> <span class="mf">2899.093137254902</span><span class="p">,</span>
+ <span class="mi">50</span><span class="p">:</span> <span class="mf">1741.443880688807</span><span class="p">,</span>
+ <span class="mi">51</span><span class="p">:</span> <span class="mf">2296.1152456323725</span><span class="p">,</span>
+ <span class="mi">53</span><span class="p">:</span> <span class="mf">3046.7845175626767</span><span class="p">,</span>
+ <span class="mi">54</span><span class="p">:</span> <span class="mf">2883.3576292748635</span><span class="p">,</span>
+ <span class="mi">55</span><span class="p">:</span> <span class="mf">3694.9032502831255</span><span class="p">,</span>
+ <span class="mi">56</span><span class="p">:</span> <span class="mf">1816.7817351598173</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, we will print this information out to a file.  To do this, we first
+need to convert the current dictionary into a table using the <code class="docutils literal"><span class="pre">items</span></code>
+dictionary method, which is accomplished with the helper function
+<code class="docutils literal"><span class="pre">dict_to_table</span></code>.  Then we will convert each row to a comma separated string
+and finally use <code class="docutils literal"><span class="pre">side_effect</span></code> to print each row out to a file with <code class="docutils literal"><span class="pre">consume</span></code>
+at the end to &#8220;eat&#8221; the strings, keeping memory clean.  To make this work, we
+move the <code class="docutils literal"><span class="pre">pipe</span></code> inside a <code class="docutils literal"><span class="pre">with</span></code> statement that opens and closes the output
+file.  Note that the helper function for printing to the output file needs to be
+constructed <em>inside</em> the <code class="docutils literal"><span class="pre">with</span></code> statement to allso access to the file handler.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">dict_to_table</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+<span class="gp">In [45]: </span><span class="n">comma_sep_row</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+
+<span class="gp">In [46]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;interest_by_state.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="n">print_to_outfile</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">row_str</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">row_str</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="n">pipe</span><span class="p">(</span><span class="n">state_means</span><span class="p">,</span>
+<span class="gp">   ....: </span>         <span class="n">dict_to_table</span><span class="p">,</span>
+<span class="gp">   ....: </span>         <span class="nb">map</span><span class="p">(</span><span class="n">comma_sep_row</span><span class="p">),</span>
+<span class="gp">   ....: </span>         <span class="n">side_effect</span><span class="p">(</span><span class="n">print_to_outfile</span><span class="p">),</span>
+<span class="gp">   ....: </span>         <span class="n">consume</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="processing-a-number-of-large-files">
+<h2>7.8.2. Processing a number of large files<a class="headerlink" href="#processing-a-number-of-large-files" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="reducing-and-joining-large-files">
+<h2>7.8.3. Reducing and joining large files<a class="headerlink" href="#reducing-and-joining-large-files" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+  
+      
+  <li id="relations-prev" class="navLink" title='Previous Section - 7.7. Lazy Iteration' data-toggle="tooltip">
+    <a href="LazyIteration.html" >
+      <i class='prevNav glyphicon glyphicon-chevron-left'></i>
+    </a>
+  </li>
+  <a class="navLinkBg" id="navLinkBgLeft"  href="LazyIteration.html" ></a>
+  
+  <li id="relations-next" class="navLink" title='Next Section - 7.9. Exercises' data-toggle="tooltip" >
+    <a href="Exercises.html" >
+      <i id="relationsNextIcon" class='nextNav glyphicon glyphicon-chevron-right'></i>
+    </a>
+  </li>
+  <a class="navLinkBg navLink" id="navLinkBgRight" href="Exercises.html" >Next Section - 7.9. Exercises</a>
+
+<script type="text/javascript">
+
+  $('#relations-prev').tooltip({'placement':'right', 'selector': '', 'delay': { show: 100, hide: 50}});
+  $('#relations-next').tooltip({'placement':'left', 'selector': '', 'delay': { show: 100, hide: 50}});
+  
+</script>
+  
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      
+      | <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017 Todd Iverson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+    </p>
+  </div>
+</footer>
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-32029811-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>
